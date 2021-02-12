@@ -1,0 +1,15 @@
+[submodule "TAVERN"]
+	path = TAVERN
+	url = https://github.com/jcdevaney/TAVERN.git
+[submodule "beethoven-piano-sonatas"]
+	path = beethoven-piano-sonatas
+	url = https://github.com/craigsapp/beethoven-piano-sonatas.git
+[submodule "ABC"]
+	path = ABC
+	url = https://github.com/DCMLab/ABC.git
+[submodule "haydn_op20_harm"]
+	path = haydn_op20_harm
+	url = https://github.com/napulen/haydn_op20_harm.git
+[submodule "When-in-Rome"]
+	path = When-in-Rome
+	url = https://github.com/MarkGotham/When-in-Rome.git
