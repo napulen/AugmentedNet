@@ -1,2 +1,2 @@
 # AugmentedNet
-Neural network trained with data augmentation artificial examples.
+Neural network trained with data-augmented artificial examples.
