@@ -52,9 +52,42 @@ octaveTest = """
 !!!system-decoration: {(s1,s2)}
 """
 
+weirdRhythm = """
+**kern	**kern
+*part1	*part1
+*staff2	*staff1
+*I"Piano	*
+*I'Pno.	*
+*clefF4	*clefG2
+*k[]	*k[]
+*M6/8	*M6/8
+*MM180	*MM180
+=1	=1
+*^	*
+4r	2.c	4.r
+[8e	.	.
+*	*	*^
+4.e]	.	8r	4.g
+.	.	4cc	.
+*	*	*v	*v
+=2	=2	=2
+8r	2.B	4.r
+[4f	.	.
+*	*	*^
+4.f]	.	4r	4.g
+.	.	8dd	.
+*	*	*v	*v
+*v	*v	*
+=3	=3
+2.c 2.e	2.g 2.cc
+=:|!	=:|!
+*-	*-
+!!!system-decoration: {(s1,s2)}
+"""
+
 
 class ScoreParser(unittest.TestCase):
-    def test_octave_test(self):
+    def test_octave(self):
         notes = [
             ["C0", "B0"],
             ["C1", "B1"],
@@ -239,5 +272,70 @@ class ScoreParser(unittest.TestCase):
                 with self.subTest(property=k, frame=frame):
                     self.assertEqual(vGT[frame], dfdict[k][frame])
 
-if __name__ == '__main__':
+    def test_weird_rhythm(self):
+        notes = [
+            ["C4"],
+            ["C4", "E4"],
+            ["C4", "E4", "G4"],
+            ["C4", "E4", "G4", "C5"],
+            ["B3"],
+            ["B3", "F4"],
+            ["B3", "F4", "G4"],
+            ["B3", "F4", "G4", "D5"],
+            ["C4", "E4", "G4", "C5"],
+        ]
+        ties = [
+            ["start"],
+            ["continue", "start"],
+            ["continue", "continue", "start"],
+            ["stop", "stop", "stop", None],
+            ["start"],
+            ["continue", "start"],
+            ["continue", "continue", "start"],
+            ["stop", "stop", "stop", None],
+            [None, None, None, None],
+        ]
+        measures = [
+            1,
+            1,
+            1,
+            1,
+            ##
+            2,
+            2,
+            2,
+            2,
+            ##
+            3,
+        ]
+        offsets = [
+            0.0,
+            1.0,
+            1.5,
+            2.0,
+            ####
+            3.0,
+            3.5,
+            4.5,
+            5.5,
+            ####
+            6.0,
+        ]
+        dfdictGT = {
+            "offset": offsets,
+            "measure": measures,
+            "notes": notes,
+            "ties": ties,
+        }
+        dfGT = pd.DataFrame(dfdictGT)
+        dfdictGT = dfGT.to_dict()
+        df = score_parser.parseScore(weirdRhythm)
+        dfdict = df.to_dict()
+        for k, vGT in dfdictGT.items():
+            for frame, val in vGT.items():
+                with self.subTest(property=k, frame=frame):
+                    self.assertEqual(vGT[frame], dfdict[k][frame])
+
+
+if __name__ == "__main__":
     unittest.main()

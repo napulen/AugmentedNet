@@ -49,3 +49,7 @@ class TestRomanNumeralParser(unittest.TestCase):
         }
         ret = roman_numerals.parseRomanNumeral(rn, key)
         self.assertEqual(GT, ret)
+
+
+if __name__ == '__main__':
+    unittest.main()
