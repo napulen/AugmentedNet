@@ -86,7 +86,7 @@ weirdRhythm = """
 """
 
 
-class ScoreParser(unittest.TestCase):
+class TestScoreParser(unittest.TestCase):
     def test_octave(self):
         notes = [
             ["C0", "B0"],

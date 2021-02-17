@@ -2,6 +2,7 @@ import music21
 import pandas as pd
 from config import FRAMESPERQUARTERNOTE
 
+
 def parseScore(f):
     """Parses a score and produces a pandas dataframe.
 
@@ -17,9 +18,9 @@ def parseScore(f):
         "ties": [],
     }
     for c in s.chordify().flat.notes:
-        dfdict['offset'].append(c.offset)
-        dfdict['measure'].append(c.measureNumber)
-        dfdict['notes'].append([n.pitch.nameWithOctave for n in c])
-        dfdict['ties'].append([n.tie.type if n.tie else None for n in c])
+        dfdict["offset"].append(c.offset)
+        dfdict["measure"].append(c.measureNumber)
+        dfdict["notes"].append([n.pitch.nameWithOctave for n in c])
+        dfdict["ties"].append([n.tie.type if n.tie else None for n in c])
     df = pd.DataFrame(dfdict)
     return df
