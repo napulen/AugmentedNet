@@ -1,6 +1,5 @@
 import unittest
 import annotation_parser
-import music21
 import pandas as pd
 
 multipleAnnotations = """
@@ -24,7 +23,7 @@ m12 b1 I
 """
 
 
-class TestAnnotationParser(unittest.TestCase):
+class TestInitialDataFrame(unittest.TestCase):
     def test_multiple_annotations(self):
         offsets = [
             0.0,
@@ -92,6 +91,84 @@ class TestAnnotationParser(unittest.TestCase):
             11,
             11,
             12,
+        ]
+        durations = [
+            1.0,
+            1.0,
+            1.0,
+            ####
+            1.0,
+            1.0,
+            1.0,
+            ####
+            1.0,
+            1.0,
+            1.0,
+            ####
+            2.0,
+            1.0,
+            ####
+            1.0,
+            1.0,
+            1.0,
+            ####
+            1.0,
+            1.0,
+            1.0,
+            ####
+            2.0,
+            1.0,
+            ####
+            2.0,
+            1.0,
+            ####
+            3.0,
+            ####
+            3.0,
+            ####
+            2.0,
+            1.0,
+            ####
+            3.0,
+        ]
+        areOnsets = [
+            True,
+            True,
+            True,
+            ####
+            True,
+            True,
+            True,
+            ####
+            True,
+            True,
+            True,
+            ####
+            True,
+            True,
+            ####
+            True,
+            True,
+            True,
+            ####
+            True,
+            True,
+            True,
+            ####
+            True,
+            True,
+            ####
+            True,
+            True,
+            ####
+            True,
+            ####
+            True,
+            ####
+            True,
+            True,
+            ####
+            True,
         ]
         pitchNames = [
             ("C", "E", "G"),
@@ -446,6 +523,8 @@ class TestAnnotationParser(unittest.TestCase):
         dfdictGT = {
             "offset": offsets,
             "measure": measures,
+            "duration": durations,
+            "isOnset": areOnsets,
             "pitchNames": pitchNames,
             "bass": basses,
             "root": roots,
@@ -457,8 +536,9 @@ class TestAnnotationParser(unittest.TestCase):
             "degree": degrees,
         }
         dfGT = pd.DataFrame(dfdictGT)
+        dfGT.set_index("offset", inplace=True)
         dfdictGT = dfGT.to_dict()
-        df = annotation_parser.parseAnnotation(multipleAnnotations)
+        df = annotation_parser._initialDataFrame(multipleAnnotations)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
             for frame, val in vGT.items():

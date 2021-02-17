@@ -4,14 +4,14 @@ import numpy as np
 from common import DELTAOFFSET, FLOATSCALE
 
 
-def parseScore(f):
+def _initialDataFrame(f, fmt=None):
     """Parses a score and produces a pandas dataframe.
 
     The features obtained are the note names, their position in the score,
     measure number, and their ties (in case something fancy needs to be done,
     with the tie information).
     """
-    s = music21.converter.parse(f)
+    s = music21.converter.parse(f, format=fmt)
     dfdict = {
         "offset": [],
         "duration": [],
@@ -29,7 +29,7 @@ def parseScore(f):
         )
     df = pd.DataFrame(dfdict)
     df.set_index("offset", inplace=True)
-    return _reindexDataFrame(df)
+    return df
 
 
 def _reindexDataFrame(df):
@@ -61,4 +61,12 @@ def _reindexDataFrame(df):
     df.isOnset.fillna(value=newCol, inplace=True)
     df.fillna(method="ffill", inplace=True)
     df = df.reindex(index=newIndex)
+    return df
+
+
+def parseScore(f, fmt=None):
+    # Step 1: Parse and produce a salami-sliced dataset
+    df = _initialDataFrame(f, fmt)
+    # Step 2: Turn salami-slice into fixed-duration steps
+    df = _reindexDataFrame(df)
     return df

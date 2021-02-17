@@ -5,7 +5,7 @@ import numpy as np
 from common import FRAMEBASENOTE, FLOATSCALE
 
 
-def parseAnnotation(f):
+def _initialDataFrame(f):
     """Parses an annotation RomanText file and produces a pandas dataframe.
 
     Unpacking a roman numeral is slightly more complicated here than in
@@ -53,8 +53,8 @@ def parseAnnotation(f):
             degree = f"{rn.scaleDegree}"
         dfdict["degree"].append(degree)
     df = pd.DataFrame(dfdict)
-    df.set_index('offset', inplace=True)
-    return _reindexDataFrame(df)
+    df.set_index("offset", inplace=True)
+    return df
 
 
 def _reindexDataFrame(df):
@@ -81,4 +81,12 @@ def _reindexDataFrame(df):
     df.isOnset.fillna(value=False, inplace=True)
     df.fillna(method="ffill", inplace=True)
     df = df.reindex(index=newIndex)
+    return df
+
+
+def parseAnnotation(f):
+    # Step 1: Parse and produce a salami-sliced dataset
+    df = _initialDataFrame(f)
+    # Step 2: Turn salami-slice into fixed-duration steps
+    df = _reindexDataFrame(df)
     return df
