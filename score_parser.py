@@ -1,6 +1,7 @@
 import music21
 import pandas as pd
-from config import FRAMESPERQUARTERNOTE
+import numpy as np
+from common import DELTAOFFSET, FLOATSCALE
 
 
 def parseScore(f):
@@ -13,14 +14,51 @@ def parseScore(f):
     s = music21.converter.parse(f)
     dfdict = {
         "offset": [],
+        "duration": [],
         "measure": [],
         "notes": [],
-        "ties": [],
+        "isOnset": [],
     }
     for c in s.chordify().flat.notes:
-        dfdict["offset"].append(c.offset)
+        dfdict["offset"].append(round(float(c.offset), FLOATSCALE))
+        dfdict["duration"].append(round(float(c.quarterLength), FLOATSCALE))
         dfdict["measure"].append(c.measureNumber)
         dfdict["notes"].append([n.pitch.nameWithOctave for n in c])
-        dfdict["ties"].append([n.tie.type if n.tie else None for n in c])
+        dfdict["isOnset"].append(
+            [(not n.tie or n.tie.type == "start") for n in c]
+        )
     df = pd.DataFrame(dfdict)
+    df.set_index("offset", inplace=True)
+    return _reindexDataFrame(df)
+
+
+def _reindexDataFrame(df):
+    """Reindexes a dataframe according to a fixed note-value.
+
+    It could be said that the DataFrame produced by parseScore
+    is a "salami-sliced" version of the score. This is intuitive
+    for humans, but does not really work in machine learning.
+
+    What works, is to slice the score in fixed note intervals,
+    for example, a sixteenth note. This reindex function does
+    exactly that.
+    """
+    firstRow = df.head(1)
+    lastRow = df.tail(1)
+    minOffset = firstRow.index.to_numpy()[0]
+    maxOffset = (lastRow.index + lastRow.duration).to_numpy()[0]
+    newIndex = np.arange(minOffset, maxOffset, DELTAOFFSET)
+    # All operations done over the full index, i.e., fixed-timesteps
+    # plus original onsets. Later, original onsets (e.g., triplets)
+    # are removed and just the fixed-timesteps are kept
+    df = df.reindex(index=df.index.union(newIndex))
+    df.notes.fillna(method="ffill", inplace=True)
+    # the "isOnset" column is hard to generate in fixed-timesteps
+    # however, it allows us to encode a "hold" symbol if we wanted to
+    newCol = pd.Series(
+        [[False] * n for n in df.notes.str.len().to_list()], index=df.index
+    )
+    df.isOnset.fillna(value=newCol, inplace=True)
+    df.fillna(method="ffill", inplace=True)
+    df = df.reindex(index=newIndex)
     return df

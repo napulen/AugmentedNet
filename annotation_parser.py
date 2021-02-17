@@ -1,6 +1,8 @@
+from common import DELTAOFFSET
 import music21
 import pandas as pd
-from config import FRAMESPERQUARTERNOTE
+import numpy as np
+from common import FRAMEBASENOTE, FLOATSCALE
 
 
 def parseAnnotation(f):
@@ -15,6 +17,8 @@ def parseAnnotation(f):
     dfdict = {
         "offset": [],
         "measure": [],
+        "duration": [],
+        "isOnset": [],
         "pitchNames": [],
         "bass": [],
         "root": [],
@@ -26,8 +30,10 @@ def parseAnnotation(f):
         "degree": [],
     }
     for rn in s.flat.getElementsByClass("RomanNumeral"):
-        dfdict["offset"].append(rn.offset)
+        dfdict["offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["measure"].append(rn.measureNumber)
+        dfdict["duration"].append(round(float(rn.quarterLength), FLOATSCALE))
+        dfdict["isOnset"].append(True)
         dfdict["pitchNames"].append(tuple(rn.pitchNames))
         dfdict["bass"].append(rn.pitchNames[0])
         dfdict["root"].append(rn.root().name)
@@ -47,4 +53,32 @@ def parseAnnotation(f):
             degree = f"{rn.scaleDegree}"
         dfdict["degree"].append(degree)
     df = pd.DataFrame(dfdict)
+    df.set_index('offset', inplace=True)
+    return _reindexDataFrame(df)
+
+
+def _reindexDataFrame(df):
+    """Reindexes a dataframe according to a fixed note-value.
+
+    It could be said that the DataFrame produced by parseScore
+    is a "salami-sliced" version of the score. This is intuitive
+    for humans, but does not really work in machine learning.
+
+    What works, is to slice the score in fixed note intervals,
+    for example, a sixteenth note. This reindex function does
+    exactly that.
+    """
+    firstRow = df.head(1)
+    lastRow = df.tail(1)
+    minOffset = firstRow.index.to_numpy()[0]
+    maxOffset = (lastRow.index + lastRow.duration).to_numpy()[0]
+    newIndex = np.arange(minOffset, maxOffset, DELTAOFFSET)
+    # All operations done over the full index, i.e., fixed-timesteps
+    # plus original onsets. Later, original onsets (e.g., triplets)
+    # are removed and just the fixed-timesteps are kept
+    df = df.reindex(index=df.index.union(newIndex))
+    # here onsets are easier, every "injected" index is not an onset
+    df.isOnset.fillna(value=False, inplace=True)
+    df.fillna(method="ffill", inplace=True)
+    df = df.reindex(index=newIndex)
     return df
