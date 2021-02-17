@@ -86,7 +86,7 @@ weirdRhythm = """
 """
 
 
-class TestScoreParser(unittest.TestCase):
+class TestInitialDataFrame(unittest.TestCase):
     def test_octave(self):
         notes = [
             ["C0", "B0"],
@@ -131,48 +131,48 @@ class TestScoreParser(unittest.TestCase):
             ##############
             ["D3", "G4"],
         ]
-        ties = [
-            [None, None],
-            [None, None],
-            [None, None],
-            [None, None],
+        areOnsets = [
+            [True, True],
+            [True, True],
+            [True, True],
+            [True, True],
             #############
-            [None, None],
-            [None, None],
-            [None, None],
-            [None, None],
+            [True, True],
+            [True, True],
+            [True, True],
+            [True, True],
             #############
-            [None, None],
-            [None, None],
-            [None, None],
-            [None, None],
+            [True, True],
+            [True, True],
+            [True, True],
+            [True, True],
             #############
-            [None, None],
-            [None, None],
-            [None, None],
-            #############
-            #############
-            [None, None],
-            [None, None],
-            [None, None],
-            [None, None],
+            [True, True],
+            [True, True],
+            [True, True],
             #############
             #############
-            [None],
-            [None, None],
-            [None, None],
-            [None, None],
+            [True, True],
+            [True, True],
+            [True, True],
+            [True, True],
             #############
-            [None, "start"],
-            [None, "stop"],
-            [None, "start"],
-            [None, "stop"],
-            [None, "start"],
-            [None, "stop"],
-            [None, "start"],
-            [None, "stop"],
+            #############
+            [True],
+            [True, True],
+            [True, True],
+            [True, True],
+            #############
+            [True, True],
+            [True, False],
+            [True, True],
+            [True, False],
+            [True, True],
+            [True, False],
+            [True, True],
+            [True, False],
             ###############
-            [None, None],
+            [True, True],
         ]
         measures = [
             1,
@@ -261,11 +261,12 @@ class TestScoreParser(unittest.TestCase):
             "offset": offsets,
             "measure": measures,
             "notes": notes,
-            "ties": ties,
+            "isOnset": areOnsets,
         }
         dfGT = pd.DataFrame(dfdictGT)
+        dfGT.set_index("offset", inplace=True)
         dfdictGT = dfGT.to_dict()
-        df = score_parser.parseScore(octaveTest)
+        df = score_parser._initialDataFrame(octaveTest)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
             for frame, val in vGT.items():
@@ -284,16 +285,16 @@ class TestScoreParser(unittest.TestCase):
             ["B3", "F4", "G4", "D5"],
             ["C4", "E4", "G4", "C5"],
         ]
-        ties = [
-            ["start"],
-            ["continue", "start"],
-            ["continue", "continue", "start"],
-            ["stop", "stop", "stop", None],
-            ["start"],
-            ["continue", "start"],
-            ["continue", "continue", "start"],
-            ["stop", "stop", "stop", None],
-            [None, None, None, None],
+        areOnsets = [
+            [True],
+            [False, True],
+            [False, False, True],
+            [False, False, False, True],
+            [True],
+            [False, True],
+            [False, False, True],
+            [False, False, False, True],
+            [True, True, True, True],
         ]
         measures = [
             1,
@@ -325,11 +326,12 @@ class TestScoreParser(unittest.TestCase):
             "offset": offsets,
             "measure": measures,
             "notes": notes,
-            "ties": ties,
+            "isOnset": areOnsets,
         }
         dfGT = pd.DataFrame(dfdictGT)
+        dfGT.set_index("offset", inplace=True)
         dfdictGT = dfGT.to_dict()
-        df = score_parser.parseScore(weirdRhythm)
+        df = score_parser._initialDataFrame(weirdRhythm)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
             for frame, val in vGT.items():
