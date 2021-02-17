@@ -1,7 +1,7 @@
 import music21
 import pandas as pd
 import numpy as np
-from common import DELTAOFFSET, FLOATSCALE
+from common import FIXEDOFFSET, FLOATSCALE
 
 
 def _initialDataFrame(f, fmt=None):
@@ -32,7 +32,7 @@ def _initialDataFrame(f, fmt=None):
     return df
 
 
-def _reindexDataFrame(df):
+def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     """Reindexes a dataframe according to a fixed note-value.
 
     It could be said that the DataFrame produced by parseScore
@@ -47,7 +47,7 @@ def _reindexDataFrame(df):
     lastRow = df.tail(1)
     minOffset = firstRow.index.to_numpy()[0]
     maxOffset = (lastRow.index + lastRow.duration).to_numpy()[0]
-    newIndex = np.arange(minOffset, maxOffset, DELTAOFFSET)
+    newIndex = np.arange(minOffset, maxOffset, fixedOffset)
     # All operations done over the full index, i.e., fixed-timesteps
     # plus original onsets. Later, original onsets (e.g., triplets)
     # are removed and just the fixed-timesteps are kept

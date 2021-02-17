@@ -1,5 +1,4 @@
 import unittest
-import music21
 import score_parser
 import pandas as pd
 
