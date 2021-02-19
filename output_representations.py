@@ -29,5 +29,8 @@ def inversion(df):
     frames = len(df.index)
     ret = np.zeros((frames, 4))
     for frame, inversion in enumerate(df.inversion):
+        if inversion > 3:
+            # Any chord beyond sevenths is encoded as "root" position
+            inversion = 0
         ret[frame, int(inversion)] = 1
     return ret
