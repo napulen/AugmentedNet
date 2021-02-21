@@ -481,44 +481,83 @@ class TestInitialDataFrame(unittest.TestCase):
             #####
             None,
         ]
-        degrees = [
+        degrees_1 = [
             "1",
             "2",
             "3",
-            ####
+            ##
             "4",
             "1",
             "5",
-            ####
+            ##
             "6",
             "5",
-            "7/1",
-            ####
+            "7",
+            ##
             "1",
             "5",
-            ####
+            ##
             "1",
             "2",
             "3",
-            ####
+            ##
             "2",
             "1",
             "5",
-            ####
+            ##
             "4",
             "5",
-            ####
+            ##
             "2",
             "5",
-            ####
+            ##
             "4",
-            ####
+            ##
             "4",
-            ####
+            ##
             "5",
             "5",
-            ####
+            ##
             "1",
+        ]
+        degrees_2 = [
+            None,
+            None,
+            None,
+            ####
+            None,
+            None,
+            None,
+            ####
+            None,
+            None,
+            "1",
+            ####
+            None,
+            None,
+            ####
+            None,
+            None,
+            None,
+            ####
+            None,
+            None,
+            None,
+            ####
+            None,
+            None,
+            ####
+            None,
+            None,
+            ####
+            None,
+            ####
+            None,
+            ####
+            None,
+            None,
+            ####
+            None,
         ]
         dfdictGT = {
             "offset": offsets,
@@ -533,7 +572,8 @@ class TestInitialDataFrame(unittest.TestCase):
             "pcset": pcsets,
             "localKey": localKeys,
             "tonicizedKey": tonicizedKeys,
-            "degree": degrees,
+            "degree_1": degrees_1,
+            "degree_2": degrees_2
         }
         dfGT = pd.DataFrame(dfdictGT)
         dfGT.set_index("offset", inplace=True)
