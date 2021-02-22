@@ -481,7 +481,7 @@ class TestInitialDataFrame(unittest.TestCase):
             #####
             None,
         ]
-        degrees_1 = [
+        degrees1 = [
             "1",
             "2",
             "3",
@@ -492,7 +492,7 @@ class TestInitialDataFrame(unittest.TestCase):
             ##
             "6",
             "5",
-            "7",
+            "#7",
             ##
             "1",
             "5",
@@ -501,17 +501,17 @@ class TestInitialDataFrame(unittest.TestCase):
             "2",
             "3",
             ##
-            "2",
+            "-2",
             "1",
             "5",
             ##
-            "4",
+            "#4",
             "5",
             ##
             "2",
             "5",
             ##
-            "4",
+            "#4",
             ##
             "4",
             ##
@@ -520,7 +520,7 @@ class TestInitialDataFrame(unittest.TestCase):
             ##
             "1",
         ]
-        degrees_2 = [
+        degrees2 = [
             None,
             None,
             None,
@@ -572,8 +572,8 @@ class TestInitialDataFrame(unittest.TestCase):
             "pcset": pcsets,
             "localKey": localKeys,
             "tonicizedKey": tonicizedKeys,
-            "degree_1": degrees_1,
-            "degree_2": degrees_2
+            "degree1": degrees1,
+            "degree2": degrees2
         }
         dfGT = pd.DataFrame(dfdictGT)
         dfGT.set_index("offset", inplace=True)

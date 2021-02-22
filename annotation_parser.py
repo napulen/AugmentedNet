@@ -26,8 +26,8 @@ def _initialDataFrame(f):
         "pcset": [],
         "localKey": [],
         "tonicizedKey": [],
-        "degree_1": [],
-        "degree_2": [],
+        "degree1": [],
+        "degree2": [],
     }
     for rn in s.flat.getElementsByClass("RomanNumeral"):
         dfdict["offset"].append(round(float(rn.offset), FLOATSCALE))
@@ -46,12 +46,22 @@ def _initialDataFrame(f):
             dfdict["tonicizedKey"].append(secondaryKey.tonicPitchNameWithCase)
         else:
             dfdict["tonicizedKey"].append(None)
-        dfdict["degree_1"].append(str(rn.scaleDegree))
+        scaleDegree, alteration = rn.scaleDegreeWithAlteration
+        if alteration:
+            scaleDegree = f"{alteration.modifier}{scaleDegree}"
+        else:
+            scaleDegree = f"{scaleDegree}"
+        dfdict["degree1"].append(str(scaleDegree))
         secondaryDegree = rn.secondaryRomanNumeral
         if secondaryDegree:
-            dfdict["degree_2"].append(str(secondaryDegree.scaleDegree))
+            scaleDegree, alteration = secondaryDegree.scaleDegreeWithAlteration
+            if alteration:
+                scaleDegree = f"{alteration.modifier}{scaleDegree}"
+            else:
+                scaleDegree = f"{scaleDegree}"
+            dfdict["degree2"].append(scaleDegree)
         else:
-            dfdict["degree_2"].append(None)
+            dfdict["degree2"].append(None)
     df = pd.DataFrame(dfdict)
     df.set_index("offset", inplace=True)
     return df
