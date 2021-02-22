@@ -45,7 +45,7 @@ def _initialDataFrame(f):
         if secondaryKey:
             dfdict["tonicizedKey"].append(secondaryKey.tonicPitchNameWithCase)
         else:
-            dfdict["tonicizedKey"].append(None)
+            dfdict["tonicizedKey"].append("None")
         scaleDegree, alteration = rn.scaleDegreeWithAlteration
         if alteration:
             scaleDegree = f"{alteration.modifier}{scaleDegree}"
@@ -61,7 +61,7 @@ def _initialDataFrame(f):
                 scaleDegree = f"{scaleDegree}"
             dfdict["degree2"].append(scaleDegree)
         else:
-            dfdict["degree2"].append(None)
+            dfdict["degree2"].append("None")
     df = pd.DataFrame(dfdict)
     df.set_index("offset", inplace=True)
     return df
