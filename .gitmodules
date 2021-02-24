@@ -13,3 +13,6 @@
 [submodule "When-in-Rome"]
 	path = When-in-Rome
 	url = https://github.com/MarkGotham/When-in-Rome.git
+[submodule "music21_corpus"]
+	path = music21_corpus
+	url = https://github.com/cuthbertLab/music21.git
