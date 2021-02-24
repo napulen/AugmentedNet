@@ -1,3 +1,5 @@
+RANDOMSEED = 1337
+
 # Number of decimals to the right of the decimal point
 FLOATSCALE = 4
 
@@ -6,3 +8,7 @@ FRAMEBASENOTE = 16
 FIXEDOFFSET = round(4.0 / FRAMEBASENOTE, FLOATSCALE)
 
 SEQUENCELENGTH = 64
+
+BATCHSIZE = 32
+
+
