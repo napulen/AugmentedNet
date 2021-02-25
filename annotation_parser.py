@@ -4,7 +4,11 @@ import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
 
 
-def _initialDataFrame(f):
+def _m21Parse(f):
+    return music21.converter.parse(f, format="romantext")
+
+
+def _initialDataFrame(s):
     """Parses an annotation RomanText file and produces a pandas dataframe.
 
     Unpacking a roman numeral is slightly more complicated here than in
@@ -12,7 +16,6 @@ def _initialDataFrame(f):
     seem to work well (e.g., inversion). It may be easier to predict others
     which may still serve to reconstruct the roman numeral.
     """
-    s = music21.converter.parse(f, format="romantext")
     dfdict = {
         "offset": [],
         "measure": [],
@@ -95,8 +98,10 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
 
 
 def parseAnnotation(f):
+    # Step 0: Use music21 to parse the score
+    s = _m21Parse(f)
     # Step 1: Parse and produce a salami-sliced dataset
-    df = _initialDataFrame(f)
+    df = _initialDataFrame(s)
     # Step 2: Turn salami-slice into fixed-duration steps
     df = _reindexDataFrame(df)
     return df

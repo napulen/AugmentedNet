@@ -4,14 +4,17 @@ import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
 
 
-def _initialDataFrame(f, fmt=None):
+def _m21Parse(f, fmt=None):
+    return music21.converter.parse(f, format=fmt)
+
+
+def _initialDataFrame(s, fmt=None):
     """Parses a score and produces a pandas dataframe.
 
     The features obtained are the note names, their position in the score,
     measure number, and their ties (in case something fancy needs to be done,
     with the tie information).
     """
-    s = music21.converter.parse(f, format=fmt)
     dfdict = {
         "offset": [],
         "duration": [],
@@ -27,6 +30,12 @@ def _initialDataFrame(f, fmt=None):
         dfdict["isOnset"].append(
             [(not n.tie or n.tie.type == "start") for n in c]
         )
+    # Make the last note to last for the entire measure
+    lastMmNumber = dfdict["measure"][-1]
+    lastMm = s.chordify().measure(lastMmNumber)
+    lastMmDuration = round(float(lastMm.duration.quarterLength), FLOATSCALE)
+    if lastMmDuration > dfdict["duration"][-1]:
+        dfdict["duration"][-1] = lastMmDuration
     df = pd.DataFrame(dfdict)
     df.set_index("offset", inplace=True)
     return df
@@ -65,8 +74,10 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
 
 
 def parseScore(f, fmt=None):
+    # Step 0: Use music21 to parse the score
+    s = _m21Parse(f, fmt)
     # Step 1: Parse and produce a salami-sliced dataset
-    df = _initialDataFrame(f, fmt)
+    df = _initialDataFrame(s, fmt)
     # Step 2: Turn salami-slice into fixed-duration steps
     df = _reindexDataFrame(df)
     return df

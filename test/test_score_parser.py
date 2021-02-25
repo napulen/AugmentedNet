@@ -265,7 +265,8 @@ class TestInitialDataFrame(unittest.TestCase):
         dfGT = pd.DataFrame(dfdictGT)
         dfGT.set_index("offset", inplace=True)
         dfdictGT = dfGT.to_dict()
-        df = score_parser._initialDataFrame(octaveTest)
+        s = score_parser._m21Parse(octaveTest)
+        df = score_parser._initialDataFrame(s)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
             for frame, val in vGT.items():
@@ -330,7 +331,8 @@ class TestInitialDataFrame(unittest.TestCase):
         dfGT = pd.DataFrame(dfdictGT)
         dfGT.set_index("offset", inplace=True)
         dfdictGT = dfGT.to_dict()
-        df = score_parser._initialDataFrame(weirdRhythm)
+        s = score_parser._m21Parse(weirdRhythm)
+        df = score_parser._initialDataFrame(s)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
             for frame, val in vGT.items():

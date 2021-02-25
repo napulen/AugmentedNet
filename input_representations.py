@@ -11,6 +11,7 @@ SPELLINGS = [
     for accidental in ACCIDENTALS
 ]
 
+
 def pitchClassNoteName(df, minOctave=2, maxOctave=6):
     """Encodes a Score DataFrame into a pianoroll-like representation.
 
@@ -59,6 +60,40 @@ def salamiSliceWithHold(df, numberOfNotes=5):
             ret[frame, octave + 19 + 27 * noteIndex] = 1
             if not onset:
                 ret[frame, 26 + 27 * noteIndex] = 1
+                # print(note, onset, 'hold')
+            noteIndex += 1
+    return ret
+
+
+def compressedSalamiSliceWithHold(df, numberOfNotes=5):
+    """Encodes a Score DataFrame into a salami-slice representation.
+
+    Expects a DataFrame parsed by parseScore(). Returns a numpy() array.
+    """
+    frames = len(df.index)
+    ret = np.zeros((frames, 20*numberOfNotes))
+    for frame, r in enumerate(df.iterrows()):
+        _, row = r
+        notes = row.notes
+        onsets = row.isOnset
+        noteIndex = 0
+        # print(notes, onsets)
+        pitchClasses = []
+        for note, onset in zip(notes, onsets):
+            if noteIndex == numberOfNotes:
+                break
+            m21Pitch = music21.pitch.Pitch(note)
+            pitchLetter = m21Pitch.step
+            pitchLetterIndex = NOTENAMES.index(pitchLetter)
+            pitchClass = m21Pitch.pitchClass
+            if pitchClass in pitchClasses:
+                continue
+            pitchClasses.append(pitchClass)
+            # print(frame, note, onset, pitchLetterIndex, pitchClass, octave)
+            ret[frame, pitchLetterIndex + 20 * noteIndex] = 1
+            ret[frame, pitchClass + 7 + 20 * noteIndex] = 1
+            if not onset:
+                ret[frame, 19 + 20 * noteIndex] = 1
                 # print(note, onset, 'hold')
             noteIndex += 1
     return ret

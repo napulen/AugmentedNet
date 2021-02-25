@@ -727,7 +727,8 @@ class TestInitialDataFrame(unittest.TestCase):
         dfGT = pd.DataFrame(dfdictGT)
         dfGT.set_index("offset", inplace=True)
         dfdictGT = dfGT.to_dict()
-        df = annotation_parser._initialDataFrame(multipleAnnotations)
+        s = annotation_parser._m21Parse(multipleAnnotations)
+        df = annotation_parser._initialDataFrame(s)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
             for frame, val in vGT.items():
@@ -741,7 +742,8 @@ class TestInitialDataFrame(unittest.TestCase):
         dfGT["pitchNames"] = dfGT["pitchNames"].apply(eval)
         dfGT["pcset"] = dfGT["pcset"].apply(eval)
         dfdictGT = dfGT.to_dict()
-        df = annotation_parser._initialDataFrame(multipleAnnotations)
+        s = annotation_parser._m21Parse(multipleAnnotations)
+        df = annotation_parser._initialDataFrame(s)
         df = annotation_parser._reindexDataFrame(df)
         dfdict = df.to_dict()
         for k, vGT in dfdictGT.items():
