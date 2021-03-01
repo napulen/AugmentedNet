@@ -255,3 +255,16 @@ def chordQuality(df):
             qualityIndex = CHORD_QUALITIES.index(quality)
         ret[frame, qualityIndex] = 1
     return ret
+
+
+def harmonicRhythm(df):
+    """Encodes an Annotation DataFrame into a numpy array representation.
+
+    Expects a DataFrame parsed by parseAnnotation(). Returns a numpy() array.
+    """
+    frames = len(df.index)
+    ret = np.zeros((frames, 2))
+    for frame, isOnset in enumerate(df.isOnset):
+        onset = 1 if isOnset else 0
+        ret[frame, onset] = 1
+    return ret
