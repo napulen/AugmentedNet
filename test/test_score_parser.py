@@ -88,6 +88,58 @@ offset,measure,notes,isOnset
 10.0,3,"['D3', 'G4']","[True, True]"
 """
 
+octaveTestReindexDataFrame = """
+offset,duration,measure,notes,isOnset
+0.0,0.25,1.0,"['C0', 'B0']","[True, True]"
+0.25,0.25,1.0,"['C1', 'B1']","[True, True]"
+0.5,0.25,1.0,"['C2', 'B2']","[True, True]"
+0.75,0.25,1.0,"['C3', 'B3']","[True, True]"
+1.0,0.25,1.0,"['C2', 'B2']","[True, True]"
+1.25,0.25,1.0,"['C3', 'B3']","[True, True]"
+1.5,0.25,1.0,"['C4', 'B4']","[True, True]"
+1.75,0.25,1.0,"['C5', 'B5']","[True, True]"
+2.0,0.25,1.0,"['C4', 'B4']","[True, True]"
+2.25,0.25,1.0,"['C5', 'B5']","[True, True]"
+2.5,0.25,1.0,"['C6', 'B6']","[True, True]"
+2.75,0.25,1.0,"['C7', 'B7']","[True, True]"
+3.0,0.25,1.0,"['C6', 'B6']","[True, True]"
+3.25,0.25,1.0,"['C7', 'B7']","[True, True]"
+3.5,0.5,1.0,"['C8', 'B8']","[True, True]"
+3.75,0.5,1.0,"['C8', 'B8']","[False, False]"
+4.0,1.0,2.0,"['C1', 'B7']","[True, True]"
+4.25,1.0,2.0,"['C1', 'B7']","[False, False]"
+4.5,1.0,2.0,"['C1', 'B7']","[False, False]"
+4.75,1.0,2.0,"['C1', 'B7']","[False, False]"
+5.0,1.0,2.0,"['C2', 'B6']","[True, True]"
+5.25,1.0,2.0,"['C2', 'B6']","[False, False]"
+5.5,1.0,2.0,"['C2', 'B6']","[False, False]"
+5.75,1.0,2.0,"['C2', 'B6']","[False, False]"
+6.0,1.0,2.0,"['C3', 'B5']","[True, True]"
+6.25,1.0,2.0,"['C3', 'B5']","[False, False]"
+6.5,1.0,2.0,"['C3', 'B5']","[False, False]"
+6.75,1.0,2.0,"['C3', 'B5']","[False, False]"
+7.0,1.0,2.0,"['C4', 'B4']","[True, True]"
+7.25,1.0,2.0,"['C4', 'B4']","[False, False]"
+7.5,1.0,2.0,"['C4', 'B4']","[False, False]"
+7.75,1.0,2.0,"['C4', 'B4']","[False, False]"
+8.0,0.25,3.0,['C4'],[True]
+8.25,0.25,3.0,"['B3', 'D4']","[True, True]"
+8.5,0.25,3.0,"['A3', 'E4']","[True, True]"
+8.75,0.25,3.0,"['G3', 'F4']","[True, True]"
+9.0,0.125,3.0,"['F3', 'G4']","[True, True]"
+9.25,0.125,3.0,"['F3', 'A4']","[True, True]"
+9.5,0.125,3.0,"['A3', 'G4']","[True, True]"
+9.75,0.125,3.0,"['F3', 'F#4']","[True, True]"
+10.0,2.0,3.0,"['D3', 'G4']","[True, True]"
+10.25,2.0,3.0,"['D3', 'G4']","[False, False]"
+10.5,2.0,3.0,"['D3', 'G4']","[False, False]"
+10.75,2.0,3.0,"['D3', 'G4']","[False, False]"
+11.0,2.0,3.0,"['D3', 'G4']","[False, False]"
+11.25,2.0,3.0,"['D3', 'G4']","[False, False]"
+11.5,2.0,3.0,"['D3', 'G4']","[False, False]"
+11.75,2.0,3.0,"['D3', 'G4']","[False, False]"
+"""
+
 weirdRhythm = """
 **kern	**kern
 *part1	*part1
@@ -100,16 +152,14 @@ weirdRhythm = """
 *MM180	*MM180
 =1	=1
 *^	*
-4r	2.c	4.r
-[8e	.	.
 *	*	*^
+4r	2.c	4.r	4.r
+[8e	.	.	.
 4.e]	.	8r	4.g
 .	.	4cc	.
-*	*	*v	*v
-=2	=2	=2
-8r	2.B	4.r
-[4f	.	.
-*	*	*^
+=2	=2	=2	=2
+8r	2.B	4.r	4.r
+[4f	.	.	.
 4.f]	.	4r	4.g
 .	.	8dd	.
 *	*	*v	*v
@@ -134,6 +184,46 @@ offset,measure,notes,isOnset
 6.0,3,"['C4', 'E4', 'G4', 'C5']","[True, True, True, True]"
 """
 
+weirdRhythmReindexDataFrame = """
+offset,duration,measure,notes,isOnset
+0.0,1.0,1.0,['C4'],[True]
+0.25,1.0,1.0,['C4'],[False]
+0.5,1.0,1.0,['C4'],[False]
+0.75,1.0,1.0,['C4'],[False]
+1.0,0.5,1.0,"['C4', 'E4']","[False, True]"
+1.25,0.5,1.0,"['C4', 'E4']","[False, False]"
+1.5,0.5,1.0,"['C4', 'E4', 'G4']","[False, False, True]"
+1.75,0.5,1.0,"['C4', 'E4', 'G4']","[False, False, False]"
+2.0,1.0,1.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, True]"
+2.25,1.0,1.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+2.5,1.0,1.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+2.75,1.0,1.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+3.0,0.5,2.0,['B3'],[True]
+3.25,0.5,2.0,['B3'],[False]
+3.5,1.0,2.0,"['B3', 'F4']","[False, True]"
+3.75,1.0,2.0,"['B3', 'F4']","[False, False]"
+4.0,1.0,2.0,"['B3', 'F4']","[False, False]"
+4.25,1.0,2.0,"['B3', 'F4']","[False, False]"
+4.5,1.0,2.0,"['B3', 'F4', 'G4']","[False, False, True]"
+4.75,1.0,2.0,"['B3', 'F4', 'G4']","[False, False, False]"
+5.0,1.0,2.0,"['B3', 'F4', 'G4']","[False, False, False]"
+5.25,1.0,2.0,"['B3', 'F4', 'G4']","[False, False, False]"
+5.5,0.5,2.0,"['B3', 'F4', 'G4', 'D5']","[False, False, False, True]"
+5.75,0.5,2.0,"['B3', 'F4', 'G4', 'D5']","[False, False, False, False]"
+6.0,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[True, True, True, True]"
+6.25,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+6.5,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+6.75,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+7.0,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+7.25,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+7.5,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+7.75,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+8.0,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+8.25,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+8.5,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+8.75,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","[False, False, False, False]"
+"""
+
 
 def _load_dfdict_gt(gt):
     csvGT = io.StringIO(gt)
@@ -145,8 +235,8 @@ def _load_dfdict_gt(gt):
     return dfdictGT
 
 
-class TestInitialDataFrame(unittest.TestCase):
-    def test_octave(self):
+class TestScoreParser(unittest.TestCase):
+    def test_octave_initial_dataframe(self):
         dfdictGT = _load_dfdict_gt(octaveTestInitialDataFrame)
         s = score_parser._m21Parse(octaveTest)
         df = score_parser._initialDataFrame(s)
@@ -156,7 +246,37 @@ class TestInitialDataFrame(unittest.TestCase):
                 with self.subTest(property=k, frame=frame):
                     self.assertEqual(vGT[frame], dfdict[k][frame])
 
-    def test_weird_rhythm(self):
+    def test_octave_initial_dataframe_index(self):
+        dfdictGT = _load_dfdict_gt(octaveTestInitialDataFrame)
+        indexGT = list(dfdictGT["notes"].keys())
+        s = score_parser._m21Parse(octaveTest)
+        df = score_parser._initialDataFrame(s)
+        dfdict = df.to_dict()
+        index = list(dfdict["notes"].keys())
+        self.assertEqual(indexGT, index)
+
+    def test_octave_reindexed_dataframe(self):
+        dfdictGT = _load_dfdict_gt(octaveTestReindexDataFrame)
+        s = score_parser._m21Parse(octaveTest)
+        df = score_parser._initialDataFrame(s)
+        df = score_parser._reindexDataFrame(df)
+        dfdict = df.to_dict()
+        for k, vGT in dfdictGT.items():
+            for frame, val in vGT.items():
+                with self.subTest(property=k, frame=frame):
+                    self.assertEqual(vGT[frame], dfdict[k][frame])
+
+    def test_octave_reindexed_dataframe_index(self):
+        dfdictGT = _load_dfdict_gt(octaveTestReindexDataFrame)
+        indexGT = list(dfdictGT["notes"].keys())
+        s = score_parser._m21Parse(octaveTest)
+        df = score_parser._initialDataFrame(s)
+        df = score_parser._reindexDataFrame(df)
+        dfdict = df.to_dict()
+        index = list(dfdict["notes"].keys())
+        self.assertEqual(indexGT, index)
+
+    def test_weird_rhythm_initial_dataframe(self):
         dfdictGT = _load_dfdict_gt(weirdRhythmInitialDataFrame)
         s = score_parser._m21Parse(weirdRhythm)
         df = score_parser._initialDataFrame(s)
@@ -166,6 +286,35 @@ class TestInitialDataFrame(unittest.TestCase):
                 with self.subTest(property=k, frame=frame):
                     self.assertEqual(vGT[frame], dfdict[k][frame])
 
+    def test_weird_rhythm_initial_dataframe_index(self):
+        dfdictGT = _load_dfdict_gt(weirdRhythmInitialDataFrame)
+        indexGT = list(dfdictGT["notes"].keys())
+        s = score_parser._m21Parse(weirdRhythm)
+        df = score_parser._initialDataFrame(s)
+        dfdict = df.to_dict()
+        index = list(dfdict["notes"].keys())
+        self.assertEqual(indexGT, index)
+
+    def test_weird_rhythm_reindexed_dataframe(self):
+        dfdictGT = _load_dfdict_gt(weirdRhythmInitialDataFrame)
+        s = score_parser._m21Parse(weirdRhythm)
+        df = score_parser._initialDataFrame(s)
+        df = score_parser._reindexDataFrame(df)
+        dfdict = df.to_dict()
+        for k, vGT in dfdictGT.items():
+            for frame, val in vGT.items():
+                with self.subTest(property=k, frame=frame):
+                    self.assertEqual(vGT[frame], dfdict[k][frame])
+
+    def test_weird_rhythm_reindexed_dataframe_index(self):
+        dfdictGT = _load_dfdict_gt(weirdRhythmReindexDataFrame)
+        indexGT = list(dfdictGT["notes"].keys())
+        s = score_parser._m21Parse(weirdRhythm)
+        df = score_parser._initialDataFrame(s)
+        df = score_parser._reindexDataFrame(df)
+        dfdict = df.to_dict()
+        index = list(dfdict["notes"].keys())
+        self.assertEqual(indexGT, index)
 
 if __name__ == "__main__":
     unittest.main()

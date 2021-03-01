@@ -212,7 +212,7 @@ def _load_dfdict_gt(gt):
     return dfdictGT
 
 
-class TestInitialDataFrame(unittest.TestCase):
+class TestAnnotationParser(unittest.TestCase):
     def test_initial_dataframe(self):
         dfdictGT = _load_dfdict_gt(multipleAnnotationsInitialDataFrame)
         s = annotation_parser._m21Parse(multipleAnnotations)

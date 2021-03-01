@@ -30,12 +30,6 @@ def _initialDataFrame(s, fmt=None):
         dfdict["isOnset"].append(
             [(not n.tie or n.tie.type == "start") for n in c]
         )
-    # Make the last note to last for the entire measure
-    lastMmNumber = dfdict["measure"][-1]
-    lastMm = s.chordify().measure(lastMmNumber)
-    lastMmDuration = round(float(lastMm.duration.quarterLength), FLOATSCALE)
-    if lastMmDuration > dfdict["duration"][-1]:
-        dfdict["duration"][-1] = lastMmDuration
     df = pd.DataFrame(dfdict)
     df.set_index("offset", inplace=True)
     return df
