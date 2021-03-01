@@ -1,2 +1,2 @@
 # AugmentedNet
-Neural network trained with data-augmented artificial examples.
+Experiments on data augmentation for tonal analysis.
