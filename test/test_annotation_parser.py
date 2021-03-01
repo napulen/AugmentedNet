@@ -23,6 +23,36 @@ m11 b1 V b3 V
 m12 b1 I
 """
 
+multipleAnnotationsInitialDataFrame = """
+offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,localKey,tonicizedKey,degree1,degree2
+0.0,1,1.0,True,"('C', 'E', 'G')",C,C,0,major triad,"(0, 4, 7)",C,None,1,None
+1.0,1,1.0,True,"('D', 'F', 'A')",D,D,0,minor triad,"(2, 5, 9)",C,None,2,None
+2.0,1,1.0,True,"('E', 'G', 'B')",E,E,0,minor triad,"(4, 7, 11)",C,None,3,None
+3.0,2,1.0,True,"('F', 'A', 'C')",F,F,0,major triad,"(0, 5, 9)",C,None,4,None
+4.0,2,1.0,True,"('G', 'C', 'E')",G,C,2,major triad,"(0, 4, 7)",C,None,1,None
+5.0,2,1.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",C,None,5,None
+6.0,3,1.0,True,"('A', 'C', 'E')",A,A,0,minor triad,"(0, 4, 9)",C,None,6,None
+7.0,3,1.0,True,"('B', 'D', 'G')",B,G,1,major triad,"(2, 7, 11)",C,None,5,None
+8.0,3,1.0,True,"('D', 'F', 'A-', 'B')",D,B,1,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
+9.0,4,2.0,True,"('E', 'G', 'C')",E,C,1,major triad,"(0, 4, 7)",C,None,1,None
+11.0,4,1.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",C,None,5,None
+12.0,5,1.0,True,"('C', 'E-', 'G')",C,C,0,minor triad,"(0, 3, 7)",c,None,1,None
+13.0,5,1.0,True,"('D', 'F', 'A-')",D,D,0,diminished triad,"(2, 5, 8)",c,None,2,None
+14.0,5,1.0,True,"('E-', 'G', 'B-')",E-,E-,0,major triad,"(3, 7, 10)",c,None,3,None
+15.0,6,1.0,True,"('F', 'A-', 'D-')",F,D-,1,major triad,"(1, 5, 8)",c,None,-2,None
+16.0,6,1.0,True,"('G', 'C', 'E-')",G,C,2,minor triad,"(0, 3, 7)",c,None,1,None
+17.0,6,1.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",c,None,5,None
+18.0,7,2.0,True,"('A-', 'C', 'F#')",A-,F#,1,Italian augmented sixth chord,"(0, 6, 8)",c,None,#4,None
+20.0,7,1.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",c,None,5,None
+21.0,8,2.0,True,"('A-', 'C', 'D', 'F#')",A-,D,2,French augmented sixth chord,"(0, 2, 6, 8)",c,None,2,None
+23.0,8,1.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",c,None,5,None
+24.0,9,3.0,True,"('A-', 'C', 'E-', 'F#')",A-,F#,1,German augmented sixth chord,"(0, 3, 6, 8)",c,None,#4,None
+27.0,10,3.0,True,"('F', 'A-', 'C')",F,F,0,minor triad,"(0, 5, 8)",c,None,4,None
+30.0,11,2.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",c,None,5,None
+32.0,11,1.0,True,"('G', 'B', 'D')",G,G,0,major triad,"(2, 7, 11)",c,None,5,None
+33.0,12,3.0,True,"('C', 'E', 'G')",C,C,0,major triad,"(0, 4, 7)",c,None,1,None
+"""
+
 multipleAnnotationsFixedTimeframe = """
 offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,localKey,tonicizedKey,degree1,degree2
 0.0,1.0,1.0,True,"('C', 'E', 'G')",C,C,0.0,major triad,"(0, 4, 7)",C,None,1,None
@@ -172,561 +202,19 @@ offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,loc
 """
 
 
+def _load_dfdict_gt(gt):
+    csvGT = io.StringIO(gt)
+    dfGT = pd.read_csv(csvGT)
+    dfGT.set_index("offset", inplace=True)
+    dfGT["pitchNames"] = dfGT["pitchNames"].apply(eval)
+    dfGT["pcset"] = dfGT["pcset"].apply(eval)
+    dfdictGT = dfGT.to_dict()
+    return dfdictGT
+
+
 class TestInitialDataFrame(unittest.TestCase):
     def test_initial_dataframe(self):
-        offsets = [
-            0.0,
-            1.0,
-            2.0,
-            ####
-            3.0,
-            4.0,
-            5.0,
-            ####
-            6.0,
-            7.0,
-            8.0,
-            ####
-            9.0,
-            11.0,
-            ####
-            12.0,
-            13.0,
-            14.0,
-            ####
-            15.0,
-            16.0,
-            17.0,
-            ####
-            18.0,
-            20.0,
-            ####
-            21.0,
-            23.0,
-            ####
-            24.0,
-            ####
-            27.0,
-            ####
-            30.0,
-            32.0,
-            ####
-            33.0,
-        ]
-        measures = [
-            1,
-            1,
-            1,
-            2,
-            2,
-            2,
-            3,
-            3,
-            3,
-            4,
-            4,
-            5,
-            5,
-            5,
-            6,
-            6,
-            6,
-            7,
-            7,
-            8,
-            8,
-            9,
-            10,
-            11,
-            11,
-            12,
-        ]
-        durations = [
-            1.0,
-            1.0,
-            1.0,
-            ####
-            1.0,
-            1.0,
-            1.0,
-            ####
-            1.0,
-            1.0,
-            1.0,
-            ####
-            2.0,
-            1.0,
-            ####
-            1.0,
-            1.0,
-            1.0,
-            ####
-            1.0,
-            1.0,
-            1.0,
-            ####
-            2.0,
-            1.0,
-            ####
-            2.0,
-            1.0,
-            ####
-            3.0,
-            ####
-            3.0,
-            ####
-            2.0,
-            1.0,
-            ####
-            3.0,
-        ]
-        areOnsets = [
-            True,
-            True,
-            True,
-            ####
-            True,
-            True,
-            True,
-            ####
-            True,
-            True,
-            True,
-            ####
-            True,
-            True,
-            ####
-            True,
-            True,
-            True,
-            ####
-            True,
-            True,
-            True,
-            ####
-            True,
-            True,
-            ####
-            True,
-            True,
-            ####
-            True,
-            ####
-            True,
-            ####
-            True,
-            True,
-            ####
-            True,
-        ]
-        pitchNames = [
-            ("C", "E", "G"),
-            ("D", "F", "A"),
-            ("E", "G", "B"),
-            ################
-            ("F", "A", "C"),
-            ("G", "C", "E"),
-            ("G", "B", "D"),
-            ################
-            ("A", "C", "E"),
-            ("B", "D", "G"),
-            ("D", "F", "A-", "B"),
-            ################
-            ("E", "G", "C"),
-            ("G", "B", "D"),
-            ################
-            ("C", "E-", "G"),
-            ("D", "F", "A-"),
-            ("E-", "G", "B-"),
-            ################
-            ("F", "A-", "D-"),
-            ("G", "C", "E-"),
-            ("G", "B", "D"),
-            ################
-            ("A-", "C", "F#"),
-            ("G", "B", "D"),
-            ################
-            ("A-", "C", "D", "F#"),
-            ("G", "B", "D"),
-            ################
-            ("A-", "C", "E-", "F#"),
-            ################
-            ("F", "A-", "C"),
-            ################
-            ("G", "B", "D"),
-            ("G", "B", "D"),
-            ################
-            ("C", "E", "G"),
-        ]
-        basses = [
-            "C",
-            "D",
-            "E",
-            ####
-            "F",
-            "G",
-            "G",
-            ####
-            "A",
-            "B",
-            "D",
-            ####
-            "E",
-            "G",
-            ####
-            "C",
-            "D",
-            "E-",
-            ####
-            "F",
-            "G",
-            "G",
-            ####
-            "A-",
-            "G",
-            ####
-            "A-",
-            "G",
-            ####
-            "A-",
-            ####
-            "F",
-            ####
-            "G",
-            "G",
-            ####
-            "C",
-        ]
-        roots = [
-            "C",
-            "D",
-            "E",
-            ####
-            "F",
-            "C",
-            "G",
-            ####
-            "A",
-            "G",
-            "B",
-            ####
-            "C",
-            "G",
-            ####
-            "C",
-            "D",
-            "E-",
-            ####
-            "D-",
-            "C",
-            "G",
-            ####
-            "F#",
-            "G",
-            ####
-            "D",
-            "G",
-            ####
-            "F#",
-            ####
-            "F",
-            ####
-            "G",
-            "G",
-            ####
-            "C",
-        ]
-        inversions = [
-            0,
-            0,
-            0,
-            ##
-            0,
-            2,
-            0,
-            ##
-            0,
-            1,
-            1,
-            ##
-            1,
-            0,
-            ##
-            0,
-            0,
-            0,
-            ##
-            1,
-            2,
-            0,
-            ##
-            1,
-            0,
-            ##
-            2,
-            0,
-            ##
-            1,
-            ##
-            0,
-            ##
-            0,
-            0,
-            ##
-            0,
-        ]
-        qualities = [
-            "major triad",
-            "minor triad",
-            "minor triad",
-            ##############
-            "major triad",
-            "major triad",
-            "major triad",
-            ##############
-            "minor triad",
-            "major triad",
-            "diminished seventh chord",
-            ##############
-            "major triad",
-            "major triad",
-            ##############
-            "minor triad",
-            "diminished triad",
-            "major triad",
-            ##############
-            "major triad",
-            "minor triad",
-            "major triad",
-            ##############
-            "Italian augmented sixth chord",
-            "major triad",
-            ##############
-            "French augmented sixth chord",
-            "major triad",
-            ##############
-            "German augmented sixth chord",
-            ##############
-            "minor triad",
-            ##############
-            "major triad",
-            "major triad",
-            "major triad",
-        ]
-        pcsets = [
-            (0, 4, 7),
-            (2, 5, 9),
-            (4, 7, 11),
-            ##########
-            (0, 5, 9),
-            (0, 4, 7),
-            (2, 7, 11),
-            ##########
-            (0, 4, 9),
-            (2, 7, 11),
-            (2, 5, 8, 11),
-            ##########
-            (0, 4, 7),
-            (2, 7, 11),
-            ##########
-            (0, 3, 7),
-            (2, 5, 8),
-            (3, 7, 10),
-            ##########
-            (1, 5, 8),
-            (0, 3, 7),
-            (2, 7, 11),
-            ##########
-            (0, 6, 8),
-            (2, 7, 11),
-            ##########
-            (0, 2, 6, 8),
-            (2, 7, 11),
-            ##########
-            (0, 3, 6, 8),
-            ##########
-            (0, 5, 8),
-            ##########
-            (2, 7, 11),
-            (2, 7, 11),
-            ##########
-            (0, 4, 7),
-        ]
-        localKeys = [
-            "C",
-            "C",
-            "C",
-            ####
-            "C",
-            "C",
-            "C",
-            ####
-            "C",
-            "C",
-            "C",
-            ####
-            "C",
-            "C",
-            ####
-            "c",
-            "c",
-            "c",
-            ####
-            "c",
-            "c",
-            "c",
-            ####
-            "c",
-            "c",
-            ####
-            "c",
-            "c",
-            ####
-            "c",
-            ####
-            "c",
-            ####
-            "c",
-            "c",
-            ####
-            "c",
-        ]
-        tonicizedKeys = [
-            "None",
-            "None",
-            "None",
-            #####
-            "None",
-            "None",
-            "None",
-            #####
-            "None",
-            "None",
-            "c",
-            #####
-            "None",
-            "None",
-            #####
-            "None",
-            "None",
-            "None",
-            #####
-            "None",
-            "None",
-            "None",
-            #####
-            "None",
-            "None",
-            #####
-            "None",
-            "None",
-            #####
-            "None",
-            #####
-            "None",
-            #####
-            "None",
-            "None",
-            #####
-            "None",
-        ]
-        degrees1 = [
-            "1",
-            "2",
-            "3",
-            ##
-            "4",
-            "1",
-            "5",
-            ##
-            "6",
-            "5",
-            "#7",
-            ##
-            "1",
-            "5",
-            ##
-            "1",
-            "2",
-            "3",
-            ##
-            "-2",
-            "1",
-            "5",
-            ##
-            "#4",
-            "5",
-            ##
-            "2",
-            "5",
-            ##
-            "#4",
-            ##
-            "4",
-            ##
-            "5",
-            "5",
-            ##
-            "1",
-        ]
-        degrees2 = [
-            "None",
-            "None",
-            "None",
-            ####
-            "None",
-            "None",
-            "None",
-            ####
-            "None",
-            "None",
-            "1",
-            ####
-            "None",
-            "None",
-            ####
-            "None",
-            "None",
-            "None",
-            ####
-            "None",
-            "None",
-            "None",
-            ####
-            "None",
-            "None",
-            ####
-            "None",
-            "None",
-            ####
-            "None",
-            ####
-            "None",
-            ####
-            "None",
-            "None",
-            ####
-            "None",
-        ]
-        dfdictGT = {
-            "offset": offsets,
-            "measure": measures,
-            "duration": durations,
-            "isOnset": areOnsets,
-            "pitchNames": pitchNames,
-            "bass": basses,
-            "root": roots,
-            "inversion": inversions,
-            "quality": qualities,
-            "pcset": pcsets,
-            "localKey": localKeys,
-            "tonicizedKey": tonicizedKeys,
-            "degree1": degrees1,
-            "degree2": degrees2,
-        }
-        dfGT = pd.DataFrame(dfdictGT)
-        dfGT.set_index("offset", inplace=True)
-        dfdictGT = dfGT.to_dict()
+        dfdictGT = _load_dfdict_gt(multipleAnnotationsInitialDataFrame)
         s = annotation_parser._m21Parse(multipleAnnotations)
         df = annotation_parser._initialDataFrame(s)
         dfdict = df.to_dict()
@@ -736,12 +224,7 @@ class TestInitialDataFrame(unittest.TestCase):
                     self.assertEqual(vGT[frame], dfdict[k][frame])
 
     def test_reindexed_dataframe(self):
-        csvGT = io.StringIO(multipleAnnotationsFixedTimeframe)
-        dfGT = pd.read_csv(csvGT)
-        dfGT.set_index("offset", inplace=True)
-        dfGT["pitchNames"] = dfGT["pitchNames"].apply(eval)
-        dfGT["pcset"] = dfGT["pcset"].apply(eval)
-        dfdictGT = dfGT.to_dict()
+        dfdictGT = _load_dfdict_gt(multipleAnnotationsFixedTimeframe)
         s = annotation_parser._m21Parse(multipleAnnotations)
         df = annotation_parser._initialDataFrame(s)
         df = annotation_parser._reindexDataFrame(df)

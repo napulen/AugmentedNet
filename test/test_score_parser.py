@@ -1,4 +1,5 @@
 import unittest
+import io
 import score_parser
 import pandas as pd
 
@@ -51,6 +52,42 @@ octaveTest = """
 !!!system-decoration: {(s1,s2)}
 """
 
+octaveTestInitialDataFrame = """
+offset,measure,notes,isOnset
+0.0,1,"['C0', 'B0']","[True, True]"
+0.25,1,"['C1', 'B1']","[True, True]"
+0.5,1,"['C2', 'B2']","[True, True]"
+0.75,1,"['C3', 'B3']","[True, True]"
+1.0,1,"['C2', 'B2']","[True, True]"
+1.25,1,"['C3', 'B3']","[True, True]"
+1.5,1,"['C4', 'B4']","[True, True]"
+1.75,1,"['C5', 'B5']","[True, True]"
+2.0,1,"['C4', 'B4']","[True, True]"
+2.25,1,"['C5', 'B5']","[True, True]"
+2.5,1,"['C6', 'B6']","[True, True]"
+2.75,1,"['C7', 'B7']","[True, True]"
+3.0,1,"['C6', 'B6']","[True, True]"
+3.25,1,"['C7', 'B7']","[True, True]"
+3.5,1,"['C8', 'B8']","[True, True]"
+4.0,2,"['C1', 'B7']","[True, True]"
+5.0,2,"['C2', 'B6']","[True, True]"
+6.0,2,"['C3', 'B5']","[True, True]"
+7.0,2,"['C4', 'B4']","[True, True]"
+8.0,3,['C4'],[True]
+8.25,3,"['B3', 'D4']","[True, True]"
+8.5,3,"['A3', 'E4']","[True, True]"
+8.75,3,"['G3', 'F4']","[True, True]"
+9.0,3,"['F3', 'G4']","[True, True]"
+9.125,3,"['E3', 'G4']","[True, False]"
+9.25,3,"['F3', 'A4']","[True, True]"
+9.375,3,"['G3', 'A4']","[True, False]"
+9.5,3,"['A3', 'G4']","[True, True]"
+9.625,3,"['G3', 'G4']","[True, False]"
+9.75,3,"['F3', 'F#4']","[True, True]"
+9.875,3,"['E3', 'F#4']","[True, False]"
+10.0,3,"['D3', 'G4']","[True, True]"
+"""
+
 weirdRhythm = """
 **kern	**kern
 *part1	*part1
@@ -84,187 +121,33 @@ weirdRhythm = """
 !!!system-decoration: {(s1,s2)}
 """
 
+weirdRhythmInitialDataFrame = """
+offset,measure,notes,isOnset
+0.0,1,['C4'],[True]
+1.0,1,"['C4', 'E4']","[False, True]"
+1.5,1,"['C4', 'E4', 'G4']","[False, False, True]"
+2.0,1,"['C4', 'E4', 'G4', 'C5']","[False, False, False, True]"
+3.0,2,['B3'],[True]
+3.5,2,"['B3', 'F4']","[False, True]"
+4.5,2,"['B3', 'F4', 'G4']","[False, False, True]"
+5.5,2,"['B3', 'F4', 'G4', 'D5']","[False, False, False, True]"
+6.0,3,"['C4', 'E4', 'G4', 'C5']","[True, True, True, True]"
+"""
+
+
+def _load_dfdict_gt(gt):
+    csvGT = io.StringIO(gt)
+    dfGT = pd.read_csv(csvGT)
+    dfGT.set_index("offset", inplace=True)
+    dfGT["notes"] = dfGT["notes"].apply(eval)
+    dfGT["isOnset"] = dfGT["isOnset"].apply(eval)
+    dfdictGT = dfGT.to_dict()
+    return dfdictGT
+
 
 class TestInitialDataFrame(unittest.TestCase):
     def test_octave(self):
-        notes = [
-            ["C0", "B0"],
-            ["C1", "B1"],
-            ["C2", "B2"],
-            ["C3", "B3"],
-            #############
-            ["C2", "B2"],
-            ["C3", "B3"],
-            ["C4", "B4"],
-            ["C5", "B5"],
-            #############
-            ["C4", "B4"],
-            ["C5", "B5"],
-            ["C6", "B6"],
-            ["C7", "B7"],
-            #############
-            ["C6", "B6"],
-            ["C7", "B7"],
-            ["C8", "B8"],
-            #############
-            #############
-            ["C1", "B7"],
-            ["C2", "B6"],
-            ["C3", "B5"],
-            ["C4", "B4"],
-            #############
-            #############
-            ["C4"],
-            ["B3", "D4"],
-            ["A3", "E4"],
-            ["G3", "F4"],
-            #############
-            ["F3", "G4"],
-            ["E3", "G4"],
-            ["F3", "A4"],
-            ["G3", "A4"],
-            ["A3", "G4"],
-            ["G3", "G4"],
-            ["F3", "F#4"],
-            ["E3", "F#4"],
-            ##############
-            ["D3", "G4"],
-        ]
-        areOnsets = [
-            [True, True],
-            [True, True],
-            [True, True],
-            [True, True],
-            #############
-            [True, True],
-            [True, True],
-            [True, True],
-            [True, True],
-            #############
-            [True, True],
-            [True, True],
-            [True, True],
-            [True, True],
-            #############
-            [True, True],
-            [True, True],
-            [True, True],
-            #############
-            #############
-            [True, True],
-            [True, True],
-            [True, True],
-            [True, True],
-            #############
-            #############
-            [True],
-            [True, True],
-            [True, True],
-            [True, True],
-            #############
-            [True, True],
-            [True, False],
-            [True, True],
-            [True, False],
-            [True, True],
-            [True, False],
-            [True, True],
-            [True, False],
-            ###############
-            [True, True],
-        ]
-        measures = [
-            1,
-            1,
-            1,
-            1,
-            #
-            1,
-            1,
-            1,
-            1,
-            #
-            1,
-            1,
-            1,
-            1,
-            #
-            1,
-            1,
-            1,
-            ##
-            2,
-            2,
-            2,
-            2,
-            ##
-            3,
-            3,
-            3,
-            3,
-            #
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            #
-            3,
-        ]
-        offsets = [
-            0.0,
-            0.25,
-            0.5,
-            0.75,
-            #####
-            1.0,
-            1.25,
-            1.5,
-            1.75,
-            #####
-            2.0,
-            2.25,
-            2.5,
-            2.75,
-            #####
-            3.0,
-            3.25,
-            3.5,
-            #####
-            #####
-            4.0,
-            5.0,
-            6.0,
-            7.0,
-            #####
-            8.0,
-            8.25,
-            8.5,
-            8.75,
-            #####
-            9.0,
-            9.125,
-            9.25,
-            9.375,
-            9.5,
-            9.625,
-            9.75,
-            9.875,
-            ######
-            10.0,
-        ]
-        dfdictGT = {
-            "offset": offsets,
-            "measure": measures,
-            "notes": notes,
-            "isOnset": areOnsets,
-        }
-        dfGT = pd.DataFrame(dfdictGT)
-        dfGT.set_index("offset", inplace=True)
-        dfdictGT = dfGT.to_dict()
+        dfdictGT = _load_dfdict_gt(octaveTestInitialDataFrame)
         s = score_parser._m21Parse(octaveTest)
         df = score_parser._initialDataFrame(s)
         dfdict = df.to_dict()
@@ -274,63 +157,7 @@ class TestInitialDataFrame(unittest.TestCase):
                     self.assertEqual(vGT[frame], dfdict[k][frame])
 
     def test_weird_rhythm(self):
-        notes = [
-            ["C4"],
-            ["C4", "E4"],
-            ["C4", "E4", "G4"],
-            ["C4", "E4", "G4", "C5"],
-            ["B3"],
-            ["B3", "F4"],
-            ["B3", "F4", "G4"],
-            ["B3", "F4", "G4", "D5"],
-            ["C4", "E4", "G4", "C5"],
-        ]
-        areOnsets = [
-            [True],
-            [False, True],
-            [False, False, True],
-            [False, False, False, True],
-            [True],
-            [False, True],
-            [False, False, True],
-            [False, False, False, True],
-            [True, True, True, True],
-        ]
-        measures = [
-            1,
-            1,
-            1,
-            1,
-            ##
-            2,
-            2,
-            2,
-            2,
-            ##
-            3,
-        ]
-        offsets = [
-            0.0,
-            1.0,
-            1.5,
-            2.0,
-            ####
-            3.0,
-            3.5,
-            4.5,
-            5.5,
-            ####
-            6.0,
-        ]
-        dfdictGT = {
-            "offset": offsets,
-            "measure": measures,
-            "notes": notes,
-            "isOnset": areOnsets,
-        }
-        dfGT = pd.DataFrame(dfdictGT)
-        dfGT.set_index("offset", inplace=True)
-        dfdictGT = dfGT.to_dict()
+        dfdictGT = _load_dfdict_gt(weirdRhythmInitialDataFrame)
         s = score_parser._m21Parse(weirdRhythm)
         df = score_parser._initialDataFrame(s)
         dfdict = df.to_dict()
