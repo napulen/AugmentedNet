@@ -316,5 +316,6 @@ class TestScoreParser(unittest.TestCase):
         index = list(dfdict["notes"].keys())
         self.assertEqual(indexGT, index)
 
+
 if __name__ == "__main__":
     unittest.main()
