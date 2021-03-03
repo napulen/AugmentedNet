@@ -91,6 +91,84 @@ CHORD_QUALITIES = [
     "minor-augmented tetrachord",
 ]
 
+COMMON_ROMAN_NUMERALS = [
+    "I",
+    "V7",
+    "V",
+    "i",
+    "IV",
+    "ii",
+    "vi",
+    "iv",
+    "viio7",
+    "viio",
+    "V7/V",
+    "V7/IV",
+    "viio7/V",
+    "VI",
+    "ii7",
+    "V/V",
+    "v",
+    "V7/ii",
+    "III",
+    "iiø7",
+    "iii",
+    "iio",
+    "viio/V",
+    "V7/vi",
+    "VII",
+    "viio7/ii",
+    "I/V",
+    "V7/iv",
+    "V/vi",
+    "vi7",
+    "Ger7",
+    "N",
+    "viio7/vi",
+    "V/ii",
+    "viiø7",
+    "V9",
+    "viio/ii",
+    "V/iv",
+    "Cad/V",
+    "iv7",
+    "viio7/iv",
+    "IV7",
+    "V7/III",
+    "viiø7/V",
+    "It",
+    "viio7/v",
+    "viio7/iii",
+    "IV/V",
+    "I+",
+    "I7",
+    "viio/IV",
+    "V/III",
+    "V7/iii",
+    "viio/iv",
+    "iio7",
+    "VI7",
+    "I/III",
+    "V7/VI",
+    "bVII",
+    "bVI",
+    "V+",
+    "viio/vi",
+    "III+",
+    "V/iii",
+    "ii/V",
+    "I/-VI",
+    "viio7/IV",
+    "V7/v",
+    "i7",
+    "iii7",
+    "Fr7",
+    "V/IV",
+    "vii",
+    "V/v",
+    "II",
+]
+
 
 def bass19(df):
     """Encodes an Annotation DataFrame into a numpy array representation.
@@ -267,4 +345,20 @@ def harmonicRhythm(df):
     for frame, isOnset in enumerate(df.isOnset):
         onset = 1 if isOnset else 0
         ret[frame, onset] = 1
+    return ret
+
+
+def romanNumeral(df):
+    """Encodes an Annotation DataFrame into a numpy array representation.
+
+    Expects a DataFrame parsed by parseAnnotation(). Returns a numpy() array.
+    """
+    frames = len(df.index)
+    ret = np.zeros((frames, len(COMMON_ROMAN_NUMERALS) + 1))
+    for frame, romanNumeral in enumerate(df.romanNumeral):
+        if romanNumeral in COMMON_ROMAN_NUMERALS:
+            rnIndex = COMMON_ROMAN_NUMERALS.index(romanNumeral)
+            ret[frame, rnIndex] = 1
+        else:
+            ret[frame, len(COMMON_ROMAN_NUMERALS)] = 1
     return ret
