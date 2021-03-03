@@ -11,6 +11,16 @@ SPELLINGS = [
     for accidental in ACCIDENTALS
 ]
 
+INTERVALCLASSES = [
+    f"{specific}{generic}"
+    for generic in [2, 3, 6, 7]
+    for specific in ["dd", "d", "m", "M", "A", "AA"]
+] + [
+    f"{specific}{generic}"
+    for generic in [4, 5, 8]
+    for specific in ["dd", "d", "P", "A", "AA"]
+]
+
 
 def pitchClassNoteName(df, minOctave=2, maxOctave=6):
     """Encodes a Score DataFrame into a pianoroll-like representation.
@@ -71,7 +81,7 @@ def compressedSalamiSliceWithHold(df, numberOfNotes=5):
     Expects a DataFrame parsed by parseScore(). Returns a numpy() array.
     """
     frames = len(df.index)
-    ret = np.zeros((frames, 20*numberOfNotes))
+    ret = np.zeros((frames, 20 * numberOfNotes))
     for frame, r in enumerate(df.iterrows()):
         _, row = r
         notes = row.notes
@@ -134,4 +144,28 @@ def micchiChromagram19(df):
             if idx == 0:
                 ret[frame, pitchLetterIndex] = 1
                 ret[frame, pitchClass + 7] = 1
+    return ret
+
+
+def intervalRepresentation(df):
+    """Encodes a "compressed" bass-chromagram, similar to Micchi et al. 2020.
+
+    Expects a DataFrame parsed by parseScore(). Returns a numpy() array.
+    """
+    frames = len(df.index)
+    ret = np.zeros((frames, 19 + len(INTERVALCLASSES)))
+
+    for frame, r in enumerate(df.iterrows()):
+        _, row = r
+        bass = row.notes[0]
+        intervals = row.intervals
+        m21Pitch = music21.pitch.Pitch(bass)
+        pitchLetter = m21Pitch.step
+        pitchLetterIndex = NOTENAMES.index(pitchLetter)
+        pitchClass = m21Pitch.pitchClass
+        ret[frame, pitchLetterIndex] = 1
+        ret[frame, 7 + pitchClass] = 1
+        for interval in intervals:
+            intervalIndex = INTERVALCLASSES.index(interval)
+            ret[frame, 19 + intervalIndex] = 1
     return ret

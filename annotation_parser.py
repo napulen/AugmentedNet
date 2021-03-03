@@ -2,10 +2,39 @@ import music21
 import pandas as pd
 import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
+import re
 
 
 def _m21Parse(f):
     return music21.converter.parse(f, format="romantext")
+
+
+def _fixRnSynonyms(figure):
+    ret = figure.replace("6/4", "64")
+    ret = ret.replace("6/5", "65")
+    ret = ret.replace("4/3", "43")
+    ret = ret.replace("4/2", "42")
+    ret = ret.replace("42", "2")
+    ret = ret.replace("bII", "N")
+    return ret
+
+
+def _simplifyRomanNumeral(figure):
+    missingAdd = re.compile("(\[.*\])")
+    return missingAdd.sub("", figure)
+
+
+def _preprocessRomanNumeral(figure):
+    return _removeInversion(_simplifyRomanNumeral(_fixRnSynonyms(figure)))
+
+
+def _removeInversion(figure):
+    ret = figure.replace("65", "7")
+    ret = ret.replace("43", "7")
+    ret = ret.replace("64", "")
+    ret = ret.replace("6", "")
+    ret = ret.replace("2", "7")
+    return ret
 
 
 def _initialDataFrame(s):
@@ -20,6 +49,7 @@ def _initialDataFrame(s):
         "offset": [],
         "measure": [],
         "duration": [],
+        "romanNumeral": [],
         "isOnset": [],
         "pitchNames": [],
         "bass": [],
@@ -36,6 +66,7 @@ def _initialDataFrame(s):
         dfdict["offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["measure"].append(rn.measureNumber)
         dfdict["duration"].append(round(float(rn.quarterLength), FLOATSCALE))
+        dfdict["romanNumeral"].append(_preprocessRomanNumeral(rn.figure))
         dfdict["isOnset"].append(True)
         dfdict["pitchNames"].append(tuple(rn.pitchNames))
         dfdict["bass"].append(rn.pitchNames[0])

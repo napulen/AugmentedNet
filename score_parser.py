@@ -1,4 +1,5 @@
 import music21
+from music21.interval import Interval
 import pandas as pd
 import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
@@ -20,6 +21,7 @@ def _initialDataFrame(s, fmt=None):
         "duration": [],
         "measure": [],
         "notes": [],
+        "intervals": [],
         "isOnset": [],
     }
     for c in s.chordify().flat.notes:
@@ -27,6 +29,9 @@ def _initialDataFrame(s, fmt=None):
         dfdict["duration"].append(round(float(c.quarterLength), FLOATSCALE))
         dfdict["measure"].append(c.measureNumber)
         dfdict["notes"].append([n.pitch.nameWithOctave for n in c])
+        dfdict["intervals"].append(
+            [Interval(c[0].pitch, p).semiSimpleName for p in c.pitches[1:]]
+        )
         dfdict["isOnset"].append(
             [(not n.tie or n.tie.type == "start") for n in c]
         )
