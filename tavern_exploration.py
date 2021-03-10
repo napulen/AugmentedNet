@@ -240,15 +240,30 @@ for annotation, scoreVersions in ANNOTATIONSCOREMAP.items():
     for version, score in scoreVersions.items():
         annotationFolder = os.path.dirname(os.path.realpath(annotation))
         print(f"{score}", end="\t")
-        analysis = ScoreAndAnalysis(
-            scoreOrData=score, analysisLocation=annotation
-        )
+        try:
+            analysis = ScoreAndAnalysis(
+                scoreOrData=score, analysisLocation=annotation
+            )
+        except:
+            print("FAILED", end="\t")
+            pass
+            continue
         feedbackFile = f"feedback_on_analysis_{version}"
         analysisScoreFile = f"analysis_on_score_{version}"
-        analysis.writeScoreWithAnalysis(
-            outPath=annotationFolder, outFile=analysisScoreFile
-        )
-        analysis.printFeedback(outPath=annotationFolder, outFile=feedbackFile)
+        try:
+            analysis.writeScoreWithAnalysis(
+                outPath=annotationFolder, outFile=analysisScoreFile
+            )
+        except:
+            print("FAILED WRITING PAIRED ANALYSIS", end="\t")
+            pass
+            continue
+        try:
+            analysis.printFeedback(outPath=annotationFolder, outFile=feedbackFile)
+        except:
+            print("FAILED PRINTING FEEDBACK", end="\t")
+            pass
+            continue
         with open(os.path.join(annotationFolder, f"{feedbackFile}.txt")) as fd:
             for line in fd.readlines():
                 if "Overall pitch match" in line:
