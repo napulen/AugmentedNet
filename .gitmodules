@@ -16,3 +16,6 @@
 [submodule "music21_corpus"]
 	path = music21_corpus
 	url = https://github.com/cuthbertLab/music21.git
+[submodule "functional-harmony-micchi"]
+	path = functional-harmony-micchi
+	url = https://github.com/napulen/functional-harmony-micchi.git
