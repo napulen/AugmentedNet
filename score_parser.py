@@ -9,6 +9,25 @@ def _m21Parse(f, fmt=None):
     return music21.converter.parse(f, format=fmt)
 
 
+def _measureNumberShift(m21Score):
+    firstMeasure = m21Score.parts[0].measure(0) or m21Score.parts[0].measure(1)
+    isAnacrusis = True if firstMeasure.paddingLeft > 0.0 else False
+    if isAnacrusis and firstMeasure.number == 1:
+        measureNumberShift = -1
+    else:
+        measureNumberShift = 0
+    return measureNumberShift
+
+
+def _lastOffset(m21Score):
+    lastMeasure = m21Score.parts[0].measure(-1)
+    filledDuration = lastMeasure.duration.quarterLength / float(
+        lastMeasure.barDurationProportion()
+    )
+    lastOffset = lastMeasure.offset + filledDuration
+    return lastOffset
+
+
 def _initialDataFrame(s, fmt=None):
     """Parses a score and produces a pandas dataframe.
 
@@ -24,10 +43,17 @@ def _initialDataFrame(s, fmt=None):
         "intervals": [],
         "isOnset": [],
     }
-    for c in s.chordify().flat.notes:
+    measureNumberShift = _measureNumberShift(s)
+    for c in s.chordify().flat.notesAndRests:
         dfdict["offset"].append(round(float(c.offset), FLOATSCALE))
         dfdict["duration"].append(round(float(c.quarterLength), FLOATSCALE))
-        dfdict["measure"].append(c.measureNumber)
+        dfdict["measure"].append(c.measureNumber + measureNumberShift)
+        if 'Rest' in c.classes:
+            # We need dummy entries for rests at the beginning of a measure
+            dfdict["notes"].append(np.nan)
+            dfdict["intervals"].append(np.nan)
+            dfdict["isOnset"].append(np.nan)
+            continue
         dfdict["notes"].append([n.pitch.nameWithOctave for n in c])
         dfdict["intervals"].append(
             [Interval(c[0].pitch, p).semiSimpleName for p in c.pitches[1:]]
@@ -35,8 +61,13 @@ def _initialDataFrame(s, fmt=None):
         dfdict["isOnset"].append(
             [(not n.tie or n.tie.type == "start") for n in c]
         )
+
     df = pd.DataFrame(dfdict)
+    currentLastOffset = float(df.tail(1).offset) + float(df.tail(1).duration)
+    deltaDuration = _lastOffset(s) - currentLastOffset
+    df.loc[len(df) - 1, 'duration'] += deltaDuration
     df.set_index("offset", inplace=True)
+    df = df[~df.index.duplicated()]
     return df
 
 
