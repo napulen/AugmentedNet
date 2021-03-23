@@ -48,7 +48,7 @@ def _initialDataFrame(s, fmt=None):
         dfdict["offset"].append(round(float(c.offset), FLOATSCALE))
         dfdict["duration"].append(round(float(c.quarterLength), FLOATSCALE))
         dfdict["measure"].append(c.measureNumber + measureNumberShift)
-        if 'Rest' in c.classes:
+        if "Rest" in c.classes:
             # We need dummy entries for rests at the beginning of a measure
             dfdict["notes"].append(np.nan)
             dfdict["intervals"].append(np.nan)
@@ -65,7 +65,7 @@ def _initialDataFrame(s, fmt=None):
     df = pd.DataFrame(dfdict)
     currentLastOffset = float(df.tail(1).offset) + float(df.tail(1).duration)
     deltaDuration = _lastOffset(s) - currentLastOffset
-    df.loc[len(df) - 1, 'duration'] += deltaDuration
+    df.loc[len(df) - 1, "duration"] += deltaDuration
     df.set_index("offset", inplace=True)
     df = df[~df.index.duplicated()]
     return df
@@ -92,6 +92,7 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     # are removed and just the fixed-timesteps are kept
     df = df.reindex(index=df.index.union(newIndex))
     df.notes.fillna(method="ffill", inplace=True)
+    df.notes.fillna(method="bfill", inplace=True)
     # the "isOnset" column is hard to generate in fixed-timesteps
     # however, it allows us to encode a "hold" symbol if we wanted to
     newCol = pd.Series(
@@ -99,6 +100,7 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     )
     df.isOnset.fillna(value=newCol, inplace=True)
     df.fillna(method="ffill", inplace=True)
+    df.fillna(method="bfill", inplace=True)
     df = df.reindex(index=newIndex)
     return df
 
