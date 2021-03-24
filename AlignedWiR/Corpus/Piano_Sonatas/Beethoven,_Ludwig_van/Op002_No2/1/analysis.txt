@@ -1,0 +1,214 @@
+Composer: Beethoven
+Title: Piano Sonata 2, Op.2 No.2, Movement 1
+Analyst: Tsung-Ping Chen and Li Su, BPS dataset (ISMIR 2018), see https://github.com/Tsung-Ping/functional-harmony
+Proof-reader: Automated conversion and manual proof-reading by Mark Gotham.
+
+Time signature: 2/4
+
+Form: Exposition
+m0 b2.5 A: I
+m1 I
+m3 ii
+m5 V7
+m9 I
+m11 V7
+m12 I
+m13 V42
+m14 I6
+m15 V65
+m16 I b2 E: V7
+m17 I b2 V7
+m18 I b2 V7
+m19 I
+m21 A: I
+m25 V42
+m26 I6
+m27 V65
+m28 I
+m29 V7
+m30 I b1.5 V6 b2 I b2.5 IV6
+m31 I64 b2 V7
+m32 I
+m34 V42
+m36 I6
+m38 B: V65
+m39 vi6
+m40 ii6
+m41 V7
+m42 I b2 V7/IV
+m43 IV6 b2 V42
+m44 I b2 V7/IV
+m45 IV6 b2 V42
+m46 I
+m50 e: V42
+m52 i6
+m54 viio7
+m57 V65
+m58 i
+m60 viio65
+m61 b2 G: V65
+m62 I
+m64 viio65
+Note: Sic, not ø
+m65 b2 Bb: V65
+m66 I
+m68 viio43/vi
+m69 V65/iii
+m70 e: V7/III
+m71 V7
+m72 V7/iv
+m73 V65/ii
+m74 iiø7
+m75 viio65
+m83 b2.5 V
+m84 E: I6
+m86 V65/V
+m87 V7
+m88 I
+m90 V65/V
+m91 V7
+m92 I
+m94 V7
+m96 I
+m98 V42
+m99 iii6
+m100 vi6
+m101 ii6
+m102 IV
+m103 V
+m104 I
+m105 V7
+m106 I
+m107 V7
+m108 I
+m109 V7
+m110 I
+m111 V7
+m112 I
+m113 I6
+
+m119 e: i
+m121 b2.5 C: I
+
+Form: Development
+m122 I
+m124 ii
+m126 V7
+m130 Ab: I
+m136 V7
+m142 V7/vi
+m148 f: i64
+m152 viio43/V
+m156 V
+m161 F: I
+m163 V7
+m164 I
+m165 V42
+m166 I6
+m167 V65
+m168 I b2 ii6
+m169 I64 b2 V7
+m170 I
+m172 V42
+m173 I6
+m174 V65
+m175 I
+m176 d: V42
+m177 i6
+m178 V65
+m179 i b2 iio6
+m180 i64 b2 V
+m181 i
+m183 F: ii
+m185 V
+m187 I
+m189 viio65
+Note: Sic, not ø
+m190 I6
+m191 d: viio65
+m192 i
+m194 viio65
+m195 i6
+m196 a: viio42
+m197 i
+m199 viio65
+m200 i6
+m201 viio43/V
+m202 V
+m203 V7
+m204 i64
+m205 V7
+m206 V
+m207 V7
+m208 i64
+m209 V7
+m210 V
+m212 A: IV6
+m214 V7
+m221 vi
+m222 V65/V
+m223 V7
+
+Form: Recapitulation
+m225-243 = m1-19
+m244 b2 A: V43/IV
+m245 IV b2 V43/IV
+m246 IV b2 V43/IV
+m247 IV
+m248 b2 V43
+m249 I b2 V43
+m250 I b2 V43
+m251 I
+m253 V42
+m255 I
+m257 V42
+m259 I6
+m261 V7
+m262 I64 b2 V42/V
+m263 V7
+m264 I64 b2 V42/V
+m265 a: V
+m269 V42
+m271 i6
+m273 viio7
+m276 V65
+m277 i
+m279 viio65
+m280 b2 C: V65
+m281 I
+m283 viio65
+Note: Sic, not ø
+m284 b2 Eb: V65
+m285 I
+m287 viio43/vi
+m288 V65/iii
+m289 a: V7/III
+m290 V7
+m291 V7/iv
+m292 V65/ii
+m293 iiø7
+m294 viio65
+m302 b2.5 V
+m303 A: I6
+m305 V43/V
+m306 V7
+m307 I
+m309 V43/V
+m310 V7
+m311 I
+m313 V7
+m315 I
+m317 V42
+m319 I6
+m321 IV
+m322 V
+m323 I
+m324 IV6
+m325 I
+m326 V7
+m327 I
+m328 V65
+m329 I
+m330 V7
+m331 I
+m335 I
