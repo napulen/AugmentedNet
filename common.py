@@ -324,7 +324,7 @@ ANNOTATIONSCOREMAP = {
     "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/4/analysis.txt": "AlignedABC/op18_no4_mov4.mxl",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/1/analysis.txt": "ABC/data/mscx/op. 18 No. 5/op18_no5_mov1.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/2/analysis.txt": "ABC/data/mscx/op. 18 No. 5/op18_no5_mov2.mscx",
-    "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/3/analysis.txt": "ABC/data/mscx/op. 18 No. 5/op18_no5_mov3.mscx",
+    "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/3/analysis.txt": "AlignedABC/op18_no5_mov3.mxl",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/4/analysis.txt": "ABC/data/mscx/op. 18 No. 5/op18_no5_mov4.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/1/analysis.txt": "ABC/data/mscx/op. 18 No. 6/op18_no6_mov1.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/2/analysis.txt": "ABC/data/mscx/op. 18 No. 6/op18_no6_mov2.mscx",
