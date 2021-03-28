@@ -345,7 +345,7 @@ ANNOTATIONSCOREMAP = {
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/1/analysis.txt": "ABC/data/mscx/op. 74 No. 10/op74_no10_mov1.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/2/analysis.txt": "ABC/data/mscx/op. 74 No. 10/op74_no10_mov2.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/3/analysis.txt": "ABC/data/mscx/op. 74 No. 10/op74_no10_mov3.mscx",
-    "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/4/analysis.txt": "ABC/data/mscx/op. 74 No. 10/op74_no10_mov4.mscx",
+    "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/4/analysis.txt": "AlignedABC/op74_no10_mov4.mxl",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op95/1/analysis.txt": "ABC/data/mscx/op. 95 No. 11/op95_no11_mov1.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op95/2/analysis.txt": "ABC/data/mscx/op. 95 No. 11/op95_no11_mov2.mscx",
     "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op95/3/analysis.txt": "ABC/data/mscx/op. 95 No. 11/op95_no11_mov3.mscx",
