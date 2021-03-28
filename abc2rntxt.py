@@ -4,12 +4,14 @@ from common import ANNOTATIONSCOREMAP
 
 
 def _isInitialKey(token):
-    return re.match(r"\.[a-gA-G][b#]*\.[b#]*[ivIV]+", token)
+    # return re.match(r"\.[a-gA-G][b#]*\.[b#]*[ivIV]+", token)
+    return re.match(r"[a-gA-G][b#]*\..*", token)
 
 
 def _isKeyChange(token):
-    return re.match(r"[.]?[b#]*[ivIV]+\.[b#]*[ivIV]+", token)
-
+    # return re.match(r"[.]?[b#]*[ivIV]+\.[b#]*[ivIV]+", token)
+    # return re.match(r"[.]?[b#]*[ivIV]+\..*", token)
+    return re.match(r"[b#]*[ivIV]+\..*", token)
 
 def _isHalfDiminishedSeventh(token):
     return "%" in token
@@ -45,16 +47,12 @@ def _isDiminishedSeventh(token):
 
 def _processABCToken(token, globalKey):
     key = None
-    figure = token
+    figure = token[1:] if token.startswith(".") else token
     if _isInitialKey(figure):
-        _, keyStr, figure = figure.split(".")
+        keyStr, figure = figure.split(".")
         key = music21.key.Key(keyStr).tonicPitchNameWithCase
     if _isKeyChange(figure):
-        keyChange = figure.split(".")
-        if len(keyChange) == 3:
-            _, keyStr, figure = keyChange
-        elif len(keyChange) == 2:
-            keyStr, figure = keyChange
+        keyStr, figure = figure.split(".")
         key = music21.roman.RomanNumeral(keyStr, globalKey).root().name
         if keyStr.islower():
             key = key.lower()
@@ -71,7 +69,7 @@ def _processABCToken(token, globalKey):
     if _hasAddedIntervals(figure):
         figure = re.sub(r"\(.*\)", "", figure)
     if _isAugmentedSixth(figure):
-        figure = figure[1:]
+        # figure = figure[1:] if figure.startswith(".") else figure
         figure = figure.replace("Ger6", "Ger65")
         figure = figure.replace("Fr6", "Fr65")
     if _isDiminishedSeventh(figure):
@@ -147,8 +145,7 @@ def makeRntxtBody(tss, ms):
 
 if __name__ == "__main__":
     for annotation, score in ANNOTATIONSCOREMAP.items():
-        # if "Quartets/Beethoven" not in annotation:
-        if "Quartets/Beethoven" not in annotation:
+        if "op74_no10_mov4" not in score:
             continue
         score = score.replace(".mscx", ".mxl")
         print(score)
@@ -157,6 +154,6 @@ if __name__ == "__main__":
         rntxtHeader = makeRntxtHeader(harm.metadata)
         rntxtBody = makeRntxtBody(tss, ms)
         out = score.replace(".mxl", ".rntxt")
-        with open(out, "w") as fd:
+        with open(annotation, "w") as fd:
             fd.write(rntxtHeader)
             fd.write(rntxtBody)
