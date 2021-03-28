@@ -1,0 +1,376 @@
+Composer: L van Beethoven
+Title: String Quartet - None: op74_no10_mov3.mxl
+Analyst: Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC
+Proofreader: Automated translation by Néstor Nápoles López
+
+Time Signature: 3/4
+
+m0 b2.5 c: i
+m3 b3 viio64/V
+m4 V
+m8 b2.5 VI
+m9 V b2.5 VI
+m10 V b2.5 VI
+m11 V b2.5 VI
+m12 V b2.5 f: VI
+m13 V b2.5 VI
+m14 V b2.5 VI
+m15 V b2.5 VI
+m16 Db: V6
+m17 I
+m19 IV
+m21 V7
+m23 I
+m24 I
+m27 f: iiø6
+m28 iio7
+m29 V7
+m31 i
+m33 i
+m34 c: viio
+m36 V7
+m37 i
+m40 c: viio/v
+m42 V7/v
+m43 v
+m44 V7
+m45 i64
+m46 V7
+m47 i64
+m49 V
+m50 V
+m51 i
+m52 V7/iv
+m53 iv64
+m54 V7/iv
+m55 iv64
+m56 b3 V
+m57 i6 b2 i6
+m58 iv b2 V65/III
+m59 III b2 VI6
+m60 iio b2 V65
+m61 i b2 i6
+m62 iv b2 V65/III
+m63 III b2 VI6
+m64 iio b2 V65
+m65 i b2 iv6
+m66 Cad64 b2 V7
+m67 ii b2 iv6
+m68 Cad64 b2 V7
+m69 V
+m70 iv
+m71 iiø43/v
+m72 V64
+m73 i b3 V
+m74 i b3 V
+m75 i b3 V
+m76 i b3 V
+m77 C: I
+m78 I
+m85 I
+m86 IV
+m88 ii
+m89 vi
+m90 V/V
+m91 G: I
+m92 V
+m93 ii
+m94 V
+m95 C: V
+m96 I
+m97 ii2
+m98 V65
+m99 iii2
+m100 vi
+m101 IV2
+m102 ii
+m103 V2 b2 V2 b3 I6
+m104 IV6
+m105 viio6/V
+m106 V
+m107 G: ii6
+m108 V7
+m109 I
+m111 ii6
+m112 V7
+m113 I
+m114 c: i
+m116 iio
+m117 III
+m118 V6/V
+m119 V64/V
+m120 iv/V
+m121 V6/V
+m122 V/V
+m123 V43/V
+m124 V43/V
+m125 V43/V
+m126 d: i
+m127 i
+m128 ii7
+m129 III
+m130 C: V6
+m131 V64
+m132 V2
+m134 V
+m135 V43
+m138 I
+m139 ii7
+m140 V2
+m141 iii7
+m142 vi
+m143 V65
+m144 ii6
+m145 I
+m146 V2/IV
+m147 IV
+m148 V
+m149 I
+m150 V2/IV
+m151 IV
+m152 V
+m153 I
+m155 ii2
+m156 V65
+m157 iii2
+m158 vi6
+m159 IV2
+m160 ii
+m161 Cad64
+m162 IV b3 IV
+m163 V65
+m164 V
+m165 iio7
+m166 viio65
+m167 viio43
+m168 viio7
+m169 b2.5 c: i
+m170 i
+m172 b3 viio64/V
+m173 V
+m177 b2.5 VI
+m178 V b2.5 VI
+m179 V b2.5 VI
+m180 V b2.5 VI
+m181 V b2.5 f: VI
+m182 V b2.5 VI
+m183 V b2.5 VI
+m184 V b2.5 VI
+m185 Db: vii b2.5 V6
+m186 I
+m188 IV
+m190 V7
+m192 I
+m195 I
+m196 f: #viiø
+m197 viio7
+m198 V7
+m200 i
+m202 i
+m203 viio7/V
+m204 viio7/V
+m205 V7/V
+m206 c: i
+m209 viio7/V
+m210 viio7/V
+m211 V7/V
+m212 v
+m213 V7
+m214 i
+m215 V7
+m216 i
+m217 V/V
+m218 V
+m219 V
+m220 i
+m221 V7/iv
+m222 iv
+m223 V7/iv
+m224 iv
+m225 b3 V
+m226 i b2.5 i6
+m227 iv b2.5 V65/III
+m228 III b2.5 VI6
+m229 iio b2.5 V65
+m230 i b2.5 i6
+m231 iv b2.5 V65/III
+m232 III b2.5 VI6
+m233 iio b2.5 V65
+m234 ii b2.5 IV6
+m235 Cad64 b2.5 V7
+m236 i b2.5 IV6
+m237 Cad64 b2.5 V
+m238 V
+m239 iv
+m240 iiø65/v
+m241 V
+m242 i b3 V
+m243 i b3 V
+m244 i b3 V
+m245 i b3 V
+m246 C: I
+m247 I
+m254 I
+m255 IV
+m257 ii
+m258 G: ii
+m259 V
+m260 I
+m261 V
+m262 ii
+m263 V
+m264 I
+m265 C: I
+m266 ii2
+m267 V65
+m268 iii2
+m269 vi6
+m270 IV2
+m271 ii
+m272 V b2 V b3 I6
+m273 IV6
+m274 viio6/V
+m275 G: I
+m276 ii6
+m277 V
+m278 I
+m280 ii6
+m281 V
+m282 I
+m283 g: i
+m285 iio
+m286 III
+m287 V6/V
+m288 V43/V
+m289 iv/V
+m290 V6/V
+m291 V/V
+m292 V43/V
+m293 V43/V
+m294 V43/V
+m295 d: i
+m297 ii7
+m298 III
+m299 C: V6
+m300 V64
+m301 V2
+m303 V
+m304 V43
+m307 I
+m308 ii7
+m309 V2
+m310 iii7
+m311 vi
+m312 V65
+m313 ii6
+m314 I
+m315 V2/IV
+m316 IV
+m317 V43
+m318 I
+m319 V2/IV
+m320 IV
+m321 V43
+m322 I
+m324 ii2
+m325 V65
+m326 iii2
+m327 vi6
+m328 iii
+m329 V43
+m330 Cad64
+m331 IV
+m332 V65
+m333 V
+m334 viio7
+m335 viio7
+m336 viio7
+m337 viio7 b2.5 c: i
+m340 b3 viio64/V
+m341 V
+m345 b2.5 i
+m348 b3 viio64/V
+m349 V
+m353 b2.5 VI
+m354 V b2.5 VI
+m355 V b2.5 VI
+m356 V b2.5 VI
+m357 V b2.5 f: VI
+m358 V b2.5 VI
+m359 V b2.5 VI
+m360 V b2.5 VI
+m361 V b2.5 Db: vii
+m362 I
+m364 IV
+m366 V7
+m368 I
+m371 I
+m372 f: viiø65
+m373 iiø65
+m374 V7
+m376 i
+m379 c: viio7
+m381 V7
+m382 i
+m385 viio7/V
+m386 viio7/V
+m387 V7/V
+m388 v
+m389 V7
+m390 i
+m391 V7
+m392 i
+m393 V/V
+m394 V
+m395 V
+m396 i
+m397 V7/iv
+m398 iv
+m399 V7/iv
+m400 iv
+m401 iv b3 V
+m402 i b2.5 i6
+m403 iv b2.5 V65/III
+m404 III b2.5 IV6
+m405 iio b2.5 V65
+m406 i b2.5 i6
+m407 iv b2.5 V65/III
+m408 III b2.5 VI6
+m409 iio7 b2.5 V65
+m410 i b2.5 iv6
+m411 Cad64 b2.5 V7
+m412 i b2.5 iv6
+m413 Cad64 b2.5 V
+m415 iv
+m416 iiø43/v
+m417 V43
+m418 i b3 V
+m419 i b3 V
+m420 i b3 V
+m421 i b3 V
+m422 VI6
+m423 VI
+m427 Db: V2
+m428 I6
+m429 V64
+m430 I b2.5 V
+m431 I b2.5 V
+m432 I b2.5 V
+m433 I b2.5 V
+m434 vi
+m436 VI-V/iii
+m438 eb: V
+m439 i64
+m440 VI64
+m441 iv7
+m442 V
+m443 i64
+m444 VI64
+m445 iv7
+m446 V
+m454 V65
+m455 V7
+m458 V43
+m464 V65
+m465 V65
+m466 V65
