@@ -145,8 +145,8 @@ def makeRntxtBody(tss, ms):
 
 if __name__ == "__main__":
     for annotation, score in ANNOTATIONSCOREMAP.items():
-        if "op74_no10_mov4" not in score:
-            continue
+        # if "op132_no15_mov5" not in score:
+        #     continue
         score = score.replace(".mscx", ".mxl")
         print(score)
         harm = music21.converter.parse(score)
