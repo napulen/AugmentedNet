@@ -50,7 +50,7 @@ def getNonChordSequence(annotationRanges, s):
 
 
 print(
-    "annotationFile\tscoreFile\tnonChordRatio\tmissingNotesRatio\tannotationQuality\n"
+    "annotationFile\tscoreFile\tnonChordRatio\tmissingNotesRatio\tannotationQuality\tnumberOfAnnotations\n"
 )
 
 for annotation, score in ANNOTATIONSCOREMAP.items():
@@ -88,9 +88,10 @@ for annotation, score in ANNOTATIONSCOREMAP.items():
         qualitydf.nonChordRatio + qualitydf.missingNotesRatio
     ) ** 2
     print(
-        "{}\t{}\t{}".format(
+        "{}\t{}\t{}\t{}".format(
             qualitydf.nonChordRatio.sum(),
             qualitydf.missingNotesRatio.sum(),
             qualitydf.score.sum(),
+            len(qualitydf.index)
         )
     )
