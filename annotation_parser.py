@@ -24,10 +24,6 @@ def _simplifyRomanNumeral(figure):
     return missingAdd.sub("", figure)
 
 
-def _preprocessRomanNumeral(figure):
-    return _removeInversion(_simplifyRomanNumeral(_fixRnSynonyms(figure)))
-
-
 def _removeInversion(figure):
     ret = figure.replace("65", "7")
     ret = ret.replace("43", "7")
@@ -35,6 +31,10 @@ def _removeInversion(figure):
     ret = ret.replace("6", "")
     ret = ret.replace("2", "7")
     return ret
+
+
+def _preprocessRomanNumeral(figure):
+    return _removeInversion(_simplifyRomanNumeral(_fixRnSynonyms(figure)))
 
 
 def _initialDataFrame(s):
