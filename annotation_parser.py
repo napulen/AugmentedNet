@@ -49,6 +49,7 @@ def _initialDataFrame(s):
         "offset": [],
         "measure": [],
         "duration": [],
+        "annotationNumber": [],
         "romanNumeral": [],
         "isOnset": [],
         "pitchNames": [],
@@ -62,10 +63,11 @@ def _initialDataFrame(s):
         "degree1": [],
         "degree2": [],
     }
-    for rn in s.flat.getElementsByClass("RomanNumeral"):
+    for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
         dfdict["offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["measure"].append(rn.measureNumber)
         dfdict["duration"].append(round(float(rn.quarterLength), FLOATSCALE))
+        dfdict["annotationNumber"].append(idx)
         dfdict["romanNumeral"].append(_preprocessRomanNumeral(rn.figure))
         dfdict["isOnset"].append(True)
         dfdict["pitchNames"].append(tuple(rn.pitchNames))
