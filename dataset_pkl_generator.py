@@ -65,10 +65,15 @@ if __name__ == "__main__":
             "qualityScoreNotes",
         ]:
             df[col] = df[col].apply(eval)
-        # print(df.file)
+        # Filter the bad content
+        if row.split == "training":
+            originalIndex = len(df.index)
+            df = df[(df.qualitySquaredSum < 0.75) & (df.measureMisalignment == False)]
+            filteredIndex = len(df.index)
+            print(f"\t({originalIndex}, {filteredIndex})")
         Xi = micchiChromagram19(df)
         Xi = _padToSequenceLength(Xi)
-        yi = romanNumeral(df)
+        yi = chordQuality(df)
         yi = _padToSequenceLength(yi)
         [splits[row.split]["X"].append(sequence) for sequence in Xi]
         [splits[row.split]["y"].append(sequence) for sequence in yi]
