@@ -1,4 +1,3 @@
-from common import ANNOTATIONSCOREMAP, DATASPLITS
 from score_parser import parseScore
 from annotation_parser import parseAnnotation
 import pandas as pd
@@ -46,7 +45,7 @@ def _qualityMetric(df):
     return df
 
 
-def parseScoreAndAnnotation(s, a, qualityAssessment=True):
+def parseAnnotationAndScore(a, s, qualityAssessment=True):
     """Process a score an RomanText file simultaneously.
 
     s is a .mxl|.krn|.musicxml file
@@ -55,11 +54,11 @@ def parseScoreAndAnnotation(s, a, qualityAssessment=True):
     Create the dataframes of both, generate a new one.
     """
     # Parse each file
-    sdf = parseScore(s)
     adf = parseAnnotation(a)
+    sdf = parseScore(s)
     # Rename the columns because some will be duplicated otherwise
-    sdf.columns = [f"s_{k}" for k in sdf.keys()]
     adf.columns = [f"a_{k}" for k in adf.keys()]
+    sdf.columns = [f"s_{k}" for k in sdf.keys()]
     # Create the joint dataframe
     jointdf = pd.concat([sdf, adf], axis=1)
     # Sometimes, scores are longer than annotations (trailing empty measures)
@@ -70,6 +69,3 @@ def parseScoreAndAnnotation(s, a, qualityAssessment=True):
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
     return jointdf
-
-
-parseScoreAndAnnotation("AlignedABC/op131_no14_mov6.mxl","When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/6/analysis.txt")
