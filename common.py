@@ -1,3 +1,5 @@
+import os
+
 RANDOMSEED = 1337
 
 # Number of decimals to the right of the decimal point
@@ -10,6 +12,9 @@ FIXEDOFFSET = round(4.0 / FRAMEBASENOTE, FLOATSCALE)
 SEQUENCELENGTH = 64
 
 BATCHSIZE = 32
+
+DATASETDIR = "dataset"
+DATASETSUMMARYFILE = os.path.join(DATASETDIR, "dataset_summary.tsv")
 
 ANNOTATIONSCOREDUPLES = {
     "bps-01-op002-no1-1": (
