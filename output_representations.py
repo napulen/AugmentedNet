@@ -177,7 +177,7 @@ def bass19(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 19))
-    for frame, bass in enumerate(df.bass):
+    for frame, bass in enumerate(df.a_bass):
         m21Pitch = music21.pitch.Pitch(bass)
         pitchLetter = m21Pitch.step
         pitchLetterIndex = NOTENAMES.index(pitchLetter)
@@ -194,7 +194,7 @@ def bass7(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 7))
-    for frame, bass in enumerate(df.bass):
+    for frame, bass in enumerate(df.a_bass):
         m21Pitch = music21.pitch.Pitch(bass)
         pitchLetter = m21Pitch.step
         pitchLetterIndex = NOTENAMES.index(pitchLetter)
@@ -209,7 +209,7 @@ def bass12(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 12))
-    for frame, bass in enumerate(df.bass):
+    for frame, bass in enumerate(df.a_bass):
         m21Pitch = music21.pitch.Pitch(bass)
         pitchClass = m21Pitch.pitchClass
         ret[frame, pitchClass] = 1
@@ -223,7 +223,7 @@ def bass35(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 35))
-    for frame, bass in enumerate(df.bass):
+    for frame, bass in enumerate(df.a_bass):
         if bass == "E###":
             bass = "G"
         spellingIndex = SPELLINGS.index(bass)
@@ -238,7 +238,7 @@ def inversion(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 4))
-    for frame, inversion in enumerate(df.inversion):
+    for frame, inversion in enumerate(df.a_inversion):
         if inversion > 3:
             # Any chord beyond sevenths is encoded as "root" position
             inversion = 0
@@ -253,7 +253,7 @@ def degree1(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 21))
-    for frame, degree1 in enumerate(df.degree1):
+    for frame, degree1 in enumerate(df.a_degree1):
         degreeIndex = DEGREES.index(degree1)
         ret[frame, degreeIndex] = 1
     return ret
@@ -266,7 +266,7 @@ def degree2(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 22))
-    for frame, degree2 in enumerate(df.degree2):
+    for frame, degree2 in enumerate(df.a_degree2):
         if degree2:
             degreeIndex = DEGREES.index(degree2)
         else:
@@ -285,9 +285,9 @@ def tonicizedKey(df):
     for frame, r in enumerate(df.iterrows()):
         _, row = r
         if row.tonicizedKey != "None":
-            tonicizedKey = row.tonicizedKey
+            tonicizedKey = row.a_tonicizedKey
         else:
-            tonicizedKey = row.localKey
+            tonicizedKey = row.a_localKey
         tonicizedKeyIndex = KEYS.index(tonicizedKey)
         ret[frame, tonicizedKeyIndex] = 1
     return ret
@@ -300,7 +300,7 @@ def localKey(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 30))
-    for frame, localKey in enumerate(df.localKey):
+    for frame, localKey in enumerate(df.a_localKey):
         localKeyIndex = KEYS.index(localKey)
         ret[frame, localKeyIndex] = 1
     return ret
@@ -313,7 +313,7 @@ def chordRoot(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 35))
-    for frame, root in enumerate(df.root):
+    for frame, root in enumerate(df.a_root):
         spellingIndex = SPELLINGS.index(root)
         ret[frame, spellingIndex] = 1
     return ret
@@ -326,7 +326,7 @@ def chordQuality(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, len(CHORD_QUALITIES) + 1))
-    for frame, quality in enumerate(df.quality):
+    for frame, quality in enumerate(df.a_quality):
         if not quality in CHORD_QUALITIES:
             qualityIndex = len(CHORD_QUALITIES) + 1
         else:
@@ -342,7 +342,7 @@ def harmonicRhythm(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 2))
-    for frame, isOnset in enumerate(df.isOnset):
+    for frame, isOnset in enumerate(df.a_isOnset):
         onset = 1 if isOnset else 0
         ret[frame, onset] = 1
     return ret
@@ -355,7 +355,7 @@ def romanNumeral(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, len(COMMON_ROMAN_NUMERALS) + 1))
-    for frame, romanNumeral in enumerate(df.romanNumeral):
+    for frame, romanNumeral in enumerate(df.a_romanNumeral):
         if romanNumeral in COMMON_ROMAN_NUMERALS:
             rnIndex = COMMON_ROMAN_NUMERALS.index(romanNumeral)
             ret[frame, rnIndex] = 1

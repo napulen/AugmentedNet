@@ -17,7 +17,7 @@ INTERVALCLASSES = [
     for specific in ["dd", "d", "m", "M", "A", "AA"]
 ] + [
     f"{specific}{generic}"
-    for generic in [4, 5, 8]
+    for generic in [1, 4, 5, 8]
     for specific in ["dd", "d", "P", "A", "AA"]
 ]
 
@@ -30,7 +30,7 @@ def pitchClassNoteName(df, minOctave=2, maxOctave=6):
     octaves = maxOctave - minOctave + 1
     frames = len(df.index)
     ret = np.zeros((frames, 19 * octaves))
-    for frame, notes in enumerate(df.notes):
+    for frame, notes in enumerate(df.s_notes):
         for note in notes:
             m21Pitch = music21.pitch.Pitch(note)
             pitchLetter = m21Pitch.step
@@ -54,8 +54,8 @@ def salamiSliceWithHold(df, numberOfNotes=5):
     ret = np.zeros((frames, (20 + 7) * numberOfNotes))
     for frame, r in enumerate(df.iterrows()):
         _, row = r
-        notes = row.notes
-        onsets = row.isOnset
+        notes = row.s_notes
+        onsets = row.s_isOnset
         noteIndex = 0
         # print(notes, onsets)
         for note, onset in zip(notes, onsets):
@@ -84,10 +84,10 @@ def compressedSalamiSliceWithHold(df, numberOfNotes=5):
     ret = np.zeros((frames, 20 * numberOfNotes))
     for frame, r in enumerate(df.iterrows()):
         _, row = r
-        notes = row.notes
-        onsets = row.isOnset
+        notes = row.s_notes
+        onsets = row.s_isOnset
         noteIndex = 0
-        # print(notes, onsets)
+        # print.s_notes, onsets)
         pitchClasses = []
         for note, onset in zip(notes, onsets):
             if noteIndex == numberOfNotes:
@@ -116,7 +116,7 @@ def micchiChromagram(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 70))
-    for frame, notes in enumerate(df.notes):
+    for frame, notes in enumerate(df.s_notes):
         for idx, note in enumerate(notes):
             noOctave = music21.note.Note(note).name
             spellingIndex = SPELLINGS.index(noOctave)
@@ -133,7 +133,7 @@ def micchiChromagram19(df):
     """
     frames = len(df.index)
     ret = np.zeros((frames, 38))
-    for frame, notes in enumerate(df.notes):
+    for frame, notes in enumerate(df.s_notes):
         for idx, note in enumerate(notes):
             m21Pitch = music21.pitch.Pitch(note)
             pitchLetter = m21Pitch.step
@@ -157,8 +157,8 @@ def intervalRepresentation(df):
 
     for frame, r in enumerate(df.iterrows()):
         _, row = r
-        bass = row.notes[0]
-        intervals = row.intervals
+        bass = row.s_notes[0]
+        intervals = row.s_intervals
         m21Pitch = music21.pitch.Pitch(bass)
         pitchLetter = m21Pitch.step
         pitchLetterIndex = NOTENAMES.index(pitchLetter)

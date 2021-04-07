@@ -53,10 +53,20 @@ if __name__ == "__main__":
         exit()
     datasetSummary = pd.read_csv(DATASETSUMMARYFILE, sep="\t")
     for row in datasetSummary.itertuples():
+        print(row.split, row.file)
         tsvlocation = os.path.join(DATASETDIR, row.split, row.file)
         df = pd.read_csv(tsvlocation + ".tsv", sep="\t")
-        print(df)
-        Xi = intervalRepresentation(df)
+        for col in [
+            "s_notes",
+            "s_intervals",
+            "s_isOnset",
+            "a_pitchNames",
+            "a_pcset",
+            "qualityScoreNotes",
+        ]:
+            df[col] = df[col].apply(eval)
+        # print(df.file)
+        Xi = micchiChromagram19(df)
         Xi = _padToSequenceLength(Xi)
         yi = romanNumeral(df)
         yi = _padToSequenceLength(yi)
