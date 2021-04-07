@@ -328,7 +328,7 @@ def chordQuality(df):
     ret = np.zeros((frames, len(CHORD_QUALITIES) + 1))
     for frame, quality in enumerate(df.a_quality):
         if not quality in CHORD_QUALITIES:
-            qualityIndex = len(CHORD_QUALITIES) + 1
+            qualityIndex = len(CHORD_QUALITIES)
         else:
             qualityIndex = CHORD_QUALITIES.index(quality)
         ret[frame, qualityIndex] = 1
