@@ -53,7 +53,7 @@ octaveTest = """
 """
 
 octaveTestInitialDataFrame = """
-offset,measure,notes,isOnset
+s_offset,s_measure,s_notes,s_isOnset
 0.0,1,"['C0', 'B0']","[True, True]"
 0.25,1,"['C1', 'B1']","[True, True]"
 0.5,1,"['C2', 'B2']","[True, True]"
@@ -89,7 +89,7 @@ offset,measure,notes,isOnset
 """
 
 octaveTestReindexDataFrame = """
-offset,duration,measure,notes,isOnset
+s_offset,s_duration,s_measure,s_notes,s_isOnset
 0.0,0.25,1.0,"['C0', 'B0']","[True, True]"
 0.25,0.25,1.0,"['C1', 'B1']","[True, True]"
 0.5,0.25,1.0,"['C2', 'B2']","[True, True]"
@@ -172,7 +172,7 @@ weirdRhythm = """
 """
 
 weirdRhythmInitialDataFrame = """
-offset,measure,notes,isOnset
+s_offset,s_measure,s_notes,s_isOnset
 0.0,1,['C4'],[True]
 1.0,1,"['C4', 'E4']","[False, True]"
 1.5,1,"['C4', 'E4', 'G4']","[False, False, True]"
@@ -185,7 +185,7 @@ offset,measure,notes,isOnset
 """
 
 weirdRhythmReindexDataFrame = """
-offset,duration,measure,notes,isOnset
+s_offset,s_duration,s_measure,s_notes,s_isOnset
 0.0,1.0,1.0,['C4'],[True]
 0.25,1.0,1.0,['C4'],[False]
 0.5,1.0,1.0,['C4'],[False]
@@ -228,9 +228,9 @@ offset,duration,measure,notes,isOnset
 def _load_dfdict_gt(gt):
     csvGT = io.StringIO(gt)
     dfGT = pd.read_csv(csvGT)
-    dfGT.set_index("offset", inplace=True)
-    dfGT["notes"] = dfGT["notes"].apply(eval)
-    dfGT["isOnset"] = dfGT["isOnset"].apply(eval)
+    dfGT.set_index("s_offset", inplace=True)
+    dfGT["s_notes"] = dfGT["s_notes"].apply(eval)
+    dfGT["s_isOnset"] = dfGT["s_isOnset"].apply(eval)
     dfdictGT = dfGT.to_dict()
     return dfdictGT
 
@@ -248,11 +248,11 @@ class TestScoreParser(unittest.TestCase):
 
     def test_octave_initial_dataframe_index(self):
         dfdictGT = _load_dfdict_gt(octaveTestInitialDataFrame)
-        indexGT = list(dfdictGT["notes"].keys())
+        indexGT = list(dfdictGT["s_notes"].keys())
         s = score_parser._m21Parse(octaveTest)
         df = score_parser._initialDataFrame(s)
         dfdict = df.to_dict()
-        index = list(dfdict["notes"].keys())
+        index = list(dfdict["s_notes"].keys())
         self.assertEqual(indexGT, index)
 
     def test_octave_reindexed_dataframe(self):
@@ -268,12 +268,12 @@ class TestScoreParser(unittest.TestCase):
 
     def test_octave_reindexed_dataframe_index(self):
         dfdictGT = _load_dfdict_gt(octaveTestReindexDataFrame)
-        indexGT = list(dfdictGT["notes"].keys())
+        indexGT = list(dfdictGT["s_notes"].keys())
         s = score_parser._m21Parse(octaveTest)
         df = score_parser._initialDataFrame(s)
         df = score_parser._reindexDataFrame(df)
         dfdict = df.to_dict()
-        index = list(dfdict["notes"].keys())
+        index = list(dfdict["s_notes"].keys())
         self.assertEqual(indexGT, index)
 
     def test_weird_rhythm_initial_dataframe(self):
@@ -288,11 +288,11 @@ class TestScoreParser(unittest.TestCase):
 
     def test_weird_rhythm_initial_dataframe_index(self):
         dfdictGT = _load_dfdict_gt(weirdRhythmInitialDataFrame)
-        indexGT = list(dfdictGT["notes"].keys())
+        indexGT = list(dfdictGT["s_notes"].keys())
         s = score_parser._m21Parse(weirdRhythm)
         df = score_parser._initialDataFrame(s)
         dfdict = df.to_dict()
-        index = list(dfdict["notes"].keys())
+        index = list(dfdict["s_notes"].keys())
         self.assertEqual(indexGT, index)
 
     def test_weird_rhythm_reindexed_dataframe(self):
@@ -308,12 +308,12 @@ class TestScoreParser(unittest.TestCase):
 
     def test_weird_rhythm_reindexed_dataframe_index(self):
         dfdictGT = _load_dfdict_gt(weirdRhythmReindexDataFrame)
-        indexGT = list(dfdictGT["notes"].keys())
+        indexGT = list(dfdictGT["s_notes"].keys())
         s = score_parser._m21Parse(weirdRhythm)
         df = score_parser._initialDataFrame(s)
         df = score_parser._reindexDataFrame(df)
         dfdict = df.to_dict()
-        index = list(dfdict["notes"].keys())
+        index = list(dfdict["s_notes"].keys())
         self.assertEqual(indexGT, index)
 
 

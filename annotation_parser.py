@@ -46,48 +46,48 @@ def _initialDataFrame(s):
     which may still serve to reconstruct the roman numeral.
     """
     dfdict = {
-        "offset": [],
-        "measure": [],
-        "duration": [],
-        "annotationNumber": [],
-        "romanNumeral": [],
-        "isOnset": [],
-        "pitchNames": [],
-        "bass": [],
-        "root": [],
-        "inversion": [],
-        "quality": [],
-        "pcset": [],
-        "localKey": [],
-        "tonicizedKey": [],
-        "degree1": [],
-        "degree2": [],
+        "a_offset": [],
+        "a_measure": [],
+        "a_duration": [],
+        "a_annotationNumber": [],
+        "a_romanNumeral": [],
+        "a_isOnset": [],
+        "a_pitchNames": [],
+        "a_bass": [],
+        "a_root": [],
+        "a_inversion": [],
+        "a_quality": [],
+        "a_pcset": [],
+        "a_localKey": [],
+        "a_tonicizedKey": [],
+        "a_degree1": [],
+        "a_degree2": [],
     }
     for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
-        dfdict["offset"].append(round(float(rn.offset), FLOATSCALE))
-        dfdict["measure"].append(rn.measureNumber)
-        dfdict["duration"].append(round(float(rn.quarterLength), FLOATSCALE))
-        dfdict["annotationNumber"].append(idx)
-        dfdict["romanNumeral"].append(_preprocessRomanNumeral(rn.figure))
-        dfdict["isOnset"].append(True)
-        dfdict["pitchNames"].append(tuple(rn.pitchNames))
-        dfdict["bass"].append(rn.pitchNames[0])
-        dfdict["root"].append(rn.root().name)
-        dfdict["inversion"].append(rn.inversion())
-        dfdict["quality"].append(rn.commonName)
-        dfdict["pcset"].append(tuple(sorted(set(rn.pitchClasses))))
-        dfdict["localKey"].append(rn.key.tonicPitchNameWithCase)
+        dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
+        dfdict["a_measure"].append(rn.measureNumber)
+        dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))
+        dfdict["a_annotationNumber"].append(idx)
+        dfdict["a_romanNumeral"].append(_preprocessRomanNumeral(rn.figure))
+        dfdict["a_isOnset"].append(True)
+        dfdict["a_pitchNames"].append(tuple(rn.pitchNames))
+        dfdict["a_bass"].append(rn.pitchNames[0])
+        dfdict["a_root"].append(rn.root().name)
+        dfdict["a_inversion"].append(rn.inversion())
+        dfdict["a_quality"].append(rn.commonName)
+        dfdict["a_pcset"].append(tuple(sorted(set(rn.pitchClasses))))
+        dfdict["a_localKey"].append(rn.key.tonicPitchNameWithCase)
         secondaryKey = rn.secondaryRomanNumeralKey
         if secondaryKey:
-            dfdict["tonicizedKey"].append(secondaryKey.tonicPitchNameWithCase)
+            dfdict["a_tonicizedKey"].append(secondaryKey.tonicPitchNameWithCase)
         else:
-            dfdict["tonicizedKey"].append("None")
+            dfdict["a_tonicizedKey"].append("None")
         scaleDegree, alteration = rn.scaleDegreeWithAlteration
         if alteration:
             scaleDegree = f"{alteration.modifier}{scaleDegree}"
         else:
             scaleDegree = f"{scaleDegree}"
-        dfdict["degree1"].append(str(scaleDegree))
+        dfdict["a_degree1"].append(str(scaleDegree))
         secondaryDegree = rn.secondaryRomanNumeral
         if secondaryDegree:
             scaleDegree, alteration = secondaryDegree.scaleDegreeWithAlteration
@@ -95,11 +95,11 @@ def _initialDataFrame(s):
                 scaleDegree = f"{alteration.modifier}{scaleDegree}"
             else:
                 scaleDegree = f"{scaleDegree}"
-            dfdict["degree2"].append(scaleDegree)
+            dfdict["a_degree2"].append(scaleDegree)
         else:
-            dfdict["degree2"].append("None")
+            dfdict["a_degree2"].append("None")
     df = pd.DataFrame(dfdict)
-    df.set_index("offset", inplace=True)
+    df.set_index("a_offset", inplace=True)
     return df
 
 
@@ -117,14 +117,14 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     firstRow = df.head(1)
     lastRow = df.tail(1)
     minOffset = firstRow.index.to_numpy()[0]
-    maxOffset = (lastRow.index + lastRow.duration).to_numpy()[0]
+    maxOffset = (lastRow.index + lastRow.a_duration).to_numpy()[0]
     newIndex = np.arange(minOffset, maxOffset, fixedOffset)
     # All operations done over the full index, i.e., fixed-timesteps
     # plus original onsets. Later, original onsets (e.g., triplets)
     # are removed and just the fixed-timesteps are kept
     df = df.reindex(index=df.index.union(newIndex))
     # here onsets are easier, every "injected" index is not an onset
-    df.isOnset.fillna(value=False, inplace=True)
+    df.a_isOnset.fillna(value=False, inplace=True)
     df.fillna(method="ffill", inplace=True)
     df = df.reindex(index=newIndex)
     return df

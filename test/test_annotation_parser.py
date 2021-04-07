@@ -24,7 +24,7 @@ m12 b1 I
 """
 
 multipleAnnotationsInitialDataFrame = """
-offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,localKey,tonicizedKey,degree1,degree2
+a_offset,a_measure,a_duration,a_isOnset,a_pitchNames,a_bass,a_root,a_inversion,a_quality,a_pcset,a_localKey,a_tonicizedKey,a_degree1,a_degree2
 0.0,1,1.0,True,"('C', 'E', 'G')",C,C,0,major triad,"(0, 4, 7)",C,None,1,None
 1.0,1,1.0,True,"('D', 'F', 'A')",D,D,0,minor triad,"(2, 5, 9)",C,None,2,None
 2.0,1,1.0,True,"('E', 'G', 'B')",E,E,0,minor triad,"(4, 7, 11)",C,None,3,None
@@ -54,7 +54,7 @@ offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,loc
 """
 
 multipleAnnotationsFixedTimeframe = """
-offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,localKey,tonicizedKey,degree1,degree2
+a_offset,a_measure,a_duration,a_isOnset,a_pitchNames,a_bass,a_root,a_inversion,a_quality,a_pcset,a_localKey,a_tonicizedKey,a_degree1,a_degree2
 0.0,1.0,1.0,True,"('C', 'E', 'G')",C,C,0.0,major triad,"(0, 4, 7)",C,None,1,None
 0.25,1.0,1.0,False,"('C', 'E', 'G')",C,C,0.0,major triad,"(0, 4, 7)",C,None,1,None
 0.5,1.0,1.0,False,"('C', 'E', 'G')",C,C,0.0,major triad,"(0, 4, 7)",C,None,1,None
@@ -205,9 +205,9 @@ offset,measure,duration,isOnset,pitchNames,bass,root,inversion,quality,pcset,loc
 def _load_dfdict_gt(gt):
     csvGT = io.StringIO(gt)
     dfGT = pd.read_csv(csvGT)
-    dfGT.set_index("offset", inplace=True)
-    dfGT["pitchNames"] = dfGT["pitchNames"].apply(eval)
-    dfGT["pcset"] = dfGT["pcset"].apply(eval)
+    dfGT.set_index("a_offset", inplace=True)
+    dfGT["a_pitchNames"] = dfGT["a_pitchNames"].apply(eval)
+    dfGT["a_pcset"] = dfGT["a_pcset"].apply(eval)
     dfdictGT = dfGT.to_dict()
     return dfdictGT
 

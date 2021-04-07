@@ -36,37 +36,39 @@ def _initialDataFrame(s, fmt=None):
     with the tie information).
     """
     dfdict = {
-        "offset": [],
-        "duration": [],
-        "measure": [],
-        "notes": [],
-        "intervals": [],
-        "isOnset": [],
+        "s_offset": [],
+        "s_duration": [],
+        "s_measure": [],
+        "s_notes": [],
+        "s_intervals": [],
+        "s_isOnset": [],
     }
     measureNumberShift = _measureNumberShift(s)
     for c in s.chordify().flat.notesAndRests:
-        dfdict["offset"].append(round(float(c.offset), FLOATSCALE))
-        dfdict["duration"].append(round(float(c.quarterLength), FLOATSCALE))
-        dfdict["measure"].append(c.measureNumber + measureNumberShift)
+        dfdict["s_offset"].append(round(float(c.offset), FLOATSCALE))
+        dfdict["s_duration"].append(round(float(c.quarterLength), FLOATSCALE))
+        dfdict["s_measure"].append(c.measureNumber + measureNumberShift)
         if "Rest" in c.classes:
             # We need dummy entries for rests at the beginning of a measure
-            dfdict["notes"].append(np.nan)
-            dfdict["intervals"].append(np.nan)
-            dfdict["isOnset"].append(np.nan)
+            dfdict["s_notes"].append(np.nan)
+            dfdict["s_intervals"].append(np.nan)
+            dfdict["s_isOnset"].append(np.nan)
             continue
-        dfdict["notes"].append([n.pitch.nameWithOctave for n in c])
-        dfdict["intervals"].append(
+        dfdict["s_notes"].append([n.pitch.nameWithOctave for n in c])
+        dfdict["s_intervals"].append(
             [Interval(c[0].pitch, p).semiSimpleName for p in c.pitches[1:]]
         )
-        dfdict["isOnset"].append(
+        dfdict["s_isOnset"].append(
             [(not n.tie or n.tie.type == "start") for n in c]
         )
 
     df = pd.DataFrame(dfdict)
-    currentLastOffset = float(df.tail(1).offset) + float(df.tail(1).duration)
+    currentLastOffset = float(df.tail(1).s_offset) + float(
+        df.tail(1).s_duration
+    )
     deltaDuration = _lastOffset(s) - currentLastOffset
-    df.loc[len(df) - 1, "duration"] += deltaDuration
-    df.set_index("offset", inplace=True)
+    df.loc[len(df) - 1, "s_duration"] += deltaDuration
+    df.set_index("s_offset", inplace=True)
     df = df[~df.index.duplicated()]
     return df
 
@@ -85,20 +87,20 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     firstRow = df.head(1)
     lastRow = df.tail(1)
     minOffset = firstRow.index.to_numpy()[0]
-    maxOffset = (lastRow.index + lastRow.duration).to_numpy()[0]
+    maxOffset = (lastRow.index + lastRow.s_duration).to_numpy()[0]
     newIndex = np.arange(minOffset, maxOffset, fixedOffset)
     # All operations done over the full index, i.e., fixed-timesteps
     # plus original onsets. Later, original onsets (e.g., triplets)
     # are removed and just the fixed-timesteps are kept
     df = df.reindex(index=df.index.union(newIndex))
-    df.notes.fillna(method="ffill", inplace=True)
-    df.notes.fillna(method="bfill", inplace=True)
+    df.s_notes.fillna(method="ffill", inplace=True)
+    df.s_notes.fillna(method="bfill", inplace=True)
     # the "isOnset" column is hard to generate in fixed-timesteps
     # however, it allows us to encode a "hold" symbol if we wanted to
     newCol = pd.Series(
-        [[False] * n for n in df.notes.str.len().to_list()], index=df.index
+        [[False] * n for n in df.s_notes.str.len().to_list()], index=df.index
     )
-    df.isOnset.fillna(value=newCol, inplace=True)
+    df.s_isOnset.fillna(value=newCol, inplace=True)
     df.fillna(method="ffill", inplace=True)
     df.fillna(method="bfill", inplace=True)
     df = df.reindex(index=newIndex)

@@ -56,9 +56,6 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
     # Parse each file
     adf = parseAnnotation(a)
     sdf = parseScore(s)
-    # Rename the columns because some will be duplicated otherwise
-    adf.columns = [f"a_{k}" for k in adf.keys()]
-    sdf.columns = [f"s_{k}" for k in sdf.keys()]
     # Create the joint dataframe
     jointdf = pd.concat([sdf, adf], axis=1)
     # Sometimes, scores are longer than annotations (trailing empty measures)
