@@ -719,7 +719,7 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "wir-bach-chorales-14": (
         "When-in-Rome/Corpus/Early_Choral/Bach,_Johann_Sebastian/Chorales/14/analysis.txt",
-        "music21_corpus/music21/corpus/bach/bwv184.5.mxl",
+        "AlignedBachChorales/bwv184.5.mxl",
     ),
     "wir-bach-chorales-16": (
         "When-in-Rome/Corpus/Early_Choral/Bach,_Johann_Sebastian/Chorales/16/analysis.txt",
