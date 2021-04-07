@@ -1431,8 +1431,52 @@ ANNOTATIONSCOREDUPLES = {
     ),
 }
 
-DATASPLITS = {
+
+DATASPLITSBPS = {
     "test": [
+        "bps-01-op002-no1-1",
+        "bps-14-op027-no2-moonlight-1",
+        "bps-23-op057-appassionata-1",
+        "bps-15-op028-pastorale-1",
+        "bps-10-op014-no2-1",
+        "bps-25-op079-sonatina-1",
+        "bps-07-op010-no3-1",
+    ],
+    "validation": [
+        "bps-08-op013-pathetique-1",
+        "bps-19-op049-no1-1",
+        "bps-29-op106-hammerklavier-1",
+        "bps-16-op031-no1-1",
+        "bps-26-op081a-les-adieux-1",
+        "bps-06-op010-no2-1",
+        "bps-20-op049-no2-1",
+    ],
+    "training": [
+        "bps-02-op002-no2-1",
+        "bps-03-op002-no3-1",
+        "bps-04-op007-1",
+        "bps-05-op010-no1-1",
+        "bps-09-op014-no1-1",
+        "bps-11-op022-1",
+        "bps-12-op026-1",
+        "bps-13-op027-no1-1",
+        "bps-17-op031-no2-1",
+        "bps-18-op031-no3-1",
+        "bps-21-op053-1",
+        "bps-22-op054-1",
+        "bps-24-op078-1",
+        "bps-27-op090-1",
+        "bps-28-op101-1",
+        "bps-30-op109-1",
+        "bps-31-op110-1",
+        "bps-32-op111-1",
+    ],
+}
+
+
+DATASPLITS = {
+    "test": DATASPLITSBPS["test"]
+    + [
         "abc-op74-3",
         "abc-op127-2",
         "abc-op95-3",
@@ -1455,13 +1499,6 @@ DATASPLITS = {
         "haydnop20-no3-4",
         "haydnop20-no5-3",
         "haydnop20-no6-4",
-        "bps-01-op002-no1-1",
-        "bps-14-op027-no2-moonlight-1",
-        "bps-23-op057-appassionata-1",
-        "bps-15-op028-pastorale-1",
-        "bps-10-op014-no2-1",
-        "bps-25-op079-sonatina-1",
-        "bps-07-op010-no3-1",
         "wir-openscore-liedercorpus-schubert-die-schone-mullerin-d-795-12-pause",
         "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-08-der-atlas",
         "wir-openscore-liedercorpus-wolf-eichendorff-lieder-14-der-verzweifelte-liebhaber",
@@ -1488,7 +1525,8 @@ DATASPLITS = {
         "wir-monteverdi-madrigals-book-5-7",
         "wir-monteverdi-madrigals-book-5-5",
     ],
-    "validation": [
+    "validation": DATASPLITSBPS["validation"]
+    + [
         "abc-op131-1",
         "abc-op59-no3-1",
         "abc-op59-no1-4",
@@ -1511,13 +1549,6 @@ DATASPLITS = {
         "haydnop20-no2-4",
         "haydnop20-no3-3",
         "haydnop20-no5-2",
-        "bps-08-op013-pathetique-1",
-        "bps-19-op049-no1-1",
-        "bps-29-op106-hammerklavier-1",
-        "bps-16-op031-no1-1",
-        "bps-26-op081a-les-adieux-1",
-        "bps-06-op010-no2-1",
-        "bps-20-op049-no2-1",
         "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-13-ich-hab-im-traum-geweinet",
         "wir-openscore-liedercorpus-hensel-6-lieder-op-9-5-der-maiabend",
         "wir-openscore-liedercorpus-brahms-6-songs-op-3-3-liebe-und-fruhling-ii",
@@ -1544,7 +1575,8 @@ DATASPLITS = {
         "wir-monteverdi-madrigals-book-3-15",
         "wir-monteverdi-madrigals-book-3-13",
     ],
-    "training": [
+    "training": DATASPLITSBPS["training"]
+    + [
         "abc-op131-3",
         "abc-op95-4",
         "abc-op132-2",
@@ -1649,24 +1681,6 @@ DATASPLITS = {
         "haydnop20-no2-1",
         "haydnop20-no4-2",
         "haydnop20-no6-1",
-        "bps-02-op002-no2-1",
-        "bps-03-op002-no3-1",
-        "bps-04-op007-1",
-        "bps-05-op010-no1-1",
-        "bps-09-op014-no1-1",
-        "bps-11-op022-1",
-        "bps-12-op026-1",
-        "bps-13-op027-no1-1",
-        "bps-17-op031-no2-1",
-        "bps-18-op031-no3-1",
-        "bps-21-op053-1",
-        "bps-22-op054-1",
-        "bps-24-op078-1",
-        "bps-27-op090-1",
-        "bps-28-op101-1",
-        "bps-30-op109-1",
-        "bps-31-op110-1",
-        "bps-32-op111-1",
         "wir-openscore-liedercorpus-schubert-winterreise-d-911-07-auf-dem-flusse",
         "wir-openscore-liedercorpus-schubert-winterreise-d-911-12-einsamkeit-urspruengliche-fassung",
         "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-12-am-meer",
