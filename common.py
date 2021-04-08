@@ -16,6 +16,30 @@ BATCHSIZE = 32
 DATASETDIR = "dataset"
 DATASETSUMMARYFILE = os.path.join(DATASETDIR, "dataset_summary.tsv")
 
+INTERVAL_TRANSPOSITIONS = [
+    # "A1",
+    "m2",
+    "M2",
+    # "A2",
+    "m3",
+    "M3",
+    # "D4",
+    # "A3",
+    "P4",
+    "A4",
+    "D5",
+    "P5",
+    # "D6",
+    # "A5",
+    "m6",
+    "M6",
+    # "D7",
+    # "A6",
+    "m7",
+    "M7",
+    # "D8",
+]
+
 ANNOTATIONSCOREDUPLES = {
     "bps-01-op002-no1-1": (
         "When-in-Rome/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op002_No1/1/analysis.txt",

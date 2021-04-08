@@ -43,6 +43,7 @@ def _padToSequenceLength(arr):
 
 
 if __name__ == "__main__":
+    dataAugmentation = True
     splits = {
         "training": {"X": [], "y": []},
         "validation": {"X": [], "y": []},
@@ -68,13 +69,32 @@ if __name__ == "__main__":
         # Filter the bad content
         if row.split == "training":
             originalIndex = len(df.index)
-            df = df[(df.qualitySquaredSum < 0.75) & (df.measureMisalignment == False)]
+            df = df[
+                (df.qualitySquaredSum < 0.75)
+                & (df.measureMisalignment == False)
+            ]
             filteredIndex = len(df.index)
             print(f"\t({originalIndex}, {filteredIndex})")
-        Xi = micchiChromagram19(df)
+        Xi, dataAug = intervalRepresentation(
+            df, dataAugmentation=(row.split == "training" and dataAugmentation)
+        )
         Xi = _padToSequenceLength(Xi)
-        yi = chordQuality(df)
+        if dataAug is not None:
+            for transposition in range(dataAug.shape[0]):
+                print("transposition ", transposition)
+                Xi = np.concatenate(
+                    (Xi, _padToSequenceLength(dataAug[transposition]))
+                )
+        yi, dataAug = romanNumeral(
+            df, dataAugmentation=(row.split == "training" and dataAugmentation)
+        )
         yi = _padToSequenceLength(yi)
+        if dataAug is not None:
+            for transposition in range(dataAug.shape[0]):
+                print("transposition ", transposition)
+                yi = np.concatenate(
+                    (yi, _padToSequenceLength(dataAug[transposition]))
+                )
         [splits[row.split]["X"].append(sequence) for sequence in Xi]
         [splits[row.split]["y"].append(sequence) for sequence in yi]
     for split in ["training", "validation", "test"]:

@@ -41,12 +41,15 @@ if __name__ == "__main__":
     X_train, y_train = dataset["training"]["X"], dataset["training"]["y"]
     X_val, y_val = dataset["validation"]["X"], dataset["validation"]["y"]
     X_test, y_test = dataset["test"]["X"], dataset["test"]["y"]
-    ############################################
+
     model = keras.Sequential([
         keras.Input(shape=(SEQUENCELENGTH, X_train.shape[2])),
-        layers.GRU(20, return_sequences=True),
+        layers.Dense(64),
+        layers.Dropout(0.5),
+        layers.Bidirectional(layers.GRU(20, return_sequences=True)),
         layers.BatchNormalization(),
-        layers.GRU(20, return_sequences=True),
+        layers.Bidirectional(layers.GRU(20, return_sequences=True)),
+        layers.BatchNormalization(),
         layers.Dense(y_train.shape[2])
     ])
     model.compile(
@@ -58,7 +61,8 @@ if __name__ == "__main__":
     model.fit(
         X_train,
         y_train,
-        epochs=10,
+        epochs=50,
+        shuffle=True,
         batch_size=BATCHSIZE,
         validation_data=(X_val, y_val),
     )

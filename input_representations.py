@@ -1,3 +1,5 @@
+from common import INTERVAL_TRANSPOSITIONS
+
 import numpy as np
 import music21
 
@@ -20,6 +22,7 @@ INTERVALCLASSES = [
     for generic in [1, 4, 5, 8]
     for specific in ["dd", "d", "P", "A", "AA"]
 ]
+
 
 
 def pitchClassNoteName(df, minOctave=2, maxOctave=6):
@@ -147,13 +150,14 @@ def micchiChromagram19(df):
     return ret
 
 
-def intervalRepresentation(df):
+def intervalRepresentation(df, dataAugmentation=False):
     """Encodes a "compressed" bass-chromagram, similar to Micchi et al. 2020.
 
     Expects a DataFrame parsed by parseScore(). Returns a numpy() array.
     """
-    frames = len(df.index)
-    ret = np.zeros((frames, 19 + len(INTERVALCLASSES)))
+    frames, classes = len(df.index), (19 + len(INTERVALCLASSES))
+    ret = np.zeros((frames, classes))
+    dataAug = None
 
     for frame, r in enumerate(df.iterrows()):
         _, row = r
@@ -168,4 +172,27 @@ def intervalRepresentation(df):
         for interval in intervals:
             intervalIndex = INTERVALCLASSES.index(interval)
             ret[frame, 19 + intervalIndex] = 1
-    return ret
+
+    if not dataAugmentation:
+        return ret, dataAug
+
+    dataAug = np.zeros((len(INTERVAL_TRANSPOSITIONS), frames, classes))
+    for transposition, interval in enumerate(INTERVAL_TRANSPOSITIONS):
+        tr = dataAug[transposition]
+        for frame, r in enumerate(df.iterrows()):
+            m21Interval = music21.interval.Interval(interval)
+            _, row = r
+            bass = row.s_notes[0]
+            intervals = row.s_intervals
+            m21Pitch = music21.pitch.Pitch(bass)
+            m21Pitch = m21Interval.transposePitch(m21Pitch)
+            pitchLetter = m21Pitch.step
+            pitchLetterIndex = NOTENAMES.index(pitchLetter)
+            pitchClass = m21Pitch.pitchClass
+            tr[frame, pitchLetterIndex] = 1
+            tr[frame, 7 + pitchClass] = 1
+            for interval in intervals:
+                intervalIndex = INTERVALCLASSES.index(interval)
+                tr[frame, 19 + intervalIndex] = 1
+
+    return ret, dataAug

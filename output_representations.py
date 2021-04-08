@@ -1,3 +1,5 @@
+from common import INTERVAL_TRANSPOSITIONS
+
 import numpy as np
 import music21
 
@@ -231,19 +233,29 @@ def bass35(df):
     return ret
 
 
-def inversion(df):
+def inversion(df, dataAugmentation=False):
     """Encodes an Annotation DataFrame into a numpy array representation.
 
     Expects a DataFrame parsed by parseAnnotation(). Returns a numpy() array.
     """
-    frames = len(df.index)
-    ret = np.zeros((frames, 4))
+    frames, classes = len(df.index), 4
+    ret = np.zeros((frames, classes))
+    dataAug = None
+
     for frame, inversion in enumerate(df.a_inversion):
         if inversion > 3:
             # Any chord beyond sevenths is encoded as "root" position
             inversion = 0
         ret[frame, int(inversion)] = 1
-    return ret
+
+    if not dataAugmentation:
+        return ret, dataAug
+
+    dataAug = np.zeros((len(INTERVAL_TRANSPOSITIONS), frames, classes))
+    for transposition, _ in enumerate(INTERVAL_TRANSPOSITIONS):
+        dataAug[transposition] = ret
+
+    return ret, dataAug
 
 
 def degree1(df):
@@ -348,17 +360,27 @@ def harmonicRhythm(df):
     return ret
 
 
-def romanNumeral(df):
+def romanNumeral(df, dataAugmentation=False):
     """Encodes an Annotation DataFrame into a numpy array representation.
 
     Expects a DataFrame parsed by parseAnnotation(). Returns a numpy() array.
     """
-    frames = len(df.index)
-    ret = np.zeros((frames, len(COMMON_ROMAN_NUMERALS) + 1))
+    frames, classes = len(df.index), (len(COMMON_ROMAN_NUMERALS) + 1)
+    ret = np.zeros((frames, classes))
+    dataAug = None
+
     for frame, romanNumeral in enumerate(df.a_romanNumeral):
         if romanNumeral in COMMON_ROMAN_NUMERALS:
             rnIndex = COMMON_ROMAN_NUMERALS.index(romanNumeral)
             ret[frame, rnIndex] = 1
         else:
             ret[frame, len(COMMON_ROMAN_NUMERALS)] = 1
-    return ret
+
+    if not dataAugmentation:
+        return ret, dataAug
+
+    dataAug = np.zeros((len(INTERVAL_TRANSPOSITIONS), frames, classes))
+    for transposition, _ in enumerate(INTERVAL_TRANSPOSITIONS):
+        dataAug[transposition] = ret
+
+    return ret, dataAug
