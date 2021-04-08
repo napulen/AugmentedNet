@@ -1,6 +1,7 @@
 import music21
 import re
-from common import ANNOTATIONSCOREMAP
+from common import ANNOTATIONSCOREDUPLES
+import sys
 
 
 def _isInitialKey(token):
@@ -12,6 +13,7 @@ def _isKeyChange(token):
     # return re.match(r"[.]?[b#]*[ivIV]+\.[b#]*[ivIV]+", token)
     # return re.match(r"[.]?[b#]*[ivIV]+\..*", token)
     return re.match(r"[b#]*[ivIV]+\..*", token)
+
 
 def _isHalfDiminishedSeventh(token):
     return "%" in token
@@ -144,9 +146,9 @@ def makeRntxtBody(tss, ms):
 
 
 if __name__ == "__main__":
-    for annotation, score in ANNOTATIONSCOREMAP.items():
-        # if "op132_no15_mov5" not in score:
-        #     continue
+    for filename, (annotation, score) in ANNOTATIONSCOREDUPLES.items():
+        if filename != "abc-op131-1":
+            continue
         score = score.replace(".mscx", ".mxl")
         print(score)
         harm = music21.converter.parse(score)
