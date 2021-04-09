@@ -66,3 +66,15 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
     return jointdf
+
+
+def parseAnnotationAndAnnotation(a, qualityAssessment=True):
+    adf = parseAnnotation(a)
+    sdf = parseScore(a, fmt="romantext")
+    jointdf = pd.concat([sdf, adf], axis=1)
+    jointdf["a_isOnset"].fillna(False, inplace=True)
+    jointdf.fillna(method="ffill", inplace=True)
+    if qualityAssessment:
+        jointdf = _measureAlignmentScore(jointdf)
+        jointdf = _qualityMetric(jointdf)
+    return jointdf

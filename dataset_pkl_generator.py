@@ -5,6 +5,7 @@ from pathlib import Path
 from common import (
     SEQUENCELENGTH,
     DATASETDIR,
+    SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
 )
 from input_representations import (
@@ -42,20 +43,25 @@ def _padToSequenceLength(arr):
     return arr
 
 
-if __name__ == "__main__":
-    dataAugmentation = True
+def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
     splits = {
         "training": {"X": [], "y": []},
         "validation": {"X": [], "y": []},
         "test": {"X": [], "y": []},
     }
-    if not os.path.exists(DATASETSUMMARYFILE):
+    datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
+    summaryFile = os.path.join(datasetDir, DATASETSUMMARYFILE)
+    if not os.path.exists(summaryFile):
         print("You need to generate the tsv files first.")
         exit()
-    datasetSummary = pd.read_csv(DATASETSUMMARYFILE, sep="\t")
+    datasetSummary = pd.read_csv(summaryFile, sep="\t")
+    if collection:
+        datasetSummary = datasetSummary[
+            datasetSummary.collection == collection
+        ]
     for row in datasetSummary.itertuples():
         print(row.split, row.file)
-        tsvlocation = os.path.join(DATASETDIR, row.split, row.file)
+        tsvlocation = os.path.join(datasetDir, row.split, row.file)
         df = pd.read_csv(tsvlocation + ".tsv", sep="\t")
         for col in [
             "s_notes",
@@ -100,4 +106,8 @@ if __name__ == "__main__":
     for split in ["training", "validation", "test"]:
         for xy in ["X", "y"]:
             splits[split][xy] = np.array(splits[split][xy])
-    np.save("dataset.npy", splits)
+    np.save(f"{datasetDir}.npy", splits)
+
+
+if __name__ == "__main__":
+    generateDataset(synthetic=True, dataAugmentation=True, collection="bps")

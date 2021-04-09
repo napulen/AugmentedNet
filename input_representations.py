@@ -129,13 +129,15 @@ def micchiChromagram(df):
     return ret
 
 
-def micchiChromagram19(df):
+def micchiChromagram19(df, dataAugmentation=False):
     """Encodes a "compressed" bass-chromagram, similar to Micchi et al. 2020.
 
     Expects a DataFrame parsed by parseScore(). Returns a numpy() array.
     """
-    frames = len(df.index)
-    ret = np.zeros((frames, 38))
+    frames, classes = len(df.index), (19*2)
+    ret = np.zeros((frames, classes))
+    dataAug = None
+
     for frame, notes in enumerate(df.s_notes):
         for idx, note in enumerate(notes):
             m21Pitch = music21.pitch.Pitch(note)
@@ -147,7 +149,28 @@ def micchiChromagram19(df):
             if idx == 0:
                 ret[frame, pitchLetterIndex] = 1
                 ret[frame, pitchClass + 7] = 1
-    return ret
+
+    if not dataAugmentation:
+        return ret, dataAug
+
+    dataAug = np.zeros((len(INTERVAL_TRANSPOSITIONS), frames, classes))
+    for transposition, interval in enumerate(INTERVAL_TRANSPOSITIONS):
+        tr = dataAug[transposition]
+        m21Interval = music21.interval.Interval(interval)
+        for frame, notes in enumerate(df.s_notes):
+            for idx, note in enumerate(notes):
+                m21Pitch = music21.pitch.Pitch(note)
+                m21Pitch = m21Interval.transposePitch(m21Pitch)
+                pitchLetter = m21Pitch.step
+                pitchLetterIndex = NOTENAMES.index(pitchLetter)
+                pitchClass = m21Pitch.pitchClass
+                tr[frame, pitchLetterIndex + 19] = 1
+                tr[frame, pitchClass + 19 + 7] = 1
+                if idx == 0:
+                    tr[frame, pitchLetterIndex] = 1
+                    tr[frame, pitchClass + 7] = 1
+
+    return ret, dataAug
 
 
 def intervalRepresentation(df, dataAugmentation=False):
@@ -179,8 +202,8 @@ def intervalRepresentation(df, dataAugmentation=False):
     dataAug = np.zeros((len(INTERVAL_TRANSPOSITIONS), frames, classes))
     for transposition, interval in enumerate(INTERVAL_TRANSPOSITIONS):
         tr = dataAug[transposition]
+        m21Interval = music21.interval.Interval(interval)
         for frame, r in enumerate(df.iterrows()):
-            m21Interval = music21.interval.Interval(interval)
             _, row = r
             bass = row.s_notes[0]
             intervals = row.s_intervals

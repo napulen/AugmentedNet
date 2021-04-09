@@ -14,7 +14,8 @@ SEQUENCELENGTH = 64
 BATCHSIZE = 32
 
 DATASETDIR = "dataset"
-DATASETSUMMARYFILE = os.path.join(DATASETDIR, "dataset_summary.tsv")
+SYNTHDATASETDIR = "dataset-synth"
+DATASETSUMMARYFILE = "dataset_summary.tsv"
 
 INTERVAL_TRANSPOSITIONS = [
     # "A1",
