@@ -1,9 +1,12 @@
+from cache import TransposeKey, TransposePitch, m21Key, m21Pitch
 from common import INTERVAL_TRANSPOSITIONS
 
 import numpy as np
 import music21
 
 NOTENAMES = ("C", "D", "E", "F", "G", "A", "B")
+
+PITCHCLASSES = [pc for pc in range(12)]
 
 ACCIDENTALS = ("--", "-", "", "#", "##")
 
@@ -41,6 +44,7 @@ DEGREES = (
 )
 
 KEYS = (
+    "F-",
     "C-",
     "G-",
     "D-",
@@ -56,7 +60,9 @@ KEYS = (
     "B",
     "F#",
     "C#",
+    "G#",
     ####
+    "d-",
     "a-",
     "e-",
     "b-",
@@ -72,6 +78,7 @@ KEYS = (
     "g#",
     "d#",
     "a#",
+    "e#",
     "None",
 )
 
@@ -170,6 +177,114 @@ COMMON_ROMAN_NUMERALS = [
     "V/v",
     "II",
 ]
+
+INTERVAL_ENHARMONICS = {
+    "A1": "m2",
+    "M2": "D3",
+    "A2": "m3",
+    "M3": "D4",
+    "A3": "P4",
+    "A4": "D5",
+    "P5": "D6",
+    "A5": "m6",
+    "M6": "D7",
+    "A6": "m7",
+    "M7": "D8",
+    "m2": "A1",
+    "D3": "M2",
+    "m3": "A2",
+    "D4": "M3",
+    "P4": "A3",
+    "D5": "A4",
+    "D6": "P5",
+    "m6": "A5",
+    "D7": "M6",
+    "m7": "A6",
+    "D8": "M7",
+}
+
+
+class OutputRepresentation(object):
+    def __init__(self, df, features=1):
+        self.df = df
+        self.frames = len(df.index)
+        self.features = features
+        self.shape = (self.frames, features)
+        self.array = self.run()
+
+    def run(self, transposeByInterval=None):
+        array = np.zeros(self.shape)
+        return array
+
+    def dataAugmentation(self, intervals):
+        for interval in intervals:
+            yield self.run(transposeByInterval=interval)
+        return
+
+
+class OutputRepresentationTI(OutputRepresentation):
+    """TI stands for Transposition Invariant.
+
+    If a representation is TI, dataAugmentation consists of
+    returning a copy of the array that was already computed.
+    """
+
+    def dataAugmentation(self, intervals):
+        for _ in intervals:
+            yield np.copy(self.array)
+        return
+
+
+class Bass19(OutputRepresentation):
+    def __init__(self, df):
+        features = len(NOTENAMES) + len(PITCHCLASSES)
+        super().__init__(df, features=features)
+
+    def run(self, transposedByInterval=None):
+        array = np.zeros(self.shape)
+        for frame, bass in enumerate(self.df.a_bass):
+            if transposedByInterval:
+                transposedBass = TransposePitch(bass, transposedByInterval)
+                pitchObj = m21Pitch(transposedBass)
+            else:
+                pitchObj = m21Pitch(bass)
+            pitchLetter = pitchObj.step
+            pitchLetterIndex = NOTENAMES.index(pitchLetter)
+            pitchClass = m21Pitch.pitchClass
+            array[frame, pitchLetterIndex] = 1
+            array[frame, pitchClass + 7] = 1
+        return array
+
+
+class Inversion(OutputRepresentationTI):
+    # def __init__(self, df):
+    #     features = 4
+    #     super().__init__(df, features=features)
+
+    def run(self):
+        array = np.zeros(self.shape)
+        for frame, inversion in enumerate(self.df.a_inversion):
+            if inversion > 3:
+                # Any chord beyond sevenths is encoded as "root" position
+                inversion = 0
+            array[frame] = inversion
+        return array
+
+
+class RomanNumeral(OutputRepresentationTI):
+    # def __init__(self, df):
+    #     features = len(COMMON_ROMAN_NUMERALS) + 1
+    #     super().__init__(df, features=features)
+
+    def run(self):
+        array = np.zeros(self.shape)
+        for frame, romanNumeral in enumerate(self.df.a_romanNumeral):
+            if romanNumeral in COMMON_ROMAN_NUMERALS:
+                rnIndex = COMMON_ROMAN_NUMERALS.index(romanNumeral)
+                array[frame] = rnIndex
+            else:
+                array[frame] = len(COMMON_ROMAN_NUMERALS)
+        return array
 
 
 def bass19(df):
@@ -305,17 +420,35 @@ def tonicizedKey(df):
     return ret
 
 
-def localKey(df):
+def localKey(df, dataAugmentation=False):
     """Encodes an Annotation DataFrame into a numpy array representation.
 
     Expects a DataFrame parsed by parseAnnotation(). Returns a numpy() array.
     """
-    frames = len(df.index)
-    ret = np.zeros((frames, 30))
+    frames, classes = len(df.index), (len(KEYS) - 1)
+    ret = np.zeros((frames, classes))
+    dataAug = None
+
     for frame, localKey in enumerate(df.a_localKey):
         localKeyIndex = KEYS.index(localKey)
         ret[frame, localKeyIndex] = 1
-    return ret
+
+    if not dataAugmentation:
+        return ret, dataAug
+
+    dataAug = np.zeros((len(INTERVAL_TRANSPOSITIONS), frames, classes))
+    for transposition, interval in enumerate(INTERVAL_TRANSPOSITIONS):
+        tr = dataAug[transposition]
+        enharmonicInterval = INTERVAL_ENHARMONICS[interval]
+        for frame, localKey in enumerate(df.a_localKey):
+            transposedKey = TransposeKey(localKey, interval)
+            if transposedKey not in KEYS:
+                print("x")
+                transposedKey = TransposeKey(localKey, enharmonicInterval)
+            localKeyIndex = KEYS.index(transposedKey)
+            tr[frame, localKeyIndex] = 1
+
+    return ret, dataAug
 
 
 def chordRoot(df):

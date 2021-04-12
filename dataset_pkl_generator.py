@@ -3,24 +3,28 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from common import (
+    INTERVAL_TRANSPOSITIONS,
     SEQUENCELENGTH,
     DATASETDIR,
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
 )
 from input_representations import (
-    intervalRepresentation,
+    IntervalRepresentation,
+    micchiChromagram19,
     pitchClassNoteName,
     salamiSliceWithHold,
     compressedSalamiSliceWithHold,
     micchiChromagram,
-    micchiChromagram19,
+    Chromagram19,
+    ChromagramInterval,
 )
 from output_representations import (
     bass35,
     bass12,
     bass7,
     bass19,
+    Inversion,
     inversion,
     tonicizedKey,
     degree1,
@@ -29,7 +33,7 @@ from output_representations import (
     chordRoot,
     chordQuality,
     harmonicRhythm,
-    romanNumeral,
+    RomanNumeral,
 )
 
 
@@ -81,26 +85,23 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
             ]
             filteredIndex = len(df.index)
             print(f"\t({originalIndex}, {filteredIndex})")
-        Xi, dataAug = intervalRepresentation(
-            df, dataAugmentation=(row.split == "training" and dataAugmentation)
-        )
+        inputLayer = Chromagram19(df)
+        Xi = inputLayer.array
         Xi = _padToSequenceLength(Xi)
-        if dataAug is not None:
-            for transposition in range(dataAug.shape[0]):
-                print("transposition ", transposition)
-                Xi = np.concatenate(
-                    (Xi, _padToSequenceLength(dataAug[transposition]))
-                )
-        yi, dataAug = romanNumeral(
-            df, dataAugmentation=(row.split == "training" and dataAugmentation)
-        )
+        if dataAugmentation and row.split == "training":
+            for transposition in inputLayer.dataAugmentation(
+                INTERVAL_TRANSPOSITIONS
+            ):
+                Xi = np.concatenate((Xi, _padToSequenceLength(transposition)))
+        outputLayer = RomanNumeral(df)
+        yi = outputLayer.array
         yi = _padToSequenceLength(yi)
-        if dataAug is not None:
-            for transposition in range(dataAug.shape[0]):
-                print("transposition ", transposition)
-                yi = np.concatenate(
-                    (yi, _padToSequenceLength(dataAug[transposition]))
-                )
+        # dataAug = list(inv.dataAugmentation(INTERVAL_TRANSPOSITIONS))
+        if dataAugmentation and row.split == "training":
+            for transposition in outputLayer.dataAugmentation(
+                INTERVAL_TRANSPOSITIONS
+            ):
+                yi = np.concatenate((yi, _padToSequenceLength(transposition)))
         [splits[row.split]["X"].append(sequence) for sequence in Xi]
         [splits[row.split]["y"].append(sequence) for sequence in yi]
     for split in ["training", "validation", "test"]:

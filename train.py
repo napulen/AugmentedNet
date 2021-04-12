@@ -1,3 +1,4 @@
+from tensorflow.python.keras.layers.normalization import BatchNormalization
 from score_parser import parseScore
 from annotation_parser import parseAnnotation
 from input_representations import pitchClassNoteName
@@ -14,8 +15,9 @@ tf.random.set_seed(RANDOMSEED)
 
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-
+# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+gpu_devices = tf.config.experimental.list_physical_devices('GPU')
+for device in gpu_devices: tf.config.experimental.set_memory_growth(device, True)
 
 def plotExample(pr, label):
     _, ax = plt.subplots(2, 1)
@@ -37,25 +39,27 @@ def manyhot_accuracy(y_true, y_pred):
 
 if __name__ == "__main__":
     # Xreal, yreal = np.load("train_pianoroll.npy"), np.load("train_labels.npy")
-    dataset = np.load("dataset.npy", allow_pickle=True).item()
+    dataset = np.load("dataset-synth.npy", allow_pickle=True).item()
     X_train, y_train = dataset["training"]["X"], dataset["training"]["y"]
     X_val, y_val = dataset["validation"]["X"], dataset["validation"]["y"]
     X_test, y_test = dataset["test"]["X"], dataset["test"]["y"]
 
     model = keras.Sequential([
         keras.Input(shape=(SEQUENCELENGTH, X_train.shape[2])),
-        layers.Dense(64),
-        layers.Dropout(0.5),
-        layers.Bidirectional(layers.GRU(20, return_sequences=True)),
+        layers.Dense(32),
+        layers.BatchNormalization(),
+        layers.Dense(32),
         layers.BatchNormalization(),
         layers.Bidirectional(layers.GRU(20, return_sequences=True)),
         layers.BatchNormalization(),
-        layers.Dense(y_train.shape[2])
+        layers.Bidirectional(layers.GRU(20, return_sequences=True)),
+        layers.BatchNormalization(),
+        layers.Dense(76)
     ])
     model.compile(
         optimizer="adam",
-        loss=keras.losses.CategoricalCrossentropy(from_logits=True),
-        metrics="categorical_accuracy",
+        loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics="accuracy",
     )
     print(model.summary())
     model.fit(
