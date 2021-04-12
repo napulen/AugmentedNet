@@ -5,6 +5,33 @@ from common import FIXEDOFFSET, FLOATSCALE
 import re
 
 
+A_COLUMNS = [
+    "a_offset",
+    "a_measure",
+    "a_duration",
+    "a_annotationNumber",
+    "a_romanNumeral",
+    "a_isOnset",
+    "a_pitchNames",
+    "a_bass",
+    "a_root",
+    "a_inversion",
+    "a_quality",
+    "a_pcset",
+    "a_localKey",
+    "a_tonicizedKey",
+    "a_degree1",
+    "a_degree2",
+]
+
+
+# These have to be made lists again if read from a csv. They're stored as str.
+A_LISTTYPE_COLUMNS = [
+    "a_pitchNames",
+    "a_pcset",
+]
+
+
 def _m21Parse(f):
     return music21.converter.parse(f, format="romantext")
 
@@ -45,24 +72,7 @@ def _initialDataFrame(s):
     seem to work well (e.g., inversion). It may be easier to predict others
     which may still serve to reconstruct the roman numeral.
     """
-    dfdict = {
-        "a_offset": [],
-        "a_measure": [],
-        "a_duration": [],
-        "a_annotationNumber": [],
-        "a_romanNumeral": [],
-        "a_isOnset": [],
-        "a_pitchNames": [],
-        "a_bass": [],
-        "a_root": [],
-        "a_inversion": [],
-        "a_quality": [],
-        "a_pcset": [],
-        "a_localKey": [],
-        "a_tonicizedKey": [],
-        "a_degree1": [],
-        "a_degree2": [],
-    }
+    dfdict = {col: [] for col in A_COLUMNS}
     for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
         dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["a_measure"].append(rn.measureNumber)
@@ -79,7 +89,8 @@ def _initialDataFrame(s):
         dfdict["a_localKey"].append(rn.key.tonicPitchNameWithCase)
         secondaryKey = rn.secondaryRomanNumeralKey
         if secondaryKey:
-            dfdict["a_tonicizedKey"].append(secondaryKey.tonicPitchNameWithCase)
+            tonicizedKey = secondaryKey.tonicPitchNameWithCase
+            dfdict["a_tonicizedKey"].append(tonicizedKey)
         else:
             dfdict["a_tonicizedKey"].append("None")
         scaleDegree, alteration = rn.scaleDegreeWithAlteration
