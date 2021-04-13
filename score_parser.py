@@ -4,6 +4,21 @@ import pandas as pd
 import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
 
+S_COLUMNS = [
+    "s_offset",
+    "s_duration",
+    "s_measure",
+    "s_notes",
+    "s_intervals",
+    "s_isOnset",
+]
+
+S_LISTTYPE_COLUMNS = [
+    "s_notes",
+    "s_intervals",
+    "s_isOnset",
+]
+
 
 def _m21Parse(f, fmt=None):
     return music21.converter.parse(f, format=fmt)
@@ -35,14 +50,7 @@ def _initialDataFrame(s, fmt=None):
     measure number, and their ties (in case something fancy needs to be done,
     with the tie information).
     """
-    dfdict = {
-        "s_offset": [],
-        "s_duration": [],
-        "s_measure": [],
-        "s_notes": [],
-        "s_intervals": [],
-        "s_isOnset": [],
-    }
+    dfdict = {col: [] for col in S_COLUMNS}
     measureNumberShift = _measureNumberShift(s)
     for c in s.chordify().flat.notesAndRests:
         dfdict["s_offset"].append(round(float(c.offset), FLOATSCALE))
@@ -55,13 +63,10 @@ def _initialDataFrame(s, fmt=None):
             dfdict["s_isOnset"].append(np.nan)
             continue
         dfdict["s_notes"].append([n.pitch.nameWithOctave for n in c])
-        dfdict["s_intervals"].append(
-            [Interval(c[0].pitch, p).semiSimpleName for p in c.pitches[1:]]
-        )
-        dfdict["s_isOnset"].append(
-            [(not n.tie or n.tie.type == "start") for n in c]
-        )
-
+        intvs = [Interval(c[0].pitch, p).semiSimpleName for p in c.pitches[1:]]
+        dfdict["s_intervals"].append(intvs)
+        onsets = [(not n.tie or n.tie.type == "start") for n in c]
+        dfdict["s_isOnset"].append(onsets)
     df = pd.DataFrame(dfdict)
     currentLastOffset = float(df.tail(1).s_offset) + float(
         df.tail(1).s_duration
