@@ -230,8 +230,6 @@ def _load_dfgt(csvGT):
     dfGT = pd.read_csv(csvGTF)
     dfGT.set_index("s_offset", inplace=True)
     for col in score_parser.S_LISTTYPE_COLUMNS:
-        # if col == "s_intervals":
-        #     continue
         dfGT[col] = dfGT[col].apply(eval)
     return dfGT
 
