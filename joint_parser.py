@@ -35,13 +35,13 @@ def _qualityMetric(df):
         )
         df.loc[
             df.a_annotationNumber == n, "qualityNonChordTones"
-        ] = nonChordTonesScore
+        ] = round(nonChordTonesScore, 2)
         df.loc[
             df.a_annotationNumber == n, "qualityMissingChordTones"
-        ] = missingChordTonesScore
+        ] = round(missingChordTonesScore, 2)
         df.loc[
             df.a_annotationNumber == n, "qualitySquaredSum"
-        ] = squaredSumScore
+        ] = round(squaredSumScore, 2)
     return df
 
 
@@ -58,6 +58,7 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
     sdf = parseScore(s)
     # Create the joint dataframe
     jointdf = pd.concat([sdf, adf], axis=1)
+    jointdf.index.name = "j_offset"
     # Sometimes, scores are longer than annotations (trailing empty measures)
     # In that case, ffill the annotation portion of the new dataframe
     jointdf["a_isOnset"].fillna(False, inplace=True)
