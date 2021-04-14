@@ -46,6 +46,7 @@ def generateDataset(synthetic=False):
             statsdict["qualityMean"].append(qualitySquaredSum)
             df = pd.DataFrame(statsdict)
             df.to_csv(os.path.join(datasetDir, DATASETSUMMARYFILE), sep="\t")
+    return df
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 from pathlib import Path
+from joint_parser import J_LISTTYPE_COLUMNS
 from common import (
     INTERVAL_TRANSPOSITIONS,
     SEQUENCELENGTH,

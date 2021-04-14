@@ -4,10 +4,21 @@ import pandas as pd
 import numpy as np
 import re
 
-J_COLUMNS = score_parser.S_COLUMNS + annotation_parser.A_COLUMNS
+J_COLUMNS = (
+    score_parser.S_COLUMNS
+    + annotation_parser.A_COLUMNS
+    + [
+        "qualityScoreNotes",
+        "qualityNonChordTones",
+        "qualityMissingChordTones",
+        "qualitySquaredSum",
+    ]
+)
 
 J_LISTTYPE_COLUMNS = (
-    score_parser.S_LISTTYPE_COLUMNS + annotation_parser.A_LISTTYPE_COLUMNS
+    score_parser.S_LISTTYPE_COLUMNS
+    + annotation_parser.A_LISTTYPE_COLUMNS
+    + ["qualityScoreNotes"]
 )
 
 
@@ -48,6 +59,7 @@ def _qualityMetric(df):
         df.loc[df.a_annotationNumber == n, "qualitySquaredSum"] = round(
             squaredSumScore, 2
         )
+    df["qualityScoreNotes"] = df["qualityScoreNotes"].apply(eval)
     return df
 
 
