@@ -34,19 +34,19 @@ def generateDataset(synthetic=False):
                 df = parseAnnotationAndAnnotation(annotation, annotation)
             outpath = os.path.join(datasetDir, split, nickname + ".tsv")
             df.to_csv(outpath, sep="\t")
-            collection = nickname.split('-')[0]
+            collection = nickname.split("-")[0]
             statsdict["file"].append(nickname)
             statsdict["annotation"].append(annotation)
             statsdict["score"].append(score)
             statsdict["collection"].append(collection)
             statsdict["split"].append(split)
-            statsdict["misalignmentMean"].append(df.measureMisalignment.mean())
-            statsdict["qualityMean"].append(df.qualitySquaredSum.mean())
+            misalignment = df.measureMisalignment.mean().round(2)
+            statsdict["misalignmentMean"].append(misalignment)
+            qualitySquaredSum = df.qualitySquaredSum.mean().round(2)
+            statsdict["qualityMean"].append(qualitySquaredSum)
             df = pd.DataFrame(statsdict)
-            df.to_csv(
-                os.path.join(datasetDir, DATASETSUMMARYFILE), sep="\t"
-            )
+            df.to_csv(os.path.join(datasetDir, DATASETSUMMARYFILE), sep="\t")
 
 
 if __name__ == "__main__":
-    generateDataset(synthetic=True)
+    generateDataset(synthetic=False)
