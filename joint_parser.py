@@ -1,8 +1,14 @@
-from score_parser import parseScore
-from annotation_parser import parseAnnotation
+import score_parser
+import annotation_parser
 import pandas as pd
 import numpy as np
 import re
+
+J_COLUMNS = score_parser.S_COLUMNS + annotation_parser.A_COLUMNS
+
+J_LISTTYPE_COLUMNS = (
+    score_parser.S_LISTTYPE_COLUMNS + annotation_parser.A_LISTTYPE_COLUMNS
+)
 
 
 def _measureAlignmentScore(df):
@@ -33,15 +39,15 @@ def _qualityMetric(df):
         df.loc[df.a_annotationNumber == n, "qualityScoreNotes"] = str(
             scoreNotes
         )
-        df.loc[
-            df.a_annotationNumber == n, "qualityNonChordTones"
-        ] = round(nonChordTonesScore, 2)
-        df.loc[
-            df.a_annotationNumber == n, "qualityMissingChordTones"
-        ] = round(missingChordTonesScore, 2)
-        df.loc[
-            df.a_annotationNumber == n, "qualitySquaredSum"
-        ] = round(squaredSumScore, 2)
+        df.loc[df.a_annotationNumber == n, "qualityNonChordTones"] = round(
+            nonChordTonesScore, 2
+        )
+        df.loc[df.a_annotationNumber == n, "qualityMissingChordTones"] = round(
+            missingChordTonesScore, 2
+        )
+        df.loc[df.a_annotationNumber == n, "qualitySquaredSum"] = round(
+            squaredSumScore, 2
+        )
     return df
 
 
@@ -54,8 +60,8 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
     Create the dataframes of both, generate a new one.
     """
     # Parse each file
-    adf = parseAnnotation(a)
-    sdf = parseScore(s)
+    adf = annotation_parser.parseAnnotation(a)
+    sdf = score_parser.parseScore(s)
     # Create the joint dataframe
     jointdf = pd.concat([sdf, adf], axis=1)
     jointdf.index.name = "j_offset"
@@ -70,8 +76,8 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
 
 
 def parseAnnotationAndAnnotation(a, qualityAssessment=True):
-    adf = parseAnnotation(a)
-    sdf = parseScore(a, fmt="romantext")
+    adf = annotation_parser.parseAnnotation(a)
+    sdf = score_parser.parseScore(a, fmt="romantext")
     jointdf = pd.concat([sdf, adf], axis=1)
     jointdf["a_isOnset"].fillna(False, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
