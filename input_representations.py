@@ -10,6 +10,29 @@ from feature_representation import (
 import numpy as np
 import music21
 
+NOTENAMEDEFAULTCLASS = {
+    "C": 0,
+    "D": 2,
+    "E": 4,
+    "F": 5,
+    "G": 7,
+    "A": 9,
+    "B": 11,
+}
+
+
+# def _solvePitchSpelling(noteNames, pitchClasses):
+#     if len(noteNames) != len(pitchClasses):
+#         raise Exception
+#     if not noteNames:
+#         return
+#     elif len(noteNames) == 1:
+#     note = noteNames[0]
+#     default = NOTENAMEDEFAULTCLASS[note]
+#     bestMatch = 999999
+#     for pc in pitchClasses:
+#         diff = pc -
+
 
 class BassChromagram19(FeatureRepresentation):
     features = 2 * (len(NOTENAMES) + len(PITCHCLASSES))
@@ -57,9 +80,10 @@ class BassChromagram19(FeatureRepresentation):
 
 
 class IntervalRepresentation(FeatureRepresentation):
+    features = len(INTERVALCLASSES) + 19
+
     def __init__(self, df):
-        features = len(INTERVALCLASSES) + 19
-        super().__init__(df, features=features)
+        super().__init__(df)
 
     def run(self, transposition="P1"):
         array = np.zeros(self.shape)
@@ -78,6 +102,26 @@ class IntervalRepresentation(FeatureRepresentation):
                 intervalIndex = INTERVALCLASSES.index(interval)
                 array[frame, 19 + intervalIndex] = 1
         return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            bassPitchName = NOTENAMES[np.argmax(manyhot[:7])]
+            bassPitchClass = np.argmax(manyhot[7:19])
+            intervals = [
+                INTERVALCLASSES[x] for x in np.nonzero(manyhot[19:])[0]
+            ]
+            ret.append(
+                (
+                    bassPitchName,
+                    bassPitchClass,
+                    tuple(intervals),
+                )
+            )
+        return ret
 
 
 class ChromagramInterval(FeatureRepresentation):
