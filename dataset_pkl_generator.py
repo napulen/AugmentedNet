@@ -68,14 +68,7 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
         print(row.split, row.file)
         tsvlocation = os.path.join(datasetDir, row.split, row.file)
         df = pd.read_csv(tsvlocation + ".tsv", sep="\t")
-        for col in [
-            "s_notes",
-            "s_intervals",
-            "s_isOnset",
-            "a_pitchNames",
-            "a_pcset",
-            "qualityScoreNotes",
-        ]:
+        for col in J_LISTTYPE_COLUMNS:
             df[col] = df[col].apply(eval)
         # Filter the bad content
         if row.split == "training":

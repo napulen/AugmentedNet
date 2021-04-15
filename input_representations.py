@@ -1,69 +1,24 @@
-from output_representations import PITCHCLASSES
 from common import INTERVAL_TRANSPOSITIONS
 from cache import TransposeKey, TransposePitch, m21Pitch, m21Key
-
+from feature_representation import (
+    PITCHCLASSES,
+    NOTENAMES,
+    INTERVALCLASSES,
+    SPELLINGS,
+    FeatureRepresentation,
+)
 import numpy as np
 import music21
 
-NOTENAMES = ("C", "D", "E", "F", "G", "A", "B")
 
-ACCIDENTALS = ("--", "-", "", "#", "##")
+class BassChromagram19(FeatureRepresentation):
+    features = 2 * (len(NOTENAMES) + len(PITCHCLASSES))
 
-SPELLINGS = [
-    f"{letter}{accidental}"
-    for letter in NOTENAMES
-    for accidental in ACCIDENTALS
-]
-
-INTERVALCLASSES = [
-    f"{specific}{generic}"
-    for generic in [2, 3, 6, 7]
-    for specific in ["dd", "d", "m", "M", "A", "AA"]
-] + [
-    f"{specific}{generic}"
-    for generic in [1, 4, 5, 8]
-    for specific in ["dd", "d", "P", "A", "AA"]
-]
-
-
-class InputRepresentation(object):
-    def __init__(self, df, features=1):
-        self.df = df
-        self.frames = len(df.index)
-        self.features = features
-        self.shape = (self.frames, features)
-        self.array = self.run()
-
-    def run(self, transposeByInterval=None):
-        array = np.zeros(self.shape)
-        return array
-
-    def dataAugmentation(self, intervals):
-        for interval in intervals:
-            yield self.run(transposition=interval)
-        return
-
-
-class InputRepresentationTI(InputRepresentation):
-    """TI stands for Transposition Invariant.
-
-    If a representation is TI, dataAugmentation consists of
-    returning a copy of the array that was already computed.
-    """
-
-    def dataAugmentation(self, intervals):
-        for _ in intervals:
-            yield np.copy(self.array)
-        return
-
-
-class Chromagram19(InputRepresentation):
     def __init__(self, df):
-        features = 2 * (len(NOTENAMES) + len(PITCHCLASSES))
-        super().__init__(df, features=features)
+        super().__init__(df)
 
     def run(self, transposition="P1"):
-        array = np.zeros(self.shape)
+        array = np.zeros(self.shape, dtype=self.dtype)
         for frame, notes in enumerate(self.df.s_notes):
             for idx, note in enumerate(notes):
                 transposedNote = TransposePitch(note, transposition)
@@ -78,8 +33,30 @@ class Chromagram19(InputRepresentation):
                     array[frame, pitchClass + 7] = 1
         return array
 
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            bassPitchName = NOTENAMES[np.argmax(manyhot[:7])]
+            bassPitchClass = np.argmax(manyhot[7:19])
+            chromagramPitchNames = [
+                NOTENAMES[x] for x in np.nonzero(manyhot[19:26])[0]
+            ]
+            chromagramPitchClasses = np.nonzero(manyhot[26:])[0].tolist()
+            ret.append(
+                (
+                    bassPitchName,
+                    bassPitchClass,
+                    tuple(chromagramPitchNames),
+                    tuple(chromagramPitchClasses),
+                )
+            )
+        return ret
 
-class IntervalRepresentation(InputRepresentation):
+
+class IntervalRepresentation(FeatureRepresentation):
     def __init__(self, df):
         features = len(INTERVALCLASSES) + 19
         super().__init__(df, features=features)
@@ -103,9 +80,9 @@ class IntervalRepresentation(InputRepresentation):
         return array
 
 
-class ChromagramInterval(InputRepresentation):
+class ChromagramInterval(FeatureRepresentation):
     def __init__(self, df):
-        features = len(INTERVALCLASSES) + 19*2
+        features = len(INTERVALCLASSES) + 19 * 2
         super().__init__(df, features=features)
 
     def run(self, transposition="P1"):
