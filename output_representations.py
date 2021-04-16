@@ -39,7 +39,7 @@ class OutputRepresentation(FeatureRepresentation):
                 rnIndex = self.classList.index(transposed)
                 array[frame, rnIndex] = 1
             else:
-                array[frame, len(self.classList)] = 1
+                array[frame, -1] = 1
         return array
 
     @classmethod
@@ -67,7 +67,7 @@ class OutputRepresentationTI(FeatureRepresentationTI):
                 rnIndex = self.classList.index(dfFeature)
                 array[frame, rnIndex] = 1
             else:
-                array[frame, len(self.classList)] = 1
+                array[frame, -1] = 1
         return array
 
     @classmethod
@@ -108,61 +108,30 @@ class RomanNumeral76(OutputRepresentationTI):
 class PrimaryDegree22(OutputRepresentationTI):
     classList = DEGREES
     dfFeature = "a_degree1"
-    features = len(DEGREES)
+    features = len(classList)
 
 
 class SecondaryDegree22(OutputRepresentationTI):
     classList = DEGREES
     dfFeature = "a_degree2"
-    features = len(DEGREES)
+    features = len(classList)
 
 
 class LocalKey35(OutputRepresentation):
     classList = KEYS
     dfFeature = "a_localKey"
-    features = len(KEYS)
+    features = len(classList)
     transpositionFn = "TransposeKey"
 
 
-class ChordRoot35(FeatureRepresentation):
+class ChordRoot35(OutputRepresentation):
     classList = SPELLINGS
     dfFeature = "a_root"
-    features = len(SPELLINGS)
+    features = len(classList)
     transpositionFn = "TransposePitch"
 
-    # def run(self):
-    #     array = np.zeros(self.shape)
-    #     for frame, root in enumerate(self.df.a_root):
-    #         if root in SPELLINGS:
-    #             rootIndex = SPELLINGS.index(root)
-    #             array[frame] = rootIndex
-    #         else:
-    #             array[frame] = len(SPELLINGS)
-    #     return array
 
-    # @classmethod
-    # def decode(cls, array):
-    #     if len(array.shape) != 2 or array.shape[1] != cls.features:
-    #         raise IndexError("Strange array shape.")
-    #     ret = [KEYS[np.argmax(onehot)] for onehot in array]
-    #     return ret
-
-
-class ChordQuality15(FeatureRepresentationTI):
+class ChordQuality15(OutputRepresentationTI):
     classList = CHORD_QUALITIES
     dfFeature = "a_quality"
-    features = len(CHORD_QUALITIES)
-
-    # def run(self):
-    #     array = np.zeros(self.shape)
-    #     for frame, quality in enumerate(self.df.a_quality):
-    #         qualityIndex = CHORD_QUALITIES.index(quality)
-    #         array[frame] = qualityIndex
-    #     return array
-
-    # @classmethod
-    # def decode(cls, array):
-    #     if len(array.shape) != 2 or array.shape[1] != cls.features:
-    #         raise IndexError("Strange array shape.")
-    #     ret = [CHORD_QUALITIES[np.argmax(onehot)] for onehot in array]
-    #     return ret
+    features = len(classList)

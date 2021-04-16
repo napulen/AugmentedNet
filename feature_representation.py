@@ -104,6 +104,7 @@ CHORD_QUALITIES = [
     "French augmented sixth chord",
     "Italian augmented sixth chord",
     "minor-augmented tetrachord",
+    "None",
 ]
 
 COMMON_ROMAN_NUMERALS = [

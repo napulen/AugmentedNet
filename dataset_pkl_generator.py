@@ -10,32 +10,8 @@ from common import (
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
 )
-from input_representations import (
-    IntervalRepresentation,
-    micchiChromagram19,
-    pitchClassNoteName,
-    salamiSliceWithHold,
-    compressedSalamiSliceWithHold,
-    micchiChromagram,
-    Chromagram19,
-    ChromagramInterval,
-)
-from output_representations import (
-    bass35,
-    bass12,
-    bass7,
-    bass19,
-    Inversion,
-    inversion,
-    tonicizedKey,
-    degree1,
-    degree2,
-    localKey,
-    chordRoot,
-    chordQuality,
-    harmonicRhythm,
-    RomanNumeral,
-)
+from input_representations import BassChromagram38, BassIntervals63
+from output_representations import RomanNumeral76, LocalKey35, Inversion4
 
 
 def _padToSequenceLength(arr):
