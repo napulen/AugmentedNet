@@ -17,163 +17,152 @@ from feature_representation import (
 import numpy as np
 
 
-class Bass35(FeatureRepresentation):
-    features = len(SPELLINGS)
+class OutputRepresentation(FeatureRepresentation):
+    """Output representations are all one-hot encoded (no many-hots).
+
+    That makes them easier to template.
+    """
+
+    classList = []
+    classesNumber = len(classList)
+    dfFeature = ""
+    features = classesNumber
+    transpositionFn = None
 
     def run(self, transposition="P1"):
         array = np.zeros(self.shape)
-        for frame, bass in enumerate(self.df.a_bass):
-            transposedBass = TransposePitch(bass, transposition)
-            spellingIndex = SPELLINGS.index(transposedBass)
-            array[frame, spellingIndex] = 1
+        for frame, dfFeature in enumerate(self.df[self.dfFeature]):
+            if dfFeature in self.classList:
+                transposed = eval(self.transpositionFn)(
+                    dfFeature, transposition
+                )
+                rnIndex = self.classList.index(transposed)
+                array[frame, rnIndex] = 1
+            else:
+                array[frame, len(self.classList)] = 1
         return array
 
     @classmethod
     def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
+        if len(array.shape) != 2 or array.shape[1] != len(cls.classList):
             raise IndexError("Strange array shape.")
-        ret = [SPELLINGS[np.argmax(onehot)] for onehot in array]
-        return ret
+        return [cls.classList[np.argmax(onehot)] for onehot in array]
 
 
-class Inversion4(FeatureRepresentationTI):
-    features = 4
+class OutputRepresentationTI(FeatureRepresentationTI):
+    """Output representations are all one-hot encoded (no many-hots).
+
+    That makes them easier to template.
+    """
+
+    classList = []
+    classesNumber = len(classList)
+    dfFeature = ""
+    features = classesNumber
 
     def run(self):
         array = np.zeros(self.shape)
-        for frame, inversion in enumerate(self.df.a_inversion):
+        for frame, dfFeature in enumerate(self.df[self.dfFeature]):
+            if dfFeature in self.classList:
+                rnIndex = self.classList.index(dfFeature)
+                array[frame, rnIndex] = 1
+            else:
+                array[frame, len(self.classList)] = 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != len(cls.classList):
+            raise IndexError("Strange array shape.")
+        return [cls.classList[np.argmax(onehot)] for onehot in array]
+
+
+class Bass35(OutputRepresentation):
+    classList = SPELLINGS
+    dfFeature = "a_bass"
+    features = len(classList)
+    transpositionFn = "TransposePitch"
+
+
+class Inversion4(OutputRepresentationTI):
+    classList = list(range(4))
+    dfFeature = "a_inversion"
+    features = len(classList)
+
+    def run(self):
+        array = np.zeros(self.shape)
+        for frame, inversion in enumerate(self.df[self.dfFeature]):
             if inversion > 3:
                 # Any chord beyond sevenths is encoded as "root" position
                 inversion = 0
-            array[frame] = inversion
+            array[frame, int(inversion)] = 1
         return array
 
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [np.argmax(onehot) for onehot in array]
-        return ret
+
+class RomanNumeral76(OutputRepresentationTI):
+    classList = COMMON_ROMAN_NUMERALS
+    dfFeature = "a_romanNumeral"
+    features = len(classList)
 
 
-class RomanNumeral76(FeatureRepresentationTI):
-    features = len(COMMON_ROMAN_NUMERALS) + 1
-
-    def run(self):
-        array = np.zeros(self.shape)
-        for frame, romanNumeral in enumerate(self.df.a_romanNumeral):
-            if romanNumeral in COMMON_ROMAN_NUMERALS:
-                rnIndex = COMMON_ROMAN_NUMERALS.index(romanNumeral)
-                array[frame, rnIndex] = 1
-            else:
-                array[frame, len(COMMON_ROMAN_NUMERALS)] = 1
-        return array
-
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [COMMON_ROMAN_NUMERALS[np.argmax(onehot)] for onehot in array]
-        return ret
+class PrimaryDegree22(OutputRepresentationTI):
+    classList = DEGREES
+    dfFeature = "a_degree1"
+    features = len(DEGREES)
 
 
-class PrimaryDegree22(FeatureRepresentationTI):
-    features = len(DEGREES) + 1
-
-    def run(self):
-        array = np.zeros(self.shape)
-        for frame, degree1 in enumerate(self.df.a_degree1):
-            if degree1 in DEGREES:
-                degreeIndex = DEGREES.index(degree1)
-                array[frame] = degreeIndex
-            else:
-                array[frame] = len(DEGREES)
-        return array
-
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [DEGREES[np.argmax(onehot)] for onehot in array]
-        return ret
+class SecondaryDegree22(OutputRepresentationTI):
+    classList = DEGREES
+    dfFeature = "a_degree2"
+    features = len(DEGREES)
 
 
-class SecondaryDegree22(FeatureRepresentationTI):
-    features = len(DEGREES) + 1
-
-    def run(self):
-        array = np.zeros(self.shape)
-        for frame, degree2 in enumerate(self.df.a_degree2):
-            if degree2 in DEGREES:
-                degreeIndex = DEGREES.index(degree2)
-                array[frame] = degreeIndex
-            else:
-                array[frame] = len(DEGREES)
-        return array
-
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [DEGREES[np.argmax(onehot)] for onehot in array]
-        return ret
-
-
-class LocalKey35(FeatureRepresentation):
+class LocalKey35(OutputRepresentation):
+    classList = KEYS
+    dfFeature = "a_localKey"
     features = len(KEYS)
-
-    def run(self):
-        array = np.zeros(self.shape)
-        for frame, localKey in enumerate(self.df.a_localKey):
-            if localKey in KEYS:
-                degreeIndex = KEYS.index(localKey)
-                array[frame] = degreeIndex
-            else:
-                array[frame] = len(KEYS)
-        return array
-
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [KEYS[np.argmax(onehot)] for onehot in array]
-        return ret
+    transpositionFn = "TransposeKey"
 
 
 class ChordRoot35(FeatureRepresentation):
+    classList = SPELLINGS
+    dfFeature = "a_root"
     features = len(SPELLINGS)
+    transpositionFn = "TransposePitch"
 
-    def run(self):
-        array = np.zeros(self.shape)
-        for frame, root in enumerate(self.df.a_root):
-            if root in SPELLINGS:
-                rootIndex = SPELLINGS.index(root)
-                array[frame] = rootIndex
-            else:
-                array[frame] = len(SPELLINGS)
-        return array
+    # def run(self):
+    #     array = np.zeros(self.shape)
+    #     for frame, root in enumerate(self.df.a_root):
+    #         if root in SPELLINGS:
+    #             rootIndex = SPELLINGS.index(root)
+    #             array[frame] = rootIndex
+    #         else:
+    #             array[frame] = len(SPELLINGS)
+    #     return array
 
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [KEYS[np.argmax(onehot)] for onehot in array]
-        return ret
+    # @classmethod
+    # def decode(cls, array):
+    #     if len(array.shape) != 2 or array.shape[1] != cls.features:
+    #         raise IndexError("Strange array shape.")
+    #     ret = [KEYS[np.argmax(onehot)] for onehot in array]
+    #     return ret
 
 
-class ChordQuality15(FeatureRepresentation):
+class ChordQuality15(FeatureRepresentationTI):
+    classList = CHORD_QUALITIES
+    dfFeature = "a_quality"
     features = len(CHORD_QUALITIES)
 
-    def run(self):
-        array = np.zeros(self.shape)
-        for frame, quality in enumerate(self.df.a_quality):
-            qualityIndex = CHORD_QUALITIES.index(quality)
-            array[frame] = qualityIndex
-        return array
+    # def run(self):
+    #     array = np.zeros(self.shape)
+    #     for frame, quality in enumerate(self.df.a_quality):
+    #         qualityIndex = CHORD_QUALITIES.index(quality)
+    #         array[frame] = qualityIndex
+    #     return array
 
-    @classmethod
-    def decode(cls, array):
-        if len(array.shape) != 2 or array.shape[1] != cls.features:
-            raise IndexError("Strange array shape.")
-        ret = [CHORD_QUALITIES[np.argmax(onehot)] for onehot in array]
-        return ret
+    # @classmethod
+    # def decode(cls, array):
+    #     if len(array.shape) != 2 or array.shape[1] != cls.features:
+    #         raise IndexError("Strange array shape.")
+    #     ret = [CHORD_QUALITIES[np.argmax(onehot)] for onehot in array]
+    #     return ret

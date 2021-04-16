@@ -182,6 +182,7 @@ COMMON_ROMAN_NUMERALS = [
     "vii",
     "V/v",
     "II",
+    "None",
 ]
 
 INTERVAL_ENHARMONICS = {
