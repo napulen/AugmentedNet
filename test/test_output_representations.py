@@ -569,7 +569,7 @@ def _load_dfgt(csvGT):
 def _plot_array(arr):
     import matplotlib.pyplot as plt
 
-    plt.pcolor(arr.T, edgecolors="k", linewidth=2)
+    plt.pcolor(arr.T, edgecolors="k", linewidth=1, cmap="tab20")
     plt.show()
 
 
@@ -581,6 +581,7 @@ class TestBass35(unittest.TestCase):
     clas = Bass35
     encodingGT = haydnBass35GT
     dfFeature = "a_bass"
+    transpositions = ["m2", "M6", "P5", "d7"]
 
     def setUp(self):
         self.df = _load_dfgt(haydn)
@@ -603,6 +604,18 @@ class TestBass35(unittest.TestCase):
         ):
             with self.subTest(timestep=timestep):
                 self.assertEqual(gt, x)
+
+    # def test_data_augmentation(self):
+    #     rep = self.clas(self.df)
+    #     daArray = rep.array
+    #     daGT = np.zeros(rep.shape)
+    #     for idx, da in enumerate(
+    #         rep.dataAugmentation(intervals=self.transpositions)
+    #     ):
+    #         daArray += (idx + 2) * da
+    #     for timestep, (gt, x) in enumerate(zip(daArray, daGT)):
+    #         with self.subTest(timestep=timestep):
+    #             self.assertEqual(gt.tolist(), x.tolist())
 
 
 class TestInversion4(TestBass35):

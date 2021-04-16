@@ -32,10 +32,10 @@ class OutputRepresentation(FeatureRepresentation):
     def run(self, transposition="P1"):
         array = np.zeros(self.shape)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
-            if dfFeature in self.classList:
-                transposed = eval(self.transpositionFn)(
-                    dfFeature, transposition
-                )
+            transposed = eval(self.transpositionFn)(
+                dfFeature, transposition
+            )
+            if transposed in self.classList:
                 rnIndex = self.classList.index(transposed)
                 array[frame, rnIndex] = 1
             else:
