@@ -80,7 +80,7 @@ class BassIntervals63(FeatureRepresentation):
     features = len(INTERVALCLASSES) + 19
 
     def run(self, transposition="P1"):
-        array = np.zeros(self.shape)
+        array = np.zeros(self.shape, dtype=self.dtype)
         for frame, r in enumerate(self.df.iterrows()):
             _, row = r
             bass = row.s_notes[0]
@@ -122,7 +122,7 @@ class ChromagramInterval(FeatureRepresentation):
     features = 19 + 19 + 44
 
     def run(self, transposition="P1"):
-        array = np.zeros(self.shape)
+        array = np.zeros(self.shape, dtype=self.dtype)
         for frame, r in enumerate(self.df.iterrows()):
             _, row = r
             intervals = row.s_intervals
