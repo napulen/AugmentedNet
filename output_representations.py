@@ -64,9 +64,9 @@ class RomanNumeral76(FeatureRepresentationTI):
         for frame, romanNumeral in enumerate(self.df.a_romanNumeral):
             if romanNumeral in COMMON_ROMAN_NUMERALS:
                 rnIndex = COMMON_ROMAN_NUMERALS.index(romanNumeral)
-                array[frame] = rnIndex
+                array[frame, rnIndex] = 1
             else:
-                array[frame] = len(COMMON_ROMAN_NUMERALS)
+                array[frame, len(COMMON_ROMAN_NUMERALS)] = 1
         return array
 
     @classmethod
