@@ -9,6 +9,8 @@ from common import (
     DATASETDIR,
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
+    INPUT_REPRESENTATION,
+    OUTPUT_REPRESENTATION
 )
 from input_representations import BassChromagram38, BassIntervals63
 from output_representations import RomanNumeral76, LocalKey35, Inversion4
@@ -55,7 +57,7 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
             ]
             filteredIndex = len(df.index)
             print(f"\t({originalIndex}, {filteredIndex})")
-        inputLayer = Chromagram19(df)
+        inputLayer = eval(INPUT_REPRESENTATION)(df)
         Xi = inputLayer.array
         Xi = _padToSequenceLength(Xi)
         if dataAugmentation and row.split == "training":
@@ -63,7 +65,7 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
                 INTERVAL_TRANSPOSITIONS
             ):
                 Xi = np.concatenate((Xi, _padToSequenceLength(transposition)))
-        outputLayer = RomanNumeral(df)
+        outputLayer = eval(OUTPUT_REPRESENTATION)(df)
         yi = outputLayer.array
         yi = _padToSequenceLength(yi)
         # dataAug = list(inv.dataAugmentation(INTERVAL_TRANSPOSITIONS))
@@ -81,4 +83,4 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
 
 
 if __name__ == "__main__":
-    generateDataset(synthetic=True, dataAugmentation=True, collection="bps")
+    generateDataset(synthetic=False, dataAugmentation=True, collection="bps")
