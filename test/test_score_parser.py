@@ -235,6 +235,9 @@ def _load_dfgt(csvGT):
 
 
 class TestScoreParser(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+
     def test_octave_initial_dataframe(self):
         dfGT = _load_dfgt(octaveTestInitialDataFrame)
         s = score_parser._m21Parse(octaveTest)

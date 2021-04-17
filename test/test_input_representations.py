@@ -434,6 +434,9 @@ def _save(arr):
 
 class TestBassChromagram19(unittest.TestCase):
     def setUp(self):
+        self.maxDiff = None
+
+    def setUp(self):
         self.df = _load_dfgt(haydn)
         self.timesteps = len(self.df.index)
         self.transpositions = ["m2", "M6", "P5", "d7"]
@@ -472,6 +475,7 @@ class TestBassChromagram19(unittest.TestCase):
 
 class TestIntervalRepresentation(unittest.TestCase):
     def setUp(self):
+        self.maxDiff = None
         self.df = _load_dfgt(haydn)
         self.timesteps = len(self.df.index)
         self.transpositions = ["m2", "M6", "P5", "d7"]

@@ -1797,6 +1797,9 @@ def _annotationScoreHashes():
 
 
 class TestDataset(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+
     def test_dataset_and_splits_length(self):
         """ This one checks there are no duplicate entries. """
         train, val, test = DATASPLITS.values()
@@ -1813,7 +1816,6 @@ class TestDataset(unittest.TestCase):
 
     def test_dataset_nicknames(self):
         """Checks that the identifiers ('nicknames') haven't changed. """
-        self.maxDiff = 20000
         nicknamesGT = tuple(sorted(hashes.keys()))
         nicknames = tuple(sorted(ANNOTATIONSCOREDUPLES.keys()))
         self.assertTupleEqual(nicknamesGT, nicknames)

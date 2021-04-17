@@ -212,6 +212,9 @@ def _load_dfgt(csvGT):
 
 
 class TestAnnotationParser(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+
     def test_initial_dataframe(self):
         dfGT = _load_dfgt(multipleAnnotationsInitialDataFrame)
         s = annotation_parser._m21Parse(multipleAnnotations)

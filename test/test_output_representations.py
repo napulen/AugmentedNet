@@ -584,6 +584,7 @@ class TestBass35(unittest.TestCase):
     transpositions = ["m2", "M6", "P5", "d7"]
 
     def setUp(self):
+        self.maxDiff = None
         self.df = _load_dfgt(haydn)
         self.timesteps = len(self.df.index)
 

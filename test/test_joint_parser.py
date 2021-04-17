@@ -670,8 +670,10 @@ def _load_dfgt(csvGT):
 
 
 class TestScoreParser(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+
     def test_haydn_annotation_and_score(self):
-        self.maxDiff = 2000
         dfGT = _load_dfgt(haydnOp20no4iDataFrameGT)
         df = joint_parser.parseAnnotationAndScore(
             haydnOp20no4iAnnotation, haydnOp20no4iScore
