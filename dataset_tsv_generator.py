@@ -9,6 +9,7 @@ from common import (
     DATASETSUMMARYFILE,
 )
 from joint_parser import parseAnnotationAndScore, parseAnnotationAndAnnotation
+from argparse import ArgumentParser
 
 
 def generateDataset(synthetic=False):
@@ -50,4 +51,13 @@ def generateDataset(synthetic=False):
 
 
 if __name__ == "__main__":
-    generateDataset(synthetic=False)
+    parser = ArgumentParser(
+        description="Generate tsv files for every (annotation, score) pair."
+    )
+    parser.add_argument(
+        "--synthetic",
+        action="store_true",
+        help="Use (annotation, annotation) pairs, ignore the real scores.",
+    )
+    args = parser.parse_args()
+    generateDataset(synthetic=args.synthetic)
