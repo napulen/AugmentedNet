@@ -20,7 +20,7 @@ INTERVALCLASSES = [
     for specific in ["dd", "d", "m", "M", "A", "AA"]
 ] + [
     f"{specific}{generic}"
-    for generic in [1, 4, 5, 8]
+    for generic in [1, 4, 5]
     for specific in ["dd", "d", "P", "A", "AA"]
 ]
 
