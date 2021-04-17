@@ -10,11 +10,12 @@ from common import (
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
     INPUT_REPRESENTATION,
-    OUTPUT_REPRESENTATION
+    OUTPUT_REPRESENTATION,
 )
 from feature_representation import KEYS, INTERVALCLASSES
 from input_representations import BassChromagram38, BassIntervals58
 from output_representations import RomanNumeral76, LocalKey35, Inversion4
+from argparse import ArgumentParser
 
 
 def _padToSequenceLength(arr):
@@ -28,7 +29,6 @@ def _padToSequenceLength(arr):
 
 
 def _getTranspositions(df):
-    # return INTERVALCLASSES
     localKeys = df.a_localKey.to_list()
     localKeys = set(localKeys)
     ret = []
@@ -77,19 +77,15 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
         Xi = _padToSequenceLength(Xi)
         if dataAugmentation and row.split == "training":
             transpositions = _getTranspositions(df)
-            print('\t', transpositions)
-            for transposition in inputLayer.dataAugmentation(
-                transpositions
-            ):
+            print("\t", transpositions)
+            for transposition in inputLayer.dataAugmentation(transpositions):
                 Xi = np.concatenate((Xi, _padToSequenceLength(transposition)))
         outputLayer = eval(OUTPUT_REPRESENTATION)(df)
         yi = outputLayer.array
         yi = _padToSequenceLength(yi)
         # dataAug = list(inv.dataAugmentation(INTERVAL_TRANSPOSITIONS))
         if dataAugmentation and row.split == "training":
-            for transposition in outputLayer.dataAugmentation(
-                transpositions
-            ):
+            for transposition in outputLayer.dataAugmentation(transpositions):
                 yi = np.concatenate((yi, _padToSequenceLength(transposition)))
         [splits[row.split]["X"].append(sequence) for sequence in Xi]
         [splits[row.split]["y"].append(sequence) for sequence in yi]
@@ -100,4 +96,27 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
 
 
 if __name__ == "__main__":
-    generateDataset(synthetic=False, dataAugmentation=True, collection="bps")
+    parser = ArgumentParser(
+        description="Generate pkl files for every tsv training example."
+    )
+    parser.add_argument(
+        "--synthetic",
+        action="store_true",
+        help="Search for a synthetic dataset, not one from real scores.",
+    )
+    parser.add_argument(
+        "--dataAugmentation",
+        action="store_true",
+        help="Perform data augmentation on the training set.",
+    )
+    parser.add_argument(
+        "--collection",
+        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
+        help="Include files from a specific corpus/collection.",
+    )
+    args = parser.parse_args()
+    generateDataset(
+        synthetic=args.synthetic,
+        dataAugmentation=args.dataAugmentation,
+        collection=args.collection,
+    )
