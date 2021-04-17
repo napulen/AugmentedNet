@@ -73,7 +73,7 @@ class BassChromagram38(FeatureRepresentation):
         return ret
 
 
-class BassIntervals63(FeatureRepresentation):
+class BassIntervals58(FeatureRepresentation):
     features = len(INTERVALCLASSES) + 19
 
     def run(self, transposition="P1"):

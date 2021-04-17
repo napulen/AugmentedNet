@@ -2,7 +2,7 @@ import unittest
 import io
 import pandas as pd
 import numpy as np
-from input_representations import BassChromagram38, BassIntervals63
+from input_representations import BassChromagram38, BassIntervals58
 from joint_parser import J_LISTTYPE_COLUMNS
 
 haydn = """
@@ -209,7 +209,7 @@ haydnBassChromagram38DecodedGT = [
     ("E", 4, ("E", "G", "B"), (4, 8, 11)),
 ]
 
-haydnBassIntervals63GT = [
+haydnBassIntervals58GT = [
     "0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0".split(),
     "0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0".split(),
     "0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0".split(),
@@ -277,7 +277,7 @@ haydnBassIntervals63GT = [
 ]
 
 
-haydnBassIntervals63DA = [
+haydnBassIntervals58DA = [
     "0 0 4 3 5 1 2 0 0 0 0 4 0 8 0 0 1 2 0 0 0 0 0 0 0 0 0 15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 0 0 0 0 0 0 0 0 0 15 0 0".split(),
     "0 0 4 3 5 1 2 0 0 0 0 4 0 8 0 0 1 2 0 0 0 0 0 0 0 0 0 15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 0 0 0 0 0 0 0 0 0 15 0 0".split(),
     "0 0 4 3 5 1 2 0 0 0 0 4 0 8 0 0 1 2 0 0 0 0 0 0 0 0 0 15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 0 0".split(),
@@ -471,7 +471,7 @@ class TestBassChromagram19(unittest.TestCase):
                 self.assertEqual(gt.tolist(), x.tolist())
 
 
-class TestBassIntervals63(unittest.TestCase):
+class TestBassIntervals58(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
         self.df = _load_dfgt(haydn)
@@ -479,8 +479,8 @@ class TestBassIntervals63(unittest.TestCase):
         self.transpositions = ["m2", "M6", "P5", "d7"]
 
     def test_encoding(self):
-        encoding = BassIntervals63(self.df).array
-        encodingGT = np.array(haydnBassIntervals63GT, dtype="i1")
+        encoding = BassIntervals58(self.df).array
+        encodingGT = np.array(haydnBassIntervals58GT, dtype="i1")
         for timestep in range(self.timesteps):
             with self.subTest(timestep=timestep):
                 ar = np.nonzero(encoding[timestep])
@@ -488,16 +488,16 @@ class TestBassIntervals63(unittest.TestCase):
                 self.assertEqual(tuple(ar[0]), tuple(arGT[0]))
 
     def test_decoding(self):
-        encoding = BassIntervals63(self.df).array
-        decoded = BassIntervals63.decode(encoding)
+        encoding = BassIntervals58(self.df).array
+        decoded = BassIntervals58.decode(encoding)
         for timestep, (gt, x) in enumerate(zip(self.df.s_intervals, decoded)):
             with self.subTest(timestep=timestep):
                 self.assertEqual(set(gt), set(x[2]))
 
     def test_data_augmentation(self):
-        bi63 = BassIntervals63(self.df)
+        bi63 = BassIntervals58(self.df)
         daArray = bi63.array
-        daGT = np.array(haydnBassIntervals63DA, dtype="i8")
+        daGT = np.array(haydnBassIntervals58DA, dtype="i8")
         for idx, da in enumerate(
             bi63.dataAugmentation(intervals=self.transpositions)
         ):

@@ -13,7 +13,7 @@ from common import (
     OUTPUT_REPRESENTATION
 )
 from feature_representation import KEYS, INTERVALCLASSES
-from input_representations import BassChromagram38, BassIntervals63
+from input_representations import BassChromagram38, BassIntervals58
 from output_representations import RomanNumeral76, LocalKey35, Inversion4
 
 
