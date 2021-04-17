@@ -3,7 +3,7 @@ import os
 RANDOMSEED = 1337
 
 INPUT_REPRESENTATION = "BassChromagram38"
-OUTPUT_REPRESENTATION = "RomanNumeral76"
+OUTPUT_REPRESENTATION = "Inversion4"
 
 # Number of decimals to the right of the decimal point
 FLOATSCALE = 4
@@ -19,30 +19,6 @@ BATCHSIZE = 32
 DATASETDIR = "dataset"
 SYNTHDATASETDIR = "dataset-synth"
 DATASETSUMMARYFILE = "dataset_summary.tsv"
-
-INTERVAL_TRANSPOSITIONS = [
-    # "A1",
-    "m2",
-    "M2",
-    # "A2",
-    "m3",
-    "M3",
-    # "D4",
-    # "A3",
-    "P4",
-    "A4",
-    "D5",
-    "P5",
-    # "D6",
-    # "A5",
-    "m6",
-    "M6",
-    # "D7",
-    # "A6",
-    "m7",
-    "M7",
-    # "D8",
-]
 
 ANNOTATIONSCOREDUPLES = {
     "bps-01-op002-no1-1": (

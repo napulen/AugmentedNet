@@ -1,12 +1,9 @@
 from cache import TransposeKey, TransposePitch, m21Key, m21Pitch
-from common import INTERVAL_TRANSPOSITIONS
 from feature_representation import (
     CHORD_QUALITIES,
     COMMON_ROMAN_NUMERALS,
     FeatureRepresentation,
     FeatureRepresentationTI,
-    NOTENAMES,
-    PITCHCLASSES,
     SPELLINGS,
     COMMON_ROMAN_NUMERALS,
     DEGREES,

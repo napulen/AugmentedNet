@@ -1,14 +1,11 @@
-from common import INTERVAL_TRANSPOSITIONS
-from cache import TransposeKey, TransposePitch, m21Pitch, m21Key
+from cache import TransposePitch, m21Pitch, m21Key
 from feature_representation import (
     PITCHCLASSES,
     NOTENAMES,
     INTERVALCLASSES,
-    SPELLINGS,
     FeatureRepresentation,
 )
 import numpy as np
-import music21
 
 NOTENAMEDEFAULTCLASS = {
     "C": 0,
