@@ -2,7 +2,7 @@ import os
 
 RANDOMSEED = 1337
 
-INPUT_REPRESENTATION = "BassChromagram38"
+INPUT_REPRESENTATION = "BassIntervals58"
 OUTPUT_REPRESENTATION = "Inversion4"
 
 # Number of decimals to the right of the decimal point
