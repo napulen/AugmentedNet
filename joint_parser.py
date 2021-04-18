@@ -63,6 +63,31 @@ def _qualityMetric(df):
     return df
 
 
+def _inversionMetric(df):
+    df["incongruentBass"] = np.nan
+    annotationIndexes = df[df.a_isOnset].a_pitchNames.index.to_list()
+    annotationBasses = df[df.a_isOnset].a_bass.to_list()
+    annotationIndexes.append("end")
+    annotationRanges = [
+        (
+            annotationIndexes[i],
+            annotationIndexes[i + 1],
+            annotationBasses[i],
+        )
+        for i in range(len(annotationBasses))
+    ]
+    for start, end, annotationBass in annotationRanges:
+        if end == "end":
+            slices = df[start:]
+        else:
+            slices = df[start:end].iloc[:-1]
+        scoreBasses = [re.sub(r"\d", "", c[0]) for c in slices.s_notes]
+        counts = scoreBasses.count(annotationBass)
+        inversionScore = 1.0 - counts / len(scoreBasses)
+        df.loc[slices.index, "incongruentBass"] = round(inversionScore, 2)
+    return df
+
+
 def parseAnnotationAndScore(a, s, qualityAssessment=True):
     """Process a score an RomanText file simultaneously.
 
@@ -84,6 +109,7 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
+        jointdf = _inversionMetric(jointdf)
     return jointdf
 
 
