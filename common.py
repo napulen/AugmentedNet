@@ -2,8 +2,10 @@ import os
 
 RANDOMSEED = 1337
 
-INPUT_REPRESENTATION = "BassIntervals58"
-OUTPUT_REPRESENTATION = "Inversion4"
+EPOCHS = 20
+
+INPUT_REPRESENTATION = "BassChromagram38"
+OUTPUT_REPRESENTATION = "RomanNumeral76"
 
 # Number of decimals to the right of the decimal point
 FLOATSCALE = 4

@@ -1,6 +1,5 @@
 from music21.key import Key
 from music21.pitch import Pitch
-from music21.interval import Interval
 
 _transposeKey = {}
 _transposePitch = {}
@@ -31,14 +30,14 @@ def TransposePitch(pitch, interval):
 def m21Key(key):
     if key in _key:
         return _key[key]
-    m21Key = Key(key)
-    _key[key] = m21Key
-    return m21Key
+    keyObj = Key(key)
+    _key[key] = keyObj
+    return keyObj
 
 
 def m21Pitch(pitch):
     if pitch in _pitch:
         return _pitch[pitch]
-    m21Pitch = Pitch(pitch)
-    _pitch[pitch] = m21Pitch
-    return m21Pitch
+    pitchObj = Pitch(pitch)
+    _pitch[pitch] = pitchObj
+    return pitchObj
