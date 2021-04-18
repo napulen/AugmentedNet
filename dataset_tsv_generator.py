@@ -21,6 +21,7 @@ def generateDataset(synthetic=False):
         "split": [],
         "misalignmentMean": [],
         "qualityMean": [],
+        "incongruentBassMean": [],
     }
     datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
     Path(datasetDir).mkdir(exist_ok=True)
@@ -45,6 +46,8 @@ def generateDataset(synthetic=False):
             statsdict["misalignmentMean"].append(misalignment)
             qualitySquaredSum = df.qualitySquaredSum.mean().round(2)
             statsdict["qualityMean"].append(qualitySquaredSum)
+            incongruentBass = df.incongruentBass.mean().round(2)
+            statsdict["incongruentBassMean"].append(incongruentBass)
             df = pd.DataFrame(statsdict)
             df.to_csv(os.path.join(datasetDir, DATASETSUMMARYFILE), sep="\t")
     return df
