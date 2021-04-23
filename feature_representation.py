@@ -222,7 +222,7 @@ class FeatureRepresentation(object):
         self.dtype = "i8"
         self.array = self.run()
 
-    def run(self, transposeByInterval=None):
+    def run(self, tranposition=None):
         array = np.zeros(self.shape)
         return array
 
