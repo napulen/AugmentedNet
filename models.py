@@ -67,9 +67,9 @@ def micchi2020(inputFeatures, outputClasses):
             )(y)
             y = layers.Activation("relu")(y)
             y = layers.BatchNormalization()(y)
-            y = layers.MaxPooling1D(s, s, padding="same", data_format="channels_last")(
-                y
-            )
+            y = layers.MaxPooling1D(
+                s, s, padding="same", data_format="channels_last"
+            )(y)
         return y
 
     # def MultiTaskLayer(x, derive_root, input_type):
@@ -109,7 +109,9 @@ def micchi2020(inputFeatures, outputClasses):
     # x = layers.Lambda(lambda t: __import__('tensorflow').multiply(*t), name='apply_mask')((x, mask))
     # x = layers.Masking()(x)  # is this useless?
 
-    x = layers.Bidirectional(layers.GRU(64, return_sequences=True, dropout=0.3))(x)
+    x = layers.Bidirectional(
+        layers.GRU(64, return_sequences=True, dropout=0.3)
+    )(x)
 
     # I don't think we need the TimeDistributed
     # https://stackoverflow.com/questions/47305618

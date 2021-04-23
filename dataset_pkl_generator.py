@@ -60,7 +60,9 @@ def generateDataset(
         exit()
     datasetSummary = pd.read_csv(summaryFile, sep="\t")
     if collection:
-        datasetSummary = datasetSummary[datasetSummary.collection == collection]
+        datasetSummary = datasetSummary[
+            datasetSummary.collection == collection
+        ]
     for row in datasetSummary.itertuples():
         print(row.split, row.file)
         tsvlocation = os.path.join(datasetDir, row.split, row.file)
