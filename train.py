@@ -19,9 +19,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import models
-from argparse import ArgumentParser
+import args
 
 tf.random.set_seed(RANDOMSEED)
+
+import mlflow
+import mlflow.tensorflow
 
 
 def tensorflowGPUHack():
@@ -65,35 +68,35 @@ def train():
 
     print(model.summary())
     model.fit(
-        Xda_train,
-        yda_train,
+        X_train,
+        y_train,
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,
         validation_data=(X_val, y_val),
     )
 
-    tl = keras.Sequential([
-        keras.Input(shape=(SEQUENCELENGTH, X_train.shape[2])),
-        model,
-        layers.Dense(32),
-        layers.Dense(y_train.shape[2])
-    ])
+    # tl = keras.Sequential([
+    #     keras.Input(shape=(SEQUENCELENGTH, X_train.shape[2])),
+    #     model,
+    #     layers.Dense(32),
+    #     layers.Dense(y_train.shape[2])
+    # ])
 
-    model.trainable = False
+    # model.trainable = False
 
-    tl.compile(
-        optimizer="adam",
-        loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-        metrics=["accuracy"],
-    )
-    tl.fit(
-        X_train,
-        y_train,
-        epochs=EPOCHS,
-        batch_size=BATCHSIZE,
-        validation_data=(X_val, y_val)
-    )
+    # tl.compile(
+    #     optimizer="adam",
+    #     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    #     metrics=["accuracy"],
+    # )
+    # tl.fit(
+    #     X_train,
+    #     y_train,
+    #     epochs=EPOCHS,
+    #     batch_size=BATCHSIZE,
+    #     validation_data=(X_val, y_val)
+    # )
 
 
 if __name__ == "__main__":
@@ -112,5 +115,7 @@ if __name__ == "__main__":
     else:
         # Ideally, this shouldn't be necessary; but this is not an ideal world
         tensorflowGPUHack()
+
+    mlflow.tensorflow.autolog()
 
     train()
