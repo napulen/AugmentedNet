@@ -119,7 +119,9 @@ def makeRntxtHeader(metadata):
     movementName = metadata.movementName
     header = f"Composer: {composer}\n"
     header += f"Title: {title} - {movementNumber}: {movementName}\n"
-    header += f"Analyst: Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC\n"
+    header += (
+        f"Analyst: Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC\n"
+    )
     header += f"Proofreader: Automated translation by Néstor Nápoles López\n"
     return header
 

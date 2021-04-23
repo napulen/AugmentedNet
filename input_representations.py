@@ -80,13 +80,9 @@ class Chromagram19(FeatureRepresentation):
             raise IndexError("Strange array shape.")
         ret = []
         for manyhot in array:
-            chromagramPitchNames = [
-                NOTENAMES[x] for x in np.nonzero(manyhot[:7])[0]
-            ]
+            chromagramPitchNames = [NOTENAMES[x] for x in np.nonzero(manyhot[:7])[0]]
             chromagramPitchClasses = np.nonzero(manyhot[7:])[0].tolist()
-            ret.append(
-                (tuple(chromagramPitchNames), tuple(chromagramPitchClasses))
-            )
+            ret.append((tuple(chromagramPitchNames), tuple(chromagramPitchClasses)))
         return ret
 
 
@@ -156,13 +152,10 @@ class BassChromagramIntervals77(FeatureRepresentation):
 
     @classmethod
     def decode(cls, array):
-        bassChroma38 = BassChromagram38.decode(
-            array[:, : BassChromagram38.features]
-        )
+        bassChroma38 = BassChromagram38.decode(array[:, : BassChromagram38.features])
         intervals39 = Intervals39.decode(array[:, BassChromagram38.features :])
         return [
-            (bc[0], bc[1], bc[2], bc[3], i)
-            for bc, i in zip(bassChroma38, intervals39)
+            (bc[0], bc[1], bc[2], bc[3], i) for bc, i in zip(bassChroma38, intervals39)
         ]
 
 

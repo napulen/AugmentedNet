@@ -42,14 +42,10 @@ def _qualityMetric(df):
         annotationNotes = rows.iloc[0].a_pitchNames
         missingChordTones = set(annotationNotes) - set(scoreNotes)
         nonChordTones = [n for n in scoreNotes if n not in annotationNotes]
-        missingChordTonesScore = len(missingChordTones) / len(
-            set(annotationNotes)
-        )
+        missingChordTonesScore = len(missingChordTones) / len(set(annotationNotes))
         nonChordTonesScore = len(nonChordTones) / len(scoreNotes)
         squaredSumScore = (missingChordTonesScore + nonChordTonesScore) ** 2
-        df.loc[df.a_annotationNumber == n, "qualityScoreNotes"] = str(
-            scoreNotes
-        )
+        df.loc[df.a_annotationNumber == n, "qualityScoreNotes"] = str(scoreNotes)
         df.loc[df.a_annotationNumber == n, "qualityNonChordTones"] = round(
             nonChordTonesScore, 2
         )

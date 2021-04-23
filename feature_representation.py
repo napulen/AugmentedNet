@@ -9,9 +9,7 @@ PITCHCLASSES = [pc for pc in range(12)]
 ACCIDENTALS = ("--", "-", "", "#", "##")
 
 SPELLINGS = [
-    f"{letter}{accidental}"
-    for letter in NOTENAMES
-    for accidental in ACCIDENTALS
+    f"{letter}{accidental}" for letter in NOTENAMES for accidental in ACCIDENTALS
 ]
 
 INTERVALCLASSES = [
