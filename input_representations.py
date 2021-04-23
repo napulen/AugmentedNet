@@ -164,3 +164,13 @@ class BassChromagramIntervals77(FeatureRepresentation):
             (bc[0], bc[1], bc[2], bc[3], i)
             for bc, i in zip(bassChroma38, intervals39)
         ]
+
+
+available_representations = {
+    "Bass19": Bass19,
+    "Chromagram19": Chromagram19,
+    "Intervals39": Intervals39,
+    "BassChromagram38": BassChromagram38,
+    "BassIntervals58": BassIntervals58,
+    "BassChromagramIntervals77": BassChromagramIntervals77,
+}

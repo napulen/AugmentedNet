@@ -132,3 +132,14 @@ class ChordQuality15(OutputRepresentationTI):
     classList = CHORD_QUALITIES
     dfFeature = "a_quality"
     features = len(classList)
+
+available_representations = {
+    "Bass35": Bass35,
+    "Inversion4": Inversion4,
+    "RomanNumeral76": RomanNumeral76,
+    "PrimaryDegree22": PrimaryDegree22,
+    "SecondaryDegree2": SecondaryDegree22,
+    "LocalKey35": LocalKey35,
+    "ChordRoot35": ChordRoot35,
+    "ChordQuality15": ChordQuality15
+}

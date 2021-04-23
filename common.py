@@ -1,22 +1,9 @@
-import os
-
-RANDOMSEED = 1337
-
-EPOCHS = 20
-
-INPUT_REPRESENTATION = "BassChromagram38"
-OUTPUT_REPRESENTATION = "RomanNumeral76"
-
 # Number of decimals to the right of the decimal point
 FLOATSCALE = 4
 
 # Sixteenth notes
 FRAMEBASENOTE = 16
 FIXEDOFFSET = round(4.0 / FRAMEBASENOTE, FLOATSCALE)
-
-SEQUENCELENGTH = 64
-
-BATCHSIZE = 32
 
 DATASETDIR = "dataset"
 SYNTHDATASETDIR = "dataset-synth"

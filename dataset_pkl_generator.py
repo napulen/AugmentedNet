@@ -5,26 +5,25 @@ from pathlib import Path
 from joint_parser import J_LISTTYPE_COLUMNS
 from cache import TransposeKey
 from common import (
-    SEQUENCELENGTH,
     DATASETDIR,
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
-    INPUT_REPRESENTATION,
-    OUTPUT_REPRESENTATION,
 )
 from feature_representation import KEYS, INTERVALCLASSES
-from input_representations import BassChromagram38, BassIntervals58
-from output_representations import RomanNumeral76, LocalKey35, Inversion4
+from input_representations import available_representations as availableInputs
+from output_representations import (
+    available_representations as availableOutputs,
+)
 from argparse import ArgumentParser
 
 
-def _padToSequenceLength(arr):
+def _padToSequenceLength(arr, sequenceLength):
     frames, features = arr.shape
-    featuresPerSequence = SEQUENCELENGTH * features
+    featuresPerSequence = sequenceLength * features
     featuresInExample = frames * features
     padding = featuresPerSequence - (featuresInExample % featuresPerSequence)
     arr = np.pad(arr.reshape(-1), (0, padding))
-    arr = arr.reshape(-1, SEQUENCELENGTH, features)
+    arr = arr.reshape(-1, sequenceLength, features)
     return arr
 
 
@@ -41,7 +40,14 @@ def _getTranspositions(df):
     return ret
 
 
-def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
+def generateDataset(
+    synthetic=False,
+    dataAugmentation=False,
+    collection=None,
+    inputRepresentation="BassChromagram38",
+    outputRepresentations=["Inversion4", "LocalKey35", "RomanNumeral76"],
+    sequenceLength=64,
+):
     splits = {
         "training": {"X": [], "y": []},
         "validation": {"X": [], "y": []},
@@ -73,21 +79,25 @@ def generateDataset(synthetic=False, dataAugmentation=False, collection=None):
             ]
             filteredIndex = len(df.index)
             print(f"\t({originalIndex}, {filteredIndex})")
-        inputLayer = eval(INPUT_REPRESENTATION)(df)
+        inputLayer = availableInputs[inputRepresentation](df)
         Xi = inputLayer.array
-        Xi = _padToSequenceLength(Xi)
+        Xi = _padToSequenceLength(Xi, sequenceLength)
         if dataAugmentation and row.split == "training":
             transpositions = _getTranspositions(df)
             print("\t", transpositions)
             for transposition in inputLayer.dataAugmentation(transpositions):
-                Xi = np.concatenate((Xi, _padToSequenceLength(transposition)))
-        outputLayer = eval(OUTPUT_REPRESENTATION)(df)
+                Xi = np.concatenate(
+                    (Xi, _padToSequenceLength(transposition, sequenceLength))
+                )
+        outputLayer = availableOutputs[outputRepresentations[0]](df)
         yi = outputLayer.array
-        yi = _padToSequenceLength(yi)
+        yi = _padToSequenceLength(yi, sequenceLength)
         # dataAug = list(inv.dataAugmentation(INTERVAL_TRANSPOSITIONS))
         if dataAugmentation and row.split == "training":
             for transposition in outputLayer.dataAugmentation(transpositions):
-                yi = np.concatenate((yi, _padToSequenceLength(transposition)))
+                yi = np.concatenate(
+                    (yi, _padToSequenceLength(transposition, sequenceLength))
+                )
         [splits[row.split]["X"].append(sequence) for sequence in Xi]
         [splits[row.split]["y"].append(sequence) for sequence in yi]
     for split in ["training", "validation", "test"]:
@@ -115,9 +125,30 @@ if __name__ == "__main__":
         choices=["abc", "bps", "haydnop20", "wir", "tavern"],
         help="Include files from a specific corpus/collection.",
     )
+    parser.add_argument(
+        "--input_representation",
+        type=str,
+        default="BassChromagram38",
+        choices=list(availableInputs.keys()),
+    )
+    parser.add_argument(
+        "--output_representations",
+        nargs="+",
+        default=["Inversion4", "LocalKey35", "RomanNumeral76"],
+        choices=list(availableOutputs.keys()),
+    )
+    parser.add_argument(
+        "--sequence_length",
+        type=int,
+        default=64,
+        choices=range(16, 128),
+    )
     args = parser.parse_args()
     generateDataset(
         synthetic=args.synthetic,
         dataAugmentation=args.dataAugmentation,
         collection=args.collection,
+        inputRepresentation=args.input_representation,
+        outputRepresentations=args.output_representations,
+        sequenceLength=args.sequence_length,
     )
