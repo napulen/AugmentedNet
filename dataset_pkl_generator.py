@@ -45,14 +45,21 @@ def generateDataset(
     dataAugmentation=False,
     collection=None,
     inputRepresentation="BassChromagram38",
-    outputRepresentations=["Inversion4", "LocalKey35", "RomanNumeral76"],
+    outputRepresentations=[
+        "LocalKey35",
+        "PrimaryDegree22",
+        "SecondaryDegree22",
+        "ChordQuality15",
+        "Inversion4",
+        "ChordRoot35",
+    ],
     sequenceLength=64,
 ):
-    splits = {
-        "training": {"X": [], "y": []},
-        "validation": {"X": [], "y": []},
-        "test": {"X": [], "y": []},
-    }
+    outputArrays = {}
+    for split in ["training", "validation", "test"]:
+        outputArrays[split + f"_X_{inputRepresentation}"] = []
+        for y in outputRepresentations:
+            outputArrays[split + f"_y_{y}"] = []
     datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
     summaryFile = os.path.join(datasetDir, DATASETSUMMARYFILE)
     if not os.path.exists(summaryFile):
@@ -89,21 +96,27 @@ def generateDataset(
                 Xi = np.concatenate(
                     (Xi, _padToSequenceLength(transposition, sequenceLength))
                 )
-        outputLayer = availableOutputs[outputRepresentations[0]](df)
-        yi = outputLayer.array
-        yi = _padToSequenceLength(yi, sequenceLength)
-        # dataAug = list(inv.dataAugmentation(INTERVAL_TRANSPOSITIONS))
-        if dataAugmentation and row.split == "training":
-            for transposition in outputLayer.dataAugmentation(transpositions):
-                yi = np.concatenate(
-                    (yi, _padToSequenceLength(transposition, sequenceLength))
-                )
-        [splits[row.split]["X"].append(sequence) for sequence in Xi]
-        [splits[row.split]["y"].append(sequence) for sequence in yi]
-    for split in ["training", "validation", "test"]:
-        for xy in ["X", "y"]:
-            splits[split][xy] = np.array(splits[split][xy])
-    np.save(f"{datasetDir}.npy", splits)
+        npzfile = f"{row.split}_X_{inputRepresentation}"
+        for sequence in Xi:
+            outputArrays[npzfile].append(sequence)
+        outputLayers = [availableOutputs[o](df) for o in outputRepresentations]
+        for outputRepresentation in outputRepresentations:
+            outputLayer = availableOutputs[outputRepresentation](df)
+            yi = outputLayer.array
+            yi = _padToSequenceLength(yi, sequenceLength)
+            if dataAugmentation and row.split == "training":
+                for tr in outputLayer.dataAugmentation(transpositions):
+                    yi = np.concatenate(
+                        (
+                            yi,
+                            _padToSequenceLength(tr, sequenceLength),
+                        )
+                    )
+
+            npzfile = f"{row.split}_y_{outputRepresentation}"
+            for sequence in yi:
+                outputArrays[npzfile].append(sequence)
+    np.savez(f"{datasetDir}.npy", **outputArrays)
 
 
 if __name__ == "__main__":
@@ -134,7 +147,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output_representations",
         nargs="+",
-        default=["Inversion4", "LocalKey35", "RomanNumeral76"],
+        default=[
+        "LocalKey35",
+        "PrimaryDegree22",
+        "SecondaryDegree22",
+        "ChordQuality15",
+        "Inversion4",
+        "ChordRoot35",
+    ],
         choices=list(availableOutputs.keys()),
     )
     parser.add_argument(

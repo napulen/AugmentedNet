@@ -138,7 +138,7 @@ available_representations = {
     "Inversion4": Inversion4,
     "RomanNumeral76": RomanNumeral76,
     "PrimaryDegree22": PrimaryDegree22,
-    "SecondaryDegree2": SecondaryDegree22,
+    "SecondaryDegree22": SecondaryDegree22,
     "LocalKey35": LocalKey35,
     "ChordRoot35": ChordRoot35,
     "ChordQuality15": ChordQuality15
