@@ -1,11 +1,10 @@
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-from common import SEQUENCELENGTH
 
 
-def simpleGRU(inputFeatures, outputClasses):
-    inputs = layers.Input(shape=(SEQUENCELENGTH, inputFeatures))
+def simpleGRU(inputs, outputs):
+    inputs = layers.Input(shape=(inputs[0].shape[1], inputs[0].shape[2]))
     x = layers.Dense(32)(inputs)
     x = layers.BatchNormalization()(x)
     x = layers.Dense(32)(x)
@@ -14,8 +13,11 @@ def simpleGRU(inputFeatures, outputClasses):
     x = layers.BatchNormalization()(x)
     x = layers.Bidirectional(layers.GRU(30, return_sequences=True))(x)
     x = layers.BatchNormalization()(x)
-    outputs = layers.Dense(outputClasses)(x)
-    model = keras.Model(inputs=[inputs], outputs=[outputs])
+    y = []
+    for output in outputs:
+        out = layers.Dense(output.shape[2])(x)
+        y.append(out)
+    model = keras.Model(inputs=[inputs], outputs=y)
     return model
     # return keras.Sequential(
     #     [
@@ -97,7 +99,7 @@ def micchi2020(inputFeatures, outputClasses):
         )(x)
         return [o_single]
 
-    notes = layers.Input(shape=(SEQUENCELENGTH, inputFeatures))
+    notes = layers.Input(shape=(64, inputFeatures))
     # mask = layers.Input(shape=(None, 1))
 
     x = DenseNetLayer(notes, b=4, f=8, n=1)

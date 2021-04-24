@@ -2,16 +2,15 @@ from tensorflow.python.eager.context import disable_graph_collection
 from tensorflow.python.keras.layers.normalization import BatchNormalization
 from score_parser import parseScore
 from annotation_parser import parseAnnotation
-from common import (
+from args import (
     SEQUENCELENGTH,
     BATCHSIZE,
     RANDOMSEED,
     INPUT_REPRESENTATION,
     OUTPUT_REPRESENTATION,
-    DATASETDIR,
-    SYNTHDATASETDIR,
     EPOCHS,
 )
+from common import DATASETDIR, SYNTHDATASETDIR
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -34,38 +33,31 @@ def tensorflowGPUHack():
     for device in gpu_devices:
         tf.config.experimental.set_memory_growth(device, True)
 
+
 def disableGPU():
     # Disabling the GPU
     import os
+
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
 def train():
-    dataset = np.load(f"dataset.npy", allow_pickle=True).item()
-    datasetDa = np.load("dataset-synth.npy", allow_pickle=True).item()
-    X_train, y_train = dataset["training"]["X"], dataset["training"]["y"]
-    X_val, y_val = dataset["validation"]["X"], dataset["validation"]["y"]
-    X_test, y_test = dataset["test"]["X"], dataset["test"]["y"]
+    dataset = np.load(f"dataset.npz")
+    # datasetDa = np.load("dataset-synth.npz")
+    training = {f: dataset[f] for f in dataset.files if "training" in f}
+    X_train = [arr for f, arr in training.items() if "X" in f]
+    y_train = [arr for f, arr, in training.items() if "y" in f]
 
-    Xda_train, yda_train = (
-        datasetDa["training"]["X"],
-        datasetDa["training"]["y"],
-    )
-    outputClasses = y_train.shape[2]
-    # X_train, y_train = np.concatenate((X_train, Xda_train)), np.concatenate(
-    #     (y_train, yda_train)
-    # )
-
-    model = models.simpleGRU(X_train.shape[2], y_train.shape[2])
+    model = models.simpleGRU(X_train, y_train)
     model.compile(
         optimizer="adam",
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics=["accuracy"],
     )
 
-    y_train = np.argmax(y_train, axis=2).reshape(-1, SEQUENCELENGTH, 1)
-    yda_train = np.argmax(yda_train, axis=2).reshape(-1, SEQUENCELENGTH, 1)
-    y_val = np.argmax(y_val, axis=2).reshape(-1, SEQUENCELENGTH, 1)
+    for idx, y in enumerate(y_train):
+        y_train[idx] = np.argmax(y, axis=2).reshape(-1, SEQUENCELENGTH, 1)
+        # y_val[y] = np.argmax(y_val[y], axis=2).reshape(-1, SEQUENCELENGTH, 1)
 
     print(model.summary())
     model.fit(
@@ -74,7 +66,7 @@ def train():
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,
-        validation_data=(X_val, y_val),
+        # validation_data=(X_val, y_val),
     )
 
     # tl = keras.Sequential([
@@ -101,9 +93,7 @@ def train():
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser(
-        description="Train the AugmentedNet."
-    )
+    parser = ArgumentParser(description="Train the AugmentedNet.")
     parser.add_argument(
         "--nogpu",
         action="store_true",
