@@ -116,7 +116,7 @@ def generateDataset(
             npzfile = f"{row.split}_y_{outputRepresentation}"
             for sequence in yi:
                 outputArrays[npzfile].append(sequence)
-    np.savez(f"{datasetDir}.npy", **outputArrays)
+    np.savez_compressed(datasetDir, **outputArrays)
 
 
 if __name__ == "__main__":
@@ -148,13 +148,13 @@ if __name__ == "__main__":
         "--output_representations",
         nargs="+",
         default=[
-        "LocalKey35",
-        "PrimaryDegree22",
-        "SecondaryDegree22",
-        "ChordQuality15",
-        "Inversion4",
-        "ChordRoot35",
-    ],
+            "LocalKey35",
+            "PrimaryDegree22",
+            "SecondaryDegree22",
+            "ChordQuality15",
+            "Inversion4",
+            "ChordRoot35",
+        ],
         choices=list(availableOutputs.keys()),
     )
     parser.add_argument(
