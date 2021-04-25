@@ -50,8 +50,11 @@ def disableGPU():
 def train():
     dataset = np.load(f"dataset.npz")
     training = {f: dataset[f] for f in dataset.files if "training" in f}
+    validation = {f: dataset[f] for f in dataset.files if "validation" in f}
     X_train = [InputOutput(x, arr) for x, arr in training.items() if "X" in x]
     y_train = [InputOutput(y, arr) for y, arr in training.items() if "y" in y]
+    X_val = [InputOutput(x, arr) for x, arr in validation.items() if "X" in x]
+    y_val = [InputOutput(y, arr) for y, arr in validation.items() if "y" in y]
 
     model = models.simpleGRU(X_train, y_train)
     model.compile(
@@ -60,8 +63,9 @@ def train():
         metrics=["accuracy"],
     )
 
-    for y in y_train:
-        y.array = np.argmax(y.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
+    for yt, yv in zip(y_train, y_val):
+        yt.array = np.argmax(yt.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
+        yv.array = np.argmax(yv.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
 
     print(model.summary())
     model.fit(
@@ -70,7 +74,10 @@ def train():
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,
-        # validation_data=(X_val, y_val),
+        validation_data=(
+            [xi.array for xi in X_val],
+            [yi.array for yi in y_val],
+        ),
     )
 
     # tl = keras.Sequential([
