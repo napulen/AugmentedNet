@@ -76,25 +76,6 @@ def micchi2020(inputs, outputs):
             )(y)
         return y
 
-    # def MultiTaskLayer(x, derive_root, input_type):
-    #     classes_key = 30 if input_type.startswith('spelling') else 24  # Major keys: 0-11, Minor keys: 12-23
-    #     classes_degree = 21  # 7 degrees * 3: regular, diminished, augmented
-    #     classes_root = 35 if input_type.startswith('spelling') else 12  # the twelve notes without enharmonic duplicates
-    #     classes_quality = 12  # ['M', 'm', 'd', 'a', 'M7', 'm7', 'D7', 'd7', 'h7', 'Gr+6', 'It+6', 'Fr+6']
-    #     classes_inversion = 4  # root position, 1st, 2nd, and 3rd inversion (the last only for seventh chords)
-
-    #     o_key = TimeDistributed(Dense(classes_key, activation='softmax'), name='key')(x)
-    #     z = Concatenate()([x, o_key])
-    #     o_dg1 = TimeDistributed(Dense(classes_degree, activation='softmax'), name='degree_1')(z)
-    #     o_dg2 = TimeDistributed(Dense(classes_degree, activation='softmax'), name='degree_2')(z)
-    #     o_qlt = TimeDistributed(Dense(classes_quality, activation='softmax'), name='quality')(x)
-    #     o_inv = TimeDistributed(Dense(classes_inversion, activation='softmax'), name='inversion')(x)
-    #     if derive_root and input_type.startswith('pitch'):
-    #         o_roo = Lambda(find_root_pitch, name='root')([o_key, o_dg1, o_dg2])
-    #     else:
-    #         o_roo = TimeDistributed(Dense(classes_root, activation='softmax'), name='root')(x)
-    #     return [o_key, o_dg1, o_dg2, o_qlt, o_inv, o_roo]
-
     def MultiTaskLayer(h, outputs):
         y = []
         for output in outputs:
@@ -110,10 +91,6 @@ def micchi2020(inputs, outputs):
     x = PoolingLayer(x, 32, 2, n=1)
     x = DenseNetLayer(x, 4, 5, n=2)
     x = PoolingLayer(x, 48, 2, n=1)
-
-    # Super-ugly hack otherwise tensorflow can't save the model, see https://stackoverflow.com/a/55229794/5048010
-    # x = layers.Lambda(lambda t: __import__('tensorflow').multiply(*t), name='apply_mask')((x, mask))
-    # x = layers.Masking()(x)  # is this useless?
 
     x = layers.Bidirectional(
         layers.GRU(64, return_sequences=True, dropout=0.3)
@@ -167,12 +144,6 @@ def modifiedMicchi2020(inputs, outputs):
                 s, s, padding="same", data_format="channels_last"
             )(y)
         return y
-
-    def MultiTaskLayer(x, input_type, output_classes):
-        o_single = layers.TimeDistributed(
-            layers.Dense(output_classes),
-        )(x)
-        return [o_single]
 
     x = []
     for i in inputs:
