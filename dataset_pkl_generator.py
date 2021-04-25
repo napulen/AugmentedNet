@@ -44,7 +44,7 @@ def generateDataset(
     synthetic=False,
     dataAugmentation=False,
     collection=None,
-    inputRepresentation="BassChromagram38",
+    inputRepresentations=["BassChromagram38"],
     outputRepresentations=[
         "LocalKey35",
         "PrimaryDegree22",
@@ -57,7 +57,8 @@ def generateDataset(
 ):
     outputArrays = {}
     for split in ["training", "validation", "test"]:
-        outputArrays[split + f"_X_{inputRepresentation}"] = []
+        for x in inputRepresentations:
+            outputArrays[split + f"_X_{x}"] = []
         for y in outputRepresentations:
             outputArrays[split + f"_y_{y}"] = []
     datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
@@ -86,20 +87,20 @@ def generateDataset(
             ]
             filteredIndex = len(df.index)
             print(f"\t({originalIndex}, {filteredIndex})")
-        inputLayer = availableInputs[inputRepresentation](df)
-        Xi = inputLayer.array
-        Xi = _padToSequenceLength(Xi, sequenceLength)
-        if dataAugmentation and row.split == "training":
-            transpositions = _getTranspositions(df)
-            print("\t", transpositions)
-            for transposition in inputLayer.dataAugmentation(transpositions):
-                Xi = np.concatenate(
-                    (Xi, _padToSequenceLength(transposition, sequenceLength))
-                )
-        npzfile = f"{row.split}_X_{inputRepresentation}"
-        for sequence in Xi:
-            outputArrays[npzfile].append(sequence)
-        outputLayers = [availableOutputs[o](df) for o in outputRepresentations]
+        for inputRepresentation in inputRepresentations:
+            inputLayer = availableInputs[inputRepresentation](df)
+            Xi = inputLayer.array
+            Xi = _padToSequenceLength(Xi, sequenceLength)
+            if dataAugmentation and row.split == "training":
+                transpositions = _getTranspositions(df)
+                print("\t", transpositions)
+                for transposition in inputLayer.dataAugmentation(transpositions):
+                    Xi = np.concatenate(
+                        (Xi, _padToSequenceLength(transposition, sequenceLength))
+                    )
+            npzfile = f"{row.split}_X_{inputRepresentation}"
+            for sequence in Xi:
+                outputArrays[npzfile].append(sequence)
         for outputRepresentation in outputRepresentations:
             outputLayer = availableOutputs[outputRepresentation](df)
             yi = outputLayer.array
@@ -139,9 +140,9 @@ if __name__ == "__main__":
         help="Include files from a specific corpus/collection.",
     )
     parser.add_argument(
-        "--input_representation",
-        type=str,
-        default="BassChromagram38",
+        "--input_representations",
+        nargs="+",
+        default=["BassChromagram38"],
         choices=list(availableInputs.keys()),
     )
     parser.add_argument(
@@ -168,7 +169,7 @@ if __name__ == "__main__":
         synthetic=args.synthetic,
         dataAugmentation=args.dataAugmentation,
         collection=args.collection,
-        inputRepresentation=args.input_representation,
+        inputRepresentations=args.input_representations,
         outputRepresentations=args.output_representations,
         sequenceLength=args.sequence_length,
     )

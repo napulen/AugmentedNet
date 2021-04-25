@@ -6,8 +6,8 @@ from args import (
     SEQUENCELENGTH,
     BATCHSIZE,
     RANDOMSEED,
-    INPUT_REPRESENTATION,
-    OUTPUT_REPRESENTATION,
+    INPUT_REPRESENTATIONS,
+    OUTPUT_REPRESENTATIONS,
     EPOCHS,
 )
 from common import DATASETDIR, SYNTHDATASETDIR
@@ -18,10 +18,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import models
-import args
+import args as globalArgs
 from argparse import ArgumentParser
 import os
 from dataset_pkl_generator import generateDataset
+from input_representations import available_representations as availableInputs
+from output_representations import (
+    available_representations as availableOutputs,
+)
 
 tf.random.set_seed(RANDOMSEED)
 
@@ -34,6 +38,12 @@ class InputOutput(object):
         self.name = name
         self.array = array
 
+    def __str__(self):
+        return f"{self.name} {self.array.shape}"
+
+    def __repr__(self):
+        return str(self)
+
 
 def tensorflowGPUHack():
     # https://github.com/tensorflow/tensorflow/issues/37942
@@ -44,8 +54,6 @@ def tensorflowGPUHack():
 
 def disableGPU():
     # Disabling the GPU
-    import os
-
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
@@ -71,14 +79,19 @@ def loadData(synthetic=False):
             y_test.append(InputOutput(name, array))
     return (X_train, y_train), (X_val, y_val), (X_test, y_test)
 
-def train():
-    (X_train, y_train), (X_val, y_val), (_, _) = loadData()
+
+def train(synthetic=False):
+    (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
+    if synthetic:
+        (Xs_train, ys_train), (Xs_val, ys_val), (_, _) = loadData(
+            synthetic=True
+        )
 
     model = models.simpleGRU(X_train, y_train)
     model.compile(
         optimizer="adam",
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-        metrics=["accuracy"],
+        metrics="accuracy",
     )
 
     for yt, yv in zip(y_train, y_val):
@@ -88,13 +101,13 @@ def train():
     print(model.summary())
     model.fit(
         [xi.array for xi in X_train],
-        [yi.array for yi in y_train],
+        y_train[0].array,
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,
         validation_data=(
             [xi.array for xi in X_val],
-            [yi.array for yi in y_val],
+            y_val[0].array,
         ),
     )
 
@@ -128,6 +141,49 @@ if __name__ == "__main__":
         action="store_true",
         help="Disable the use of any GPU.",
     )
+    parser.add_argument(
+        "--generateData",
+        action="store_true",
+        default=globalArgs.GENERATE_DATA,
+        help="Generate the numpy dataset, even if it exists.",
+    )
+    parser.add_argument(
+        "--synthetic",
+        action="store_true",
+        default=globalArgs.SYNTHETIC,
+        help="Use (and generate) the dataset of synthetic examples.",
+    )
+    parser.add_argument(
+        "--dataAugmentation",
+        action="store_true",
+        default=globalArgs.DATAAUGMENTATION,
+        help="If generating the numpy arrays, whether to do data augmentation.",
+    )
+    parser.add_argument(
+        "--collection",
+        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
+        default=globalArgs.COLLECTION,
+        help="Include files from a specific corpus/collection.",
+    )
+    parser.add_argument(
+        "--input_representations",
+        nargs="+",
+        default=globalArgs.INPUT_REPRESENTATIONS,
+        choices=list(availableInputs.keys()),
+    )
+    parser.add_argument(
+        "--output_representations",
+        nargs="+",
+        default=globalArgs.OUTPUT_REPRESENTATIONS,
+        choices=list(availableOutputs.keys()),
+    )
+    parser.add_argument(
+        "--sequence_length",
+        type=int,
+        default=globalArgs.SEQUENCELENGTH,
+        choices=range(16, 128),
+    )
+
     args = parser.parse_args()
 
     if args.nogpu:
@@ -136,6 +192,26 @@ if __name__ == "__main__":
         # Ideally, this shouldn't be necessary; but this is not an ideal world
         tensorflowGPUHack()
 
+    if args.generateData or not os.path.isfile(DATASETDIR + ".npz"):
+        generateDataset(
+            synthetic=False,
+            dataAugmentation=args.dataAugmentation,
+            collection=args.collection,
+            inputRepresentations=args.input_representations,
+            outputRepresentations=args.output_representations,
+            sequenceLength=args.sequence_length,
+        )
+    if args.synthetic:
+        if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
+            generateDataset(
+                synthetic=True,
+                dataAugmentation=args.dataAugmentation,
+                collection=args.collection,
+                inputRepresentations=args.input_representations,
+                outputRepresentations=args.output_representations,
+                sequenceLength=args.sequence_length,
+            )
+
     mlflow.tensorflow.autolog()
 
-    train()
+    train(synthetic=args.synthetic)
