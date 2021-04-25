@@ -20,6 +20,8 @@ import seaborn as sns
 import models
 import args
 from argparse import ArgumentParser
+import os
+from dataset_pkl_generator import generateDataset
 
 tf.random.set_seed(RANDOMSEED)
 
@@ -47,14 +49,30 @@ def disableGPU():
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
+def loadData(synthetic=False):
+    datasetFile = f"{SYNTHDATASETDIR if synthetic else DATASETDIR}.npz"
+    dataset = np.load(datasetFile)
+    X_train, y_train = [], []
+    X_val, y_val = [], []
+    X_test, y_test = [], []
+    for name in dataset.files:
+        array = dataset[name]
+        if "training_X" in name:
+            X_train.append(InputOutput(name, array))
+        elif "training_y" in name:
+            y_train.append(InputOutput(name, array))
+        elif "validation_X" in name:
+            X_val.append(InputOutput(name, array))
+        elif "validation_y" in name:
+            y_val.append(InputOutput(name, array))
+        elif "test_X" in name:
+            X_test.append(InputOutput(name, array))
+        elif "test_y" in name:
+            y_test.append(InputOutput(name, array))
+    return (X_train, y_train), (X_val, y_val), (X_test, y_test)
+
 def train():
-    dataset = np.load(f"dataset.npz")
-    training = {f: dataset[f] for f in dataset.files if "training" in f}
-    validation = {f: dataset[f] for f in dataset.files if "validation" in f}
-    X_train = [InputOutput(x, arr) for x, arr in training.items() if "X" in x]
-    y_train = [InputOutput(y, arr) for y, arr in training.items() if "y" in y]
-    X_val = [InputOutput(x, arr) for x, arr in validation.items() if "X" in x]
-    y_val = [InputOutput(y, arr) for y, arr in validation.items() if "y" in y]
+    (X_train, y_train), (X_val, y_val), (_, _) = loadData()
 
     model = models.simpleGRU(X_train, y_train)
     model.compile(
