@@ -37,7 +37,7 @@ def simpleGRU(inputs, outputs):
     return model
 
 
-def micchi2020(inputFeatures, outputClasses):
+def micchi2020(inputs, outputs):
     def DenseNetLayer(x, b, f, n=1):
         with tf.name_scope(f"denseNet_{n}"):
             for _ in range(b):
@@ -95,14 +95,16 @@ def micchi2020(inputFeatures, outputClasses):
     #         o_roo = TimeDistributed(Dense(classes_root, activation='softmax'), name='root')(x)
     #     return [o_key, o_dg1, o_dg2, o_qlt, o_inv, o_roo]
 
-    def MultiTaskLayer(x, input_type, output_classes):
-        o_single = layers.TimeDistributed(
-            layers.Dense(output_classes),
-        )(x)
-        return [o_single]
+    def MultiTaskLayer(h, outputs):
+        y = []
+        for output in outputs:
+            outputFeatures = output.array.shape[2]
+            out = layers.Dense(outputFeatures, name=output.name)(h)
+            y.append(out)
+        return y
 
-    notes = layers.Input(shape=(64, inputFeatures))
-    # mask = layers.Input(shape=(None, 1))
+    _, sequenceLength, inputFeatures = inputs[0].array.shape
+    notes = layers.Input(shape=(sequenceLength, inputFeatures))
 
     x = DenseNetLayer(notes, b=4, f=8, n=1)
     x = PoolingLayer(x, 32, 2, n=1)
@@ -121,9 +123,7 @@ def micchi2020(inputFeatures, outputClasses):
     # https://stackoverflow.com/questions/47305618
     # https://github.com/keras-team/keras/issues/11547
     x = layers.TimeDistributed(layers.Dense(64, activation="tanh"))(x)
-    y = MultiTaskLayer(x, "spelling", outputClasses)
-
-    # x = layers.Dense(outputClasses)(y)
+    y = MultiTaskLayer(x, outputs)
 
     model = keras.Model(inputs=[notes], outputs=y)
     return model
