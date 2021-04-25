@@ -27,6 +27,12 @@ import mlflow
 import mlflow.tensorflow
 
 
+class InputOutput(object):
+    def __init__(self, name, array):
+        self.name = name
+        self.array = array
+
+
 def tensorflowGPUHack():
     # https://github.com/tensorflow/tensorflow/issues/37942
     gpu_devices = tf.config.experimental.list_physical_devices("GPU")
@@ -43,10 +49,9 @@ def disableGPU():
 
 def train():
     dataset = np.load(f"dataset.npz")
-    # datasetDa = np.load("dataset-synth.npz")
     training = {f: dataset[f] for f in dataset.files if "training" in f}
-    X_train = [arr for f, arr in training.items() if "X" in f]
-    y_train = [arr for f, arr, in training.items() if "y" in f]
+    X_train = [InputOutput(x, arr) for x, arr in training.items() if "X" in x]
+    y_train = [InputOutput(y, arr) for y, arr in training.items() if "y" in y]
 
     model = models.simpleGRU(X_train, y_train)
     model.compile(
@@ -55,14 +60,13 @@ def train():
         metrics=["accuracy"],
     )
 
-    for idx, y in enumerate(y_train):
-        y_train[idx] = np.argmax(y, axis=2).reshape(-1, SEQUENCELENGTH, 1)
-        # y_val[y] = np.argmax(y_val[y], axis=2).reshape(-1, SEQUENCELENGTH, 1)
+    for y in y_train:
+        y.array = np.argmax(y.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
 
     print(model.summary())
     model.fit(
-        X_train,
-        y_train,
+        [xi.array for xi in X_train],
+        [yi.array for yi in y_train],
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,

@@ -4,35 +4,29 @@ from tensorflow.keras import layers
 
 
 def simpleGRU(inputs, outputs):
-    inputs = layers.Input(shape=(inputs[0].shape[1], inputs[0].shape[2]))
-    x = layers.Dense(32)(inputs)
-    x = layers.BatchNormalization()(x)
-    x = layers.Dense(32)(x)
-    x = layers.BatchNormalization()(x)
-    x = layers.Bidirectional(layers.GRU(30, return_sequences=True))(x)
-    x = layers.BatchNormalization()(x)
-    x = layers.Bidirectional(layers.GRU(30, return_sequences=True))(x)
-    x = layers.BatchNormalization()(x)
+    x = []
+    for i in inputs:
+        sequenceLength = i.array.shape[1]
+        inputFeatures = i.array.shape[2]
+        xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
+        x.append(xi)
+    if len(x) > 1:
+        inputs = layers.Concatenate()([layers.Dense(32)(xi) for xi in x])
+    else:
+        inputs = layers.Dense(32)(x[0])
+    h = layers.Dense(32)(inputs)
+    h = layers.BatchNormalization()(h)
+    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
+    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
     y = []
     for output in outputs:
-        out = layers.Dense(output.shape[2])(x)
+        outputFeatures = output.array.shape[2]
+        out = layers.Dense(outputFeatures, name=output.name)(h)
         y.append(out)
-    model = keras.Model(inputs=[inputs], outputs=y)
+    model = keras.Model(inputs=x, outputs=y)
     return model
-    # return keras.Sequential(
-    #     [
-    #         keras.Input(shape=(SEQUENCELENGTH, inputFeatures)),
-    #         layers.Dense(32),
-    #         layers.BatchNormalization(),
-    #         layers.Dense(32),
-    #         layers.BatchNormalization(),
-    #         layers.Bidirectional(layers.GRU(30, return_sequences=True)),
-    #         layers.BatchNormalization(),
-    #         layers.Bidirectional(layers.GRU(30, return_sequences=True)),
-    #         layers.BatchNormalization(),
-    #         layers.Dense(outputClasses),
-    #     ]
-    # )
 
 
 def micchi2020(inputFeatures, outputClasses):
