@@ -31,6 +31,7 @@ tf.random.set_seed(RANDOMSEED)
 
 import mlflow
 import mlflow.tensorflow
+from mlflow import log_metric, log_param, log_artifact
 
 
 class InputOutput(object):
@@ -99,15 +100,25 @@ def train(synthetic=False):
         yv.array = np.argmax(yv.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
 
     print(model.summary())
+
+    x = [xi.array for xi in X_train]
+    y = [yi.array for yi in y_train]
+    x = x if len(x) > 1 else x[0]
+    y = y if len(y) > 1 else y[0]
+    xv = [xi.array for xi in X_val]
+    yv = [yi.array for yi in y_val]
+    xv = xv if len(xv) > 1 else xv[0]
+    yv = yv if len(yv) > 1 else yv[0]
+
     model.fit(
-        [xi.array for xi in X_train],
-        y_train[0].array,
+        x,
+        y,
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,
         validation_data=(
-            [xi.array for xi in X_val],
-            y_val[0].array,
+            xv,
+            yv,
         ),
     )
 
@@ -213,5 +224,7 @@ if __name__ == "__main__":
             )
 
     mlflow.tensorflow.autolog()
+    # log_param("inputs", args.input_representations)
+    # log_param("outputs", args.output_representations)
 
     train(synthetic=args.synthetic)
