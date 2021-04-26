@@ -676,7 +676,7 @@ class TestScoreParser(unittest.TestCase):
     def test_haydn_annotation_and_score(self):
         dfGT = _load_dfgt(haydnOp20no4iDataFrameGT)
         df = joint_parser.parseAnnotationAndScore(
-            haydnOp20no4iAnnotation, haydnOp20no4iScore
+            haydnOp20no4iAnnotation, haydnOp20no4iScore, fixedOffset=0.25
         )
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):

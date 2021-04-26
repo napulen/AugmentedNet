@@ -141,11 +141,11 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     return df
 
 
-def parseAnnotation(f):
+def parseAnnotation(f, fixedOffset=FIXEDOFFSET):
     # Step 0: Use music21 to parse the score
     s = _m21Parse(f)
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s)
     # Step 2: Turn salami-slice into fixed-duration steps
-    df = _reindexDataFrame(df)
+    df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df

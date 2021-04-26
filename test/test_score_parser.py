@@ -250,7 +250,7 @@ class TestScoreParser(unittest.TestCase):
         dfGT = _load_dfgt(octaveTestReindexDataFrame)
         s = score_parser._m21Parse(octaveTest)
         df = score_parser._initialDataFrame(s)
-        df = score_parser._reindexDataFrame(df)
+        df = score_parser._reindexDataFrame(df, fixedOffset=0.25)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())
@@ -267,7 +267,7 @@ class TestScoreParser(unittest.TestCase):
         dfGT = _load_dfgt(weirdRhythmReindexDataFrame)
         s = score_parser._m21Parse(weirdRhythm)
         df = score_parser._initialDataFrame(s)
-        df = score_parser._reindexDataFrame(df)
+        df = score_parser._reindexDataFrame(df, fixedOffset=0.25)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())

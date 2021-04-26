@@ -1,5 +1,6 @@
 import music21
 from music21.interval import Interval
+from numpy.lib.ufunclike import fix
 import pandas as pd
 import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
@@ -112,11 +113,11 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     return df
 
 
-def parseScore(f, fmt=None):
+def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET):
     # Step 0: Use music21 to parse the score
     s = _m21Parse(f, fmt)
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt)
     # Step 2: Turn salami-slice into fixed-duration steps
-    df = _reindexDataFrame(df)
+    df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df

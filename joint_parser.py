@@ -1,8 +1,10 @@
+from numpy.lib.ufunclike import fix
 import score_parser
 import annotation_parser
 import pandas as pd
 import numpy as np
 import re
+from common import FIXEDOFFSET
 
 J_COLUMNS = (
     score_parser.S_COLUMNS
@@ -42,10 +44,14 @@ def _qualityMetric(df):
         annotationNotes = rows.iloc[0].a_pitchNames
         missingChordTones = set(annotationNotes) - set(scoreNotes)
         nonChordTones = [n for n in scoreNotes if n not in annotationNotes]
-        missingChordTonesScore = len(missingChordTones) / len(set(annotationNotes))
+        missingChordTonesScore = len(missingChordTones) / len(
+            set(annotationNotes)
+        )
         nonChordTonesScore = len(nonChordTones) / len(scoreNotes)
         squaredSumScore = (missingChordTonesScore + nonChordTonesScore) ** 2
-        df.loc[df.a_annotationNumber == n, "qualityScoreNotes"] = str(scoreNotes)
+        df.loc[df.a_annotationNumber == n, "qualityScoreNotes"] = str(
+            scoreNotes
+        )
         df.loc[df.a_annotationNumber == n, "qualityNonChordTones"] = round(
             nonChordTonesScore, 2
         )
@@ -84,7 +90,9 @@ def _inversionMetric(df):
     return df
 
 
-def parseAnnotationAndScore(a, s, qualityAssessment=True):
+def parseAnnotationAndScore(
+    a, s, qualityAssessment=True, fixedOffset=FIXEDOFFSET
+):
     """Process a score an RomanText file simultaneously.
 
     s is a .mxl|.krn|.musicxml file
@@ -93,8 +101,8 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
     Create the dataframes of both, generate a new one.
     """
     # Parse each file
-    adf = annotation_parser.parseAnnotation(a)
-    sdf = score_parser.parseScore(s)
+    adf = annotation_parser.parseAnnotation(a, fixedOffset=fixedOffset)
+    sdf = score_parser.parseScore(s, fixedOffset=fixedOffset)
     # Create the joint dataframe
     jointdf = pd.concat([sdf, adf], axis=1)
     jointdf.index.name = "j_offset"
@@ -109,9 +117,11 @@ def parseAnnotationAndScore(a, s, qualityAssessment=True):
     return jointdf
 
 
-def parseAnnotationAndAnnotation(a, qualityAssessment=True):
-    adf = annotation_parser.parseAnnotation(a)
-    sdf = score_parser.parseScore(a, fmt="romantext")
+def parseAnnotationAndAnnotation(
+    a, qualityAssessment=True, fixedOffset=FIXEDOFFSET
+):
+    adf = annotation_parser.parseAnnotation(a, fixedOffset=fixedOffset)
+    sdf = score_parser.parseScore(a, fmt="romantext", fixedOffset=fixedOffset)
     jointdf = pd.concat([sdf, adf], axis=1)
     jointdf["a_isOnset"].fillna(False, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)

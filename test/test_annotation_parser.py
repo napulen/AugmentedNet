@@ -227,7 +227,7 @@ class TestAnnotationParser(unittest.TestCase):
         dfGT = _load_dfgt(multipleAnnotationsFixedTimeframe)
         s = annotation_parser._m21Parse(multipleAnnotations)
         df = annotation_parser._initialDataFrame(s)
-        df = annotation_parser._reindexDataFrame(df)
+        df = annotation_parser._reindexDataFrame(df, fixedOffset=0.25)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())

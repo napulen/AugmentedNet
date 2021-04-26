@@ -1842,7 +1842,7 @@ class TestDataset(unittest.TestCase):
                 misalignmentGT = dfGT[dfGT.file == nickname].misalignmentMean
                 qualityGT = dfGT[dfGT.file == nickname].qualityMean
                 bassGT = dfGT[dfGT.file == nickname].incongruentBassMean
-                df = parseAnnotationAndScore(annotation, score)
+                df = parseAnnotationAndScore(annotation, score, fixedOffset=0.25)
                 misalignment = df.measureMisalignment.mean()
                 quality = df.qualitySquaredSum.mean()
                 bass = df.incongruentBass.mean()
