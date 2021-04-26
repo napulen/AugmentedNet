@@ -253,7 +253,7 @@ if __name__ == "__main__":
             inputRepresentations=args.input_representations,
             outputRepresentations=args.output_representations,
             sequenceLength=args.sequence_length,
-            scrutinizeData=args.scrutinize_data
+            scrutinizeData=args.scrutinize_data,
         )
     if args.syntheticDataStrategy:
         if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
@@ -264,13 +264,14 @@ if __name__ == "__main__":
                 inputRepresentations=args.input_representations,
                 outputRepresentations=args.output_representations,
                 sequenceLength=args.sequence_length,
-                scrutinizeData=args.scrutinize_data
+                scrutinizeData=args.scrutinize_data,
             )
 
     mlflow.tensorflow.autolog()
     log_param("inputs", args.input_representations)
     log_param("outputs", args.output_representations)
     log_param("model", args.model)
+    log_param("syntheticDataStrategy", args.syntheticDataStrategy)
     log_param("scrutinize_data", args.scrutinize_data)
 
     train(
