@@ -54,6 +54,7 @@ def generateDataset(
         "ChordRoot35",
     ],
     sequenceLength=64,
+    scrutinizeData=True,
 ):
     outputArrays = {}
     for split in ["training", "validation", "test"]:
@@ -77,8 +78,8 @@ def generateDataset(
         df = pd.read_csv(tsvlocation + ".tsv", sep="\t")
         for col in J_LISTTYPE_COLUMNS:
             df[col] = df[col].apply(eval)
-        # Filter the bad content
-        if row.split == "training":
+        # Filter the bad quality annotations
+        if scrutinizeData and row.split == "training":
             originalIndex = len(df.index)
             df = df[
                 (df.qualitySquaredSum < 0.75)
@@ -94,9 +95,16 @@ def generateDataset(
             if dataAugmentation and row.split == "training":
                 transpositions = _getTranspositions(df)
                 print("\t", transpositions)
-                for transposition in inputLayer.dataAugmentation(transpositions):
+                for transposition in inputLayer.dataAugmentation(
+                    transpositions
+                ):
                     Xi = np.concatenate(
-                        (Xi, _padToSequenceLength(transposition, sequenceLength))
+                        (
+                            Xi,
+                            _padToSequenceLength(
+                                transposition, sequenceLength
+                            ),
+                        )
                     )
             npzfile = f"{row.split}_X_{inputRepresentation}"
             for sequence in Xi:
@@ -163,6 +171,12 @@ if __name__ == "__main__":
         type=int,
         default=64,
         choices=range(16, 128),
+    )
+    parser.add_argument(
+        "--scrutinize_data",
+        action="store_true",
+        default=True,
+        help="Exclude bad-quality annotations from the training data."
     )
     args = parser.parse_args()
     generateDataset(

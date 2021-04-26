@@ -231,6 +231,11 @@ if __name__ == "__main__":
         default=globalArgs.MODEL,
         choices=list(models.available_models.keys()),
     )
+    parser.add_argument(
+        "--scrutinize_data",
+        action="store_true",
+        default=globalArgs.SCRUTINIZEDATA,
+    )
 
     args = parser.parse_args()
 
@@ -248,6 +253,7 @@ if __name__ == "__main__":
             inputRepresentations=args.input_representations,
             outputRepresentations=args.output_representations,
             sequenceLength=args.sequence_length,
+            scrutinizeData=args.scrutinize_data
         )
     if args.syntheticDataStrategy:
         if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
@@ -258,12 +264,14 @@ if __name__ == "__main__":
                 inputRepresentations=args.input_representations,
                 outputRepresentations=args.output_representations,
                 sequenceLength=args.sequence_length,
+                scrutinizeData=args.scrutinize_data
             )
 
     mlflow.tensorflow.autolog()
     log_param("inputs", args.input_representations)
     log_param("outputs", args.output_representations)
     log_param("model", args.model)
+    log_param("scrutinize_data", args.scrutinize_data)
 
     train(
         syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
