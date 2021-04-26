@@ -32,6 +32,8 @@ def _getTranspositions(df):
     localKeys = set(localKeys)
     ret = []
     for interval in INTERVALCLASSES:
+        if interval == "P1":
+            continue
         transposed = [TransposeKey(k, interval) for k in localKeys]
         # Transpose to this interval if every modulation lies within
         # the set of KEY classes that we can classify

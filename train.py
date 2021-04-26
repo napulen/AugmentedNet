@@ -84,7 +84,7 @@ def loadData(synthetic=False):
 def printTrainingExample(x, y):
     import pandas as pd
 
-    pd.set_option("display.max_rows", 64)
+    pd.set_option("display.max_rows", 640)
     ret = {}
     for xi in x:
         representationName = xi.name.split("_")[-1]
