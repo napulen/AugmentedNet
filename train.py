@@ -81,14 +81,44 @@ def loadData(synthetic=False):
     return (X_train, y_train), (X_val, y_val), (X_test, y_test)
 
 
-def train(synthetic=False):
-    (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
-    if synthetic:
-        (Xs_train, ys_train), (Xs_val, ys_val), (_, _) = loadData(
-            synthetic=True
+def printTrainingExample(x, y):
+    import pandas as pd
+
+    pd.set_option("display.max_rows", 64)
+    ret = {}
+    for xi in x:
+        representationName = xi.name.split("_")[-1]
+        decoded = availableInputs[representationName].decode(xi.array[1000])
+        ret[representationName] = decoded
+    for yi in y:
+        representationName = yi.name.split("_")[-1]
+        decoded = availableOutputs[representationName].decode(yi.array[1000])
+        ret[representationName] = decoded
+    df = pd.DataFrame(ret)
+    print(df)
+
+
+def train(syntheticDataStrategy=None, modelName="simpleGRU"):
+    if not syntheticDataStrategy:
+        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
+    elif syntheticDataStrategy == "syntheticOnly":
+        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=True)
+    elif syntheticDataStrategy == "concatenate":
+        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
+        (Xs_train, ys_train), (_, _), (_, _) = loadData(synthetic=True)
+        for x, xs in zip(X_train, Xs_train):
+            x.array = np.concatenate((x.array, xs.array))
+        for y, ys in zip(y_train, ys_train):
+            y.array = np.concatenate((y.array, ys.array))
+    elif syntheticDataStrategy == "transfer":
+        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=True)
+        (Xtr_train, ytr_train), (Xtr_val, ytr_val), (_, _) = loadData(
+            synthetic=False
         )
 
-    model = models.simpleGRU(X_train, y_train)
+    printTrainingExample(X_train, y_train)
+
+    model = models.available_models[modelName](X_train, y_train)
     model.compile(
         optimizer="adam",
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -98,9 +128,11 @@ def train(synthetic=False):
     for yt, yv in zip(y_train, y_val):
         yt.array = np.argmax(yt.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
         yv.array = np.argmax(yv.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
+        if modelName in ["micchi2020", "modifiedMicchi2020"]:
+            yt.array = yt.array[:, ::4]
+            yv.array = yv.array[:, ::4]
 
     print(model.summary())
-
     x = [xi.array for xi in X_train]
     y = [yi.array for yi in y_train]
     x = x if len(x) > 1 else x[0]
@@ -159,10 +191,10 @@ if __name__ == "__main__":
         help="Generate the numpy dataset, even if it exists.",
     )
     parser.add_argument(
-        "--synthetic",
-        action="store_true",
-        default=globalArgs.SYNTHETIC,
-        help="Use (and generate) the dataset of synthetic examples.",
+        "--syntheticDataStrategy",
+        choices=["syntheticOnly", "concatenate", "transfer"],
+        default=globalArgs.SYNTHETICDATASTRATEGY,
+        help="The strategy to use for synthetic training examples (if any).",
     )
     parser.add_argument(
         "--dataAugmentation",
@@ -194,6 +226,11 @@ if __name__ == "__main__":
         default=globalArgs.SEQUENCELENGTH,
         choices=range(16, 128),
     )
+    parser.add_argument(
+        "--model",
+        default=globalArgs.MODEL,
+        choices=list(models.available_models.keys()),
+    )
 
     args = parser.parse_args()
 
@@ -212,7 +249,7 @@ if __name__ == "__main__":
             outputRepresentations=args.output_representations,
             sequenceLength=args.sequence_length,
         )
-    if args.synthetic:
+    if args.syntheticDataStrategy:
         if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
             generateDataset(
                 synthetic=True,
@@ -224,7 +261,10 @@ if __name__ == "__main__":
             )
 
     mlflow.tensorflow.autolog()
-    # log_param("inputs", args.input_representations)
-    # log_param("outputs", args.output_representations)
+    log_param("inputs", args.input_representations)
+    log_param("outputs", args.output_representations)
+    log_param("model", args.model)
 
-    train(synthetic=args.synthetic)
+    train(
+        syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
+    )

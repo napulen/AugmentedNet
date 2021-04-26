@@ -145,16 +145,23 @@ def modifiedMicchi2020(inputs, outputs):
             )(y)
         return y
 
+    # (raw) inputs of the network
     x = []
+    # inputs after batchnorm, a dense layer to induce sparsity, etc.
+    xprime = []
     for i in inputs:
         sequenceLength = i.array.shape[1]
         inputFeatures = i.array.shape[2]
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
+        xi = layers.Dense(32)(xi)
+        xi = layers.BatchNormalization()(xi)
+        xi = layers.Activation("relu")(xi)
+        xprime.append(xi)
     if len(x) > 1:
-        inputs = layers.Concatenate()([layers.Dense(32)(xi) for xi in x])
+        inputs = layers.Concatenate()([xi for xi in xprime])
     else:
-        inputs = layers.Dense(32)(x[0])
+        inputs = xprime[0]
 
     h = DenseNetLayer(inputs, b=4, f=8, n=1)
     h = PoolingLayer(h, 32, 2, n=1)

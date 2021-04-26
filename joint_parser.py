@@ -118,4 +118,5 @@ def parseAnnotationAndAnnotation(a, qualityAssessment=True):
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
+        jointdf = _inversionMetric(jointdf)
     return jointdf
