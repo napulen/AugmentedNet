@@ -840,11 +840,14 @@ class TestPcSet94(TestBass35):
     encodingGT = haydnPitchClassSet94
     dfFeature = "a_pcset"
 
-    def test_encoding(self):
-        super().test_encoding()
+    # def test_encoding(self):
+    #     super().test_encoding()
 
-    def test_decoding(self):
-        super().test_decoding()
+    # def test_decoding(self):
+    #     super().test_decoding()
+
+    # def test_data_augmentation(self):
+    #     super().test_data_augmentation()
 
 
 class TestInversion4(TestBass35):
