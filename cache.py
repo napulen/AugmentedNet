@@ -1,8 +1,10 @@
 from music21.key import Key
 from music21.pitch import Pitch
+from music21.interval import Interval
 
 _transposeKey = {}
 _transposePitch = {}
+_transposePcSet = {}
 _pitch = {}
 _key = {}
 
@@ -27,6 +29,16 @@ def TransposePitch(pitch, interval):
     pitchObj = m21Pitch(pitch)
     transposed = pitchObj.transpose(interval).nameWithOctave
     _transposePitch[duple] = transposed
+    return transposed
+
+
+def TransposePcSet(pcset, interval):
+    duple = (pcset, interval)
+    if duple in _transposePcSet:
+        return _transposePcSet[duple]
+    semitones = Interval(interval).semitones
+    transposed = [(x + semitones) % 12 for x in pcset]
+    transposed = tuple(sorted(transposed))
     return transposed
 
 

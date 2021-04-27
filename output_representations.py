@@ -1,4 +1,10 @@
-from cache import TransposeKey, TransposePitch, m21Key, m21Pitch
+from cache import (
+    TransposeKey,
+    TransposePitch,
+    TransposePcSet,
+    m21Key,
+    m21Pitch,
+)
 from feature_representation import (
     CHORD_QUALITIES,
     COMMON_ROMAN_NUMERALS,
@@ -9,6 +15,7 @@ from feature_representation import (
     DEGREES,
     KEYS,
     CHORD_QUALITIES,
+    PCSETS,
 )
 
 import numpy as np
@@ -143,6 +150,13 @@ class ChordQuality15(OutputRepresentationTI):
     classList = CHORD_QUALITIES
     dfFeature = "a_quality"
     features = len(classList)
+
+
+class PitchClassSet94(OutputRepresentation):
+    classList = PCSETS
+    dfFeature = "a_pcset"
+    features = len(classList)
+    transpositionFn = "TransposePcSet"
 
 
 available_representations = {
