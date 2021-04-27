@@ -118,10 +118,12 @@ def parseAnnotationAndScore(
 
 
 def parseAnnotationAndAnnotation(
-    a, qualityAssessment=True, fixedOffset=FIXEDOFFSET
+    a, qualityAssessment=True, fixedOffset=FIXEDOFFSET, texturize=True
 ):
     adf = annotation_parser.parseAnnotation(a, fixedOffset=fixedOffset)
-    sdf = score_parser.parseScore(a, fmt="romantext", fixedOffset=fixedOffset)
+    sdf = score_parser.parseAnnotationAsScore(
+        a, texturize=texturize, fixedOffset=fixedOffset
+    )
     jointdf = pd.concat([sdf, adf], axis=1)
     jointdf["a_isOnset"].fillna(False, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)

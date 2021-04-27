@@ -1,9 +1,13 @@
 import music21
 from music21.interval import Interval
+from music21.pitch import Pitch
 from numpy.lib.ufunclike import fix
 import pandas as pd
 import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
+import io
+from itertools import combinations
+from texturizers import getTemplate
 
 S_COLUMNS = [
     "s_offset",
@@ -113,11 +117,64 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     return df
 
 
+def _texturizeAnnotationScore(df, duration, numberOfNotes):
+    # Preemptively, remove any notion of held notes in an annotation file
+    df["s_isOnset"] = df.s_isOnset.apply(lambda l: [True for _ in l])
+    outputdf = df.copy()
+    # A copy because we don't want these two temporary columns in the output
+    df["notesNumber"] = df.s_notes.apply(len)
+    df["allOnsets"] = df.s_isOnset.apply(all)
+    # Which block chords can we replace with a more complex texture
+    replaceable = df[
+        (df.s_duration == duration)
+        & (df.notesNumber == numberOfNotes)
+        & (df.allOnsets)
+    ]
+    for row in replaceable.itertuples():
+        offset = row.Index
+        measure = row.s_measure
+        notes = row.s_notes
+        intervals = [
+            Interval(Pitch(n1), Pitch(n2)).simpleName
+            for n1, n2 in combinations(notes, 2)
+        ]
+        template = getTemplate(duration, len(notes))
+        texture = template.format(notes=notes, intervals=intervals)
+        textureF = io.StringIO(texture)
+        texturedf = pd.read_csv(textureF)
+        texturedf["s_offset"] += offset
+        texturedf["s_measure"] = measure
+        for col in S_LISTTYPE_COLUMNS:
+            texturedf[col] = texturedf[col].apply(eval)
+        texturedf.set_index("s_offset", inplace=True)
+        for index, row in texturedf.iterrows():
+            outputdf.loc[index] = row
+    outputdf.sort_index(inplace=True)
+    return outputdf
+
+
 def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET):
     # Step 0: Use music21 to parse the score
     s = _m21Parse(f, fmt)
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt)
     # Step 2: Turn salami-slice into fixed-duration steps
+    df = _reindexDataFrame(df, fixedOffset=fixedOffset)
+    return df
+
+
+def parseAnnotationAsScore(f, texturize=False, fixedOffset=FIXEDOFFSET):
+    fmt = "romantext"
+    if not texturize:
+        return parseScore(f, fmt=fmt, fixedOffset=fixedOffset)
+    # Step 0: Use music21 to parse the score
+    s = _m21Parse(f, fmt=fmt)
+    # Step 1: Parse and produce a salami-sliced dataset
+    df = _initialDataFrame(s, fmt=fmt)
+    # Step 2: Texturize the dataframe
+    for duration in [4.0]:
+        for numberOfNotes in [3, 4]:
+            df = _texturizeAnnotationScore(df, duration, numberOfNotes)
+    # Step 3: Turn salami-slice into fixed-duration steps
     df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df
