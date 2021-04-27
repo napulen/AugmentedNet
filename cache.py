@@ -8,6 +8,9 @@ _key = {}
 
 
 def TransposeKey(key, interval):
+    if key == "None":
+        # This is because of frames with empty tonicized keys
+        return "None"
     duple = (key, interval)
     if duple in _transposeKey:
         return _transposeKey[duple]

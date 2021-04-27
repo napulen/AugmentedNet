@@ -29,9 +29,7 @@ class OutputRepresentation(FeatureRepresentation):
     def run(self, transposition="P1"):
         array = np.zeros(self.shape)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
-            transposed = eval(self.transpositionFn)(
-                dfFeature, transposition
-            )
+            transposed = eval(self.transpositionFn)(dfFeature, transposition)
             if transposed in self.classList:
                 rnIndex = self.classList.index(transposed)
                 array[frame, rnIndex] = 1
@@ -96,6 +94,12 @@ class Inversion4(OutputRepresentationTI):
         return array
 
 
+class HarmonicRhythm2(OutputRepresentationTI):
+    classList = [True, False]
+    dfFeature = "a_isOnset"
+    features = len(classList)
+
+
 class RomanNumeral76(OutputRepresentationTI):
     classList = COMMON_ROMAN_NUMERALS
     dfFeature = "a_romanNumeral"
@@ -121,6 +125,13 @@ class LocalKey35(OutputRepresentation):
     transpositionFn = "TransposeKey"
 
 
+class TonicizedKey35(OutputRepresentation):
+    classList = KEYS
+    dfFeature = "a_tonicizedKey"
+    features = len(classList)
+    transpositionFn = "TransposeKey"
+
+
 class ChordRoot35(OutputRepresentation):
     classList = SPELLINGS
     dfFeature = "a_root"
@@ -133,6 +144,7 @@ class ChordQuality15(OutputRepresentationTI):
     dfFeature = "a_quality"
     features = len(classList)
 
+
 available_representations = {
     "Bass35": Bass35,
     "Inversion4": Inversion4,
@@ -141,5 +153,5 @@ available_representations = {
     "SecondaryDegree22": SecondaryDegree22,
     "LocalKey35": LocalKey35,
     "ChordRoot35": ChordRoot35,
-    "ChordQuality15": ChordQuality15
+    "ChordQuality15": ChordQuality15,
 }
