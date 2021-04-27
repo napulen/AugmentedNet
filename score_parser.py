@@ -172,7 +172,7 @@ def parseAnnotationAsScore(f, texturize=False, fixedOffset=FIXEDOFFSET):
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt=fmt)
     # Step 2: Texturize the dataframe
-    for duration in [4.0]:
+    for duration in [4.0, 2.0, 1.0]:
         for numberOfNotes in [3, 4]:
             df = _texturizeAnnotationScore(df, duration, numberOfNotes)
     # Step 3: Turn salami-slice into fixed-duration steps
