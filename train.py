@@ -31,7 +31,7 @@ tf.random.set_seed(RANDOMSEED)
 
 import mlflow
 import mlflow.tensorflow
-from mlflow import log_metric, log_param, log_artifact
+from mlflow import log_metric, log_param, log_artifacts
 
 
 class InputOutput(object):
@@ -255,6 +255,7 @@ if __name__ == "__main__":
             sequenceLength=args.sequence_length,
             scrutinizeData=args.scrutinize_data,
         )
+        log_artifacts(DATASETDIR, artifact_path="dataset")
     if args.syntheticDataStrategy:
         if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
             generateDataset(
@@ -266,6 +267,7 @@ if __name__ == "__main__":
                 sequenceLength=args.sequence_length,
                 scrutinizeData=args.scrutinize_data,
             )
+            log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
 
     mlflow.tensorflow.autolog()
     log_param("inputs", args.input_representations)
@@ -273,7 +275,7 @@ if __name__ == "__main__":
     log_param("model", args.model)
     log_param("syntheticDataStrategy", args.syntheticDataStrategy)
     log_param("scrutinize_data", args.scrutinize_data)
-    log_param("sequenceLength", args.sequece_length)
+    log_param("sequenceLength", args.sequence_length)
 
     train(
         syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
