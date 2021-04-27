@@ -12,7 +12,7 @@ from joint_parser import parseAnnotationAndScore, parseAnnotationAndAnnotation
 from argparse import ArgumentParser
 
 
-def generateDataset(synthetic=False):
+def generateDataset(synthetic=False, texturize=False):
     statsdict = {
         "file": [],
         "annotation": [],
@@ -33,7 +33,9 @@ def generateDataset(synthetic=False):
             if not synthetic:
                 df = parseAnnotationAndScore(annotation, score)
             else:
-                df = parseAnnotationAndAnnotation(annotation, annotation)
+                df = parseAnnotationAndAnnotation(
+                    annotation, annotation, texturize=texturize
+                )
             outpath = os.path.join(datasetDir, split, nickname + ".tsv")
             df.to_csv(outpath, sep="\t")
             collection = nickname.split("-")[0]
@@ -62,5 +64,10 @@ if __name__ == "__main__":
         action="store_true",
         help="Use (annotation, annotation) pairs, ignore the real scores.",
     )
+    parser.add_argument(
+        "--texturize",
+        action="store_true",
+        help="Texturize block chords. Ignored unless synthetic=True."
+    )
     args = parser.parse_args()
-    generateDataset(synthetic=args.synthetic)
+    generateDataset(synthetic=args.synthetic, texturize=args.texturize)
