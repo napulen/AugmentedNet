@@ -273,6 +273,7 @@ if __name__ == "__main__":
     log_param("model", args.model)
     log_param("syntheticDataStrategy", args.syntheticDataStrategy)
     log_param("scrutinize_data", args.scrutinize_data)
+    log_param("sequenceLength", args.sequece_length)
 
     train(
         syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
