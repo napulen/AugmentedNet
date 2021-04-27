@@ -168,4 +168,7 @@ available_representations = {
     "LocalKey35": LocalKey35,
     "ChordRoot35": ChordRoot35,
     "ChordQuality15": ChordQuality15,
+    "HarmonicRhythm2": HarmonicRhythm2,
+    "TonicizedKey35": TonicizedKey35,
+    "PitchClassSet94": PitchClassSet94,
 }
