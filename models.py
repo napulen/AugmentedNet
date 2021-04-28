@@ -230,6 +230,7 @@ def modifiedMicchi2020(inputs, outputs):
 
 available_models = {
     "simpleGRU": simpleGRU,
+    "encoderDecoderGRU": encoderDecoderGRU,
     "micchi2020": micchi2020,
     "modifiedMicchi2020": modifiedMicchi2020,
 }
