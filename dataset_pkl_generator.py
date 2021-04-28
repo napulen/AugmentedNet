@@ -85,7 +85,7 @@ def generateDataset(
             originalIndex = len(df.index)
             df = df[
                 # (df.qualitySquaredSum < 0.75)
-                & (df.measureMisalignment == False)
+                (df.measureMisalignment == False)
                 # & (df.incongruentBass < 0.8)
             ]
             filteredIndex = len(df.index)
