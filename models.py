@@ -158,9 +158,9 @@ def modifiedMicchi2020(inputs, outputs):
         inputFeatures = i.array.shape[2]
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
-        xi = layers.Dense(32)(xi)
-        xi = layers.BatchNormalization()(xi)
-        xi = layers.Activation("relu")(xi)
+        # xi = layers.Dense(32)(xi)
+        # xi = layers.BatchNormalization()(xi)
+        # xi = layers.Activation("relu")(xi)
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
