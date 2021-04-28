@@ -28,7 +28,7 @@ def _padToSequenceLength(arr, sequenceLength):
 
 
 def _getTranspositions(df):
-    ret = INTERVALCLASSES
+    ret = INTERVALCLASSES.copy()
     ret.remove("P1")
     return ret
     localKeys = df.a_localKey.to_list()
