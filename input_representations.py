@@ -8,11 +8,13 @@ from cache import (
 from feature_representation import (
     PITCHCLASSES,
     NOTENAMES,
+    SPELLINGS,
     INTERVALCLASSES,
     FeatureRepresentation,
     FeatureRepresentationTI,
 )
 import numpy as np
+import re
 
 # NOTENAMEDEFAULTCLASS = {
 #     "C": 0,
@@ -142,6 +144,67 @@ class Intervals39(FeatureRepresentationTI):
             intervals = [INTERVALCLASSES[x] for x in np.nonzero(manyhot)[0]]
             ret.append(tuple(intervals))
         return ret
+
+
+class Bass35(FeatureRepresentation):
+    features = len(SPELLINGS)
+
+    def run(self, transposition="P1"):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        for frame, notes in enumerate(self.df.s_notes):
+            bass = re.sub(r"\d", "", notes[0])
+            transposed = TransposePitch(bass, transposition)
+            if transposed in SPELLINGS:
+                spellingIndex = SPELLINGS.index(transposed)
+                array[frame, spellingIndex] = 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != len(SPELLINGS):
+            raise IndexError("Strange array shape.")
+        return [SPELLINGS[np.argmax(onehot)] for onehot in array]
+
+
+class Chromagram35(FeatureRepresentation):
+    features = len(SPELLINGS)
+
+    def run(self, transposition="P1"):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        for frame, notes in enumerate(self.df.s_notes):
+            notes = [re.sub(r"\d", "", n) for n in notes]
+            for note in notes:
+                transposed = TransposePitch(note, transposition)
+                if transposed in SPELLINGS:
+                    spellingIndex = SPELLINGS.index(transposed)
+                    array[frame, spellingIndex] = 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != len(SPELLINGS):
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            notes = [SPELLINGS[x] for x in np.nonzero(manyhot)[0]]
+            ret.append(tuple(notes))
+        return ret
+
+
+class BassChromagram70(FeatureRepresentation):
+    features = Bass35.features + Chromagram35.features
+
+    def run(self, transposition="P1"):
+        self.bass35 = Bass35(self.df).run(transposition)
+        self.chromagram35 = Chromagram35(self.df).run(transposition)
+        array = np.concatenate((self.bass35, self.chromagram35), axis=1)
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        bass35 = Bass35.decode(array[:, : Bass35.features])
+        chromagram35 = Chromagram35.decode(array[:, Bass35.features :])
+        return [(b, ch) for b, ch in zip(bass35, chromagram35)]
 
 
 class BassChromagram38(FeatureRepresentation):
