@@ -104,7 +104,7 @@ class Intervals19(FeatureRepresentationTI):
         for frame, intervals in enumerate(self.df.s_intervals):
             for interval in intervals:
                 intervalObj = m21IntervalStr(interval)
-                chromatic = intervalObj.semitones
+                chromatic = intervalObj.chromatic.mod12
                 genericClass = intervalObj.generic.simpleUndirected - 1
                 array[frame, genericClass] = 1
                 array[frame, chromatic + len(NOTENAMES)] = 1
