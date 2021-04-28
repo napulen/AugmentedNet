@@ -3,6 +3,43 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
+def encoderDecoderGRU(inputs, outputs):
+    # (raw) inputs of the network
+    x = []
+    # inputs after batchnorm, a dense layer to induce sparsity, etc.
+    xprime = []
+    for i in inputs:
+        sequenceLength = i.array.shape[1]
+        inputFeatures = i.array.shape[2]
+        xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
+        x.append(xi)
+        xi = layers.GRU(32)(xi)
+        xi = layers.BatchNormalization()(xi)
+        xprime.append(xi)
+    if len(x) > 1:
+        inputs = layers.Concatenate()([xi for xi in xprime])
+    else:
+        inputs = xprime[0]
+    h = layers.RepeatVector(sequenceLength)(inputs)
+    # h = layers.Dense(64)(inputs)
+    # h = layers.BatchNormalization()(h)
+    # h = layers.Activation("relu")(h)
+    # h = layers.Dense(32)(h)
+    # h = layers.BatchNormalization()(h)
+    # h = layers.Activation("relu")(h)
+    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
+    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
+    y = []
+    for output in outputs:
+        outputFeatures = output.array.shape[2]
+        out = layers.Dense(outputFeatures, name=output.name)(h)
+        y.append(out)
+    model = keras.Model(inputs=x, outputs=y)
+    return model
+
+
 def simpleGRU(inputs, outputs):
     # (raw) inputs of the network
     x = []
