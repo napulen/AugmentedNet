@@ -100,6 +100,7 @@ def micchi2020(inputs, outputs):
     )(x)
 
     # I don't think we need the TimeDistributed
+    # however, leaving as is
     # https://stackoverflow.com/questions/47305618
     # https://github.com/keras-team/keras/issues/11547
     x = layers.TimeDistributed(layers.Dense(64, activation="tanh"))(x)

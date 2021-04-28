@@ -267,6 +267,7 @@ available_representations = {
     "Intervals39": Intervals39,
     "Intervals19": Intervals19,
     "BassChromagram38": BassChromagram38,
+    "BassChromagram70": BassChromagram70,
     "BassIntervals58": BassIntervals58,
     "BassChromagramIntervals77": BassChromagramIntervals77,
 }
