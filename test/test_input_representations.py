@@ -2,8 +2,13 @@ import unittest
 import io
 import pandas as pd
 import numpy as np
-from input_representations import BassChromagram38, BassIntervals58
+from input_representations import (
+    BassChromagram38,
+    BassIntervals58,
+    Intervals19,
+)
 from joint_parser import J_LISTTYPE_COLUMNS
+from music21.interval import Interval
 
 haydn = """
 j_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_isOnset,a_pitchNames,a_bass,a_root,a_inversion,a_quality,a_pcset,a_localKey,a_tonicizedKey,a_degree1,a_degree2,measureMisalignment,qualityScoreNotes,qualityNonChordTones,qualityMissingChordTones,qualitySquaredSum
@@ -411,6 +416,73 @@ haydnBassChromagram38DA = [
     "3 5 1 2 0 0 4 0 8 0 0 1 2 0 0 0 0 0 4 5 9 4 11 4 7 5 2 8 0 4 1 10 4 0 9 2 0 5".split(),
 ]
 
+haydnIntervals19GT = [
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0".split(),
+    "0 0 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0".split(),
+    "0 0 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0".split(),
+    "0 0 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "0 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0".split(),
+    "1 0 0 1 0 1 0 1 0 0 0 0 1 0 0 1 0 0 0".split(),
+    "1 0 0 1 0 1 0 1 0 0 0 0 1 0 0 1 0 0 0".split(),
+    "1 0 0 1 0 1 0 1 0 0 0 0 1 0 0 1 0 0 0".split(),
+    "1 0 0 1 0 1 0 1 0 0 0 0 1 0 0 1 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 0 1".split(),
+    "0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 0 1".split(),
+    "0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 0 1".split(),
+    "0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 0 1".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+    "1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 0".split(),
+]
+
 
 def _load_dfgt(csvGT):
     csvGTF = io.StringIO(csvGT)
@@ -505,3 +577,35 @@ class TestBassIntervals58(unittest.TestCase):
         for timestep, (gt, x) in enumerate(zip(daArray, daGT)):
             with self.subTest(timestep=timestep):
                 self.assertEqual(gt.tolist(), x.tolist())
+
+
+class TestIntervals19(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+        self.df = _load_dfgt(haydn)
+        self.timesteps = len(self.df.index)
+        self.transpositions = ["m2", "M6", "P5", "d7"]
+
+    def test_encoding(self):
+        encoding = Intervals19(self.df).array
+        encodingGT = np.array(haydnIntervals19GT, dtype="i1")
+        for timestep in range(self.timesteps):
+            with self.subTest(timestep=timestep):
+                ar = np.nonzero(encoding[timestep])
+                arGT = np.nonzero(encodingGT[timestep])
+                self.assertEqual(tuple(ar[0]), tuple(arGT[0]))
+
+    def test_decoding(self):
+        encoding = Intervals19(self.df).array
+        decoded = Intervals19.decode(encoding)
+        for timestep, (gt, x) in enumerate(zip(self.df.s_intervals, decoded)):
+            intervals = [Interval(i) for i in gt]
+            generics = [i.generic.simpleUndirected for i in intervals]
+            generics = tuple(sorted(set(generics)))
+            chromatics = [i.semitones for i in intervals]
+            chromatics = tuple(sorted(set(chromatics)))
+            with self.subTest(timestep=timestep):
+                self.assertEqual((generics, chromatics), x)
+
+    # def test_data_augmentation(self):
+    #     TODO: but it should be transposition invariant

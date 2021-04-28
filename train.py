@@ -88,11 +88,11 @@ def printTrainingExample(x, y):
     ret = {}
     for xi in x:
         representationName = xi.name.split("_")[-1]
-        decoded = availableInputs[representationName].decode(xi.array[1000])
+        decoded = availableInputs[representationName].decode(xi.array[0])
         ret[representationName] = decoded
     for yi in y:
         representationName = yi.name.split("_")[-1]
-        decoded = availableOutputs[representationName].decode(yi.array[1000])
+        decoded = availableOutputs[representationName].decode(yi.array[0])
         ret[representationName] = decoded
     df = pd.DataFrame(ret)
     print(df)

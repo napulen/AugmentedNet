@@ -1,12 +1,14 @@
 from music21.key import Key
 from music21.pitch import Pitch
-from music21.interval import Interval
+from music21.interval import Interval, intervalFromGenericAndChromatic
 
 _transposeKey = {}
 _transposePitch = {}
 _transposePcSet = {}
 _pitch = {}
 _key = {}
+_intervalStr = {}
+_intervalGenChr = {}
 
 
 def TransposeKey(key, interval):
@@ -40,6 +42,23 @@ def TransposePcSet(pcset, interval):
     transposed = [(x + semitones) % 12 for x in pcset]
     transposed = tuple(sorted(transposed))
     return transposed
+
+
+def m21IntervalStr(interval):
+    if interval in _intervalStr:
+        return _intervalStr[interval]
+    intervalObj = Interval(interval)
+    _intervalStr[interval] = intervalObj
+    return intervalObj
+
+
+def m21IntervalGenChr(generic, chromatic):
+    duple = (generic, chromatic)
+    if duple in _intervalGenChr:
+        return _intervalGenChr[duple]
+    intervalObj = intervalFromGenericAndChromatic(generic, chromatic)
+    _intervalGenChr[duple] = intervalObj
+    return intervalObj
 
 
 def m21Key(key):

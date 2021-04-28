@@ -1,4 +1,10 @@
-from cache import TransposePitch, m21Pitch, m21Key
+from cache import (
+    TransposePitch,
+    m21Pitch,
+    m21Key,
+    m21IntervalStr,
+    m21IntervalGenChr,
+)
 from feature_representation import (
     PITCHCLASSES,
     NOTENAMES,
@@ -90,6 +96,32 @@ class Chromagram19(FeatureRepresentation):
         return ret
 
 
+class Intervals19(FeatureRepresentationTI):
+    features = len(NOTENAMES) + len(PITCHCLASSES)
+
+    def run(self):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        for frame, intervals in enumerate(self.df.s_intervals):
+            for interval in intervals:
+                intervalObj = m21IntervalStr(interval)
+                chromatic = intervalObj.semitones
+                genericClass = intervalObj.generic.simpleUndirected - 1
+                array[frame, genericClass] = 1
+                array[frame, chromatic + len(NOTENAMES)] = 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            generics = (np.nonzero(manyhot[:7])[0] + 1).tolist()
+            chromatics = np.nonzero(manyhot[7:])[0].tolist()
+            ret.append((tuple(generics), tuple(chromatics)))
+        return ret
+
+
 class Intervals39(FeatureRepresentationTI):
     features = len(INTERVALCLASSES)
 
@@ -170,6 +202,7 @@ available_representations = {
     "Bass19": Bass19,
     "Chromagram19": Chromagram19,
     "Intervals39": Intervals39,
+    "Intervals19": Intervals19,
     "BassChromagram38": BassChromagram38,
     "BassIntervals58": BassIntervals58,
     "BassChromagramIntervals77": BassChromagramIntervals77,
