@@ -99,7 +99,11 @@ def printTrainingExample(x, y):
     print(df)
 
 
-def train(syntheticDataStrategy=None, modelName="simpleGRU"):
+def train(
+    syntheticDataStrategy=None,
+    modelName="simpleGRU",
+    monitoredMetric="val_training_y_LocalKey35_accuracy",
+):
     if not syntheticDataStrategy:
         (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
     elif syntheticDataStrategy == "syntheticOnly":
@@ -156,11 +160,11 @@ def train(syntheticDataStrategy=None, modelName="simpleGRU"):
         ),
         callbacks=[
             EarlyStopping(
-                monitor="training_y_LocalKey35_accuracy", patience=3
+                monitor=monitoredMetric, patience=3
             ),
             ModelCheckpoint(
                 "weights.{epoch:02d}-{val_loss:.2f}.hdf5",
-                monitor="training_y_LocalKey35_accuracy",
+                monitor=monitoredMetric,
                 save_best_only=True,
             ),
         ],
@@ -248,6 +252,12 @@ if __name__ == "__main__":
         action="store_true",
         default=globalArgs.SCRUTINIZEDATA,
     )
+    parser.add_argument(
+        "--monitored_metric",
+        type=str,
+        default=globalArgs.MONITOREDMETRIC,
+        help="Metric observed by EarlyStopping and ModelCheckpoint.",
+    )
 
     args = parser.parse_args()
 
@@ -288,7 +298,10 @@ if __name__ == "__main__":
     log_param("syntheticDataStrategy", args.syntheticDataStrategy)
     log_param("scrutinize_data", args.scrutinize_data)
     log_param("sequenceLength", args.sequence_length)
+    log_param("monitoredMetric", args.monitored_metric)
 
     train(
-        syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
+        syntheticDataStrategy=args.syntheticDataStrategy,
+        modelName=args.model,
+        monitoredMetric=args.monitored_metric,
     )
