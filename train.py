@@ -32,7 +32,7 @@ tf.random.set_seed(RANDOMSEED)
 import mlflow
 import mlflow.tensorflow
 from mlflow import log_metric, log_param, log_artifacts
-from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.python.keras.callbacks import ModelCheckpoint
 
 
 class InputOutput(object):
@@ -159,9 +159,6 @@ def train(
             yv,
         ),
         callbacks=[
-            EarlyStopping(
-                monitor=monitoredMetric, patience=3
-            ),
             ModelCheckpoint(
                 "weights.{epoch:02d}-{val_loss:.2f}.hdf5",
                 monitor=monitoredMetric,
