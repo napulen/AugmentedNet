@@ -8,7 +8,11 @@ import numpy as np
 from common import FIXEDOFFSET, FLOATSCALE
 import io
 from itertools import combinations
-from texturizers import getTemplate
+from texturizers import (
+    applyTextureTemplate,
+    available_durations,
+    available_number_of_notes,
+)
 
 S_COLUMNS = [
     "s_offset",
@@ -152,8 +156,7 @@ def _texturizeAnnotationScore(df, duration, numberOfNotes):
             Interval(Pitch(n1), Pitch(n2)).simpleName
             for n1, n2 in combinations(notes, 2)
         ]
-        template = getTemplate(duration, len(notes))
-        texture = template.format(notes=notes, intervals=intervals)
+        texture = applyTextureTemplate(duration, notes, intervals)
         textureF = io.StringIO(texture)
         texturedf = pd.read_csv(textureF)
         texturedf["s_offset"] += offset
@@ -186,8 +189,8 @@ def parseAnnotationAsScore(f, texturize=False, fixedOffset=FIXEDOFFSET):
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt=fmt)
     # Step 2: Texturize the dataframe
-    for duration in [4.0, 2.0, 1.0]:
-        for numberOfNotes in [3, 4]:
+    for duration in available_durations:
+        for numberOfNotes in available_number_of_notes:
             df = _texturizeAnnotationScore(df, duration, numberOfNotes)
     # Step 3: Turn salami-slice into fixed-duration steps
     df = _reindexDataFrame(df, fixedOffset=fixedOffset)

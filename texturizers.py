@@ -1,189 +1,141 @@
 import random
 
-########
-# Triads
-########
-whole_triad_basssplit = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,2.0,,['{notes[0]}'],[],[True]
-2.0,2.0,,"['{notes[1]}', '{notes[2]}']",['{intervals[2]}'],"[True, True]"
+
+class TextureTemplate(object):
+    supported_durations = [4.0, 2.0, 1.0]
+    supported_number_of_notes = [3, 4]
+
+    def __init__(self, duration, notes, intervals):
+        self.numberOfNotes = len(notes)
+        if duration not in self.supported_durations:
+            raise ValueError("Wrong duration value for this template.")
+        if self.numberOfNotes not in self.supported_number_of_notes:
+            raise ValueError(
+                "This template doesn't support that number of notes."
+            )
+        self.duration = duration
+        self.notes = notes
+        self.intervals = intervals
+        self.header = (
+            "s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset\n"
+        )
+        if self.numberOfNotes == 3:
+            self.template = self.templateTriad
+        elif self.numberOfNotes == 4:
+            self.template = self.templateSeventh
+
+    def templateTriad(self):
+        raise NotImplemented()
+
+    def templateSeventh(self):
+        raise NotImplemented()
+
+    def __str__(self):
+        return self.header + self.template()
+
+    def __repr__(self):
+        return str(self)
+
+
+class BassSplit(TextureTemplate):
+    def templateTriad(self):
+        dur = self.duration / 2
+        return f"""
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
 """
 
-half_triad_basssplit = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,1.0,,['{notes[0]}'],[],[True]
-1.0,1.0,,"['{notes[1]}', '{notes[2]}']",['{intervals[2]}'],"[True, True]"
-"""
-
-quarter_triad_basssplit = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,0.5,,['{notes[0]}'],[],[True]
-0.5,0.5,,"['{notes[1]}', '{notes[2]}']",['{intervals[2]}'],"[True, True]"
-"""
-
-
-whole_triad_alberti = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,1.0,,['{notes[0]}'],[],[True]
-1.0,1.0,,['{notes[2]}'],[],[True]
-2.0,1.0,,['{notes[1]}'],[],[True]
-3.0,1.0,,['{notes[2]}'],[],[True]
-"""
-
-half_triad_alberti = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,0.5,,['{notes[0]}'],[],[True]
-0.5,0.5,,['{notes[2]}'],[],[True]
-1.0,0.5,,['{notes[1]}'],[],[True]
-1.5,0.5,,['{notes[2]}'],[],[True]
-"""
-
-quarter_triad_alberti = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,0.25,,['{notes[0]}'],[],[True]
-0.25,0.25,,['{notes[2]}'],[],[True]
-0.5,0.25,,['{notes[1]}'],[],[True]
-0.75,0.25,,['{notes[2]}'],[],[True]
-"""
-
-
-whole_triad_block = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,4.0,,"['{notes[0]}', '{notes[1]}', '{notes[2]}']","['{intervals[0]}', '{intervals[1]}']","[True, True, True]"
-"""
-
-half_triad_block = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,2.0,,"['{notes[0]}', '{notes[1]}', '{notes[2]}']","['{intervals[0]}', '{intervals[1]}']","[True, True, True]"
-"""
-
-quarter_triad_block = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,1.0,,"['{notes[0]}', '{notes[1]}', '{notes[2]}']","['{intervals[0]}', '{intervals[1]}']","[True, True, True]"
+    def templateSeventh(self):
+        dur = self.duration / 2
+        return f"""
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
 """
 
 
-##########
-# Sevenths
-##########
-whole_seventh_basssplit = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,2.0,,['{notes[0]}'],[],[True]
-2.0,2.0,,"['{notes[1]}', '{notes[2]}', '{notes[3]}']","['{intervals[3]}', '{intervals[4]}']","[True, True, True]"
+class Alberti(TextureTemplate):
+    def templateTriad(self):
+        dur = self.duration / 4
+        return f"""
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[2]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]}'],[],[True]
+{dur*3},{dur},,['{self.notes[2]}'],[],[True]
 """
 
-half_seventh_basssplit = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,1.0,,['{notes[0]}'],[],[True]
-1.0,1.0,,"['{notes[1]}', '{notes[2]}', '{notes[3]}']","['{intervals[3]}', '{intervals[4]}']","[True, True, True]"
-"""
-
-quarter_seventh_basssplit = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,0.5,,['{notes[0]}'],[],[True]
-0.5,0.5,,"['{notes[1]}', '{notes[2]}', '{notes[3]}']","['{intervals[3]}', '{intervals[4]}']","[True, True, True]"
-"""
-
-
-whole_seventh_alberti = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,1.0,,['{notes[0]}'],[],[True]
-1.0,1.0,,['{notes[3]}'],[],[True]
-2.0,1.0,,['{notes[1]}'],[],[True]
-3.0,1.0,,['{notes[2]}'],[],[True]
-"""
-
-half_seventh_alberti = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,0.5,,['{notes[0]}'],[],[True]
-0.5,0.5,,['{notes[3]}'],[],[True]
-1.0,0.5,,['{notes[1]}'],[],[True]
-1.5,0.5,,['{notes[2]}'],[],[True]
-"""
-
-quarter_seventh_alberti = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,0.25,,['{notes[0]}'],[],[True]
-0.25,0.25,,['{notes[3]}'],[],[True]
-0.5,0.25,,['{notes[1]}'],[],[True]
-0.75,0.25,,['{notes[2]}'],[],[True]
+    def templateSeventh(self):
+        dur = self.duration / 4
+        return f"""
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[3]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]}'],[],[True]
+{dur*3},{dur},,['{self.notes[2]}'],[],[True]
 """
 
 
-whole_seventh_block = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,4.0,,"['{notes[0]}', '{notes[1]}', '{notes[2]}', '{notes[3]}']","['{intervals[0]}', '{intervals[1]}', '{intervals[2]}']","[True, True, True, True]"
+class BlockChord(TextureTemplate):
+    def templateTriad(self):
+        dur = self.duration
+        return f"""
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
 """
 
-half_seventh_block = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,2.0,,"['{notes[0]}', '{notes[1]}', '{notes[2]}', '{notes[3]}']","['{intervals[0]}', '{intervals[1]}', '{intervals[2]}']","[True, True, True, True]"
-"""
-
-quarter_seventh_block = """
-s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
-0.0,1.0,,"['{notes[0]}', '{notes[1]}', '{notes[2]}', '{notes[3]}']","['{intervals[0]}', '{intervals[1]}', '{intervals[2]}']","[True, True, True, True]"
+    def templateSeventh(self):
+        dur = self.duration
+        return f"""
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[True, True, True, True]"
 """
 
 
 available_templates = {
-    "whole": {
-        "triad": [
-            whole_triad_basssplit,
-            whole_triad_alberti,
-            whole_triad_block,
-        ],
-        "seventh": [
-            whole_seventh_basssplit,
-            whole_seventh_alberti,
-            whole_seventh_block,
-        ],
-    },
-    "half": {
-        "triad": [
-            half_triad_basssplit,
-            half_triad_alberti,
-            half_triad_block,
-        ],
-        "seventh": [
-            half_seventh_basssplit,
-            half_seventh_alberti,
-            half_seventh_block,
-        ],
-    },
-    "quarter": {
-        "triad": [
-            quarter_triad_basssplit,
-            quarter_triad_alberti,
-            quarter_triad_block,
-        ],
-        "seventh": [
-            quarter_seventh_basssplit,
-            quarter_seventh_alberti,
-            quarter_seventh_block,
-        ],
-    },
+    "BassSplit": BassSplit,
+    "Alberti": Alberti,
+    "BlockChord": BlockChord,
 }
 
-
-def getTemplate(duration, numberOfNotes):
-    if duration == 4.0:
-        duration = "whole"
-    elif duration == 2.0:
-        duration = "half"
-    elif duration == 1.0:
-        duration = "quarter"
-
-    if numberOfNotes == 3:
-        numberOfNotes = "triad"
-    elif numberOfNotes == 4:
-        numberOfNotes = "seventh"
-    if (
-        not duration in available_templates
-        or not numberOfNotes in available_templates[duration]
-    ):
-        raise KeyError(
-            f"Cannot find a template for {duration}, {numberOfNotes}"
+available_durations = list(
+    sorted(
+        set(
+            [
+                d
+                for t in available_templates.values()
+                for d in t.supported_durations
+            ]
         )
-    available = available_templates[duration][numberOfNotes]
-    return random.choice(available)
+    )
+)
+
+available_number_of_notes = list(
+    sorted(
+        set(
+            [
+                n
+                for t in available_templates.values()
+                for n in t.supported_number_of_notes
+            ]
+        )
+    )
+)
+
+
+def applyTextureTemplate(duration, notes, intervals, templateName=None):
+    numberOfNotes = len(notes)
+    if templateName:
+        if templateName not in available_templates:
+            raise KeyError()
+        else:
+            template = available_templates[templateName]
+            return str(template(duration, notes, intervals))
+    if (
+        duration not in available_durations
+        or numberOfNotes not in available_number_of_notes
+    ):
+        raise KeyError()
+    relevantTemplates = []
+    for template in available_templates.values():
+        if (
+            duration in template.supported_durations
+            and numberOfNotes in template.supported_number_of_notes
+        ):
+            relevantTemplates.append(template)
+    return str(random.choice(relevantTemplates)(duration, notes, intervals))
