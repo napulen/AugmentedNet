@@ -32,6 +32,7 @@ tf.random.set_seed(RANDOMSEED)
 import mlflow
 import mlflow.tensorflow
 from mlflow import log_metric, log_param, log_artifacts
+from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 
 class InputOutput(object):
@@ -119,6 +120,7 @@ def train(syntheticDataStrategy=None, modelName="simpleGRU"):
     printTrainingExample(X_train, y_train)
 
     model = models.available_models[modelName](X_train, y_train)
+
     model.compile(
         optimizer="adam",
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -152,6 +154,12 @@ def train(syntheticDataStrategy=None, modelName="simpleGRU"):
             xv,
             yv,
         ),
+        callbacks=[
+            EarlyStopping(monitor="val_localKey35_accuracy", patience=3),
+            ModelCheckpoint(
+                monitor="val_localKey35_accuracy", save_best_only=True
+            ),
+        ],
     )
 
     # tl = keras.Sequential([
