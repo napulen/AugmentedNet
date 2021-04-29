@@ -55,9 +55,9 @@ def generateDataset(
         "Inversion4",
         "ChordRoot35",
     ],
-    sequenceLength=64,
+    sequenceLength=640,
     scrutinizeData=True,
-    testSetOn = False,
+    testSetOn=False,
 ):
     outputArrays = {}
     for split in ["training", "validation"]:
@@ -85,7 +85,7 @@ def generateDataset(
         else:
             if split == "test":
                 continue
-        print(f"{row.split} -> {split}", row.file)
+        print(f"{row.split} -used-as-> {split}", row.file)
         tsvlocation = os.path.join(datasetDir, row.split, row.file)
         df = pd.read_csv(tsvlocation + ".tsv", sep="\t")
         for col in J_LISTTYPE_COLUMNS:
@@ -181,14 +181,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--sequence_length",
         type=int,
-        default=64,
-        choices=range(16, 128),
+        default=640,
+        choices=range(64, 640),
     )
     parser.add_argument(
         "--scrutinize_data",
         action="store_true",
         default=True,
-        help="Exclude bad-quality annotations from the training data."
+        help="Exclude bad-quality annotations from the training data.",
     )
     args = parser.parse_args()
     generateDataset(
