@@ -295,7 +295,6 @@ if __name__ == "__main__":
     log_param("syntheticDataStrategy", args.syntheticDataStrategy)
     log_param("scrutinize_data", args.scrutinize_data)
     log_param("sequenceLength", args.sequence_length)
-    log_param("monitoredMetric", args.monitored_metric)
 
     train(
         syntheticDataStrategy=args.syntheticDataStrategy,
