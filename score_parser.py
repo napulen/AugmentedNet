@@ -1,6 +1,7 @@
 import music21
 from music21.interval import Interval
 from music21.pitch import Pitch
+from music21.chord import Chord
 from numpy.lib.ufunclike import fix
 import pandas as pd
 import numpy as np
@@ -115,6 +116,19 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     df.fillna(method="bfill", inplace=True)
     df = df.reindex(index=newIndex)
     return df
+
+
+def _engraveScore(df):
+    """Useful for debugging _texturizeAnnotationScore."""
+    chords = music21.stream.Stream()
+    for row in df.itertuples():
+        if row.s_measure == 0:
+            continue
+        pitches = row.s_notes
+        duration = row.s_duration
+        chord = Chord(pitches, quarterLength=duration)
+        chords.append(chord)
+    return chords
 
 
 def _texturizeAnnotationScore(df, duration, numberOfNotes):
