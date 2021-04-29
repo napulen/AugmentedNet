@@ -57,9 +57,10 @@ def generateDataset(
     ],
     sequenceLength=64,
     scrutinizeData=True,
+    testSetOn = False,
 ):
     outputArrays = {}
-    for split in ["training", "validation", "test"]:
+    for split in ["training", "validation"]:
         for x in inputRepresentations:
             outputArrays[split + f"_X_{x}"] = []
         for y in outputRepresentations:
@@ -75,13 +76,22 @@ def generateDataset(
             datasetSummary.collection == collection
         ]
     for row in datasetSummary.itertuples():
-        print(row.split, row.file)
+        split = row.split
+        if testSetOn:
+            if split == "validation":
+                split = "training"
+            elif split == "test":
+                split = "validation"
+        else:
+            if split == "test":
+                continue
+        print(f"{row.split} -> {split}", row.file)
         tsvlocation = os.path.join(datasetDir, row.split, row.file)
         df = pd.read_csv(tsvlocation + ".tsv", sep="\t")
         for col in J_LISTTYPE_COLUMNS:
             df[col] = df[col].apply(eval)
         # Filter the bad quality annotations
-        if scrutinizeData and row.split == "training":
+        if scrutinizeData and split == "training":
             originalIndex = len(df.index)
             df = df[
                 (df.qualitySquaredSum < 0.75)
@@ -94,7 +104,7 @@ def generateDataset(
             inputLayer = availableInputs[inputRepresentation](df)
             Xi = inputLayer.array
             Xi = _padToSequenceLength(Xi, sequenceLength)
-            if dataAugmentation and row.split == "training":
+            if dataAugmentation and split == "training":
                 transpositions = _getTranspositions(df)
                 print("\t", transpositions)
                 for transposition in inputLayer.dataAugmentation(
@@ -108,14 +118,14 @@ def generateDataset(
                             ),
                         )
                     )
-            npzfile = f"{row.split}_X_{inputRepresentation}"
+            npzfile = f"{split}_X_{inputRepresentation}"
             for sequence in Xi:
                 outputArrays[npzfile].append(sequence)
         for outputRepresentation in outputRepresentations:
             outputLayer = availableOutputs[outputRepresentation](df)
             yi = outputLayer.array
             yi = _padToSequenceLength(yi, sequenceLength)
-            if dataAugmentation and row.split == "training":
+            if dataAugmentation and split == "training":
                 for tr in outputLayer.dataAugmentation(transpositions):
                     yi = np.concatenate(
                         (
@@ -124,7 +134,7 @@ def generateDataset(
                         )
                     )
 
-            npzfile = f"{row.split}_y_{outputRepresentation}"
+            npzfile = f"{split}_y_{outputRepresentation}"
             for sequence in yi:
                 outputArrays[npzfile].append(sequence)
     np.savez_compressed(datasetDir, **outputArrays)

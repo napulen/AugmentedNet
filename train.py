@@ -6,8 +6,6 @@ from args import (
     SEQUENCELENGTH,
     BATCHSIZE,
     RANDOMSEED,
-    INPUT_REPRESENTATIONS,
-    OUTPUT_REPRESENTATIONS,
     EPOCHS,
 )
 from common import DATASETDIR, SYNTHDATASETDIR
@@ -31,7 +29,7 @@ tf.random.set_seed(RANDOMSEED)
 
 import mlflow
 import mlflow.tensorflow
-from mlflow import log_metric, log_param, log_artifacts
+from mlflow import log_param, log_artifacts
 from tensorflow.python.keras.callbacks import ModelCheckpoint
 
 
@@ -63,7 +61,6 @@ def loadData(synthetic=False):
     datasetFile = f"{SYNTHDATASETDIR if synthetic else DATASETDIR}.npz"
     dataset = np.load(datasetFile)
     X_train, y_train = [], []
-    X_val, y_val = [], []
     X_test, y_test = [], []
     for name in dataset.files:
         array = dataset[name]
@@ -72,14 +69,10 @@ def loadData(synthetic=False):
         elif "training_y" in name:
             y_train.append(InputOutput(name, array))
         elif "validation_X" in name:
-            X_val.append(InputOutput(name, array))
-        elif "validation_y" in name:
-            y_val.append(InputOutput(name, array))
-        elif "test_X" in name:
             X_test.append(InputOutput(name, array))
-        elif "test_y" in name:
+        elif "validation_y" in name:
             y_test.append(InputOutput(name, array))
-    return (X_train, y_train), (X_val, y_val), (X_test, y_test)
+    return (X_train, y_train), (X_test, y_test)
 
 
 def printTrainingExample(x, y):
@@ -105,21 +98,17 @@ def train(
     monitoredMetric="val_training_y_LocalKey35_accuracy",
 ):
     if not syntheticDataStrategy:
-        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
+        (X_train, y_train), (X_test, y_test) = loadData(synthetic=False)
     elif syntheticDataStrategy == "syntheticOnly":
-        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=True)
+        (X_train, y_train), (X_test, y_test) = loadData(synthetic=True)
     elif syntheticDataStrategy == "concatenate":
-        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=False)
-        (Xs_train, ys_train), (_, _), (_, _) = loadData(synthetic=True)
+        (X_train, y_train), (X_test, y_test) = loadData(synthetic=False)
+        # Test portion of synthetic data is NEVER used in this case
+        (Xs_train, ys_train), (_, _) = loadData(synthetic=True)
         for x, xs in zip(X_train, Xs_train):
             x.array = np.concatenate((x.array, xs.array))
         for y, ys in zip(y_train, ys_train):
             y.array = np.concatenate((y.array, ys.array))
-    elif syntheticDataStrategy == "transfer":
-        (X_train, y_train), (X_val, y_val), (_, _) = loadData(synthetic=True)
-        (Xtr_train, ytr_train), (Xtr_val, ytr_val), (_, _) = loadData(
-            synthetic=False
-        )
 
     printTrainingExample(X_train, y_train)
 
@@ -131,7 +120,8 @@ def train(
         metrics="accuracy",
     )
 
-    for yt, yv in zip(y_train, y_val):
+    for yt, yv in zip(y_train, y_test):
+        # Go from one-hot encodings to index value
         yt.array = np.argmax(yt.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
         yv.array = np.argmax(yv.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
         if modelName in ["micchi2020", "modifiedMicchi2020"]:
@@ -139,12 +129,13 @@ def train(
             yv.array = yv.array[:, ::4]
 
     print(model.summary())
+    # Unpacking the numpy arrays inside the input and output representations
     x = [xi.array for xi in X_train]
     y = [yi.array for yi in y_train]
     x = x if len(x) > 1 else x[0]
     y = y if len(y) > 1 else y[0]
-    xv = [xi.array for xi in X_val]
-    yv = [yi.array for yi in y_val]
+    xv = [xi.array for xi in X_test]
+    yv = [yi.array for yi in y_test]
     xv = xv if len(xv) > 1 else xv[0]
     yv = yv if len(yv) > 1 else yv[0]
 
@@ -154,40 +145,15 @@ def train(
         epochs=EPOCHS,
         shuffle=True,
         batch_size=BATCHSIZE,
-        validation_data=(
-            xv,
-            yv,
-        ),
+        validation_data=(xv, yv),
         callbacks=[
             ModelCheckpoint(
-                "weights.{epoch:02d}-{val_loss:.2f}.hdf5",
+                ".model_checkpoint/weights.{epoch:02d}.hdf5",
                 monitor=monitoredMetric,
                 save_best_only=True,
             ),
         ],
     )
-
-    # tl = keras.Sequential([
-    #     keras.Input(shape=(SEQUENCELENGTH, X_train.shape[2])),
-    #     model,
-    #     layers.Dense(32),
-    #     layers.Dense(y_train.shape[2])
-    # ])
-
-    # model.trainable = False
-
-    # tl.compile(
-    #     optimizer="adam",
-    #     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-    #     metrics=["accuracy"],
-    # )
-    # tl.fit(
-    #     X_train,
-    #     y_train,
-    #     epochs=EPOCHS,
-    #     batch_size=BATCHSIZE,
-    #     validation_data=(X_val, y_val)
-    # )
 
 
 if __name__ == "__main__":
@@ -205,7 +171,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--syntheticDataStrategy",
-        choices=["syntheticOnly", "concatenate", "transfer"],
+        choices=["syntheticOnly", "concatenate"],
         default=globalArgs.SYNTHETICDATASTRATEGY,
         help="The strategy to use for synthetic training examples (if any).",
     )
@@ -255,6 +221,9 @@ if __name__ == "__main__":
         default=globalArgs.MONITOREDMETRIC,
         help="Metric observed by EarlyStopping and ModelCheckpoint.",
     )
+    parser.add_argument(
+        "--test_set_on", action="store_true", default=globalArgs.TESTSETON
+    )
 
     args = parser.parse_args()
 
@@ -273,6 +242,7 @@ if __name__ == "__main__":
             outputRepresentations=args.output_representations,
             sequenceLength=args.sequence_length,
             scrutinizeData=args.scrutinize_data,
+            testSetOn=args.test_set_on,
         )
         log_artifacts(DATASETDIR, artifact_path="dataset")
     if args.syntheticDataStrategy:
@@ -285,6 +255,7 @@ if __name__ == "__main__":
                 outputRepresentations=args.output_representations,
                 sequenceLength=args.sequence_length,
                 scrutinizeData=args.scrutinize_data,
+                testSetOn=args.test_set_on,
             )
             log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
 
@@ -295,6 +266,7 @@ if __name__ == "__main__":
     log_param("syntheticDataStrategy", args.syntheticDataStrategy)
     log_param("scrutinize_data", args.scrutinize_data)
     log_param("sequenceLength", args.sequence_length)
+    log_param("testSetOn", args.test_set_on)
 
     train(
         syntheticDataStrategy=args.syntheticDataStrategy,
