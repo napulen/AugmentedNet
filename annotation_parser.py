@@ -86,13 +86,15 @@ def _initialDataFrame(s):
         dfdict["a_inversion"].append(rn.inversion())
         dfdict["a_quality"].append(rn.commonName)
         dfdict["a_pcset"].append(tuple(sorted(set(rn.pitchClasses))))
-        dfdict["a_localKey"].append(rn.key.tonicPitchNameWithCase)
+        localKey = rn.key.tonicPitchNameWithCase
+        dfdict["a_localKey"].append(localKey)
         secondaryKey = rn.secondaryRomanNumeralKey
         if secondaryKey:
             tonicizedKey = secondaryKey.tonicPitchNameWithCase
             dfdict["a_tonicizedKey"].append(tonicizedKey)
         else:
-            dfdict["a_tonicizedKey"].append("None")
+            # if there is no tonicization, encode the local key
+            dfdict["a_tonicizedKey"].append(localKey)
         scaleDegree, alteration = rn.scaleDegreeWithAlteration
         if alteration:
             scaleDegree = f"{alteration.modifier}{scaleDegree}"
