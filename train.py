@@ -157,7 +157,9 @@ def train(syntheticDataStrategy=None, modelName="simpleGRU"):
         callbacks=[
             EarlyStopping(monitor="val_localKey35_accuracy", patience=3),
             ModelCheckpoint(
-                monitor="val_localKey35_accuracy", save_best_only=True
+                "weights.{epoch:02d}-{val_loss:.2f}.hdf5",
+                monitor="val_localKey35_accuracy",
+                save_best_only=True,
             ),
         ],
     )
