@@ -11,7 +11,8 @@ def simpleGRU(inputs, outputs):
     for i in inputs:
         sequenceLength = i.array.shape[1]
         inputFeatures = i.array.shape[2]
-        xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
+        name = i.name.replace("training_", "")
+        xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
         xi = layers.Dense(32)(xi)
         xi = layers.BatchNormalization()(xi)
@@ -34,7 +35,8 @@ def simpleGRU(inputs, outputs):
     y = []
     for output in outputs:
         outputFeatures = output.array.shape[2]
-        out = layers.Dense(outputFeatures, name=output.name)(h)
+        name = output.name.replace("training_", "")
+        out = layers.Dense(outputFeatures, name=name)(h)
         y.append(out)
     model = keras.Model(inputs=x, outputs=y)
     return model
