@@ -120,6 +120,5 @@ class TestVariables(unittest.TestCase):
         self.assertEqual(template, GT)
 
 
-
 if __name__ == "__main__":
     unittest.main()
