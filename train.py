@@ -26,11 +26,8 @@ from output_representations import (
     available_representations as availableOutputs,
 )
 
-tf.random.set_seed(RANDOMSEED)
-
 import mlflow
 import mlflow.tensorflow
-from mlflow import log_param, log_artifacts
 from tensorflow.python.keras.callbacks import ModelCheckpoint
 
 
@@ -113,12 +110,14 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
         print(f"monitored loss: {monitoredLoss}")
         logs["val_y_monitored_accuracy"] = monitoredAcc
         logs["val_y_monitored_loss"] = monitoredLoss
-        super(keras.callbacks.ModelCheckpoint, self).on_epoch_end(
-            epoch, logs=logs
-        )
+        super().on_epoch_end(epoch, logs=logs)
 
 
-def train(syntheticDataStrategy=None, modelName="simpleGRU"):
+def train(
+    syntheticDataStrategy=None,
+    modelName="simpleGRU",
+    weightsPath=".model_checkpoint/weights",
+):
     if not syntheticDataStrategy:
         (X_train, y_train), (X_test, y_test) = loadData(synthetic=False)
     elif syntheticDataStrategy == "syntheticOnly":
@@ -170,9 +169,9 @@ def train(syntheticDataStrategy=None, modelName="simpleGRU"):
         validation_data=(xv, yv),
         callbacks=[
             ModdedModelCheckpoint(
-                ".model_checkpoint/weights.{epoch:02d}.hdf5",
+                weightsPath + "{epoch:02d}-{val_y_monitored_loss:.2f}.hdf5",
                 monitor="val_y_monitored_loss",
-                mode=min,
+                mode="auto",
                 save_best_only=True,
             ),
         ],
@@ -181,6 +180,14 @@ def train(syntheticDataStrategy=None, modelName="simpleGRU"):
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Train the AugmentedNet.")
+    parser.add_argument(
+        "experiment_name",
+        choices=["testset", "multitask", "syntheticdata", "delete"],
+        help="A short name for this experiment.",
+    )
+    parser.add_argument(
+        "run_name", type=str, help="A name for this experiment run."
+    )
     parser.add_argument(
         "--nogpu",
         action="store_true",
@@ -226,7 +233,7 @@ if __name__ == "__main__":
         "--sequence_length",
         type=int,
         default=globalArgs.SEQUENCELENGTH,
-        choices=range(16, 128),
+        choices=range(64, 1000, 64),
     )
     parser.add_argument(
         "--model",
@@ -277,14 +284,19 @@ if __name__ == "__main__":
             # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
 
     mlflow.tensorflow.autolog()
-    log_param("inputs", args.input_representations)
-    log_param("outputs", args.output_representations)
-    log_param("model", args.model)
-    log_param("syntheticDataStrategy", args.syntheticDataStrategy)
-    log_param("scrutinize_data", args.scrutinize_data)
-    log_param("sequenceLength", args.sequence_length)
-    log_param("testSetOn", args.test_set_on)
+    mlflow.set_experiment(args.experiment_name)
+    mlflow.start_run(run_name=args.run_name)
+    mlflow.log_param("inputs", args.input_representations)
+    mlflow.log_param("outputs", args.output_representations)
+    mlflow.log_param("model", args.model)
+    mlflow.log_param("syntheticDataStrategy", args.syntheticDataStrategy)
+    mlflow.log_param("scrutinize_data", args.scrutinize_data)
+    mlflow.log_param("sequenceLength", args.sequence_length)
+    mlflow.log_param("testSetOn", args.test_set_on)
+    weightsPath = f".model_checkpoint/{args.experiment_name}/{args.run_name}-"
 
     train(
-        syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
+        syntheticDataStrategy=args.syntheticDataStrategy,
+        modelName=args.model,
+        weightsPath=weightsPath,
     )
