@@ -115,25 +115,29 @@ available_templates = {
 }
 
 available_durations = list(
-    sorted(
-        set(
-            [
-                d
-                for t in available_templates.values()
-                for d in t.supported_durations
-            ]
+    reversed(
+        sorted(
+            set(
+                [
+                    d
+                    for t in available_templates.values()
+                    for d in t.supported_durations
+                ]
+            )
         )
     )
 )
 
 available_number_of_notes = list(
-    sorted(
-        set(
-            [
-                n
-                for t in available_templates.values()
-                for n in t.supported_number_of_notes
-            ]
+    reversed(
+        sorted(
+            set(
+                [
+                    n
+                    for t in available_templates.values()
+                    for n in t.supported_number_of_notes
+                ]
+            )
         )
     )
 )

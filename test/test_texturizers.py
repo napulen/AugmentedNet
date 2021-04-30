@@ -63,11 +63,11 @@ s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
 
 class TestVariables(unittest.TestCase):
     def test_available_number_of_notes(self):
-        GT = [3, 4]
+        GT = [4, 3]
         self.assertEqual(available_number_of_notes, GT)
 
     def test_available_durations(self):
-        GT = [1.0, 2.0, 4.0]
+        GT = [4.0, 2.0, 1.0]
         self.assertEqual(available_durations, GT)
 
     def test_available_templates(self):
