@@ -22,6 +22,7 @@ import os
 from dataset_pkl_generator import generateDataset
 from input_representations import available_representations as availableInputs
 from output_representations import (
+    OutputRepresentation,
     available_representations as availableOutputs,
 )
 
@@ -92,11 +93,32 @@ def printTrainingExample(x, y):
     print(df)
 
 
-def train(
-    syntheticDataStrategy=None,
-    modelName="simpleGRU",
-    monitoredMetric="val_training_y_LocalKey35_accuracy",
-):
+class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
+    def on_epoch_end(self, epoch, logs={}):
+        monitored = list(availableOutputs.keys())
+        nonMonitored = [
+            "Bass35",
+            "RomanNumeral76",
+            "TonicizedKey35",
+            "PitchClassSet94",
+            "HarmonicRhythm2",
+        ]
+        monitored = [a for a in monitored if a not in nonMonitored]
+        print(f"monitored_outputs: {monitored}")
+        accuracies = [logs[f"val_y_{k}_accuracy"] for k in monitored]
+        monitoredAcc = sum(accuracies) / len(monitored)
+        losses = [logs[f"val_y_{k}_loss"] for k in monitored]
+        monitoredLoss = sum(losses)
+        print(f"monitored accuracy: {monitoredAcc}")
+        print(f"monitored loss: {monitoredLoss}")
+        logs["val_y_monitored_accuracy"] = monitoredAcc
+        logs["val_y_monitored_loss"] = monitoredLoss
+        super(keras.callbacks.ModelCheckpoint, self).on_epoch_end(
+            epoch, logs=logs
+        )
+
+
+def train(syntheticDataStrategy=None, modelName="simpleGRU"):
     if not syntheticDataStrategy:
         (X_train, y_train), (X_test, y_test) = loadData(synthetic=False)
     elif syntheticDataStrategy == "syntheticOnly":
@@ -147,9 +169,10 @@ def train(
         batch_size=BATCHSIZE,
         validation_data=(xv, yv),
         callbacks=[
-            ModelCheckpoint(
+            ModdedModelCheckpoint(
                 ".model_checkpoint/weights.{epoch:02d}.hdf5",
-                monitor=monitoredMetric,
+                monitor="val_y_monitored_loss",
+                mode=min,
                 save_best_only=True,
             ),
         ],
@@ -216,12 +239,6 @@ if __name__ == "__main__":
         default=globalArgs.SCRUTINIZEDATA,
     )
     parser.add_argument(
-        "--monitored_metric",
-        type=str,
-        default=globalArgs.MONITOREDMETRIC,
-        help="Metric observed by EarlyStopping and ModelCheckpoint.",
-    )
-    parser.add_argument(
         "--test_set_on", action="store_true", default=globalArgs.TESTSETON
     )
 
@@ -269,7 +286,5 @@ if __name__ == "__main__":
     log_param("testSetOn", args.test_set_on)
 
     train(
-        syntheticDataStrategy=args.syntheticDataStrategy,
-        modelName=args.model,
-        monitoredMetric=args.monitored_metric,
+        syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
     )
