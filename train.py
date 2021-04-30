@@ -5,7 +5,6 @@ from annotation_parser import parseAnnotation
 from args import (
     SEQUENCELENGTH,
     BATCHSIZE,
-    RANDOMSEED,
     EPOCHS,
 )
 from common import DATASETDIR, SYNTHDATASETDIR
@@ -172,7 +171,6 @@ def train(
                 weightsPath + "{epoch:02d}-{val_y_monitored_loss:.2f}.hdf5",
                 monitor="val_y_monitored_loss",
                 mode="auto",
-                save_best_only=True,
             ),
         ],
     )
