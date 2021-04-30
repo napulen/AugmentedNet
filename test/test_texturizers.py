@@ -4,6 +4,7 @@ from texturizers import (
     available_templates,
     available_durations,
     applyTextureTemplate,
+    _getRelevantTemplates,
 )
 
 
@@ -72,6 +73,12 @@ class TestVariables(unittest.TestCase):
     def test_available_templates(self):
         GT = ["BassSplit", "Alberti", "Syncopation", "BlockChord"]
         self.assertEqual(list(available_templates.keys()), GT)
+
+    def test_relevant_templates(self):
+        templates1 = _getRelevantTemplates(4.0, 4)
+        templates2 = _getRelevantTemplates(1.0, 4)
+        self.assertEqual(len(templates1), 4)
+        self.assertEqual(len(templates2), 3)
 
     def test_basssplit_whole_triad(self):
         GT = basssplit_whole_triad

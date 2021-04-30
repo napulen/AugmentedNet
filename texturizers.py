@@ -139,6 +139,17 @@ available_number_of_notes = list(
 )
 
 
+def _getRelevantTemplates(duration, numberOfNotes):
+    ret = []
+    for template in available_templates.values():
+        if (
+            duration in template.supported_durations
+            and numberOfNotes in template.supported_number_of_notes
+        ):
+            ret.append(template)
+    return ret
+
+
 def applyTextureTemplate(duration, notes, intervals, templateName=None):
     numberOfNotes = len(notes)
     if templateName:
@@ -152,11 +163,5 @@ def applyTextureTemplate(duration, notes, intervals, templateName=None):
         or numberOfNotes not in available_number_of_notes
     ):
         raise KeyError()
-    relevantTemplates = []
-    for template in available_templates.values():
-        if (
-            duration in template.supported_durations
-            and numberOfNotes in template.supported_number_of_notes
-        ):
-            relevantTemplates.append(template)
+    relevantTemplates = _getRelevantTemplates(duration, numberOfNotes)
     return str(random.choice(relevantTemplates)(duration, notes, intervals))
