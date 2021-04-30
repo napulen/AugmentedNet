@@ -19,6 +19,32 @@ s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
 0.5,0.5,,"['E-4', 'G-4', 'B--4']","['m3', 'd5']","[True, True, True]"
 """
 
+alberti_half_triad = """\
+s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
+0.0,0.5,,['C4'],[],[True]
+0.5,0.5,,['G-4'],[],[True]
+1.0,0.5,,['E-4'],[],[True]
+1.5,0.5,,['G-4'],[],[True]
+"""
+
+alberti_whole_seventh = """\
+s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
+0.0,1.0,,['C4'],[],[True]
+1.0,1.0,,['B--4'],[],[True]
+2.0,1.0,,['E-4'],[],[True]
+3.0,1.0,,['G-4'],[],[True]
+"""
+
+blockchord_quarter_triad = """\
+s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
+0.0,1.0,,"['C4', 'E-4', 'G-4']","['m3', 'd5']","[True, True, True]"
+"""
+
+blockchord_half_seventh = """\
+s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
+0.0,2.0,,"['C4', 'E-4', 'G-4', 'B--4']","['m3', 'd5', 'd7']","[True, True, True, True]"
+"""
+
 
 class TestVariables(unittest.TestCase):
     def test_available_number_of_notes(self):
@@ -52,6 +78,47 @@ class TestVariables(unittest.TestCase):
             duration, notes, intervals, templateName="BassSplit"
         )
         self.assertEqual(template, GT)
+
+    def test_alberti_half_triad(self):
+        GT = alberti_half_triad
+        duration = 2.0
+        notes = ["C4", "E-4", "G-4"]
+        intervals = ["m3", "d5", "m3"]
+        template = applyTextureTemplate(
+            duration, notes, intervals, templateName="Alberti"
+        )
+        self.assertEqual(template, GT)
+
+    def test_alberti_whole_seventh(self):
+        GT = alberti_whole_seventh
+        duration = 4.0
+        notes = ["C4", "E-4", "G-4", "B--4"]
+        intervals = ["m3", "d5", "d7", "m3", "d5", "m3"]
+        template = applyTextureTemplate(
+            duration, notes, intervals, templateName="Alberti"
+        )
+        self.assertEqual(template, GT)
+
+    def test_blockchord_quarter_triad(self):
+        GT = blockchord_quarter_triad
+        duration = 1.0
+        notes = ["C4", "E-4", "G-4"]
+        intervals = ["m3", "d5", "m3"]
+        template = applyTextureTemplate(
+            duration, notes, intervals, templateName="BlockChord"
+        )
+        self.assertEqual(template, GT)
+
+    def test_blockchord_half_seventh(self):
+        GT = blockchord_half_seventh
+        duration = 2.0
+        notes = ["C4", "E-4", "G-4", "B--4"]
+        intervals = ["m3", "d5", "d7", "m3", "d5", "m3"]
+        template = applyTextureTemplate(
+            duration, notes, intervals, templateName="BlockChord"
+        )
+        self.assertEqual(template, GT)
+
 
 
 if __name__ == "__main__":

@@ -76,13 +76,13 @@ class Alberti(TextureTemplate):
 class BlockChord(TextureTemplate):
     def templateTriad(self):
         dur = self.duration
-        return f"""
+        return f"""\
 0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
 """
 
     def templateSeventh(self):
         dur = self.duration
-        return f"""
+        return f"""\
 0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[True, True, True, True]"
 """
 
