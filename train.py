@@ -159,6 +159,13 @@ def train(
     xv = xv if len(xv) > 1 else xv[0]
     yv = yv if len(yv) > 1 else yv[0]
 
+    modelNameSuffix = (
+        "{epoch:02d}"
+        + "-{val_y_monitored_loss:.2f}"
+        + "-{val_y_monitored_accuracy:.2f}"
+        + ".hdf5",
+    )
+
     model.fit(
         x,
         y,
@@ -168,7 +175,7 @@ def train(
         validation_data=(xv, yv),
         callbacks=[
             ModdedModelCheckpoint(
-                weightsPath + "{epoch:02d}-{val_y_monitored_loss:.2f}.hdf5",
+                weightsPath + modelNameSuffix,
                 monitor="val_y_monitored_loss",
                 mode="auto",
             ),
