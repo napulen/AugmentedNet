@@ -73,6 +73,26 @@ class Alberti(TextureTemplate):
 """
 
 
+class Syncopation(TextureTemplate):
+    supported_durations = [4.0, 2.0]
+
+    def templateTriad(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,['{self.notes[2]}'],[],[True]
+{dur},{dur*2},,['{self.notes[0]}'],[],[True]
+{dur*3},{dur},,['{self.notes[1]}'],[],[True]
+"""
+
+    def templateSeventh(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,['{self.notes[3]}'],[],[True]
+{dur},{dur*2},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
+{dur*3},{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
+"""
+
+
 class BlockChord(TextureTemplate):
     def templateTriad(self):
         dur = self.duration
@@ -90,6 +110,7 @@ class BlockChord(TextureTemplate):
 available_templates = {
     "BassSplit": BassSplit,
     "Alberti": Alberti,
+    "Syncopation": Syncopation,
     "BlockChord": BlockChord,
 }
 
