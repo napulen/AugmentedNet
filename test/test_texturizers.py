@@ -7,7 +7,20 @@ from texturizers import (
 )
 
 
-class TestTexturizers(unittest.TestCase):
+basssplit_whole_triad = """\
+s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
+0.0,2.0,,['C4'],[],[True]
+2.0,2.0,,"['E-4', 'G-4']",['m3'],"[True, True]"
+"""
+
+basssplit_quarter_seventh = """\
+s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
+0.0,0.5,,['C4'],[],[True]
+0.5,0.5,,"['E-4', 'G-4', 'B--4']","['m3', 'd5']","[True, True, True]"
+"""
+
+
+class TestVariables(unittest.TestCase):
     def test_available_number_of_notes(self):
         GT = [3, 4]
         self.assertEqual(available_number_of_notes, GT)
@@ -19,6 +32,26 @@ class TestTexturizers(unittest.TestCase):
     def test_available_templates(self):
         GT = ["BassSplit", "Alberti", "BlockChord"]
         self.assertEqual(list(available_templates.keys()), GT)
+
+    def test_basssplit_whole_triad(self):
+        GT = basssplit_whole_triad
+        duration = 4.0
+        notes = ["C4", "E-4", "G-4"]
+        intervals = ["m3", "d5", "m3"]
+        template = applyTextureTemplate(
+            duration, notes, intervals, templateName="BassSplit"
+        )
+        self.assertEqual(template, GT)
+
+    def test_basssplit_quarter_seventh(self):
+        GT = basssplit_quarter_seventh
+        duration = 1.0
+        notes = ["C4", "E-4", "G-4", "B--4"]
+        intervals = ["m3", "d5", "d7", "m3", "d5", "m3"]
+        template = applyTextureTemplate(
+            duration, notes, intervals, templateName="BassSplit"
+        )
+        self.assertEqual(template, GT)
 
 
 if __name__ == "__main__":

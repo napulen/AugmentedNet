@@ -40,14 +40,14 @@ class TextureTemplate(object):
 class BassSplit(TextureTemplate):
     def templateTriad(self):
         dur = self.duration / 2
-        return f"""
+        return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
 """
 
     def templateSeventh(self):
         dur = self.duration / 2
-        return f"""
+        return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
 """
@@ -56,7 +56,7 @@ class BassSplit(TextureTemplate):
 class Alberti(TextureTemplate):
     def templateTriad(self):
         dur = self.duration / 4
-        return f"""
+        return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,['{self.notes[2]}'],[],[True]
 {dur*2},{dur},,['{self.notes[1]}'],[],[True]
@@ -65,7 +65,7 @@ class Alberti(TextureTemplate):
 
     def templateSeventh(self):
         dur = self.duration / 4
-        return f"""
+        return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,['{self.notes[3]}'],[],[True]
 {dur*2},{dur},,['{self.notes[1]}'],[],[True]
