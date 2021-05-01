@@ -39,21 +39,21 @@ class OutputRepresentation(FeatureRepresentation):
                 rnIndex = self.classList.index(transposed)
                 array[frame] = rnIndex
             else:
-                array[frame] = self.classesNumber - 1
+                array[frame] = self.classesNumber() - 1
         return array
 
-    @property
-    def shape(self):
-        # Forcing the shape to be a single scalar value per frame
-        return (self.frames,)
+    # @property
+    # def shape(self):
+    #     # Forcing the shape to be a single scalar value per frame
+    # return (self.frames,)
 
-    @property
-    def classesNumber(self):
-        return len(self.classList)
+    @classmethod
+    def classesNumber(cls):
+        return len(cls.classList)
 
     @classmethod
     def decode(cls, array):
-        return [cls.classList[index] for index in array]
+        return [cls.classList[index] for index in array.reshape(-1)]
 
     @classmethod
     def decodeOneHot(cls, array):
@@ -79,21 +79,21 @@ class OutputRepresentationTI(FeatureRepresentationTI):
                 rnIndex = self.classList.index(dfFeature)
                 array[frame] = rnIndex
             else:
-                array[frame] = self.classesNumber - 1
+                array[frame] = self.classesNumber() - 1
         return array
 
-    @property
-    def shape(self):
-        # Forcing the shape to be a single scalar value per frame
-        return (self.frames,)
+    # @property
+    # def shape(self):
+    #     # Forcing the shape to be a single scalar value per frame
+    #     return (self.frames,)
 
-    @property
-    def classesNumber(self):
-        return len(self.classList)
+    @classmethod
+    def classesNumber(cls):
+        return len(cls.classList)
 
     @classmethod
     def decode(cls, array):
-        return [cls.classList[index] for index in array]
+        return [cls.classList[index] for index in array.reshape(-1)]
 
     @classmethod
     def decodeOneHot(cls, array):

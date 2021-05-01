@@ -793,7 +793,7 @@ class TestBass35(unittest.TestCase):
         self.timesteps = len(self.df.index)
 
     def test_encoding(self):
-        encoding = self.clas(self.df).array
+        encoding = self.clas(self.df).array.reshape(-1)
         encodingGT = np.array(self.encodingGT, dtype="i1")
         encodingGT = np.argmax(encodingGT, axis=1)
         for timestep in range(self.timesteps):
@@ -887,7 +887,7 @@ class TestChordQuality15(TestBass35):
     dfFeature = "a_quality"
 
     def test_decoding(self):
-        encoding = self.clas(self.df).array
+        encoding = self.clas(self.df).array.reshape(-1)
         decoded = self.clas.decode(encoding)
         for timestep, (gt, x) in enumerate(
             zip(self.df[self.dfFeature], decoded)
