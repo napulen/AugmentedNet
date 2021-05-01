@@ -18,7 +18,7 @@ import models
 import args as globalArgs
 from argparse import ArgumentParser
 import os
-from dataset_pkl_generator import generateDataset
+from dataset_npz_generator import generateDataset
 from input_representations import available_representations as availableInputs
 from output_representations import (
     OutputRepresentation,
