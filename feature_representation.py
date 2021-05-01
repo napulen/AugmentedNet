@@ -315,9 +315,12 @@ class FeatureRepresentation(object):
     def __init__(self, df):
         self.df = df
         self.frames = len(df.index)
-        self.shape = (self.frames, self.features)
         self.dtype = "i8"
         self.array = self.run()
+
+    @property
+    def shape(self):
+        return (self.frames, self.features)
 
     def run(self, tranposition=None):
         array = np.zeros(self.shape)

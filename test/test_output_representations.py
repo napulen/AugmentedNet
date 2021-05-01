@@ -795,11 +795,12 @@ class TestBass35(unittest.TestCase):
     def test_encoding(self):
         encoding = self.clas(self.df).array
         encodingGT = np.array(self.encodingGT, dtype="i1")
+        encodingGT = np.argmax(encodingGT, axis=1)
         for timestep in range(self.timesteps):
             with self.subTest(timestep=timestep):
-                ar = np.nonzero(encoding[timestep])
-                arGT = np.nonzero(encodingGT[timestep])
-                self.assertEqual(tuple(ar[0]), tuple(arGT[0]))
+                bass = encoding[timestep]
+                bassGT = encodingGT[timestep]
+                self.assertEqual(bass, bassGT)
 
     def test_decoding(self):
         encoding = self.clas(self.df).array
@@ -812,7 +813,7 @@ class TestBass35(unittest.TestCase):
 
     # def test_data_augmentation(self):
     #     rep = self.clas(self.df)
-    #     daArray = rep.array
+    #     daArray = np.copy(rep.array)
     #     daGT = np.zeros(rep.shape)
     #     for idx, da in enumerate(
     #         rep.dataAugmentation(intervals=self.transpositions)
