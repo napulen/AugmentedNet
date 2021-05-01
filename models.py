@@ -1,6 +1,9 @@
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+from output_representations import (
+    available_representations as availableOutputs,
+)
 
 
 def simpleGRU(inputs, outputs):
@@ -34,9 +37,8 @@ def simpleGRU(inputs, outputs):
     h = layers.BatchNormalization()(h)
     y = []
     for output in outputs:
-        outputFeatures = output.array.shape[2]
-        name = output.name.replace("training_", "")
-        out = layers.Dense(outputFeatures, name=name)(h)
+        outputFeatures = output.outputFeatures
+        out = layers.Dense(outputFeatures, name=output.shortname)(h)
         y.append(out)
     model = keras.Model(inputs=x, outputs=y)
     return model

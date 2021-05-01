@@ -34,6 +34,10 @@ class InputOutput(object):
     def __init__(self, name, array):
         self.name = name
         self.array = array
+        if "y" in name:
+            self.shortname = name.split("_")[-1]
+            self.clas = availableOutputs[self.shortname]
+            self.outputFeatures = self.clas.classesNumber()
 
     def __str__(self):
         return f"{self.name} {self.array.shape}"
@@ -101,14 +105,14 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
         print(f"monitored_outputs: {monitored}")
-        accuracies = [logs[f"val_y_{k}_accuracy"] for k in monitored]
+        accuracies = [logs[f"val_{k}_accuracy"] for k in monitored]
         monitoredAcc = sum(accuracies) / len(monitored)
-        losses = [logs[f"val_y_{k}_loss"] for k in monitored]
+        losses = [logs[f"val_{k}_loss"] for k in monitored]
         monitoredLoss = sum(losses)
         print(f"monitored accuracy: {monitoredAcc}")
         print(f"monitored loss: {monitoredLoss}")
-        logs["val_y_monitored_accuracy"] = monitoredAcc
-        logs["val_y_monitored_loss"] = monitoredLoss
+        logs["val_monitored_accuracy"] = monitoredAcc
+        logs["val_monitored_loss"] = monitoredLoss
         super().on_epoch_end(epoch, logs=logs)
 
 
@@ -141,9 +145,6 @@ def train(
     )
 
     for yt, yv in zip(y_train, y_test):
-        # Go from one-hot encodings to index value
-        yt.array = np.argmax(yt.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
-        yv.array = np.argmax(yv.array, axis=2).reshape(-1, SEQUENCELENGTH, 1)
         if modelName in ["micchi2020", "modifiedMicchi2020"]:
             yt.array = yt.array[:, ::4]
             yv.array = yv.array[:, ::4]
@@ -161,9 +162,9 @@ def train(
 
     modelNameSuffix = (
         "{epoch:02d}"
-        + "-{val_y_monitored_loss:.2f}"
-        + "-{val_y_monitored_accuracy:.2f}"
-        + ".hdf5",
+        + "-{val_monitored_loss:.2f}"
+        + "-{val_monitored_accuracy:.2f}"
+        + ".hdf5"
     )
 
     model.fit(
