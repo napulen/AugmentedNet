@@ -323,7 +323,7 @@ class FeatureRepresentation(object):
         return (self.frames, self.features)
 
     def run(self, tranposition=None):
-        array = np.zeros(self.shape)
+        array = np.zeros(self.shape, dtype=self.dtype)
         return array
 
     def dataAugmentation(self, intervals):
