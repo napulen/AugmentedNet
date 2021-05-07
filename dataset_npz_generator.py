@@ -45,7 +45,8 @@ def _getTranspositions(df):
 def generateDataset(
     synthetic=False,
     dataAugmentation=False,
-    collection=None,
+    collections=["abc", "bps", "haydnop20", "wir", "tavern"],
+    testCollections=["abc", "bps", "haydnop20", "wir", "tavern"],
     inputRepresentations=["BassChromagram38"],
     outputRepresentations=[
         "LocalKey35",
@@ -65,17 +66,24 @@ def generateDataset(
             outputArrays[split + f"_X_{x}"] = []
         for y in outputRepresentations:
             outputArrays[split + f"_y_{y}"] = []
+    training = ["training", "validation"] if testSetOn else ["training"]
+    validation = ["test"] if testSetOn else ["validation"]
     datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
     summaryFile = os.path.join(datasetDir, DATASETSUMMARYFILE)
     if not os.path.exists(summaryFile):
         print("You need to generate the tsv files first.")
         exit()
     datasetSummary = pd.read_csv(summaryFile, sep="\t")
-    if collection:
-        datasetSummary = datasetSummary[
-            datasetSummary.collection == collection
-        ]
-    for row in datasetSummary.itertuples():
+    trainingdf = datasetSummary[
+        (datasetSummary.collection.isin(collections))
+        & (datasetSummary.split.isin(training))
+    ]
+    validationdf = datasetSummary[
+        (datasetSummary.collection.isin(testCollections))
+        & (datasetSummary.split.isin(validation))
+    ]
+    df = pd.concat([trainingdf, validationdf])
+    for row in df.itertuples():
         split = row.split
         if testSetOn:
             if split == "validation":
@@ -155,9 +163,18 @@ if __name__ == "__main__":
         help="Perform data augmentation on the training set.",
     )
     parser.add_argument(
-        "--collection",
+        "--collections",
         choices=["abc", "bps", "haydnop20", "wir", "tavern"],
-        help="Include files from a specific corpus/collection.",
+        default=["abc", "bps", "haydnop20", "wir", "tavern"],
+        nargs="+",
+        help="Include training files from a specific corpus/collection.",
+    )
+    parser.add_argument(
+        "--test_collections",
+        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
+        default=["abc", "bps", "haydnop20", "wir", "tavern"],
+        nargs="+",
+        help="Include test files from a specific corpus/collection.",
     )
     parser.add_argument(
         "--input_representations",
@@ -190,12 +207,20 @@ if __name__ == "__main__":
         default=True,
         help="Exclude bad-quality annotations from the training data.",
     )
+    parser.add_argument(
+        "--test_set_on",
+        action="store_true",
+        default=False,
+        help="Use the real test set, and add the validation set to training.",
+    )
     args = parser.parse_args()
     generateDataset(
         synthetic=args.synthetic,
         dataAugmentation=args.dataAugmentation,
-        collection=args.collection,
+        collections=args.collections,
+        testCollections=args.test_collections,
         inputRepresentations=args.input_representations,
         outputRepresentations=args.output_representations,
         sequenceLength=args.sequence_length,
+        testSetOn=args.test_set_on
     )
