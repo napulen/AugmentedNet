@@ -151,7 +151,7 @@ def evaluate(modelHdf5, X_test, y_true):
     X = X if len(X) > 1 else X[0]
     y_preds = model.predict(X)
     dfdict = {}
-    means = {}
+    summary = {}
     features = []
     for y, ypred in zip(y_true, y_preds):
         name = y.name.replace("validation_y_", "")
@@ -167,8 +167,8 @@ def evaluate(modelHdf5, X_test, y_true):
     df = pd.DataFrame(dfdict)
     for feature in features:
         df[feature] = df["true_" + feature] == df["pred_" + feature]
-        means[feature] = df[feature].mean().round(3)
-        print(f"{feature}: {means[feature]}")
+        summary[feature] = df[feature].mean().round(3)
+        print(f"{feature}: {summary[feature]}")
     # Some custom features
     df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
     df["RomanNumeral"] = (
@@ -178,18 +178,18 @@ def evaluate(modelHdf5, X_test, y_true):
         & df.Inversion4
         & df.Degree
     )
-    means["Degree"] = df.Degree.mean().round(3)
-    means["RomanNumeral"] = df.Degree.mean().round(3)
-    print(f"Degree: {means['Degree']}")
-    print(f"RomanNumeral: {means['RomanNumeral']}")
+    summary["Degree"] = df.Degree.mean().round(3)
+    summary["RomanNumeral"] = df.Degree.mean().round(3)
+    print(f"Degree: {summary['Degree']}")
+    print(f"RomanNumeral: {summary['RomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
     outputPath = outputPath.replace(".hdf5", "")
     Path(outputPath).mkdir(parents=True, exist_ok=True)
     df.to_csv(f"{outputPath}/results.csv")
     with open(f"{outputPath}/summary.txt", "w") as fd:
-        for task, score in means.items():
+        for task, score in summary.items():
             fd.write(f"{task}: {score}\n")
-    return str(outputPath)
+    return str(outputPath), summary
 
 
 def train(
@@ -389,5 +389,6 @@ if __name__ == "__main__":
         modelName=args.model,
         checkpointPath=checkpoint,
     )
-    results = evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
+    results, summary = evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
     mlflow.log_artifacts(results, artifact_path="results")
+    mlflow.log_metrics(summary)
