@@ -391,4 +391,6 @@ if __name__ == "__main__":
     )
     results, summary = evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
     mlflow.log_artifacts(results, artifact_path="results")
+    # Helps organizing them in the mlflow interface
+    summary = {f"results_{k}": v for k, v in summary.items()}
     mlflow.log_metrics(summary)
