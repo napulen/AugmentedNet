@@ -28,7 +28,7 @@ def simpleGRU(inputs, outputs):
     h = layers.Conv1D(32, 3, padding="same")(inputs)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
-    h = layers.Conv1D(32, 3, padding="same")(inputs)
+    h = layers.Conv1D(32, 3, padding="same")(h)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
     h = layers.Bidirectional(layers.GRU(32, return_sequences=True))(h)
