@@ -35,6 +35,8 @@ def simpleGRU(inputs, outputs):
     h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.LSTM(30, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
+    h = layers.Bidirectional(layers.LSTM(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
     y = []
     for output in outputs:
         outputFeatures = output.outputFeatures
