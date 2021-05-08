@@ -32,6 +32,7 @@ from tensorflow.python.keras.callbacks import ModelCheckpoint
 import datetime
 from pathlib import Path
 
+
 class InputOutput(object):
     def __init__(self, name, array):
         self.name = name
@@ -250,7 +251,7 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Train the AugmentedNet.")
     parser.add_argument(
         "experiment_name",
-        choices=["testset", "validationset", "multitask", "syntheticdata", "debug"],
+        choices=["testset", "validationset", "prototyping", "debug"],
         help="A short name for this experiment.",
     )
     parser.add_argument(
@@ -389,7 +390,9 @@ if __name__ == "__main__":
         modelName=args.model,
         checkpointPath=checkpoint,
     )
-    results, summary = evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
+    results, summary = evaluate(
+        os.path.join(checkpoint, bestmodel), X_test, y_test
+    )
     mlflow.log_artifacts(results, artifact_path="results")
     # Helps organizing them in the mlflow interface
     summary = {f"results_{k}": v for k, v in summary.items()}
