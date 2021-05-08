@@ -17,44 +17,6 @@ def simpleGRU(inputs, outputs):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        xi = layers.Bidirectional(layers.GRU(32, return_sequences=True))(xi)
-        xi = layers.BatchNormalization()(xi)
-        xprime.append(xi)
-    if len(x) > 1:
-        inputs = layers.Concatenate()([xi for xi in xprime])
-    else:
-        inputs = xprime[0]
-    h = layers.Dense(32)(inputs)
-    h = layers.BatchNormalization()(h)
-    h = layers.Activation("relu")(h)
-    # h = layers.Dense(32)(h)
-    # h = layers.BatchNormalization()(h)
-    # h = layers.Activation("relu")(h)
-    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
-    h = layers.BatchNormalization()(h)
-    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
-    h = layers.BatchNormalization()(h)
-    y = []
-    for output in outputs:
-        outputFeatures = output.outputFeatures
-        out = layers.Dense(outputFeatures, name=output.shortname)(h)
-        y.append(out)
-    model = keras.Model(inputs=x, outputs=y)
-    return model
-
-
-
-def simpleGRU1(inputs, outputs):
-    # (raw) inputs of the network
-    x = []
-    # inputs after batchnorm, a dense layer to induce sparsity, etc.
-    xprime = []
-    for i in inputs:
-        sequenceLength = i.array.shape[1]
-        inputFeatures = i.array.shape[2]
-        name = i.name.replace("training_", "")
-        xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
-        x.append(xi)
         xi = layers.Dense(32)(xi)
         xi = layers.BatchNormalization()(xi)
         xi = layers.Activation("relu")(xi)
