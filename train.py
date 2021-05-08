@@ -27,7 +27,9 @@ from output_representations import (
 
 import mlflow
 import mlflow.tensorflow
+import pandas as pd
 from tensorflow.python.keras.callbacks import ModelCheckpoint
+import datetime
 
 
 class InputOutput(object):
@@ -58,7 +60,7 @@ def disableGPU():
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
-def loadData(synthetic=False):
+def _loadNpz(synthetic=False):
     datasetFile = f"{SYNTHDATASETDIR if synthetic else DATASETDIR}.npz"
     dataset = np.load(datasetFile)
     X_train, y_train = [], []
@@ -76,9 +78,29 @@ def loadData(synthetic=False):
     return (X_train, y_train), (X_test, y_test)
 
 
-def printTrainingExample(x, y):
-    import pandas as pd
+def loadData(syntheticDataStrategy=None, modelName="simpleGRU"):
+    if not syntheticDataStrategy:
+        (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=False)
+    elif syntheticDataStrategy == "syntheticOnly":
+        (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=True)
+    elif syntheticDataStrategy == "concatenate":
+        (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=False)
+        # Test portion of synthetic data is NEVER used in this case
+        (Xs_train, ys_train), (_, _) = _loadNpz(synthetic=True)
+        for x, xs in zip(X_train, Xs_train):
+            x.array = np.concatenate((x.array, xs.array))
+        for y, ys in zip(y_train, ys_train):
+            y.array = np.concatenate((y.array, ys.array))
 
+    for yt, yv in zip(y_train, y_test):
+        if modelName in ["micchi2020", "modifiedMicchi2020"]:
+            yt.array = yt.array[:, ::4]
+            yv.array = yv.array[:, ::4]
+
+    return (X_train, y_train), (X_test, y_test)
+
+
+def printTrainingExample(x, y):
     pd.set_option("display.max_rows", 640)
     ret = {}
     for xi in x:
@@ -91,6 +113,13 @@ def printTrainingExample(x, y):
         ret[representationName] = decoded
     df = pd.DataFrame(ret)
     print(df)
+
+
+def findBestModel(checkpointPath=".model_checkpoint/"):
+    models = [f for f in os.listdir(checkpointPath)]
+    accuracies = [f.replace(".hdf5", "").split("-")[-1] for f in models]
+    best = accuracies.index(max(accuracies))
+    return models[best]
 
 
 class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
@@ -116,38 +145,59 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
         super().on_epoch_end(epoch, logs=logs)
 
 
+def evaluate(modelHdf5, X_test, y_true):
+    model = keras.models.load_model(modelHdf5)
+    X = [xi.array for xi in X_test]
+    X = X if len(X) > 1 else X[0]
+    y_preds = model.predict(X)
+    dfdict = {}
+    features = []
+    for y, ypred in zip(y_true, y_preds):
+        name = y.name.replace("validation_y_", "")
+        print(name)
+        features.append(name)
+        dfdict["true_" + name] = []
+        dfdict["pred_" + name] = []
+        for true, preds in zip(y.array, ypred):
+            predsCategorical = np.argmax(preds, axis=1).reshape(-1, 1)
+            decodedTrue = availableOutputs[name].decode(true)
+            dfdict["true_" + name].extend(decodedTrue)
+            decodedPreds = availableOutputs[name].decode(predsCategorical)
+            dfdict["pred_" + name].extend(decodedPreds)
+    df = pd.DataFrame(dfdict)
+    for feature in features:
+        df[feature] = df["true_" + feature] == df["pred_" + feature]
+        print(f"{feature}: {df[feature].mean().round(3)}")
+    # Some custom features
+    df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
+    df["RomanNumeral"] = (
+        df.LocalKey35
+        & df.ChordQuality15
+        & df.ChordRoot35
+        & df.Inversion4
+        & df.Degree
+    )
+    print(f"Degree: {df.Degree.mean().round(3)}")
+    print(f"RomanNumeral: {df.RomanNumeral.mean().round(3)}")
+    outputFile = modelHdf5.replace(".model_checkpoint/", "").replace("/", "_")
+    df.to_csv(f"./{outputFile}.csv")
+
+
 def train(
-    syntheticDataStrategy=None,
+    X_train,
+    y_train,
+    X_test,
+    y_test,
     modelName="simpleGRU",
-    weightsPath=".model_checkpoint/weights",
+    checkpointPath=".model_checkpoint/",
 ):
-    if not syntheticDataStrategy:
-        (X_train, y_train), (X_test, y_test) = loadData(synthetic=False)
-    elif syntheticDataStrategy == "syntheticOnly":
-        (X_train, y_train), (X_test, y_test) = loadData(synthetic=True)
-    elif syntheticDataStrategy == "concatenate":
-        (X_train, y_train), (X_test, y_test) = loadData(synthetic=False)
-        # Test portion of synthetic data is NEVER used in this case
-        (Xs_train, ys_train), (_, _) = loadData(synthetic=True)
-        for x, xs in zip(X_train, Xs_train):
-            x.array = np.concatenate((x.array, xs.array))
-        for y, ys in zip(y_train, ys_train):
-            y.array = np.concatenate((y.array, ys.array))
-
-    printTrainingExample(X_train, y_train)
-
+    # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
-
     model.compile(
         optimizer="adam",
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
-
-    for yt, yv in zip(y_train, y_test):
-        if modelName in ["micchi2020", "modifiedMicchi2020"]:
-            yt.array = yt.array[:, ::4]
-            yv.array = yv.array[:, ::4]
 
     print(model.summary())
     # Unpacking the numpy arrays inside the input and output representations
@@ -162,8 +212,8 @@ def train(
 
     modelNameSuffix = (
         "{epoch:02d}"
-        + "-{val_monitored_loss:.2f}"
-        + "-{val_monitored_accuracy:.2f}"
+        + "-{val_monitored_loss:.3f}"
+        + "-{val_monitored_accuracy:.4f}"
         + ".hdf5"
     )
 
@@ -176,19 +226,22 @@ def train(
         validation_data=(xv, yv),
         callbacks=[
             ModdedModelCheckpoint(
-                weightsPath + modelNameSuffix,
+                checkpointPath + modelNameSuffix,
                 monitor="val_y_monitored_loss",
                 mode="auto",
             ),
         ],
     )
 
+    bestModel = findBestModel(checkpointPath=checkpointPath)
+    return bestModel
+
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Train the AugmentedNet.")
     parser.add_argument(
         "experiment_name",
-        choices=["testset", "multitask", "syntheticdata", "delete"],
+        choices=["testset", "multitask", "syntheticdata", "debug"],
         help="A short name for this experiment.",
     )
     parser.add_argument(
@@ -218,10 +271,18 @@ if __name__ == "__main__":
         help="If generating the numpy arrays, whether to do data augmentation.",
     )
     parser.add_argument(
-        "--collection",
+        "--collections",
         choices=["abc", "bps", "haydnop20", "wir", "tavern"],
-        default=globalArgs.COLLECTION,
+        default=globalArgs.COLLECTIONS,
+        nargs="+",
         help="Include files from a specific corpus/collection.",
+    )
+    parser.add_argument(
+        "--test_collections",
+        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
+        default=globalArgs.TESTCOLLECTIONS,
+        nargs="+",
+        help="Include test files from a specific corpus/collection.",
     )
     parser.add_argument(
         "--input_representations",
@@ -267,7 +328,8 @@ if __name__ == "__main__":
         generateDataset(
             synthetic=False,
             dataAugmentation=args.dataAugmentation,
-            collection=args.collection,
+            collections=args.collections,
+            testCollections=args.test_collections,
             inputRepresentations=args.input_representations,
             outputRepresentations=args.output_representations,
             sequenceLength=args.sequence_length,
@@ -280,7 +342,8 @@ if __name__ == "__main__":
             generateDataset(
                 synthetic=True,
                 dataAugmentation=args.dataAugmentation,
-                collection=args.collection,
+                collections=args.collections,
+                testCollections=args.test_collections,
                 inputRepresentations=args.input_representations,
                 outputRepresentations=args.output_representations,
                 sequenceLength=args.sequence_length,
@@ -299,10 +362,22 @@ if __name__ == "__main__":
     mlflow.log_param("scrutinize_data", args.scrutinize_data)
     mlflow.log_param("sequenceLength", args.sequence_length)
     mlflow.log_param("testSetOn", args.test_set_on)
-    weightsPath = f".model_checkpoint/{args.experiment_name}/{args.run_name}-"
-
-    train(
-        syntheticDataStrategy=args.syntheticDataStrategy,
-        modelName=args.model,
-        weightsPath=weightsPath,
+    timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
+    checkpoint = (
+        f".model_checkpoint/"
+        f"{args.experiment_name}/"
+        f"{args.run_name}-{timestamp}/"
     )
+
+    (X_train, y_train), (X_test, y_test) = loadData(
+        syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
+    )
+    bestmodel = train(
+        X_train,
+        y_train,
+        X_test,
+        y_test,
+        modelName=args.model,
+        checkpointPath=checkpoint,
+    )
+    evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
