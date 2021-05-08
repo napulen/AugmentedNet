@@ -19,18 +19,15 @@ def simpleGRU(inputs, outputs):
         x.append(xi)
         xi = layers.Dense(32)(xi)
         xi = layers.BatchNormalization()(xi)
-        xi = layers.Activation("tanh")(xi)
+        xi = layers.Activation("relu")(xi)
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
     else:
         inputs = xprime[0]
-    h = layers.Dense(64)(inputs)
+    h = layers.Conv1D(32, 5, padding="same")(inputs)
     h = layers.BatchNormalization()(h)
-    h = layers.Activation("tanh")(h)
-    h = layers.Dense(32)(h)
-    h = layers.BatchNormalization()(h)
-    h = layers.Activation("tanh")(h)
+    h = layers.Activation("relu")(h)
     h = layers.Bidirectional(layers.GRU(32, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.GRU(32, return_sequences=True))(h)
