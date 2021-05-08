@@ -180,7 +180,7 @@ def evaluate(modelHdf5, X_test, y_true):
         & df.Degree
     )
     summary["Degree"] = df.Degree.mean().round(3)
-    summary["RomanNumeral"] = df.Degree.mean().round(3)
+    summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
     print(f"Degree: {summary['Degree']}")
     print(f"RomanNumeral: {summary['RomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
