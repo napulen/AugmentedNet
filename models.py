@@ -17,7 +17,7 @@ def simpleGRU(inputs, outputs):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        xi = layers.Conv1D(32, 3, padding="same")(xi)
+        xi = layers.Conv1D(24, 3, padding="same")(xi)
         xi = layers.BatchNormalization()(xi)
         xi = layers.Activation("relu")(xi)
         xprime.append(xi)
@@ -26,9 +26,6 @@ def simpleGRU(inputs, outputs):
     else:
         inputs = xprime[0]
     h = layers.Conv1D(32, 3, padding="same")(inputs)
-    h = layers.BatchNormalization()(h)
-    h = layers.Activation("relu")(h)
-    h = layers.Conv1D(32, 3, padding="same")(h)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
     h = layers.Bidirectional(layers.GRU(32, return_sequences=True))(h)
