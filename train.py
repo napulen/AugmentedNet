@@ -94,7 +94,7 @@ def loadData(syntheticDataStrategy=None, modelName="simpleGRU"):
             y.array = np.concatenate((y.array, ys.array))
 
     for yt, yv in zip(y_train, y_test):
-        if modelName in ["micchi2020", "modifiedMicchi2020"]:
+        if modelName in ["micchi2020"]:
             yt.array = yt.array[:, ::4]
             yv.array = yv.array[:, ::4]
 

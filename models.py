@@ -193,8 +193,8 @@ def modifiedMicchi2020(inputs, outputs):
 
     y = []
     for output in outputs:
-        outputFeatures = output.array.shape[2]
-        out = layers.Dense(outputFeatures, name=output.name)(h)
+        outputFeatures = output.outputFeatures
+        out = layers.Dense(outputFeatures, name=output.shortname)(h)
         y.append(out)
 
     model = keras.Model(inputs=x, outputs=y)
