@@ -25,7 +25,7 @@ def simpleGRU(inputs, outputs):
         inputs = layers.Concatenate()([xi for xi in xprime])
     else:
         inputs = xprime[0]
-    h = layers.Dense(32)(inputs)
+    h = layers.Conv1D(32, 3, padding="same")(inputs)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
     h = layers.Bidirectional(layers.GRU(32, return_sequences=True))(h)
