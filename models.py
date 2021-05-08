@@ -23,6 +23,9 @@ def simpleGRU(inputs, outputs):
         xi = layers.Dense(32)(xi)
         xi = layers.BatchNormalization()(xi)
         xi = layers.Activation("relu")(xi)
+        xi = layers.Dense(32)(xi)
+        xi = layers.BatchNormalization()(xi)
+        xi = layers.Activation("relu")(xi)
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
