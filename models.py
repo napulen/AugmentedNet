@@ -178,9 +178,9 @@ def modifiedMicchi2020(inputs, outputs):
         inputs = xprime[0]
 
     h = DenseNetLayer(inputs, b=4, f=8, n=1)
-    h = PoolingLayer(h, 32, 2, n=1)
+    # h = PoolingLayer(h, 32, 2, n=1)
     h = DenseNetLayer(h, 4, 5, n=2)
-    h = PoolingLayer(h, 48, 2, n=1)
+    # h = PoolingLayer(h, 48, 2, n=1)
 
     h = layers.Bidirectional(
         layers.GRU(64, return_sequences=True, dropout=0.3)
