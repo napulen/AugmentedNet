@@ -143,22 +143,6 @@ def modifiedMicchi2020(inputs, outputs):
                 x = layers.Concatenate()([x, y])
         return x
 
-    def PoolingLayer(x, k, s, n=1):
-        with tf.name_scope(f"poolingLayer_{n}"):
-            y = layers.BatchNormalization()(x)
-            y = layers.Conv1D(
-                filters=k,
-                kernel_size=1,
-                padding="same",
-                data_format="channels_last",
-            )(y)
-            y = layers.Activation("relu")(y)
-            y = layers.BatchNormalization()(y)
-            y = layers.MaxPooling1D(
-                s, s, padding="same", data_format="channels_last"
-            )(y)
-        return y
-
     # (raw) inputs of the network
     x = []
     # inputs after batchnorm, a dense layer to induce sparsity, etc.
@@ -168,9 +152,9 @@ def modifiedMicchi2020(inputs, outputs):
         inputFeatures = i.array.shape[2]
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
-        # xi = layers.Dense(32)(xi)
-        # xi = layers.BatchNormalization()(xi)
-        # xi = layers.Activation("relu")(xi)
+        xi = layers.Dense(32)(xi)
+        xi = layers.BatchNormalization()(xi)
+        xi = layers.Activation("relu")(xi)
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
