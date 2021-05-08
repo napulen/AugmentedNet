@@ -30,7 +30,7 @@ import mlflow.tensorflow
 import pandas as pd
 from tensorflow.python.keras.callbacks import ModelCheckpoint
 import datetime
-
+from pathlib import Path
 
 class InputOutput(object):
     def __init__(self, name, array):
@@ -151,10 +151,10 @@ def evaluate(modelHdf5, X_test, y_true):
     X = X if len(X) > 1 else X[0]
     y_preds = model.predict(X)
     dfdict = {}
+    means = {}
     features = []
     for y, ypred in zip(y_true, y_preds):
         name = y.name.replace("validation_y_", "")
-        print(name)
         features.append(name)
         dfdict["true_" + name] = []
         dfdict["pred_" + name] = []
@@ -167,7 +167,8 @@ def evaluate(modelHdf5, X_test, y_true):
     df = pd.DataFrame(dfdict)
     for feature in features:
         df[feature] = df["true_" + feature] == df["pred_" + feature]
-        print(f"{feature}: {df[feature].mean().round(3)}")
+        means[feature] = df[feature].mean().round(3)
+        print(f"{feature}: {means[feature]}")
     # Some custom features
     df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
     df["RomanNumeral"] = (
@@ -177,10 +178,18 @@ def evaluate(modelHdf5, X_test, y_true):
         & df.Inversion4
         & df.Degree
     )
-    print(f"Degree: {df.Degree.mean().round(3)}")
-    print(f"RomanNumeral: {df.RomanNumeral.mean().round(3)}")
-    outputFile = modelHdf5.replace(".model_checkpoint/", "").replace("/", "_")
-    df.to_csv(f"./{outputFile}.csv")
+    means["Degree"] = df.Degree.mean().round(3)
+    means["RomanNumeral"] = df.Degree.mean().round(3)
+    print(f"Degree: {means['Degree']}")
+    print(f"RomanNumeral: {means['RomanNumeral']}")
+    outputPath = modelHdf5.replace(".model_checkpoint", ".results")
+    outputPath = outputPath.replace(".hdf5", "")
+    Path(outputPath).mkdir(parents=True, exist_ok=True)
+    df.to_csv(f"{outputPath}/results.csv")
+    with open(f"{outputPath}/summary.txt", "w") as fd:
+        for task, score in means.items():
+            fd.write(f"{task}: {score}\n")
+    return str(outputPath)
 
 
 def train(
@@ -241,7 +250,7 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Train the AugmentedNet.")
     parser.add_argument(
         "experiment_name",
-        choices=["testset", "multitask", "syntheticdata", "debug"],
+        choices=["testset", "validationset", "multitask", "syntheticdata", "debug"],
         help="A short name for this experiment.",
     )
     parser.add_argument(
@@ -380,4 +389,5 @@ if __name__ == "__main__":
         modelName=args.model,
         checkpointPath=checkpoint,
     )
-    evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
+    results = evaluate(os.path.join(checkpoint, bestmodel), X_test, y_test)
+    mlflow.log_artifacts(results, artifact_path="results")
