@@ -154,7 +154,7 @@ def modifiedMicchi2020(inputs, outputs):
         # xi = DenseNetLayer(xi, b=2, f=8, n=1)
         xi = layers.BatchNormalization()(xi)
         for _ in range(2):
-            xii = layers.Conv1D(32, 1, padding="same")(xii)
+            xii = layers.Conv1D(32, 1, padding="same")(xi)
             xii = layers.Activation("relu")(xii)
             xii = layers.BatchNormalization()(xii)
             xii = layers.Conv1D(8, 8, padding="same")(xii)
