@@ -151,10 +151,18 @@ def modifiedMicchi2020(inputs, outputs):
         inputFeatures = i.array.shape[2]
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
-        # xi = layers.Dense(32)(xi)
-        # xi = layers.BatchNormalization()(xi)
-        # xi = layers.Activation("relu")(xi)
-        xi = DenseNetLayer(xi, b=2, f=8, n=1)
+        # xi = DenseNetLayer(xi, b=2, f=8, n=1)
+        for _ in range(2):
+            xii = layers.BatchNormalization()(xi)
+            xii = layers.Conv1D(32, 1, padding="same")(xii)
+            xii = layers.Activation("relu")(xii)
+            xii = layers.BatchNormalization()(xii)
+            xii = layers.Conv1D(8, 8, padding="same")(xii)
+            xii = layers.Activation("relu")(xii)
+            if _ < 1:
+                xi = layers.Concatenate()([xi, xii])
+            else:
+                xi = xii
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
@@ -173,7 +181,9 @@ def modifiedMicchi2020(inputs, outputs):
     # I don't think we need the TimeDistributed
     # https://stackoverflow.com/questions/47305618
     # https://github.com/keras-team/keras/issues/11547
-    h = layers.TimeDistributed(layers.Dense(64, activation="tanh"))(h)
+    # h = layers.TimeDistributed(layers.Dense(64, activation="tanh"))(h)
+
+    h = layers.Concatenate()([inputs, h])
 
     y = []
     for output in outputs:
