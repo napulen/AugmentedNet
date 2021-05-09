@@ -152,13 +152,14 @@ def modifiedMicchi2020(inputs, outputs):
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
         # xi = DenseNetLayer(xi, b=2, f=8, n=1)
+        xi = layers.BatchNormalization()(xi)
         for _ in range(2):
-            xii = layers.BatchNormalization()(xi)
             xii = layers.Conv1D(32, 1, padding="same")(xii)
             xii = layers.Activation("relu")(xii)
             xii = layers.BatchNormalization()(xii)
             xii = layers.Conv1D(8, 8, padding="same")(xii)
             xii = layers.Activation("relu")(xii)
+            xii = layers.BatchNormalization()(xii)
             if _ < 1:
                 xi = layers.Concatenate()([xi, xii])
             else:
@@ -174,9 +175,10 @@ def modifiedMicchi2020(inputs, outputs):
     # h = DenseNetLayer(h, 2, 5, n=2)
     # h = PoolingLayer(h, 48, 2, n=1)
 
-    h = layers.Bidirectional(
-        layers.GRU(30, return_sequences=True, dropout=0.3)
-    )(h)
+    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
+    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.BatchNormalization()(h)
 
     # I don't think we need the TimeDistributed
     # https://stackoverflow.com/questions/47305618
@@ -184,6 +186,7 @@ def modifiedMicchi2020(inputs, outputs):
     # h = layers.TimeDistributed(layers.Dense(64, activation="tanh"))(h)
 
     h = layers.Concatenate()([inputs, h])
+    h = layers.BatchNormalization()(h)
 
     y = []
     for output in outputs:
