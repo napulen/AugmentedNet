@@ -17,7 +17,7 @@ def simpleGRU(inputs, outputs):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        xi = layers.Dense(20)(xi)
+        xi = layers.Dense(30)(xi)
         xi = layers.BatchNormalization()(xi)
         xi = layers.Activation("relu")(xi)
         # xi = layers.Dropout(0.2)(xi)
@@ -26,17 +26,17 @@ def simpleGRU(inputs, outputs):
         inputs = layers.Concatenate()([xi for xi in xprime])
     else:
         inputs = xprime[0]
-    h = layers.Dense(50)(inputs)
+    h = layers.Dense(60)(inputs)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
-    h = layers.Dense(25)(h)
+    h = layers.Dense(30)(h)
     h = layers.BatchNormalization()(h)
-    h = layers.Activation("relu")(h)
+    dens = layers.Activation("relu")(h)
+    h = layers.Bidirectional(layers.GRU(25, return_sequences=True))(dens)
+    h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.GRU(25, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
-    h = layers.Bidirectional(layers.GRU(25, return_sequences=True))(h)
-    h = layers.BatchNormalization()(h)
-    h = layers.Concatenate()([h, inputs])
+    h = layers.Concatenate()([h, dens])
     y = []
     for output in outputs:
         outputFeatures = output.outputFeatures
