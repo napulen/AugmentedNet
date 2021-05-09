@@ -36,7 +36,7 @@ def simpleGRU(inputs, outputs):
     h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.GRU(32, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
-    h = layers.Dense(32)(inputs)
+    h = layers.Dense(32)(h)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("tanh")(h)
     y = []
