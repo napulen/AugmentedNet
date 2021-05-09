@@ -152,19 +152,22 @@ def modifiedMicchi2020(inputs, outputs):
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
         # xi = DenseNetLayer(xi, b=2, f=8, n=1)
-        xi = layers.BatchNormalization()(xi)
-        for _ in range(2):
-            xii = layers.Conv1D(32, 1, padding="same")(xi)
-            xii = layers.Activation("relu")(xii)
-            xii = layers.BatchNormalization()(xii)
-            xii = layers.Conv1D(8, 8, padding="same")(xii)
-            xii = layers.Activation("relu")(xii)
-            xii = layers.BatchNormalization()(xii)
-            if _ < 1:
-                xi = layers.Concatenate()([xi, xii])
-            else:
-                xi = xii
-        xprime.append(xi)
+        xii = layers.BatchNormalization()(xi)
+        xii = layers.Conv1D(32, 1, padding="same")(xii)
+        xii = layers.Activation("relu")(xii)
+        xii = layers.BatchNormalization()(xii)
+        xii = layers.Conv1D(8, 8, padding="same")(xii)
+        xii = layers.Activation("relu")(xii)
+        xii = layers.BatchNormalization()(xii)
+        xii = layers.Concatenate()([xi, xii])
+        xii = layers.BatchNormalization()(xii)
+        xii = layers.Conv1D(32, 1, padding="same")(xii)
+        xii = layers.Activation("relu")(xii)
+        xii = layers.BatchNormalization()(xii)
+        xii = layers.Conv1D(8, 8, padding="same")(xii)
+        xii = layers.Activation("relu")(xii)
+        xii = layers.BatchNormalization()(xii)
+        xprime.append(xii)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
     else:
