@@ -169,13 +169,13 @@ def modifiedMicchi2020(inputs, outputs):
     else:
         inputs = xprime[0]
 
-    h = DenseNetLayer(inputs, b=2, f=8, n=1)
+    h = DenseNetLayer(inputs, b=1, f=8, n=1)
     # h = PoolingLayer(h, 32, 2, n=1)
     # h = DenseNetLayer(h, 2, 5, n=2)
     # h = PoolingLayer(h, 48, 2, n=1)
 
     h = layers.Bidirectional(
-        layers.GRU(64, return_sequences=True, dropout=0.3)
+        layers.GRU(30, return_sequences=True, dropout=0.3)
     )(h)
 
     # I don't think we need the TimeDistributed
