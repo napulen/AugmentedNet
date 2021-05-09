@@ -39,7 +39,7 @@ def simpleGRU(inputs, outputs):
     h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
-    h = layers.Concatenate()([h, inputs])
+    # h = layers.Concatenate()([h, inputs])
     y = []
     for output in outputs:
         outputFeatures = output.outputFeatures
