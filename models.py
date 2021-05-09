@@ -17,7 +17,7 @@ def simpleGRU(inputs, outputs):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        xi = layers.Conv1D(inputFeatures, 1, padding="same")(xi)
+        xi = layers.Conv1D(32, 1, padding="same")(xi)
         xi = layers.BatchNormalization()(xi)
         xi = layers.Activation("relu")(xi)
         # xi = layers.Conv1D(16, 3, padding="same")(xi)
