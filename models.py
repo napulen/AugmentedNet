@@ -168,7 +168,7 @@ def modifiedMicchi2020(inputs, outputs):
         xii = layers.Activation("relu")(xii)
         xii = layers.BatchNormalization()(xii)
         xi = layers.Concatenate()([xi, xii])
-        xprime.append(xii)
+        xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
     else:
