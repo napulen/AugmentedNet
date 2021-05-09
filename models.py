@@ -151,9 +151,10 @@ def modifiedMicchi2020(inputs, outputs):
         inputFeatures = i.array.shape[2]
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=i.name)
         x.append(xi)
-        xi = layers.Dense(32)(xi)
-        xi = layers.BatchNormalization()(xi)
-        xi = layers.Activation("relu")(xi)
+        # xi = layers.Dense(32)(xi)
+        # xi = layers.BatchNormalization()(xi)
+        # xi = layers.Activation("relu")(xi)
+        xi = DenseNetLayer(xi, b=2, f=8, n=1)
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
@@ -162,7 +163,7 @@ def modifiedMicchi2020(inputs, outputs):
 
     h = DenseNetLayer(inputs, b=2, f=8, n=1)
     # h = PoolingLayer(h, 32, 2, n=1)
-    h = DenseNetLayer(h, 2, 5, n=2)
+    # h = DenseNetLayer(h, 2, 5, n=2)
     # h = PoolingLayer(h, 48, 2, n=1)
 
     h = layers.Bidirectional(
