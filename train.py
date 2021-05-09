@@ -79,7 +79,7 @@ def _loadNpz(synthetic=False):
     return (X_train, y_train), (X_test, y_test)
 
 
-def loadData(syntheticDataStrategy=None, modelName="simpleGRU"):
+def loadData(syntheticDataStrategy=None, modelName="AugmentedNet"):
     if not syntheticDataStrategy:
         (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=False)
     elif syntheticDataStrategy == "syntheticOnly":
@@ -94,7 +94,7 @@ def loadData(syntheticDataStrategy=None, modelName="simpleGRU"):
             y.array = np.concatenate((y.array, ys.array))
 
     for yt, yv in zip(y_train, y_test):
-        if modelName in ["micchi2020"]:
+        if modelName in ["Micchi2020"]:
             yt.array = yt.array[:, ::4]
             yv.array = yv.array[:, ::4]
 
@@ -198,7 +198,7 @@ def train(
     y_train,
     X_test,
     y_test,
-    modelName="simpleGRU",
+    modelName="AugmentedNet",
     checkpointPath=".model_checkpoint/",
 ):
     # printTrainingExample(X_train, y_train)

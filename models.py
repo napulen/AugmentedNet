@@ -6,10 +6,10 @@ from output_representations import (
 )
 
 
-def simpleGRU(inputs, outputs, blocks=6):
+def AugmentedNet(inputs, outputs, blocks=6):
     # (raw) inputs of the network
     x = []
-    # inputs after batchnorm, a dense layer to induce sparsity, etc.
+    # inputs after initial convolutional blocks
     xprime = []
     for i in inputs:
         sequenceLength = i.array.shape[1]
@@ -39,7 +39,6 @@ def simpleGRU(inputs, outputs, blocks=6):
     h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
-    # h = layers.Concatenate()([h, inputs])
     y = []
     for output in outputs:
         outputFeatures = output.outputFeatures
@@ -49,7 +48,7 @@ def simpleGRU(inputs, outputs, blocks=6):
     return model
 
 
-def micchi2020(inputs, outputs):
+def Micchi2020(inputs, outputs):
     def DenseNetLayer(x, b, f, n=1):
         with tf.name_scope(f"denseNet_{n}"):
             for _ in range(b):
@@ -119,7 +118,7 @@ def micchi2020(inputs, outputs):
     return model
 
 
-def modifiedMicchi2020(inputs, outputs):
+def ModifiedMicchi2020(inputs, outputs):
     def DenseNetLayer(x, b, f, n=1):
         with tf.name_scope(f"denseNet_{n}"):
             for _ in range(b):
@@ -203,7 +202,7 @@ def modifiedMicchi2020(inputs, outputs):
 
 
 available_models = {
-    "simpleGRU": simpleGRU,
-    "micchi2020": micchi2020,
-    "modifiedMicchi2020": modifiedMicchi2020,
+    "AugmentedNet": AugmentedNet,
+    "Micchi2020": Micchi2020,
+    "ModifiedMicchi2020": ModifiedMicchi2020,
 }
