@@ -19,8 +19,8 @@ def simpleGRU(inputs, outputs):
         x.append(xi)
         blocks=6
         for i in range(blocks):
-            filters = 2**i
-            kernel = 2**(blocks-1-i)
+            filters = 2**(blocks-1-i)
+            kernel = 2**i
             h = layers.Conv1D(filters, kernel, padding="same")(xi)
             h = layers.BatchNormalization()(h)
             h = layers.Activation("relu")(h)
