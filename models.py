@@ -6,7 +6,7 @@ from output_representations import (
 )
 
 
-def simpleGRU(inputs, outputs):
+def simpleGRU(inputs, outputs, blocks=6):
     # (raw) inputs of the network
     x = []
     # inputs after batchnorm, a dense layer to induce sparsity, etc.
@@ -17,7 +17,6 @@ def simpleGRU(inputs, outputs):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        blocks=6
         for i in range(blocks):
             filters = 2**(blocks-1-i)
             kernel = 2**i
