@@ -566,99 +566,99 @@ ANNOTATIONSCOREDUPLES = {
         "When-in-Rome/Corpus/OpenScore-LiederCorpus/Schubert,_Franz/Schwanengesang,_D.957/08_Der_Atlas/analysis.txt",
         "When-in-Rome/Corpus/OpenScore-LiederCorpus/Schubert,_Franz/Schwanengesang,_D.957/08_Der_Atlas/score.mxl",
     ),
-    "wir-bach-wtc-i-24": (
+    "wirwtc-bach-wtc-i-24": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/24/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/24/score.mxl",
     ),
-    "wir-bach-wtc-i-15": (
+    "wirwtc-bach-wtc-i-15": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/15/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/15/score.mxl",
     ),
-    "wir-bach-wtc-i-8": (
+    "wirwtc-bach-wtc-i-8": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/8/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/8/score.mxl",
     ),
-    "wir-bach-wtc-i-3": (
+    "wirwtc-bach-wtc-i-3": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/3/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/3/score.mxl",
     ),
-    "wir-bach-wtc-i-7": (
+    "wirwtc-bach-wtc-i-7": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/7/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/7/score.mxl",
     ),
-    "wir-bach-wtc-i-17": (
+    "wirwtc-bach-wtc-i-17": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/17/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/17/score.mxl",
     ),
-    "wir-bach-wtc-i-16": (
+    "wirwtc-bach-wtc-i-16": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/16/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/16/score.mxl",
     ),
-    "wir-bach-wtc-i-11": (
+    "wirwtc-bach-wtc-i-11": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/11/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/11/score.mxl",
     ),
-    "wir-bach-wtc-i-20": (
+    "wirwtc-bach-wtc-i-20": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/20/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/20/score.mxl",
     ),
-    "wir-bach-wtc-i-19": (
+    "wirwtc-bach-wtc-i-19": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/19/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/19/score.mxl",
     ),
-    "wir-bach-wtc-i-22": (
+    "wirwtc-bach-wtc-i-22": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/22/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/22/score.mxl",
     ),
-    "wir-bach-wtc-i-9": (
+    "wirwtc-bach-wtc-i-9": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/9/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/9/score.mxl",
     ),
-    "wir-bach-wtc-i-18": (
+    "wirwtc-bach-wtc-i-18": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/18/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/18/score.mxl",
     ),
-    "wir-bach-wtc-i-1": (
+    "wirwtc-bach-wtc-i-1": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/1/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/1/score.mxl",
     ),
-    "wir-bach-wtc-i-5": (
+    "wirwtc-bach-wtc-i-5": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/5/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/5/score.mxl",
     ),
-    "wir-bach-wtc-i-4": (
+    "wirwtc-bach-wtc-i-4": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/4/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/4/score.mxl",
     ),
-    "wir-bach-wtc-i-6": (
+    "wirwtc-bach-wtc-i-6": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/6/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/6/score.mxl",
     ),
-    "wir-bach-wtc-i-10": (
+    "wirwtc-bach-wtc-i-10": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/10/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/10/score.mxl",
     ),
-    "wir-bach-wtc-i-14": (
+    "wirwtc-bach-wtc-i-14": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/14/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/14/score.mxl",
     ),
-    "wir-bach-wtc-i-23": (
+    "wirwtc-bach-wtc-i-23": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/23/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/23/score.mxl",
     ),
-    "wir-bach-wtc-i-2": (
+    "wirwtc-bach-wtc-i-2": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/2/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/2/score.mxl",
     ),
-    "wir-bach-wtc-i-21": (
+    "wirwtc-bach-wtc-i-21": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/21/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/21/score.mxl",
     ),
-    "wir-bach-wtc-i-12": (
+    "wirwtc-bach-wtc-i-12": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/12/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/12/score.mxl",
     ),
-    "wir-bach-wtc-i-13": (
+    "wirwtc-bach-wtc-i-13": (
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/13/analysis.txt",
         "When-in-Rome/Corpus/Etudes_and_Preludes/Bach,_Johann_Sebastian/The_Well-Tempered_Clavier_I/13/score.mxl",
     ),
@@ -1467,8 +1467,43 @@ DATASPLITSBPS = {
 }
 
 
+DATASPLITSWTC = {
+    "test": [
+        "wirwtc-bach-wtc-i-3",
+        "wirwtc-bach-wtc-i-8",
+        "wirwtc-bach-wtc-i-12",
+        "wirwtc-bach-wtc-i-15",
+        "wirwtc-bach-wtc-i-22",
+        "wirwtc-bach-wtc-i-24",
+    ],
+    "validation": [
+        "wirwtc-bach-wtc-i-7",
+        "wirwtc-bach-wtc-i-9",
+        "wirwtc-bach-wtc-i-11",
+        "wirwtc-bach-wtc-i-16",
+        "wirwtc-bach-wtc-i-17",
+        "wirwtc-bach-wtc-i-18",
+    ],
+    "training": [
+        "wirwtc-bach-wtc-i-1",
+        "wirwtc-bach-wtc-i-2",
+        "wirwtc-bach-wtc-i-4",
+        "wirwtc-bach-wtc-i-5",
+        "wirwtc-bach-wtc-i-6",
+        "wirwtc-bach-wtc-i-10",
+        "wirwtc-bach-wtc-i-13",
+        "wirwtc-bach-wtc-i-14",
+        "wirwtc-bach-wtc-i-19",
+        "wirwtc-bach-wtc-i-20",
+        "wirwtc-bach-wtc-i-21",
+        "wirwtc-bach-wtc-i-23",
+    ],
+}
+
+
 DATASPLITS = {
     "test": DATASPLITSBPS["test"]
+    + DATASPLITSWTC["test"]
     + [
         "abc-op74-3",
         "abc-op127-2",
@@ -1507,10 +1542,6 @@ DATASPLITS = {
         "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-05-aufenthalt",
         "wir-openscore-liedercorpus-schubert-op-59-3-du-bist-die-ruh",
         "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-10-das-fischermadchen",
-        "wir-bach-wtc-i-24",
-        "wir-bach-wtc-i-15",
-        "wir-bach-wtc-i-8",
-        "wir-bach-wtc-i-3",
         "wir-bach-chorales-19",
         "wir-bach-chorales-4",
         "wir-bach-chorales-10",
@@ -1519,6 +1550,7 @@ DATASPLITS = {
         "wir-monteverdi-madrigals-book-5-5",
     ],
     "validation": DATASPLITSBPS["validation"]
+    + DATASPLITSWTC["validation"]
     + [
         "abc-op131-1",
         "abc-op59-no3-1",
@@ -1557,10 +1589,6 @@ DATASPLITS = {
         "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-01-im-wunderschonen-monat-mai",
         "wir-openscore-liedercorpus-schubert-winterreise-d-911-18-der-stuermische-morgen",
         "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-13-der-doppelganger",
-        "wir-bach-wtc-i-7",
-        "wir-bach-wtc-i-17",
-        "wir-bach-wtc-i-16",
-        "wir-bach-wtc-i-11",
         "wir-bach-chorales-2",
         "wir-bach-chorales-14",
         "wir-bach-chorales-16",
@@ -1569,6 +1597,7 @@ DATASPLITS = {
         "wir-monteverdi-madrigals-book-3-13",
     ],
     "training": DATASPLITSBPS["training"]
+    + DATASPLITSWTC["training"]
     + [
         "abc-op131-3",
         "abc-op95-4",
@@ -1751,22 +1780,6 @@ DATASPLITS = {
         "wir-openscore-liedercorpus-schubert-winterreise-d-911-01-gute-nacht",
         "wir-openscore-liedercorpus-hensel-6-lieder-op-1-5-morgenstandchen",
         "wir-openscore-liedercorpus-brahms-7-lieder-op-48-3-liebesklage-des-madchens",
-        "wir-bach-wtc-i-20",
-        "wir-bach-wtc-i-19",
-        "wir-bach-wtc-i-22",
-        "wir-bach-wtc-i-9",
-        "wir-bach-wtc-i-18",
-        "wir-bach-wtc-i-1",
-        "wir-bach-wtc-i-5",
-        "wir-bach-wtc-i-4",
-        "wir-bach-wtc-i-6",
-        "wir-bach-wtc-i-10",
-        "wir-bach-wtc-i-14",
-        "wir-bach-wtc-i-23",
-        "wir-bach-wtc-i-2",
-        "wir-bach-wtc-i-21",
-        "wir-bach-wtc-i-12",
-        "wir-bach-wtc-i-13",
         "wir-bach-chorales-6",
         "wir-bach-chorales-18",
         "wir-bach-chorales-3",

@@ -562,99 +562,99 @@ hashes = {
         "a4d845d01703e58f547c5eedf628975e5a65de5af8fdb15ab380e28b97a36d01",
         "f79c9ec11585a92a4f41d3f62a4cbab8571222dfeb71759d93b0c7331ba13c19",
     ),
-    "wir-bach-wtc-i-24": (
+    "wirwtc-bach-wtc-i-24": (
         "089bfcc629fa8ec1be79595f4af0b89f0a0dabaf77c94d85917b6e8dd523a036",
         "8fb64fe411963a27de13caaef4b62af3c27dbba756394ed96edd1e9d6154219d",
     ),
-    "wir-bach-wtc-i-15": (
+    "wirwtc-bach-wtc-i-15": (
         "7573780602ae5cdb088a2683e3318af42ac5afdea587717cab5060e7ec8ae8b8",
         "528ec9142b332ab231630ed0a293ba80b3b02f35b1517bb78daabbd880a0ae69",
     ),
-    "wir-bach-wtc-i-8": (
+    "wirwtc-bach-wtc-i-8": (
         "974d84b36d9b0766689f30306cef84bc65b893e8e455249e6f816b216a9b1b48",
         "d927e102dcaedd7b26b48a8ee1a9f342d39fdaa0950baa409282a07dd2f2acf5",
     ),
-    "wir-bach-wtc-i-3": (
+    "wirwtc-bach-wtc-i-3": (
         "9801a6db0589a52647915c328cb342615659e5a73850d99125a192229e0488f1",
         "b736479ee227f5e475c779a4009fb91d1c340e688855c9a42adf3f4f374fa7a1",
     ),
-    "wir-bach-wtc-i-7": (
+    "wirwtc-bach-wtc-i-7": (
         "4b8023ff6f796d5c77c22f038072aa28a12ee0da0f18db45ced8eb107c96d0db",
         "a8e386216eb89a14ed73c94c6c1d0bee0903345e4478d6f3e71340df3c1598ac",
     ),
-    "wir-bach-wtc-i-17": (
+    "wirwtc-bach-wtc-i-17": (
         "5f85d505bcc08bab97f9286380b3d0cc78e885dd2887010a9a1a52d4418c6f3c",
         "b6f2da42a3c58519b20ad1a60c553a16e2e87b56f4852edd65d6794f944004e4",
     ),
-    "wir-bach-wtc-i-16": (
+    "wirwtc-bach-wtc-i-16": (
         "89224aeb6c7603f01491b6e092a7ef4595eaca372fc9f47afa998339f9c9ebb0",
         "e40a89fd3e861255d533e68092c9b1fc36109e7c4107fa0628b7700667c5e576",
     ),
-    "wir-bach-wtc-i-11": (
+    "wirwtc-bach-wtc-i-11": (
         "10e8c572ea356fb37dcfb167e2fa1430f00a7bb253869bd2405f5ec43b7648e5",
         "31d8c498130cec13966cfb800d57916b58dbc547ff5c5972a013f2fe0d3df981",
     ),
-    "wir-bach-wtc-i-20": (
+    "wirwtc-bach-wtc-i-20": (
         "b1c4d9fbbfb30cb3b357396b6c3570f8007b74c841e5595082007498d54829f0",
         "1a871d8cf5ef2ed50953fb4ea0e7acbf80ff29962f1ffeb445cf12288475de03",
     ),
-    "wir-bach-wtc-i-19": (
+    "wirwtc-bach-wtc-i-19": (
         "09e674a673507f9a4668732c0ed31f2c42561b2ecde109e7ac5ac0f1312a93bf",
         "a9b989b0cceea6f2ccde4c26d4a84ee9401a74e10599ae03046418ebda14ccc3",
     ),
-    "wir-bach-wtc-i-22": (
+    "wirwtc-bach-wtc-i-22": (
         "1e65290e5502017ca0042bf62a2429341bb9ee23a76dbb65a3ed6ab76638f29a",
         "0a1484babd7a9fbb0ab3630c4f6c7b2d7febb1adf192fd866236f30466b313f8",
     ),
-    "wir-bach-wtc-i-9": (
+    "wirwtc-bach-wtc-i-9": (
         "859f0445d5a337912b9670661267a4ed95bde2cb0bec74f1ca89a7c1d08cf320",
         "d581caa7ff81c4b0b78dbf57de49b869ad414594963ef50e7e37c0699abd166b",
     ),
-    "wir-bach-wtc-i-18": (
+    "wirwtc-bach-wtc-i-18": (
         "5fdd4c6ee8cd376f60d01d3457a831ff2eb4ae19bb12cc44297445efb462a25c",
         "fc5b861696722069884752d6b3f2e528ff463b9848a4e10f5173705e03fcd8ef",
     ),
-    "wir-bach-wtc-i-1": (
+    "wirwtc-bach-wtc-i-1": (
         "e2c9b0e4ca444aefbfc6daf9507eaea31931ba630d25fcc97a3cd1bfd7194b37",
         "7179b0aa86707cc2e6db004c30c5b94713b1cb0d201a58d4d70197be6311f974",
     ),
-    "wir-bach-wtc-i-5": (
+    "wirwtc-bach-wtc-i-5": (
         "daefb1862be3b76bc321a6a781c6c64582ca1754bbf816dcbb983b6b4509acf7",
         "a522bed78e8d045b803d65167271668defc5a106e6aaace9d7c354e46d316f53",
     ),
-    "wir-bach-wtc-i-4": (
+    "wirwtc-bach-wtc-i-4": (
         "703dfd6f51f99799b759bd3fbefd941bf443e29583ae95a5ceab7ef4ecacca1a",
         "3a8471d25c3f71a71af2de19f351c95f945d3de4fb919b4c7ef92bc4149855a0",
     ),
-    "wir-bach-wtc-i-6": (
+    "wirwtc-bach-wtc-i-6": (
         "65fe8f6970448e4f34b7278200872019295bb2f323d690ab879ab6c89d17b43b",
         "4de7ea61b6c90bc231923c926cf8a36ecd2b2aa2829c4d5bdb5e05f336e037f1",
     ),
-    "wir-bach-wtc-i-10": (
+    "wirwtc-bach-wtc-i-10": (
         "ea97397e7bab4e54ee6b197e25e639b56d6841165c17212540a319dec40ee480",
         "a36f889320af6ac986cb4e3b091d4d7edc1662d4fa0bb2e15f7ec68fa7ce483a",
     ),
-    "wir-bach-wtc-i-14": (
+    "wirwtc-bach-wtc-i-14": (
         "fd6afde377962fc12dcce570d80405b957d8c2ca049d39ebc6602e9b4279858f",
         "9db2438ae5f5c0ec5e5fa16baad917a3ed910285de1e3c804bdfbb20aed74150",
     ),
-    "wir-bach-wtc-i-23": (
+    "wirwtc-bach-wtc-i-23": (
         "b04042a864e1f312fabf75a3efa51f64c53e118ea5b0788148a9e220a88fdcf2",
         "26162fa3884931608a838061bed1bb74be76fd7ec5822dee5292aa08692e043a",
     ),
-    "wir-bach-wtc-i-2": (
+    "wirwtc-bach-wtc-i-2": (
         "3d6047c714bc6e98b6c2cf5c5e846d57992f6ca6e0065b2d1d33297117cc90df",
         "e13adf687ff1b80ff801c34aa72fc4ac66312c58663364c4ac5d3bfc9aa4dc11",
     ),
-    "wir-bach-wtc-i-21": (
+    "wirwtc-bach-wtc-i-21": (
         "8a7aaafcd711ac82afa9892cdb4777c7dfc9934091a67fef4136bb670945eca3",
         "d19aeaca89172737c297dfacd8e64d1e76f34f73a6547631d5e48953f81528df",
     ),
-    "wir-bach-wtc-i-12": (
+    "wirwtc-bach-wtc-i-12": (
         "a77a439f6df7b61cb2d5fb76838cec1d744ff711aadd57e8b79a853abc4ca2d4",
         "6cf694fcedb9cf1672568da5da04dc23258e72176b9991d1c1777ce0306c49be",
     ),
-    "wir-bach-wtc-i-13": (
+    "wirwtc-bach-wtc-i-13": (
         "59831feaa2ae14174c35140f8a88c2ecaab5df2a35609b958457776eb0651b93",
         "9c2fae600646832ccf1fa93898630bd14848c2c4dcfe9fc08d5a097a3f8d955e",
     ),
