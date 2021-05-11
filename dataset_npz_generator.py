@@ -164,15 +164,15 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--collections",
-        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
-        default=["abc", "bps", "haydnop20", "wir", "tavern"],
+        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        default=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
         nargs="+",
         help="Include training files from a specific corpus/collection.",
     )
     parser.add_argument(
         "--test_collections",
-        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
-        default=["abc", "bps", "haydnop20", "wir", "tavern"],
+        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        default=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
         nargs="+",
         help="Include test files from a specific corpus/collection.",
     )
@@ -222,5 +222,5 @@ if __name__ == "__main__":
         inputRepresentations=args.input_representations,
         outputRepresentations=args.output_representations,
         sequenceLength=args.sequence_length,
-        testSetOn=args.test_set_on
+        testSetOn=args.test_set_on,
     )
