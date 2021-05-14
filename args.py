@@ -1,9 +1,9 @@
-GENERATE_DATA = False
+GENERATE_DATA = True
 SYNTHETICDATASTRATEGY = "concatenate"
-COLLECTIONS = ["bps"]
-TESTCOLLECTIONS = ["bps"]
-EPOCHS = 60
-INPUT_REPRESENTATIONS = ["Bass35", "Chromagram35", "Intervals39"]
+COLLECTIONS = ["bps"]#, "abc", "haydnop20", "tavern", "wir", "wirwtc"]
+TESTCOLLECTIONS = ["haydnop20"]
+EPOCHS = 100
+INPUT_REPRESENTATIONS = ["Bass19", "Chromagram19"]
 OUTPUT_REPRESENTATIONS = [
     "LocalKey35",
     "PrimaryDegree22",
@@ -20,6 +20,6 @@ OUTPUT_REPRESENTATIONS = [
 SEQUENCELENGTH = 640
 BATCHSIZE = 16
 DATAAUGMENTATION = True
-MODEL = "simpleGRU"
+MODEL = "AugmentedNet"
 SCRUTINIZEDATA = False
-TESTSETON = False
+TESTSETON = True
