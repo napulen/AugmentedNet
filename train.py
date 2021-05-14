@@ -31,6 +31,7 @@ import pandas as pd
 from tensorflow.python.keras.callbacks import ModelCheckpoint
 import datetime
 from pathlib import Path
+import gc
 
 
 class InputOutput(object):
@@ -63,7 +64,7 @@ def disableGPU():
 
 def _loadNpz(synthetic=False):
     datasetFile = f"{SYNTHDATASETDIR if synthetic else DATASETDIR}.npz"
-    dataset = np.load(datasetFile)
+    dataset = np.load(datasetFile, mmap_mode="r")
     X_train, y_train = [], []
     X_test, y_test = [], []
     for name in dataset.files:
@@ -179,10 +180,13 @@ def evaluate(modelHdf5, X_test, y_true):
         & df.Inversion4
         & df.Degree
     )
+    df["AltRomanNumeral"] = df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
     summary["Degree"] = df.Degree.mean().round(3)
     summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
+    summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
     print(f"Degree: {summary['Degree']}")
     print(f"RomanNumeral: {summary['RomanNumeral']}")
+    print(f"AlRomanNumeral: {summary['AltRomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
     outputPath = outputPath.replace(".hdf5", "")
     Path(outputPath).mkdir(parents=True, exist_ok=True)
@@ -227,6 +231,9 @@ def train(
         + ".hdf5"
     )
 
+    # Maybe this will force gc on the python lists?
+    X_train = y_train = X_test = y_test = []
+    gc.collect()
     model.fit(
         x,
         y,
