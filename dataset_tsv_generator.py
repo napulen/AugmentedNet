@@ -25,7 +25,7 @@ def generateDataset(wtcfold, synthetic=False, texturize=False):
     }
     datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
     Path(datasetDir).mkdir(exist_ok=True)
-    for split, files in DATASPLITS.items():
+    for split, files in DATASPLITS(wtcfold).items():
         Path(os.path.join(datasetDir, split)).mkdir(exist_ok=True)
         for nickname in files:
             print(nickname)
@@ -61,6 +61,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "wtcfold",
+        type=int,
         choices=range(4),
         help="The number of cross-validation fold of wtc to use.",
     )

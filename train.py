@@ -258,7 +258,13 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Train the AugmentedNet.")
     parser.add_argument(
         "experiment_name",
-        choices=["testset", "validationset", "prototyping", "debug"],
+        choices=[
+            "testset",
+            "validationset",
+            "prototyping",
+            "debug",
+            "wtccrossval",
+        ],
         help="A short name for this experiment.",
     )
     parser.add_argument(

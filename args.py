@@ -1,7 +1,7 @@
 GENERATE_DATA = True
 SYNTHETICDATASTRATEGY = "concatenate"
-COLLECTIONS = ["bps", "abc", "haydnop20", "tavern", "wir", "wirwtc"]
-TESTCOLLECTIONS = ["haydnop20"]
+COLLECTIONS = ["bps", "wirwtc"]
+TESTCOLLECTIONS = ["wirwtc"]
 EPOCHS = 100
 INPUT_REPRESENTATIONS = ["Bass19", "Chromagram19"]
 OUTPUT_REPRESENTATIONS = [
