@@ -12,7 +12,7 @@ from joint_parser import parseAnnotationAndScore, parseAnnotationAndAnnotation
 from argparse import ArgumentParser
 
 
-def generateDataset(synthetic=False, texturize=False):
+def generateDataset(wtcfold, synthetic=False, texturize=False):
     statsdict = {
         "file": [],
         "annotation": [],
@@ -60,6 +60,11 @@ if __name__ == "__main__":
         description="Generate tsv files for every (annotation, score) pair."
     )
     parser.add_argument(
+        "wtcfold",
+        choices=range(4),
+        help="The number of cross-validation fold of wtc to use.",
+    )
+    parser.add_argument(
         "--synthetic",
         action="store_true",
         help="Use (annotation, annotation) pairs, ignore the real scores.",
@@ -67,7 +72,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--texturize",
         action="store_true",
-        help="Texturize block chords. Ignored unless synthetic=True."
+        help="Texturize block chords. Ignored unless synthetic=True.",
     )
     args = parser.parse_args()
-    generateDataset(synthetic=args.synthetic, texturize=args.texturize)
+    generateDataset(
+        args.wtcfold, synthetic=args.synthetic, texturize=args.texturize
+    )
