@@ -359,7 +359,7 @@ if __name__ == "__main__":
             scrutinizeData=args.scrutinize_data,
             testSetOn=args.test_set_on,
         )
-        # log_artifacts(DATASETDIR, artifact_path="dataset")
+        mlflow.log_artifacts(DATASETDIR, artifact_path="dataset")
     if args.syntheticDataStrategy:
         if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
             generateDataset(
@@ -373,7 +373,7 @@ if __name__ == "__main__":
                 scrutinizeData=args.scrutinize_data,
                 testSetOn=args.test_set_on,
             )
-            # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
+            mlflow.log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
 
     mlflow.tensorflow.autolog()
     mlflow.set_experiment(args.experiment_name)
