@@ -1,0 +1,8 @@
+LocalKey35: 0.804
+PrimaryDegree22: 0.723
+SecondaryDegree22: 0.921
+Inversion4: 0.715
+ChordQuality15: 0.751
+ChordRoot35: 0.816
+Degree: 0.681
+RomanNumeral: 0.404

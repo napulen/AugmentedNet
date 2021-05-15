@@ -347,6 +347,9 @@ if __name__ == "__main__":
         # Ideally, this shouldn't be necessary; but this is not an ideal world
         tensorflowGPUHack()
 
+    mlflow.tensorflow.autolog()
+    mlflow.set_experiment(args.experiment_name)
+    mlflow.start_run(run_name=args.run_name)
     if args.generateData or not os.path.isfile(DATASETDIR + ".npz"):
         generateDataset(
             synthetic=False,
@@ -375,9 +378,6 @@ if __name__ == "__main__":
             )
             mlflow.log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
 
-    mlflow.tensorflow.autolog()
-    mlflow.set_experiment(args.experiment_name)
-    mlflow.start_run(run_name=args.run_name)
     mlflow.log_param("inputs", args.input_representations)
     mlflow.log_param("outputs", args.output_representations)
     mlflow.log_param("model", args.model)

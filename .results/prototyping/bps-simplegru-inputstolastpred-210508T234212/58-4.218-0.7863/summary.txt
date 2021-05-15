@@ -1,0 +1,13 @@
+LocalKey35: 0.815
+PrimaryDegree22: 0.704
+SecondaryDegree22: 0.922
+Inversion4: 0.701
+ChordQuality15: 0.764
+ChordRoot35: 0.813
+Bass35: 0.666
+RomanNumeral76: 0.627
+TonicizedKey35: 0.831
+PitchClassSet94: 0.755
+HarmonicRhythm2: 0.949
+Degree: 0.663
+RomanNumeral: 0.398
