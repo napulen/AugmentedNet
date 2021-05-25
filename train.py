@@ -209,7 +209,7 @@ def train(
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
     model.compile(
-        optimizer=optimizers.Adam(learning_rate=0.0005),
+        optimizer=optimizers.Adam(learning_rate=0.005),
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
