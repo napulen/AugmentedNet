@@ -11,6 +11,7 @@ from common import DATASETDIR, SYNTHDATASETDIR
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+from tensorflow.keras import optimizers
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -208,7 +209,7 @@ def train(
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
     model.compile(
-        optimizer="adam",
+        optimizer=optimizers.Adam(learning_rate=0.01),
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
