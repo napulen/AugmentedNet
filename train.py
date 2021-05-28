@@ -213,7 +213,7 @@ def train(
         initial_learning_rate=0.01, decay_steps=1000, decay_rate=0.9
     )
     model.compile(
-        optimizer=optimizers.RMSprop(learning_rate=lr_schedule),
+        optimizer=optimizers.RMSprop(learning_rate=0.01),
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
