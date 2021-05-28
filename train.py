@@ -187,7 +187,7 @@ def evaluate(modelHdf5, X_test, y_true):
     summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
     print(f"Degree: {summary['Degree']}")
     print(f"RomanNumeral: {summary['RomanNumeral']}")
-    print(f"AlRomanNumeral: {summary['AltRomanNumeral']}")
+    print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
     outputPath = outputPath.replace(".hdf5", "")
     Path(outputPath).mkdir(parents=True, exist_ok=True)
