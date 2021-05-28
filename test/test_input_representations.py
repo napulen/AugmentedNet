@@ -640,7 +640,7 @@ def _save(arr):
     np.savetxt("tmp.txt", arr, fmt="%i", delimiter=" ")
 
 
-class TestBassChromagram19(unittest.TestCase):
+class TestBassChromagram38(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
         self.df = _load_dfgt(haydn)
