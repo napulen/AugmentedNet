@@ -1,7 +1,7 @@
-GENERATE_DATA = True
+GENERATE_DATA = False
 SYNTHETICDATASTRATEGY = "concatenate"
-COLLECTIONS = ["bps", "abc", "haydnop20", "tavern", "wir", "wirwtc"]
-TESTCOLLECTIONS = ["haydnop20"]
+COLLECTIONS = ["bps"]
+TESTCOLLECTIONS = ["bps"]
 EPOCHS = 100
 INPUT_REPRESENTATIONS = ["Bass19", "Chromagram19"]
 OUTPUT_REPRESENTATIONS = [
@@ -22,4 +22,4 @@ BATCHSIZE = 16
 DATAAUGMENTATION = True
 MODEL = "AugmentedNet"
 SCRUTINIZEDATA = False
-TESTSETON = True
+TESTSETON = False
