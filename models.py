@@ -24,7 +24,7 @@ def AugmentedNet(inputs, outputs, blocks=6):
             h = layers.Conv1D(filters, kernel, padding="same")(xi)
             h = layers.BatchNormalization()(h)
             h = layers.Activation("relu")(h)
-            h = layers.Dropout(dropout[i])
+            h = layers.Dropout(dropout[i])(h)
             xi = layers.Concatenate()([xi, h])
         xprime.append(xi)
     if len(x) > 1:
