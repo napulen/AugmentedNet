@@ -18,8 +18,8 @@ def AugmentedNet(inputs, outputs, blocks=7):
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
         # dropout = [0.25, 0.2, 0.15, 0, 0, 0]
-        filtersList = [20, 16, 12, 8, 4, 2, 1]
-        kernelsList = [1, 2, 4, 8, 16, 32, 64]
+        filtersList = [20, 16, 8, 4, 2, 1]
+        kernelsList = [1, 2, 4, 8, 16, 32]
         for i in range(blocks):
             # filters = 2 ** (blocks - 1 - i)
             # kernel = 2 ** i
