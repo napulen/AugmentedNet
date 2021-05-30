@@ -213,7 +213,7 @@ def train(
         boundaries=[8120], values=[0.01, 0.0001]
     )
     model.compile(
-        optimizer=optimizers.RMSprop(learning_rate=0.0003),
+        optimizer=optimizers.RMSprop(learning_rate=0.0005),
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
