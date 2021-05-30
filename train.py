@@ -209,11 +209,11 @@ def train(
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
 
-    lr_schedule = optimizers.schedules.ExponentialDecay(
-        initial_learning_rate=0.01, decay_steps=1000, decay_rate=0.9
+    lr_schedule = optimizers.schedules.PiecewiseConstantDecay(
+        boundaries=[2240, 4480], values=[0.01, 0.001, 0.0001]
     )
     model.compile(
-        optimizer=optimizers.RMSprop(learning_rate=0.01),
+        optimizer=optimizers.RMSprop(learning_rate=lr_schedule),
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
