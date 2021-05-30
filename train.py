@@ -210,7 +210,7 @@ def train(
     model = models.available_models[modelName](X_train, y_train)
 
     lr_schedule = optimizers.schedules.PiecewiseConstantDecay(
-        boundaries=[8120], values=[0.01, 0.0001]
+        boundaries=[10150], values=[0.0005, 0.0001]
     )
     model.compile(
         optimizer=optimizers.RMSprop(learning_rate=0.0005),
