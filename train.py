@@ -205,12 +205,14 @@ def train(
     y_test,
     modelName="AugmentedNet",
     checkpointPath=".model_checkpoint/",
+    lrBoundaries=[10000],
+    lrValues=[0.01, 0.0001],
 ):
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
 
     lr_schedule = optimizers.schedules.PiecewiseConstantDecay(
-        boundaries=[1840, 2300, 2760], values=[0.01, 0.0001, 0.001, 0.0001]
+        boundaries=lrBoundaries, values=lrValues
     )
     model.compile(
         optimizer=optimizers.RMSprop(learning_rate=lr_schedule),
@@ -337,6 +339,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--test_set_on", action="store_true", default=globalArgs.TESTSETON
     )
+    parser.add_argument(
+        "--lr-boundaries", nargs="+", default=globalArgs.LR_BOUNDARIES
+    )
+    parser.add_argument("--lr-values", nargs="+", default=globalArgs.LR_VALUES)
 
     args = parser.parse_args()
 
@@ -384,6 +390,8 @@ if __name__ == "__main__":
     mlflow.log_param("scrutinize_data", args.scrutinize_data)
     mlflow.log_param("sequenceLength", args.sequence_length)
     mlflow.log_param("testSetOn", args.test_set_on)
+    mlflow.log_param("learningRateBoundaries", args.lr_boundaries)
+    mlflow.log_param("learningRateValues", args.lr_values)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
     checkpoint = (
         f".model_checkpoint/"
@@ -401,6 +409,8 @@ if __name__ == "__main__":
         y_test,
         modelName=args.model,
         checkpointPath=checkpoint,
+        lrBoundaries=args.lr_boundaries,
+        lrValues=args.lr_values,
     )
     results, summary = evaluate(
         os.path.join(checkpoint, bestmodel), X_test, y_test
