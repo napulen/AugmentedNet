@@ -205,12 +205,14 @@ def train(
     y_test,
     modelName="AugmentedNet",
     checkpointPath=".model_checkpoint/",
-    lrBoundaries=[10000],
+    lrBoundaries=[40],
     lrValues=[0.01, 0.0001],
 ):
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
 
+    stepsPerEpoch = X_train[0].array.shape[0] // BATCHSIZE
+    lrBoundaries = [x*stepsPerEpoch for x in lrBoundaries]
     lr_schedule = optimizers.schedules.PiecewiseConstantDecay(
         boundaries=lrBoundaries, values=lrValues
     )
