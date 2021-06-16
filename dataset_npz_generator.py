@@ -204,7 +204,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--scrutinize_data",
         action="store_true",
-        default=True,
+        default=False,
         help="Exclude bad-quality annotations from the training data.",
     )
     parser.add_argument(
@@ -223,4 +223,5 @@ if __name__ == "__main__":
         outputRepresentations=args.output_representations,
         sequenceLength=args.sequence_length,
         testSetOn=args.test_set_on,
+        scrutinizeData=args.scrutinize_data,
     )
