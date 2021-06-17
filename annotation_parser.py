@@ -144,6 +144,12 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
 
 
 def parseAnnotation(f, fixedOffset=FIXEDOFFSET):
+    """Generates the DataFrame from a RomanText file.
+
+    Parses the file using music21. Creates an initial DataFrame
+    with every onset event of the music21 stream. Finally,
+    does the sampling at symbolically regular durations fixedOffset.
+    """
     # Step 0: Use music21 to parse the score
     s = _m21Parse(f)
     # Step 1: Parse and produce a salami-sliced dataset
