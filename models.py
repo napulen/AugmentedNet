@@ -17,14 +17,13 @@ def AugmentedNet(inputs, outputs, blocks=6):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        flist = [14, 12, 10, 8, 6, 4]
         for i in range(blocks):
-            filters = flist[i]
+            filters = 2 ** (blocks - 1 - i)
             kernel = 2 ** i
-            h = layers.Conv1D(filters, kernel, padding="same")(xi)
+            h = layers.Conv1D(19, kernel, padding="same")(xi)
             h = layers.BatchNormalization()(h)
             h = layers.Activation("relu")(h)
-            xi = layers.Concatenate()([xi, h])
+            xi = layers.Add()([xi, h])
         xprime.append(xi)
     if len(x) > 1:
         inputs = layers.Concatenate()([xi for xi in xprime])
