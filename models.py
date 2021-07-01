@@ -17,12 +17,12 @@ def AugmentedNet(inputs, outputs, blocks=6):
         name = i.name.replace("training_", "")
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
-        xi = layers.Conv1D(16, 1, padding="same")(xi)
+        xi = layers.Conv1D(32, 1, padding="same")(xi)
         xi = layers.BatchNormalization()(xi)
         for i in range(blocks):
             filters = 2 ** (blocks - 1 - i)
             kernel = 2 ** i
-            h = layers.SeparableConv1D(16, kernel, padding="same")(xi)
+            h = layers.SeparableConv1D(32, kernel, padding="same")(xi)
             h = layers.BatchNormalization()(h)
             h = layers.Activation("relu")(h)
             xi = layers.Add()([xi, h])
