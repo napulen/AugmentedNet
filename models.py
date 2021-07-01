@@ -6,7 +6,7 @@ from output_representations import (
 )
 
 
-def AugmentedNet(inputs, outputs, blocks=6):
+def AugmentedNet(inputs, outputs, blocks=7):
     # (raw) inputs of the network
     x = []
     # inputs after initial convolutional blocks
@@ -20,10 +20,7 @@ def AugmentedNet(inputs, outputs, blocks=6):
         for i in range(blocks):
             filters = 2 ** (blocks - 1 - i)
             kernel = 2 ** i
-            h = layers.Conv1D(19, 1, padding="same")(xi)
-            h = layers.BatchNormalization()(h)
-            h = layers.Activation("relu")(h)
-            h = layers.Conv1D(19, kernel, padding="same")(h)
+            h = layers.Conv1D(19, kernel, padding="same")(xi)
             h = layers.BatchNormalization()(h)
             h = layers.Activation("relu")(h)
             xi = layers.Add()([xi, h])
