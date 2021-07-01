@@ -6,7 +6,7 @@ from output_representations import (
 )
 
 
-def AugmentedNet(inputs, outputs, blocks=7):
+def AugmentedNet(inputs, outputs, blocks=6):
     # (raw) inputs of the network
     x = []
     # inputs after initial convolutional blocks
