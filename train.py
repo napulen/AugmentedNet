@@ -386,15 +386,19 @@ if __name__ == "__main__":
     mlflow.tensorflow.autolog()
     mlflow.set_experiment(args.experiment_name)
     mlflow.start_run(run_name=args.run_name)
-    mlflow.log_param("inputs", args.input_representations)
-    mlflow.log_param("outputs", args.output_representations)
-    mlflow.log_param("model", args.model)
-    mlflow.log_param("syntheticDataStrategy", args.syntheticDataStrategy)
-    mlflow.log_param("scrutinize_data", args.scrutinize_data)
-    mlflow.log_param("sequenceLength", args.sequence_length)
-    mlflow.log_param("testSetOn", args.test_set_on)
-    mlflow.log_param("learningRateBoundaries", args.lr_boundaries)
-    mlflow.log_param("learningRateValues", args.lr_values)
+    for arg, value in vars(args).items():
+        if arg == "experiment_name" or arg == "run_name":
+            continue
+        mlflow.log_param(f"custom_{arg}", value)
+    # mlflow.log_param("inputs", args.input_representations)
+    # mlflow.log_param("outputs", args.output_representations)
+    # mlflow.log_param("model", args.model)
+    # mlflow.log_param("syntheticDataStrategy", args.syntheticDataStrategy)
+    # mlflow.log_param("scrutinize_data", args.scrutinize_data)
+    # mlflow.log_param("sequenceLength", args.sequence_length)
+    # mlflow.log_param("testSetOn", args.test_set_on)
+    # mlflow.log_param("learningRateBoundaries", args.lr_boundaries)
+    # mlflow.log_param("learningRateValues", args.lr_values)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
     checkpoint = (
         f".model_checkpoint/"
