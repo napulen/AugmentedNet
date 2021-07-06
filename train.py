@@ -181,13 +181,14 @@ def evaluate(modelHdf5, X_test, y_true):
         & df.Inversion4
         & df.Degree
     )
-    df["AltRomanNumeral"] = df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
     summary["Degree"] = df.Degree.mean().round(3)
     summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
-    summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
     print(f"Degree: {summary['Degree']}")
     print(f"RomanNumeral: {summary['RomanNumeral']}")
-    print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
+    if "RomanNumeral76" in df:
+        df["AltRomanNumeral"] = df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
+        summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
+        print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
     outputPath = outputPath.replace(".hdf5", "")
     Path(outputPath).mkdir(parents=True, exist_ok=True)
