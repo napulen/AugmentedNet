@@ -1,19 +1,17 @@
 from cache import (
     TransposeKey,
-    TransposePitch,
     TransposePcSet,
+    TransposePitch,
 )
 from feature_representation import (
-    CHORD_QUALITIES,
-    COMMON_ROMAN_NUMERALS,
     FeatureRepresentation,
     FeatureRepresentationTI,
-    SPELLINGS,
+    CHORD_QUALITIES,
     COMMON_ROMAN_NUMERALS,
     DEGREES,
     KEYS,
-    CHORD_QUALITIES,
     PCSETS,
+    SPELLINGS,
 )
 
 import numpy as np
