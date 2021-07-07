@@ -2,8 +2,6 @@ from cache import (
     TransposeKey,
     TransposePitch,
     TransposePcSet,
-    m21Key,
-    m21Pitch,
 )
 from feature_representation import (
     CHORD_QUALITIES,
