@@ -49,6 +49,7 @@ def TransposePcSet(pcset, interval):
     semitones = m21IntervalStr(interval).semitones
     transposed = [(x + semitones) % 12 for x in pcset]
     transposed = tuple(sorted(transposed))
+    _transposePcSet[duple] = transposed
     return transposed
 
 

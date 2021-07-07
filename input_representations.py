@@ -1,9 +1,7 @@
 from cache import (
     TransposePitch,
     m21Pitch,
-    m21Key,
     m21IntervalStr,
-    m21IntervalGenChr,
 )
 from feature_representation import (
     PITCHCLASSES,
