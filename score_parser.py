@@ -185,6 +185,17 @@ def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET, eventBased=False):
 def parseAnnotationAsScore(
     f, texturize=False, fixedOffset=FIXEDOFFSET, eventBased=False
 ):
+    """Generates a DataFrame from a synthesized RomanText file.
+
+    Args:
+        f (string): The path to the input RomanText file.
+        texturize (bool, optional): Texturize the synthetic score. Defaults to False.
+        fixedOffset (float, optional): The sampling rate in quarter notes. Defaults to FIXEDOFFSET.
+        eventBased (bool, optional): If True, no fixedOffset sampling is done. Defaults to False.
+
+    Returns:
+        DataFrame: The output DataFrame
+    """
     fmt = "romantext"
     if not texturize:
         return parseScore(f, fmt=fmt, fixedOffset=fixedOffset)
