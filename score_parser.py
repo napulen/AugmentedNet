@@ -171,17 +171,20 @@ def _texturizeAnnotationScore(df, duration, numberOfNotes):
     return outputdf
 
 
-def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET):
+def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET, eventBased=False):
     # Step 0: Use music21 to parse the score
     s = _m21Parse(f, fmt)
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt)
     # Step 2: Turn salami-slice into fixed-duration steps
-    df = _reindexDataFrame(df, fixedOffset=fixedOffset)
+    if not eventBased:
+        df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df
 
 
-def parseAnnotationAsScore(f, texturize=False, fixedOffset=FIXEDOFFSET):
+def parseAnnotationAsScore(
+    f, texturize=False, fixedOffset=FIXEDOFFSET, eventBased=False
+):
     fmt = "romantext"
     if not texturize:
         return parseScore(f, fmt=fmt, fixedOffset=fixedOffset)
@@ -194,5 +197,6 @@ def parseAnnotationAsScore(f, texturize=False, fixedOffset=FIXEDOFFSET):
         for numberOfNotes in available_number_of_notes:
             df = _texturizeAnnotationScore(df, duration, numberOfNotes)
     # Step 3: Turn salami-slice into fixed-duration steps
-    df = _reindexDataFrame(df, fixedOffset=fixedOffset)
+    if not eventBased:
+        df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df

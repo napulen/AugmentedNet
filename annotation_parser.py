@@ -143,7 +143,7 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     return df
 
 
-def parseAnnotation(f, fixedOffset=FIXEDOFFSET):
+def parseAnnotation(f, fixedOffset=FIXEDOFFSET, eventBased=False):
     """Generates the DataFrame from a RomanText file.
 
     Parses the file using music21. Creates an initial DataFrame
@@ -155,5 +155,6 @@ def parseAnnotation(f, fixedOffset=FIXEDOFFSET):
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s)
     # Step 2: Turn salami-slice into fixed-duration steps
-    df = _reindexDataFrame(df, fixedOffset=fixedOffset)
+    if not eventBased:
+        df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df
