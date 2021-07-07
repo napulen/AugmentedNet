@@ -68,9 +68,9 @@ def _initialDataFrame(s):
     """Parses an annotation RomanText file and produces a pandas dataframe.
 
     Unpacking a roman numeral is slightly more complicated here than in
-    previous approaches/papers, the reason is that some features do not
-    seem to work well (e.g., inversion). It may be easier to predict others
-    which may still serve to reconstruct the roman numeral.
+    previous approaches/papers, the reason is that I include more features
+    than usual (e.g., inversion). It may be easier to predict which features
+    lead to a better Roman numeral reconstruction this way.
     """
     dfdict = {col: [] for col in A_COLUMNS}
     for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
