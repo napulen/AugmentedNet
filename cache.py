@@ -5,16 +5,16 @@ from music21.interval import Interval, intervalFromGenericAndChromatic
 _transposeKey = {}
 _transposePitch = {}
 _transposePcSet = {}
-_pitch = {}
-_key = {}
-_intervalStr = {}
-_intervalGenChr = {}
+_pitchObj = {}
+_keyObj = {}
+_intervalObj = {}
 
 
 def TransposeKey(key, interval):
-    if key == "None":
-        # This is because of frames with empty tonicized keys
-        return "None"
+    """Transposes a key based on an interval string (e.g., 'm3').
+
+    Several music21 objects are cached for performance reasons.
+    """
     duple = (key, interval)
     if duple in _transposeKey:
         return _transposeKey[duple]
@@ -25,6 +25,10 @@ def TransposeKey(key, interval):
 
 
 def TransposePitch(pitch, interval):
+    """Transposes a pitch based on an interval string (e.g., 'm3').
+
+    Several music21 objects are cached for performance reasons.
+    """
     duple = (pitch, interval)
     if duple in _transposePitch:
         return _transposePitch[duple]
@@ -35,43 +39,64 @@ def TransposePitch(pitch, interval):
 
 
 def TransposePcSet(pcset, interval):
+    """Transposes a pcset based on an interval string (e.g., 'm3').
+
+    Several music21 objects are cached for performance reasons.
+    """
     duple = (pcset, interval)
     if duple in _transposePcSet:
         return _transposePcSet[duple]
-    semitones = Interval(interval).semitones
+    semitones = m21IntervalStr(interval).semitones
     transposed = [(x + semitones) % 12 for x in pcset]
     transposed = tuple(sorted(transposed))
     return transposed
 
 
 def m21IntervalStr(interval):
-    if interval in _intervalStr:
-        return _intervalStr[interval]
+    """A cached interval object, based on the string (e.g., 'm3').
+
+    Several music21 objects are cached for performance reasons.
+    """
+    if interval in _intervalObj:
+        return _intervalObj[interval]
     intervalObj = Interval(interval)
-    _intervalStr[interval] = intervalObj
+    _intervalObj[interval] = intervalObj
     return intervalObj
 
 
 def m21IntervalGenChr(generic, chromatic):
+    """A cached interval object, based on a pair of (generic, chromatic)
+    intervals.
+
+    Several music21 objects are cached for performance reasons.
+    """
     duple = (generic, chromatic)
-    if duple in _intervalGenChr:
-        return _intervalGenChr[duple]
+    if duple in _intervalObj:
+        return _intervalObj[duple]
     intervalObj = intervalFromGenericAndChromatic(generic, chromatic)
-    _intervalGenChr[duple] = intervalObj
+    _intervalObj[duple] = intervalObj
     return intervalObj
 
 
 def m21Key(key):
-    if key in _key:
-        return _key[key]
+    """A cached key object, based on a string (e.g., 'c#').
+
+    Several music21 objects are cached for performance reasons.
+    """
+    if key in _keyObj:
+        return _keyObj[key]
     keyObj = Key(key)
-    _key[key] = keyObj
+    _keyObj[key] = keyObj
     return keyObj
 
 
 def m21Pitch(pitch):
-    if pitch in _pitch:
-        return _pitch[pitch]
+    """A cached pitch object, based on a string (e.g., 'C#').
+
+    Several music21 objects are cached for performance reasons.
+    """
+    if pitch in _pitchObj:
+        return _pitchObj[pitch]
     pitchObj = Pitch(pitch)
-    _pitch[pitch] = pitchObj
+    _pitchObj[pitch] = pitchObj
     return pitchObj
