@@ -1,4 +1,3 @@
-from numpy.lib.ufunclike import fix
 import score_parser
 import annotation_parser
 import pandas as pd
@@ -93,12 +92,12 @@ def _inversionMetric(df):
 def parseAnnotationAndScore(
     a, s, qualityAssessment=True, fixedOffset=FIXEDOFFSET
 ):
-    """Process a score an RomanText file simultaneously.
+    """Process a RomanText and score files simultaneously.
 
-    s is a .mxl|.krn|.musicxml file
     a is a RomanText file
+    s is a .mxl|.krn|.musicxml file
 
-    Create the dataframes of both, generate a new one.
+    Create the dataframes of both. Generate a new, joint, one.
     """
     # Parse each file
     adf = annotation_parser.parseAnnotation(a, fixedOffset=fixedOffset)
@@ -120,6 +119,12 @@ def parseAnnotationAndScore(
 def parseAnnotationAndAnnotation(
     a, qualityAssessment=True, fixedOffset=FIXEDOFFSET, texturize=True
 ):
+    """Synthesize a RomanText file to treat it as both analysis and score.
+
+    a is a RomanText file
+
+    When synthesizing the file, texturize it if `texturize=True`
+    """
     adf = annotation_parser.parseAnnotation(a, fixedOffset=fixedOffset)
     sdf = score_parser.parseAnnotationAsScore(
         a, texturize=texturize, fixedOffset=fixedOffset
