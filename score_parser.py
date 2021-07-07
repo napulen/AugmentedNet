@@ -2,6 +2,7 @@ import music21
 from music21.interval import Interval
 from music21.pitch import Pitch
 from music21.chord import Chord
+from music21.note import Rest
 from numpy.lib.ufunclike import fix
 import pandas as pd
 import numpy as np
@@ -66,7 +67,7 @@ def _initialDataFrame(s, fmt=None):
         dfdict["s_offset"].append(round(float(c.offset), FLOATSCALE))
         dfdict["s_duration"].append(round(float(c.quarterLength), FLOATSCALE))
         dfdict["s_measure"].append(c.measureNumber + measureNumberShift)
-        if "Rest" in c.classes:
+        if isinstance(c, Rest):
             # We need dummy entries for rests at the beginning of a measure
             dfdict["s_notes"].append(np.nan)
             dfdict["s_intervals"].append(np.nan)
