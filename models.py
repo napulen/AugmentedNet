@@ -7,10 +7,9 @@ from output_representations import (
 
 
 def AugmentedNet(inputs, outputs, blocks=6):
-    # (raw) inputs of the network
-    x = []
-    # inputs after initial convolutional blocks
-    xprime = []
+    """Definition of the AugmentedNet architecture."""
+    x = []  # (raw) inputs of the network
+    xprime = []  # inputs after initial convolutional blocks
     for i in inputs:
         sequenceLength = i.array.shape[1]
         inputFeatures = i.array.shape[2]
@@ -49,6 +48,8 @@ def AugmentedNet(inputs, outputs, blocks=6):
 
 
 def Micchi2020(inputs, outputs):
+    """The model by Micchi et al. (2020)."""
+
     def DenseNetLayer(x, b, f, n=1):
         with tf.name_scope(f"denseNet_{n}"):
             for _ in range(b):
@@ -119,6 +120,8 @@ def Micchi2020(inputs, outputs):
 
 
 def ModifiedMicchi2020(inputs, outputs):
+    """A modified version of the model by Micchi et al. (2020)."""
+
     def DenseNetLayer(x, b, f, n=1):
         with tf.name_scope(f"denseNet_{n}"):
             for _ in range(b):
