@@ -135,3 +135,5 @@ mlruns/
 .results/
 .model_checkpoint/
 .vscode/
+
+*.npz
