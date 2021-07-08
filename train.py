@@ -1,20 +1,12 @@
-from tensorflow.python.eager.context import disable_graph_collection
-from tensorflow.python.keras.layers.normalization import BatchNormalization
-from score_parser import parseScore
-from annotation_parser import parseAnnotation
 from args import (
-    SEQUENCELENGTH,
     BATCHSIZE,
     EPOCHS,
 )
 from common import DATASETDIR, SYNTHDATASETDIR
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
 from tensorflow.keras import optimizers
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import models
 import args as globalArgs
 from argparse import ArgumentParser
@@ -22,14 +14,12 @@ import os
 from dataset_npz_generator import generateDataset
 from input_representations import available_representations as availableInputs
 from output_representations import (
-    OutputRepresentation,
     available_representations as availableOutputs,
 )
 
 import mlflow
 import mlflow.tensorflow
 import pandas as pd
-from tensorflow.python.keras.callbacks import ModelCheckpoint
 import datetime
 from pathlib import Path
 import gc
@@ -186,7 +176,9 @@ def evaluate(modelHdf5, X_test, y_true):
     print(f"Degree: {summary['Degree']}")
     print(f"RomanNumeral: {summary['RomanNumeral']}")
     if "RomanNumeral76" in df:
-        df["AltRomanNumeral"] = df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
+        df["AltRomanNumeral"] = (
+            df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
+        )
         summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
         print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
@@ -213,7 +205,7 @@ def train(
     model = models.available_models[modelName](X_train, y_train)
 
     stepsPerEpoch = X_train[0].array.shape[0] // BATCHSIZE
-    lrBoundaries = [x*stepsPerEpoch for x in lrBoundaries]
+    lrBoundaries = [x * stepsPerEpoch for x in lrBoundaries]
     lr_schedule = optimizers.schedules.PiecewiseConstantDecay(
         boundaries=lrBoundaries, values=lrValues
     )
