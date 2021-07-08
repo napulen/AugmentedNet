@@ -1,3 +1,5 @@
+"""Several cached music21 objects and functions for performance."""
+
 from music21.key import Key
 from music21.pitch import Pitch
 from music21.interval import Interval, intervalFromGenericAndChromatic
@@ -11,10 +13,7 @@ _intervalObj = {}
 
 
 def TransposeKey(key, interval):
-    """Transposes a key based on an interval string (e.g., 'm3').
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """Transposes a key based on an interval string (e.g., 'm3')."""
     duple = (key, interval)
     if duple in _transposeKey:
         return _transposeKey[duple]
@@ -25,10 +24,7 @@ def TransposeKey(key, interval):
 
 
 def TransposePitch(pitch, interval):
-    """Transposes a pitch based on an interval string (e.g., 'm3').
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """Transposes a pitch based on an interval string (e.g., 'm3')."""
     duple = (pitch, interval)
     if duple in _transposePitch:
         return _transposePitch[duple]
@@ -39,10 +35,7 @@ def TransposePitch(pitch, interval):
 
 
 def TransposePcSet(pcset, interval):
-    """Transposes a pcset based on an interval string (e.g., 'm3').
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """Transposes a pcset based on an interval string (e.g., 'm3')."""
     duple = (pcset, interval)
     if duple in _transposePcSet:
         return _transposePcSet[duple]
@@ -54,10 +47,7 @@ def TransposePcSet(pcset, interval):
 
 
 def m21IntervalStr(interval):
-    """A cached interval object, based on the string (e.g., 'm3').
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """A cached interval object, based on the string (e.g., 'm3')."""
     if interval in _intervalObj:
         return _intervalObj[interval]
     intervalObj = Interval(interval)
@@ -66,11 +56,7 @@ def m21IntervalStr(interval):
 
 
 def m21IntervalGenChr(generic, chromatic):
-    """A cached interval object, based on a pair of (generic, chromatic)
-    intervals.
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """A cached interval object, based on (generic, chromatic) interval pairs."""
     duple = (generic, chromatic)
     if duple in _intervalObj:
         return _intervalObj[duple]
@@ -80,10 +66,7 @@ def m21IntervalGenChr(generic, chromatic):
 
 
 def m21Key(key):
-    """A cached key object, based on a string (e.g., 'c#').
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """A cached key object, based on a string (e.g., 'c#')."""
     if key in _keyObj:
         return _keyObj[key]
     keyObj = Key(key)
@@ -92,10 +75,7 @@ def m21Key(key):
 
 
 def m21Pitch(pitch):
-    """A cached pitch object, based on a string (e.g., 'C#').
-
-    Several music21 objects are cached for performance reasons.
-    """
+    """A cached pitch object, based on a string (e.g., 'C#')."""
     if pitch in _pitchObj:
         return _pitchObj[pitch]
     pitchObj = Pitch(pitch)
