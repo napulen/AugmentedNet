@@ -1,7 +1,4 @@
-from args import (
-    BATCHSIZE,
-    EPOCHS,
-)
+from args import BATCHSIZE, EPOCHS
 from common import DATASETDIR, SYNTHDATASETDIR
 import tensorflow as tf
 from tensorflow import keras
@@ -16,7 +13,6 @@ from input_representations import available_representations as availableInputs
 from output_representations import (
     available_representations as availableOutputs,
 )
-
 import mlflow
 import mlflow.tensorflow
 import pandas as pd
