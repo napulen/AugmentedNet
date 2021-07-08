@@ -2,6 +2,8 @@ import random
 
 
 class TextureTemplate(object):
+    """The base class for texturization templates."""
+
     supported_durations = [4.0, 2.0, 1.0]
     supported_number_of_notes = [3, 4]
 
@@ -38,6 +40,12 @@ class TextureTemplate(object):
 
 
 class BassSplit(TextureTemplate):
+    """Dividing the bass and remaining notes.
+
+    The original chord duration is divided by half, playing
+    the bass note in isolation during the first half,
+    followed by the remaining upper notes."""
+
     def templateTriad(self):
         dur = self.duration / 2
         return f"""\
@@ -54,6 +62,11 @@ class BassSplit(TextureTemplate):
 
 
 class Alberti(TextureTemplate):
+    """An Alberti-bass-like texturization of a chord.
+
+    A  4-note  melodic  pattern with the contour
+    lowest, highest, middle, highest."""
+
     def templateTriad(self):
         dur = self.duration / 4
         return f"""\
@@ -74,6 +87,12 @@ class Alberti(TextureTemplate):
 
 
 class Syncopation(TextureTemplate):
+    """A syncopated pattern to separate the upper voice from the rest.
+
+    The highest note is played in isolation,
+    followed by the remaining lower notes,
+    played in syncopation."""
+
     supported_durations = [4.0, 2.0]
 
     def templateTriad(self):
@@ -94,6 +113,8 @@ class Syncopation(TextureTemplate):
 
 
 class BlockChord(TextureTemplate):
+    """A block-chord texture. The default texture in music21-generated scores."""
+
     def templateTriad(self):
         dur = self.duration
         return f"""\
@@ -155,6 +176,8 @@ def _getRelevantTemplates(duration, numberOfNotes):
 
 
 def applyTextureTemplate(duration, notes, intervals, templateName=None):
+    """Apply a random texture to a chord with the given duration and notes."""
+
     numberOfNotes = len(notes)
     if templateName:
         if templateName not in available_templates:

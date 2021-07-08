@@ -4,7 +4,7 @@ from score_parser import (
     _initialDataFrame,
     _texturizeAnnotationScore,
 )
-from joint_parser import parseAnnotationAndAnnotation
+from score_parser import parseAnnotationAsScore
 import music21
 
 
@@ -25,7 +25,6 @@ f = "bps-01-op002-no1-1"
 
 annotation, score = ANNOTATIONSCOREDUPLES[f]
 
-df = parseAnnotationAndAnnotation(annotation)
+df = parseAnnotationAsScore(annotation, texturize=True, eventBased=True)
 
 _engraveScore(df).show()
-
