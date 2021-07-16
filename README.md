@@ -1,2 +1,4 @@
 # AugmentedNet
-Experiments on data augmentation for tonal analysis.
+A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
+
+![AugmentedNet](AugmentedNetCode.png)
