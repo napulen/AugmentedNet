@@ -1,3 +1,7 @@
+"""The output target representations learned through multitask learning."""
+
+import numpy as np
+
 from cache import (
     TransposeKey,
     TransposePcSet,
@@ -13,8 +17,6 @@ from feature_representation import (
     PCSETS,
     SPELLINGS,
 )
-
-import numpy as np
 
 
 class OutputRepresentation(FeatureRepresentation):
@@ -37,11 +39,6 @@ class OutputRepresentation(FeatureRepresentation):
             else:
                 array[frame] = self.classesNumber() - 1
         return array
-
-    # @property
-    # def shape(self):
-    #     # Forcing the shape to be a single scalar value per frame
-    # return (self.frames,)
 
     @classmethod
     def classesNumber(cls):
@@ -76,11 +73,6 @@ class OutputRepresentationTI(FeatureRepresentationTI):
             else:
                 array[frame] = self.classesNumber() - 1
         return array
-
-    # @property
-    # def shape(self):
-    #     # Forcing the shape to be a single scalar value per frame
-    #     return (self.frames,)
 
     @classmethod
     def classesNumber(cls):
