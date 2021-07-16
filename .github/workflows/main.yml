@@ -35,7 +35,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude "When-in-Rome","music21_corpus",".env"
     - name: Check code is formatted with black
       run: |
-        black --exclude "music21*|When-in-Rome|functional-harmony-micchi" --check .
+        black --exclude "music21*|When-in-Rome|functional-harmony-micchi" --check -l 79 .
     - name: Test with unnittest and coverage
       run: |
         coverage run -m unittest -v
