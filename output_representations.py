@@ -30,7 +30,7 @@ class OutputRepresentation(FeatureRepresentation):
     def run(self, transposition="P1"):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
-            transposed = eval(self.transpositionFn)(dfFeature, transposition)
+            transposed = self.transpositionFn(dfFeature, transposition)
             if transposed in self.classList:
                 rnIndex = self.classList.index(transposed)
                 array[frame] = rnIndex
@@ -66,7 +66,6 @@ class OutputRepresentationTI(FeatureRepresentationTI):
 
     classList = []
     dfFeature = ""
-    transpositionFn = None
 
     def run(self):
         array = np.zeros(self.shape, dtype=self.dtype)
@@ -101,7 +100,7 @@ class OutputRepresentationTI(FeatureRepresentationTI):
 class Bass35(OutputRepresentation):
     classList = SPELLINGS
     dfFeature = "a_bass"
-    transpositionFn = "TransposePitch"
+    transpositionFn = staticmethod(TransposePitch)
 
 
 class Inversion4(OutputRepresentationTI):
@@ -141,19 +140,19 @@ class SecondaryDegree22(OutputRepresentationTI):
 class LocalKey35(OutputRepresentation):
     classList = KEYS
     dfFeature = "a_localKey"
-    transpositionFn = "TransposeKey"
+    transpositionFn = staticmethod(TransposeKey)
 
 
 class TonicizedKey35(OutputRepresentation):
     classList = KEYS
     dfFeature = "a_tonicizedKey"
-    transpositionFn = "TransposeKey"
+    transpositionFn = staticmethod(TransposeKey)
 
 
 class ChordRoot35(OutputRepresentation):
     classList = SPELLINGS
     dfFeature = "a_root"
-    transpositionFn = "TransposePitch"
+    transpositionFn = staticmethod(TransposePitch)
 
 
 class ChordQuality15(OutputRepresentationTI):
@@ -164,19 +163,19 @@ class ChordQuality15(OutputRepresentationTI):
 class PitchClassSet94(OutputRepresentation):
     classList = PCSETS
     dfFeature = "a_pcset"
-    transpositionFn = "TransposePcSet"
+    transpositionFn = staticmethod(TransposePcSet)
 
 
 available_representations = {
     "Bass35": Bass35,
-    "Inversion4": Inversion4,
-    "RomanNumeral76": RomanNumeral76,
-    "PrimaryDegree22": PrimaryDegree22,
-    "SecondaryDegree22": SecondaryDegree22,
-    "LocalKey35": LocalKey35,
-    "ChordRoot35": ChordRoot35,
     "ChordQuality15": ChordQuality15,
+    "ChordRoot35": ChordRoot35,
     "HarmonicRhythm2": HarmonicRhythm2,
-    "TonicizedKey35": TonicizedKey35,
+    "Inversion4": Inversion4,
+    "LocalKey35": LocalKey35,
     "PitchClassSet94": PitchClassSet94,
+    "PrimaryDegree22": PrimaryDegree22,
+    "RomanNumeral76": RomanNumeral76,
+    "SecondaryDegree22": SecondaryDegree22,
+    "TonicizedKey35": TonicizedKey35,
 }
