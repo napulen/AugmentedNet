@@ -67,7 +67,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--texturize",
         action="store_true",
-        help="Texturize block chords. Ignored unless synthetic=True."
+        help="Texturize block chords. Ignored unless synthetic=True.",
     )
     args = parser.parse_args()
     generateDataset(synthetic=args.synthetic, texturize=args.texturize)

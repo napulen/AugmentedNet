@@ -2,6 +2,7 @@ import music21
 from pprint import pprint
 import itertools
 
+
 def _line_of_fifths(x, mode="major"):
     fifths_major = ["C", "G", "D", "A", "E", "B", "F#"]
     fourths_major = ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb"]
@@ -21,9 +22,11 @@ def _line_of_fifths(x, mode="major"):
         accidentals = x // 7
         return f"{fourths[x%7]}{'-' * accidentals}"
 
+
 def range_lof(start, end, mode="major"):
     for n in range(start, end + 1):
         yield _line_of_fifths(n, mode=mode)
+
 
 start, end = -6, 5
 majorkeys = range_lof(start, end, mode="major")
@@ -102,8 +105,12 @@ for pitchset, keys_roman in pitchsets.items():
         print(f'\t"{key}"[shape=plain]')
         print(f'\t"{pitchsetstr}" -- "{key}";')
     for pcset in pitchset_pcset[pitchset]:
-        print(f'\t"{tuple(sorted(set(pcset)))}"[shape=oval, fixedsize=true, width=1, height=0.5];')
-        print(f'\t"{pitchsetstr}" -- "{tuple(sorted(set(pcset)))}"[weight=10];')
+        print(
+            f'\t"{tuple(sorted(set(pcset)))}"[shape=oval, fixedsize=true, width=1, height=0.5];'
+        )
+        print(
+            f'\t"{pitchsetstr}" -- "{tuple(sorted(set(pcset)))}"[weight=10];'
+        )
 
     # for key in itertools.combinations(keys, 2):
     #     k1, k2 = key
