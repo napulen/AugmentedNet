@@ -16,6 +16,8 @@ from output_representations import (
 )
 from argparse import ArgumentParser
 
+import cli
+
 
 def _padToSequenceLength(arr, sequenceLength):
     frames, features = arr.shape
@@ -149,79 +151,6 @@ def generateDataset(
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser(
-        description="Generate pkl files for every tsv training example."
-    )
-    parser.add_argument(
-        "--synthetic",
-        action="store_true",
-        help="Search for a synthetic dataset, not one from real scores.",
-    )
-    parser.add_argument(
-        "--dataAugmentation",
-        action="store_true",
-        help="Perform data augmentation on the training set.",
-    )
-    parser.add_argument(
-        "--collections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
-        default=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
-        nargs="+",
-        help="Include training files from a specific corpus/collection.",
-    )
-    parser.add_argument(
-        "--test_collections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
-        default=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
-        nargs="+",
-        help="Include test files from a specific corpus/collection.",
-    )
-    parser.add_argument(
-        "--input_representations",
-        nargs="+",
-        default=["BassChromagram38"],
-        choices=list(availableInputs.keys()),
-    )
-    parser.add_argument(
-        "--output_representations",
-        nargs="+",
-        default=[
-            "LocalKey35",
-            "PrimaryDegree22",
-            "SecondaryDegree22",
-            "ChordQuality15",
-            "Inversion4",
-            "ChordRoot35",
-        ],
-        choices=list(availableOutputs.keys()),
-    )
-    parser.add_argument(
-        "--sequence_length",
-        type=int,
-        default=640,
-        choices=range(64, 640),
-    )
-    parser.add_argument(
-        "--scrutinize_data",
-        action="store_true",
-        default=False,
-        help="Exclude bad-quality annotations from the training data.",
-    )
-    parser.add_argument(
-        "--test_set_on",
-        action="store_true",
-        default=False,
-        help="Use the real test set, and add the validation set to training.",
-    )
+    parser = cli.npz()
     args = parser.parse_args()
-    generateDataset(
-        synthetic=args.synthetic,
-        dataAugmentation=args.dataAugmentation,
-        collections=args.collections,
-        testCollections=args.test_collections,
-        inputRepresentations=args.input_representations,
-        outputRepresentations=args.output_representations,
-        sequenceLength=args.sequence_length,
-        testSetOn=args.test_set_on,
-        scrutinizeData=args.scrutinize_data,
-    )
+    generateDataset(**vars(args))

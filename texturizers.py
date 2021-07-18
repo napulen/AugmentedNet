@@ -1,3 +1,5 @@
+"""Templates for texturizing annotation files and turn them into scores."""
+
 import random
 
 

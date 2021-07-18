@@ -1,24 +1,29 @@
-from args import BATCHSIZE, EPOCHS
-from common import DATASETDIR, SYNTHDATASETDIR
+"""Trains the model."""
+
+from argparse import ArgumentParser
+import datetime
+import gc
+from pathlib import Path
+import os
+
+import mlflow
+import mlflow.tensorflow
+import numpy as np
+import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import optimizers
-import numpy as np
-import models
+
+from args import BATCHSIZE, EPOCHS
 import args as globalArgs
-from argparse import ArgumentParser
-import os
+import cli
+from common import DATASETDIR, SYNTHDATASETDIR
 from dataset_npz_generator import generateDataset
 from input_representations import available_representations as availableInputs
+import models
 from output_representations import (
     available_representations as availableOutputs,
 )
-import mlflow
-import mlflow.tensorflow
-import pandas as pd
-import datetime
-from pathlib import Path
-import gc
 
 
 class InputOutput(object):
@@ -252,139 +257,42 @@ def train(
     return bestModel
 
 
-if __name__ == "__main__":
-    parser = ArgumentParser(description="Train the AugmentedNet.")
-    parser.add_argument(
-        "experiment_name",
-        choices=["testset", "validationset", "prototyping", "debug"],
-        help="A short name for this experiment.",
-    )
-    parser.add_argument(
-        "run_name", type=str, help="A name for this experiment run."
-    )
-    parser.add_argument(
-        "--nogpu",
-        action="store_true",
-        help="Disable the use of any GPU.",
-    )
-    parser.add_argument(
-        "--generateData",
-        action="store_true",
-        default=globalArgs.GENERATE_DATA,
-        help="Generate the numpy dataset, even if it exists.",
-    )
-    parser.add_argument(
-        "--syntheticDataStrategy",
-        choices=["syntheticOnly", "concatenate"],
-        default=globalArgs.SYNTHETICDATASTRATEGY,
-        help="The strategy to use for synthetic training examples (if any).",
-    )
-    parser.add_argument(
-        "--dataAugmentation",
-        action="store_true",
-        default=globalArgs.DATAAUGMENTATION,
-        help="If generating the numpy arrays, whether to do data augmentation.",
-    )
-    parser.add_argument(
-        "--collections",
-        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
-        default=globalArgs.COLLECTIONS,
-        nargs="+",
-        help="Include files from a specific corpus/collection.",
-    )
-    parser.add_argument(
-        "--test_collections",
-        choices=["abc", "bps", "haydnop20", "wir", "tavern"],
-        default=globalArgs.TESTCOLLECTIONS,
-        nargs="+",
-        help="Include test files from a specific corpus/collection.",
-    )
-    parser.add_argument(
-        "--input_representations",
-        nargs="+",
-        default=globalArgs.INPUT_REPRESENTATIONS,
-        choices=list(availableInputs.keys()),
-    )
-    parser.add_argument(
-        "--output_representations",
-        nargs="+",
-        default=globalArgs.OUTPUT_REPRESENTATIONS,
-        choices=list(availableOutputs.keys()),
-    )
-    parser.add_argument(
-        "--sequence_length",
-        type=int,
-        default=globalArgs.SEQUENCELENGTH,
-        choices=range(64, 1000, 64),
-    )
-    parser.add_argument(
-        "--model",
-        default=globalArgs.MODEL,
-        choices=list(models.available_models.keys()),
-    )
-    parser.add_argument(
-        "--scrutinize_data",
-        action="store_true",
-        default=globalArgs.SCRUTINIZEDATA,
-    )
-    parser.add_argument(
-        "--test_set_on", action="store_true", default=globalArgs.TESTSETON
-    )
-    parser.add_argument(
-        "--lr-boundaries", nargs="+", default=globalArgs.LR_BOUNDARIES
-    )
-    parser.add_argument("--lr-values", nargs="+", default=globalArgs.LR_VALUES)
-
-    args = parser.parse_args()
-
-    if args.nogpu:
+def prepare_experiment(
+    experiment_name,
+    run_name,
+    generateData,
+    syntheticDataStrategy,
+    model,
+    lr_boundaries,
+    lr_values,
+    nogpu,
+    **kwargs,
+):
+    if nogpu:
         disableGPU()
     else:
         # Ideally, this shouldn't be necessary; but this is not an ideal world
         tensorflowGPUHack()
-
-    if args.generateData or not os.path.isfile(DATASETDIR + ".npz"):
-        generateDataset(
-            synthetic=False,
-            dataAugmentation=args.dataAugmentation,
-            collections=args.collections,
-            testCollections=args.test_collections,
-            inputRepresentations=args.input_representations,
-            outputRepresentations=args.output_representations,
-            sequenceLength=args.sequence_length,
-            scrutinizeData=args.scrutinize_data,
-            testSetOn=args.test_set_on,
-        )
-        # log_artifacts(DATASETDIR, artifact_path="dataset")
-    if args.syntheticDataStrategy:
-        if args.generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
-            generateDataset(
-                synthetic=True,
-                dataAugmentation=args.dataAugmentation,
-                collections=args.collections,
-                testCollections=args.test_collections,
-                inputRepresentations=args.input_representations,
-                outputRepresentations=args.output_representations,
-                sequenceLength=args.sequence_length,
-                scrutinizeData=args.scrutinize_data,
-                testSetOn=args.test_set_on,
-            )
-            # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
-
-    mlflow.tensorflow.autolog()
-    mlflow.set_experiment(args.experiment_name)
-    mlflow.start_run(run_name=args.run_name)
-    for arg, value in vars(args).items():
-        if arg == "experiment_name" or arg == "run_name":
-            continue
-        mlflow.log_param(f"custom_{arg}", value)
+    mlflow.tensorflow.autolog()-
+    mlflow.set_experiment(experiment_name)
+    mlflow.start_run(run_name=run_name)
+    for k, v in kwargs.items():
+        mlflow.log_param(f"custom_{k}", v)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
     checkpoint = (
         f".model_checkpoint/"
         f"{args.experiment_name}/"
         f"{args.run_name}-{timestamp}/"
     )
-
+    if generateData or not os.path.isfile(DATASETDIR + ".npz"):
+        kwargs["synthetic"] = False
+        generateDataset(**kwargs)
+        # log_artifacts(DATASETDIR, artifact_path="dataset")
+    if syntheticDataStrategy:
+        if generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
+            kwargs["synthetic"] = True
+            generateDataset(**kwargs)
+            # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
     (X_train, y_train), (X_test, y_test) = loadData(
         syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
     )
@@ -393,10 +301,10 @@ if __name__ == "__main__":
         y_train,
         X_test,
         y_test,
-        modelName=args.model,
+        modelName=model,
         checkpointPath=checkpoint,
-        lrBoundaries=args.lr_boundaries,
-        lrValues=args.lr_values,
+        lrBoundaries=lr_boundaries,
+        lrValues=lr_values,
     )
     results, summary = evaluate(
         os.path.join(checkpoint, bestmodel), X_test, y_test
@@ -405,3 +313,9 @@ if __name__ == "__main__":
     # Helps organizing them in the mlflow interface
     summary = {f"results_{k}": v for k, v in summary.items()}
     mlflow.log_metrics(summary)
+
+
+if __name__ == "__main__":
+    parser = cli.train()
+    args = parser.parse_args()
+    prepare_experiment(**vars(args))
