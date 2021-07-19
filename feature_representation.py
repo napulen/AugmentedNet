@@ -1,3 +1,5 @@
+"""Classes and data structures related to tonal features."""
+
 import numpy as np
 
 NOTENAMES = ("C", "D", "E", "F", "G", "A", "B")

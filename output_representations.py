@@ -1,4 +1,4 @@
-"""The output target representations learned through multitask learning."""
+"""The output tonal representations learned through multitask learning."""
 
 import numpy as np
 

@@ -1,3 +1,5 @@
+"""Turns a RomanText file into a pandas DataFrame."""
+
 import music21
 import pandas as pd
 import numpy as np

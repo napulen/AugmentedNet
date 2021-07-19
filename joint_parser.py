@@ -1,3 +1,5 @@
+"""Turns a (score, annotation) pair into a joint pandas DataFrame."""
+
 import score_parser
 import annotation_parser
 import pandas as pd

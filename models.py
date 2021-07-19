@@ -1,9 +1,8 @@
+"""Definition of the Roman numeral analysis deep neural network(s)."""
+
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-from output_representations import (
-    available_representations as availableOutputs,
-)
 
 
 def AugmentedNet(inputs, outputs, blocks=6):

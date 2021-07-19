@@ -1,3 +1,5 @@
+"""Common hardcoded variables throughout the code."""
+
 # Number of decimals to the right of the decimal point
 FLOATSCALE = 4
 

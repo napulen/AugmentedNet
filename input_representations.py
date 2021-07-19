@@ -1,3 +1,5 @@
+"""Tonal representations used as inputs to the network."""
+
 from cache import (
     TransposePitch,
     m21Pitch,

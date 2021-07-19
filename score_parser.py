@@ -1,3 +1,5 @@
+"""Turns a MusicXML file into a pandas DataFrame."""
+
 import music21
 from music21.interval import Interval
 from music21.pitch import Pitch
