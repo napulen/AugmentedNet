@@ -137,3 +137,5 @@ mlruns/
 .vscode/
 
 *.npz
+*.tsv
+*.gv
