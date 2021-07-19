@@ -9,9 +9,16 @@ import models
 from output_representations import (
     available_representations as availableOutputs,
 )
+from train import __doc__ as train_description
+from dataset_npz_generator import __doc__ as npz_description
+from dataset_tsv_generator import __doc__ as tsv_description
 
 
 class DefaultArguments(object):
+    _tsv = {
+        "synthesize": False,
+        "texturize": False,
+    }
     _npz = {
         "synthetic": True,
         "dataAugmentation": True,
@@ -56,28 +63,47 @@ class DefaultArguments(object):
             cls.jsonDefaults = dict()
 
     @classmethod
-    def npz(cls):
-        ret = cls._npz
+    def get_defaults(cls, name):
+        ret = getattr(cls, f"_{name}")
         if not hasattr(cls, "jsonDefaults"):
             cls.import_json()
-        ret.update(cls.jsonDefaults["npz_defaults"])
+        ret.update(cls.jsonDefaults[f"{name}_defaults"])
         return ret
 
     @classmethod
+    def tsv(cls):
+        return cls.get_defaults("tsv")
+
+    @classmethod
+    def npz(cls):
+        return cls.get_defaults("npz")
+
+    @classmethod
     def train(cls):
-        ret = cls._train
-        if not hasattr(cls, "jsonDefaults"):
-            cls.import_json()
-        ret.update(cls.jsonDefaults["train_defaults"])
-        return ret
+        return cls.get_defaults("train")
+
+
+def tsv():
+    parser = argparse.ArgumentParser(description=tsv_description)
+    parser.add_argument(
+        "--synthesize",
+        action="store_true",
+        help="Instead of a real score, synthesize one from the annotation.",
+    )
+    parser.add_argument(
+        "--texturize",
+        action="store_true",
+        help="If synthesizing a score, artificially texturize its block chords.",
+    )
+    parser.set_defaults(**DefaultArguments.tsv())
+    return parser
 
 
 def npz(is_parent_parser=False):
     if is_parent_parser:
         parser = argparse.ArgumentParser(add_help=False)
     else:
-        description = "Generate pkl files for every tsv training example."
-        parser = argparse.ArgumentParser(description=description)
+        parser = argparse.ArgumentParser(description=npz_description)
     parser.add_argument(
         "--synthetic",
         action="store_true",
@@ -134,8 +160,9 @@ def npz(is_parent_parser=False):
 
 def train():
     parent = npz(is_parent_parser=True)
-    description = "Train the AugmentedNet."
-    parser = argparse.ArgumentParser(parents=[parent], description=description)
+    parser = argparse.ArgumentParser(
+        parents=[parent], description=train_description
+    )
     parser.add_argument(
         "experiment_name",
         choices=["testset", "validationset", "prototyping", "debug"],

@@ -1,4 +1,4 @@
-"""Trains the model."""
+"""Train the AugmentedNet."""
 
 from argparse import ArgumentParser
 import datetime

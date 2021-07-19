@@ -1,3 +1,5 @@
+"""Generate pkl files for every tsv training example."""
+
 import os
 import pandas as pd
 import numpy as np

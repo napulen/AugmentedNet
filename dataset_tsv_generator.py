@@ -1,6 +1,10 @@
+"""Combine all available (score, annotation) pairs into tsv files."""
+
 import os
 import pandas as pd
 from pathlib import Path
+
+import cli
 from common import (
     ANNOTATIONSCOREDUPLES,
     DATASPLITS,
@@ -9,10 +13,9 @@ from common import (
     DATASETSUMMARYFILE,
 )
 from joint_parser import parseAnnotationAndScore, parseAnnotationAndAnnotation
-from argparse import ArgumentParser
 
 
-def generateDataset(synthetic=False, texturize=False):
+def generateDataset(synthesize=False, texturize=False):
     statsdict = {
         "file": [],
         "annotation": [],
@@ -23,14 +26,14 @@ def generateDataset(synthetic=False, texturize=False):
         "qualityMean": [],
         "incongruentBassMean": [],
     }
-    datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
+    datasetDir = DATASETDIR if not synthesize else SYNTHDATASETDIR
     Path(datasetDir).mkdir(exist_ok=True)
     for split, files in DATASPLITS.items():
         Path(os.path.join(datasetDir, split)).mkdir(exist_ok=True)
         for nickname in files:
             print(nickname)
             annotation, score = ANNOTATIONSCOREDUPLES[nickname]
-            if not synthetic:
+            if not synthesize:
                 df = parseAnnotationAndScore(annotation, score)
             else:
                 df = parseAnnotationAndAnnotation(
@@ -56,18 +59,7 @@ def generateDataset(synthetic=False, texturize=False):
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser(
-        description="Generate tsv files for every (annotation, score) pair."
-    )
-    parser.add_argument(
-        "--synthetic",
-        action="store_true",
-        help="Use (annotation, annotation) pairs, ignore the real scores.",
-    )
-    parser.add_argument(
-        "--texturize",
-        action="store_true",
-        help="Texturize block chords. Ignored unless synthetic=True.",
-    )
+    parser = cli.tsv()
     args = parser.parse_args()
-    generateDataset(synthetic=args.synthetic, texturize=args.texturize)
+    kwargs = vars(args)
+    generateDataset(**kwargs)
