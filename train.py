@@ -1,6 +1,5 @@
 """Train the AugmentedNet."""
 
-from argparse import ArgumentParser
 import datetime
 import gc
 from pathlib import Path
@@ -205,7 +204,7 @@ def train(
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
 
-    stepsPerEpoch = X_train[0].array.shape[0] // BATCHSIZE
+    stepsPerEpoch = X_train[0].array.shape[0] // batchsize
     lrBoundaries = [x * stepsPerEpoch for x in lrBoundaries]
     lr_schedule = optimizers.schedules.PiecewiseConstantDecay(
         boundaries=lrBoundaries, values=lrValues

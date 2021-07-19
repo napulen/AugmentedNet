@@ -93,7 +93,7 @@ def tsv():
     parser.add_argument(
         "--texturize",
         action="store_true",
-        help="If synthesizing a score, artificially texturize its block chords.",
+        help="If synthesizing a score, apply texturization patterns to it.",
     )
     parser.set_defaults(**DefaultArguments.tsv())
     return parser
