@@ -14,8 +14,6 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import optimizers
 
-from args import BATCHSIZE, EPOCHS
-import args as globalArgs
 import cli
 from common import DATASETDIR, SYNTHDATASETDIR
 from dataset_npz_generator import generateDataset
@@ -201,6 +199,8 @@ def train(
     checkpointPath=".model_checkpoint/",
     lrBoundaries=[40],
     lrValues=[0.01, 0.0001],
+    epochs=100,
+    batchsize=16,
 ):
     # printTrainingExample(X_train, y_train)
     model = models.available_models[modelName](X_train, y_train)
@@ -240,9 +240,9 @@ def train(
     model.fit(
         x,
         y,
-        epochs=EPOCHS,
+        epochs=epochs,
         shuffle=True,
-        batch_size=BATCHSIZE,
+        batch_size=batchsize,
         validation_data=(xv, yv),
         callbacks=[
             ModdedModelCheckpoint(
@@ -266,6 +266,8 @@ def run_experiment(
     lr_boundaries,
     lr_values,
     nogpu,
+    epochs,
+    batchsize,
     **kwargs,
 ):
     if nogpu:
@@ -290,7 +292,7 @@ def run_experiment(
             generateDataset(**kwargs)
             # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
     (X_train, y_train), (X_test, y_test) = loadData(
-        syntheticDataStrategy=args.syntheticDataStrategy, modelName=args.model
+        syntheticDataStrategy=syntheticDataStrategy, modelName=model
     )
     bestmodel = train(
         X_train,
@@ -301,6 +303,8 @@ def run_experiment(
         checkpointPath=checkpoint,
         lrBoundaries=lr_boundaries,
         lrValues=lr_values,
+        epochs=epochs,
+        batchsize=batchsize,
     )
     results, summary = evaluate(
         os.path.join(checkpoint, bestmodel), X_test, y_test

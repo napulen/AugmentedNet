@@ -11,7 +11,7 @@ from output_representations import (
 )
 
 
-class Defaults(object):
+class DefaultArguments(object):
     _npz = {
         "synthetic": True,
         "dataAugmentation": True,
@@ -128,7 +128,7 @@ def npz(is_parent_parser=False):
         action="store_true",
         help="Use the real test set, and add the validation set to training.",
     )
-    parser.set_defaults(**Defaults.npz())
+    parser.set_defaults(**DefaultArguments.npz())
     return parser
 
 
@@ -184,5 +184,5 @@ def train():
         type=int,
         help="Number of training examples per batch",
     )
-    parser.set_defaults(**Defaults.train())
+    parser.set_defaults(**DefaultArguments.train())
     return parser

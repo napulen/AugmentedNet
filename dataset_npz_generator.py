@@ -1,9 +1,9 @@
 import os
 import pandas as pd
 import numpy as np
-from pathlib import Path
-from joint_parser import J_LISTTYPE_COLUMNS
+
 from cache import TransposeKey
+import cli
 from common import (
     DATASETDIR,
     SYNTHDATASETDIR,
@@ -11,12 +11,10 @@ from common import (
 )
 from feature_representation import KEYS, INTERVALCLASSES
 from input_representations import available_representations as availableInputs
+from joint_parser import J_LISTTYPE_COLUMNS
 from output_representations import (
     available_representations as availableOutputs,
 )
-from argparse import ArgumentParser
-
-import cli
 
 
 def _padToSequenceLength(arr, sequenceLength):
