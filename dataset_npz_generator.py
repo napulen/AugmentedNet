@@ -45,22 +45,15 @@ def _getTranspositions(df):
 
 
 def generateDataset(
-    synthetic=False,
-    dataAugmentation=False,
-    collections=["abc", "bps", "haydnop20", "wir", "tavern"],
-    testCollections=["abc", "bps", "haydnop20", "wir", "tavern"],
-    inputRepresentations=["BassChromagram38"],
-    outputRepresentations=[
-        "LocalKey35",
-        "PrimaryDegree22",
-        "SecondaryDegree22",
-        "ChordQuality15",
-        "Inversion4",
-        "ChordRoot35",
-    ],
-    sequenceLength=640,
-    scrutinizeData=True,
-    testSetOn=False,
+    synthetic,
+    dataAugmentation,
+    collections,
+    testCollections,
+    inputRepresentations,
+    outputRepresentations,
+    sequenceLength,
+    scrutinizeData,
+    testSetOn,
 ):
     outputArrays = {}
     for split in ["training", "validation"]:

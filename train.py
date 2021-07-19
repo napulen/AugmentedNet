@@ -257,7 +257,7 @@ def train(
     return bestModel
 
 
-def prepare_experiment(
+def run_experiment(
     experiment_name,
     run_name,
     generateData,
@@ -273,17 +273,13 @@ def prepare_experiment(
     else:
         # Ideally, this shouldn't be necessary; but this is not an ideal world
         tensorflowGPUHack()
-    mlflow.tensorflow.autolog()-
+    mlflow.tensorflow.autolog()
     mlflow.set_experiment(experiment_name)
     mlflow.start_run(run_name=run_name)
     for k, v in kwargs.items():
         mlflow.log_param(f"custom_{k}", v)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
-    checkpoint = (
-        f".model_checkpoint/"
-        f"{args.experiment_name}/"
-        f"{args.run_name}-{timestamp}/"
-    )
+    checkpoint = f".model_checkpoint/{experiment_name}/{run_name}-{timestamp}/"
     if generateData or not os.path.isfile(DATASETDIR + ".npz"):
         kwargs["synthetic"] = False
         generateDataset(**kwargs)
@@ -318,4 +314,5 @@ def prepare_experiment(
 if __name__ == "__main__":
     parser = cli.train()
     args = parser.parse_args()
-    prepare_experiment(**vars(args))
+    kwargs = vars(args)
+    run_experiment(**kwargs)
