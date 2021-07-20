@@ -2,12 +2,12 @@
 
 import numpy as np
 
-from cache import (
+from .cache import (
     TransposeKey,
     TransposePcSet,
     TransposePitch,
 )
-from feature_representation import (
+from .feature_representation import (
     FeatureRepresentation,
     FeatureRepresentationTI,
     CHORD_QUALITIES,

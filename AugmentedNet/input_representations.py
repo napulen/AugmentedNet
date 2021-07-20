@@ -1,11 +1,14 @@
 """Tonal representations used as inputs to the network."""
 
-from cache import (
+import numpy as np
+import re
+
+from .cache import (
     TransposePitch,
     m21Pitch,
     m21IntervalStr,
 )
-from feature_representation import (
+from .feature_representation import (
     PITCHCLASSES,
     NOTENAMES,
     SPELLINGS,
@@ -13,8 +16,6 @@ from feature_representation import (
     FeatureRepresentation,
     FeatureRepresentationTI,
 )
-import numpy as np
-import re
 
 # NOTENAMEDEFAULTCLASS = {
 #     "C": 0,

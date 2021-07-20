@@ -1,6 +1,6 @@
 import unittest
 import io
-import score_parser
+import AugmentedNet.score_parser
 import pandas as pd
 
 octaveTest = """
@@ -229,7 +229,7 @@ def _load_dfgt(csvGT):
     csvGTF = io.StringIO(csvGT)
     dfGT = pd.read_csv(csvGTF)
     dfGT.set_index("s_offset", inplace=True)
-    for col in score_parser.S_LISTTYPE_COLUMNS:
+    for col in AugmentedNet.score_parser.S_LISTTYPE_COLUMNS:
         dfGT[col] = dfGT[col].apply(eval)
     return dfGT
 
@@ -240,34 +240,34 @@ class TestScoreParser(unittest.TestCase):
 
     def test_octave_initial_dataframe(self):
         dfGT = _load_dfgt(octaveTestInitialDataFrame)
-        s = score_parser._m21Parse(octaveTest)
-        df = score_parser._initialDataFrame(s)
+        s = AugmentedNet.score_parser._m21Parse(octaveTest)
+        df = AugmentedNet.score_parser._initialDataFrame(s)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())
 
     def test_octave_reindexed_dataframe(self):
         dfGT = _load_dfgt(octaveTestReindexDataFrame)
-        s = score_parser._m21Parse(octaveTest)
-        df = score_parser._initialDataFrame(s)
-        df = score_parser._reindexDataFrame(df, fixedOffset=0.25)
+        s = AugmentedNet.score_parser._m21Parse(octaveTest)
+        df = AugmentedNet.score_parser._initialDataFrame(s)
+        df = AugmentedNet.score_parser._reindexDataFrame(df, fixedOffset=0.25)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())
 
     def test_weird_rhythm_initial_dataframe(self):
         dfGT = _load_dfgt(weirdRhythmInitialDataFrame)
-        s = score_parser._m21Parse(weirdRhythm)
-        df = score_parser._initialDataFrame(s)
+        s = AugmentedNet.score_parser._m21Parse(weirdRhythm)
+        df = AugmentedNet.score_parser._initialDataFrame(s)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())
 
     def test_weird_rhythm_reindexed_dataframe(self):
         dfGT = _load_dfgt(weirdRhythmReindexDataFrame)
-        s = score_parser._m21Parse(weirdRhythm)
-        df = score_parser._initialDataFrame(s)
-        df = score_parser._reindexDataFrame(df, fixedOffset=0.25)
+        s = AugmentedNet.score_parser._m21Parse(weirdRhythm)
+        df = AugmentedNet.score_parser._initialDataFrame(s)
+        df = AugmentedNet.score_parser._reindexDataFrame(df, fixedOffset=0.25)
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())

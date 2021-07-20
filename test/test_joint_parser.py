@@ -1,6 +1,6 @@
 import unittest
 import io
-import joint_parser
+import AugmentedNet.joint_parser
 import pandas as pd
 
 
@@ -664,7 +664,7 @@ def _load_dfgt(csvGT):
     csvGTF = io.StringIO(csvGT)
     dfGT = pd.read_csv(csvGTF)
     dfGT.set_index("j_offset", inplace=True)
-    for col in joint_parser.J_LISTTYPE_COLUMNS:
+    for col in AugmentedNet.joint_parser.J_LISTTYPE_COLUMNS:
         dfGT[col] = dfGT[col].apply(eval)
     return dfGT
 
@@ -675,7 +675,7 @@ class TestScoreParser(unittest.TestCase):
 
     def test_haydn_annotation_and_score(self):
         dfGT = _load_dfgt(haydnOp20no4iDataFrameGT)
-        df = joint_parser.parseAnnotationAndScore(
+        df = AugmentedNet.joint_parser.parseAnnotationAndScore(
             haydnOp20no4iAnnotation, haydnOp20no4iScore, fixedOffset=0.25
         )
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):

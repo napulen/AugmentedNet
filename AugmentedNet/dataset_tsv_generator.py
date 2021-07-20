@@ -4,15 +4,18 @@ import os
 import pandas as pd
 from pathlib import Path
 
-import cli
-from common import (
+from . import cli
+from .common import (
     ANNOTATIONSCOREDUPLES,
     DATASPLITS,
     DATASETDIR,
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
 )
-from joint_parser import parseAnnotationAndScore, parseAnnotationAndAnnotation
+from .joint_parser import (
+    parseAnnotationAndScore,
+    parseAnnotationAndAnnotation,
+)
 
 
 def generateDataset(synthesize=False, texturize=False):

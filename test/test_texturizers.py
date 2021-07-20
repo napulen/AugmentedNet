@@ -1,5 +1,5 @@
 import unittest
-from texturizers import (
+from AugmentedNet.texturizers import (
     available_number_of_notes,
     available_templates,
     available_durations,

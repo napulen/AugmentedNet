@@ -4,14 +4,16 @@ import argparse
 import json
 import pathlib
 
-from input_representations import available_representations as availableInputs
-import models
-from output_representations import (
+from .input_representations import (
+    available_representations as availableInputs,
+)
+from . import models
+from .output_representations import (
     available_representations as availableOutputs,
 )
-from train import __doc__ as train_description
-from dataset_npz_generator import __doc__ as npz_description
-from dataset_tsv_generator import __doc__ as tsv_description
+from .train import __doc__ as train_description
+from .dataset_npz_generator import __doc__ as npz_description
+from .dataset_tsv_generator import __doc__ as tsv_description
 
 
 class DefaultArguments(object):

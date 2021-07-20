@@ -1,7 +1,9 @@
 import unittest
-import annotation_parser
 import pandas as pd
 import io
+
+from AugmentedNet import annotation_parser
+# import AugmentedNet.annotation_parser
 
 multipleAnnotations = """
 Composer: Néstor Nápoles López

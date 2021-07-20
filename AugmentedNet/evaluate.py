@@ -1,12 +1,15 @@
 import numpy as np
+import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
-from train import loadData
-from input_representations import available_representations as availableInputs
-from output_representations import (
+
+from .train import loadData
+from .input_representations import (
+    available_representations as availableInputs,
+)
+from .output_representations import (
     available_representations as availableOutputs,
 )
-import pandas as pd
 
 
 def tensorflowGPUHack():

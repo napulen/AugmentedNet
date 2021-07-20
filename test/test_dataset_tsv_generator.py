@@ -1,9 +1,9 @@
 import unittest
-from common import ANNOTATIONSCOREDUPLES, DATASPLITS
 from hashlib import sha256
 import pandas as pd
 import io
-from joint_parser import parseAnnotationAndScore
+from AugmentedNet.common import ANNOTATIONSCOREDUPLES, DATASPLITS
+from AugmentedNet.joint_parser import parseAnnotationAndScore
 
 hashes = {
     "bps-01-op002-no1-1": (

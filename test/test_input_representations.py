@@ -2,13 +2,13 @@ import unittest
 import io
 import pandas as pd
 import numpy as np
-from input_representations import (
+from AugmentedNet.input_representations import (
     BassChromagram38,
     BassChromagram70,
     BassIntervals58,
     Intervals19,
 )
-from joint_parser import J_LISTTYPE_COLUMNS
+from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
 from music21.interval import Interval
 import re
 

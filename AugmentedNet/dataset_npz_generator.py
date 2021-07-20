@@ -4,17 +4,19 @@ import os
 import pandas as pd
 import numpy as np
 
-from cache import TransposeKey
-import cli
-from common import (
+from .cache import TransposeKey
+from . import cli
+from .common import (
     DATASETDIR,
     SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
 )
-from feature_representation import KEYS, INTERVALCLASSES
-from input_representations import available_representations as availableInputs
-from joint_parser import J_LISTTYPE_COLUMNS
-from output_representations import (
+from .feature_representation import KEYS, INTERVALCLASSES
+from .input_representations import (
+    available_representations as availableInputs,
+)
+from .joint_parser import J_LISTTYPE_COLUMNS
+from .output_representations import (
     available_representations as availableOutputs,
 )
 

@@ -1,10 +1,11 @@
 """Turns a RomanText file into a pandas DataFrame."""
 
 import music21
-import pandas as pd
 import numpy as np
-from common import FIXEDOFFSET, FLOATSCALE
+import pandas as pd
 import re
+
+from .common import FIXEDOFFSET, FLOATSCALE
 
 
 A_COLUMNS = [

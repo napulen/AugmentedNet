@@ -1,17 +1,18 @@
 """Turns a MusicXML file into a pandas DataFrame."""
 
+import io
+from itertools import combinations
+
 import music21
 from music21.interval import Interval
 from music21.pitch import Pitch
 from music21.chord import Chord
 from music21.note import Rest
-from numpy.lib.ufunclike import fix
-import pandas as pd
 import numpy as np
-from common import FIXEDOFFSET, FLOATSCALE
-import io
-from itertools import combinations
-from texturizers import (
+import pandas as pd
+
+from .common import FIXEDOFFSET, FLOATSCALE
+from .texturizers import (
     applyTextureTemplate,
     available_durations,
     available_number_of_notes,

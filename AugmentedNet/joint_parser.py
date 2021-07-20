@@ -1,11 +1,13 @@
 """Turns a (score, annotation) pair into a joint pandas DataFrame."""
 
-import score_parser
-import annotation_parser
-import pandas as pd
-import numpy as np
 import re
-from common import FIXEDOFFSET
+
+import numpy as np
+import pandas as pd
+
+from .common import FIXEDOFFSET
+from . import annotation_parser
+from . import score_parser
 
 J_COLUMNS = (
     score_parser.S_COLUMNS
