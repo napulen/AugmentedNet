@@ -26,7 +26,7 @@ The code is organized in the following way
 - [AugmentedNet](AugmentedNet) has all the source code of the network
 - [img](img) the image diagrams of the network and code organization
 - [misc](misc) useful, but non-essential, stand-alone scripts that I wrote while developing this project
-- [notebooks](notebooks) Jupyter notebook *playground* used throughout the project (e.g., data exploration)
+- [notebooks](notebooks) Jupyter notebook *playgrounds* used throughout the project (e.g., data exploration)
 - [test](test) unit tests for all relevant modules of the network
 
 ## The AugmentedNet source code
