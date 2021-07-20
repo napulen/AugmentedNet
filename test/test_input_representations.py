@@ -1,7 +1,11 @@
-import unittest
 import io
-import pandas as pd
+import re
+import unittest
+
+from music21.interval import Interval
 import numpy as np
+import pandas as pd
+
 from AugmentedNet.input_representations import (
     BassChromagram38,
     BassChromagram70,
@@ -9,8 +13,6 @@ from AugmentedNet.input_representations import (
     Intervals19,
 )
 from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
-from music21.interval import Interval
-import re
 
 haydn = """
 j_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_isOnset,a_pitchNames,a_bass,a_root,a_inversion,a_quality,a_pcset,a_localKey,a_tonicizedKey,a_degree1,a_degree2,measureMisalignment,qualityScoreNotes,qualityNonChordTones,qualityMissingChordTones,qualitySquaredSum

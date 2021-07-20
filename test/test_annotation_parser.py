@@ -1,6 +1,7 @@
-import unittest
-import pandas as pd
 import io
+import unittest
+
+import pandas as pd
 
 from AugmentedNet import annotation_parser
 

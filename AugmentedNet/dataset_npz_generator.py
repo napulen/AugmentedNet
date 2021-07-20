@@ -4,8 +4,8 @@ import os
 import pandas as pd
 import numpy as np
 
-from .cache import TransposeKey
 from . import cli
+from .cache import TransposeKey
 from .common import (
     DATASETDIR,
     SYNTHDATASETDIR,

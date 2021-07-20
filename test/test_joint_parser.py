@@ -1,7 +1,9 @@
-import unittest
 import io
-import AugmentedNet.joint_parser
+import unittest
+
 import pandas as pd
+
+import AugmentedNet.joint_parser
 
 
 haydnOp20no4iAnnotation = """

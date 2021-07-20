@@ -1,8 +1,11 @@
-import unittest
 import io
-import pandas as pd
+import unittest
+
 import numpy as np
+import pandas as pd
+
 from AugmentedNet.feature_representation import CHORD_QUALITIES
+from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
 from AugmentedNet.output_representations import (
     Bass35,
     Inversion4,
@@ -16,7 +19,6 @@ from AugmentedNet.output_representations import (
     HarmonicRhythm2,
     PitchClassSet94,
 )
-from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
 
 haydn = """
 j_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_isOnset,a_pitchNames,a_bass,a_root,a_inversion,a_quality,a_pcset,a_localKey,a_tonicizedKey,a_degree1,a_degree2,measureMisalignment,qualityScoreNotes,qualityNonChordTones,qualityMissingChordTones,qualitySquaredSum

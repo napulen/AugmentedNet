@@ -1,4 +1,5 @@
 import unittest
+
 from AugmentedNet.texturizers import (
     available_number_of_notes,
     available_templates,

@@ -1,7 +1,9 @@
-import unittest
 import io
-import AugmentedNet.score_parser
+import unittest
+
 import pandas as pd
+
+import AugmentedNet.score_parser
 
 octaveTest = """
 **kern	**kern

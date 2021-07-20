@@ -1,7 +1,9 @@
-import unittest
 from hashlib import sha256
-import pandas as pd
 import io
+import unittest
+
+import pandas as pd
+
 from AugmentedNet.common import ANNOTATIONSCOREDUPLES, DATASPLITS
 from AugmentedNet.joint_parser import parseAnnotationAndScore
 

@@ -5,9 +5,9 @@ import re
 import numpy as np
 import pandas as pd
 
-from .common import FIXEDOFFSET
 from . import annotation_parser
 from . import score_parser
+from .common import FIXEDOFFSET
 
 J_COLUMNS = (
     score_parser.S_COLUMNS
