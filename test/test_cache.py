@@ -4,5 +4,6 @@ import unittest
 
 import AugmentedNet.cache
 
+
 class TestCache(unittest.TestCase):
     pass

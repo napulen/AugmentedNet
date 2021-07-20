@@ -4,5 +4,6 @@ import unittest
 
 import AugmentedNet.common
 
+
 class TestEvaluate(unittest.TestCase):
     pass
