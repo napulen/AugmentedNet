@@ -17,11 +17,11 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_01_01.mxl",
     ),
     "bps-02-op002-no2-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op002_No2/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op002_No2/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_02_01.mxl",
     ),
     "bps-03-op002-no3-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op002_No3/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op002_No3/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_03_01.mxl",
     ),
     "bps-04-op007-1": (
@@ -33,7 +33,7 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_05_01.mxl",
     ),
     "bps-06-op010-no2-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op010_No2/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op010_No2/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_06_01.mxl",
     ),
     "bps-07-op010-no3-1": (
@@ -41,43 +41,43 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_07_01.mxl",
     ),
     "bps-08-op013-pathetique-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op013(Pathetique)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op013(Pathetique)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_08_01.mxl",
     ),
     "bps-09-op014-no1-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op014_No1/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op014_No1/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_09_01.mxl",
     ),
     "bps-10-op014-no2-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op014_No2/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op014_No2/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_10_01.mxl",
     ),
     "bps-11-op022-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op022/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op022/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_11_01.mxl",
     ),
     "bps-12-op026-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op026/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op026/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_12_01.mxl",
     ),
     "bps-13-op027-no1-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op027_No1/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op027_No1/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_13_01.mxl",
     ),
     "bps-14-op027-no2-moonlight-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op027_No2(Moonlight)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op027_No2(Moonlight)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_14_01.mxl",
     ),
     "bps-15-op028-pastorale-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op028(Pastorale)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op028(Pastorale)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_15_01.mxl",
     ),
     "bps-16-op031-no1-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op031_No1/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op031_No1/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_16_01.mxl",
     ),
     "bps-17-op031-no2-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op031_No2/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op031_No2/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_17_01.mxl",
     ),
     "bps-18-op031-no3-1": (
@@ -85,7 +85,7 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_18_01.mxl",
     ),
     "bps-19-op049-no1-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op049_No1/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op049_No1/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_19_01.mxl",
     ),
     "bps-20-op049-no2-1": (
@@ -93,7 +93,7 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_20_01.mxl",
     ),
     "bps-21-op053-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op053/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op053/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_21_01.mxl",
     ),
     "bps-22-op054-1": (
@@ -101,19 +101,19 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_22_01.mxl",
     ),
     "bps-23-op057-appassionata-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op057(Appassionata)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op057(Appassionata)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_23_01.mxl",
     ),
     "bps-24-op078-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op078/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op078/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_24_01.mxl",
     ),
     "bps-25-op079-sonatina-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op079(Sonatina)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op079(Sonatina)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_25_01.mxl",
     ),
     "bps-26-op081a-les-adieux-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op081a(Les_Adieux)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op081a(Les_Adieux)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_26_01.mxl",
     ),
     "bps-27-op090-1": (
@@ -125,19 +125,19 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/BPS/scores/bps_28_01.mxl",
     ),
     "bps-29-op106-hammerklavier-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op106(Hammerklavier)/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op106(Hammerklavier)/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_29_01.mxl",
     ),
     "bps-30-op109-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op109/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op109/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_30_01.mxl",
     ),
     "bps-31-op110-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op110/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op110/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_31_01.mxl",
     ),
     "bps-32-op111-1": (
-        "AlignedWiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op111/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven,_Ludwig_van/Op111/1/analysis.txt",
         "functional-harmony-micchi/data/BPS/scores/bps_32_01.mxl",
     ),
     "wir-openscore-liedercorpus-hensel-6-lieder-op-1-4-mayenlied": (
@@ -714,7 +714,7 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "wir-bach-chorales-14": (
         "When-in-Rome/Corpus/Early_Choral/Bach,_Johann_Sebastian/Chorales/14/analysis.txt",
-        "AlignedBachChorales/bwv184.5.mxl",
+        "rawdata/corrections/BachChorales/bwv184.5.mxl",
     ),
     "wir-bach-chorales-16": (
         "When-in-Rome/Corpus/Early_Choral/Bach,_Johann_Sebastian/Chorales/16/analysis.txt",
@@ -722,7 +722,7 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "wir-bach-chorales-17": (
         "When-in-Rome/Corpus/Early_Choral/Bach,_Johann_Sebastian/Chorales/17/analysis.txt",
-        "AlignedBachChorales/bwv145.5.mxl",
+        "rawdata/corrections/BachChorales/bwv145.5.mxl",
     ),
     "wir-bach-chorales-18": (
         "When-in-Rome/Corpus/Early_Choral/Bach,_Johann_Sebastian/Chorales/18/analysis.txt",
@@ -902,11 +902,11 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "tavern-beethoven-woo-72-a": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Beethoven,_Ludwig_van/_/WoO_72/analysis_A.txt",
-        "AlignedTavern/Beethoven/B072.mxl",
+        "rawdata/corrections/Tavern/Beethoven/B072.mxl",
     ),
     "tavern-beethoven-woo-72-b": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Beethoven,_Ludwig_van/_/WoO_72/analysis_B.txt",
-        "AlignedTavern/Beethoven/B072.mxl",
+        "rawdata/corrections/Tavern/Beethoven/B072.mxl",
     ),
     "tavern-beethoven-woo-73-a": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Beethoven,_Ludwig_van/_/WoO_73/analysis_A.txt",
@@ -918,11 +918,11 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "tavern-beethoven-woo-75-a": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Beethoven,_Ludwig_van/_/WoO_75/analysis_A.txt",
-        "AlignedTavern/Beethoven/B075.mxl",
+        "rawdata/corrections/Tavern/Beethoven/B075.mxl",
     ),
     "tavern-beethoven-woo-75-b": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Beethoven,_Ludwig_van/_/WoO_75/analysis_B.txt",
-        "AlignedTavern/Beethoven/B075.mxl",
+        "rawdata/corrections/Tavern/Beethoven/B075.mxl",
     ),
     "tavern-beethoven-woo-76-a": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Beethoven,_Ludwig_van/_/WoO_76/analysis_A.txt",
@@ -981,12 +981,12 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Tavern/Mozart/scores/K265.mxl",
     ),
     "tavern-mozart-k353-a": (
-        "AlignedWiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K353/analysis_A.txt",
-        "AlignedTavern/Mozart/K353.mxl",
+        "rawdata/corrections/WiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K353/analysis_A.txt",
+        "rawdata/corrections/Tavern/Mozart/K353.mxl",
     ),
     "tavern-mozart-k353-b": (
-        "AlignedWiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K353/analysis_B.txt",
-        "AlignedTavern/Mozart/K353.mxl",
+        "rawdata/corrections/WiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K353/analysis_B.txt",
+        "rawdata/corrections/Tavern/Mozart/K353.mxl",
     ),
     "tavern-mozart-k354-a": (
         "When-in-Rome/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K354/analysis_A.txt",
@@ -997,11 +997,11 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Tavern/Mozart/scores/K354.mxl",
     ),
     "tavern-mozart-k398-a": (
-        "AlignedWiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K398/analysis_A.txt",
+        "rawdata/corrections/WiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K398/analysis_A.txt",
         "functional-harmony-micchi/data/Tavern/Mozart/scores/K398.mxl",
     ),
     "tavern-mozart-k398-b": (
-        "AlignedWiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K398/analysis_B.txt",
+        "rawdata/corrections/WiR/Corpus/Variations_and_Grounds/Mozart,_Wolfgang_Amadeus/_/K398/analysis_B.txt",
         "functional-harmony-micchi/data/Tavern/Mozart/scores/K398.mxl",
     ),
     "tavern-mozart-k455-a": (
@@ -1058,19 +1058,19 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "abc-op18-no1-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No1/4/analysis.txt",
-        "AlignedABC/op18_no1_mov4.mxl",
+        "rawdata/corrections/ABC/op18_no1_mov4.mxl",
     ),
     "abc-op18-no2-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No2/1/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op18_no2_mov1.mxl",
     ),
     "abc-op18-no2-2": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No2/2/analysis.txt",
-        "AlignedABC/op18_no2_mov2.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No2/2/analysis.txt",
+        "rawdata/corrections/ABC/op18_no2_mov2.mxl",
     ),
     "abc-op18-no2-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No2/3/analysis.txt",
-        "AlignedABC/op18_no2_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No2/3/analysis.txt",
+        "rawdata/corrections/ABC/op18_no2_mov3.mxl",
     ),
     "abc-op18-no2-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No2/4/analysis.txt",
@@ -1085,44 +1085,44 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op18_no3_mov2.mxl",
     ),
     "abc-op18-no3-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No3/3/analysis.txt",
-        "AlignedABC/op18_no3_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No3/3/analysis.txt",
+        "rawdata/corrections/ABC/op18_no3_mov3.mxl",
     ),
     "abc-op18-no3-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No3/4/analysis.txt",
-        "AlignedABC/op18_no3_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No3/4/analysis.txt",
+        "rawdata/corrections/ABC/op18_no3_mov4.mxl",
     ),
     "abc-op18-no4-1": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/1/analysis.txt",
-        "AlignedABC/op18_no4_mov1.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/1/analysis.txt",
+        "rawdata/corrections/ABC/op18_no4_mov1.mxl",
     ),
     "abc-op18-no4-2": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/2/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op18_no4_mov2.mxl",
     ),
     "abc-op18-no4-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/3/analysis.txt",
-        "AlignedABC/op18_no4_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/3/analysis.txt",
+        "rawdata/corrections/ABC/op18_no4_mov3.mxl",
     ),
     "abc-op18-no4-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/4/analysis.txt",
-        "AlignedABC/op18_no4_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No4/4/analysis.txt",
+        "rawdata/corrections/ABC/op18_no4_mov4.mxl",
     ),
     "abc-op18-no5-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/1/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op18_no5_mov1.mxl",
     ),
     "abc-op18-no5-2": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/2/analysis.txt",
-        "AlignedABC/op18_no5_mov2.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/2/analysis.txt",
+        "rawdata/corrections/ABC/op18_no5_mov2.mxl",
     ),
     "abc-op18-no5-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/3/analysis.txt",
-        "AlignedABC/op18_no5_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/3/analysis.txt",
+        "rawdata/corrections/ABC/op18_no5_mov3.mxl",
     ),
     "abc-op18-no5-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/4/analysis.txt",
-        "AlignedABC/op18_no5_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No5/4/analysis.txt",
+        "rawdata/corrections/ABC/op18_no5_mov4.mxl",
     ),
     "abc-op18-no6-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/1/analysis.txt",
@@ -1133,12 +1133,12 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op18_no6_mov2.mxl",
     ),
     "abc-op18-no6-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/3/analysis.txt",
-        "AlignedABC/op18_no6_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/3/analysis.txt",
+        "rawdata/corrections/ABC/op18_no6_mov3.mxl",
     ),
     "abc-op18-no6-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/4/analysis.txt",
-        "AlignedABC/op18_no6_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op18_No6/4/analysis.txt",
+        "rawdata/corrections/ABC/op18_no6_mov4.mxl",
     ),
     "abc-op59-no1-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No1/1/analysis.txt",
@@ -1165,16 +1165,16 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op59_no8_mov2.mxl",
     ),
     "abc-op59-no2-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No2/3/analysis.txt",
-        "AlignedABC/op59_no8_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No2/3/analysis.txt",
+        "rawdata/corrections/ABC/op59_no8_mov3.mxl",
     ),
     "abc-op59-no2-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No2/4/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op59_no8_mov4.mxl",
     ),
     "abc-op59-no3-1": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No3/1/analysis.txt",
-        "AlignedABC/op59_no9_mov1.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No3/1/analysis.txt",
+        "rawdata/corrections/ABC/op59_no9_mov1.mxl",
     ),
     "abc-op59-no3-2": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No3/2/analysis.txt",
@@ -1186,7 +1186,7 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "abc-op59-no3-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op59_No3/4/analysis.txt",
-        "AlignedABC/op59_no9_mov4.mxl",
+        "rawdata/corrections/ABC/op59_no9_mov4.mxl",
     ),
     "abc-op74-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/1/analysis.txt",
@@ -1197,12 +1197,12 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op74_no10_mov2.mxl",
     ),
     "abc-op74-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/3/analysis.txt",
-        "AlignedABC/op74_no10_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/3/analysis.txt",
+        "rawdata/corrections/ABC/op74_no10_mov3.mxl",
     ),
     "abc-op74-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/4/analysis.txt",
-        "AlignedABC/op74_no10_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op74/4/analysis.txt",
+        "rawdata/corrections/ABC/op74_no10_mov4.mxl",
     ),
     "abc-op95-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op95/1/analysis.txt",
@@ -1225,12 +1225,12 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op127_no12_mov1.mxl",
     ),
     "abc-op127-2": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op127/2/analysis.txt",
-        "AlignedABC/op127_no12_mov2.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op127/2/analysis.txt",
+        "rawdata/corrections/ABC/op127_no12_mov2.mxl",
     ),
     "abc-op127-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op127/3/analysis.txt",
-        "AlignedABC/op127_no12_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op127/3/analysis.txt",
+        "rawdata/corrections/ABC/op127_no12_mov3.mxl",
     ),
     "abc-op127-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op127/4/analysis.txt",
@@ -1245,8 +1245,8 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op130_no13_mov2.mxl",
     ),
     "abc-op130-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op130/3/analysis.txt",
-        "AlignedABC/op130_no13_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op130/3/analysis.txt",
+        "rawdata/corrections/ABC/op130_no13_mov3.mxl",
     ),
     "abc-op130-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op130/4/analysis.txt",
@@ -1266,50 +1266,50 @@ ANNOTATIONSCOREDUPLES = {
     ),
     "abc-op131-2": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/2/analysis.txt",
-        "AlignedABC/op131_no14_mov2.mxl",
+        "rawdata/corrections/ABC/op131_no14_mov2.mxl",
     ),
     "abc-op131-3": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/3/analysis.txt",
-        "AlignedABC/op131_no14_mov3.mxl",
+        "rawdata/corrections/ABC/op131_no14_mov3.mxl",
     ),
     "abc-op131-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/4/analysis.txt",
-        "AlignedABC/op131_no14_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/4/analysis.txt",
+        "rawdata/corrections/ABC/op131_no14_mov4.mxl",
     ),
     "abc-op131-5": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/5/analysis.txt",
-        "AlignedABC/op131_no14_mov5.mxl",
+        "rawdata/corrections/ABC/op131_no14_mov5.mxl",
     ),
     "abc-op131-6": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/6/analysis.txt",
-        "AlignedABC/op131_no14_mov6.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/6/analysis.txt",
+        "rawdata/corrections/ABC/op131_no14_mov6.mxl",
     ),
     "abc-op131-7": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op131/7/analysis.txt",
-        "AlignedABC/op131_no14_mov7.mxl",
+        "rawdata/corrections/ABC/op131_no14_mov7.mxl",
     ),
     "abc-op132-1": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/1/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op132_no15_mov1.mxl",
     ),
     "abc-op132-2": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/2/analysis.txt",
-        "AlignedABC/op132_no15_mov2.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/2/analysis.txt",
+        "rawdata/corrections/ABC/op132_no15_mov2.mxl",
     ),
     "abc-op132-3": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/3/analysis.txt",
-        "AlignedABC/op132_no15_mov3.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/3/analysis.txt",
+        "rawdata/corrections/ABC/op132_no15_mov3.mxl",
     ),
     "abc-op132-4": (
         "When-in-Rome/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/4/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op132_no15_mov4.mxl",
     ),
     "abc-op132-5": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/5/analysis.txt",
-        "AlignedABC/op132_no15_mov5.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op132/5/analysis.txt",
+        "rawdata/corrections/ABC/op132_no15_mov5.mxl",
     ),
     "abc-op135-1": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op135/1/analysis.txt",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op135/1/analysis.txt",
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op135_no16_mov1.mxl",
     ),
     "abc-op135-2": (
@@ -1321,8 +1321,8 @@ ANNOTATIONSCOREDUPLES = {
         "functional-harmony-micchi/data/Beethoven_4tets/scores/op135_no16_mov3.mxl",
     ),
     "abc-op135-4": (
-        "AlignedWiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op135/4/analysis.txt",
-        "AlignedABC/op135_no16_mov4.mxl",
+        "rawdata/corrections/WiR/Corpus/Quartets/Beethoven,_Ludwig_van/Op135/4/analysis.txt",
+        "rawdata/corrections/ABC/op135_no16_mov4.mxl",
     ),
     "haydnop20-no1-1": (
         "When-in-Rome/Corpus/Quartets/Haydn,_Franz_Joseph/Op20_No1/1/analysis.txt",
