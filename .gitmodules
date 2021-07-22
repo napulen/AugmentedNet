@@ -1,9 +1,6 @@
 [submodule "TAVERN"]
 	path = TAVERN
 	url = https://github.com/jcdevaney/TAVERN.git
-[submodule "beethoven-piano-sonatas"]
-	path = beethoven-piano-sonatas
-	url = https://github.com/craigsapp/beethoven-piano-sonatas.git
 [submodule "ABC"]
 	path = ABC
 	url = https://github.com/DCMLab/ABC.git
