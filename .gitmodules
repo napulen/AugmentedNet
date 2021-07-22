@@ -1,18 +1,18 @@
 [submodule "TAVERN"]
-	path = TAVERN
+	path = rawdata/TAVERN
 	url = https://github.com/jcdevaney/TAVERN.git
 [submodule "ABC"]
-	path = ABC
+	path = rawdata/ABC
 	url = https://github.com/DCMLab/ABC.git
 [submodule "haydn_op20_harm"]
-	path = haydn_op20_harm
+	path = rawdata/haydn_op20_harm
 	url = https://github.com/napulen/haydn_op20_harm.git
 [submodule "When-in-Rome"]
-	path = When-in-Rome
+	path = rawdata/When-in-Rome
 	url = https://github.com/MarkGotham/When-in-Rome.git
 [submodule "music21_corpus"]
-	path = music21_corpus
+	path = rawdata/music21_corpus
 	url = https://github.com/cuthbertLab/music21.git
 [submodule "functional-harmony-micchi"]
-	path = functional-harmony-micchi
+	path = rawdata/functional-harmony-micchi
 	url = https://github.com/napulen/functional-harmony-micchi.git
