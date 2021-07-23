@@ -18,7 +18,7 @@ from .joint_parser import (
 )
 
 
-def generateDataset(synthesize=False, texturize=False):
+def generateDataset(synthesize=False, texturize=False, tsvDir="dataset"):
     statsdict = {
         "file": [],
         "annotation": [],
@@ -29,7 +29,7 @@ def generateDataset(synthesize=False, texturize=False):
         "qualityMean": [],
         "incongruentBassMean": [],
     }
-    datasetDir = DATASETDIR if not synthesize else SYNTHDATASETDIR
+    datasetDir = f"{tsvDir}-synth" if synthesize else tsvDir
     Path(datasetDir).mkdir(exist_ok=True)
     for split, files in DATASPLITS.items():
         Path(os.path.join(datasetDir, split)).mkdir(exist_ok=True)

@@ -20,6 +20,7 @@ class DefaultArguments(object):
     _tsv = {
         "synthesize": False,
         "texturize": False,
+        "tsvDir": "dataset",
     }
     _npz = {
         "synthetic": True,
@@ -43,6 +44,7 @@ class DefaultArguments(object):
         "sequenceLength": 640,
         "scrutinizeData": False,
         "testSetOn": False,
+        "npzOutput": "dataset",
     }
 
     _train = {
@@ -85,27 +87,41 @@ class DefaultArguments(object):
         return cls.get_defaults("train")
 
 
-def tsv():
-    parser = argparse.ArgumentParser(description=tsv_description)
+def tsv(is_parent_parser=False):
+    defaults = DefaultArguments.tsv()
+    if is_parent_parser:
+        parser = argparse.ArgumentParser(add_help=False)
+        del defaults["synthesize"]
+        del defaults["texturize"]
+    else:
+        parser = argparse.ArgumentParser(description=tsv_description)
+        parser.add_argument(
+            "--synthesize",
+            action="store_true",
+            help="Instead of a real score, synthesize one from the RNA.",
+        )
+        parser.add_argument(
+            "--texturize",
+            action="store_true",
+            help="If synthesizing a score, apply texturization to it.",
+        )
     parser.add_argument(
-        "--synthesize",
-        action="store_true",
-        help="Instead of a real score, synthesize one from the annotation.",
+        "--tsvDir",
+        type=str,
+        help="A path to the directory where the tsvs will be located.",
     )
-    parser.add_argument(
-        "--texturize",
-        action="store_true",
-        help="If synthesizing a score, apply texturization patterns to it.",
-    )
-    parser.set_defaults(**DefaultArguments.tsv())
+    parser.set_defaults(**defaults)
     return parser
 
 
 def npz(is_parent_parser=False):
+    parent = tsv(is_parent_parser=True)
     if is_parent_parser:
-        parser = argparse.ArgumentParser(add_help=False)
+        parser = argparse.ArgumentParser(add_help=False, parents=[parent])
     else:
-        parser = argparse.ArgumentParser(description=npz_description)
+        parser = argparse.ArgumentParser(
+            description=npz_description, parents=[parent]
+        )
     parser.add_argument(
         "--synthetic",
         action="store_true",
@@ -155,6 +171,9 @@ def npz(is_parent_parser=False):
         "--testSetOn",
         action="store_true",
         help="Use the real test set, and add the validation set to training.",
+    )
+    parser.add_argument(
+        "--npzOutput", type=str, help="The path of the output .npz file(s)."
     )
     parser.set_defaults(**DefaultArguments.npz())
     return parser

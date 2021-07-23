@@ -56,6 +56,8 @@ def generateDataset(
     sequenceLength,
     scrutinizeData,
     testSetOn,
+    tsvDir,
+    npzOutput,
 ):
     outputArrays = {}
     for split in ["training", "validation"]:
@@ -65,7 +67,7 @@ def generateDataset(
             outputArrays[split + f"_y_{y}"] = []
     training = ["training", "validation"] if testSetOn else ["training"]
     validation = ["test"] if testSetOn else ["validation"]
-    datasetDir = DATASETDIR if not synthetic else SYNTHDATASETDIR
+    datasetDir = f"{tsvDir}-synth" if synthetic else tsvDir
     summaryFile = os.path.join(datasetDir, DATASETSUMMARYFILE)
     if not os.path.exists(summaryFile):
         print("You need to generate the tsv files first.")
@@ -142,7 +144,10 @@ def generateDataset(
             npzfile = f"{split}_y_{outputRepresentation}"
             for sequence in yi:
                 outputArrays[npzfile].append(sequence)
-    np.savez_compressed(datasetDir, **outputArrays)
+    # drop the extension, we'll overwrite it to .npz
+    filename, _ = os.path.splitext(npzOutput)
+    outputFile = f"{filename}-synth" if synthetic else filename
+    np.savez_compressed(outputFile, **outputArrays)
 
 
 if __name__ == "__main__":
