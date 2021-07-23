@@ -52,8 +52,8 @@ def disableGPU():
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
-def _loadNpz(synthetic=False):
-    datasetFile = f"{SYNTHDATASETDIR if synthetic else DATASETDIR}.npz"
+def _loadNpz(npzPath, synthetic=False):
+    datasetFile = f"{npzPath}-synth.npz" if synthetic else f"{npzPath}.npz"
     dataset = np.load(datasetFile, mmap_mode="r")
     X_train, y_train = [], []
     X_test, y_test = [], []
@@ -70,15 +70,21 @@ def _loadNpz(synthetic=False):
     return (X_train, y_train), (X_test, y_test)
 
 
-def loadData(syntheticDataStrategy=None, modelName="AugmentedNet"):
+def loadData(npzPath, syntheticDataStrategy=None, modelName="AugmentedNet"):
     if not syntheticDataStrategy:
-        (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=False)
+        (X_train, y_train), (X_test, y_test) = _loadNpz(
+            npzPath, synthetic=False
+        )
     elif syntheticDataStrategy == "syntheticOnly":
-        (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=True)
+        (X_train, y_train), (X_test, y_test) = _loadNpz(
+            npzPath, synthetic=True
+        )
     elif syntheticDataStrategy == "concatenate":
-        (X_train, y_train), (X_test, y_test) = _loadNpz(synthetic=False)
+        (X_train, y_train), (X_test, y_test) = _loadNpz(
+            npzPath, synthetic=False
+        )
         # Test portion of synthetic data is NEVER used in this case
-        (Xs_train, ys_train), (_, _) = _loadNpz(synthetic=True)
+        (Xs_train, ys_train), (_, _) = _loadNpz(npzPath, synthetic=True)
         for x, xs in zip(X_train, Xs_train):
             x.array = np.concatenate((x.array, xs.array))
         for y, ys in zip(y_train, ys_train):
@@ -282,17 +288,20 @@ def run_experiment(
         mlflow.log_param(f"custom_{k}", v)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
     checkpoint = f".model_checkpoint/{experiment_name}/{run_name}-{timestamp}/"
-    if generateData or not os.path.isfile(DATASETDIR + ".npz"):
+    npzNoExt, _ = os.splitext(kwargs["npzOutput"])
+    if generateData or not os.path.isfile(f"{npzNoExt}.npz"):
         kwargs["synthetic"] = False
         generateDataset(**kwargs)
         # log_artifacts(DATASETDIR, artifact_path="dataset")
     if syntheticDataStrategy:
-        if generateData or not os.path.isfile(SYNTHDATASETDIR + ".npz"):
+        if generateData or not os.path.isfile(f"{npzNoExt}-synth.npz"):
             kwargs["synthetic"] = True
             generateDataset(**kwargs)
             # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
     (X_train, y_train), (X_test, y_test) = loadData(
-        syntheticDataStrategy=syntheticDataStrategy, modelName=model
+        npzPath=npzNoExt,
+        syntheticDataStrategy=syntheticDataStrategy,
+        modelName=model,
     )
     bestmodel = train(
         X_train,
