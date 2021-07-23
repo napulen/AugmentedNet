@@ -8,8 +8,6 @@ from . import cli
 from .common import (
     ANNOTATIONSCOREDUPLES,
     DATASPLITS,
-    DATASETDIR,
-    SYNTHDATASETDIR,
     DATASETSUMMARYFILE,
 )
 from .joint_parser import (

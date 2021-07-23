@@ -15,7 +15,6 @@ from tensorflow.keras import optimizers
 
 from . import cli
 from . import models
-from .common import DATASETDIR, SYNTHDATASETDIR
 from .dataset_npz_generator import generateDataset
 from .input_representations import (
     available_representations as availableInputs,

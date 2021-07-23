@@ -6,11 +6,7 @@ import numpy as np
 
 from . import cli
 from .cache import TransposeKey
-from .common import (
-    DATASETDIR,
-    SYNTHDATASETDIR,
-    DATASETSUMMARYFILE,
-)
+from .common import DATASETSUMMARYFILE
 from .feature_representation import KEYS, INTERVALCLASSES
 from .input_representations import (
     available_representations as availableInputs,
