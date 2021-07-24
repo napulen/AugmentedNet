@@ -1,6 +1,6 @@
 """The argparse interfaces for the runnable scripts in AugmentedNet."""
 
-import argparse
+from argparse import ArgumentParser
 import json
 import pathlib
 
@@ -17,10 +17,13 @@ from .output_representations import (
 
 
 class DefaultArguments(object):
+    _base = {
+        "jsonArgs": "defaults.json",
+        "tsvDir": "dataset",
+    }
     _tsv = {
         "synthesize": False,
         "texturize": False,
-        "tsvDir": "dataset",
     }
     _npz = {
         "synthetic": True,
@@ -75,6 +78,10 @@ class DefaultArguments(object):
         return ret
 
     @classmethod
+    def base(cls):
+        return cls.get_defaults("base")
+
+    @classmethod
     def tsv(cls):
         return cls.get_defaults("tsv")
 
@@ -87,41 +94,48 @@ class DefaultArguments(object):
         return cls.get_defaults("train")
 
 
-def tsv(is_parent_parser=False):
-    defaults = DefaultArguments.tsv()
+def _base(is_parent_parser=True):
     if is_parent_parser:
-        parser = argparse.ArgumentParser(add_help=False)
-        del defaults["synthesize"]
-        del defaults["texturize"]
+        parser = ArgumentParser(add_help=False)
     else:
-        parser = argparse.ArgumentParser(description=tsv_description)
-        parser.add_argument(
-            "--synthesize",
-            action="store_true",
-            help="Instead of a real score, synthesize one from the RNA.",
-        )
-        parser.add_argument(
-            "--texturize",
-            action="store_true",
-            help="If synthesizing a score, apply texturization to it.",
-        )
+        parser = ArgumentParser()
+    parser.add_argument(
+        "--jsonArgs",
+        type=str,
+        help="A path to a json file with any CLI arguments.",
+    )
     parser.add_argument(
         "--tsvDir",
         type=str,
         help="A path to the directory where the tsvs will be located.",
     )
-    parser.set_defaults(**defaults)
+    parser.set_defaults(**DefaultArguments.base())
+    return parser
+
+
+def tsv():
+    parents = [_base()]
+    parser = ArgumentParser(description=tsv_description, parents=parents)
+    parser.add_argument(
+        "--synthesize",
+        action="store_true",
+        help="Instead of a real score, synthesize one from the RNA.",
+    )
+    parser.add_argument(
+        "--texturize",
+        action="store_true",
+        help="If synthesizing a score, apply texturization to it.",
+    )
+    parser.set_defaults(**DefaultArguments.tsv())
     return parser
 
 
 def npz(is_parent_parser=False):
-    parent = tsv(is_parent_parser=True)
+    parents = [_base()]
     if is_parent_parser:
-        parser = argparse.ArgumentParser(add_help=False, parents=[parent])
+        parser = ArgumentParser(add_help=False, parents=parents)
     else:
-        parser = argparse.ArgumentParser(
-            description=npz_description, parents=[parent]
-        )
+        parser = ArgumentParser(description=npz_description, parents=parents)
     parser.add_argument(
         "--synthetic",
         action="store_true",
@@ -180,10 +194,8 @@ def npz(is_parent_parser=False):
 
 
 def train():
-    parent = npz(is_parent_parser=True)
-    parser = argparse.ArgumentParser(
-        parents=[parent], description=train_description
-    )
+    parents = [npz(is_parent_parser=True)]
+    parser = ArgumentParser(description=train_description, parents=parents)
     parser.add_argument(
         "experiment_name",
         choices=["testset", "validationset", "prototyping", "debug"],
