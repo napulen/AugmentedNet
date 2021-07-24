@@ -137,26 +137,15 @@ def npz(is_parent_parser=False):
     else:
         parser = ArgumentParser(description=npz_description, parents=parents)
     parser.add_argument(
-        "--synthetic",
-        action="store_true",
-        help="Search for a synthetic dataset, not one from real scores.",
-    )
-    parser.add_argument(
-        "--dataAugmentation",
-        action="store_true",
-        help="Perform data augmentation on the training set.",
-    )
-    parser.add_argument(
         "--collections",
         choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
         nargs="+",
         help="Include training files from a specific corpus/collection.",
     )
     parser.add_argument(
-        "--testCollections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
-        nargs="+",
-        help="Include test files from a specific corpus/collection.",
+        "--dataAugmentation",
+        action="store_true",
+        help="Perform data augmentation on the training set.",
     )
     parser.add_argument(
         "--inputRepresentations",
@@ -165,10 +154,18 @@ def npz(is_parent_parser=False):
         help="The input representations to be used.",
     )
     parser.add_argument(
+        "--npzOutput", type=str, help="The path of the output .npz file(s)."
+    )
+    parser.add_argument(
         "--outputRepresentations",
         choices=list(availableOutputs.keys()),
         nargs="+",
         help="The output representations to be used.",
+    )
+    parser.add_argument(
+        "--scrutinizeData",
+        action="store_true",
+        help="Exclude bad-quality annotations from the training data.",
     )
     parser.add_argument(
         "--sequenceLength",
@@ -177,17 +174,20 @@ def npz(is_parent_parser=False):
         help="The number of frames in each input sequence.",
     )
     parser.add_argument(
-        "--scrutinizeData",
+        "--synthetic",
         action="store_true",
-        help="Exclude bad-quality annotations from the training data.",
+        help="Search for a synthetic dataset, not one from real scores.",
+    )
+    parser.add_argument(
+        "--testCollections",
+        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        nargs="+",
+        help="Include test files from a specific corpus/collection.",
     )
     parser.add_argument(
         "--testSetOn",
         action="store_true",
         help="Use the real test set, and add the validation set to training.",
-    )
-    parser.add_argument(
-        "--npzOutput", type=str, help="The path of the output .npz file(s)."
     )
     parser.set_defaults(**DefaultArguments.npz())
     return parser
@@ -205,24 +205,19 @@ def train():
         "run_name", type=str, help="A name for this experiment run."
     )
     parser.add_argument(
-        "--nogpu",
-        action="store_true",
-        help="Disable the use of any GPU.",
+        "--batchsize",
+        type=int,
+        help="Number of training examples per batch",
+    )
+    parser.add_argument(
+        "--epochs",
+        type=int,
+        help="Number of training epochs.",
     )
     parser.add_argument(
         "--generateData",
         action="store_true",
         help="Generate the numpy dataset, even if it exists.",
-    )
-    parser.add_argument(
-        "--syntheticDataStrategy",
-        choices=["syntheticOnly", "concatenate"],
-        help="The strategy to use for synthetic training examples (if any).",
-    )
-    parser.add_argument(
-        "--model",
-        choices=list(models.available_models.keys()),
-        help="The neural network architecture to use.",
     )
     parser.add_argument(
         "--lr_boundaries",
@@ -235,14 +230,19 @@ def train():
         help="The piecewise learning rate values for different boundaries.",
     )
     parser.add_argument(
-        "--epochs",
-        type=int,
-        help="Number of training epochs.",
+        "--model",
+        choices=list(models.available_models.keys()),
+        help="The neural network architecture to use.",
     )
     parser.add_argument(
-        "--batchsize",
-        type=int,
-        help="Number of training examples per batch",
+        "--nogpu",
+        action="store_true",
+        help="Disable the use of any GPU.",
+    )
+    parser.add_argument(
+        "--syntheticDataStrategy",
+        choices=["syntheticOnly", "concatenate"],
+        help="The strategy to use for synthetic training examples (if any).",
     )
     parser.set_defaults(**DefaultArguments.train())
     return parser
