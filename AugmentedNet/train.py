@@ -288,7 +288,7 @@ def run_experiment(
         mlflow.log_param(f"custom_{k}", v)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
     checkpoint = f".model_checkpoint/{experiment_name}/{run_name}-{timestamp}/"
-    npzNoExt, _ = os.splitext(kwargs["npzOutput"])
+    npzNoExt, _ = os.path.splitext(kwargs["npzOutput"])
     if generateData or not os.path.isfile(f"{npzNoExt}.npz"):
         kwargs["synthetic"] = False
         generateDataset(**kwargs)
@@ -328,4 +328,6 @@ if __name__ == "__main__":
     parser = cli.train()
     args = parser.parse_args()
     kwargs = vars(args)
+    if "jsonArgs" in kwargs:
+        del kwargs["jsonArgs"]
     run_experiment(**kwargs)
