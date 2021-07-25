@@ -53,7 +53,7 @@ class DefaultArguments(object):
     _train = {
         "nogpu": False,
         "generateData": True,
-        "syntheticDataStrategy": "concatenate",
+        "syntheticDataStrategy": None,
         "model": "AugmentedNet",
         "lr_boundaries": [40],
         "lr_values": [0.001, 0.001],
