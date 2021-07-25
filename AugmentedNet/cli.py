@@ -56,8 +56,8 @@ class DefaultArguments(object):
         "syntheticDataStrategy": "concatenate",
         "model": "AugmentedNet",
         "lr_boundaries": [40],
-        "lr_values": [0.01, 0.0001],
-        "epochs": 10,
+        "lr_values": [0.001, 0.001],
+        "epochs": 100,
         "batchsize": 16,
     }
 
