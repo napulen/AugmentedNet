@@ -29,3 +29,6 @@ class TestCli(unittest.TestCase):
         parentArgs = set(vars(cli.npz().parse_args([])))
         positional = {"experiment_name", "run_name"}
         self.assertEqual(args - parentArgs - positional, argsGT)
+
+
+# TODO: Validate structure of a default json file

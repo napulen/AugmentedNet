@@ -65,7 +65,8 @@ class DefaultArguments(object):
     def import_json(cls, filename="defaults.json"):
         jsonPath = pathlib.Path(filename)
         if jsonPath.exists():
-            cls.jsonDefaults = json.load(open(jsonPath))
+            with open(jsonPath) as jsonfd:
+                cls.jsonDefaults = json.load(jsonfd)
         else:
             cls.jsonDefaults = dict()
 
