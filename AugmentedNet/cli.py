@@ -74,7 +74,8 @@ class DefaultArguments(object):
         ret = getattr(cls, f"_{name}")
         if not hasattr(cls, "jsonDefaults"):
             cls.import_json()
-        ret.update(cls.jsonDefaults[f"{name}_defaults"])
+        if cls.jsonDefaults:
+            ret.update(cls.jsonDefaults[f"{name}_defaults"])
         return ret
 
     @classmethod
