@@ -35,7 +35,7 @@ The general organization of the code is summarized by the following diagram.
 
 ![AugmentedNet](img/AugmentedNetCode.png)
 
-Each of the blue rectangles roughly corresponds to a module.
+Each of the blue rectangles roughly corresponds to a Python module.
 
 The inputs of the network are pairs of (score, annotation) files.
 
