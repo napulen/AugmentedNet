@@ -13,7 +13,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
 class TestModels(unittest.TestCase):
-    def test_augmented_net(self):
+    def test_augmentednet(self):
         inputs = [
             InputOutput(f"input{i}", np.zeros((1, 640, 19))) for i in range(2)
         ]
@@ -25,3 +25,16 @@ class TestModels(unittest.TestCase):
             o.outputFeatures = 30
         model = models.AugmentedNet(inputs, outputs, blocks=6)
         self.assertEqual(model.count_params(), 77002)
+
+    def test_micchietal(self):
+        inputs = [
+            InputOutput(f"input{i}", np.zeros((1, 640, 19))) for i in range(2)
+        ]
+        outputs = [
+            InputOutput(f"output{i}", np.zeros((1, 640, 30))) for i in range(6)
+        ]
+        for o in outputs:
+            o.shortname = o.name
+            o.outputFeatures = 30
+        model = models.Micchi2020(inputs, outputs)
+        self.assertEqual(model.count_params(), 89412)
