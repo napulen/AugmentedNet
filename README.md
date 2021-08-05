@@ -30,9 +30,9 @@ The general organization of the code is summarized by the following diagram.
 
 Each of the blue rectangles roughly corresponds to a Python module.
 
-The inputs of the network are pairs of (score, annotation) files.
+The inputs of the network are pairs of ([MusicXML](https://github.com/napulen/AugmentedNet/raw/main/rawdata/corrections/BPS/bps_02_01.mxl), [RomanText](https://raw.githubusercontent.com/napulen/AugmentedNet/main/rawdata/corrections/WiR/Corpus/Piano_Sonatas/Beethoven%2C_Ludwig_van/Op002_No2/1/analysis.txt?token=ABXMCX76PQLK7FU4FBXXCRDBCUPRW)) files.
 
-The inputs pairs are transformed into [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) objects, stored as `.tsv` files.
+The inputs pairs are converted into [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) objects, stored as `.tsv` files.
 
 Later on, these are encoded in a representation that can be dispatched to the neural network.
 
