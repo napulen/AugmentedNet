@@ -29,10 +29,10 @@ class TextureTemplate(object):
             self.template = self.templateSeventh
 
     def templateTriad(self):
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def templateSeventh(self):
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def __str__(self):
         return self.header + self.template()

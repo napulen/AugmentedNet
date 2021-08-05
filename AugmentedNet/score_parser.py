@@ -2,6 +2,7 @@
 
 import io
 from itertools import combinations
+from fractions import Fraction
 
 import music21
 from music21.interval import Interval
@@ -133,7 +134,7 @@ def _engraveScore(df):
         if row.s_measure == 0:
             continue
         pitches = row.s_notes
-        duration = row.s_duration
+        duration = Fraction(row.s_duration).limit_denominator(2048)
         chord = Chord(pitches, quarterLength=duration)
         chords.append(chord)
     return chords

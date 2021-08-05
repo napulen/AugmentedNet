@@ -1,6 +1,8 @@
 import io
+import random
 import unittest
 
+import music21
 import pandas as pd
 
 import AugmentedNet.score_parser
@@ -226,6 +228,168 @@ s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
 8.75,3.0,3.0,"['C4', 'E4', 'G4', 'C5']","['M3', 'P5', 'P1']","[False, False, False, False]"
 """
 
+haydnOp20no4iAnnotation = """
+Composer: Haydn, Franz Joseph
+Title: String Quartet in D Major - No.1: Allegro di molto
+Analyst: Néstor Nápoles López, https://doi.org/10.5281/zenodo.1095617
+Proofreader: Automated translation from **harm to RomanText
+
+Time Signature: 3/4
+
+m1 a: i
+m3 Ger7
+m5 V b3 viio/V
+m6 V b3 V2
+m7 A: I6
+m8 V
+m9 I b2 IV b3 viio/V
+m10 V
+m11 I
+m12 ii
+m13 V2 b3 I6
+m14 V7 b3 I
+m15 V2 b3 I6
+m16 V7 b3 I
+m17 ii65
+m18 V2
+m19 I6
+m20 IV
+m21 ii6
+m22 I6
+m25 V43
+m27 I6
+m28 b3 I6
+m29 V43 b3 I
+m30 ii6 b3 V7
+m31 I
+"""
+
+texturizedHaydnOp20No4i = """
+**kern
+*clefG2
+*k[]
+*M4/4
+=1
+2.a 2.cc 2.ee
+[4a [4cc [4ee
+=2
+2a] 2cc] 2ee]
+[2dd#X [2ff [2aa [2ccc
+=3
+4dd#] 4ff] 4aa] 4ccc]
+2.dd#X 2.ff 2.aa 2.ccc
+=4
+8bb
+4ee
+8gg#X
+4dd#X 4ff#X 4aa
+[4ee [4gg# [4bb
+=5
+4ee] 4gg#] 4bb]
+8ddnL
+8eeJ 8gg#X 8bb
+[2cc#X [2ee [2aa
+=6
+4cc#] 4ee] 4aa]
+2.ee 2.gg#X 2.bb
+=7
+16aLL
+16ee
+16cc#X
+16eeJJ
+8ddL
+8ff#XJ 8aa
+4dd#X 4ff# 4aa
+[4ee [4gg#X [4bb
+=8
+2ee] 2gg#] 2bb]
+[2a [2cc#X [2ee
+=9
+4a] 4cc#] 4ee]
+2.b 2.dd 2.ff#X
+=10
+8bb
+4dd 4ee 4gg#X
+8dd 8ee 8gg#
+4cc#X 4ee 4aa
+8eeL
+8dddJ
+=11
+8gg#XL
+8bbJ
+16aLL
+16ee
+16cc#X
+16eeJJ
+8bbL
+16ddL
+16gg#JJ
+16eeLL
+16gg#J
+8ddJ 8ee 8gg#
+=12
+16cc#XLL
+16aa
+16ee
+16aaJJ
+2ee 2gg#X 2bb 2ddd
+4a 4cc# 4ee
+=13
+2.dd 2.ff#X 2.aa 2.bb
+[4dd [4ee [4gg#X [4bb
+=14
+2dd] 2ee] 2gg#] 2bb]
+[2cc#X [2ee [2aa
+=15
+4cc#] 4ee] 4aa]
+2.dd 2.ff#X 2.aa
+=16
+2.dd 2.ff#X 2.bb
+[4cc#X [4ee [4aa
+=17
+2cc#] 2ee] 2aa]
+[2cc#X [2ee [2aa
+=18
+4cc#] 4ee] 4aa]
+2.cc#X 2.ee 2.aa
+=19
+2.b 2.dd 2.ee 2.gg#X
+[4b [4dd [4ee [4gg#
+=20
+2b] 2dd] 2ee] 2gg#]
+[2cc#X [2ee [2aa
+=21
+4cc#] 4ee] 4aa]
+8cc#XL
+8aaJ
+8eeL
+8aaJ
+16cc#LL
+16aa
+16ee
+16aaJJ
+=22
+8gg#X
+4b 4dd 4ee
+8b 8dd 8ee
+8aL
+8cc#XJ 8ee
+8bbL
+[8ddJ
+=23
+8ddL]
+8ff#XJ
+16eeLL
+16ddd
+16gg#X
+16bbJJ
+[2a [2cc#X [2ee
+=24
+4a] 4cc#] 4ee]
+==
+*-
+"""
+
 
 def _load_dfgt(csvGT):
     csvGTF = io.StringIO(csvGT)
@@ -273,6 +437,21 @@ class TestScoreParser(unittest.TestCase):
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):
             with self.subTest(gt_index=rowGT.Index, index=row.Index):
                 self.assertEqual(rowGT._asdict(), row._asdict())
+
+    def test_parse_annotation_as_score(self):
+        # The texturization is random, thus, set the seed here
+        random.seed(1337)
+        df = AugmentedNet.score_parser.parseAnnotationAsScore(
+            haydnOp20no4iAnnotation, texturize=True, eventBased=True
+        )
+        # This test is somewhat cheating, but I prefer the higher coverage
+        # render the df into a m21 score, then compare scores (gt, generated)
+        s = AugmentedNet.score_parser._engraveScore(df)
+        s = s.makeNotation()
+        gt = music21.converter.parse(texturizedHaydnOp20No4i, fmt="humdrum")
+        for c1, c2 in zip(s.chordify().flat.notes, gt.chordify().flat.notes):
+            with self.subTest(c1=c1, c2=c2):
+                self.assertEqual(c1.pitchNames, c2.pitchNames)
 
 
 if __name__ == "__main__":
