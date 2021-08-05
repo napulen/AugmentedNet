@@ -328,6 +328,4 @@ if __name__ == "__main__":
     parser = cli.train()
     args = parser.parse_args()
     kwargs = vars(args)
-    if "jsonArgs" in kwargs:
-        del kwargs["jsonArgs"]
     run_experiment(**kwargs)
