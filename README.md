@@ -14,15 +14,7 @@ More information about the neural network architecture can be found in the paper
 
 ### Organization of the repo
 
-The code is organized in the following way
-```
-.
-├── AugmentedNet
-├── img
-├── misc
-├── notebooks
-└── test
-```
+This repository is organized in the following way
 
 - [AugmentedNet](AugmentedNet) has all the source code of the network
 - [img](img) the image diagrams of the network and code organization
@@ -40,7 +32,7 @@ Each of the blue rectangles roughly corresponds to a Python module.
 
 The inputs of the network are pairs of (score, annotation) files.
 
-The inputs pairs are transformed into pandas DataFrame objects, stored as `.tsv` files.
+The inputs pairs are transformed into [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) objects, stored as `.tsv` files.
 
 Later on, these are encoded in a representation that can be dispatched to the neural network.
 
@@ -54,11 +46,11 @@ All the experiments presented in the paper were monitored using `mlflow`.
 If you want to visualize the experiments with the [mlflow ui](https://www.mlflow.org/docs/latest/quickstart.html#viewing-the-tracking-ui): 
 
 1. `pip install mlflow`
-2. Download the [mlruns.zip](https://github.com/napulen/AugmentedNet/releases/download/untagged-142cdf7f106874032f7e/mlruns.zip) file with the AugmentedNet experiments
-3. Unzip (any folder should work)
-4. Run `mlflow ui` from the terminal, making sure that `./mlruns/` is reachable from your current working directory
-5. Visit `localhost:5000` (default host and port values)
-6. That's it! The experiments should be available in your browser
+2. Download our [mlruns](https://github.com/napulen/AugmentedNet/releases/download/untagged-142cdf7f106874032f7e/mlruns.zip) with the AugmentedNet experiments
+3. Unzip anywhere
+4. Run `mlflow ui` from the terminal; make sure that `./mlruns/` is reachable from the current directory
+5. Visit `localhost:5000`
+6. That's it! The experiments should be available in the browser
 
 For extra convenience, I also uploaded the logs to [TensorBoard.dev](https://tensorboard.dev/).
 
@@ -72,12 +64,12 @@ These are the results for the four different configurations of the AugmentedNet.
 
 | Model                      | Key           | Deg.          | Qual.         | Inv.          | Root          | RN            |
 |----------------------------|---------------|---------------|---------------|---------------|---------------|---------------|
-| AugmentedNet6              | 82.7          | 64.4          | 76.6          | 77.4          | 82.5          | 43.3          |
-| AugmentedNet6+             | 83.0          | 65.1          | 77.5          | **78.6**      | 83.0          | 44.6          |
-| AugmentedNet11             | 81.3          | 64.2          | 77.2          | 76.1          | 82.9          | 43.1          |
-| AugmentedNet11+            | **83.7**      | **66.0**      | **77.6**      | 77.2          | **83.2**      | **45.0**      |
+| AugmentedNet`6`              | 82.7          | 64.4          | 76.6          | 77.4          | 82.5          | 43.3          |
+| AugmentedNet`6+`             | 83.0          | 65.1          | 77.5          | **78.6**      | 83.0          | 44.6          |
+| AugmentedNet`11`             | 81.3          | 64.2          | 77.2          | 76.1          | 82.9          | 43.1          |
+| AugmentedNet`11+`            | **83.7**      | **66.0**      | **77.6**      | 77.2          | **83.2**      | **45.0**      |
 
-**[Watch experiments in TensorBoard.dev!](https://tensorboard.dev/experiment/l6CPJ7TdSdOjxCbibzQJwA/#scalars)**
+**[Visualize experiments in TensorBoard.dev!](https://tensorboard.dev/experiment/l6CPJ7TdSdOjxCbibzQJwA/#scalars)**
 
 `6` and `11` indicate the number of tasks in the multitask learning layout.
 
@@ -109,4 +101,4 @@ These are the results for the best AugmentedNet configuration (11+) against othe
 | BPS                     | BPS          | CS19         | 78.4                           | 65.1                  | 74.6                  | 62.1                  | -                     | -                     | -                              | -                     |
 | BPS                     | BPS          | CS18         | 66.7                           | 51.8                  | 60.6                  | 59.1                  | -                     | -                     | 25.7                           | -                     |
 
-**[Watch experiments in TensorBoard.dev!](https://tensorboard.dev/experiment/fXVA71nWTkSZh6CqTXCeCw/#scalars)**
+**[Visualize experiments in TensorBoard.dev!](https://tensorboard.dev/experiment/fXVA71nWTkSZh6CqTXCeCw/#scalars)**
