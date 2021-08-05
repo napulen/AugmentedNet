@@ -17,15 +17,15 @@ from .output_representations import (
 
 
 class DefaultArguments(object):
-    _base = {
+    base = {
         "jsonArgs": "defaults.json",
         "tsvDir": "dataset",
     }
-    _tsv = {
+    tsv = {
         "synthesize": False,
         "texturize": False,
     }
-    _npz = {
+    npz = {
         "synthetic": True,
         "dataAugmentation": True,
         "collections": ["bps"],
@@ -49,8 +49,7 @@ class DefaultArguments(object):
         "testSetOn": False,
         "npzOutput": "dataset",
     }
-
-    _train = {
+    train = {
         "nogpu": False,
         "generateData": True,
         "syntheticDataStrategy": None,
@@ -60,40 +59,6 @@ class DefaultArguments(object):
         "epochs": 100,
         "batchsize": 16,
     }
-
-    @classmethod
-    def import_json(cls, filename="defaults.json"):
-        jsonPath = pathlib.Path(filename)
-        if jsonPath.exists():
-            with open(jsonPath) as jsonfd:
-                cls.jsonDefaults = json.load(jsonfd)
-        else:
-            cls.jsonDefaults = dict()
-
-    @classmethod
-    def get_defaults(cls, name):
-        ret = getattr(cls, f"_{name}")
-        if not hasattr(cls, "jsonDefaults"):
-            cls.import_json()
-        if cls.jsonDefaults:
-            ret.update(cls.jsonDefaults[f"{name}_defaults"])
-        return ret
-
-    @classmethod
-    def base(cls):
-        return cls.get_defaults("base")
-
-    @classmethod
-    def tsv(cls):
-        return cls.get_defaults("tsv")
-
-    @classmethod
-    def npz(cls):
-        return cls.get_defaults("npz")
-
-    @classmethod
-    def train(cls):
-        return cls.get_defaults("train")
 
 
 def _base(is_parent_parser=True):
@@ -111,7 +76,7 @@ def _base(is_parent_parser=True):
         type=str,
         help="A path to the directory where the tsvs will be located.",
     )
-    parser.set_defaults(**DefaultArguments.base())
+    parser.set_defaults(**DefaultArguments.base)
     return parser
 
 
@@ -128,7 +93,7 @@ def tsv():
         action="store_true",
         help="If synthesizing a score, apply texturization to it.",
     )
-    parser.set_defaults(**DefaultArguments.tsv())
+    parser.set_defaults(**DefaultArguments.tsv)
     return parser
 
 
@@ -191,7 +156,7 @@ def npz(is_parent_parser=False):
         action="store_true",
         help="Use the real test set, and add the validation set to training.",
     )
-    parser.set_defaults(**DefaultArguments.npz())
+    parser.set_defaults(**DefaultArguments.npz)
     return parser
 
 
@@ -246,5 +211,5 @@ def train():
         choices=["syntheticOnly", "concatenate"],
         help="The strategy to use for synthetic training examples (if any).",
     )
-    parser.set_defaults(**DefaultArguments.train())
+    parser.set_defaults(**DefaultArguments.train)
     return parser
