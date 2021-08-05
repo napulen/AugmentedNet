@@ -1,8 +1,6 @@
 """The argparse interfaces for the runnable scripts in AugmentedNet."""
 
 from argparse import ArgumentParser
-import json
-import pathlib
 
 from . import models
 from .dataset_npz_generator import __doc__ as npz_description
@@ -18,7 +16,6 @@ from .output_representations import (
 
 class DefaultArguments(object):
     base = {
-        "jsonArgs": "defaults.json",
         "tsvDir": "dataset",
     }
     tsv = {
@@ -66,11 +63,6 @@ def _base(is_parent_parser=True):
         parser = ArgumentParser(add_help=False)
     else:
         parser = ArgumentParser()
-    parser.add_argument(
-        "--jsonArgs",
-        type=str,
-        help="A path to a json file with any CLI arguments.",
-    )
     parser.add_argument(
         "--tsvDir",
         type=str,
