@@ -36,6 +36,7 @@ The inputs pairs are converted into [pandas DataFrame](https://pandas.pydata.org
 
 Later on, these are encoded in a representation that can be dispatched to the neural network.
 
+The module documentation is located [here](https://napulen.github.io/AugmentedNet).
 
 ## Experiments
 
