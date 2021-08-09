@@ -47,7 +47,7 @@ All the experiments presented in the paper were monitored using `mlflow`.
 If you want to visualize the experiments with the [mlflow ui](https://www.mlflow.org/docs/latest/quickstart.html#viewing-the-tracking-ui): 
 
 1. `pip install mlflow`
-2. Download our [mlruns](https://github.com/napulen/AugmentedNet/releases/download/untagged-142cdf7f106874032f7e/mlruns.zip) with the AugmentedNet experiments
+2. Download our [mlruns](https://github.com/napulen/AugmentedNet/releases/download/v1.0.0/mlruns.zip) with the AugmentedNet experiments
 3. Unzip anywhere
 4. Run `mlflow ui` from the terminal; make sure that `./mlruns/` is reachable from the current directory
 5. Visit `localhost:5000`
