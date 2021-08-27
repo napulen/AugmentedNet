@@ -43,7 +43,7 @@
                     <a class="function" href="#m21IntervalStr">m21IntervalStr</a>
             </li>
             <li>
-                    <a class="function" href="#m21IntervalGenChr">m21IntervalGenChr</a>
+                    <a class="function" href="#m21Interval">m21Interval</a>
             </li>
             <li>
                     <a class="function" href="#m21Key">m21Key</a>
@@ -75,7 +75,7 @@
 
 <span class="kn">from</span> <span class="nn">music21.key</span> <span class="kn">import</span> <span class="n">Key</span>
 <span class="kn">from</span> <span class="nn">music21.pitch</span> <span class="kn">import</span> <span class="n">Pitch</span>
-<span class="kn">from</span> <span class="nn">music21.interval</span> <span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">intervalFromGenericAndChromatic</span>
+<span class="kn">from</span> <span class="nn">music21.interval</span> <span class="kn">import</span> <span class="n">Interval</span>
 
 <span class="n">_transposeKey</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_transposePitch</span> <span class="o">=</span> <span class="p">{}</span>
@@ -128,12 +128,13 @@
     <span class="k">return</span> <span class="n">intervalObj</span>
 
 
-<span class="k">def</span> <span class="nf">m21IntervalGenChr</span><span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A cached interval object, based on (generic, chromatic) interval pairs.&quot;&quot;&quot;</span>
-    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">m21Interval</span><span class="p">(</span><span class="n">pitch1</span><span class="p">,</span> <span class="n">pitch2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A cached interval object, computed from two pitches.&quot;&quot;&quot;</span>
+    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch1</span><span class="p">,</span> <span class="n">pitch2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">duple</span> <span class="ow">in</span> <span class="n">_intervalObj</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_intervalObj</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span>
-    <span class="n">intervalObj</span> <span class="o">=</span> <span class="n">intervalFromGenericAndChromatic</span><span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">)</span>
+    <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch1</span><span class="p">),</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch2</span><span class="p">)</span>
+    <span class="n">intervalObj</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
     <span class="n">_intervalObj</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span> <span class="o">=</span> <span class="n">intervalObj</span>
     <span class="k">return</span> <span class="n">intervalObj</span>
 
@@ -270,29 +271,30 @@
 
 
                 </section>
-                <section id="m21IntervalGenChr">
-                            <div class="attr function"><a class="headerlink" href="#m21IntervalGenChr">#&nbsp;&nbsp</a>
+                <section id="m21Interval">
+                            <div class="attr function"><a class="headerlink" href="#m21Interval">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">m21IntervalGenChr</span><span class="signature">(generic, chromatic)</span>:
+            <span class="name">m21Interval</span><span class="signature">(pitch1, pitch2)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">m21IntervalGenChr</span><span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A cached interval object, based on (generic, chromatic) interval pairs.&quot;&quot;&quot;</span>
-    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">)</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">m21Interval</span><span class="p">(</span><span class="n">pitch1</span><span class="p">,</span> <span class="n">pitch2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A cached interval object, computed from two pitches.&quot;&quot;&quot;</span>
+    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch1</span><span class="p">,</span> <span class="n">pitch2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">duple</span> <span class="ow">in</span> <span class="n">_intervalObj</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_intervalObj</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span>
-    <span class="n">intervalObj</span> <span class="o">=</span> <span class="n">intervalFromGenericAndChromatic</span><span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">)</span>
+    <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch1</span><span class="p">),</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch2</span><span class="p">)</span>
+    <span class="n">intervalObj</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
     <span class="n">_intervalObj</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span> <span class="o">=</span> <span class="n">intervalObj</span>
     <span class="k">return</span> <span class="n">intervalObj</span>
 </pre></div>
 
         </details>
 
-            <div class="docstring"><p>A cached interval object, based on (generic, chromatic) interval pairs.</p>
+            <div class="docstring"><p>A cached interval object, computed from two pitches.</p>
 </div>
 
 

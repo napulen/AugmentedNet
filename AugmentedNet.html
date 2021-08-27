@@ -110,10 +110,14 @@
                     <h1 class="modulename">
 AugmentedNet    </h1>
 
-                
+                        <div class="docstring"><p>A Roman numeral analysis network with synthetic data and additional tasks.</p>
+</div>
+
                         <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
+            <div class="codehilite"><pre><span></span><span class="sd">&quot;&quot;&quot;A Roman numeral analysis network with synthetic data and additional tasks.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 
 <span class="n">modules</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;*.py&quot;</span><span class="p">))</span>
@@ -1098,6 +1102,7 @@ AugmentedNet    </h1>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
+<span class="kn">from</span> <span class="nn">.cache</span> <span class="kn">import</span> <span class="n">m21Interval</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">FIXEDOFFSET</span><span class="p">,</span> <span class="n">FLOATSCALE</span>
 <span class="kn">from</span> <span class="nn">.texturizers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">applyTextureTemplate</span><span class="p">,</span>
@@ -1164,8 +1169,9 @@ AugmentedNet    </h1>
             <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;s_isOnset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;s_notes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">c</span><span class="p">])</span>
-        <span class="n">intvs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">simpleName</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
-        <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;s_intervals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intvs</span><span class="p">)</span>
+        <span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">]</span>
+        <span class="n">intervs</span> <span class="o">=</span> <span class="p">[</span><span class="n">m21Interval</span><span class="p">(</span><span class="n">pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">simpleName</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+        <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;s_intervals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervs</span><span class="p">)</span>
         <span class="n">onsets</span> <span class="o">=</span> <span class="p">[(</span><span class="ow">not</span> <span class="n">n</span><span class="o">.</span><span class="n">tie</span> <span class="ow">or</span> <span class="n">n</span><span class="o">.</span><span class="n">tie</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;start&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">c</span><span class="p">]</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;s_isOnset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">onsets</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dfdict</span><span class="p">)</span>
@@ -1320,7 +1326,7 @@ AugmentedNet    </h1>
 
 <span class="kn">from</span> <span class="nn">music21.key</span> <span class="kn">import</span> <span class="n">Key</span>
 <span class="kn">from</span> <span class="nn">music21.pitch</span> <span class="kn">import</span> <span class="n">Pitch</span>
-<span class="kn">from</span> <span class="nn">music21.interval</span> <span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">intervalFromGenericAndChromatic</span>
+<span class="kn">from</span> <span class="nn">music21.interval</span> <span class="kn">import</span> <span class="n">Interval</span>
 
 <span class="n">_transposeKey</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_transposePitch</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1373,12 +1379,13 @@ AugmentedNet    </h1>
     <span class="k">return</span> <span class="n">intervalObj</span>
 
 
-<span class="k">def</span> <span class="nf">m21IntervalGenChr</span><span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A cached interval object, based on (generic, chromatic) interval pairs.&quot;&quot;&quot;</span>
-    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">m21Interval</span><span class="p">(</span><span class="n">pitch1</span><span class="p">,</span> <span class="n">pitch2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A cached interval object, computed from two pitches.&quot;&quot;&quot;</span>
+    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch1</span><span class="p">,</span> <span class="n">pitch2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">duple</span> <span class="ow">in</span> <span class="n">_intervalObj</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_intervalObj</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span>
-    <span class="n">intervalObj</span> <span class="o">=</span> <span class="n">intervalFromGenericAndChromatic</span><span class="p">(</span><span class="n">generic</span><span class="p">,</span> <span class="n">chromatic</span><span class="p">)</span>
+    <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch1</span><span class="p">),</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch2</span><span class="p">)</span>
+    <span class="n">intervalObj</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
     <span class="n">_intervalObj</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span> <span class="o">=</span> <span class="n">intervalObj</span>
     <span class="k">return</span> <span class="n">intervalObj</span>
 
