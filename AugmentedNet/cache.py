@@ -2,7 +2,7 @@
 
 from music21.key import Key
 from music21.pitch import Pitch
-from music21.interval import Interval, intervalFromGenericAndChromatic
+from music21.interval import Interval
 
 _transposeKey = {}
 _transposePitch = {}
@@ -55,12 +55,13 @@ def m21IntervalStr(interval):
     return intervalObj
 
 
-def m21IntervalGenChr(generic, chromatic):
-    """A cached interval object, based on (generic, chromatic) interval pairs."""
-    duple = (generic, chromatic)
+def m21Interval(pitch1, pitch2):
+    """A cached interval object, computed from two pitches."""
+    duple = (pitch1, pitch2)
     if duple in _intervalObj:
         return _intervalObj[duple]
-    intervalObj = intervalFromGenericAndChromatic(generic, chromatic)
+    p1, p2 = m21Pitch(pitch1), m21Pitch(pitch2)
+    intervalObj = Interval(p1, p2)
     _intervalObj[duple] = intervalObj
     return intervalObj
 

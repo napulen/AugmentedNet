@@ -12,6 +12,7 @@ from music21.note import Rest
 import numpy as np
 import pandas as pd
 
+from .cache import m21Interval
 from .common import FIXEDOFFSET, FLOATSCALE
 from .texturizers import (
     applyTextureTemplate,
@@ -78,8 +79,9 @@ def _initialDataFrame(s, fmt=None):
             dfdict["s_isOnset"].append(np.nan)
             continue
         dfdict["s_notes"].append([n.pitch.nameWithOctave for n in c])
-        intvs = [Interval(c[0].pitch, p).simpleName for p in c.pitches[1:]]
-        dfdict["s_intervals"].append(intvs)
+        pitches = [p.nameWithOctave for p in c.pitches]
+        intervs = [m21Interval(pitches[0], p).simpleName for p in pitches[1:]]
+        dfdict["s_intervals"].append(intervs)
         onsets = [(not n.tie or n.tie.type == "start") for n in c]
         dfdict["s_isOnset"].append(onsets)
     df = pd.DataFrame(dfdict)
