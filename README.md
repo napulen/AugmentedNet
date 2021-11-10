@@ -7,7 +7,7 @@ A Roman Numeral Analysis Network with Synthetic Training Examples and Additional
 
 The architecture is a CRNN (Convolutional Recurrent Neural Network) with an alternative representation of pitch spelling at the input.
 
-More information about the neural network architecture can be found in the paper.
+More information about the neural network architecture can be found in the [paper](https://archives.ismir.net/ismir2021/paper/000050.pdf).
 
 ![AugmentedNet Architecture](img/AugmentedNetArchitecture.png)
 
