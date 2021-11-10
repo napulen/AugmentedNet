@@ -1,6 +1,25 @@
 # AugmentedNet
 A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
 
+```bibtex
+@inproceedings{napoleslopez21augmentednet,
+  author       = {Nápoles López, Néstor and Gotham, Mark and Fujinaga, Ichiro},
+  title        = {{AugmentedNet: A Roman Numeral Analysis Network 
+                   with Synthetic Training Examples and Additional
+                   Tonal Tasks}},
+  booktitle    = {{Proceedings of the 22nd International Society for 
+                   Music Information Retrieval Conference}},
+  year         = 2021,
+  pages        = {404-411},
+  publisher    = {ISMIR},
+  address      = {Online},
+  month        = nov,
+  venue        = {Online},
+  doi          = {10.5281/zenodo.5624533},
+  url          = {https://doi.org/10.5281/zenodo.5624533}
+}
+```
+
 ## Introduction
 
 ### The neural network architecture
