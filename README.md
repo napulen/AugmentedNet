@@ -1,6 +1,11 @@
 # AugmentedNet
 A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
 
+## Paper 
+
+N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks." in *Proceedings of the 22nd International Society for Music Information Retrieval Conference*, 2021, pp. 404–411. https://doi.org/10.5281/zenodo.5624533
+
+
 ```bibtex
 @inproceedings{napoleslopez21augmentednet,
   author       = {Nápoles López, Néstor and Gotham, Mark and Fujinaga, Ichiro},
