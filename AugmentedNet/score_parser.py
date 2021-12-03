@@ -80,7 +80,7 @@ def _initialDataFrame(s, fmt=None):
             continue
         dfdict["s_notes"].append([n.pitch.nameWithOctave for n in c])
         pitches = [p.nameWithOctave for p in c.pitches]
-        intervs = [m21Interval(pitches[0], p).simpleName for p in pitches[1:]]
+        intervs = [m21Interval(pitches[0], p).directedName for p in pitches[1:]]
         dfdict["s_intervals"].append(intervs)
         onsets = [(not n.tie or n.tie.type == "start") for n in c]
         dfdict["s_isOnset"].append(onsets)
