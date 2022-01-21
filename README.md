@@ -25,6 +25,50 @@ N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral A
 }
 ```
 
+## Run the code 
+
+### First steps 
+
+Clone recursively, create a virtual environment, and get the `python` dependencies
+
+```bash
+git clone https://github.com/napulen/AugmentedNet.git
+cd AugmentedNet
+python3 -m venv .env 
+source .env/bin/activate
+
+(.env) pip install -r requirements.txt
+```
+
+> I have experienced that `pip` is sometimes incapable of installing specific package versions depending on your environment. This `requirements.txt` was tested on a vanilla `Ubuntu 20.04`, both in native linux and Windows 10 WSL2. A docker `tensorflow/tensorflow:2.5-gpu` image should also work.
+
+### Using accompanying data
+
+If you don't care about generating your own synthetic training examples, use the accompanying `tsv` files, which include the real and synthetic data we used for the paper.
+
+```bash
+wget https://github.com/napulen/AugmentedNet/releases/download/v1.0.0/dataset.zip
+unzip dataset.zip
+```
+
+Now you are ready to train the network
+
+```bash
+(.env) python -m AugmentedNet.train
+```
+
+### Generating synthetic examples
+
+If you **do** care about generating your own synthetic training examples, you might want to look into `AugmentedNet.dataset_tsv_generator` and `AugmentedNet.dataset_npz_generator`. For example:
+
+```bash
+(.env) python -m AugmentedNet.dataset_tsv_generator --synthesize --texturize
+(.env) python -m AugmentedNet.dataset_npz_generator
+(.env) python -m AugmentedNet.train
+```
+
+At the moment, the code for generating the texturizations is not extremely simple, if you only wanted to do that. However, raise an issue, reach out, and I'll make my best effort to help you on your use case.
+
 ## Introduction
 
 ### The neural network architecture
