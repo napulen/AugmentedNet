@@ -32,7 +32,7 @@ N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral A
 Clone recursively, create a virtual environment, and get the `python` dependencies
 
 ```bash
-git clone https://github.com/napulen/AugmentedNet.git
+git clone --recursive https://github.com/napulen/AugmentedNet.git
 cd AugmentedNet
 python3 -m venv .env 
 source .env/bin/activate
