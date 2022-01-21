@@ -23,7 +23,7 @@ class DefaultArguments(object):
         "texturize": False,
     }
     npz = {
-        "synthetic": True,
+        "synthetic": False,
         "dataAugmentation": True,
         "collections": ["bps"],
         "testCollections": ["bps"],
