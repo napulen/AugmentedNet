@@ -56,7 +56,7 @@ class PcSetNgram(object):
         ngramstrength = sum([x[1] for x in sortedresults])
         print(f"from {pcset} (strength={ngramstrength}) to ->")
         for ngram, strength in sortedresults:
-            deststrength = strength/ngramstrength
+            deststrength = strength / ngramstrength
             if deststrength < 0.001:
                 break
             print(f"\t{ngram} p={deststrength:.3f}")
