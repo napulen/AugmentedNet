@@ -1,0 +1,239 @@
+!!!COM: Haydn, Franz Joseph
+!!!CDT: 1732/3/31/-1809/5/31/
+!!!CNT: Oesterreich
+!!!OTL: String Quartet in D Major
+!!!OPS: Opus 20
+!!!ONM: No. 4
+!!!OMD: Allegro di molto
+!!!OMV: 1
+!!!SCT: H III:34
+!!!SCA: Thematisch-bibliographisches Werkevererzeichnis (A. van Hoboken)
+!!!YOR: Altmann Edition
+!!!ENC: Nestor Napoles
+!!!YEC: Copyright (c) 2017 Universitat Pompeu Fabra
+!!!YEM: Rights to all derivative editions reserved.
+!!!YEM: Refer to licensing agreement for further details.
+!!!YEN: Barcelona, Spain
+**kern	**kern	**kern	**kern
+*k[f#c#]	*k[f#c#]	*k[f#c#]	*k[f#c#]
+*D:	*D:	*D:	*D:
+*clefF4	*clefC3	*clefG2	*clefG2
+*M3/4	*M3/4	*M3/4	*M3/4
+=1	=1	=1	=1
+4AA'	4cn' 4e'	4e' 4ccn'	12a
+.	.	.	12ccn
+.	.	.	12ee
+4AA'	4c' 4e'	4e' 4cc'	12aa
+.	.	.	12ee
+.	.	.	12cc
+4AA'	4c' 4e'	4e' 4cc'	12a
+.	.	.	12e
+.	.	.	12cn
+=2	=2	=2	=2
+4AA'	4cn' 4e'	4e' 4ccn'	4A
+4r	4r	4r	4r
+4r	4r	4r	4r
+=3	=3	=3	=3
+4Fn'	4cn'	4d#'	4a'
+4F'	4c'	4d#'	4a'
+4F'	4c'	4d#'	4a'
+=4	=4	=4	=4
+2.Fn	4cn	2.d#	4a
+.	4B	.	4b
+.	[4A	.	4ccn
+=5	=5	=5	=5
+[2.E	4A]	2e	4ccn
+.	4G#	.	4b
+.	4F#	4a	4dd#
+=6	=6	=6	=6
+2E]	4G#	4b	[2.ee
+.	4B	4g#	.
+4D	4B	4g#	.
+=7	=7	=7	=7
+!!linebreak:original
+4C#	4A	4a	12ee]
+.	.	.	12dd#
+.	.	.	12ee
+4r	4d	2f#	12ff#
+.	.	.	12ee
+.	.	.	12dd#
+4r	4d#	.	12cc#
+.	.	.	12b
+.	.	.	12a
+=8	=8	=8	=8
+12EE	4e	4e	4g#
+12GG#	.	.	.
+12BB	.	.	.
+12E	4r	4r	4r
+12F#	.	.	.
+12E	.	.	.
+12D	4r	4r	[4ee
+12C#	.	.	.
+12BB	.	.	.
+=9	=9	=9	=9
+4C#	4c#	4a	12ee]
+.	.	.	12dd#
+.	.	.	12ee
+4r	4d	4f#	12ff#
+.	.	.	12ee
+.	.	.	12dd#
+4r	4d#	4f#	12cc#
+.	.	.	12b
+.	.	.	12a
+=10	=10	=10	=10
+12EE	4e	4e	4g#
+12GG#	.	.	.
+12BB	.	.	.
+12E	4r	4r	4r
+12F#	.	.	.
+12E	.	.	.
+12D	4r	4r	4r
+12C#	.	.	.
+12BB	.	.	.
+=11	=11	=11	=11
+!!pagebreak:original
+4AA	4c#	4e	12a
+.	.	.	12cc#
+.	.	.	12ee
+4r	4r	4r	12aa
+.	.	.	12gg#
+.	.	.	12ff#
+4r	4r	4r	12ee
+.	.	.	12dd
+.	.	.	12cc#
+=12	=12	=12	=12
+4d	4d	4f#	12b
+.	.	.	12ff#
+.	.	.	12ee
+4r	4r	4r	12dd
+.	.	.	12cc#
+.	.	.	12b
+4r	4r	4r	12a
+.	.	.	12g#
+.	.	.	12f#
+=13	=13	=13	=13
+2d	[2.e	4B	12e
+.	.	.	12g#
+.	.	.	12a
+.	.	4r	12b
+.	.	.	12a
+.	.	.	12g#
+4c#	.	4r	12a
+.	.	.	12b
+.	.	.	12cc#
+=14	=14	=14	=14
+12E	2.e_	2b	2dd
+12G#	.	.	.
+12A	.	.	.
+12B	.	.	.
+12A	.	.	.
+12G#	.	.	.
+12A	.	4a	4cc#
+12B	.	.	.
+12c#	.	.	.
+=15	=15	=15	=15
+!!linebreak:original
+2d	2.e_	2.r	12e
+.	.	.	12g#
+.	.	.	12a
+.	.	.	12b
+.	.	.	12a
+.	.	.	12g#
+4c#	.	.	12a
+.	.	.	12b
+.	.	.	12cc#
+=16	=16	=16	=16
+12E	2.e]	2b	2dd
+12G#	.	.	.
+12A	.	.	.
+12B	.	.	.
+12A	.	.	.
+12G#	.	.	.
+12A	.	4cc#	4cc#
+12B	.	.	.
+12c#	.	.	.
+=17	=17	=17	=17
+[2.d	12f#	4cc#	2.ff#
+.	12g#	.	.
+.	12a	.	.
+.	12cc#	4b	.
+.	12dd	.	.
+.	12cc#	.	.
+.	12b	4b	.
+.	12cc#	.	.
+.	12a	.	.
+=18	=18	=18	=18
+!!linebreak:original
+2.d]	4c#	2.b	12ee
+.	.	.	12gg#
+.	.	.	12ff#
+.	4g#	.	12ee
+.	.	.	12gg#
+.	.	.	12aa
+.	[4e	.	12bb
+.	.	.	12ccc#
+.	.	.	12ddd
+=19	=19	=19	=19
+2.c#	4e]	4a	[2.eee
+.	4a	4cc#	.
+.	4a	4ee	.
+=20	=20	=20	=20
+[2.d	2a	[2.ff#	4eee]
+.	.	.	4ddd
+.	4a#	.	4ccc#
+=21	=21	=21	=21
+4d]	[2.b	4ff#]	[2.ddd
+4c#	.	4ee	.
+4B	.	4dd	.
+=22	=22	=22	=22
+[2.c#	4b]	[2.ee	4ddd]
+.	4a	.	4ccc#
+.	4g#	.	4bb#
+=23	=23	=23	=23
+4c#]	[2.a	4ee]	[2.ccc#
+4B	.	4dd	.
+4A	.	4cc#	.
+=24	=24	=24	=24
+!!pagebreak:original
+2.B	4a]	[2.dd	12ccc#]
+.	.	.	12bb#
+.	.	.	12ccc#
+.	4g#	.	12ddd
+.	.	.	12ccc#
+.	.	.	12bbn
+.	4g#	.	12aa
+.	.	.	12gg#
+.	.	.	12ff#
+=25	=25	=25	=25
+[2.B	[2.g#	2.dd_	4ee
+.	.	.	4ee'
+.	.	.	4ee'
+=26	=26	=26	=26
+2.B]	2.g#]	2.dd]	[2.ee
+=27	=27	=27	=27
+2.c#	4a	4cc#	4ee]
+.	4a'	4a'	4aa
+.	4a'	4a'	4gg#
+=28	=28	=28	=28
+2d	2.a	2.a	4gg#
+.	.	.	4ff#
+4c#	.	.	[4ee
+=29	=29	=29	=29
+2B	2d	2g#	4ee]
+.	.	.	12ff#
+.	.	.	12dd
+.	.	.	12b
+4A	4c#	4a	[4cc#
+=30	=30	=30	=30
+2D	2d	2f#	4cc#]
+.	.	.	4b
+4E	4B	4d	12dd
+.	.	.	12b
+.	.	.	12g#
+=31	=31	=31	=31
+!!linebreak:original
+4AA	4c#	4c#	4a
+4r	4r	4r	4r
+4r	4r	4r	4r
+==	==	==	==
+*-	*-	*-	*-
