@@ -5,5 +5,5 @@ import unittest
 import AugmentedNet.common
 
 
-class TestEvaluate(unittest.TestCase):
+class TestCommon(unittest.TestCase):
     pass

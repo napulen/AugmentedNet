@@ -62,7 +62,7 @@ s_offset,s_duration,s_measure,s_notes,s_intervals,s_isOnset
 """
 
 
-class TestVariables(unittest.TestCase):
+class TestTexturizers(unittest.TestCase):
     def test_available_number_of_notes(self):
         GT = [4, 3]
         self.assertEqual(available_number_of_notes, GT)

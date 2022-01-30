@@ -30,7 +30,7 @@ def _annotationScoreHashes():
         )
 
 
-class TestDataset(unittest.TestCase):
+class TestDatasetTsvGenerator(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
 

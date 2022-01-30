@@ -5,5 +5,5 @@ import unittest
 import AugmentedNet.dataset_npz_generator
 
 
-class TestEvaluate(unittest.TestCase):
+class TestDatasetNpzGenerator(unittest.TestCase):
     pass

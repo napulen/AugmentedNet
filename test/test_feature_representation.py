@@ -5,5 +5,5 @@ import unittest
 import AugmentedNet.feature_representation
 
 
-class TestEvaluate(unittest.TestCase):
+class TestFeatureRepresentation(unittest.TestCase):
     pass

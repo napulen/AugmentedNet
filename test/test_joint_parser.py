@@ -18,7 +18,7 @@ def _load_dfgt(csvGT):
     return dfGT
 
 
-class TestScoreParser(unittest.TestCase):
+class TestJointParser(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
 
