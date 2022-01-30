@@ -1,5 +1,6 @@
 import os
 
+
 class AuxiliaryFiles(object):
     def __init__(self, modulepath):
         testpath = os.path.dirname(os.path.realpath(__file__))
