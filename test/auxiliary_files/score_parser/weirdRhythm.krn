@@ -1,0 +1,28 @@
+**kern	**kern
+*part1	*part1
+*staff2	*staff1
+*I"Piano	*
+*I'Pno.	*
+*clefF4	*clefG2
+*k[]	*k[]
+*M6/8	*M6/8
+*MM180	*MM180
+=1	=1
+*^	*
+*	*	*^
+4r	2.c	4.r	4.r
+[8e	.	.	.
+4.e]	.	8r	4.g
+.	.	4cc	.
+=2	=2	=2	=2
+8r	2.B	4.r	4.r
+[4f	.	.	.
+4.f]	.	4r	4.g
+.	.	8dd	.
+*	*	*v	*v
+*v	*v	*
+=3	=3
+2.c 2.e	2.g 2.cc
+=:|!	=:|!
+*-	*-
+!!!system-decoration: {(s1,s2)}

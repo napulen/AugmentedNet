@@ -1,0 +1,46 @@
+**kern	**kern
+*part1	*part1
+*staff2	*staff1
+*I"Piano	*
+*I'Pno.	*
+*clefF4	*clefG2
+*k[]	*k[]
+*M4/4	*M4/4
+=1	=1
+16CCCCLL 16BBBB	4r
+16CCC 16BBB	.
+16CC 16BB	.
+16CJJ 16B	.
+16CCLL 16BB	16r
+16C 16B	16r
+16cJJ 16b	16r
+16r	16cc 16bb
+8r	16cLL 16b
+.	16cc 16bb
+8r	16ccc 16bbb
+.	16ccccJJ 16bbbb
+4r	16cccLL 16bbb
+.	16ccccJ 16bbbb
+.	8cccccJ 8bbbbb
+=2	=2
+4CCC	4bbbb
+4CC	4bbb
+4C	4bb
+4c	4b
+=3	=3
+16cLL	16cLL
+16B	16d
+16A	16e
+16GJJ	16fJJ
+32FLLL	16gLL
+32E	.
+32F	16a
+32G	.
+32A	16g
+32G	.
+32F	16f#XJJ
+32EJJJ	.
+2D	2g
+==	==
+*-	*-
+!!!system-decoration: {(s1,s2)}
