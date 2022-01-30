@@ -15,7 +15,7 @@ class AuxiliaryFiles(object):
         for file in files:
             base, ext = file.rsplit(".")
             filepath = os.path.join(path, file)
-            # Where a json file is found, assume a python dict is expected
+            # Where a json file is found, assume a python dict/list is expected
             if ext == "json":
                 jsoncontent = json.load(open(filepath))
                 setattr(self, base, jsoncontent)
