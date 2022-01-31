@@ -59,10 +59,10 @@ a_offset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_isOnset,a_pitc
 14.25,5.0,1.0,13.0,III,False,"('E-', 'G', 'B-')",E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
 14.5,5.0,1.0,13.0,III,False,"('E-', 'G', 'B-')",E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
 14.75,5.0,1.0,13.0,III,False,"('E-', 'G', 'B-')",E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
-15.0,6.0,1.0,14.0,N,True,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
-15.25,6.0,1.0,14.0,N,False,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
-15.5,6.0,1.0,14.0,N,False,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
-15.75,6.0,1.0,14.0,N,False,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.0,6.0,1.0,14.0,bII,True,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.25,6.0,1.0,14.0,bII,False,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.5,6.0,1.0,14.0,bII,False,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.75,6.0,1.0,14.0,bII,False,"('F', 'A-', 'D-')",F,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
 16.0,6.0,1.0,15.0,Cad,True,"('G', 'C', 'E-')",G,C,2.0,minor triad,"(0, 3, 7)",c,c,1,None
 16.25,6.0,1.0,15.0,Cad,False,"('G', 'C', 'E-')",G,C,2.0,minor triad,"(0, 3, 7)",c,c,1,None
 16.5,6.0,1.0,15.0,Cad,False,"('G', 'C', 'E-')",G,C,2.0,minor triad,"(0, 3, 7)",c,c,1,None

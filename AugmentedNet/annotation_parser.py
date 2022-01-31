@@ -45,7 +45,7 @@ def _fixRnSynonyms(figure):
     ret = ret.replace("4/3", "43")
     ret = ret.replace("4/2", "42")
     ret = ret.replace("42", "2")
-    ret = ret.replace("bII", "N")
+    ret = ret.replace("N", "bII")
     return ret
 
 
@@ -64,7 +64,7 @@ def _removeInversion(figure):
 
 
 def _preprocessRomanNumeral(figure):
-    return _removeInversion(_simplifyRomanNumeral(_fixRnSynonyms(figure)))
+    return _fixRnSynonyms(_simplifyRomanNumeral(figure))
 
 
 def _initialDataFrame(s):
@@ -77,11 +77,17 @@ def _initialDataFrame(s):
     """
     dfdict = {col: [] for col in A_COLUMNS}
     for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
+        if (
+            "Ger" not in rn.figure
+            and "Fr" not in rn.figure
+            and "It" not in rn.figure
+        ):
+            rn.figure = _preprocessRomanNumeral(rn.figure)
         dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["a_measure"].append(rn.measureNumber)
         dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))
         dfdict["a_annotationNumber"].append(idx)
-        dfdict["a_romanNumeral"].append(_preprocessRomanNumeral(rn.figure))
+        dfdict["a_romanNumeral"].append(_removeInversion(rn.figure))
         dfdict["a_isOnset"].append(True)
         dfdict["a_pitchNames"].append(tuple(rn.pitchNames))
         dfdict["a_bass"].append(rn.pitchNames[0])
