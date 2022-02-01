@@ -24,15 +24,15 @@ def AugmentedNet(inputs, outputs, blocks=6):
             xi = layers.Concatenate()([xi, h])
         xprime.append(xi)
     if len(x) > 1:
-        inputs = layers.Add()([xi for xi in xprime])
+        inputs = layers.Concatenate()([xi for xi in xprime])
     else:
         inputs = xprime[0]
-    h = layers.Dense(32)(inputs)
+    h = layers.Dense(64)(inputs)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
-    # h = layers.Dense(32)(h)
-    # h = layers.BatchNormalization()(h)
-    # h = layers.Activation("relu")(h)
+    h = layers.Dense(32)(h)
+    h = layers.BatchNormalization()(h)
+    h = layers.Activation("relu")(h)
     h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
     h = layers.BatchNormalization()(h)
     h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
