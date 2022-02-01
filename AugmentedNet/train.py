@@ -329,13 +329,15 @@ def run_experiment(
         epochs=epochs,
         batchsize=batchsize,
     )
+    modelpath = os.path.join(checkpoint, bestmodel) 
     results, summary = evaluate(
-        os.path.join(checkpoint, bestmodel), X_test, y_test
+        modelpath, X_test, y_test
     )
     mlflow.log_artifacts(results, artifact_path="results")
     # Helps organizing them in the mlflow interface
     summary = {f"results_{k}": v for k, v in summary.items()}
     mlflow.log_metrics(summary)
+    print(f"The trained model is available in: {modelpath}")
 
 
 if __name__ == "__main__":
