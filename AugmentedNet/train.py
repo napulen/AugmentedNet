@@ -124,11 +124,12 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
     def on_epoch_end(self, epoch, logs={}):
         monitored = list(availableOutputs.keys())
         nonMonitored = [
-            "Bass35",
+            "ChordQuality15",
+            "ChordRoot35",
+            "Inversion4",
+            "PrimaryDegree22",
             "RomanNumeral76",
-            "TonicizedKey35",
-            "PitchClassSet94",
-            "HarmonicRhythm2",
+            "SecondaryDegree22",
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
         print(f"monitored_outputs: {monitored}")
@@ -180,12 +181,25 @@ def evaluate(modelHdf5, X_test, y_true):
     summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
     print(f"Degree: {summary['Degree']}")
     print(f"RomanNumeral: {summary['RomanNumeral']}")
+    # The alternative approach proposed in Napoles Lopez et al. (2021)
     if "RomanNumeral76" in df:
         df["AltRomanNumeral"] = (
             df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
         )
         summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
         print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
+    # An alternative version in closed-form chord outputs
+    if (
+        "Bass35" in df
+        and "Tenor35" in df
+        and "Alto35" in df
+        and "Soprano35" in df
+    ):
+        df["satbRomanNumeral"] = (
+            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 and df.LocalKey35
+        )
+        summary["satbRomanNumeral"] = df.satbRomanNumeral.mean().round(3)
+        print(f"satbRomanNumeral: {summary['satbRomanNumeral']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
     outputPath = outputPath.replace(".hdf5", "")
     Path(outputPath).mkdir(parents=True, exist_ok=True)
