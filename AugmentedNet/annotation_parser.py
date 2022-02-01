@@ -94,9 +94,7 @@ def _initialDataFrame(s):
                 rn.figure = "v"
             if rn.figure == "V4":
                 rn.figure = "V"
-            print(rn.figure, rn.pitchNames)
             rn.figure = _preprocessRomanNumeral(rn.figure)
-            print(rn.figure, rn.pitchNames)
         dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["a_measure"].append(rn.measureNumber)
         dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))

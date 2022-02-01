@@ -196,7 +196,7 @@ def evaluate(modelHdf5, X_test, y_true):
         and "Soprano35" in df
     ):
         df["satbRomanNumeral"] = (
-            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 and df.LocalKey35
+            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey35
         )
         summary["satbRomanNumeral"] = df.satbRomanNumeral.mean().round(3)
         print(f"satbRomanNumeral: {summary['satbRomanNumeral']}")
@@ -329,10 +329,8 @@ def run_experiment(
         epochs=epochs,
         batchsize=batchsize,
     )
-    modelpath = os.path.join(checkpoint, bestmodel) 
-    results, summary = evaluate(
-        modelpath, X_test, y_test
-    )
+    modelpath = os.path.join(checkpoint, bestmodel)
+    results, summary = evaluate(modelpath, X_test, y_test)
     mlflow.log_artifacts(results, artifact_path="results")
     # Helps organizing them in the mlflow interface
     summary = {f"results_{k}": v for k, v in summary.items()}
