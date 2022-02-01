@@ -17,6 +17,9 @@ A_COLUMNS = [
     "a_isOnset",
     "a_pitchNames",
     "a_bass",
+    "a_tenor",
+    "a_alto",
+    "a_soprano",
     "a_root",
     "a_inversion",
     "a_quality",
@@ -82,7 +85,18 @@ def _initialDataFrame(s):
             and "Fr" not in rn.figure
             and "It" not in rn.figure
         ):
+            if rn.figure == "I4":
+                # found in wir-monteverdi-madrigals-book-3-10
+                rn.figure = "I"
+            if rn.figure == "iv4":
+                rn.figure = "iv"
+            if rn.figure == "v4":
+                rn.figure = "v"
+            if rn.figure == "V4":
+                rn.figure = "V"
+            print(rn.figure, rn.pitchNames)
             rn.figure = _preprocessRomanNumeral(rn.figure)
+            print(rn.figure, rn.pitchNames)
         dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["a_measure"].append(rn.measureNumber)
         dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))
@@ -91,6 +105,12 @@ def _initialDataFrame(s):
         dfdict["a_isOnset"].append(True)
         dfdict["a_pitchNames"].append(tuple(rn.pitchNames))
         dfdict["a_bass"].append(rn.pitchNames[0])
+        dfdict["a_tenor"].append(rn.pitchNames[1])
+        dfdict["a_alto"].append(rn.pitchNames[2])
+        if len(rn.pitchNames) == 4:
+            dfdict["a_soprano"].append(rn.pitchNames[3])
+        else:
+            dfdict["a_soprano"].append(rn.root().name)
         dfdict["a_root"].append(rn.root().name)
         dfdict["a_inversion"].append(rn.inversion())
         dfdict["a_quality"].append(rn.commonName)

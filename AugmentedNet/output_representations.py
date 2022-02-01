@@ -95,6 +95,21 @@ class Bass35(OutputRepresentation):
     transpositionFn = staticmethod(TransposePitch)
 
 
+class Tenor35(OutputRepresentation):
+    classList = SPELLINGS
+    dfFeature = "a_tenor"
+    transpositionFn = staticmethod(TransposePitch)
+
+class Alto35(OutputRepresentation):
+    classList = SPELLINGS
+    dfFeature = "a_alto"
+    transpositionFn = staticmethod(TransposePitch)
+
+class Soprano35(OutputRepresentation):
+    classList = SPELLINGS
+    dfFeature = "a_soprano"
+    transpositionFn = staticmethod(TransposePitch)
+
 class Inversion4(OutputRepresentationTI):
     classList = list(range(4))
     dfFeature = "a_inversion"
@@ -160,6 +175,9 @@ class PitchClassSet94(OutputRepresentation):
 
 available_representations = {
     "Bass35": Bass35,
+    "Tenor35": Tenor35,
+    "Alto35": Alto35,
+    "Soprano35": Soprano35,
     "ChordQuality15": ChordQuality15,
     "ChordRoot35": ChordRoot35,
     "HarmonicRhythm2": HarmonicRhythm2,
