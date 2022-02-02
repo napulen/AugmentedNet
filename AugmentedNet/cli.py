@@ -6,6 +6,7 @@ from . import models
 from .dataset_npz_generator import __doc__ as npz_description
 from .dataset_tsv_generator import __doc__ as tsv_description
 from .train import __doc__ as train_description
+from .inference import __doc__ as inference_description
 from .input_representations import (
     available_representations as availableInputs,
 )
@@ -207,4 +208,16 @@ def train():
         help="The strategy to use for synthetic training examples (if any).",
     )
     parser.set_defaults(**DefaultArguments.train)
+    return parser
+
+def inference():
+    parser = ArgumentParser(description=inference_description, parents=[])
+    parser.add_argument(
+        "modelPath",
+        help="The path to a trained HDF5 AugmentedNet model."
+    )
+    parser.add_argument(
+        "inputFile",
+        help="The path to a MusicXML (or similar) input score to process."
+    )
     return parser
