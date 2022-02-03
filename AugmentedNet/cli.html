@@ -295,15 +295,15 @@
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">train</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 
+
 <span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 </pre></div>
@@ -614,12 +614,11 @@
             <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 </pre></div>

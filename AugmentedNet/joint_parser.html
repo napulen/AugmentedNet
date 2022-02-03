@@ -128,7 +128,9 @@
 
 <span class="k">def</span> <span class="nf">_inversionMetric</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incongruentBass&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">annotationIndexes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a_pitchNames</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">annotationIndexes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">a_pitchNames</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
     <span class="n">annotationBasses</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a_bass</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
     <span class="n">annotationIndexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">)</span>
     <span class="n">annotationRanges</span> <span class="o">=</span> <span class="p">[</span>

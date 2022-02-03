@@ -287,7 +287,9 @@ AugmentedNet    </h1>
 
 <span class="k">def</span> <span class="nf">_inversionMetric</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incongruentBass&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">annotationIndexes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a_pitchNames</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">annotationIndexes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">a_pitchNames</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
     <span class="n">annotationBasses</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">a_bass</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
     <span class="n">annotationIndexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">)</span>
     <span class="n">annotationRanges</span> <span class="o">=</span> <span class="p">[</span>
@@ -2446,15 +2448,18 @@ AugmentedNet    </h1>
     <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_tenor&quot;</span>
     <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
 
+
 <span class="k">class</span> <span class="nc">Alto35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
     <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
     <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_alto&quot;</span>
     <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
 
+
 <span class="k">class</span> <span class="nc">Soprano35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
     <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
     <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_soprano&quot;</span>
     <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+
 
 <span class="k">class</span> <span class="nc">Inversion4</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
     <span class="n">classList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
@@ -3344,7 +3349,6 @@ AugmentedNet    </h1>
         <span class="c1"># print(analysis.offset, notes)</span>
         <span class="n">bass</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">thiskey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">LocalKey35</span>
-        <span class="c1"># rn1 = reconstruct_roman_numeral(analysis.RomanNumeral76, analysis.Inversion4)</span>
         <span class="n">rn2</span> <span class="o">=</span> <span class="n">resolveSATB</span><span class="p">(</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Bass35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Tenor35</span><span class="p">,</span>
@@ -4980,15 +4984,15 @@ AugmentedNet    </h1>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">train</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 
+
 <span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 </pre></div>
