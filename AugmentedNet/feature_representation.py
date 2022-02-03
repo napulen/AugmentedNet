@@ -310,6 +310,8 @@ INTERVAL_ENHARMONICS = {
     "D8": "M7",
 }
 
+HARMONICRHYTHM = [0, 1, 2, 3, 4, 5, 6]
+
 
 class FeatureRepresentation(object):
     features = 1

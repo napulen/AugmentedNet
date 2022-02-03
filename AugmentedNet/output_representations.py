@@ -8,11 +8,13 @@ from .cache import (
     TransposePitch,
 )
 from .feature_representation import (
+    HARMONICRHYTHM,
     FeatureRepresentation,
     FeatureRepresentationTI,
     CHORD_QUALITIES,
     COMMON_ROMAN_NUMERALS,
     DEGREES,
+    HARMONICRHYTHM,
     KEYS,
     PCSETS,
     SPELLINGS,
@@ -124,9 +126,9 @@ class Inversion4(OutputRepresentationTI):
         return array
 
 
-class HarmonicRhythm2(OutputRepresentationTI):
-    classList = [True, False]
-    dfFeature = "a_isOnset"
+class HarmonicRhythm7(OutputRepresentationTI):
+    classList = HARMONICRHYTHM
+    dfFeature = "a_harmonicRhythm"
 
 
 class RomanNumeral76(OutputRepresentationTI):
@@ -180,7 +182,7 @@ available_representations = {
     "Soprano35": Soprano35,
     "ChordQuality15": ChordQuality15,
     "ChordRoot35": ChordRoot35,
-    "HarmonicRhythm2": HarmonicRhythm2,
+    "HarmonicRhythm7": HarmonicRhythm7,
     "Inversion4": Inversion4,
     "LocalKey35": LocalKey35,
     "PitchClassSet94": PitchClassSet94,

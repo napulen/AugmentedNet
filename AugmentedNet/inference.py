@@ -39,7 +39,7 @@ def _padToSequenceLength(arr, sequenceLength):
 
 
 def solveChordSegmentation(df):
-    return df.dropna()[df.HarmonicRhythm2 == True]
+    return df.dropna()[df.HarmonicRhythm2 == 0]
 
 
 def resolveRomanNumeral75(rn75, inversion):

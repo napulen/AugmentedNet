@@ -90,7 +90,13 @@ class TestBass35(unittest.TestCase):
 class TestHarmonicRhythm7(TestBass35):
     clas = HarmonicRhythm7
     encodingGT = aux.haydnHarmonicRhythm7
-    dfFeature = "a_isOnset"
+    dfFeature = "a_harmonicRhythm"
+
+    def test_encoding(self):
+        super().test_encoding()
+
+    def test_decoding(self):
+        super().test_decoding()
 
 
 class TestTonicizedKey35(TestBass35):

@@ -14,7 +14,7 @@ A_COLUMNS = [
     "a_duration",
     "a_annotationNumber",
     "a_romanNumeral",
-    "a_isOnset",
+    "a_harmonicRhythm",
     "a_pitchNames",
     "a_bass",
     "a_tenor",
@@ -100,7 +100,7 @@ def _initialDataFrame(s):
         dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))
         dfdict["a_annotationNumber"].append(idx)
         dfdict["a_romanNumeral"].append(_removeInversion(rn.figure))
-        dfdict["a_isOnset"].append(True)
+        dfdict["a_harmonicRhythm"].append(0)
         dfdict["a_pitchNames"].append(tuple(rn.pitchNames))
         dfdict["a_bass"].append(rn.pitchNames[0])
         dfdict["a_tenor"].append(rn.pitchNames[1])
@@ -143,6 +143,31 @@ def _initialDataFrame(s):
     return df
 
 
+def _harmonicRhythmPostprocessing(a_harmonicRhythm):
+    """This is a new approach for harmonic rhythm to balance the classes.
+
+    Instead of providing 'is_onset' True/False kind of annotations,
+    log the duration elapsed since the last chord.
+
+    0 - this is a chord onset
+    1 - a 32nd note has passed since the last chord
+    2 - a 16th note has passed since the last chord
+    3 - an eighth note has passed since the last chord
+    4 - a quarter note has passed since the last chord
+    5 - a half note has passed since the last chord
+    6 - a whole note has passed since the last chord"""
+    template = [1, 2, 2, 3, 3, 3, 3] + ([4] * 8) + ([5] * 16) + ([6] * 32)
+    hr = a_harmonicRhythm.to_list()
+    t = 62
+    for i in range(len(a_harmonicRhythm)):
+        if hr[i] == 0:
+            t = 0
+        else:
+            hr[i] = template[min(t, 62)]
+            t += 1
+    return hr
+
+
 def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     """Reindexes a dataframe according to a fixed note-value.
 
@@ -163,8 +188,9 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     # plus original onsets. Later, original onsets (e.g., triplets)
     # are removed and just the fixed-timesteps are kept
     df = df.reindex(index=df.index.union(newIndex))
-    # here onsets are easier, every "injected" index is not an onset
-    df.a_isOnset.fillna(value=False, inplace=True)
+    # the harmonic rhythm is postprocessed to reduce class imbalance
+    harmRhythm = _harmonicRhythmPostprocessing(df.a_harmonicRhythm)
+    df["a_harmonicRhythm"] = harmRhythm
     df.fillna(method="ffill", inplace=True)
     df = df.reindex(index=newIndex)
     return df

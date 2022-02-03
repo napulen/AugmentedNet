@@ -70,8 +70,8 @@ def _qualityMetric(df):
 
 def _inversionMetric(df):
     df["incongruentBass"] = np.nan
-    annotationIndexes = df[df.a_isOnset].a_pitchNames.index.to_list()
-    annotationBasses = df[df.a_isOnset].a_bass.to_list()
+    annotationIndexes = df[df.a_harmonicRhythm == 0].a_pitchNames.index.to_list()
+    annotationBasses = df[df.a_harmonicRhythm == 0].a_bass.to_list()
     annotationIndexes.append("end")
     annotationRanges = [
         (
@@ -111,7 +111,7 @@ def parseAnnotationAndScore(
     jointdf.index.name = "j_offset"
     # Sometimes, scores are longer than annotations (trailing empty measures)
     # In that case, ffill the annotation portion of the new dataframe
-    jointdf["a_isOnset"].fillna(False, inplace=True)
+    jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
@@ -134,7 +134,7 @@ def parseAnnotationAndAnnotation(
         a, texturize=texturize, fixedOffset=fixedOffset
     )
     jointdf = pd.concat([sdf, adf], axis=1)
-    jointdf["a_isOnset"].fillna(False, inplace=True)
+    jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
