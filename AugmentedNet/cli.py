@@ -210,14 +210,14 @@ def train():
     parser.set_defaults(**DefaultArguments.train)
     return parser
 
+
 def inference():
     parser = ArgumentParser(description=inference_description, parents=[])
     parser.add_argument(
-        "modelPath",
-        help="The path to a trained HDF5 AugmentedNet model."
+        "modelPath", help="The path to a trained HDF5 AugmentedNet model."
     )
     parser.add_argument(
         "inputFile",
-        help="The path to a MusicXML (or similar) input score to process."
+        help="The path to a MusicXML (or similar) input score to process.",
     )
     return parser

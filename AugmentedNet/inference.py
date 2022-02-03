@@ -123,7 +123,6 @@ def predict(modelPath, inputFile, useGpu=False):
         # print(analysis.offset, notes)
         bass = sorted(notes, key=lambda n: n[1])[0][0]
         thiskey = analysis.LocalKey35
-        # rn1 = reconstruct_roman_numeral(analysis.RomanNumeral76, analysis.Inversion4)
         rn2 = resolveSATB(
             analysis.Bass35,
             analysis.Tenor35,

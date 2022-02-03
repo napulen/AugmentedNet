@@ -70,7 +70,9 @@ def _qualityMetric(df):
 
 def _inversionMetric(df):
     df["incongruentBass"] = np.nan
-    annotationIndexes = df[df.a_harmonicRhythm == 0].a_pitchNames.index.to_list()
+    annotationIndexes = df[
+        df.a_harmonicRhythm == 0
+    ].a_pitchNames.index.to_list()
     annotationBasses = df[df.a_harmonicRhythm == 0].a_bass.to_list()
     annotationIndexes.append("end")
     annotationRanges = [

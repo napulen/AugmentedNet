@@ -102,15 +102,18 @@ class Tenor35(OutputRepresentation):
     dfFeature = "a_tenor"
     transpositionFn = staticmethod(TransposePitch)
 
+
 class Alto35(OutputRepresentation):
     classList = SPELLINGS
     dfFeature = "a_alto"
     transpositionFn = staticmethod(TransposePitch)
 
+
 class Soprano35(OutputRepresentation):
     classList = SPELLINGS
     dfFeature = "a_soprano"
     transpositionFn = staticmethod(TransposePitch)
+
 
 class Inversion4(OutputRepresentationTI):
     classList = list(range(4))
