@@ -97,6 +97,51 @@
 
             </li>
             <li>
+                    <a class="class" href="#Tenor35">Tenor35</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Tenor35.classList">classList</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Tenor35.dfFeature">dfFeature</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Tenor35.transpositionFn">transpositionFn</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Alto35">Alto35</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Alto35.classList">classList</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Alto35.dfFeature">dfFeature</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Alto35.transpositionFn">transpositionFn</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Soprano35">Soprano35</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Soprano35.classList">classList</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Soprano35.dfFeature">dfFeature</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Soprano35.transpositionFn">transpositionFn</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
                     <a class="class" href="#Inversion4">Inversion4</a>
                             <ul class="memberlist">
                         <li>
@@ -112,13 +157,13 @@
 
             </li>
             <li>
-                    <a class="class" href="#HarmonicRhythm2">HarmonicRhythm2</a>
+                    <a class="class" href="#HarmonicRhythm7">HarmonicRhythm7</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="variable" href="#HarmonicRhythm2.classList">classList</a>
+                                <a class="variable" href="#HarmonicRhythm7.classList">classList</a>
                         </li>
                         <li>
-                                <a class="variable" href="#HarmonicRhythm2.dfFeature">dfFeature</a>
+                                <a class="variable" href="#HarmonicRhythm7.dfFeature">dfFeature</a>
                         </li>
                 </ul>
 
@@ -261,11 +306,13 @@
     <span class="n">TransposePitch</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.feature_representation</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HARMONICRHYTHM</span><span class="p">,</span>
     <span class="n">FeatureRepresentation</span><span class="p">,</span>
     <span class="n">FeatureRepresentationTI</span><span class="p">,</span>
     <span class="n">CHORD_QUALITIES</span><span class="p">,</span>
     <span class="n">COMMON_ROMAN_NUMERALS</span><span class="p">,</span>
     <span class="n">DEGREES</span><span class="p">,</span>
+    <span class="n">HARMONICRHYTHM</span><span class="p">,</span>
     <span class="n">KEYS</span><span class="p">,</span>
     <span class="n">PCSETS</span><span class="p">,</span>
     <span class="n">SPELLINGS</span><span class="p">,</span>
@@ -348,6 +395,21 @@
     <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
 
 
+<span class="k">class</span> <span class="nc">Tenor35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_tenor&quot;</span>
+    <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Alto35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_alto&quot;</span>
+    <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Soprano35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_soprano&quot;</span>
+    <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+
 <span class="k">class</span> <span class="nc">Inversion4</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
     <span class="n">classList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
     <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_inversion&quot;</span>
@@ -362,9 +424,9 @@
         <span class="k">return</span> <span class="n">array</span>
 
 
-<span class="k">class</span> <span class="nc">HarmonicRhythm2</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
-    <span class="n">classList</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
-    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_isOnset&quot;</span>
+<span class="k">class</span> <span class="nc">HarmonicRhythm7</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">HARMONICRHYTHM</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_harmonicRhythm&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">RomanNumeral76</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
@@ -413,9 +475,12 @@
 
 <span class="n">available_representations</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;Bass35&quot;</span><span class="p">:</span> <span class="n">Bass35</span><span class="p">,</span>
+    <span class="s2">&quot;Tenor35&quot;</span><span class="p">:</span> <span class="n">Tenor35</span><span class="p">,</span>
+    <span class="s2">&quot;Alto35&quot;</span><span class="p">:</span> <span class="n">Alto35</span><span class="p">,</span>
+    <span class="s2">&quot;Soprano35&quot;</span><span class="p">:</span> <span class="n">Soprano35</span><span class="p">,</span>
     <span class="s2">&quot;ChordQuality15&quot;</span><span class="p">:</span> <span class="n">ChordQuality15</span><span class="p">,</span>
     <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">:</span> <span class="n">ChordRoot35</span><span class="p">,</span>
-    <span class="s2">&quot;HarmonicRhythm2&quot;</span><span class="p">:</span> <span class="n">HarmonicRhythm2</span><span class="p">,</span>
+    <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">:</span> <span class="n">HarmonicRhythm7</span><span class="p">,</span>
     <span class="s2">&quot;Inversion4&quot;</span><span class="p">:</span> <span class="n">Inversion4</span><span class="p">,</span>
     <span class="s2">&quot;LocalKey35&quot;</span><span class="p">:</span> <span class="n">LocalKey35</span><span class="p">,</span>
     <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">:</span> <span class="n">PitchClassSet94</span><span class="p">,</span>
@@ -891,6 +956,285 @@
                                 </dl>
                             </div>
                 </section>
+                <section id="Tenor35">
+                                <div class="attr class">
+        <a class="headerlink" href="#Tenor35">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Tenor35</span><wbr>(<span class="base"><a href="#OutputRepresentation">OutputRepresentation</a></span>):
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Tenor35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_tenor&quot;</span>
+    <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Output representations are all one-hot encoded (no many-hots).</p>
+
+<p>That makes them easier to template.</p>
+</div>
+
+
+                            <div id="Tenor35.classList" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Tenor35.classList">#&nbsp;&nbsp</a>
+
+        <span class="name">classList</span><span class="default_value"> = [&#39;C--&#39;, &#39;C-&#39;, &#39;C&#39;, &#39;C#&#39;, &#39;C##&#39;, &#39;D--&#39;, &#39;D-&#39;, &#39;D&#39;, &#39;D#&#39;, &#39;D##&#39;, &#39;E--&#39;, &#39;E-&#39;, &#39;E&#39;, &#39;E#&#39;, &#39;E##&#39;, &#39;F--&#39;, &#39;F-&#39;, &#39;F&#39;, &#39;F#&#39;, &#39;F##&#39;, &#39;G--&#39;, &#39;G-&#39;, &#39;G&#39;, &#39;G#&#39;, &#39;G##&#39;, &#39;A--&#39;, &#39;A-&#39;, &#39;A&#39;, &#39;A#&#39;, &#39;A##&#39;, &#39;B--&#39;, &#39;B-&#39;, &#39;B&#39;, &#39;B#&#39;, &#39;B##&#39;]</span>
+    </div>
+
+    
+
+                            </div>
+                            <div id="Tenor35.dfFeature" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Tenor35.dfFeature">#&nbsp;&nbsp</a>
+
+        <span class="name">dfFeature</span><span class="default_value"> = &#39;a_tenor&#39;</span>
+    </div>
+
+    
+
+                            </div>
+                            <div id="Tenor35.transpositionFn" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Tenor35.transpositionFn">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">transpositionFn</span><span class="signature">(pitch, interval)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">TransposePitch</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transposes a pitch based on an interval string (e.g., &#39;m3&#39;).&quot;&quot;&quot;</span>
+    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">duple</span> <span class="ow">in</span> <span class="n">_transposePitch</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_transposePitch</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span>
+    <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+    <span class="n">transposed</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span><span class="o">.</span><span class="n">nameWithOctave</span>
+    <span class="n">_transposePitch</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span> <span class="o">=</span> <span class="n">transposed</span>
+    <span class="k">return</span> <span class="n">transposed</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Transposes a pitch based on an interval string (e.g., 'm3').</p>
+</div>
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Tenor35.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Tenor35.features" class="variable"><a href="feature_representation.html#FeatureRepresentation.features">features</a></dd>
+                <dd id="Tenor35.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Tenor35.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Tenor35.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Tenor35.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+            <div><dt><a href="#OutputRepresentation">OutputRepresentation</a></dt>
+                                <dd id="Tenor35.run" class="function"><a href="#OutputRepresentation.run">run</a></dd>
+                <dd id="Tenor35.classesNumber" class="function"><a href="#OutputRepresentation.classesNumber">classesNumber</a></dd>
+                <dd id="Tenor35.decode" class="function"><a href="#OutputRepresentation.decode">decode</a></dd>
+                <dd id="Tenor35.decodeOneHot" class="function"><a href="#OutputRepresentation.decodeOneHot">decodeOneHot</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="Alto35">
+                                <div class="attr class">
+        <a class="headerlink" href="#Alto35">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Alto35</span><wbr>(<span class="base"><a href="#OutputRepresentation">OutputRepresentation</a></span>):
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Alto35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_alto&quot;</span>
+    <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Output representations are all one-hot encoded (no many-hots).</p>
+
+<p>That makes them easier to template.</p>
+</div>
+
+
+                            <div id="Alto35.classList" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Alto35.classList">#&nbsp;&nbsp</a>
+
+        <span class="name">classList</span><span class="default_value"> = [&#39;C--&#39;, &#39;C-&#39;, &#39;C&#39;, &#39;C#&#39;, &#39;C##&#39;, &#39;D--&#39;, &#39;D-&#39;, &#39;D&#39;, &#39;D#&#39;, &#39;D##&#39;, &#39;E--&#39;, &#39;E-&#39;, &#39;E&#39;, &#39;E#&#39;, &#39;E##&#39;, &#39;F--&#39;, &#39;F-&#39;, &#39;F&#39;, &#39;F#&#39;, &#39;F##&#39;, &#39;G--&#39;, &#39;G-&#39;, &#39;G&#39;, &#39;G#&#39;, &#39;G##&#39;, &#39;A--&#39;, &#39;A-&#39;, &#39;A&#39;, &#39;A#&#39;, &#39;A##&#39;, &#39;B--&#39;, &#39;B-&#39;, &#39;B&#39;, &#39;B#&#39;, &#39;B##&#39;]</span>
+    </div>
+
+    
+
+                            </div>
+                            <div id="Alto35.dfFeature" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Alto35.dfFeature">#&nbsp;&nbsp</a>
+
+        <span class="name">dfFeature</span><span class="default_value"> = &#39;a_alto&#39;</span>
+    </div>
+
+    
+
+                            </div>
+                            <div id="Alto35.transpositionFn" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alto35.transpositionFn">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">transpositionFn</span><span class="signature">(pitch, interval)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">TransposePitch</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transposes a pitch based on an interval string (e.g., &#39;m3&#39;).&quot;&quot;&quot;</span>
+    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">duple</span> <span class="ow">in</span> <span class="n">_transposePitch</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_transposePitch</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span>
+    <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+    <span class="n">transposed</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span><span class="o">.</span><span class="n">nameWithOctave</span>
+    <span class="n">_transposePitch</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span> <span class="o">=</span> <span class="n">transposed</span>
+    <span class="k">return</span> <span class="n">transposed</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Transposes a pitch based on an interval string (e.g., 'm3').</p>
+</div>
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Alto35.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Alto35.features" class="variable"><a href="feature_representation.html#FeatureRepresentation.features">features</a></dd>
+                <dd id="Alto35.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Alto35.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Alto35.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Alto35.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+            <div><dt><a href="#OutputRepresentation">OutputRepresentation</a></dt>
+                                <dd id="Alto35.run" class="function"><a href="#OutputRepresentation.run">run</a></dd>
+                <dd id="Alto35.classesNumber" class="function"><a href="#OutputRepresentation.classesNumber">classesNumber</a></dd>
+                <dd id="Alto35.decode" class="function"><a href="#OutputRepresentation.decode">decode</a></dd>
+                <dd id="Alto35.decodeOneHot" class="function"><a href="#OutputRepresentation.decodeOneHot">decodeOneHot</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="Soprano35">
+                                <div class="attr class">
+        <a class="headerlink" href="#Soprano35">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Soprano35</span><wbr>(<span class="base"><a href="#OutputRepresentation">OutputRepresentation</a></span>):
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Soprano35</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">SPELLINGS</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_soprano&quot;</span>
+    <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePitch</span><span class="p">)</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Output representations are all one-hot encoded (no many-hots).</p>
+
+<p>That makes them easier to template.</p>
+</div>
+
+
+                            <div id="Soprano35.classList" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Soprano35.classList">#&nbsp;&nbsp</a>
+
+        <span class="name">classList</span><span class="default_value"> = [&#39;C--&#39;, &#39;C-&#39;, &#39;C&#39;, &#39;C#&#39;, &#39;C##&#39;, &#39;D--&#39;, &#39;D-&#39;, &#39;D&#39;, &#39;D#&#39;, &#39;D##&#39;, &#39;E--&#39;, &#39;E-&#39;, &#39;E&#39;, &#39;E#&#39;, &#39;E##&#39;, &#39;F--&#39;, &#39;F-&#39;, &#39;F&#39;, &#39;F#&#39;, &#39;F##&#39;, &#39;G--&#39;, &#39;G-&#39;, &#39;G&#39;, &#39;G#&#39;, &#39;G##&#39;, &#39;A--&#39;, &#39;A-&#39;, &#39;A&#39;, &#39;A#&#39;, &#39;A##&#39;, &#39;B--&#39;, &#39;B-&#39;, &#39;B&#39;, &#39;B#&#39;, &#39;B##&#39;]</span>
+    </div>
+
+    
+
+                            </div>
+                            <div id="Soprano35.dfFeature" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Soprano35.dfFeature">#&nbsp;&nbsp</a>
+
+        <span class="name">dfFeature</span><span class="default_value"> = &#39;a_soprano&#39;</span>
+    </div>
+
+    
+
+                            </div>
+                            <div id="Soprano35.transpositionFn" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Soprano35.transpositionFn">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">transpositionFn</span><span class="signature">(pitch, interval)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">TransposePitch</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transposes a pitch based on an interval string (e.g., &#39;m3&#39;).&quot;&quot;&quot;</span>
+    <span class="n">duple</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">duple</span> <span class="ow">in</span> <span class="n">_transposePitch</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_transposePitch</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span>
+    <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+    <span class="n">transposed</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span><span class="o">.</span><span class="n">nameWithOctave</span>
+    <span class="n">_transposePitch</span><span class="p">[</span><span class="n">duple</span><span class="p">]</span> <span class="o">=</span> <span class="n">transposed</span>
+    <span class="k">return</span> <span class="n">transposed</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Transposes a pitch based on an interval string (e.g., 'm3').</p>
+</div>
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Soprano35.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Soprano35.features" class="variable"><a href="feature_representation.html#FeatureRepresentation.features">features</a></dd>
+                <dd id="Soprano35.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Soprano35.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Soprano35.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Soprano35.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+            <div><dt><a href="#OutputRepresentation">OutputRepresentation</a></dt>
+                                <dd id="Soprano35.run" class="function"><a href="#OutputRepresentation.run">run</a></dd>
+                <dd id="Soprano35.classesNumber" class="function"><a href="#OutputRepresentation.classesNumber">classesNumber</a></dd>
+                <dd id="Soprano35.decode" class="function"><a href="#OutputRepresentation.decode">decode</a></dd>
+                <dd id="Soprano35.decodeOneHot" class="function"><a href="#OutputRepresentation.decodeOneHot">decodeOneHot</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
                 <section id="Inversion4">
                                 <div class="attr class">
         <a class="headerlink" href="#Inversion4">#&nbsp;&nbsp</a>
@@ -991,20 +1335,20 @@
                                 </dl>
                             </div>
                 </section>
-                <section id="HarmonicRhythm2">
+                <section id="HarmonicRhythm7">
                                 <div class="attr class">
-        <a class="headerlink" href="#HarmonicRhythm2">#&nbsp;&nbsp</a>
+        <a class="headerlink" href="#HarmonicRhythm7">#&nbsp;&nbsp</a>
 
         
         <span class="def">class</span>
-        <span class="name">HarmonicRhythm2</span><wbr>(<span class="base"><a href="#OutputRepresentationTI">OutputRepresentationTI</a></span>):
+        <span class="name">HarmonicRhythm7</span><wbr>(<span class="base"><a href="#OutputRepresentationTI">OutputRepresentationTI</a></span>):
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">HarmonicRhythm2</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
-    <span class="n">classList</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
-    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_isOnset&quot;</span>
+            <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">HarmonicRhythm7</span><span class="p">(</span><span class="n">OutputRepresentationTI</span><span class="p">):</span>
+    <span class="n">classList</span> <span class="o">=</span> <span class="n">HARMONICRHYTHM</span>
+    <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_harmonicRhythm&quot;</span>
 </pre></div>
 
         </details>
@@ -1015,19 +1359,19 @@
 </div>
 
 
-                            <div id="HarmonicRhythm2.classList" class="classattr">
-                                            <div class="attr variable"><a class="headerlink" href="#HarmonicRhythm2.classList">#&nbsp;&nbsp</a>
+                            <div id="HarmonicRhythm7.classList" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#HarmonicRhythm7.classList">#&nbsp;&nbsp</a>
 
-        <span class="name">classList</span><span class="default_value"> = [True, False]</span>
+        <span class="name">classList</span><span class="default_value"> = [0, 1, 2, 3, 4, 5, 6]</span>
     </div>
 
     
 
                             </div>
-                            <div id="HarmonicRhythm2.dfFeature" class="classattr">
-                                            <div class="attr variable"><a class="headerlink" href="#HarmonicRhythm2.dfFeature">#&nbsp;&nbsp</a>
+                            <div id="HarmonicRhythm7.dfFeature" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#HarmonicRhythm7.dfFeature">#&nbsp;&nbsp</a>
 
-        <span class="name">dfFeature</span><span class="default_value"> = &#39;a_isOnset&#39;</span>
+        <span class="name">dfFeature</span><span class="default_value"> = &#39;a_harmonicRhythm&#39;</span>
     </div>
 
     
@@ -1037,22 +1381,22 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
-                                <dd id="HarmonicRhythm2.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
-                <dd id="HarmonicRhythm2.features" class="variable"><a href="feature_representation.html#FeatureRepresentation.features">features</a></dd>
-                <dd id="HarmonicRhythm2.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
-                <dd id="HarmonicRhythm2.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
-                <dd id="HarmonicRhythm2.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+                                <dd id="HarmonicRhythm7.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="HarmonicRhythm7.features" class="variable"><a href="feature_representation.html#FeatureRepresentation.features">features</a></dd>
+                <dd id="HarmonicRhythm7.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="HarmonicRhythm7.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="HarmonicRhythm7.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
 
             </div>
             <div><dt><a href="#OutputRepresentationTI">OutputRepresentationTI</a></dt>
-                                <dd id="HarmonicRhythm2.run" class="function"><a href="#OutputRepresentationTI.run">run</a></dd>
-                <dd id="HarmonicRhythm2.classesNumber" class="function"><a href="#OutputRepresentationTI.classesNumber">classesNumber</a></dd>
-                <dd id="HarmonicRhythm2.decode" class="function"><a href="#OutputRepresentationTI.decode">decode</a></dd>
-                <dd id="HarmonicRhythm2.decodeOneHot" class="function"><a href="#OutputRepresentationTI.decodeOneHot">decodeOneHot</a></dd>
+                                <dd id="HarmonicRhythm7.run" class="function"><a href="#OutputRepresentationTI.run">run</a></dd>
+                <dd id="HarmonicRhythm7.classesNumber" class="function"><a href="#OutputRepresentationTI.classesNumber">classesNumber</a></dd>
+                <dd id="HarmonicRhythm7.decode" class="function"><a href="#OutputRepresentationTI.decode">decode</a></dd>
+                <dd id="HarmonicRhythm7.decodeOneHot" class="function"><a href="#OutputRepresentationTI.decodeOneHot">decodeOneHot</a></dd>
 
             </div>
             <div><dt><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></dt>
-                                <dd id="HarmonicRhythm2.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentationTI.dataAugmentation">dataAugmentation</a></dd>
+                                <dd id="HarmonicRhythm7.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentationTI.dataAugmentation">dataAugmentation</a></dd>
 
             </div>
                                 </dl>

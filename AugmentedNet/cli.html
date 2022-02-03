@@ -60,6 +60,9 @@
             <li>
                     <a class="function" href="#train">train</a>
             </li>
+            <li>
+                    <a class="function" href="#inference">inference</a>
+            </li>
     </ul>
 
 
@@ -88,6 +91,7 @@
 <span class="kn">from</span> <span class="nn">.dataset_npz_generator</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">npz_description</span>
 <span class="kn">from</span> <span class="nn">.dataset_tsv_generator</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">tsv_description</span>
 <span class="kn">from</span> <span class="nn">.train</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">train_description</span>
+<span class="kn">from</span> <span class="nn">.inference</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">inference_description</span>
 <span class="kn">from</span> <span class="nn">.input_representations</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableInputs</span><span class="p">,</span>
 <span class="p">)</span>
@@ -118,10 +122,13 @@
             <span class="s2">&quot;ChordQuality15&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;Bass35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Tenor35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Alto35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Soprano35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
             <span class="s2">&quot;TonicizedKey35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;HarmonicRhythm2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="s2">&quot;sequenceLength&quot;</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
         <span class="s2">&quot;scrutinizeData&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
@@ -287,6 +294,18 @@
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">train</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span>
 </pre></div>
 
         </details>
@@ -325,10 +344,13 @@
             <span class="s2">&quot;ChordQuality15&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;Bass35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Tenor35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Alto35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Soprano35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
             <span class="s2">&quot;TonicizedKey35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;HarmonicRhythm2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="s2">&quot;sequenceLength&quot;</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
         <span class="s2">&quot;scrutinizeData&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
@@ -383,7 +405,7 @@
                             <div id="DefaultArguments.npz" class="classattr">
                                             <div class="attr variable"><a class="headerlink" href="#DefaultArguments.npz">#&nbsp;&nbsp</a>
 
-        <span class="name">npz</span><span class="default_value"> = {&#39;synthetic&#39;: False, &#39;dataAugmentation&#39;: True, &#39;collections&#39;: [&#39;bps&#39;], &#39;testCollections&#39;: [&#39;bps&#39;], &#39;inputRepresentations&#39;: [&#39;Bass19&#39;, &#39;Chromagram19&#39;], &#39;outputRepresentations&#39;: [&#39;LocalKey35&#39;, &#39;PrimaryDegree22&#39;, &#39;SecondaryDegree22&#39;, &#39;Inversion4&#39;, &#39;ChordQuality15&#39;, &#39;ChordRoot35&#39;, &#39;Bass35&#39;, &#39;RomanNumeral76&#39;, &#39;TonicizedKey35&#39;, &#39;PitchClassSet94&#39;, &#39;HarmonicRhythm2&#39;], &#39;sequenceLength&#39;: 640, &#39;scrutinizeData&#39;: False, &#39;testSetOn&#39;: False, &#39;npzOutput&#39;: &#39;dataset&#39;}</span>
+        <span class="name">npz</span><span class="default_value"> = {&#39;synthetic&#39;: False, &#39;dataAugmentation&#39;: True, &#39;collections&#39;: [&#39;bps&#39;], &#39;testCollections&#39;: [&#39;bps&#39;], &#39;inputRepresentations&#39;: [&#39;Bass19&#39;, &#39;Chromagram19&#39;], &#39;outputRepresentations&#39;: [&#39;LocalKey35&#39;, &#39;PrimaryDegree22&#39;, &#39;SecondaryDegree22&#39;, &#39;Inversion4&#39;, &#39;ChordQuality15&#39;, &#39;ChordRoot35&#39;, &#39;Bass35&#39;, &#39;Tenor35&#39;, &#39;Alto35&#39;, &#39;Soprano35&#39;, &#39;RomanNumeral76&#39;, &#39;TonicizedKey35&#39;, &#39;PitchClassSet94&#39;, &#39;HarmonicRhythm7&#39;], &#39;sequenceLength&#39;: 640, &#39;scrutinizeData&#39;: False, &#39;testSetOn&#39;: False, &#39;npzOutput&#39;: &#39;dataset&#39;}</span>
     </div>
 
     
@@ -571,6 +593,34 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The strategy to use for synthetic training examples (if any).&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">train</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span>
+</pre></div>
+
+        </details>
+
+    
+
+                </section>
+                <section id="inference">
+                            <div class="attr function"><a class="headerlink" href="#inference">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">inference</span><span class="signature">()</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 </pre></div>
 
