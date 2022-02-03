@@ -43,7 +43,7 @@ class DefaultArguments(object):
             "RomanNumeral76",
             "TonicizedKey35",
             "PitchClassSet94",
-            "HarmonicRhythm2",
+            "HarmonicRhythm7",
         ],
         "sequenceLength": 640,
         "scrutinizeData": False,
