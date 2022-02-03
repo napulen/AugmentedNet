@@ -16,7 +16,7 @@ from AugmentedNet.output_representations import (
     ChordQuality15,
     ChordRoot35,
     TonicizedKey35,
-    HarmonicRhythm2,
+    HarmonicRhythm7,
     PitchClassSet94,
 )
 
@@ -87,9 +87,9 @@ class TestBass35(unittest.TestCase):
     #             self.assertEqual(gt.tolist(), x.tolist())
 
 
-class TestHarmonicRhythm2(TestBass35):
-    clas = HarmonicRhythm2
-    encodingGT = aux.haydnHarmonicRhythm2
+class TestHarmonicRhythm7(TestBass35):
+    clas = HarmonicRhythm7
+    encodingGT = aux.haydnHarmonicRhythm7
     dfFeature = "a_isOnset"
 
 
