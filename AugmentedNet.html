@@ -3034,21 +3034,29 @@ AugmentedNet    </h1>
         <span class="n">df</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;true_&quot;</span> <span class="o">+</span> <span class="n">feature</span><span class="p">]</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pred_&quot;</span> <span class="o">+</span> <span class="n">feature</span><span class="p">]</span>
         <span class="n">summary</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="c1"># Some custom features</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Degree&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">PrimaryDegree22</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">SecondaryDegree22</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">ChordQuality15</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">ChordRoot35</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Degree</span>
-    <span class="p">)</span>
-    <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;Degree&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Degree</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;Degree&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RomanNumeral: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;RomanNumeral&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Some custom features, all optional depending on outputs</span>
+    <span class="k">if</span> <span class="s2">&quot;PrimaryDegree22&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;SecondaryDegree22&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Degree&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">PrimaryDegree22</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">SecondaryDegree22</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;Degree&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Degree</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;Degree&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span>
+        <span class="ow">and</span> <span class="s2">&quot;ChordQuality15&quot;</span> <span class="ow">in</span> <span class="n">df</span>
+        <span class="ow">and</span> <span class="s2">&quot;ChordRoot35&quot;</span> <span class="ow">in</span> <span class="n">df</span>
+        <span class="ow">and</span> <span class="s2">&quot;Inversion4&quot;</span> <span class="ow">in</span> <span class="n">df</span>
+        <span class="ow">and</span> <span class="s2">&quot;Degree&quot;</span> <span class="ow">in</span> <span class="n">df</span>
+    <span class="p">):</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span>
+            <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">ChordQuality15</span>
+            <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">ChordRoot35</span>
+            <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
+            <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Degree</span>
+        <span class="p">)</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RomanNumeral: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;RomanNumeral&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># The alternative approach proposed in Napoles Lopez et al. (2021)</span>
-    <span class="k">if</span> <span class="s2">&quot;RomanNumeral76&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;RomanNumeral76&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;Inversion4&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
         <span class="n">df</span><span class="p">[</span><span class="s2">&quot;AltRomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral76</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
         <span class="p">)</span>
@@ -3060,6 +3068,7 @@ AugmentedNet    </h1>
         <span class="ow">and</span> <span class="s2">&quot;Tenor35&quot;</span> <span class="ow">in</span> <span class="n">df</span>
         <span class="ow">and</span> <span class="s2">&quot;Alto35&quot;</span> <span class="ow">in</span> <span class="n">df</span>
         <span class="ow">and</span> <span class="s2">&quot;Soprano35&quot;</span> <span class="ow">in</span> <span class="n">df</span>
+        <span class="ow">and</span> <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span>
     <span class="p">):</span>
         <span class="n">df</span><span class="p">[</span><span class="s2">&quot;satbRomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">df</span><span class="o">.</span><span class="n">Bass35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Tenor35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Alto35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Soprano35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span>
@@ -4831,20 +4840,20 @@ AugmentedNet    </h1>
         <span class="s2">&quot;testCollections&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bps&quot;</span><span class="p">],</span>
         <span class="s2">&quot;inputRepresentations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Bass19&quot;</span><span class="p">,</span> <span class="s2">&quot;Chromagram19&quot;</span><span class="p">],</span>
         <span class="s2">&quot;outputRepresentations&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;LocalKey35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;PrimaryDegree22&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;SecondaryDegree22&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Inversion4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Alto35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Bass35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ChordQuality15&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Bass35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Tenor35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Alto35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Soprano35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;TonicizedKey35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">,</span>
             <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Inversion4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LocalKey35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PrimaryDegree22&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SecondaryDegree22&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Soprano35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Tenor35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TonicizedKey35&quot;</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="s2">&quot;sequenceLength&quot;</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
         <span class="s2">&quot;scrutinizeData&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
