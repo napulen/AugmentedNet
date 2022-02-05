@@ -58,12 +58,19 @@ def resolveRomanNumeral75(rn75, inversion):
     return rn
 
 
-def resolveSATB(b, t, a, s, key):
+def resolveSATB(b, t, a, s, key, tonicizedKey):
     chord = music21.chord.Chord(f"{b}2 {t}3 {a}4 {s}5")
-    return music21.roman.romanNumeralFromChord(chord, key)
+    rn = music21.roman.romanNumeralFromChord(chord, tonicizedKey)
+    if tonicizedKey != key:
+        tonic, _, third, _, fifth, _, _, _ = rn.key.pitches
+        c1 = music21.chord.Chord([tonic, third, fifth])
+        secondary = music21.roman.romanNumeralFromChord(c1, key)
+        rn = music21.roman.RomanNumeral(f"{rn.figure}/{secondary.figure}", key)
+    return rn
 
 
 def simplifyChordLabel(label):
+    label = label.replace("-incomplete ", "-")
     label = label.replace("-major triad", "")
     label = label.replace("-minor triad", "min")
     label = label.replace("-diminished triad", "dim")
@@ -71,8 +78,26 @@ def simplifyChordLabel(label):
     label = label.replace("-dominant seventh chord", "7")
     label = label.replace("-major seventh chord", "maj7")
     label = label.replace("-minor seventh chord", "min7")
+    label = label.replace("-minor-seventh chord", "min7")
     label = label.replace("-half-diminished seventh chord", "hdim7")
+    label = label.replace("-diminished seventh chord", "dim7")
     return label
+
+
+def simplifyArabicNumerals(figure):
+    # Diminished seventh of a major key
+    figure = figure.replace("b753", "7")
+    figure = figure.replace("6b5", "65")
+    figure = figure.replace("64b3", "43")
+    # Another diminished seventh case
+    figure = figure.replace("#653", "65")
+    figure = figure.replace("6#43", "65")
+    figure = figure.replace("64#2", "65")
+    # Dominant seventh of a minor key
+    figure = figure.replace("75#3", "7")
+    figure = figure.replace("#643", "43")
+    figure = figure.replace("6#42", "2")
+    return figure
 
 
 def predict(modelPath, inputFile, useGpu=False):
@@ -123,12 +148,14 @@ def predict(modelPath, inputFile, useGpu=False):
         # print(analysis.offset, notes)
         bass = sorted(notes, key=lambda n: n[1])[0][0]
         thiskey = analysis.LocalKey35
+        tonicizedKey = analysis.TonicizedKey35
         rn2 = resolveSATB(
             analysis.Bass35,
             analysis.Tenor35,
             analysis.Alto35,
             analysis.Soprano35,
             thiskey,
+            tonicizedKey,
         )
         if thiskey != prevkey:
             # rn1 = f"{thiskey}:{rn1}"
@@ -137,7 +164,7 @@ def predict(modelPath, inputFile, useGpu=False):
         else:
             rn2fig = rn2.figure
         # bass.addLyric(rn1)
-        bass.addLyric(rn2fig)
+        bass.addLyric(simplifyArabicNumerals(rn2fig))
         bass.addLyric(simplifyChordLabel(rn2.pitchedCommonName))
     filename, extension = inputFile.rsplit(".")
     annotatedScore = f"{filename}_annotated.musicxml"
