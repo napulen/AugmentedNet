@@ -133,9 +133,9 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
         print(f"monitored_outputs: {monitored}")
-        accuracies = [logs[f"val_{k}_accuracy"] for k in monitored]
+        accuracies = [logs.get(f"val_{k}_accuracy", 0.0) for k in monitored]
         monitoredAcc = sum(accuracies) / len(monitored)
-        losses = [logs[f"val_{k}_loss"] for k in monitored]
+        losses = [logs.get(f"val_{k}_loss", 0.0) for k in monitored]
         monitoredLoss = sum(losses)
         print(f"monitored accuracy: {monitoredAcc}")
         print(f"monitored loss: {monitoredLoss}")
