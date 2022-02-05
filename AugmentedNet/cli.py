@@ -185,11 +185,13 @@ def train():
     parser.add_argument(
         "--lr_boundaries",
         nargs="+",
+        type=int,
         help="The piecewise learning rate boundary points (in epochs).",
     )
     parser.add_argument(
         "--lr_values",
         nargs="+",
+        type=float,
         help="The piecewise learning rate values for different boundaries.",
     )
     parser.add_argument(
