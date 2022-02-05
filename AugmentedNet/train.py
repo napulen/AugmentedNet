@@ -168,21 +168,29 @@ def evaluate(modelHdf5, X_test, y_true):
         df[feature] = df["true_" + feature] == df["pred_" + feature]
         summary[feature] = df[feature].mean().round(3)
         print(f"{feature}: {summary[feature]}")
-    # Some custom features
-    df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
-    df["RomanNumeral"] = (
-        df.LocalKey35
-        & df.ChordQuality15
-        & df.ChordRoot35
-        & df.Inversion4
-        & df.Degree
-    )
-    summary["Degree"] = df.Degree.mean().round(3)
-    summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
-    print(f"Degree: {summary['Degree']}")
-    print(f"RomanNumeral: {summary['RomanNumeral']}")
+    # Some custom features, all optional depending on outputs
+    if "PrimaryDegree22" in df and "SecondaryDegree22" in df:
+        df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
+        summary["Degree"] = df.Degree.mean().round(3)
+        print(f"Degree: {summary['Degree']}")
+    if (
+        "LocalKey35" in df
+        and "ChordQuality15" in df
+        and "ChordRoot35" in df
+        and "Inversion4" in df
+        and "Degree" in df
+    ):
+        df["RomanNumeral"] = (
+            df.LocalKey35
+            & df.ChordQuality15
+            & df.ChordRoot35
+            & df.Inversion4
+            & df.Degree
+        )
+        summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
+        print(f"RomanNumeral: {summary['RomanNumeral']}")
     # The alternative approach proposed in Napoles Lopez et al. (2021)
-    if "RomanNumeral76" in df:
+    if "RomanNumeral76" in df and "LocalKey35" in df and "Inversion4" in df:
         df["AltRomanNumeral"] = (
             df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
         )
@@ -194,6 +202,7 @@ def evaluate(modelHdf5, X_test, y_true):
         and "Tenor35" in df
         and "Alto35" in df
         and "Soprano35" in df
+        and "LocalKey35" in df
     ):
         df["satbRomanNumeral"] = (
             df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey35
