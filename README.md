@@ -1,6 +1,8 @@
 # AugmentedNet
 A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
 
+> The `main` branch is now a slightly improved neural network. The source code of the published version (`v1.0.0`) can be found in the [v1](https://github.com/napulen/AugmentedNet/tree/v1) branch. The differences are indicated in any releases > `v1.0.0`. If you report against the published results, you are comparing against `v1.0.0`. If you want to compare against the latest network, train a model using this code.
+
 ### ISMIR Paper 
 
 N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks." in *Proceedings of the 22nd International Society for Music Information Retrieval Conference*, 2021, pp. 404–411. https://doi.org/10.5281/zenodo.5624533
@@ -25,11 +27,37 @@ N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral A
 }
 ```
 
-## Run the code 
+## Try out the pre-trained network
 
-### First steps 
+Clone, create a virtual environment, and get the `python` dependencies
 
-Clone recursively, create a virtual environment, and get the `python` dependencies
+```bash
+git clone https://github.com/napulen/AugmentedNet.git
+cd AugmentedNet
+python3 -m venv .env 
+source .env/bin/activate
+
+(.env) pip install -r requirements.txt
+```
+
+> I have experienced that `pip` is sometimes incapable of installing specific package versions depending on your environment. This `requirements.txt` was tested on a vanilla `Ubuntu 20.04`, both in native linux and Windows 10 WSL2. A docker `tensorflow/tensorflow:2.5-gpu` image should also work.
+
+Run the pre-trained model for inference on a `MusicXML` file
+
+```bash
+python -m AugmentedNet.inference AugmentedNetv.hdf5 <input_file>.musicxml
+```
+
+Two files will be generated:
+
+- `<input_file>_annotated.xml`
+- `<input_file>_annotated.csv`
+
+An annotated `MusicXML` file and the `csv` file with the predictions of every time step.
+
+## Training the network from scratch
+
+Clone **recursively** (needed to collect the third-party datasets), create a virtual environment, and get the `python` dependencies
 
 ```bash
 git clone --recursive https://github.com/napulen/AugmentedNet.git
@@ -40,22 +68,16 @@ source .env/bin/activate
 (.env) pip install -r requirements.txt
 ```
 
-> I have experienced that `pip` is sometimes incapable of installing specific package versions depending on your environment. This `requirements.txt` was tested on a vanilla `Ubuntu 20.04`, both in native linux and Windows 10 WSL2. A docker `tensorflow/tensorflow:2.5-gpu` image should also work.
-
 ### Using accompanying data
 
-If you don't care about generating your own synthetic training examples, use the accompanying `tsv` files, which include the real and synthetic data we used for the paper.
+If you don't care about generating your own synthetic training examples, use the accompanying `tsv` files, which include the real and synthetic training examples.
 
 ```bash
-wget https://github.com/napulen/AugmentedNet/releases/download/v1.0.0/dataset.zip
+wget https://github.com/napulen/AugmentedNet/releases/download/v1.2.0/dataset.zip
 unzip dataset.zip
 ```
 
-Now you are ready to train the network
-
-```bash
-(.env) python -m AugmentedNet.train
-```
+Now you are ready to train the network.
 
 ### Generating synthetic examples
 
@@ -68,6 +90,23 @@ If you **do** care about generating your own synthetic training examples, you mi
 ```
 
 At the moment, the code for generating the texturizations is not extremely simple, if you only wanted to do that. However, raise an issue, reach out, and I'll make my best effort to help you on your use case.
+
+
+### Training the network
+
+```bash
+(.env) python -m AugmentedNet.train debug testexperiment
+```
+
+The code is integrated with [mlflow](https://mlflow.org/). In the training script, `debug` and `testexperiment` refer to the *experiment* and *run* names passed down to mlflow. You can access more CLI parameters by running `python -m AugmentedNet.train --help`.
+
+After training the network, you will get a path to the trained `hdf5` model, which looks something like this:
+
+```
+The trained model is available in: .model_checkpoint/debug/testexperiment-220101T000000/81-6.000-0.78.hdf5
+```
+
+You can use that trained model for inference, using the same workflow shown above.
 
 ## Introduction
 
