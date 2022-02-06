@@ -1,5 +1,3 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/napulen/AugmentedNet/blob/main/notebooks/AugmentedNet.ipynb)
-
 # AugmentedNet
 A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
 
@@ -31,7 +29,10 @@ N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral A
 
 ## Try out the pre-trained network
 
-Clone, create a virtual environment, and get the `python` dependencies
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/napulen/AugmentedNet/blob/main/notebooks/AugmentedNet.ipynb)
+
+
+Clone, create a virtual environment, and get the `python` dependencies. 
 
 ```bash
 git clone https://github.com/napulen/AugmentedNet.git
@@ -110,7 +111,7 @@ The trained model is available in: .model_checkpoint/debug/testexperiment-220101
 
 You can use that trained model for inference, using the same workflow shown above.
 
-## Introduction
+## About the AugmentedNet
 
 ### The neural network architecture
 
