@@ -40,10 +40,10 @@
                     <a class="function" href="#solveChordSegmentation">solveChordSegmentation</a>
             </li>
             <li>
-                    <a class="function" href="#resolveRomanNumeral75">resolveRomanNumeral75</a>
+                    <a class="function" href="#forceTonicization">forceTonicization</a>
             </li>
             <li>
-                    <a class="function" href="#resolveSATB">resolveSATB</a>
+                    <a class="function" href="#resolveRomanNumeral">resolveRomanNumeral</a>
             </li>
             <li>
                     <a class="function" href="#simplifyChordLabel">simplifyChordLabel</a>
@@ -85,11 +85,27 @@
 <span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cli</span>
+<span class="kn">from</span> <span class="nn">.chord_vocabulary</span> <span class="kn">import</span> <span class="n">frompcset</span>
 <span class="kn">from</span> <span class="nn">.score_parser</span> <span class="kn">import</span> <span class="n">parseScore</span>
 <span class="kn">from</span> <span class="nn">.input_representations</span> <span class="kn">import</span> <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableInputs</span>
 <span class="kn">from</span> <span class="nn">.output_representations</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableOutputs</span><span class="p">,</span>
 <span class="p">)</span>
+
+
+<span class="n">inversions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;triad&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;64&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;seventh&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;65&quot;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;43&quot;</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
 
 
 <span class="k">def</span> <span class="nf">tensorflowGPUHack</span><span class="p">():</span>
@@ -118,25 +134,51 @@
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">df</span><span class="o">.</span><span class="n">HarmonicRhythm7</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">resolveRomanNumeral75</span><span class="p">(</span><span class="n">rn75</span><span class="p">,</span> <span class="n">inversion</span><span class="p">):</span>
-    <span class="n">seventh</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">&quot;7&quot;</span> <span class="ow">in</span> <span class="n">rn75</span> <span class="k">else</span> <span class="kc">False</span>
-    <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;65&quot;</span> <span class="k">if</span> <span class="n">seventh</span> <span class="k">else</span> <span class="s2">&quot;6&quot;</span>
-    <span class="k">elif</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;43&quot;</span> <span class="k">if</span> <span class="n">seventh</span> <span class="k">else</span> <span class="s2">&quot;64&quot;</span>
-    <span class="k">elif</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
-    <span class="k">if</span> <span class="n">seventh</span><span class="p">:</span>
-        <span class="n">rn</span> <span class="o">=</span> <span class="n">rn75</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="n">inv</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">rn</span> <span class="o">=</span> <span class="n">rn75</span> <span class="o">+</span> <span class="n">inv</span>
-    <span class="k">return</span> <span class="n">rn</span>
+<span class="k">def</span> <span class="nf">forceTonicization</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">):</span>
+    <span class="n">LoF</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">)</span><span class="o">.</span><span class="n">sharps</span>
+    <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="mi">1337</span>
+    <span class="n">tonicization</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">candidateKey</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
+        <span class="n">candidateLoF</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">candidateKey</span><span class="p">)</span><span class="o">.</span><span class="n">sharps</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidateLoF</span> <span class="o">-</span> <span class="n">LoF</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">tonicizedKey</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">candidateKey</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">tonicizationDistance</span><span class="p">:</span>
+            <span class="n">tonicization</span> <span class="o">=</span> <span class="n">candidateKey</span>
+            <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="n">distance</span>
+    <span class="k">return</span> <span class="n">tonicization</span>
 
 
-<span class="k">def</span> <span class="nf">resolveSATB</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">resolveRomanNumeral</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">pcs</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
     <span class="n">chord</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">2 </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">3 </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">4 </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">5&quot;</span><span class="p">)</span>
-    <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">chord</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
+    <span class="n">pcset</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">pitchClasses</span><span class="p">)))</span>
+    <span class="c1"># if the SATB notes don&#39;t make sense, use the pcset classifier</span>
+    <span class="k">if</span> <span class="n">pcset</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="p">:</span>
+        <span class="c1"># which is guaranteed to exist in the chord vocabulary</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="n">pcs</span>
+    <span class="c1"># if the chord is nondiatonic to the tonicizedKey</span>
+    <span class="c1"># force a tonicization where the chord does exist</span>
+    <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]:</span>
+        <span class="c1"># print(&quot;Forcing a tonicization&quot;)</span>
+        <span class="n">candidateKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="c1"># prioritize modal mixture</span>
+        <span class="n">parallel</span> <span class="o">=</span> <span class="n">tonicizedKey</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
+            <span class="c1"># print(f&quot;\tTonicizing the parallel, {parallel}&quot;)</span>
+            <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">parallel</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">forceTonicization</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">)</span>
+    <span class="n">rnfigure</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span>
+    <span class="n">chord</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;chord&quot;</span><span class="p">]</span>
+    <span class="n">chordtype</span> <span class="o">=</span> <span class="s2">&quot;seventh&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="s2">&quot;triad&quot;</span>
+    <span class="c1"># if you can&#39;t find the predicted bass</span>
+    <span class="c1"># in the pcset, assume root position</span>
+    <span class="n">inv</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">chord</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">invfigure</span> <span class="o">=</span> <span class="n">inversions</span><span class="p">[</span><span class="n">chordtype</span><span class="p">][</span><span class="n">inv</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">invfigure</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;65&quot;</span><span class="p">,</span> <span class="s2">&quot;43&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">]:</span>
+        <span class="n">rnfigure</span> <span class="o">=</span> <span class="n">rnfigure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="n">invfigure</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">invfigure</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;64&quot;</span><span class="p">]:</span>
+        <span class="n">rnfigure</span> <span class="o">+=</span> <span class="n">invfigure</span>
+    <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="n">rnfigure</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="o">!=</span> <span class="n">key</span><span class="p">:</span>
         <span class="n">tonic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pitches</span>
         <span class="n">c1</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">tonic</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
@@ -157,6 +199,7 @@
     <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-minor-seventh chord&quot;</span><span class="p">,</span> <span class="s2">&quot;min7&quot;</span><span class="p">)</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-half-diminished seventh chord&quot;</span><span class="p">,</span> <span class="s2">&quot;hdim7&quot;</span><span class="p">)</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-diminished seventh chord&quot;</span><span class="p">,</span> <span class="s2">&quot;dim7&quot;</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-German augmented sixth chord&quot;</span><span class="p">,</span> <span class="s2">&quot;Ger&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">label</span>
 
 
@@ -221,25 +264,25 @@
                 <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">midi</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">notes</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="c1"># print(analysis.offset, notes)</span>
         <span class="n">bass</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">thiskey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">LocalKey35</span>
         <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">TonicizedKey35</span>
-        <span class="n">rn2</span> <span class="o">=</span> <span class="n">resolveSATB</span><span class="p">(</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">PitchClassSet94</span>
+        <span class="n">rn2</span> <span class="o">=</span> <span class="n">resolveRomanNumeral</span><span class="p">(</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Bass35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Tenor35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Alto35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Soprano35</span><span class="p">,</span>
+            <span class="n">pcset</span><span class="p">,</span>
             <span class="n">thiskey</span><span class="p">,</span>
             <span class="n">tonicizedKey</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">rn2</span><span class="o">.</span><span class="n">pitchClasses</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">thiskey</span> <span class="o">!=</span> <span class="n">prevkey</span><span class="p">:</span>
-            <span class="c1"># rn1 = f&quot;{thiskey}:{rn1}&quot;</span>
             <span class="n">rn2fig</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">thiskey</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">rn2</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">prevkey</span> <span class="o">=</span> <span class="n">thiskey</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rn2fig</span> <span class="o">=</span> <span class="n">rn2</span><span class="o">.</span><span class="n">figure</span>
-        <span class="c1"># bass.addLyric(rn1)</span>
         <span class="n">bass</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">simplifyArabicNumerals</span><span class="p">(</span><span class="n">rn2fig</span><span class="p">))</span>
         <span class="n">bass</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">simplifyChordLabel</span><span class="p">(</span><span class="n">rn2</span><span class="o">.</span><span class="n">pitchedCommonName</span><span class="p">))</span>
     <span class="n">filename</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">inputFile</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
@@ -320,30 +363,28 @@
     
 
                 </section>
-                <section id="resolveRomanNumeral75">
-                            <div class="attr function"><a class="headerlink" href="#resolveRomanNumeral75">#&nbsp;&nbsp</a>
+                <section id="forceTonicization">
+                            <div class="attr function"><a class="headerlink" href="#forceTonicization">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">resolveRomanNumeral75</span><span class="signature">(rn75, inversion)</span>:
+            <span class="name">forceTonicization</span><span class="signature">(tonicizedKey, candidateKeys)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">resolveRomanNumeral75</span><span class="p">(</span><span class="n">rn75</span><span class="p">,</span> <span class="n">inversion</span><span class="p">):</span>
-    <span class="n">seventh</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">&quot;7&quot;</span> <span class="ow">in</span> <span class="n">rn75</span> <span class="k">else</span> <span class="kc">False</span>
-    <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;65&quot;</span> <span class="k">if</span> <span class="n">seventh</span> <span class="k">else</span> <span class="s2">&quot;6&quot;</span>
-    <span class="k">elif</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;43&quot;</span> <span class="k">if</span> <span class="n">seventh</span> <span class="k">else</span> <span class="s2">&quot;64&quot;</span>
-    <span class="k">elif</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">inv</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
-    <span class="k">if</span> <span class="n">seventh</span><span class="p">:</span>
-        <span class="n">rn</span> <span class="o">=</span> <span class="n">rn75</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="n">inv</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">rn</span> <span class="o">=</span> <span class="n">rn75</span> <span class="o">+</span> <span class="n">inv</span>
-    <span class="k">return</span> <span class="n">rn</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">forceTonicization</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">):</span>
+    <span class="n">LoF</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">)</span><span class="o">.</span><span class="n">sharps</span>
+    <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="mi">1337</span>
+    <span class="n">tonicization</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">candidateKey</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
+        <span class="n">candidateLoF</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">candidateKey</span><span class="p">)</span><span class="o">.</span><span class="n">sharps</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidateLoF</span> <span class="o">-</span> <span class="n">LoF</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">tonicizedKey</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">candidateKey</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">tonicizationDistance</span><span class="p">:</span>
+            <span class="n">tonicization</span> <span class="o">=</span> <span class="n">candidateKey</span>
+            <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="n">distance</span>
+    <span class="k">return</span> <span class="n">tonicization</span>
 </pre></div>
 
         </details>
@@ -351,19 +392,47 @@
     
 
                 </section>
-                <section id="resolveSATB">
-                            <div class="attr function"><a class="headerlink" href="#resolveSATB">#&nbsp;&nbsp</a>
+                <section id="resolveRomanNumeral">
+                            <div class="attr function"><a class="headerlink" href="#resolveRomanNumeral">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">resolveSATB</span><span class="signature">(b, t, a, s, key, tonicizedKey)</span>:
+            <span class="name">resolveRomanNumeral</span><span class="signature">(b, t, a, s, pcs, key, tonicizedKey)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">resolveSATB</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">resolveRomanNumeral</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">pcs</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
     <span class="n">chord</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">2 </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">3 </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">4 </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">5&quot;</span><span class="p">)</span>
-    <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">chord</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
+    <span class="n">pcset</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">pitchClasses</span><span class="p">)))</span>
+    <span class="c1"># if the SATB notes don&#39;t make sense, use the pcset classifier</span>
+    <span class="k">if</span> <span class="n">pcset</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="p">:</span>
+        <span class="c1"># which is guaranteed to exist in the chord vocabulary</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="n">pcs</span>
+    <span class="c1"># if the chord is nondiatonic to the tonicizedKey</span>
+    <span class="c1"># force a tonicization where the chord does exist</span>
+    <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]:</span>
+        <span class="c1"># print(&quot;Forcing a tonicization&quot;)</span>
+        <span class="n">candidateKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="c1"># prioritize modal mixture</span>
+        <span class="n">parallel</span> <span class="o">=</span> <span class="n">tonicizedKey</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
+            <span class="c1"># print(f&quot;\tTonicizing the parallel, {parallel}&quot;)</span>
+            <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">parallel</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">forceTonicization</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">)</span>
+    <span class="n">rnfigure</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span>
+    <span class="n">chord</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;chord&quot;</span><span class="p">]</span>
+    <span class="n">chordtype</span> <span class="o">=</span> <span class="s2">&quot;seventh&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="s2">&quot;triad&quot;</span>
+    <span class="c1"># if you can&#39;t find the predicted bass</span>
+    <span class="c1"># in the pcset, assume root position</span>
+    <span class="n">inv</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">chord</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">invfigure</span> <span class="o">=</span> <span class="n">inversions</span><span class="p">[</span><span class="n">chordtype</span><span class="p">][</span><span class="n">inv</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">invfigure</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;65&quot;</span><span class="p">,</span> <span class="s2">&quot;43&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">]:</span>
+        <span class="n">rnfigure</span> <span class="o">=</span> <span class="n">rnfigure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="n">invfigure</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">invfigure</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;64&quot;</span><span class="p">]:</span>
+        <span class="n">rnfigure</span> <span class="o">+=</span> <span class="n">invfigure</span>
+    <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="n">rnfigure</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="o">!=</span> <span class="n">key</span><span class="p">:</span>
         <span class="n">tonic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pitches</span>
         <span class="n">c1</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">tonic</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
@@ -399,6 +468,7 @@
     <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-minor-seventh chord&quot;</span><span class="p">,</span> <span class="s2">&quot;min7&quot;</span><span class="p">)</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-half-diminished seventh chord&quot;</span><span class="p">,</span> <span class="s2">&quot;hdim7&quot;</span><span class="p">)</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-diminished seventh chord&quot;</span><span class="p">,</span> <span class="s2">&quot;dim7&quot;</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-German augmented sixth chord&quot;</span><span class="p">,</span> <span class="s2">&quot;Ger&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">label</span>
 </pre></div>
 
@@ -493,25 +563,25 @@
                 <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">midi</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">notes</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="c1"># print(analysis.offset, notes)</span>
         <span class="n">bass</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">thiskey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">LocalKey35</span>
         <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">TonicizedKey35</span>
-        <span class="n">rn2</span> <span class="o">=</span> <span class="n">resolveSATB</span><span class="p">(</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">PitchClassSet94</span>
+        <span class="n">rn2</span> <span class="o">=</span> <span class="n">resolveRomanNumeral</span><span class="p">(</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Bass35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Tenor35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Alto35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Soprano35</span><span class="p">,</span>
+            <span class="n">pcset</span><span class="p">,</span>
             <span class="n">thiskey</span><span class="p">,</span>
             <span class="n">tonicizedKey</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">rn2</span><span class="o">.</span><span class="n">pitchClasses</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">thiskey</span> <span class="o">!=</span> <span class="n">prevkey</span><span class="p">:</span>
-            <span class="c1"># rn1 = f&quot;{thiskey}:{rn1}&quot;</span>
             <span class="n">rn2fig</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">thiskey</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">rn2</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">prevkey</span> <span class="o">=</span> <span class="n">thiskey</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rn2fig</span> <span class="o">=</span> <span class="n">rn2</span><span class="o">.</span><span class="n">figure</span>
-        <span class="c1"># bass.addLyric(rn1)</span>
         <span class="n">bass</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">simplifyArabicNumerals</span><span class="p">(</span><span class="n">rn2fig</span><span class="p">))</span>
         <span class="n">bass</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">simplifyChordLabel</span><span class="p">(</span><span class="n">rn2</span><span class="o">.</span><span class="n">pitchedCommonName</span><span class="p">))</span>
     <span class="n">filename</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">inputFile</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
