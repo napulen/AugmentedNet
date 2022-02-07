@@ -9,11 +9,27 @@ import tensorflow as tf
 from tensorflow import keras
 
 from . import cli
+from .chord_vocabulary import frompcset
 from .score_parser import parseScore
 from .input_representations import available_representations as availableInputs
 from .output_representations import (
     available_representations as availableOutputs,
 )
+
+
+inversions = {
+    "triad": {
+        0: "",
+        1: "6",
+        2: "64",
+    },
+    "seventh": {
+        0: "7",
+        1: "65",
+        2: "43",
+        3: "2",
+    },
+}
 
 
 def tensorflowGPUHack():
@@ -42,25 +58,51 @@ def solveChordSegmentation(df):
     return df.dropna()[df.HarmonicRhythm7 == 0]
 
 
-def resolveRomanNumeral75(rn75, inversion):
-    seventh = True if "7" in rn75 else False
-    inv = ""
-    if inversion == 1:
-        inv = "65" if seventh else "6"
-    elif inversion == 2:
-        inv = "43" if seventh else "64"
-    elif inversion == 3:
-        inv = "2"
-    if seventh:
-        rn = rn75.replace("7", inv)
-    else:
-        rn = rn75 + inv
-    return rn
+def forceTonicization(tonicizedKey, candidateKeys):
+    LoF = music21.key.Key(tonicizedKey).sharps
+    tonicizationDistance = 1337
+    tonicization = ""
+    for candidateKey in candidateKeys:
+        candidateLoF = music21.key.Key(candidateKey).sharps
+        distance = abs(candidateLoF - LoF)
+        print(f"\t{tonicizedKey} -> {candidateKey} = {distance}")
+        if distance < tonicizationDistance:
+            tonicization = candidateKey
+            tonicizationDistance = distance
+    return tonicization
 
 
-def resolveSATB(b, t, a, s, key, tonicizedKey):
+def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     chord = music21.chord.Chord(f"{b}2 {t}3 {a}4 {s}5")
-    rn = music21.roman.romanNumeralFromChord(chord, tonicizedKey)
+    pcset = tuple(sorted(set(chord.pitchClasses)))
+    # if the SATB notes don't make sense, use the pcset classifier
+    if pcset not in frompcset:
+        # which is guaranteed to exist in the chord vocabulary
+        pcset = pcs
+    # if the chord is nondiatonic to the tonicizedKey
+    # force a tonicization where the chord does exist
+    if tonicizedKey not in frompcset[pcset]:
+        # print("Forcing a tonicization")
+        candidateKeys = list(frompcset[pcset].keys())
+        # prioritize modal mixture
+        parallel = tonicizedKey.lower()
+        if parallel in candidateKeys:
+            # print(f"\tTonicizing the parallel, {parallel}")
+            tonicizedKey = parallel
+        else:
+            tonicizedKey = forceTonicization(tonicizedKey, candidateKeys)
+    rnfigure = frompcset[pcset][tonicizedKey]["rn"]
+    chord = frompcset[pcset][tonicizedKey]["chord"]
+    chordtype = "seventh" if len(pcset) == 4 else "triad"
+    # if you can't find the predicted bass
+    # in the pcset, assume root position
+    inv = chord.index(b) if b in chord else 0
+    invfigure = inversions[chordtype][inv]
+    if invfigure in ["65", "43", "2"]:
+        rnfigure = rnfigure.replace("7", invfigure)
+    elif invfigure in ["6", "64"]:
+        rnfigure += invfigure
+    rn = music21.roman.RomanNumeral(rnfigure, tonicizedKey)
     if tonicizedKey != key:
         tonic, _, third, _, fifth, _, _, _ = rn.key.pitches
         c1 = music21.chord.Chord([tonic, third, fifth])
@@ -81,6 +123,7 @@ def simplifyChordLabel(label):
     label = label.replace("-minor-seventh chord", "min7")
     label = label.replace("-half-diminished seventh chord", "hdim7")
     label = label.replace("-diminished seventh chord", "dim7")
+    label = label.replace("-German augmented sixth chord", "Ger")
     return label
 
 
@@ -145,25 +188,25 @@ def predict(modelPath, inputFile, useGpu=False):
                 notes.append((n, n[0].pitch.midi))
         if not notes:
             continue
-        # print(analysis.offset, notes)
         bass = sorted(notes, key=lambda n: n[1])[0][0]
         thiskey = analysis.LocalKey35
         tonicizedKey = analysis.TonicizedKey35
-        rn2 = resolveSATB(
+        pcset = analysis.PitchClassSet94
+        rn2 = resolveRomanNumeral(
             analysis.Bass35,
             analysis.Tenor35,
             analysis.Alto35,
             analysis.Soprano35,
+            pcset,
             thiskey,
             tonicizedKey,
         )
+        pcset = tuple(sorted(set(rn2.pitchClasses)))
         if thiskey != prevkey:
-            # rn1 = f"{thiskey}:{rn1}"
             rn2fig = f"{thiskey}:{rn2.figure}"
             prevkey = thiskey
         else:
             rn2fig = rn2.figure
-        # bass.addLyric(rn1)
         bass.addLyric(simplifyArabicNumerals(rn2fig))
         bass.addLyric(simplifyChordLabel(rn2.pitchedCommonName))
     filename, extension = inputFile.rsplit(".")
