@@ -2,6 +2,6 @@
 
 ## Demos
 
-Here are some demos of the network.
+Some demos coming up soon.
 
-See the [module](modules) documentation.
+In the meantime, see the [module](modules) documentation.
