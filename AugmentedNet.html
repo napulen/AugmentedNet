@@ -35,6 +35,7 @@
                             <li><a href="AugmentedNet/joint_parser.html">AugmentedNet.joint_parser</a></li>
                             <li><a href="AugmentedNet/common.html">AugmentedNet.common</a></li>
                             <li><a href="AugmentedNet/models.html">AugmentedNet.models</a></li>
+                            <li><a href="AugmentedNet/keydistance.html">AugmentedNet.keydistance</a></li>
                             <li><a href="AugmentedNet/output_representations.html">AugmentedNet.output_representations</a></li>
                             <li><a href="AugmentedNet/dataset_tsv_generator.html">AugmentedNet.dataset_tsv_generator</a></li>
                             <li><a href="AugmentedNet/annotation_parser.html">AugmentedNet.annotation_parser</a></li>
@@ -63,6 +64,9 @@
             </li>
             <li>
                     <a class="module" href="#models">models</a>
+            </li>
+            <li>
+                    <a class="module" href="#keydistance">keydistance</a>
             </li>
             <li>
                     <a class="module" href="#output_representations">output_representations</a>
@@ -2342,6 +2346,85 @@ AugmentedNet    </h1>
 
 
                 </section>
+                <section id="keydistance">
+                                <div class="attr module"><a class="headerlink" href="#keydistance">#&nbsp;&nbsp</a>
+<span class="name"><a href="AugmentedNet/keydistance.html">AugmentedNet.keydistance</a></span></div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="sd">&quot;&quot;&quot;An auxiliary module to measure key distance.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># The diagonal of keys in the Weber tonal chart</span>
+<span class="c1"># constrained to the range of keys between [Fb, G#]</span>
+<span class="n">WEBERDIAGONAL</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;F-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;g-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;C-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;d-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;G-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;a-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;D-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;e-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;b-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;E-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;B-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;F&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;e&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;E&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;f#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;c#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;F#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;g#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;C#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;d#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;G#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;a#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;D#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;e#&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Adding this vector takes you to the next coordinates of a key</span>
+<span class="c1"># in the Weber tonal chart, ascending from &quot;flatness&quot; to &quot;sharpness&quot;</span>
+<span class="n">TRANSPOSITION</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">weberEuclidean</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A measurement of key distance based on the Weber tonal chart.&quot;&quot;&quot;</span>
+    <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">WEBERDIAGONAL</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k1</span><span class="p">),</span> <span class="n">WEBERDIAGONAL</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k2</span><span class="p">)</span>
+    <span class="n">flatterkey</span><span class="p">,</span> <span class="n">sharperkey</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">))</span>
+    <span class="n">coord1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">flatterkey</span><span class="p">,</span> <span class="n">flatterkey</span><span class="p">))</span>
+    <span class="n">coord2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">sharperkey</span><span class="p">,</span> <span class="n">sharperkey</span><span class="p">))</span>
+    <span class="n">smallerdistance</span> <span class="o">=</span> <span class="mi">1337</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">WEBERDIAGONAL</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="n">TRANSPOSITION</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="n">newcoord1</span> <span class="o">=</span> <span class="n">trans</span> <span class="o">+</span> <span class="n">coord1</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">coord2</span> <span class="o">-</span> <span class="n">newcoord1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">smallerdistance</span><span class="p">:</span>
+            <span class="n">smallerdistance</span> <span class="o">=</span> <span class="n">distance</span>
+    <span class="k">return</span> <span class="n">smallerdistance</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>An auxiliary module to measure key distance.</p>
+</div>
+
+
+                </section>
                 <section id="output_representations">
                                 <div class="attr module"><a class="headerlink" href="#output_representations">#&nbsp;&nbsp</a>
 <span class="name"><a href="AugmentedNet/output_representations.html">AugmentedNet.output_representations</a></span></div>
@@ -3249,6 +3332,7 @@ AugmentedNet    </h1>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cli</span>
 <span class="kn">from</span> <span class="nn">.chord_vocabulary</span> <span class="kn">import</span> <span class="n">frompcset</span>
+<span class="kn">from</span> <span class="nn">.keydistance</span> <span class="kn">import</span> <span class="n">weberEuclidean</span>
 <span class="kn">from</span> <span class="nn">.score_parser</span> <span class="kn">import</span> <span class="n">parseScore</span>
 <span class="kn">from</span> <span class="nn">.input_representations</span> <span class="kn">import</span> <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableInputs</span>
 <span class="kn">from</span> <span class="nn">.output_representations</span> <span class="kn">import</span> <span class="p">(</span>
@@ -3297,14 +3381,12 @@ AugmentedNet    </h1>
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">df</span><span class="o">.</span><span class="n">HarmonicRhythm7</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">forceTonicization</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">):</span>
-    <span class="n">LoF</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">)</span><span class="o">.</span><span class="n">sharps</span>
+<span class="k">def</span> <span class="nf">forceTonicization</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">):</span>
     <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="mi">1337</span>
     <span class="n">tonicization</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">candidateKey</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
-        <span class="n">candidateLoF</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">candidateKey</span><span class="p">)</span><span class="o">.</span><span class="n">sharps</span>
-        <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidateLoF</span> <span class="o">-</span> <span class="n">LoF</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">tonicizedKey</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">candidateKey</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">weberEuclidean</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKey</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">localKey</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">candidateKey</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">tonicizationDistance</span><span class="p">:</span>
             <span class="n">tonicization</span> <span class="o">=</span> <span class="n">candidateKey</span>
             <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="n">distance</span>
@@ -3317,19 +3399,19 @@ AugmentedNet    </h1>
     <span class="c1"># if the SATB notes don&#39;t make sense, use the pcset classifier</span>
     <span class="k">if</span> <span class="n">pcset</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="p">:</span>
         <span class="c1"># which is guaranteed to exist in the chord vocabulary</span>
-        <span class="n">pcset</span> <span class="o">=</span> <span class="n">pcs</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="n">pcs</span> <span class="k">if</span> <span class="n">pcs</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
     <span class="c1"># if the chord is nondiatonic to the tonicizedKey</span>
     <span class="c1"># force a tonicization where the chord does exist</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]:</span>
-        <span class="c1"># print(&quot;Forcing a tonicization&quot;)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forcing a tonicization&quot;</span><span class="p">)</span>
         <span class="n">candidateKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="c1"># prioritize modal mixture</span>
         <span class="n">parallel</span> <span class="o">=</span> <span class="n">tonicizedKey</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
-            <span class="c1"># print(f&quot;\tTonicizing the parallel, {parallel}&quot;)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Tonicizing the parallel, </span><span class="si">{</span><span class="n">parallel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">parallel</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">forceTonicization</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">)</span>
+            <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">forceTonicization</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">)</span>
     <span class="n">rnfigure</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span>
     <span class="n">chord</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;chord&quot;</span><span class="p">]</span>
     <span class="n">chordtype</span> <span class="o">=</span> <span class="s2">&quot;seventh&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pcset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="s2">&quot;triad&quot;</span>
@@ -3766,7 +3848,9 @@ AugmentedNet    </h1>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="n">frompcset</span> <span class="o">=</span> <span class="p">{</span>
+            <div class="codehilite"><pre><span></span><span class="sd">&quot;&quot;&quot;The vocabulary of all valid chords and their chord representations.&quot;&quot;&quot;</span>
+
+<span class="n">frompcset</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span> <span class="p">{</span>
         <span class="s2">&quot;A-&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;chord&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;D-&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;A-&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="s2">&quot;rn&quot;</span><span class="p">:</span> <span class="s2">&quot;IV7&quot;</span><span class="p">},</span>
         <span class="s2">&quot;C#&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;chord&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C#&quot;</span><span class="p">,</span> <span class="s2">&quot;E#&quot;</span><span class="p">,</span> <span class="s2">&quot;G#&quot;</span><span class="p">,</span> <span class="s2">&quot;B#&quot;</span><span class="p">],</span> <span class="s2">&quot;rn&quot;</span><span class="p">:</span> <span class="s2">&quot;I7&quot;</span><span class="p">},</span>
@@ -4649,7 +4733,9 @@ AugmentedNet    </h1>
 
         </details>
 
-    
+            <div class="docstring"><p>The vocabulary of all valid chords and their chord representations.</p>
+</div>
+
 
                 </section>
                 <section id="cache">
