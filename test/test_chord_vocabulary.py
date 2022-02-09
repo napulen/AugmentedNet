@@ -17,7 +17,7 @@ class TestChordVocabulary(unittest.TestCase):
         for pcset, k in frompcset.items():
             keys.extend(list(k.keys()))
         self.assertEqual(frozenset(keys), frozenset(KEYS))
-    
+
     def test_pcsets_in_vocabulary(self):
         """The pcsets in the vocabulary and PCSETS should be the same."""
         pcsets = set(frompcset.keys())
