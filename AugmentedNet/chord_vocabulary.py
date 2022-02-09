@@ -1,3 +1,5 @@
+"""The vocabulary of all valid chords and their chord representations."""
+
 frompcset = {
     (0, 1, 5, 8): {
         "A-": {"chord": ["D-", "F", "A-", "C"], "rn": "IV7"},

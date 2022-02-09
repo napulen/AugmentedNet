@@ -10,6 +10,7 @@ from tensorflow import keras
 
 from . import cli
 from .chord_vocabulary import frompcset
+from .keydistance import weberEuclidean
 from .score_parser import parseScore
 from .input_representations import available_representations as availableInputs
 from .output_representations import (
@@ -58,14 +59,12 @@ def solveChordSegmentation(df):
     return df.dropna()[df.HarmonicRhythm7 == 0]
 
 
-def forceTonicization(tonicizedKey, candidateKeys):
-    LoF = music21.key.Key(tonicizedKey).sharps
+def forceTonicization(localKey, candidateKeys):
     tonicizationDistance = 1337
     tonicization = ""
     for candidateKey in candidateKeys:
-        candidateLoF = music21.key.Key(candidateKey).sharps
-        distance = abs(candidateLoF - LoF)
-        print(f"\t{tonicizedKey} -> {candidateKey} = {distance}")
+        distance = weberEuclidean(localKey, candidateKey)
+        print(f"\t{localKey} -> {candidateKey} = {distance}")
         if distance < tonicizationDistance:
             tonicization = candidateKey
             tonicizationDistance = distance
@@ -78,19 +77,19 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     # if the SATB notes don't make sense, use the pcset classifier
     if pcset not in frompcset:
         # which is guaranteed to exist in the chord vocabulary
-        pcset = pcs
+        pcset = pcs if pcs != "None" else (0, 4, 7)
     # if the chord is nondiatonic to the tonicizedKey
     # force a tonicization where the chord does exist
     if tonicizedKey not in frompcset[pcset]:
-        # print("Forcing a tonicization")
+        print("Forcing a tonicization")
         candidateKeys = list(frompcset[pcset].keys())
         # prioritize modal mixture
         parallel = tonicizedKey.lower()
         if parallel in candidateKeys:
-            # print(f"\tTonicizing the parallel, {parallel}")
+            print(f"\tTonicizing the parallel, {parallel}")
             tonicizedKey = parallel
         else:
-            tonicizedKey = forceTonicization(tonicizedKey, candidateKeys)
+            tonicizedKey = forceTonicization(key, candidateKeys)
     rnfigure = frompcset[pcset][tonicizedKey]["rn"]
     chord = frompcset[pcset][tonicizedKey]["chord"]
     chordtype = "seventh" if len(pcset) == 4 else "triad"
