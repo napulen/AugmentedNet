@@ -6,7 +6,7 @@ import pandas as pd
 import re
 
 from .common import FIXEDOFFSET, FLOATSCALE
-
+from .chord_vocabulary import frompcset
 
 A_COLUMNS = [
     "a_offset",
@@ -138,6 +138,16 @@ def _initialDataFrame(s):
             dfdict["a_degree2"].append(scaleDegree)
         else:
             dfdict["a_degree2"].append("None")
+        rntextrn = dfdict['a_romanNumeral'][-1]
+        pcset = dfdict["a_pcset"][-1]
+        harmalysisrn = "!!!!!!!!!!!!!!!!!!!!!"
+        key = dfdict["a_tonicizedKey"][-1]
+        if pcset in frompcset:
+            if key in frompcset[pcset]:
+                harmalysisrn = frompcset[pcset][key]["rn"]
+            else:
+                harmalysisrn = "?????????????????????????"
+        print(f"RomanText: {rntextrn} -> Harmalysis: {harmalysisrn}\t{key} {pcset}")
     df = pd.DataFrame(dfdict)
     df.set_index("a_offset", inplace=True)
     return df

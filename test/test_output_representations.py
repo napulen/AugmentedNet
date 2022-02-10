@@ -9,7 +9,7 @@ from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
 from AugmentedNet.output_representations import (
     Bass35,
     Inversion4,
-    RomanNumeral32,
+    RomanNumeral35,
     LocalKey35,
     PrimaryDegree22,
     SecondaryDegree22,
@@ -120,9 +120,9 @@ class TestInversion4(TestBass35):
     dfFeature = "a_inversion"
 
 
-class TestRomanNumeral32(TestBass35):
-    clas = RomanNumeral32
-    encodingGT = aux.haydnRomanNumeral32
+class TestRomanNumeral35(TestBass35):
+    clas = RomanNumeral35
+    encodingGT = aux.haydnRomanNumeral35
     dfFeature = "a_romanNumeral"
 
     def test_encoding(self):
