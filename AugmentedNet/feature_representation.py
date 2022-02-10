@@ -111,7 +111,12 @@ CHORD_QUALITIES = (
 )
 
 COMMON_ROMAN_NUMERALS = tuple(
-    sorted(
+    [
+        # Cadentials are undistinguishable from a I chord in the vocabulary,
+        # they are contextually (and explicitly) annotated by the analyst
+        "Cad"
+    ]
+    + sorted(
         set(
             [key["rn"] for keys in frompcset.values() for key in keys.values()]
         )
