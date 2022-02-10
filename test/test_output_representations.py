@@ -92,12 +92,6 @@ class TestHarmonicRhythm7(TestBass35):
     encodingGT = aux.haydnHarmonicRhythm7
     dfFeature = "a_harmonicRhythm"
 
-    def test_encoding(self):
-        super().test_encoding()
-
-    def test_decoding(self):
-        super().test_decoding()
-
 
 class TestTonicizedKey35(TestBass35):
     clas = TonicizedKey35
@@ -109,6 +103,12 @@ class TestPcSet94(TestBass35):
     clas = PitchClassSet94
     encodingGT = aux.haydnPitchClassSet94
     dfFeature = "a_pcset"
+    
+    def test_encoding(self):
+        super().test_encoding()
+
+    def test_decoding(self):
+        super().test_decoding()
 
     # def test_encoding(self):
     #     super().test_encoding()
