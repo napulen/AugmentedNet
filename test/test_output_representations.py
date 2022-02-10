@@ -103,12 +103,6 @@ class TestPcSet94(TestBass35):
     clas = PitchClassSet121
     encodingGT = aux.haydnPitchClassSet121
     dfFeature = "a_pcset"
-    
-    def test_encoding(self):
-        super().test_encoding()
-
-    def test_decoding(self):
-        super().test_decoding()
 
     # def test_encoding(self):
     #     super().test_encoding()
@@ -130,6 +124,12 @@ class TestRomanNumeral76(TestBass35):
     clas = RomanNumeral76
     encodingGT = aux.haydnRomanNumeral76
     dfFeature = "a_romanNumeral"
+
+    def test_encoding(self):
+        super().test_encoding()
+
+    def test_decoding(self):
+        super().test_decoding()
 
 
 class TestLocalKey35(TestBass35):

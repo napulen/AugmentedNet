@@ -91,7 +91,7 @@ KEYS = (
     "e#",
 )
 
-CHORD_QUALITIES = [
+CHORD_QUALITIES = (
     "major triad",
     "minor triad",
     "diminished triad",
@@ -108,88 +108,17 @@ CHORD_QUALITIES = [
     "Italian augmented sixth chord",
     "minor-augmented tetrachord",
     "None",
-]
+)
 
-COMMON_ROMAN_NUMERALS = [
-    "I",
-    "V7",
-    "V",
-    "i",
-    "IV",
-    "ii",
-    "vi",
-    "iv",
-    "viio7",
-    "viio",
-    "V7/V",
-    "V7/IV",
-    "viio7/V",
-    "VI",
-    "ii7",
-    "V/V",
-    "v",
-    "V7/ii",
-    "III",
-    "iiø7",
-    "iii",
-    "iio",
-    "viio/V",
-    "V7/vi",
-    "VII",
-    "viio7/ii",
-    "I/V",
-    "V7/iv",
-    "V/vi",
-    "vi7",
-    "Ger7",
-    "N",
-    "viio7/vi",
-    "V/ii",
-    "viiø7",
-    "V9",
-    "viio/ii",
-    "V/iv",
-    "Cad/V",
-    "iv7",
-    "viio7/iv",
-    "IV7",
-    "V7/III",
-    "viiø7/V",
-    "It",
-    "viio7/v",
-    "viio7/iii",
-    "IV/V",
-    "I+",
-    "I7",
-    "viio/IV",
-    "V/III",
-    "V7/iii",
-    "viio/iv",
-    "iio7",
-    "VI7",
-    "I/III",
-    "V7/VI",
-    "bVII",
-    "bVI",
-    "V+",
-    "viio/vi",
-    "III+",
-    "V/iii",
-    "ii/V",
-    "I/-VI",
-    "viio7/IV",
-    "V7/v",
-    "i7",
-    "iii7",
-    "Fr7",
-    "V/IV",
-    "vii",
-    "V/v",
-    "II",
-    "None",
-]
+COMMON_ROMAN_NUMERALS = tuple(
+    sorted(
+        set(
+            [key["rn"] for keys in frompcset.values() for key in keys.values()]
+        )
+    )
+)
 
-PCSETS = list(frompcset.keys())
+PCSETS = tuple(sorted(frompcset.keys()))
 
 INTERVAL_ENHARMONICS = {
     "A1": "m2",
