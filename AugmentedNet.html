@@ -2605,7 +2605,7 @@ AugmentedNet    </h1>
     <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_quality&quot;</span>
 
 
-<span class="k">class</span> <span class="nc">PitchClassSet94</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PitchClassSet121</span><span class="p">(</span><span class="n">OutputRepresentation</span><span class="p">):</span>
     <span class="n">classList</span> <span class="o">=</span> <span class="n">PCSETS</span>
     <span class="n">dfFeature</span> <span class="o">=</span> <span class="s2">&quot;a_pcset&quot;</span>
     <span class="n">transpositionFn</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">TransposePcSet</span><span class="p">)</span>
@@ -2621,7 +2621,7 @@ AugmentedNet    </h1>
     <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">:</span> <span class="n">HarmonicRhythm7</span><span class="p">,</span>
     <span class="s2">&quot;Inversion4&quot;</span><span class="p">:</span> <span class="n">Inversion4</span><span class="p">,</span>
     <span class="s2">&quot;LocalKey35&quot;</span><span class="p">:</span> <span class="n">LocalKey35</span><span class="p">,</span>
-    <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">:</span> <span class="n">PitchClassSet94</span><span class="p">,</span>
+    <span class="s2">&quot;PitchClassSet121&quot;</span><span class="p">:</span> <span class="n">PitchClassSet121</span><span class="p">,</span>
     <span class="s2">&quot;PrimaryDegree22&quot;</span><span class="p">:</span> <span class="n">PrimaryDegree22</span><span class="p">,</span>
     <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">:</span> <span class="n">RomanNumeral76</span><span class="p">,</span>
     <span class="s2">&quot;SecondaryDegree22&quot;</span><span class="p">:</span> <span class="n">SecondaryDegree22</span><span class="p">,</span>
@@ -3512,7 +3512,7 @@ AugmentedNet    </h1>
         <span class="n">bass</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">thiskey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">LocalKey35</span>
         <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">TonicizedKey35</span>
-        <span class="n">pcset</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">PitchClassSet94</span>
+        <span class="n">pcset</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">PitchClassSet121</span>
         <span class="n">rn2</span> <span class="o">=</span> <span class="n">resolveRomanNumeral</span><span class="p">(</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Bass35</span><span class="p">,</span>
             <span class="n">analysis</span><span class="o">.</span><span class="n">Tenor35</span><span class="p">,</span>
@@ -5778,7 +5778,7 @@ AugmentedNet    </h1>
             <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">,</span>
             <span class="c1"># &quot;Inversion4&quot;,</span>
             <span class="s2">&quot;LocalKey35&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;PitchClassSet94&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PitchClassSet121&quot;</span><span class="p">,</span>
             <span class="c1"># &quot;PrimaryDegree22&quot;,</span>
             <span class="c1"># &quot;RomanNumeral76&quot;,</span>
             <span class="c1"># &quot;SecondaryDegree22&quot;,</span>
