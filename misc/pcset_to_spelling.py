@@ -32,7 +32,7 @@ def range_lof(start, end, mode="major"):
 
 def fillpcset(key, deg):
     rntext = f"{key}:{deg}"
-    rn = music21.roman.RomanNumeral(deg, key)
+    rn = music21.roman.RomanNumeral(deg.replace("bVII", "VII"), key)
     pcset = tuple(sorted(set(rn.pitchClasses)))
     if not pcset in pcsets:
         pcsets[pcset] = {}
@@ -62,8 +62,8 @@ if __name__ == "__main__":
         "viio",
     ]
     degreesmajor7 = [f"{c}7".replace("viio7", "viiø7") for c in degreesmajor]
-    degreesminor7 = [f"{c}7" for c in degreesminor]
-    special = ["bII", "Ger7", "Fr7", "It"]
+    degreesminor7 = [f"{c}7" if c != "iio" else "iiø7" for c in degreesminor]
+    special = ["V+", "bII", "Ger7", "Fr7", "It"]
 
     for key in majorkeys:
         for deg in degreesmajor + degreesmajor7 + special:
