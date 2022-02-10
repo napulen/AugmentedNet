@@ -190,7 +190,7 @@ def predict(modelPath, inputFile, useGpu=False):
         bass = sorted(notes, key=lambda n: n[1])[0][0]
         thiskey = analysis.LocalKey35
         tonicizedKey = analysis.TonicizedKey35
-        pcset = analysis.PitchClassSet94
+        pcset = analysis.PitchClassSet121
         rn2 = resolveRomanNumeral(
             analysis.Bass35,
             analysis.Tenor35,

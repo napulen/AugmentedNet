@@ -37,7 +37,7 @@ class DefaultArguments(object):
             "HarmonicRhythm7",
             # "Inversion4",
             "LocalKey35",
-            "PitchClassSet94",
+            "PitchClassSet121",
             # "PrimaryDegree22",
             # "RomanNumeral76",
             # "SecondaryDegree22",

@@ -17,7 +17,7 @@ from AugmentedNet.output_representations import (
     ChordRoot35,
     TonicizedKey35,
     HarmonicRhythm7,
-    PitchClassSet94,
+    PitchClassSet121,
 )
 
 from test import AuxiliaryFiles
@@ -100,8 +100,8 @@ class TestTonicizedKey35(TestBass35):
 
 
 class TestPcSet94(TestBass35):
-    clas = PitchClassSet94
-    encodingGT = aux.haydnPitchClassSet94
+    clas = PitchClassSet121
+    encodingGT = aux.haydnPitchClassSet121
     dfFeature = "a_pcset"
     
     def test_encoding(self):

@@ -172,7 +172,7 @@ class ChordQuality15(OutputRepresentationTI):
     dfFeature = "a_quality"
 
 
-class PitchClassSet94(OutputRepresentation):
+class PitchClassSet121(OutputRepresentation):
     classList = PCSETS
     dfFeature = "a_pcset"
     transpositionFn = staticmethod(TransposePcSet)
@@ -188,7 +188,7 @@ available_representations = {
     "HarmonicRhythm7": HarmonicRhythm7,
     "Inversion4": Inversion4,
     "LocalKey35": LocalKey35,
-    "PitchClassSet94": PitchClassSet94,
+    "PitchClassSet121": PitchClassSet121,
     "PrimaryDegree22": PrimaryDegree22,
     "RomanNumeral76": RomanNumeral76,
     "SecondaryDegree22": SecondaryDegree22,
