@@ -10,7 +10,7 @@ from tensorflow import keras
 
 from . import cli
 from .chord_vocabulary import frompcset
-from .keydistance import weberEuclidean
+from .cache import forceTonicization, getTonicizationScaleDegree
 from .score_parser import parseScore
 from .input_representations import available_representations as availableInputs
 from .output_representations import (
@@ -59,18 +59,6 @@ def solveChordSegmentation(df):
     return df.dropna()[df.HarmonicRhythm7 == 0]
 
 
-def forceTonicization(localKey, candidateKeys):
-    tonicizationDistance = 1337
-    tonicization = ""
-    for candidateKey in candidateKeys:
-        distance = weberEuclidean(localKey, candidateKey)
-        print(f"\t{localKey} -> {candidateKey} = {distance}")
-        if distance < tonicizationDistance:
-            tonicization = candidateKey
-            tonicizationDistance = distance
-    return tonicization
-
-
 def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     chord = music21.chord.Chord(f"{b}2 {t}3 {a}4 {s}5")
     pcset = tuple(sorted(set(chord.pitchClasses)))
@@ -103,10 +91,8 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
         rnfigure += invfigure
     rn = music21.roman.RomanNumeral(rnfigure, tonicizedKey)
     if tonicizedKey != key:
-        tonic, _, third, _, fifth, _, _, _ = rn.key.pitches
-        c1 = music21.chord.Chord([tonic, third, fifth])
-        secondary = music21.roman.romanNumeralFromChord(c1, key)
-        rn = music21.roman.RomanNumeral(f"{rn.figure}/{secondary.figure}", key)
+        denominator = getTonicizationScaleDegree(key, tonicizedKey)
+        rn = music21.roman.RomanNumeral(f"{rn.figure}/{denominator}", key)
     return rn
 
 

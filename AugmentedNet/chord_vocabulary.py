@@ -1,5 +1,37 @@
 """The vocabulary of all valid chords and their chord representations."""
 
+from cmath import cos
+import numpy as np
+from numpy import dot
+from numpy.linalg import norm
+
+
+def cosineSimilarity(v1, v2):
+    return dot(v1, v2) / (norm(v1) * norm(v2))
+
+
+def closestPcSet(pcset):
+    """Get the closest matching pcset from the vocabulary.
+
+    Uses cosine similarity to measure the distance between
+    the given pcset and all pcsets in the vocabulary.
+    """
+    v1 = np.zeros(12)
+    for pc in pcset:
+        v1[pc] = 1
+    mostSimilarScore = -2
+    closestPcSet = []
+    for pcs in frompcset:
+        v2 = np.zeros(12)
+        for p in pcs:
+            v2[p] = 1
+        similarity = cosineSimilarity(v1, v2)
+        if similarity > mostSimilarScore:
+            closestPcSet = pcs
+            mostSimilarScore = similarity
+    return closestPcSet
+
+
 frompcset = {
     (0, 1, 5, 8): {
         "A-": {"chord": ["D-", "F", "A-", "C"], "rn": "IV7"},
