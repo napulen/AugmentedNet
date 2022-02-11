@@ -31,10 +31,10 @@ a_offset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_harmonicRhythm
 7.25,3.0,1.0,7.0,V,1.0,"('B', 'D', 'G')",B,D,G,G,G,1.0,major triad,"(2, 7, 11)",C,C,5,None
 7.5,3.0,1.0,7.0,V,2.0,"('B', 'D', 'G')",B,D,G,G,G,1.0,major triad,"(2, 7, 11)",C,C,5,None
 7.75,3.0,1.0,7.0,V,2.0,"('B', 'D', 'G')",B,D,G,G,G,1.0,major triad,"(2, 7, 11)",C,C,5,None
-8.0,3.0,1.0,8.0,viio7/i,0.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
-8.25,3.0,1.0,8.0,viio7/i,1.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
-8.5,3.0,1.0,8.0,viio7/i,2.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
-8.75,3.0,1.0,8.0,viio7/i,2.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
+8.0,3.0,1.0,8.0,viio7,0.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
+8.25,3.0,1.0,8.0,viio7,1.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
+8.5,3.0,1.0,8.0,viio7,2.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
+8.75,3.0,1.0,8.0,viio7,2.0,"('D', 'F', 'A-', 'B')",D,F,A-,B,B,1.0,diminished seventh chord,"(2, 5, 8, 11)",C,c,#7,1
 9.0,4.0,2.0,9.0,I,0.0,"('E', 'G', 'C')",E,G,C,C,C,1.0,major triad,"(0, 4, 7)",C,C,1,None
 9.25,4.0,2.0,9.0,I,1.0,"('E', 'G', 'C')",E,G,C,C,C,1.0,major triad,"(0, 4, 7)",C,C,1,None
 9.5,4.0,2.0,9.0,I,2.0,"('E', 'G', 'C')",E,G,C,C,C,1.0,major triad,"(0, 4, 7)",C,C,1,None
@@ -59,10 +59,10 @@ a_offset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_harmonicRhythm
 14.25,5.0,1.0,13.0,III,1.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
 14.5,5.0,1.0,13.0,III,2.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
 14.75,5.0,1.0,13.0,III,2.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
-15.0,6.0,1.0,14.0,bII,0.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
-15.25,6.0,1.0,14.0,bII,1.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
-15.5,6.0,1.0,14.0,bII,2.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
-15.75,6.0,1.0,14.0,bII,2.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.0,6.0,1.0,14.0,N,0.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.25,6.0,1.0,14.0,N,1.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.5,6.0,1.0,14.0,N,2.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
+15.75,6.0,1.0,14.0,N,2.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
 16.0,6.0,1.0,15.0,Cad,0.0,"('G', 'C', 'E-')",G,C,E-,C,C,2.0,minor triad,"(0, 3, 7)",c,c,1,None
 16.25,6.0,1.0,15.0,Cad,1.0,"('G', 'C', 'E-')",G,C,E-,C,C,2.0,minor triad,"(0, 3, 7)",c,c,1,None
 16.5,6.0,1.0,15.0,Cad,2.0,"('G', 'C', 'E-')",G,C,E-,C,C,2.0,minor triad,"(0, 3, 7)",c,c,1,None
@@ -131,15 +131,15 @@ a_offset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_harmonicRhythm
 32.25,11.0,1.0,24.0,V,1.0,"('G', 'B', 'D')",G,B,D,G,G,0.0,major triad,"(2, 7, 11)",c,c,5,None
 32.5,11.0,1.0,24.0,V,2.0,"('G', 'B', 'D')",G,B,D,G,G,0.0,major triad,"(2, 7, 11)",c,c,5,None
 32.75,11.0,1.0,24.0,V,2.0,"('G', 'B', 'D')",G,B,D,G,G,0.0,major triad,"(2, 7, 11)",c,c,5,None
-33.0,12.0,3.0,25.0,I,0.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-33.25,12.0,3.0,25.0,I,1.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-33.5,12.0,3.0,25.0,I,2.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-33.75,12.0,3.0,25.0,I,2.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-34.0,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-34.25,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-34.5,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-34.75,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-35.0,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-35.25,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-35.5,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
-35.75,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,c,1,None
+33.0,12.0,3.0,25.0,I,0.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+33.25,12.0,3.0,25.0,I,1.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+33.5,12.0,3.0,25.0,I,2.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+33.75,12.0,3.0,25.0,I,2.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+34.0,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+34.25,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+34.5,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+34.75,12.0,3.0,25.0,I,3.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+35.0,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+35.25,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+35.5,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
+35.75,12.0,3.0,25.0,I,4.0,"('C', 'E', 'G')",C,E,G,C,C,0.0,major triad,"(0, 4, 7)",c,C,1,None
