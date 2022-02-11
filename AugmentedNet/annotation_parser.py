@@ -89,7 +89,7 @@ def _initialDataFrame(s):
         dfdict["a_annotationNumber"].append(idx)
         dfdict["a_romanNumeral"].append(_removeInversion(rncorr["rn"]))
         dfdict["a_harmonicRhythm"].append(0)
-        dfdict["a_pitchNames"].append(rncorr["pitchNames"])
+        dfdict["a_pitchNames"].append(tuple(rncorr["pitchNames"]))
         dfdict["a_bass"].append(rncorr["pitchNames"][0])
         dfdict["a_tenor"].append(rncorr["pitchNames"][1])
         dfdict["a_alto"].append(rncorr["pitchNames"][2])
