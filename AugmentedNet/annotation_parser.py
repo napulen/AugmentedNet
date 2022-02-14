@@ -99,7 +99,7 @@ def _initialDataFrame(s):
             dfdict["a_soprano"].append(rncorr["root"])
         dfdict["a_root"].append(rncorr["root"])
         dfdict["a_inversion"].append(rncorr["inversion"])
-        dfdict["a_quality"].append(rn.commonName)
+        dfdict["a_quality"].append(rncorr["quality"])
         dfdict["a_pcset"].append(rncorr["pcset"])
         dfdict["a_localKey"].append(rncorr["localKey"])
         dfdict["a_tonicizedKey"].append(rncorr["tonicizedKey"])
@@ -178,6 +178,7 @@ def _correctRomanNumeral(rndata):
     chord = frompcset[pcset][tonicizedKey]["chord"]
     root = chord[0]
     numerator = frompcset[pcset][tonicizedKey]["rn"]
+    quality = frompcset[pcset][tonicizedKey]["quality"]
     myrn = numerator
     if tonicizedKey != localKey:
         denominator = getTonicizationScaleDegree(localKey, tonicizedKey)
@@ -189,7 +190,7 @@ def _correctRomanNumeral(rndata):
     pitchNames = chord[inversion:] + chord[:inversion]
     # CADENTIAL
     if "Cad" in rn and numerator in ["I", "i"] and inversion == 2:
-        print("Found a cadential")
+        # print("Found a cadential")
         myrn = myrn.replace(numerator, "Cad", 1)
         numerator = "Cad"
     if rn != myrn:
@@ -201,6 +202,7 @@ def _correctRomanNumeral(rndata):
     rndata["pitchNames"] = pitchNames
     rndata["root"] = root
     rndata["inversion"] = inversion
+    rndata["quality"] = quality
     return rndata
 
 

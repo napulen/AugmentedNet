@@ -35,11 +35,8 @@ class OutputRepresentation(FeatureRepresentation):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
             transposed = self.transpositionFn(dfFeature, transposition)
-            if transposed in self.classList:
-                rnIndex = self.classList.index(transposed)
-                array[frame] = rnIndex
-            else:
-                array[frame] = self.classesNumber() - 1
+            rnIndex = self.classList.index(transposed)
+            array[frame] = rnIndex
         return array
 
     @classmethod
@@ -69,11 +66,8 @@ class OutputRepresentationTI(FeatureRepresentationTI):
     def run(self):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
-            if dfFeature in self.classList:
-                rnIndex = self.classList.index(dfFeature)
-                array[frame] = rnIndex
-            else:
-                array[frame] = self.classesNumber() - 1
+            rnIndex = self.classList.index(dfFeature)
+            array[frame] = rnIndex
         return array
 
     @classmethod
