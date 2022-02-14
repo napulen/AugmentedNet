@@ -37,16 +37,17 @@ def getTonicizationScaleDegree(localKey, tonicizedKey):
 
 
 def forceTonicization(localKey, candidateKeys):
+    """Forces a tonicization of candidateKey that exist in vocabulary."""
     tonicizationDistance = 1337
     tonicization = ""
     for candidateKey in candidateKeys:
         distance = weberEuclidean(localKey, candidateKey)
-        print(f"\t{localKey} -> {candidateKey} = {distance}")
+        # print(f"\t{localKey} -> {candidateKey} = {distance}")
         scaleDegree = getTonicizationScaleDegree(localKey, candidateKey)
-        if scaleDegree.lower() != "i":
-            # Slight preference for tonal scale degrees
+        if scaleDegree not in ["i", "III"]:
+            # Slight preference for parallel minor and relative major
             distance *= 1.05
-        if scaleDegree.lower() not in ["i", "iv", "v"]:
+        if scaleDegree not in ["i", "I", "III", "iv", "IV", "v", "V"]:
             distance *= 1.05
         if distance < tonicizationDistance:
             tonicization = candidateKey

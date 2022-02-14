@@ -39,7 +39,7 @@ class DefaultArguments(object):
             "LocalKey35",
             "PitchClassSet121",
             # "PrimaryDegree22",
-            "RomanNumeral35",
+            "RomanNumeral31",
             # "SecondaryDegree22",
             "Soprano35",
             "Tenor35",
