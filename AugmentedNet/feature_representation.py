@@ -91,23 +91,16 @@ KEYS = (
     "e#",
 )
 
-CHORD_QUALITIES = (
-    "major triad",
-    "minor triad",
-    "diminished triad",
-    "augmented triad",
-    "minor seventh chord",
-    "major seventh chord",
-    "dominant seventh chord",
-    "incomplete dominant-seventh chord",
-    "diminished seventh chord",
-    "half-diminished seventh chord",
-    "augmented sixth",
-    "German augmented sixth chord",
-    "French augmented sixth chord",
-    "Italian augmented sixth chord",
-    "minor-augmented tetrachord",
-    "None",
+CHORD_QUALITIES = tuple(
+    sorted(
+        set(
+            [
+                key["quality"]
+                for keys in frompcset.values()
+                for key in keys.values()
+            ]
+        )
+    )
 )
 
 COMMON_ROMAN_NUMERALS = tuple(

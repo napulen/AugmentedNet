@@ -35,11 +35,8 @@ class OutputRepresentation(FeatureRepresentation):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
             transposed = self.transpositionFn(dfFeature, transposition)
-            if transposed in self.classList:
-                rnIndex = self.classList.index(transposed)
-                array[frame] = rnIndex
-            else:
-                array[frame] = self.classesNumber() - 1
+            rnIndex = self.classList.index(transposed)
+            array[frame] = rnIndex
         return array
 
     @classmethod
@@ -69,11 +66,8 @@ class OutputRepresentationTI(FeatureRepresentationTI):
     def run(self):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
-            if dfFeature in self.classList:
-                rnIndex = self.classList.index(dfFeature)
-                array[frame] = rnIndex
-            else:
-                array[frame] = self.classesNumber() - 1
+            rnIndex = self.classList.index(dfFeature)
+            array[frame] = rnIndex
         return array
 
     @classmethod
@@ -167,7 +161,7 @@ class ChordRoot35(OutputRepresentation):
     transpositionFn = staticmethod(TransposePitch)
 
 
-class ChordQuality15(OutputRepresentationTI):
+class ChordQuality11(OutputRepresentationTI):
     classList = CHORD_QUALITIES
     dfFeature = "a_quality"
 
@@ -183,7 +177,7 @@ available_representations = {
     "Tenor35": Tenor35,
     "Alto35": Alto35,
     "Soprano35": Soprano35,
-    "ChordQuality15": ChordQuality15,
+    "ChordQuality11": ChordQuality11,
     "ChordRoot35": ChordRoot35,
     "HarmonicRhythm7": HarmonicRhythm7,
     "Inversion4": Inversion4,
