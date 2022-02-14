@@ -124,7 +124,7 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
     def on_epoch_end(self, epoch, logs={}):
         monitored = list(availableOutputs.keys())
         nonMonitored = [
-            "ChordQuality15",
+            "ChordQuality11",
             "ChordRoot35",
             "Inversion4",
             "PrimaryDegree22",
@@ -175,14 +175,14 @@ def evaluate(modelHdf5, X_test, y_true):
         print(f"Degree: {summary['Degree']}")
     if (
         "LocalKey35" in df
-        and "ChordQuality15" in df
+        and "ChordQuality11" in df
         and "ChordRoot35" in df
         and "Inversion4" in df
         and "Degree" in df
     ):
         df["RomanNumeral"] = (
             df.LocalKey35
-            & df.ChordQuality15
+            & df.ChordQuality11
             & df.ChordRoot35
             & df.Inversion4
             & df.Degree

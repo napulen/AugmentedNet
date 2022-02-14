@@ -45,7 +45,7 @@ def evaluate(modelHdf5, X_test, y_true):
     df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
     df["RomanNumeral"] = (
         df.LocalKey35
-        & df.ChordQuality15
+        & df.ChordQuality11
         & df.ChordRoot35
         & df.Inversion4
         & df.Degree

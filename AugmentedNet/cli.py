@@ -32,7 +32,7 @@ class DefaultArguments(object):
         "outputRepresentations": [
             "Alto35",
             "Bass35",
-            # "ChordQuality15",
+            # "ChordQuality11",
             # "ChordRoot35",
             "HarmonicRhythm7",
             # "Inversion4",
