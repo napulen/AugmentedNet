@@ -179,7 +179,7 @@
     <span class="s2">&quot;e#&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">CHORD_QUALITIES</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">CHORD_QUALITIES</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">&quot;major triad&quot;</span><span class="p">,</span>
     <span class="s2">&quot;minor triad&quot;</span><span class="p">,</span>
     <span class="s2">&quot;diminished triad&quot;</span><span class="p">,</span>
@@ -196,88 +196,22 @@
     <span class="s2">&quot;Italian augmented sixth chord&quot;</span><span class="p">,</span>
     <span class="s2">&quot;minor-augmented tetrachord&quot;</span><span class="p">,</span>
     <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-<span class="p">]</span>
+<span class="p">)</span>
 
-<span class="n">COMMON_ROMAN_NUMERALS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;I&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;i&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;IV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;vi&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/IV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;VI&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ii7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;v&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/ii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;III&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iiø7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iio&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/vi&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;VII&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/ii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;I/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/iv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/vi&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;vi7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Ger7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;N&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/vi&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/ii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viiø7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V9&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio/ii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/iv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Cad/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iv7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/iv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;IV7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/III&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viiø7/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;It&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/v&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/iii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;IV/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;I+&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;I7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio/IV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/III&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/iii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio/iv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iio7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;VI7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;I/III&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/VI&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bVII&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bVI&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V+&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio/vi&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;III+&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/iii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ii/V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;I/-VI&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;viio7/IV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V7/v&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;i7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iii7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Fr7&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/IV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;vii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;V/v&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;II&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-<span class="p">]</span>
+<span class="n">COMMON_ROMAN_NUMERALS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="c1"># Cadentials are undistinguishable from a I chord in the vocabulary,</span>
+        <span class="c1"># they are contextually (and explicitly) annotated by the analyst</span>
+        <span class="s2">&quot;Cad&quot;</span>
+    <span class="p">]</span>
+    <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">PCSETS</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frompcset</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">PCSETS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">frompcset</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
 <span class="n">INTERVAL_ENHARMONICS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;A1&quot;</span><span class="p">:</span> <span class="s2">&quot;m2&quot;</span><span class="p">,</span>

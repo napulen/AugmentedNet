@@ -40,9 +40,6 @@
                     <a class="function" href="#solveChordSegmentation">solveChordSegmentation</a>
             </li>
             <li>
-                    <a class="function" href="#forceTonicization">forceTonicization</a>
-            </li>
-            <li>
                     <a class="function" href="#resolveRomanNumeral">resolveRomanNumeral</a>
             </li>
             <li>
@@ -86,7 +83,7 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cli</span>
 <span class="kn">from</span> <span class="nn">.chord_vocabulary</span> <span class="kn">import</span> <span class="n">frompcset</span>
-<span class="kn">from</span> <span class="nn">.keydistance</span> <span class="kn">import</span> <span class="n">weberEuclidean</span>
+<span class="kn">from</span> <span class="nn">.cache</span> <span class="kn">import</span> <span class="n">forceTonicization</span><span class="p">,</span> <span class="n">getTonicizationScaleDegree</span>
 <span class="kn">from</span> <span class="nn">.score_parser</span> <span class="kn">import</span> <span class="n">parseScore</span>
 <span class="kn">from</span> <span class="nn">.input_representations</span> <span class="kn">import</span> <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableInputs</span>
 <span class="kn">from</span> <span class="nn">.output_representations</span> <span class="kn">import</span> <span class="p">(</span>
@@ -135,18 +132,6 @@
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">df</span><span class="o">.</span><span class="n">HarmonicRhythm7</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">forceTonicization</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">):</span>
-    <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="mi">1337</span>
-    <span class="n">tonicization</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">candidateKey</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
-        <span class="n">distance</span> <span class="o">=</span> <span class="n">weberEuclidean</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKey</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">localKey</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">candidateKey</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">tonicizationDistance</span><span class="p">:</span>
-            <span class="n">tonicization</span> <span class="o">=</span> <span class="n">candidateKey</span>
-            <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="n">distance</span>
-    <span class="k">return</span> <span class="n">tonicization</span>
-
-
 <span class="k">def</span> <span class="nf">resolveRomanNumeral</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">pcs</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
     <span class="n">chord</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">2 </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">3 </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">4 </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">5&quot;</span><span class="p">)</span>
     <span class="n">pcset</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">pitchClasses</span><span class="p">)))</span>
@@ -179,10 +164,8 @@
         <span class="n">rnfigure</span> <span class="o">+=</span> <span class="n">invfigure</span>
     <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="n">rnfigure</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="o">!=</span> <span class="n">key</span><span class="p">:</span>
-        <span class="n">tonic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pitches</span>
-        <span class="n">c1</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">tonic</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
-        <span class="n">secondary</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-        <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">secondary</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="n">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
+        <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">denominator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rn</span>
 
 
@@ -362,33 +345,6 @@
     
 
                 </section>
-                <section id="forceTonicization">
-                            <div class="attr function"><a class="headerlink" href="#forceTonicization">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">forceTonicization</span><span class="signature">(localKey, candidateKeys)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">forceTonicization</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">):</span>
-    <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="mi">1337</span>
-    <span class="n">tonicization</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">candidateKey</span> <span class="ow">in</span> <span class="n">candidateKeys</span><span class="p">:</span>
-        <span class="n">distance</span> <span class="o">=</span> <span class="n">weberEuclidean</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKey</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">localKey</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">candidateKey</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">tonicizationDistance</span><span class="p">:</span>
-            <span class="n">tonicization</span> <span class="o">=</span> <span class="n">candidateKey</span>
-            <span class="n">tonicizationDistance</span> <span class="o">=</span> <span class="n">distance</span>
-    <span class="k">return</span> <span class="n">tonicization</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
                 <section id="resolveRomanNumeral">
                             <div class="attr function"><a class="headerlink" href="#resolveRomanNumeral">#&nbsp;&nbsp</a>
 
@@ -431,10 +387,8 @@
         <span class="n">rnfigure</span> <span class="o">+=</span> <span class="n">invfigure</span>
     <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="n">rnfigure</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="o">!=</span> <span class="n">key</span><span class="p">:</span>
-        <span class="n">tonic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pitches</span>
-        <span class="n">c1</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">tonic</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
-        <span class="n">secondary</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-        <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">secondary</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="n">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
+        <span class="n">rn</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">denominator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rn</span>
 </pre></div>
 

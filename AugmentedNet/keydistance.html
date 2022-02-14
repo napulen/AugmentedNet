@@ -33,6 +33,9 @@
             <li>
                     <a class="function" href="#weberEuclidean">weberEuclidean</a>
             </li>
+            <li>
+                    <a class="function" href="#getTonicizationScaleDegree">getTonicizationScaleDegree</a>
+            </li>
     </ul>
 
 
@@ -55,6 +58,7 @@
             <summary>View Source</summary>
             <div class="codehilite"><pre><span></span><span class="sd">&quot;&quot;&quot;An auxiliary module to measure key distance.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">music21</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># The diagonal of keys in the Weber tonal chart</span>
@@ -117,6 +121,18 @@
         <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">smallerdistance</span><span class="p">:</span>
             <span class="n">smallerdistance</span> <span class="o">=</span> <span class="n">distance</span>
     <span class="k">return</span> <span class="n">smallerdistance</span>
+
+
+<span class="k">def</span> <span class="nf">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the Roman numeral degree of a tonicization (denominator).&quot;&quot;&quot;</span>
+    <span class="n">tonic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">)</span><span class="o">.</span><span class="n">pitches</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">tonic</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
+    <span class="c1"># TODO: Use harmalysis to solve this problem, not romanNumeralFromChord</span>
+    <span class="n">degree</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">localKey</span><span class="p">)</span><span class="o">.</span><span class="n">figure</span>
+    <span class="c1"># TODO: This is a hack to workaround music21</span>
+    <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="s2">&quot;bVI&quot;</span><span class="p">:</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="s2">&quot;VI&quot;</span>
+    <span class="k">return</span> <span class="n">degree</span>
 </pre></div>
 
         </details>
@@ -151,6 +167,35 @@
         </details>
 
             <div class="docstring"><p>A measurement of key distance based on the Weber tonal chart.</p>
+</div>
+
+
+                </section>
+                <section id="getTonicizationScaleDegree">
+                            <div class="attr function"><a class="headerlink" href="#getTonicizationScaleDegree">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">getTonicizationScaleDegree</span><span class="signature">(localKey, tonicizedKey)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the Roman numeral degree of a tonicization (denominator).&quot;&quot;&quot;</span>
+    <span class="n">tonic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">tonicizedKey</span><span class="p">)</span><span class="o">.</span><span class="n">pitches</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">tonic</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
+    <span class="c1"># TODO: Use harmalysis to solve this problem, not romanNumeralFromChord</span>
+    <span class="n">degree</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">localKey</span><span class="p">)</span><span class="o">.</span><span class="n">figure</span>
+    <span class="c1"># TODO: This is a hack to workaround music21</span>
+    <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="s2">&quot;bVI&quot;</span><span class="p">:</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="s2">&quot;VI&quot;</span>
+    <span class="k">return</span> <span class="n">degree</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Return the Roman numeral degree of a tonicization (denominator).</p>
 </div>
 
 

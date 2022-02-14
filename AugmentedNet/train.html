@@ -222,7 +222,7 @@
             <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;Inversion4&quot;</span><span class="p">,</span>
             <span class="s2">&quot;PrimaryDegree22&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RomanNumeral35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;SecondaryDegree22&quot;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="n">monitored</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">monitored</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nonMonitored</span><span class="p">]</span>
@@ -284,9 +284,9 @@
         <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RomanNumeral: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;RomanNumeral&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># The alternative approach proposed in Napoles Lopez et al. (2021)</span>
-    <span class="k">if</span> <span class="s2">&quot;RomanNumeral76&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;Inversion4&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;RomanNumeral35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;Inversion4&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
         <span class="n">df</span><span class="p">[</span><span class="s2">&quot;AltRomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral76</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
         <span class="p">)</span>
         <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;AltRomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">AltRomanNumeral</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AltRomanNumeral: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;AltRomanNumeral&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -662,7 +662,7 @@
             <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;Inversion4&quot;</span><span class="p">,</span>
             <span class="s2">&quot;PrimaryDegree22&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RomanNumeral35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;SecondaryDegree22&quot;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="n">monitored</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">monitored</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nonMonitored</span><span class="p">]</span>
@@ -796,7 +796,7 @@ options: Optional `tf.train.CheckpointOptions` object if
             <span class="s2">&quot;ChordRoot35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;Inversion4&quot;</span><span class="p">,</span>
             <span class="s2">&quot;PrimaryDegree22&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;RomanNumeral76&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RomanNumeral35&quot;</span><span class="p">,</span>
             <span class="s2">&quot;SecondaryDegree22&quot;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="n">monitored</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">monitored</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nonMonitored</span><span class="p">]</span>
@@ -915,9 +915,9 @@ be called during TRAIN mode.</p>
         <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RomanNumeral: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;RomanNumeral&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># The alternative approach proposed in Napoles Lopez et al. (2021)</span>
-    <span class="k">if</span> <span class="s2">&quot;RomanNumeral76&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;Inversion4&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;RomanNumeral35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;LocalKey35&quot;</span> <span class="ow">in</span> <span class="n">df</span> <span class="ow">and</span> <span class="s2">&quot;Inversion4&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
         <span class="n">df</span><span class="p">[</span><span class="s2">&quot;AltRomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral76</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">RomanNumeral35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">LocalKey35</span> <span class="o">&amp;</span> <span class="n">df</span><span class="o">.</span><span class="n">Inversion4</span>
         <span class="p">)</span>
         <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;AltRomanNumeral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">AltRomanNumeral</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AltRomanNumeral: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;AltRomanNumeral&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
