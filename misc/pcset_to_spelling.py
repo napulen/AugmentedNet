@@ -4,6 +4,40 @@ import json
 
 pcsets = {}
 
+QUALITIES = {
+    "Cad": "cad",
+    "Fr7": "aug6",
+    "Ger7": "aug6",
+    "I": "maj",
+    "I7": "maj7",
+    "III+": "aug",
+    "III+7": "aug7",
+    "IV": "maj",
+    "IV7": "maj7",
+    "It": "aug6",
+    "N": "maj",
+    "V": "maj",
+    "V+": "aug",
+    "V7": "7",
+    "VI": "maj",
+    "VI7": "maj7",
+    "i": "min",
+    "i7": "min7",  # should this be minmaj7?
+    "ii": "min",
+    "ii7": "min7",
+    "iii": "min",
+    "iii7": "min7",
+    "iio": "dim",
+    "iiø7": "hdim7",
+    "iv": "min",
+    "iv7": "min7",
+    "vi": "min",
+    "vi7": "min7",
+    "viio": "dim",
+    "viio7": "dim7",
+    "viiø7": "hdim7",
+}
+
 
 def line_of_fifths(x, mode="major"):
     fifths_major = ["C", "G", "D", "A", "E", "B", "F#"]
@@ -44,6 +78,7 @@ def fillpcset(key, deg):
     if deg == "bII":
         deg = "N"
     pcsets[pcset][key]["rn"] = deg
+    pcsets[pcset][key]["quality"] = QUALITIES[deg]
 
 
 if __name__ == "__main__":
