@@ -1,5 +1,37 @@
 """The vocabulary of all valid chords and their chord representations."""
 
+from cmath import cos
+import numpy as np
+from numpy import dot
+from numpy.linalg import norm
+
+
+def cosineSimilarity(v1, v2):
+    return dot(v1, v2) / (norm(v1) * norm(v2))
+
+
+def closestPcSet(pcset):
+    """Get the closest matching pcset from the vocabulary.
+
+    Uses cosine similarity to measure the distance between
+    the given pcset and all pcsets in the vocabulary.
+    """
+    v1 = np.zeros(12)
+    for pc in pcset:
+        v1[pc] = 1
+    mostSimilarScore = -2
+    closestPcSet = []
+    for pcs in frompcset:
+        v2 = np.zeros(12)
+        for p in pcs:
+            v2[p] = 1
+        similarity = cosineSimilarity(v1, v2)
+        if similarity > mostSimilarScore:
+            closestPcSet = pcs
+            mostSimilarScore = similarity
+    return closestPcSet
+
+
 frompcset = {
     (0, 1, 5, 8): {
         "A-": {"chord": ["D-", "F", "A-", "C"], "rn": "IV7"},
@@ -15,7 +47,10 @@ frompcset = {
         "a#": {"chord": ["C#", "E#", "G##", "B#"], "rn": "III+7"},
         "b-": {"chord": ["D-", "F", "A", "C"], "rn": "III+7"},
     },
-    (0, 2, 5, 8): {"E-": {"chord": ["D", "F", "A-", "C"], "rn": "viiø7"}},
+    (0, 2, 5, 8): {
+        "E-": {"chord": ["D", "F", "A-", "C"], "rn": "viiø7"},
+        "c": {"chord": ["D", "F", "A-", "C"], "rn": "iiø7"},
+    },
     (0, 2, 5, 9): {
         "B-": {"chord": ["D", "F", "A", "C"], "rn": "iii7"},
         "C": {"chord": ["D", "F", "A", "C"], "rn": "ii7"},
@@ -39,8 +74,7 @@ frompcset = {
         "F#": {"chord": ["B#", "D", "F#", "A"], "rn": "Ger7"},
         "G": {"chord": ["D", "F#", "A", "C"], "rn": "V7"},
         "G-": {"chord": ["C", "E--", "G-", "B--"], "rn": "Ger7"},
-        "e#": {"chord": ["D", "F#", "A", "C"], "rn": "bVII7"},
-        "f": {"chord": ["E--", "G-", "B--", "D--"], "rn": "bVII7"},
+        "e": {"chord": ["D", "F#", "A", "C"], "rn": "bVII7"},
         "f#": {"chord": ["B#", "D", "F#", "A"], "rn": "Ger7"},
         "g": {"chord": ["D", "F#", "A", "C"], "rn": "V7"},
     },
@@ -63,9 +97,8 @@ frompcset = {
         "B-": {"chord": ["F", "A", "C", "E-"], "rn": "V7"},
         "a": {"chord": ["D#", "F", "A", "C"], "rn": "Ger7"},
         "a#": {"chord": ["E#", "G##", "B#", "D#"], "rn": "V7"},
-        "a-": {"chord": ["G--", "B--", "D--", "F--"], "rn": "bVII7"},
         "b-": {"chord": ["F", "A", "C", "E-"], "rn": "V7"},
-        "g#": {"chord": ["F", "A", "C", "E-"], "rn": "bVII7"},
+        "g": {"chord": ["F", "A", "C", "E-"], "rn": "bVII7"},
     },
     (0, 3, 6): {
         "C#": {"chord": ["B#", "D#", "F#"], "rn": "viio"},
@@ -79,7 +112,8 @@ frompcset = {
         "C": {"chord": ["F#", "A-", "C", "E-"], "rn": "Ger7"},
         "C#": {"chord": ["G#", "B#", "D#", "F#"], "rn": "V7"},
         "D-": {"chord": ["A-", "C", "E-", "G-"], "rn": "V7"},
-        "b": {"chord": ["A-", "C", "E-", "G-"], "rn": "bVII7"},
+        "a#": {"chord": ["G#", "B#", "D#", "F#"], "rn": "bVII7"},
+        "b-": {"chord": ["A-", "C", "E-", "G-"], "rn": "bVII7"},
         "c": {"chord": ["F#", "A-", "C", "E-"], "rn": "Ger7"},
         "c#": {"chord": ["G#", "B#", "D#", "F#"], "rn": "V7"},
         "d-": {"chord": ["A-", "C", "E-", "G-"], "rn": "V7"},
@@ -95,6 +129,8 @@ frompcset = {
     (0, 3, 6, 10): {
         "C#": {"chord": ["B#", "D#", "F#", "A#"], "rn": "viiø7"},
         "D-": {"chord": ["C", "E-", "G-", "B-"], "rn": "viiø7"},
+        "a#": {"chord": ["B#", "D#", "F#", "A#"], "rn": "iiø7"},
+        "b-": {"chord": ["C", "E-", "G-", "B-"], "rn": "iiø7"},
     },
     (0, 3, 7): {
         "A-": {"chord": ["C", "E-", "G"], "rn": "iii"},
@@ -112,7 +148,10 @@ frompcset = {
         "e#": {"chord": ["G#", "B#", "D#", "F##"], "rn": "III7"},
         "f": {"chord": ["A-", "C", "E-", "G"], "rn": "III7"},
     },
-    (0, 3, 7, 9): {"B-": {"chord": ["A", "C", "E-", "G"], "rn": "viiø7"}},
+    (0, 3, 7, 9): {
+        "B-": {"chord": ["A", "C", "E-", "G"], "rn": "viiø7"},
+        "g": {"chord": ["A", "C", "E-", "G"], "rn": "iiø7"},
+    },
     (0, 3, 7, 10): {
         "A-": {"chord": ["C", "E-", "G", "B-"], "rn": "iii7"},
         "B-": {"chord": ["C", "E-", "G", "B-"], "rn": "ii7"},
@@ -128,7 +167,8 @@ frompcset = {
         "E-": {"chord": ["A-", "C", "E-"], "rn": "IV"},
         "G": {"chord": ["A-", "C", "E-"], "rn": "N"},
         "G#": {"chord": ["G#", "B#", "D#"], "rn": "I"},
-        "b": {"chord": ["A-", "C", "E-"], "rn": "bVII"},
+        "a#": {"chord": ["G#", "B#", "D#"], "rn": "bVII"},
+        "b-": {"chord": ["A-", "C", "E-"], "rn": "bVII"},
         "c": {"chord": ["A-", "C", "E-"], "rn": "VI"},
         "c#": {"chord": ["G#", "B#", "D#"], "rn": "V"},
         "d-": {"chord": ["A-", "C", "E-"], "rn": "V"},
@@ -148,7 +188,10 @@ frompcset = {
         "a": {"chord": ["F", "A", "C", "E"], "rn": "VI7"},
         "d": {"chord": ["F", "A", "C", "E"], "rn": "III7"},
     },
-    (0, 4, 6, 9): {"G": {"chord": ["F#", "A", "C", "E"], "rn": "viiø7"}},
+    (0, 4, 6, 9): {
+        "G": {"chord": ["F#", "A", "C", "E"], "rn": "viiø7"},
+        "e": {"chord": ["F#", "A", "C", "E"], "rn": "iiø7"},
+    },
     (0, 4, 6, 10): {
         "B-": {"chord": ["C", "E", "G-", "B-"], "rn": "Fr7"},
         "E": {"chord": ["F#", "A#", "C", "E"], "rn": "Fr7"},
@@ -165,10 +208,9 @@ frompcset = {
         "G": {"chord": ["C", "E", "G"], "rn": "IV"},
         "a": {"chord": ["C", "E", "G"], "rn": "III"},
         "b": {"chord": ["C", "E", "G"], "rn": "N"},
-        "d#": {"chord": ["C", "E", "G"], "rn": "bVII"},
+        "d": {"chord": ["C", "E", "G"], "rn": "bVII"},
         "e": {"chord": ["C", "E", "G"], "rn": "VI"},
         "e#": {"chord": ["B#", "D##", "F##"], "rn": "V"},
-        "e-": {"chord": ["D--", "F-", "A--"], "rn": "bVII"},
         "f": {"chord": ["C", "E", "G"], "rn": "V"},
     },
     (0, 4, 7, 8): {
@@ -186,10 +228,9 @@ frompcset = {
         "E": {"chord": ["A#", "C", "E", "G"], "rn": "Ger7"},
         "F": {"chord": ["C", "E", "G", "B-"], "rn": "V7"},
         "F-": {"chord": ["B-", "D--", "F-", "A--"], "rn": "Ger7"},
-        "d#": {"chord": ["C", "E", "G", "B-"], "rn": "bVII7"},
+        "d": {"chord": ["C", "E", "G", "B-"], "rn": "bVII7"},
         "e": {"chord": ["A#", "C", "E", "G"], "rn": "Ger7"},
         "e#": {"chord": ["B#", "D##", "F##", "A#"], "rn": "V7"},
-        "e-": {"chord": ["D--", "F-", "A--", "C--"], "rn": "bVII7"},
         "f": {"chord": ["C", "E", "G", "B-"], "rn": "V7"},
     },
     (0, 4, 7, 11): {
@@ -199,11 +240,15 @@ frompcset = {
         "e": {"chord": ["C", "E", "G", "B"], "rn": "VI7"},
     },
     (0, 4, 8): {
-        "a": {"chord": ["C", "E", "G#"], "rn": "III+"},
-        "c#": {"chord": ["E", "G#", "B#"], "rn": "III+"},
-        "d-": {"chord": ["F-", "A-", "C"], "rn": "III+"},
-        "e#": {"chord": ["G#", "B#", "D##"], "rn": "III+"},
-        "f": {"chord": ["A-", "C", "E"], "rn": "III+"},
+        "A": {"chord": ["E", "G#", "B#"], "rn": "V+"},
+        "C#": {"chord": ["G#", "B#", "D##"], "rn": "V+"},
+        "D-": {"chord": ["A-", "C", "E"], "rn": "V+"},
+        "F": {"chord": ["C", "E", "G#"], "rn": "V+"},
+        "a": {"chord": ["E", "G#", "B#"], "rn": "V+"},
+        "c#": {"chord": ["G#", "B#", "D##"], "rn": "V+"},
+        "d-": {"chord": ["A-", "C", "E"], "rn": "V+"},
+        "e#": {"chord": ["B#", "D##", "F###"], "rn": "V+"},
+        "f": {"chord": ["C", "E", "G#"], "rn": "V+"},
     },
     (0, 4, 8, 11): {"a": {"chord": ["C", "E", "G#", "B"], "rn": "III+7"}},
     (0, 4, 9): {
@@ -236,11 +281,10 @@ frompcset = {
         "F-": {"chord": ["G--", "B--", "D--"], "rn": "N"},
         "a": {"chord": ["F", "A", "C"], "rn": "VI"},
         "a#": {"chord": ["E#", "G##", "B#"], "rn": "V"},
-        "a-": {"chord": ["G--", "B--", "D--"], "rn": "bVII"},
         "b-": {"chord": ["F", "A", "C"], "rn": "V"},
         "d": {"chord": ["F", "A", "C"], "rn": "III"},
         "e": {"chord": ["F", "A", "C"], "rn": "N"},
-        "g#": {"chord": ["F", "A", "C"], "rn": "bVII"},
+        "g": {"chord": ["F", "A", "C"], "rn": "bVII"},
     },
     (0, 6, 8): {
         "C": {"chord": ["F#", "A-", "C"], "rn": "It"},
@@ -261,6 +305,8 @@ frompcset = {
     (1, 3, 6, 9): {
         "E": {"chord": ["D#", "F#", "A", "C#"], "rn": "viiø7"},
         "F-": {"chord": ["E-", "G-", "B--", "D-"], "rn": "viiø7"},
+        "c#": {"chord": ["D#", "F#", "A", "C#"], "rn": "iiø7"},
+        "d-": {"chord": ["E-", "G-", "B--", "D-"], "rn": "iiø7"},
     },
     (1, 3, 6, 10): {
         "B": {"chord": ["D#", "F#", "A#", "C#"], "rn": "iii7"},
@@ -291,7 +337,8 @@ frompcset = {
         "G": {"chord": ["C#", "E-", "G", "B-"], "rn": "Ger7"},
         "G#": {"chord": ["D#", "F##", "A#", "C#"], "rn": "V7"},
         "a-": {"chord": ["E-", "G", "B-", "D-"], "rn": "V7"},
-        "f#": {"chord": ["E-", "G", "B-", "D-"], "rn": "bVII7"},
+        "e#": {"chord": ["D#", "F##", "A#", "C#"], "rn": "bVII7"},
+        "f": {"chord": ["E-", "G", "B-", "D-"], "rn": "bVII7"},
         "g": {"chord": ["C#", "E-", "G", "B-"], "rn": "Ger7"},
         "g#": {"chord": ["D#", "F##", "A#", "C#"], "rn": "V7"},
     },
@@ -309,10 +356,11 @@ frompcset = {
         "B": {"chord": ["F#", "A#", "C#", "E"], "rn": "V7"},
         "B-": {"chord": ["E", "G-", "B-", "D-"], "rn": "Ger7"},
         "C-": {"chord": ["G-", "B-", "D-", "F-"], "rn": "V7"},
-        "a": {"chord": ["G-", "B-", "D-", "F-"], "rn": "bVII7"},
         "a#": {"chord": ["D##", "F#", "A#", "C#"], "rn": "Ger7"},
+        "a-": {"chord": ["G-", "B-", "D-", "F-"], "rn": "bVII7"},
         "b": {"chord": ["F#", "A#", "C#", "E"], "rn": "V7"},
         "b-": {"chord": ["E", "G-", "B-", "D-"], "rn": "Ger7"},
+        "g#": {"chord": ["F#", "A#", "C#", "E"], "rn": "bVII7"},
     },
     (1, 4, 7): {
         "D": {"chord": ["C#", "E", "G"], "rn": "viio"},
@@ -323,7 +371,7 @@ frompcset = {
         "C#": {"chord": ["F##", "A", "C#", "E"], "rn": "Ger7"},
         "D": {"chord": ["A", "C#", "E", "G"], "rn": "V7"},
         "D-": {"chord": ["G", "B--", "D-", "F-"], "rn": "Ger7"},
-        "c": {"chord": ["B--", "D-", "F-", "A--"], "rn": "bVII7"},
+        "b": {"chord": ["A", "C#", "E", "G"], "rn": "bVII7"},
         "c#": {"chord": ["F##", "A", "C#", "E"], "rn": "Ger7"},
         "d": {"chord": ["A", "C#", "E", "G"], "rn": "V7"},
         "d-": {"chord": ["G", "B--", "D-", "F-"], "rn": "Ger7"},
@@ -336,7 +384,10 @@ frompcset = {
         "f": {"chord": ["E", "G", "B-", "D-"], "rn": "viio7"},
         "g#": {"chord": ["F##", "A#", "C#", "E"], "rn": "viio7"},
     },
-    (1, 4, 7, 11): {"D": {"chord": ["C#", "E", "G", "B"], "rn": "viiø7"}},
+    (1, 4, 7, 11): {
+        "D": {"chord": ["C#", "E", "G", "B"], "rn": "viiø7"},
+        "b": {"chord": ["C#", "E", "G", "B"], "rn": "iiø7"},
+    },
     (1, 4, 8): {
         "A": {"chord": ["C#", "E", "G#"], "rn": "iii"},
         "B": {"chord": ["C#", "E", "G#"], "rn": "ii"},
@@ -359,6 +410,8 @@ frompcset = {
     (1, 4, 8, 10): {
         "B": {"chord": ["A#", "C#", "E", "G#"], "rn": "viiø7"},
         "C-": {"chord": ["B-", "D-", "F-", "A-"], "rn": "viiø7"},
+        "a-": {"chord": ["B-", "D-", "F-", "A-"], "rn": "iiø7"},
+        "g#": {"chord": ["A#", "C#", "E", "G#"], "rn": "iiø7"},
     },
     (1, 4, 8, 11): {
         "A": {"chord": ["C#", "E", "G#", "B"], "rn": "iii7"},
@@ -379,7 +432,7 @@ frompcset = {
         "F-": {"chord": ["B--", "D-", "F-"], "rn": "IV"},
         "G#": {"chord": ["A", "C#", "E"], "rn": "N"},
         "a-": {"chord": ["B--", "D-", "F-"], "rn": "N"},
-        "c": {"chord": ["B--", "D-", "F-"], "rn": "bVII"},
+        "b": {"chord": ["A", "C#", "E"], "rn": "bVII"},
         "c#": {"chord": ["A", "C#", "E"], "rn": "VI"},
         "d": {"chord": ["A", "C#", "E"], "rn": "V"},
         "d-": {"chord": ["B--", "D-", "F-"], "rn": "VI"},
@@ -406,6 +459,8 @@ frompcset = {
     (1, 5, 7, 10): {
         "A-": {"chord": ["G", "B-", "D-", "F"], "rn": "viiø7"},
         "G#": {"chord": ["F##", "A#", "C#", "E#"], "rn": "viiø7"},
+        "e#": {"chord": ["F##", "A#", "C#", "E#"], "rn": "iiø7"},
+        "f": {"chord": ["G", "B-", "D-", "F"], "rn": "iiø7"},
     },
     (1, 5, 7, 11): {
         "B": {"chord": ["C#", "E#", "G", "B"], "rn": "Fr7"},
@@ -426,8 +481,9 @@ frompcset = {
         "a#": {"chord": ["C#", "E#", "G#"], "rn": "III"},
         "b-": {"chord": ["D-", "F", "A-"], "rn": "III"},
         "c": {"chord": ["D-", "F", "A-"], "rn": "N"},
-        "e": {"chord": ["D-", "F", "A-"], "rn": "bVII"},
+        "d#": {"chord": ["C#", "E#", "G#"], "rn": "bVII"},
         "e#": {"chord": ["C#", "E#", "G#"], "rn": "VI"},
+        "e-": {"chord": ["D-", "F", "A-"], "rn": "bVII"},
         "f": {"chord": ["D-", "F", "A-"], "rn": "VI"},
         "f#": {"chord": ["C#", "E#", "G#"], "rn": "V"},
     },
@@ -448,16 +504,21 @@ frompcset = {
         "F": {"chord": ["B", "D-", "F", "A-"], "rn": "Ger7"},
         "F#": {"chord": ["C#", "E#", "G#", "B"], "rn": "V7"},
         "G-": {"chord": ["D-", "F", "A-", "C-"], "rn": "V7"},
-        "e": {"chord": ["D-", "F", "A-", "C-"], "rn": "bVII7"},
+        "d#": {"chord": ["C#", "E#", "G#", "B"], "rn": "bVII7"},
         "e#": {"chord": ["A##", "C#", "E#", "G#"], "rn": "Ger7"},
+        "e-": {"chord": ["D-", "F", "A-", "C-"], "rn": "bVII7"},
         "f": {"chord": ["B", "D-", "F", "A-"], "rn": "Ger7"},
         "f#": {"chord": ["C#", "E#", "G#", "B"], "rn": "V7"},
     },
     (1, 5, 9): {
-        "a#": {"chord": ["C#", "E#", "G##"], "rn": "III+"},
-        "b-": {"chord": ["D-", "F", "A"], "rn": "III+"},
-        "d": {"chord": ["F", "A", "C#"], "rn": "III+"},
-        "f#": {"chord": ["A", "C#", "E#"], "rn": "III+"},
+        "B-": {"chord": ["F", "A", "C#"], "rn": "V+"},
+        "D": {"chord": ["A", "C#", "E#"], "rn": "V+"},
+        "F#": {"chord": ["C#", "E#", "G##"], "rn": "V+"},
+        "G-": {"chord": ["D-", "F", "A"], "rn": "V+"},
+        "a#": {"chord": ["E#", "G##", "B##"], "rn": "V+"},
+        "b-": {"chord": ["F", "A", "C#"], "rn": "V+"},
+        "d": {"chord": ["A", "C#", "E#"], "rn": "V+"},
+        "f#": {"chord": ["C#", "E#", "G##"], "rn": "V+"},
     },
     (1, 5, 10): {
         "A-": {"chord": ["B-", "D-", "F"], "rn": "ii"},
@@ -493,14 +554,15 @@ frompcset = {
         "F": {"chord": ["G-", "B-", "D-"], "rn": "N"},
         "F#": {"chord": ["F#", "A#", "C#"], "rn": "I"},
         "G-": {"chord": ["G-", "B-", "D-"], "rn": "I"},
-        "a": {"chord": ["G-", "B-", "D-"], "rn": "bVII"},
         "a#": {"chord": ["F#", "A#", "C#"], "rn": "VI"},
+        "a-": {"chord": ["G-", "B-", "D-"], "rn": "bVII"},
         "b": {"chord": ["F#", "A#", "C#"], "rn": "V"},
         "b-": {"chord": ["G-", "B-", "D-"], "rn": "VI"},
         "d#": {"chord": ["F#", "A#", "C#"], "rn": "III"},
         "e#": {"chord": ["F#", "A#", "C#"], "rn": "N"},
         "e-": {"chord": ["G-", "B-", "D-"], "rn": "III"},
         "f": {"chord": ["G-", "B-", "D-"], "rn": "N"},
+        "g#": {"chord": ["F#", "A#", "C#"], "rn": "bVII"},
     },
     (1, 7, 9): {
         "C#": {"chord": ["F##", "A", "C#"], "rn": "It"},
@@ -523,7 +585,10 @@ frompcset = {
         "g": {"chord": ["E-", "G", "B-", "D"], "rn": "VI7"},
     },
     (2, 3, 7, 11): {"c": {"chord": ["E-", "G", "B", "D"], "rn": "III+7"}},
-    (2, 4, 7, 10): {"F": {"chord": ["E", "G", "B-", "D"], "rn": "viiø7"}},
+    (2, 4, 7, 10): {
+        "F": {"chord": ["E", "G", "B-", "D"], "rn": "viiø7"},
+        "d": {"chord": ["E", "G", "B-", "D"], "rn": "iiø7"},
+    },
     (2, 4, 7, 11): {
         "C": {"chord": ["E", "G", "B", "D"], "rn": "iii7"},
         "D": {"chord": ["E", "G", "B", "D"], "rn": "ii7"},
@@ -551,7 +616,7 @@ frompcset = {
         "G#": {"chord": ["C##", "E", "G#", "B"], "rn": "Ger7"},
         "a": {"chord": ["E", "G#", "B", "D"], "rn": "V7"},
         "a-": {"chord": ["D", "F-", "A-", "C-"], "rn": "Ger7"},
-        "g": {"chord": ["F-", "A-", "C-", "E--"], "rn": "bVII7"},
+        "f#": {"chord": ["E", "G#", "B", "D"], "rn": "bVII7"},
         "g#": {"chord": ["C##", "E", "G#", "B"], "rn": "Ger7"},
     },
     (2, 5, 6, 10): {
@@ -569,9 +634,8 @@ frompcset = {
         "B": {"chord": ["E#", "G", "B", "D"], "rn": "Ger7"},
         "C": {"chord": ["G", "B", "D", "F"], "rn": "V7"},
         "C-": {"chord": ["F", "A--", "C-", "E--"], "rn": "Ger7"},
-        "a#": {"chord": ["G", "B", "D", "F"], "rn": "bVII7"},
+        "a": {"chord": ["G", "B", "D", "F"], "rn": "bVII7"},
         "b": {"chord": ["E#", "G", "B", "D"], "rn": "Ger7"},
-        "b-": {"chord": ["A--", "C-", "E--", "G--"], "rn": "bVII7"},
         "c": {"chord": ["G", "B", "D", "F"], "rn": "V7"},
     },
     (2, 5, 8): {
@@ -583,10 +647,9 @@ frompcset = {
     (2, 5, 8, 10): {
         "D": {"chord": ["G#", "B-", "D", "F"], "rn": "Ger7"},
         "E-": {"chord": ["B-", "D", "F", "A-"], "rn": "V7"},
-        "c#": {"chord": ["B-", "D", "F", "A-"], "rn": "bVII7"},
+        "c": {"chord": ["B-", "D", "F", "A-"], "rn": "bVII7"},
         "d": {"chord": ["G#", "B-", "D", "F"], "rn": "Ger7"},
         "d#": {"chord": ["A#", "C##", "E#", "G#"], "rn": "V7"},
-        "d-": {"chord": ["C--", "E--", "G--", "B---"], "rn": "bVII7"},
         "e-": {"chord": ["B-", "D", "F", "A-"], "rn": "V7"},
     },
     (2, 5, 8, 11): {
@@ -609,17 +672,19 @@ frompcset = {
         "d": {"chord": ["B-", "D", "F", "A"], "rn": "VI7"},
         "g": {"chord": ["B-", "D", "F", "A"], "rn": "III7"},
     },
-    (2, 5, 9, 11): {"C": {"chord": ["B", "D", "F", "A"], "rn": "viiø7"}},
+    (2, 5, 9, 11): {
+        "C": {"chord": ["B", "D", "F", "A"], "rn": "viiø7"},
+        "a": {"chord": ["B", "D", "F", "A"], "rn": "iiø7"},
+    },
     (2, 5, 10): {
         "A": {"chord": ["B-", "D", "F"], "rn": "N"},
         "B-": {"chord": ["B-", "D", "F"], "rn": "I"},
         "E-": {"chord": ["B-", "D", "F"], "rn": "V"},
         "F": {"chord": ["B-", "D", "F"], "rn": "IV"},
         "a": {"chord": ["B-", "D", "F"], "rn": "N"},
-        "c#": {"chord": ["B-", "D", "F"], "rn": "bVII"},
+        "c": {"chord": ["B-", "D", "F"], "rn": "bVII"},
         "d": {"chord": ["B-", "D", "F"], "rn": "VI"},
         "d#": {"chord": ["A#", "C##", "E#"], "rn": "V"},
-        "d-": {"chord": ["C--", "E--", "G--"], "rn": "bVII"},
         "e-": {"chord": ["B-", "D", "F"], "rn": "V"},
         "g": {"chord": ["B-", "D", "F"], "rn": "III"},
     },
@@ -634,7 +699,10 @@ frompcset = {
         "b": {"chord": ["G", "B", "D", "F#"], "rn": "VI7"},
         "e": {"chord": ["G", "B", "D", "F#"], "rn": "III7"},
     },
-    (2, 6, 8, 11): {"A": {"chord": ["G#", "B", "D", "F#"], "rn": "viiø7"}},
+    (2, 6, 8, 11): {
+        "A": {"chord": ["G#", "B", "D", "F#"], "rn": "viiø7"},
+        "f#": {"chord": ["G#", "B", "D", "F#"], "rn": "iiø7"},
+    },
     (2, 6, 9): {
         "A": {"chord": ["D", "F#", "A"], "rn": "IV"},
         "C#": {"chord": ["D", "F#", "A"], "rn": "N"},
@@ -644,8 +712,7 @@ frompcset = {
         "b": {"chord": ["D", "F#", "A"], "rn": "III"},
         "c#": {"chord": ["D", "F#", "A"], "rn": "N"},
         "d-": {"chord": ["E--", "G-", "B--"], "rn": "N"},
-        "e#": {"chord": ["D", "F#", "A"], "rn": "bVII"},
-        "f": {"chord": ["E--", "G-", "B--"], "rn": "bVII"},
+        "e": {"chord": ["D", "F#", "A"], "rn": "bVII"},
         "f#": {"chord": ["D", "F#", "A"], "rn": "VI"},
         "g": {"chord": ["D", "F#", "A"], "rn": "V"},
     },
@@ -658,10 +725,14 @@ frompcset = {
         "f#": {"chord": ["B", "D", "F#", "A"], "rn": "iv7"},
     },
     (2, 6, 10): {
-        "b": {"chord": ["D", "F#", "A#"], "rn": "III+"},
-        "d#": {"chord": ["F#", "A#", "C##"], "rn": "III+"},
-        "e-": {"chord": ["G-", "B-", "D"], "rn": "III+"},
-        "g": {"chord": ["B-", "D", "F#"], "rn": "III+"},
+        "B": {"chord": ["F#", "A#", "C##"], "rn": "V+"},
+        "C-": {"chord": ["G-", "B-", "D"], "rn": "V+"},
+        "E-": {"chord": ["B-", "D", "F#"], "rn": "V+"},
+        "G": {"chord": ["D", "F#", "A#"], "rn": "V+"},
+        "b": {"chord": ["F#", "A#", "C##"], "rn": "V+"},
+        "d#": {"chord": ["A#", "C##", "E##"], "rn": "V+"},
+        "e-": {"chord": ["B-", "D", "F#"], "rn": "V+"},
+        "g": {"chord": ["D", "F#", "A#"], "rn": "V+"},
     },
     (2, 6, 11): {
         "A": {"chord": ["B", "D", "F#"], "rn": "ii"},
@@ -683,9 +754,8 @@ frompcset = {
         "F#": {"chord": ["G", "B", "D"], "rn": "N"},
         "G": {"chord": ["G", "B", "D"], "rn": "I"},
         "G-": {"chord": ["A--", "C-", "E--"], "rn": "N"},
-        "a#": {"chord": ["G", "B", "D"], "rn": "bVII"},
+        "a": {"chord": ["G", "B", "D"], "rn": "bVII"},
         "b": {"chord": ["G", "B", "D"], "rn": "VI"},
-        "b-": {"chord": ["A--", "C-", "E--"], "rn": "bVII"},
         "c": {"chord": ["G", "B", "D"], "rn": "V"},
         "e": {"chord": ["G", "B", "D"], "rn": "III"},
         "f#": {"chord": ["G", "B", "D"], "rn": "N"},
@@ -712,6 +782,8 @@ frompcset = {
     (3, 5, 8, 11): {
         "F#": {"chord": ["E#", "G#", "B", "D#"], "rn": "viiø7"},
         "G-": {"chord": ["F", "A-", "C-", "E-"], "rn": "viiø7"},
+        "d#": {"chord": ["E#", "G#", "B", "D#"], "rn": "iiø7"},
+        "e-": {"chord": ["F", "A-", "C-", "E-"], "rn": "iiø7"},
     },
     (3, 5, 9): {
         "A": {"chord": ["D#", "F", "A"], "rn": "It"},
@@ -748,8 +820,9 @@ frompcset = {
         "E": {"chord": ["B", "D#", "F#", "A"], "rn": "V7"},
         "E-": {"chord": ["A", "C-", "E-", "G-"], "rn": "Ger7"},
         "F-": {"chord": ["C-", "E-", "G-", "B--"], "rn": "V7"},
-        "d": {"chord": ["C-", "E-", "G-", "B--"], "rn": "bVII7"},
+        "c#": {"chord": ["B", "D#", "F#", "A"], "rn": "bVII7"},
         "d#": {"chord": ["G##", "B", "D#", "F#"], "rn": "Ger7"},
+        "d-": {"chord": ["C-", "E-", "G-", "B--"], "rn": "bVII7"},
         "e": {"chord": ["B", "D#", "F#", "A"], "rn": "V7"},
         "e-": {"chord": ["A", "C-", "E-", "G-"], "rn": "Ger7"},
     },
@@ -786,8 +859,9 @@ frompcset = {
         "a#": {"chord": ["B", "D#", "F#"], "rn": "N"},
         "a-": {"chord": ["C-", "E-", "G-"], "rn": "III"},
         "b-": {"chord": ["C-", "E-", "G-"], "rn": "N"},
-        "d": {"chord": ["C-", "E-", "G-"], "rn": "bVII"},
+        "c#": {"chord": ["B", "D#", "F#"], "rn": "bVII"},
         "d#": {"chord": ["B", "D#", "F#"], "rn": "VI"},
+        "d-": {"chord": ["C-", "E-", "G-"], "rn": "bVII"},
         "e": {"chord": ["B", "D#", "F#"], "rn": "V"},
         "e-": {"chord": ["C-", "E-", "G-"], "rn": "VI"},
         "g#": {"chord": ["B", "D#", "F#"], "rn": "III"},
@@ -801,7 +875,8 @@ frompcset = {
         "a-": {"chord": ["E-", "G", "B-"], "rn": "V"},
         "c": {"chord": ["E-", "G", "B-"], "rn": "III"},
         "d": {"chord": ["E-", "G", "B-"], "rn": "N"},
-        "f#": {"chord": ["E-", "G", "B-"], "rn": "bVII"},
+        "e#": {"chord": ["D#", "F##", "A#"], "rn": "bVII"},
+        "f": {"chord": ["E-", "G", "B-"], "rn": "bVII"},
         "g": {"chord": ["E-", "G", "B-"], "rn": "VI"},
         "g#": {"chord": ["D#", "F##", "A#"], "rn": "V"},
     },
@@ -810,10 +885,15 @@ frompcset = {
         "g#": {"chord": ["B", "D#", "F##", "A#"], "rn": "III+7"},
     },
     (3, 7, 11): {
-        "a-": {"chord": ["C-", "E-", "G"], "rn": "III+"},
-        "c": {"chord": ["E-", "G", "B"], "rn": "III+"},
-        "e": {"chord": ["G", "B", "D#"], "rn": "III+"},
-        "g#": {"chord": ["B", "D#", "F##"], "rn": "III+"},
+        "A-": {"chord": ["E-", "G", "B"], "rn": "V+"},
+        "C": {"chord": ["G", "B", "D#"], "rn": "V+"},
+        "E": {"chord": ["B", "D#", "F##"], "rn": "V+"},
+        "F-": {"chord": ["C-", "E-", "G"], "rn": "V+"},
+        "G#": {"chord": ["D#", "F##", "A##"], "rn": "V+"},
+        "a-": {"chord": ["E-", "G", "B"], "rn": "V+"},
+        "c": {"chord": ["G", "B", "D#"], "rn": "V+"},
+        "e": {"chord": ["B", "D#", "F##"], "rn": "V+"},
+        "g#": {"chord": ["D#", "F##", "A##"], "rn": "V+"},
     },
     (3, 8, 11): {
         "B": {"chord": ["G#", "B", "D#"], "rn": "vi"},
@@ -863,7 +943,7 @@ frompcset = {
         "d#": {"chord": ["E", "G#", "B"], "rn": "N"},
         "d-": {"chord": ["F-", "A-", "C-"], "rn": "III"},
         "e-": {"chord": ["F-", "A-", "C-"], "rn": "N"},
-        "g": {"chord": ["F-", "A-", "C-"], "rn": "bVII"},
+        "f#": {"chord": ["E", "G#", "B"], "rn": "bVII"},
         "g#": {"chord": ["E", "G#", "B"], "rn": "VI"},
     },
     (5, 7, 11): {

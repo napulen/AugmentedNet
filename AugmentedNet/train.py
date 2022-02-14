@@ -128,7 +128,7 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
             "ChordRoot35",
             "Inversion4",
             "PrimaryDegree22",
-            "RomanNumeral76",
+            "RomanNumeral35",
             "SecondaryDegree22",
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
@@ -190,9 +190,9 @@ def evaluate(modelHdf5, X_test, y_true):
         summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
         print(f"RomanNumeral: {summary['RomanNumeral']}")
     # The alternative approach proposed in Napoles Lopez et al. (2021)
-    if "RomanNumeral76" in df and "LocalKey35" in df and "Inversion4" in df:
+    if "RomanNumeral35" in df and "LocalKey35" in df and "Inversion4" in df:
         df["AltRomanNumeral"] = (
-            df.RomanNumeral76 & df.LocalKey35 & df.Inversion4
+            df.RomanNumeral35 & df.LocalKey35 & df.Inversion4
         )
         summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
         print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")

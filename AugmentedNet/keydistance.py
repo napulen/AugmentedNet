@@ -1,5 +1,6 @@
 """An auxiliary module to measure key distance."""
 
+import music21
 import numpy as np
 
 # The diagonal of keys in the Weber tonal chart
@@ -62,3 +63,15 @@ def weberEuclidean(k1, k2):
         if distance < smallerdistance:
             smallerdistance = distance
     return smallerdistance
+
+
+def getTonicizationScaleDegree(localKey, tonicizedKey):
+    """Return the Roman numeral degree of a tonicization (denominator)."""
+    tonic, _, third, _, fifth, _, _, _ = music21.key.Key(tonicizedKey).pitches
+    c1 = music21.chord.Chord([tonic, third, fifth])
+    # TODO: Use harmalysis to solve this problem, not romanNumeralFromChord
+    degree = music21.roman.romanNumeralFromChord(c1, localKey).figure
+    # TODO: This is a hack to workaround music21
+    if degree == "bVI":
+        degree = "VI"
+    return degree

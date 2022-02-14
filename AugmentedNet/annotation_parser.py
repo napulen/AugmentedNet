@@ -5,8 +5,9 @@ import numpy as np
 import pandas as pd
 import re
 
+from .cache import forceTonicization, getTonicizationScaleDegree
 from .common import FIXEDOFFSET, FLOATSCALE
-
+from .chord_vocabulary import frompcset, closestPcSet
 
 A_COLUMNS = [
     "a_offset",
@@ -80,48 +81,28 @@ def _initialDataFrame(s):
     """
     dfdict = {col: [] for col in A_COLUMNS}
     for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
-        if (
-            "Ger" not in rn.figure
-            and "Fr" not in rn.figure
-            and "It" not in rn.figure
-        ):
-            if rn.figure == "I4":
-                # found in wir-monteverdi-madrigals-book-3-10
-                rn.figure = "I"
-            if rn.figure == "iv4":
-                rn.figure = "iv"
-            if rn.figure == "v4":
-                rn.figure = "v"
-            if rn.figure == "V4":
-                rn.figure = "V"
-            rn.figure = _preprocessRomanNumeral(rn.figure)
+        rn, rncorr = _extractRomanNumeralInformation(rn)
+        rncorr = _correctRomanNumeral(rncorr)
         dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["a_measure"].append(rn.measureNumber)
         dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))
         dfdict["a_annotationNumber"].append(idx)
-        dfdict["a_romanNumeral"].append(_removeInversion(rn.figure))
+        dfdict["a_romanNumeral"].append(_removeInversion(rncorr["rn"]))
         dfdict["a_harmonicRhythm"].append(0)
-        dfdict["a_pitchNames"].append(tuple(rn.pitchNames))
-        dfdict["a_bass"].append(rn.pitchNames[0])
-        dfdict["a_tenor"].append(rn.pitchNames[1])
-        dfdict["a_alto"].append(rn.pitchNames[2])
-        if len(rn.pitchNames) == 4:
-            dfdict["a_soprano"].append(rn.pitchNames[3])
+        dfdict["a_pitchNames"].append(tuple(rncorr["pitchNames"]))
+        dfdict["a_bass"].append(rncorr["pitchNames"][0])
+        dfdict["a_tenor"].append(rncorr["pitchNames"][1])
+        dfdict["a_alto"].append(rncorr["pitchNames"][2])
+        if len(rncorr["pitchNames"]) == 4:
+            dfdict["a_soprano"].append(rncorr["pitchNames"][3])
         else:
-            dfdict["a_soprano"].append(rn.root().name)
-        dfdict["a_root"].append(rn.root().name)
-        dfdict["a_inversion"].append(rn.inversion())
+            dfdict["a_soprano"].append(rncorr["root"])
+        dfdict["a_root"].append(rncorr["root"])
+        dfdict["a_inversion"].append(rncorr["inversion"])
         dfdict["a_quality"].append(rn.commonName)
-        dfdict["a_pcset"].append(tuple(sorted(set(rn.pitchClasses))))
-        localKey = rn.key.tonicPitchNameWithCase
-        dfdict["a_localKey"].append(localKey)
-        secondaryKey = rn.secondaryRomanNumeralKey
-        if secondaryKey:
-            tonicizedKey = secondaryKey.tonicPitchNameWithCase
-            dfdict["a_tonicizedKey"].append(tonicizedKey)
-        else:
-            # if there is no tonicization, encode the local key
-            dfdict["a_tonicizedKey"].append(localKey)
+        dfdict["a_pcset"].append(rncorr["pcset"])
+        dfdict["a_localKey"].append(rncorr["localKey"])
+        dfdict["a_tonicizedKey"].append(rncorr["tonicizedKey"])
         scaleDegree, alteration = rn.scaleDegreeWithAlteration
         if alteration:
             scaleDegree = f"{alteration.modifier}{scaleDegree}"
@@ -141,6 +122,86 @@ def _initialDataFrame(s):
     df = pd.DataFrame(dfdict)
     df.set_index("a_offset", inplace=True)
     return df
+
+
+def _extractRomanNumeralInformation(rn):
+    """Hacks and workarounds to retrieve the RomanNumeral from music21."""
+    if (
+        "Ger" not in rn.figure
+        and "Fr" not in rn.figure
+        and "It" not in rn.figure
+    ):
+        if rn.figure in ["I4", "iv4", "v4", "V4"]:
+            rn.figure = rn.figure.replace("4", "")
+        if rn.figure in ["V9", "V7M9"]:
+            rn.figure = "V7"
+        rn.figure = _preprocessRomanNumeral(rn.figure)
+    romanNumeral = _removeInversion(rn.figure)
+    pcset = tuple(sorted(set(rn.pitchClasses)))
+    pitchNames = rn.pitchNames
+    localKey = rn.key.tonicPitchNameWithCase
+    secondaryKey = rn.secondaryRomanNumeralKey
+    if secondaryKey:
+        tonicizedKey = secondaryKey.tonicPitchNameWithCase
+    else:
+        tonicizedKey = localKey
+    if localKey == "c-":
+        # It happens for one measure in a piece by Wolf and c- is a stretch
+        localKey = "b"
+        tonicizedKey = "b"
+    cleaned = {
+        "rn": romanNumeral,
+        "pcset": pcset,
+        "pitchNames": pitchNames,
+        "localKey": localKey,
+        "tonicizedKey": tonicizedKey,
+    }
+    return rn, cleaned
+
+
+def _correctRomanNumeral(rndata):
+    """Trust nobody. Rewrite all Roman numerals based on chord vocabulary."""
+    rn = rndata["rn"]
+    pcset = rndata["pcset"]
+    pitchNames = rndata["pitchNames"]
+    localKey = rndata["localKey"]
+    tonicizedKey = rndata["tonicizedKey"]
+    # CHORD (PCSET)
+    if not pcset in frompcset:
+        # We get a valid pcset yes or yes
+        pcset = closestPcSet(pcset)
+    # TONICIZATION
+    if tonicizedKey not in frompcset[pcset]:
+        # Find a new tonicizedKey
+        candidateKeys = list(frompcset[pcset].keys())
+        tonicizedKey = forceTonicization(localKey, candidateKeys)
+    chord = frompcset[pcset][tonicizedKey]["chord"]
+    root = chord[0]
+    numerator = frompcset[pcset][tonicizedKey]["rn"]
+    myrn = numerator
+    if tonicizedKey != localKey:
+        denominator = getTonicizationScaleDegree(localKey, tonicizedKey)
+        if denominator not in ["i", "I"]:
+            myrn += f"/{denominator}"
+    # INVERSION
+    presumedBass = pitchNames[0]
+    inversion = chord.index(presumedBass) if presumedBass in chord else 0
+    pitchNames = chord[inversion:] + chord[:inversion]
+    # CADENTIAL
+    if "Cad" in rn and numerator in ["I", "i"] and inversion == 2:
+        print("Found a cadential")
+        myrn = myrn.replace(numerator, "Cad", 1)
+        numerator = "Cad"
+    if rn != myrn:
+        mode = "minor" if localKey.islower() else "major"
+        print(f"\t\t{rn} -> {myrn}\t{pcset}{mode}")
+    rndata["rn"] = numerator # without tonicizations
+    rndata["pcset"] = pcset
+    rndata["tonicizedKey"] = tonicizedKey
+    rndata["pitchNames"] = pitchNames
+    rndata["root"] = root
+    rndata["inversion"] = inversion
+    return rndata
 
 
 def _harmonicRhythmPostprocessing(a_harmonicRhythm):

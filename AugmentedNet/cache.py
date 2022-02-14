@@ -3,6 +3,8 @@
 from music21.key import Key
 from music21.pitch import Pitch
 from music21.interval import Interval
+from .keydistance import weberEuclidean as _we
+from .keydistance import getTonicizationScaleDegree as _gtsd
 
 _transposeKey = {}
 _transposePitch = {}
@@ -10,6 +12,46 @@ _transposePcSet = {}
 _pitchObj = {}
 _keyObj = {}
 _intervalObj = {}
+_weberEuclidean = {}
+_getTonicizationScaleDegree = {}
+
+
+def weberEuclidean(k1, k2):
+    """A cached version of keydistance.weberEuclidean."""
+    duple = (k1, k2)
+    if duple in _weberEuclidean:
+        return _weberEuclidean[duple]
+    distance = _we(k1, k2)
+    _weberEuclidean[duple] = distance
+    return distance
+
+
+def getTonicizationScaleDegree(localKey, tonicizedKey):
+    """A cached version of keydistance.weberEuclidean."""
+    duple = (localKey, tonicizedKey)
+    if duple in _getTonicizationScaleDegree:
+        return _getTonicizationScaleDegree[duple]
+    degree = _gtsd(localKey, tonicizedKey)
+    _getTonicizationScaleDegree[duple] = degree
+    return degree
+
+
+def forceTonicization(localKey, candidateKeys):
+    tonicizationDistance = 1337
+    tonicization = ""
+    for candidateKey in candidateKeys:
+        distance = weberEuclidean(localKey, candidateKey)
+        print(f"\t{localKey} -> {candidateKey} = {distance}")
+        scaleDegree = getTonicizationScaleDegree(localKey, candidateKey)
+        if scaleDegree.lower() != "i":
+            # Slight preference for tonal scale degrees
+            distance *= 1.05
+        if scaleDegree.lower() not in ["i", "iv", "v"]:
+            distance *= 1.05
+        if distance < tonicizationDistance:
+            tonicization = candidateKey
+            tonicizationDistance = distance
+    return tonicization
 
 
 def TransposeKey(key, interval):
