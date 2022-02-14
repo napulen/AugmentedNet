@@ -13,7 +13,7 @@ from AugmentedNet.output_representations import (
     LocalKey35,
     PrimaryDegree22,
     SecondaryDegree22,
-    ChordQuality15,
+    ChordQuality11,
     ChordRoot35,
     TonicizedKey35,
     HarmonicRhythm7,
@@ -134,12 +134,6 @@ class TestRomanNumeral31(TestBass35):
     encodingGT = aux.haydnRomanNumeral31
     dfFeature = "a_romanNumeral"
 
-    def test_encoding(self):
-        super().test_encoding()
-
-    def test_decoding(self):
-        super().test_decoding()
-
 
 class TestLocalKey35(TestBass35):
     clas = LocalKey35
@@ -159,23 +153,16 @@ class TestSecondaryDegree22(TestBass35):
     dfFeature = "a_degree2"
 
 
-class TestChordQuality15(TestBass35):
-    clas = ChordQuality15
-    encodingGT = aux.haydnChordQuality15
+class TestChordQuality11(TestBass35):
+    clas = ChordQuality11
+    encodingGT = aux.haydnChordQuality11
     dfFeature = "a_quality"
 
+    def test_encoding(self):
+        super().test_encoding()
+
     def test_decoding(self):
-        encoding = self.clas(self.df).array.reshape(-1)
-        decoded = self.clas.decode(encoding)
-        for timestep, (gt, x) in enumerate(
-            zip(self.df[self.dfFeature], decoded)
-        ):
-            if gt not in CHORD_QUALITIES:
-                # Chord quality is a lossy classifier
-                # some classes are not predicted
-                gt = "None"
-            with self.subTest(timestep=timestep):
-                self.assertEqual(gt, x)
+        super().test_decoding()
 
 
 class TestChordRoot35(TestBass35):
