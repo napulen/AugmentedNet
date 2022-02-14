@@ -9,7 +9,7 @@ from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
 from AugmentedNet.output_representations import (
     Bass35,
     Inversion4,
-    RomanNumeral35,
+    RomanNumeral31,
     LocalKey35,
     PrimaryDegree22,
     SecondaryDegree22,
@@ -42,6 +42,15 @@ def _plot_array(arr):
 
 def _save(arr):
     np.savetxt("tmp.txt", arr, fmt="%i", delimiter=" ")
+
+
+def _one_hot_encode(encoding, classList):
+    timesteps = len(encoding)
+    features = len(classList)
+    array = np.zeros((timesteps, features), dtype="i8")
+    for t, enc in enumerate(encoding):
+        array[t, enc] = 1
+    return array
 
 
 class TestBass35(unittest.TestCase):
@@ -120,9 +129,9 @@ class TestInversion4(TestBass35):
     dfFeature = "a_inversion"
 
 
-class TestRomanNumeral35(TestBass35):
-    clas = RomanNumeral35
-    encodingGT = aux.haydnRomanNumeral35
+class TestRomanNumeral31(TestBass35):
+    clas = RomanNumeral31
+    encodingGT = aux.haydnRomanNumeral31
     dfFeature = "a_romanNumeral"
 
     def test_encoding(self):

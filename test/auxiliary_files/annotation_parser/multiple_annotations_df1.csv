@@ -12,7 +12,7 @@ a_offset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_harmonicRhythm
 11.0,4,1.0,10,V,0,"('G', 'B', 'D')",G,B,D,G,G,0,major triad,"(2, 7, 11)",C,C,5,None
 12.0,5,1.0,11,i,0,"('C', 'E-', 'G')",C,E-,G,C,C,0,minor triad,"(0, 3, 7)",c,c,1,None
 13.0,5,1.0,12,iio,0,"('D', 'F', 'A-')",D,F,A-,D,D,0,diminished triad,"(2, 5, 8)",c,c,2,None
-14.0,5,1.0,13,III,0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0,major triad,"(3, 7, 10)",c,c,3,None
+14.0,5,1.0,13,I,0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0,major triad,"(3, 7, 10)",c,E-,3,None
 15.0,6,1.0,14,N,0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1,major triad,"(1, 5, 8)",c,c,-2,None
 16.0,6,1.0,15,Cad,0,"('G', 'C', 'E-')",G,C,E-,C,C,2,minor triad,"(0, 3, 7)",c,c,1,None
 17.0,6,1.0,16,V,0,"('G', 'B', 'D')",G,B,D,G,G,0,major triad,"(2, 7, 11)",c,c,5,None

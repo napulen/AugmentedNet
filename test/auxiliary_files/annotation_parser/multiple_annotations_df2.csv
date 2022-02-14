@@ -55,10 +55,10 @@ a_offset,a_measure,a_duration,a_annotationNumber,a_romanNumeral,a_harmonicRhythm
 13.25,5.0,1.0,12.0,iio,1.0,"('D', 'F', 'A-')",D,F,A-,D,D,0.0,diminished triad,"(2, 5, 8)",c,c,2,None
 13.5,5.0,1.0,12.0,iio,2.0,"('D', 'F', 'A-')",D,F,A-,D,D,0.0,diminished triad,"(2, 5, 8)",c,c,2,None
 13.75,5.0,1.0,12.0,iio,2.0,"('D', 'F', 'A-')",D,F,A-,D,D,0.0,diminished triad,"(2, 5, 8)",c,c,2,None
-14.0,5.0,1.0,13.0,III,0.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
-14.25,5.0,1.0,13.0,III,1.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
-14.5,5.0,1.0,13.0,III,2.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
-14.75,5.0,1.0,13.0,III,2.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,c,3,None
+14.0,5.0,1.0,13.0,I,0.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,E-,3,None
+14.25,5.0,1.0,13.0,I,1.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,E-,3,None
+14.5,5.0,1.0,13.0,I,2.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,E-,3,None
+14.75,5.0,1.0,13.0,I,2.0,"('E-', 'G', 'B-')",E-,G,B-,E-,E-,0.0,major triad,"(3, 7, 10)",c,E-,3,None
 15.0,6.0,1.0,14.0,N,0.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
 15.25,6.0,1.0,14.0,N,1.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None
 15.5,6.0,1.0,14.0,N,2.0,"('F', 'A-', 'D-')",F,A-,D-,D-,D-,1.0,major triad,"(1, 5, 8)",c,c,-2,None

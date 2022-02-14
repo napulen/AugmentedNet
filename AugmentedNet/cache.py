@@ -47,7 +47,7 @@ def forceTonicization(localKey, candidateKeys):
         if scaleDegree not in ["i", "III"]:
             # Slight preference for parallel minor and relative major
             distance *= 1.05
-        if scaleDegree not in ["i", "III", "iv", "IV", "v", "V"]:
+        if scaleDegree not in ["i", "I", "III", "iv", "IV", "v", "V"]:
             distance *= 1.05
         if distance < tonicizationDistance:
             tonicization = candidateKey

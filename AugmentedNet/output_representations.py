@@ -134,7 +134,7 @@ class HarmonicRhythm7(OutputRepresentationTI):
     dfFeature = "a_harmonicRhythm"
 
 
-class RomanNumeral35(OutputRepresentationTI):
+class RomanNumeral31(OutputRepresentationTI):
     classList = COMMON_ROMAN_NUMERALS
     dfFeature = "a_romanNumeral"
 
@@ -190,7 +190,7 @@ available_representations = {
     "LocalKey35": LocalKey35,
     "PitchClassSet121": PitchClassSet121,
     "PrimaryDegree22": PrimaryDegree22,
-    "RomanNumeral35": RomanNumeral35,
+    "RomanNumeral31": RomanNumeral31,
     "SecondaryDegree22": SecondaryDegree22,
     "TonicizedKey35": TonicizedKey35,
 }
