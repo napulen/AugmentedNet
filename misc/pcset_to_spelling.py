@@ -36,8 +36,10 @@ def fillpcset(key, deg):
     pcset = tuple(sorted(set(rn.pitchClasses)))
     if not pcset in pcsets:
         pcsets[pcset] = {}
-    if not key in pcsets[pcset]:
-        pcsets[pcset][key] = {}
+    if key in pcsets[pcset]:
+        print(f"COLLISION between {rntext} and {pcsets[pcset][key]}")
+        return
+    pcsets[pcset][key] = {}
     pcsets[pcset][key]["chord"] = rn.pitchNames
     if deg == "bII":
         deg = "N"
@@ -48,22 +50,22 @@ if __name__ == "__main__":
     start, end = -8, 8
     majorkeys = range_lof(start, end, mode="major")
     minorkeys = range_lof(start, end, mode="minor")
-
-    degreesmajor = ["I", "ii", "iii", "IV", "V", "vi", "viio"]
+    degreesmajor = ["I", "ii", "iii", "IV", "V", "V+", "vi", "viio"]
     degreesminor = [
         "i",
         "iio",
-        "III",
+        # "III",
         "III+",
         "iv",
         "V",
         "VI",
-        "bVII",
+        # "bVII",
         "viio",
     ]
     degreesmajor7 = [f"{c}7".replace("viio7", "viiø7") for c in degreesmajor]
+    degreesmajor7.remove("V+7")
     degreesminor7 = [f"{c}7" if c != "iio" else "iiø7" for c in degreesminor]
-    special = ["V+", "bII", "Ger7", "Fr7", "It"]
+    special = ["bII", "Ger7", "Fr7", "It"]
 
     for key in majorkeys:
         for deg in degreesmajor + degreesmajor7 + special:
