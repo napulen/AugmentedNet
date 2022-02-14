@@ -154,7 +154,7 @@
             <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_soprano&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_root&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_inversion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;inversion&quot;</span><span class="p">])</span>
-        <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_quality&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">commonName</span><span class="p">)</span>
+        <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_quality&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;quality&quot;</span><span class="p">])</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_pcset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;pcset&quot;</span><span class="p">])</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_localKey&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;localKey&quot;</span><span class="p">])</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_tonicizedKey&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;tonicizedKey&quot;</span><span class="p">])</span>
@@ -233,6 +233,7 @@
     <span class="n">chord</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;chord&quot;</span><span class="p">]</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">chord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">numerator</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span>
+    <span class="n">quality</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;quality&quot;</span><span class="p">]</span>
     <span class="n">myrn</span> <span class="o">=</span> <span class="n">numerator</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="o">!=</span> <span class="n">localKey</span><span class="p">:</span>
         <span class="n">denominator</span> <span class="o">=</span> <span class="n">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
@@ -244,7 +245,7 @@
     <span class="n">pitchNames</span> <span class="o">=</span> <span class="n">chord</span><span class="p">[</span><span class="n">inversion</span><span class="p">:]</span> <span class="o">+</span> <span class="n">chord</span><span class="p">[:</span><span class="n">inversion</span><span class="p">]</span>
     <span class="c1"># CADENTIAL</span>
     <span class="k">if</span> <span class="s2">&quot;Cad&quot;</span> <span class="ow">in</span> <span class="n">rn</span> <span class="ow">and</span> <span class="n">numerator</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">inversion</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found a cadential&quot;</span><span class="p">)</span>
+        <span class="c1"># print(&quot;Found a cadential&quot;)</span>
         <span class="n">myrn</span> <span class="o">=</span> <span class="n">myrn</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="s2">&quot;Cad&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">numerator</span> <span class="o">=</span> <span class="s2">&quot;Cad&quot;</span>
     <span class="k">if</span> <span class="n">rn</span> <span class="o">!=</span> <span class="n">myrn</span><span class="p">:</span>
@@ -256,6 +257,7 @@
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;pitchNames&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pitchNames</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;inversion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inversion</span>
+    <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;quality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quality</span>
     <span class="k">return</span> <span class="n">rndata</span>
 
 

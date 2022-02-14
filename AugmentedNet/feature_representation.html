@@ -179,23 +179,16 @@
     <span class="s2">&quot;e#&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">CHORD_QUALITIES</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;major triad&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;minor triad&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;diminished triad&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;augmented triad&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;minor seventh chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;major seventh chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dominant seventh chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incomplete dominant-seventh chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;diminished seventh chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;half-diminished seventh chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;augmented sixth&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;German augmented sixth chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;French augmented sixth chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Italian augmented sixth chord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;minor-augmented tetrachord&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+<span class="n">CHORD_QUALITIES</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+    <span class="nb">sorted</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">key</span><span class="p">[</span><span class="s2">&quot;quality&quot;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 
 <span class="n">COMMON_ROMAN_NUMERALS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
