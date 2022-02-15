@@ -31,12 +31,6 @@
         <h2>API Documentation</h2>
             <ul class="memberlist">
             <li>
-                    <a class="function" href="#tensorflowGPUHack">tensorflowGPUHack</a>
-            </li>
-            <li>
-                    <a class="function" href="#disableGPU">disableGPU</a>
-            </li>
-            <li>
                     <a class="function" href="#solveChordSegmentation">solveChordSegmentation</a>
             </li>
             <li>
@@ -90,6 +84,7 @@
 <span class="kn">from</span> <span class="nn">.output_representations</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableOutputs</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">tensorflowGPUHack</span><span class="p">,</span> <span class="n">disableGPU</span><span class="p">,</span> <span class="n">padToSequenceLength</span>
 
 
 <span class="n">inversions</span> <span class="o">=</span> <span class="p">{</span>
@@ -105,28 +100,6 @@
         <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
-
-
-<span class="k">def</span> <span class="nf">tensorflowGPUHack</span><span class="p">():</span>
-    <span class="c1"># https://github.com/tensorflow/tensorflow/issues/37942</span>
-    <span class="n">gpu_devices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">gpu_devices</span><span class="p">:</span>
-        <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">set_memory_growth</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">disableGPU</span><span class="p">():</span>
-    <span class="c1"># Disabling the GPU</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
-
-
-<span class="k">def</span> <span class="nf">_padToSequenceLength</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">):</span>
-    <span class="n">frames</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">featuresPerSequence</span> <span class="o">=</span> <span class="n">sequenceLength</span> <span class="o">*</span> <span class="n">features</span>
-    <span class="n">featuresInExample</span> <span class="o">=</span> <span class="n">frames</span> <span class="o">*</span> <span class="n">features</span>
-    <span class="n">padding</span> <span class="o">=</span> <span class="n">featuresPerSequence</span> <span class="o">-</span> <span class="p">(</span><span class="n">featuresInExample</span> <span class="o">%</span> <span class="n">featuresPerSequence</span><span class="p">)</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">padding</span><span class="p">))</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">arr</span>
 
 
 <span class="k">def</span> <span class="nf">solveChordSegmentation</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -213,7 +186,7 @@
     <span class="n">encodedInputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">availableInputs</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">df</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">]</span>
     <span class="n">outputLayers</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
     <span class="c1"># TODO: How to decide the sequence length?</span>
-    <span class="n">modelInputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_padToSequenceLength</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">encodedInputs</span><span class="p">]</span>
+    <span class="n">modelInputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">encodedInputs</span><span class="p">]</span>
     <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">modelInputs</span><span class="p">)</span>
     <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">]</span>
     <span class="n">dfdict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -285,48 +258,6 @@
         </details>
 
             </section>
-                <section id="tensorflowGPUHack">
-                            <div class="attr function"><a class="headerlink" href="#tensorflowGPUHack">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">tensorflowGPUHack</span><span class="signature">()</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">tensorflowGPUHack</span><span class="p">():</span>
-    <span class="c1"># https://github.com/tensorflow/tensorflow/issues/37942</span>
-    <span class="n">gpu_devices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">gpu_devices</span><span class="p">:</span>
-        <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">set_memory_growth</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="disableGPU">
-                            <div class="attr function"><a class="headerlink" href="#disableGPU">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">disableGPU</span><span class="signature">()</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">disableGPU</span><span class="p">():</span>
-    <span class="c1"># Disabling the GPU</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
                 <section id="solveChordSegmentation">
                             <div class="attr function"><a class="headerlink" href="#solveChordSegmentation">#&nbsp;&nbsp</a>
 
@@ -481,7 +412,7 @@
     <span class="n">encodedInputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">availableInputs</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">df</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">]</span>
     <span class="n">outputLayers</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
     <span class="c1"># TODO: How to decide the sequence length?</span>
-    <span class="n">modelInputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_padToSequenceLength</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">encodedInputs</span><span class="p">]</span>
+    <span class="n">modelInputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">encodedInputs</span><span class="p">]</span>
     <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">modelInputs</span><span class="p">)</span>
     <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">]</span>
     <span class="n">dfdict</span> <span class="o">=</span> <span class="p">{}</span>
