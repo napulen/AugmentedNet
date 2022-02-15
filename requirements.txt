@@ -4,3 +4,4 @@ music21==6.7.1
 mlflow==1.23.1
 black==20.8b1
 pdoc==10.0.1
+coverage==6.3.1
