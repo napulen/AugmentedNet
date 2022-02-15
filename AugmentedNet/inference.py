@@ -16,6 +16,7 @@ from .input_representations import available_representations as availableInputs
 from .output_representations import (
     available_representations as availableOutputs,
 )
+from .utils import tensorflowGPUHack, disableGPU, padToSequenceLength
 
 
 inversions = {
@@ -31,28 +32,6 @@ inversions = {
         3: "2",
     },
 }
-
-
-def tensorflowGPUHack():
-    # https://github.com/tensorflow/tensorflow/issues/37942
-    gpu_devices = tf.config.experimental.list_physical_devices("GPU")
-    for device in gpu_devices:
-        tf.config.experimental.set_memory_growth(device, True)
-
-
-def disableGPU():
-    # Disabling the GPU
-    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-
-
-def _padToSequenceLength(arr, sequenceLength):
-    frames, features = arr.shape
-    featuresPerSequence = sequenceLength * features
-    featuresInExample = frames * features
-    padding = featuresPerSequence - (featuresInExample % featuresPerSequence)
-    arr = np.pad(arr.reshape(-1), (0, padding))
-    arr = arr.reshape(-1, sequenceLength, features)
-    return arr
 
 
 def solveChordSegmentation(df):
@@ -139,7 +118,7 @@ def predict(modelPath, inputFile, useGpu=False):
     encodedInputs = [availableInputs[i](df) for i in inputs]
     outputLayers = [l.name.split("/")[0] for l in model.outputs]
     # TODO: How to decide the sequence length?
-    modelInputs = [_padToSequenceLength(i.array, 640) for i in encodedInputs]
+    modelInputs = [padToSequenceLength(i.array, 640) for i in encodedInputs]
     predictions = model.predict(modelInputs)
     predictions = [p.reshape(1, -1, p.shape[2]) for p in predictions]
     dfdict = {}

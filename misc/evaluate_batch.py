@@ -9,13 +9,7 @@ from AugmentedNet.train import loadData, _loadNpz, InputOutput
 from AugmentedNet.output_representations import (
     available_representations as availableOutputs,
 )
-
-
-def tensorflowGPUHack():
-    # https://github.com/tensorflow/tensorflow/issues/37942
-    gpu_devices = tf.config.experimental.list_physical_devices("GPU")
-    for device in gpu_devices:
-        tf.config.experimental.set_memory_growth(device, True)
+from AugmentedNet.utils import tensorflowGPUHack
 
 
 OUTPUTS = [
