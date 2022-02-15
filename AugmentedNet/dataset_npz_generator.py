@@ -28,13 +28,13 @@ def _padToSequenceLength(arr, sequenceLength):
 
 
 def _getTranspositions(df):
-    localKeys = df.a_localKey.to_list()
-    localKeys = set(localKeys)
+    tonicizedKeys = df.a_tonicizedKey.to_list()
+    tonicizedKeys = set(tonicizedKeys)
     ret = []
     for interval in INTERVALCLASSES:
         if interval == "P1":
             continue
-        transposed = [TransposeKey(k, interval) for k in localKeys]
+        transposed = [TransposeKey(k, interval) for k in tonicizedKeys]
         # Transpose to this interval if every modulation lies within
         # the set of KEY classes that we can classify
         if set(transposed).issubset(set(KEYS)):
