@@ -1,15 +1,11 @@
-# %%
-import sys; sys.path.insert(0, "..")
+import sys
 
-# %% [markdown]
-# What's the name of chord `X` in `Y` key?
+sys.path.insert(0, "..")
 
-# %%
 from AugmentedNet.chord_vocabulary import frompcset
 from AugmentedNet.feature_representation import KEYS
 from AugmentedNet.cache import forceTonicization, getTonicizationScaleDegree
 
-# %%
 for pcs in frompcset:
     print(f"Chord {pcs} is called...")
     for key in KEYS:
@@ -26,10 +22,3 @@ for pcs in frompcset:
                 denominator = getTonicizationScaleDegree(key, tonicizedKey)
                 rn += f"/{denominator}"
             print(f"\t{key}:{rn}")
-
-
-
-# %%
-
-
-

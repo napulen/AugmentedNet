@@ -198,7 +198,7 @@ def _correctRomanNumeral(rndata):
     if rn != myrn:
         mode = "minor" if localKey.islower() else "major"
         print(f"\t\t{rn} -> {myrn}\t{pcset}{mode}")
-    rndata["rn"] = numerator # without tonicizations
+    rndata["rn"] = numerator  # without tonicizations
     rndata["pcset"] = pcset
     rndata["tonicizedKey"] = tonicizedKey
     rndata["pitchNames"] = pitchNames
