@@ -28,7 +28,7 @@ def _padToSequenceLength(arr, sequenceLength):
 
 
 def _getTranspositions(df):
-    tonicizedKeys = df.a_tonicizedKey.to_list()
+    tonicizedKeys = df.a_localKey.to_list() + df.a_tonicizedKey.to_list()
     tonicizedKeys = set(tonicizedKeys)
     ret = []
     for interval in INTERVALCLASSES:
