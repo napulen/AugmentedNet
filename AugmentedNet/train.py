@@ -22,6 +22,7 @@ from .input_representations import (
 from .output_representations import (
     available_representations as availableOutputs,
 )
+from .utils import tensorflowGPUHack, disableGPU
 
 
 class InputOutput(object):
@@ -38,18 +39,6 @@ class InputOutput(object):
 
     def __repr__(self):
         return str(self)
-
-
-def tensorflowGPUHack():
-    # https://github.com/tensorflow/tensorflow/issues/37942
-    gpu_devices = tf.config.experimental.list_physical_devices("GPU")
-    for device in gpu_devices:
-        tf.config.experimental.set_memory_growth(device, True)
-
-
-def disableGPU():
-    # Disabling the GPU
-    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
 def _loadNpz(npzPath, synthetic=False):

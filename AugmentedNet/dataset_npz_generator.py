@@ -15,16 +15,7 @@ from .joint_parser import J_LISTTYPE_COLUMNS
 from .output_representations import (
     available_representations as availableOutputs,
 )
-
-
-def _padToSequenceLength(arr, sequenceLength):
-    frames, features = arr.shape
-    featuresPerSequence = sequenceLength * features
-    featuresInExample = frames * features
-    padding = featuresPerSequence - (featuresInExample % featuresPerSequence)
-    arr = np.pad(arr.reshape(-1), (0, padding))
-    arr = arr.reshape(-1, sequenceLength, features)
-    return arr
+from .utils import padToSequenceLength
 
 
 def _getTranspositions(df):
@@ -106,7 +97,7 @@ def generateDataset(
         for inputRepresentation in inputRepresentations:
             inputLayer = availableInputs[inputRepresentation](df)
             Xi = inputLayer.array
-            Xi = _padToSequenceLength(Xi, sequenceLength)
+            Xi = padToSequenceLength(Xi, sequenceLength)
             if dataAugmentation and split == "training":
                 transpositions = _getTranspositions(df)
                 print("\t", transpositions)
@@ -116,9 +107,7 @@ def generateDataset(
                     Xi = np.concatenate(
                         (
                             Xi,
-                            _padToSequenceLength(
-                                transposition, sequenceLength
-                            ),
+                            padToSequenceLength(transposition, sequenceLength),
                         )
                     )
             npzfile = f"{split}_X_{inputRepresentation}"
@@ -127,13 +116,13 @@ def generateDataset(
         for outputRepresentation in outputRepresentations:
             outputLayer = availableOutputs[outputRepresentation](df)
             yi = outputLayer.array
-            yi = _padToSequenceLength(yi, sequenceLength)
+            yi = padToSequenceLength(yi, sequenceLength)
             if dataAugmentation and split == "training":
                 for tr in outputLayer.dataAugmentation(transpositions):
                     yi = np.concatenate(
                         (
                             yi,
-                            _padToSequenceLength(tr, sequenceLength),
+                            padToSequenceLength(tr, sequenceLength),
                         )
                     )
 
