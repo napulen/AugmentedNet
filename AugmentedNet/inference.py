@@ -69,7 +69,7 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     # if the chord is nondiatonic to the tonicizedKey
     # force a tonicization where the chord does exist
     if tonicizedKey not in frompcset[pcset]:
-        print("Forcing a tonicization")
+        # print("Forcing a tonicization")
         candidateKeys = list(frompcset[pcset].keys())
         # prioritize modal mixture
         parallel = tonicizedKey.lower()
