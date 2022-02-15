@@ -73,7 +73,7 @@ tensorflow==2.5.0
 tensorflow-estimator==2.5.0
 termcolor==1.1.0
 tomli==2.0.1
-typing-extensions==4.1.1
+typing-extensions==3.7.4
 urllib3==1.26.8
 webcolors==1.11.1
 websocket-client==1.2.3
