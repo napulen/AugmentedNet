@@ -131,10 +131,12 @@ def _extractRomanNumeralInformation(rn):
         and "Fr" not in rn.figure
         and "It" not in rn.figure
     ):
-        if rn.figure in ["I4", "iv4", "v4", "V4"]:
-            rn.figure = rn.figure.replace("4", "")
+        if rn.figure in ["I4", "iv4", "v4", "V4", "I54", "i54"]:
+            rn.figure = rn.figure.replace("5", "").replace("4", "")
         if rn.figure in ["V9", "V7M9"]:
             rn.figure = "V7"
+        if rn.figure == "iio7":
+            rn.figure = "iiø7"
         rn.figure = _preprocessRomanNumeral(rn.figure)
     romanNumeral = _removeInversion(rn.figure)
     pcset = tuple(sorted(set(rn.pitchClasses)))
