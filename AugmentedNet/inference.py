@@ -5,6 +5,7 @@ import os
 import music21
 import numpy as np
 import pandas as pd
+import re
 import tensorflow as tf
 from tensorflow import keras
 
@@ -34,6 +35,22 @@ inversions = {
 }
 
 
+def formatChordLabel(cl):
+    """Format the chord label for end-user presentation."""
+    # The only change I can think of: Cmaj -> C
+    cl = cl.replace("maj", "") if cl.endswith("maj") else cl
+    cl = cl.replace("-", "b")
+    return cl
+
+
+def formatRomanNumeral(rn, key):
+    """Format the Roman numeral label for end-user presentation."""
+    # Something of "I" and "I" of something
+    if rn == "I/I":
+        rn = "I"
+    return rn
+
+
 def solveChordSegmentation(df):
     return df.dropna()[df.HarmonicRhythm7 == 0]
 
@@ -41,24 +58,21 @@ def solveChordSegmentation(df):
 def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     chord = music21.chord.Chord(f"{b}2 {t}3 {a}4 {s}5")
     pcset = tuple(sorted(set(chord.pitchClasses)))
+    pcset = (0, 0, 0)
     # if the SATB notes don't make sense, use the pcset classifier
     if pcset not in frompcset:
         # which is guaranteed to exist in the chord vocabulary
-        pcset = pcs if pcs != "None" else (0, 4, 7)
+        pcset = pcs
     # if the chord is nondiatonic to the tonicizedKey
     # force a tonicization where the chord does exist
     if tonicizedKey not in frompcset[pcset]:
         # print("Forcing a tonicization")
         candidateKeys = list(frompcset[pcset].keys())
         # prioritize modal mixture
-        parallel = tonicizedKey.lower()
-        if parallel in candidateKeys:
-            print(f"\tTonicizing the parallel, {parallel}")
-            tonicizedKey = parallel
-        else:
-            tonicizedKey = forceTonicization(key, candidateKeys)
+        tonicizedKey = forceTonicization(key, candidateKeys)
     rnfigure = frompcset[pcset][tonicizedKey]["rn"]
     chord = frompcset[pcset][tonicizedKey]["chord"]
+    quality = frompcset[pcset][tonicizedKey]["quality"]
     chordtype = "seventh" if len(pcset) == 4 else "triad"
     # if you can't find the predicted bass
     # in the pcset, assume root position
@@ -68,43 +82,12 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
         rnfigure = rnfigure.replace("7", invfigure)
     elif invfigure in ["6", "64"]:
         rnfigure += invfigure
-    rn = music21.roman.RomanNumeral(rnfigure, tonicizedKey)
+    rn = rnfigure
     if tonicizedKey != key:
         denominator = getTonicizationScaleDegree(key, tonicizedKey)
-        rn = music21.roman.RomanNumeral(f"{rn.figure}/{denominator}", key)
-    return rn
-
-
-def simplifyChordLabel(label):
-    label = label.replace("-incomplete ", "-")
-    label = label.replace("-major triad", "")
-    label = label.replace("-minor triad", "min")
-    label = label.replace("-diminished triad", "dim")
-    label = label.replace("-augmented triad", "aug")
-    label = label.replace("-dominant seventh chord", "7")
-    label = label.replace("-major seventh chord", "maj7")
-    label = label.replace("-minor seventh chord", "min7")
-    label = label.replace("-minor-seventh chord", "min7")
-    label = label.replace("-half-diminished seventh chord", "hdim7")
-    label = label.replace("-diminished seventh chord", "dim7")
-    label = label.replace("-German augmented sixth chord", "Ger")
-    return label
-
-
-def simplifyArabicNumerals(figure):
-    # Diminished seventh of a major key
-    figure = figure.replace("b753", "7")
-    figure = figure.replace("6b5", "65")
-    figure = figure.replace("64b3", "43")
-    # Another diminished seventh case
-    figure = figure.replace("#653", "65")
-    figure = figure.replace("6#43", "65")
-    figure = figure.replace("64#2", "65")
-    # Dominant seventh of a minor key
-    figure = figure.replace("75#3", "7")
-    figure = figure.replace("#643", "43")
-    figure = figure.replace("6#42", "2")
-    return figure
+        rn = f"{rn}/{denominator}"
+    chordLabel = f"{chord[0]}{quality}"
+    return rn, chordLabel
 
 
 def predict(modelPath, inputFile, useGpu=False):
@@ -156,7 +139,7 @@ def predict(modelPath, inputFile, useGpu=False):
         thiskey = analysis.LocalKey35
         tonicizedKey = analysis.TonicizedKey35
         pcset = analysis.PitchClassSet121
-        rn2 = resolveRomanNumeral(
+        rn2, chordLabel = resolveRomanNumeral(
             analysis.Bass35,
             analysis.Tenor35,
             analysis.Alto35,
@@ -165,15 +148,14 @@ def predict(modelPath, inputFile, useGpu=False):
             thiskey,
             tonicizedKey,
         )
-        pcset = tuple(sorted(set(rn2.pitchClasses)))
         if thiskey != prevkey:
-            rn2fig = f"{thiskey}:{rn2.figure}"
+            rn2fig = f"{thiskey}:{rn2}"
             prevkey = thiskey
         else:
-            rn2fig = rn2.figure
-        bass.addLyric(simplifyArabicNumerals(rn2fig))
-        bass.addLyric(simplifyChordLabel(rn2.pitchedCommonName))
-    filename, extension = inputFile.rsplit(".")
+            rn2fig = rn2
+        bass.addLyric(formatRomanNumeral(rn2fig, thiskey))
+        bass.addLyric(formatChordLabel(chordLabel))
+    filename, _ = inputFile.rsplit(".", 1)
     annotatedScore = f"{filename}_annotated.musicxml"
     annotationCSV = f"{filename}_annotated.csv"
     s.write(fp=annotatedScore)
