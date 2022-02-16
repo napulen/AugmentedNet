@@ -76,7 +76,7 @@ source .env/bin/activate
 If you don't care about generating your own synthetic training examples, use the accompanying `tsv` files, which include the real and synthetic training examples.
 
 ```bash
-wget https://github.com/napulen/AugmentedNet/releases/download/v1.2.2/dataset.zip
+wget https://github.com/napulen/AugmentedNet/releases/download/v1.3.5/dataset.zip
 unzip dataset.zip
 ```
 
