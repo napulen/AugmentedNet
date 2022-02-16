@@ -6,6 +6,8 @@ import numpy as np
 # The diagonal of keys in the Weber tonal chart
 # constrained to the range of keys between [Fb, G#]
 WEBERDIAGONAL = [
+    "B--",
+    "c-",
     "F-",
     "g-",
     "C-",
@@ -42,6 +44,8 @@ WEBERDIAGONAL = [
     "a#",
     "D#",
     "e#",
+    "A#",
+    "b#",
 ]
 
 # Adding this vector takes you to the next coordinates of a key
