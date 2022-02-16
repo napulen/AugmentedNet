@@ -58,7 +58,6 @@ def solveChordSegmentation(df):
 def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     chord = music21.chord.Chord(f"{b}2 {t}3 {a}4 {s}5")
     pcset = tuple(sorted(set(chord.pitchClasses)))
-    pcset = (0, 0, 0)
     # if the SATB notes don't make sense, use the pcset classifier
     if pcset not in frompcset:
         # which is guaranteed to exist in the chord vocabulary
