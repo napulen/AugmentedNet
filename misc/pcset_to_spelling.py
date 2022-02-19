@@ -82,7 +82,7 @@ def fillpcset(key, deg):
 
 
 if __name__ == "__main__":
-    start, end = -8, 8
+    start, end = -9, 9
     majorkeys = range_lof(start, end, mode="major")
     minorkeys = range_lof(start, end, mode="minor")
     degreesmajor = ["I", "ii", "iii", "IV", "V", "V+", "vi", "viio"]
