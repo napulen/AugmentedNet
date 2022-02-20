@@ -59,7 +59,7 @@ def _initialDataFrame(s):
         dfdict["a_annotationNumber"].append(idx)
         # Get basic information from Roman numeral object, then hack it
         rn, rncorr = _extractRomanNumeralInformation(rn)
-        rncorr = _correctRomanNumeral(rncorr)
+        # rncorr = _correctRomanNumeral(rncorr)
         dfdict["a_romanNumeral"].append(_removeInversion(rncorr["rn"]))
         dfdict["a_harmonicRhythm"].append(0)
         dfdict["a_pitchNames"].append(tuple(rncorr["pitchNames"]))
@@ -98,10 +98,7 @@ def _initialDataFrame(s):
 
 
 def _hackRomanNumerals(figure, localKey):
-    return figure
     flatsix = r"bVI[\d]*|bVI[\d]*/[#b]?[IV]+"
-    if figure in ["V9", "V7M9"]:
-        figure = "V7"
     if figure == "iio7":
         figure = "iiø7"
     # bVI in minor should be VI
@@ -156,9 +153,20 @@ def _extractRomanNumeralInformation(rn):
     newpcset = rn.pitchClasses
     romanNumeral = _removeInversion(rn.figure)
     pcset = tuple(sorted(set(rn.pitchClasses)))
-    if newpcset != originalpcset and "[no" not in originalFigure:
-        print(f"{originalFigure} -> {hackedFigure}, {originalpcset} -> {newpcset}")
+    if (
+        newpcset != originalpcset
+        and "[no" not in originalFigure
+        and "[add" not in originalFigure
+    ):
+        print(
+            f"{originalFigure} -> {hackedFigure}, {originalpcset} -> {newpcset}"
+        )
     pitchNames = rn.pitchNames
+    root = rn.root().pitch.name
+    inversion = rn.inversion()
+    # This is a workaround before I commit to writing a mapping between
+    # music21's quality vocabulary and my vocabulary
+    quality = "maj"
     secondaryKey = rn.secondaryRomanNumeralKey
     if secondaryKey:
         tonicizedKey = secondaryKey.tonicPitchNameWithCase
@@ -174,6 +182,9 @@ def _extractRomanNumeralInformation(rn):
         "pitchNames": pitchNames,
         "localKey": localKey,
         "tonicizedKey": tonicizedKey,
+        "root": root,
+        "inversion": inversion,
+        "quality": quality,
     }
     return rn, cleaned
 
@@ -224,8 +235,8 @@ def _correctRomanNumeral(rndata):
     #         print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
     rndata["rn"] = numerator  # without tonicizations
     rndata["pcset"] = pcset
-    rndata["tonicizedKey"] = tonicizedKey
     rndata["pitchNames"] = pitchNames
+    rndata["tonicizedKey"] = tonicizedKey
     rndata["root"] = root
     rndata["inversion"] = inversion
     rndata["quality"] = quality
