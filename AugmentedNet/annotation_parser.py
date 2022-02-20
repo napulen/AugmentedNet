@@ -59,7 +59,7 @@ def _initialDataFrame(s):
         dfdict["a_annotationNumber"].append(idx)
         # Get basic information from Roman numeral object, then hack it
         rn, rncorr = _extractRomanNumeralInformation(rn)
-        # rncorr = _correctRomanNumeral(rncorr)
+        rncorr = _correctRomanNumeral(rncorr)
         dfdict["a_romanNumeral"].append(_removeInversion(rncorr["rn"]))
         dfdict["a_harmonicRhythm"].append(0)
         dfdict["a_pitchNames"].append(tuple(rncorr["pitchNames"]))
@@ -153,14 +153,14 @@ def _extractRomanNumeralInformation(rn):
     newpcset = rn.pitchClasses
     romanNumeral = _removeInversion(rn.figure)
     pcset = tuple(sorted(set(rn.pitchClasses)))
-    if (
-        newpcset != originalpcset
-        and "[no" not in originalFigure
-        and "[add" not in originalFigure
-    ):
-        print(
-            f"{originalFigure} -> {hackedFigure}, {originalpcset} -> {newpcset}"
-        )
+    # if (
+    #     newpcset != originalpcset
+    #     and "[no" not in originalFigure
+    #     and "[add" not in originalFigure
+    # ):
+    #     print(
+    #         f"{originalFigure} -> {hackedFigure}, {originalpcset} -> {newpcset}"
+    #     )
     pitchNames = rn.pitchNames
     root = rn.root().name
     if len(pitchNames) < 3:
