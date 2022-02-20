@@ -76,6 +76,6 @@ def getTonicizationScaleDegree(localKey, tonicizedKey):
     # TODO: Use harmalysis to solve this problem, not romanNumeralFromChord
     degree = music21.roman.romanNumeralFromChord(c1, localKey).figure
     # TODO: This is a hack to workaround music21
-    if degree == "bVI":
+    if localKey.islower() and degree == "bVI":
         degree = "VI"
     return degree

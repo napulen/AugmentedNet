@@ -43,34 +43,6 @@ def _m21Parse(f):
     return music21.converter.parse(f, format="romantext")
 
 
-def _fixRnSynonyms(figure):
-    ret = figure.replace("6/4", "64")
-    ret = ret.replace("6/5", "65")
-    ret = ret.replace("4/3", "43")
-    ret = ret.replace("4/2", "42")
-    ret = ret.replace("42", "2")
-    ret = ret.replace("N", "bII")
-    return ret
-
-
-def _simplifyRomanNumeral(figure):
-    missingAdd = re.compile("(\[.*\])")
-    return missingAdd.sub("", figure)
-
-
-def _removeInversion(figure):
-    ret = figure.replace("65", "7")
-    ret = ret.replace("43", "7")
-    ret = ret.replace("64", "")
-    ret = ret.replace("6", "")
-    ret = ret.replace("2", "7")
-    return ret
-
-
-def _preprocessRomanNumeral(figure):
-    return _fixRnSynonyms(_simplifyRomanNumeral(figure))
-
-
 def _initialDataFrame(s):
     """Parses an annotation RomanText file and produces a pandas dataframe.
 
@@ -81,12 +53,13 @@ def _initialDataFrame(s):
     """
     dfdict = {col: [] for col in A_COLUMNS}
     for idx, rn in enumerate(s.flat.getElementsByClass("RomanNumeral")):
-        rn, rncorr = _extractRomanNumeralInformation(rn)
-        rncorr = _correctRomanNumeral(rncorr)
         dfdict["a_offset"].append(round(float(rn.offset), FLOATSCALE))
         dfdict["a_measure"].append(rn.measureNumber)
         dfdict["a_duration"].append(round(float(rn.quarterLength), FLOATSCALE))
         dfdict["a_annotationNumber"].append(idx)
+        # Get basic information from Roman numeral object, then hack it
+        rn, rncorr = _extractRomanNumeralInformation(rn)
+        rncorr = _correctRomanNumeral(rncorr)
         dfdict["a_romanNumeral"].append(_removeInversion(rncorr["rn"]))
         dfdict["a_harmonicRhythm"].append(0)
         dfdict["a_pitchNames"].append(tuple(rncorr["pitchNames"]))
@@ -124,24 +97,59 @@ def _initialDataFrame(s):
     return df
 
 
+def _hackRomanNumerals(figure, localKey):
+    flatsix = r"bVI[\d]*|bVI[\d]*/[#b]?[IV]+"
+    if figure in ["V9", "V7M9"]:
+        figure = "V7"
+    if figure == "iio7":
+        figure = "iiø7"
+    # bVI in minor should be VI
+    # bVI in major should be bVI
+    # bVII in major should be bVII
+    # bVII in minor should be bVII
+    if localKey.islower() and re.fullmatch(flatsix, figure):
+        figure = figure.replace("bVI", "VI", 1)
+    return figure
+
+
+def _fixRnSynonyms(figure):
+    ret = figure.replace("6/4", "64")
+    ret = ret.replace("6/5", "65")
+    ret = ret.replace("4/3", "43")
+    ret = ret.replace("4/2", "42")
+    ret = ret.replace("42", "2")
+    ret = ret.replace("N", "bII")
+    return ret
+
+
+def _simplifyRomanNumeral(figure):
+    missingAdd = re.compile("(\[.*\])")
+    return missingAdd.sub("", figure)
+
+
+def _removeInversion(figure):
+    ret = figure.replace("65", "7")
+    ret = ret.replace("43", "7")
+    ret = ret.replace("64", "")
+    ret = ret.replace("6", "")
+    ret = ret.replace("2", "7")
+    return ret
+
+
+def _preprocessRomanNumeral(figure, localKey):
+    return _fixRnSynonyms(
+        _simplifyRomanNumeral(_hackRomanNumerals(figure, localKey))
+    )
+
+
 def _extractRomanNumeralInformation(rn):
     """Hacks and workarounds to retrieve the RomanNumeral from music21."""
-    if (
-        "Ger" not in rn.figure
-        and "Fr" not in rn.figure
-        and "It" not in rn.figure
-    ):
-        if rn.figure in ["I4", "iv4", "v4", "V4", "I54", "i54"]:
-            rn.figure = rn.figure.replace("5", "").replace("4", "")
-        if rn.figure in ["V9", "V7M9"]:
-            rn.figure = "V7"
-        if rn.figure == "iio7":
-            rn.figure = "iiø7"
-        rn.figure = _preprocessRomanNumeral(rn.figure)
+    localKey = rn.key.tonicPitchNameWithCase
+    hackedFigure = _preprocessRomanNumeral(rn.figure, localKey)
+    rn = music21.roman.RomanNumeral(hackedFigure, localKey)
     romanNumeral = _removeInversion(rn.figure)
     pcset = tuple(sorted(set(rn.pitchClasses)))
     pitchNames = rn.pitchNames
-    localKey = rn.key.tonicPitchNameWithCase
     secondaryKey = rn.secondaryRomanNumeralKey
     if secondaryKey:
         tonicizedKey = secondaryKey.tonicPitchNameWithCase
@@ -178,9 +186,9 @@ def _correctRomanNumeral(rndata):
         candidateKeys = list(frompcset[pcset].keys())
         tonicizedKey = forceTonicization(localKey, candidateKeys)
     chord = frompcset[pcset][tonicizedKey]["chord"]
-    root = chord[0]
     numerator = frompcset[pcset][tonicizedKey]["rn"]
     quality = frompcset[pcset][tonicizedKey]["quality"]
+    root = chord[0]
     myrn = numerator
     if tonicizedKey != localKey:
         denominator = getTonicizationScaleDegree(localKey, tonicizedKey)
@@ -196,8 +204,15 @@ def _correctRomanNumeral(rndata):
         myrn = myrn.replace(numerator, "Cad", 1)
         numerator = "Cad"
     if rn != myrn:
-        mode = "minor" if localKey.islower() else "major"
-        print(f"\t\t{rn} -> {myrn}\t{pcset}{mode}")
+        if len(rn.split("/")) == 2 and len(myrn.split("/")) == 2:
+            rnnum, rnden = rn.split("/")
+            myrnnum, myrnden = myrn.split("/")
+            if f"{rnnum}/{rnden.lower()}" != f"{myrnnum}/{myrnden}":
+                mode = "minor" if localKey.islower() else "major"
+                print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
+        elif rn != "bII":
+            mode = "minor" if localKey.islower() else "major"
+            print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
     rndata["rn"] = numerator  # without tonicizations
     rndata["pcset"] = pcset
     rndata["tonicizedKey"] = tonicizedKey
