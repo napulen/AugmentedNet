@@ -98,6 +98,7 @@ def _initialDataFrame(s):
 
 
 def _hackRomanNumerals(figure, localKey):
+    return figure
     flatsix = r"bVI[\d]*|bVI[\d]*/[#b]?[IV]+"
     if figure in ["V9", "V7M9"]:
         figure = "V7"
@@ -123,7 +124,7 @@ def _fixRnSynonyms(figure):
 
 
 def _simplifyRomanNumeral(figure):
-    missingAdd = re.compile("(\[.*\])")
+    missingAdd = re.compile("(\[(add\d)*\]|\[(no\d*)*\])")
     return missingAdd.sub("", figure)
 
 
@@ -145,10 +146,18 @@ def _preprocessRomanNumeral(figure, localKey):
 def _extractRomanNumeralInformation(rn):
     """Hacks and workarounds to retrieve the RomanNumeral from music21."""
     localKey = rn.key.tonicPitchNameWithCase
+    originalpcset = rn.pitchClasses
+    originalFigure = rn.figure
     hackedFigure = _preprocessRomanNumeral(rn.figure, localKey)
-    rn = music21.roman.RomanNumeral(hackedFigure, localKey)
+    s = music21.converter.parseData(
+        f"m1 {localKey.replace('-', 'b')}: {hackedFigure}", format="romantext"
+    )
+    rn = [rn for rn in s.flat.notes][0]
+    newpcset = rn.pitchClasses
     romanNumeral = _removeInversion(rn.figure)
     pcset = tuple(sorted(set(rn.pitchClasses)))
+    if newpcset != originalpcset and "[no" not in originalFigure:
+        print(f"{originalFigure} -> {hackedFigure}, {originalpcset} -> {newpcset}")
     pitchNames = rn.pitchNames
     secondaryKey = rn.secondaryRomanNumeralKey
     if secondaryKey:
@@ -203,16 +212,16 @@ def _correctRomanNumeral(rndata):
         # print("Found a cadential")
         myrn = myrn.replace(numerator, "Cad", 1)
         numerator = "Cad"
-    if rn != myrn:
-        if len(rn.split("/")) == 2 and len(myrn.split("/")) == 2:
-            rnnum, rnden = rn.split("/")
-            myrnnum, myrnden = myrn.split("/")
-            if f"{rnnum}/{rnden.lower()}" != f"{myrnnum}/{myrnden}":
-                mode = "minor" if localKey.islower() else "major"
-                print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
-        elif rn != "bII":
-            mode = "minor" if localKey.islower() else "major"
-            print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
+    # if rn != myrn:
+    #     if len(rn.split("/")) == 2 and len(myrn.split("/")) == 2:
+    #         rnnum, rnden = rn.split("/")
+    #         myrnnum, myrnden = myrn.split("/")
+    #         if f"{rnnum}/{rnden.lower()}" != f"{myrnnum}/{myrnden}":
+    #             mode = "minor" if localKey.islower() else "major"
+    #             print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
+    #     elif rn != "bII":
+    #         mode = "minor" if localKey.islower() else "major"
+    #         print(f"\t\t{mode}:{rn} -> {myrn}\t{localKey}{pcset}")
     rndata["rn"] = numerator  # without tonicizations
     rndata["pcset"] = pcset
     rndata["tonicizedKey"] = tonicizedKey
