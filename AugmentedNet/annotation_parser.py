@@ -163,6 +163,11 @@ def _extractRomanNumeralInformation(rn):
         )
     pitchNames = rn.pitchNames
     root = rn.root().name
+    if len(pitchNames) < 3:
+        print(
+            f"{originalFigure} -> {hackedFigure}, {originalpcset} -> {newpcset}"
+        )
+        pitchNames += [root] * 2
     inversion = rn.inversion()
     # This is a workaround before I commit to writing a mapping between
     # music21's quality vocabulary and my vocabulary
