@@ -32,6 +32,14 @@ def _measureAlignmentScore(df):
     return df
 
 
+def from_tsv(tsv):
+    df = pd.read_csv(tsv)
+    df.set_index("j_offset", inplace=True)
+    for col in J_LISTTYPE_COLUMNS:
+        df[col] = df[col].apply(eval)
+    return df
+
+
 def _qualityMetric(df):
     df["qualityScoreNotes"] = np.nan
     df["qualityNonChordTones"] = np.nan

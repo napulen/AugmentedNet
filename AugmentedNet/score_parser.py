@@ -40,6 +40,14 @@ def _m21Parse(f, fmt=None):
     return music21.converter.parse(f, format=fmt)
 
 
+def from_tsv(tsv):
+    df = pd.read_csv(tsv, sep="\t")
+    df.set_index("s_offset", inplace=True)
+    for col in S_LISTTYPE_COLUMNS:
+        df[col] = df[col].apply(eval)
+    return df
+
+
 def _measureNumberShift(m21Score):
     firstMeasure = m21Score.parts[0].measure(0) or m21Score.parts[0].measure(1)
     isAnacrusis = True if firstMeasure.paddingLeft > 0.0 else False
@@ -183,6 +191,15 @@ def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET, eventBased=False):
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt)
     # Step 2: Turn salami-slice into fixed-duration steps
+    if not eventBased:
+        df = _reindexDataFrame(df, fixedOffset=fixedOffset)
+    return df
+
+
+def _recursiveTexturization(df, fixedOffset=FIXEDOFFSET, eventBased=False):
+    for duration in available_durations:
+        for numberOfNotes in available_number_of_notes:
+            df = _texturizeAnnotationScore(df, duration, numberOfNotes)
     if not eventBased:
         df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df
