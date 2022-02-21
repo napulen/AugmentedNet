@@ -99,34 +99,6 @@
     <span class="k">return</span> <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;romantext&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_fixRnSynonyms</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;6/4&quot;</span><span class="p">,</span> <span class="s2">&quot;64&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;6/5&quot;</span><span class="p">,</span> <span class="s2">&quot;65&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;4/3&quot;</span><span class="p">,</span> <span class="s2">&quot;43&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;4/2&quot;</span><span class="p">,</span> <span class="s2">&quot;42&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;bII&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ret</span>
-
-
-<span class="k">def</span> <span class="nf">_simplifyRomanNumeral</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
-    <span class="n">missingAdd</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(\[.*\])&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">missingAdd</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">figure</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">_removeInversion</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;65&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;43&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;64&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ret</span>
-
-
-<span class="k">def</span> <span class="nf">_preprocessRomanNumeral</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">_fixRnSynonyms</span><span class="p">(</span><span class="n">_simplifyRomanNumeral</span><span class="p">(</span><span class="n">figure</span><span class="p">))</span>
-
-
 <span class="k">def</span> <span class="nf">_initialDataFrame</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Parses an annotation RomanText file and produces a pandas dataframe.</span>
 
@@ -137,12 +109,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dfdict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">A_COLUMNS</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">rn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s2">&quot;RomanNumeral&quot;</span><span class="p">)):</span>
-        <span class="n">rn</span><span class="p">,</span> <span class="n">rncorr</span> <span class="o">=</span> <span class="n">_extractRomanNumeralInformation</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span>
-        <span class="n">rncorr</span> <span class="o">=</span> <span class="n">_correctRomanNumeral</span><span class="p">(</span><span class="n">rncorr</span><span class="p">)</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_offset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">offset</span><span class="p">),</span> <span class="n">FLOATSCALE</span><span class="p">))</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_measure&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">measureNumber</span><span class="p">)</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_duration&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">quarterLength</span><span class="p">),</span> <span class="n">FLOATSCALE</span><span class="p">))</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_annotationNumber&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="c1"># Get basic information from Roman numeral object, then hack it</span>
+        <span class="n">rn</span><span class="p">,</span> <span class="n">rncorr</span> <span class="o">=</span> <span class="n">_extractRomanNumeralInformation</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span>
+        <span class="n">rncorr</span> <span class="o">=</span> <span class="n">_correctRomanNumeral</span><span class="p">(</span><span class="n">rncorr</span><span class="p">)</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_romanNumeral&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_removeInversion</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;rn&quot;</span><span class="p">]))</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_harmonicRhythm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">dfdict</span><span class="p">[</span><span class="s2">&quot;a_pitchNames&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">rncorr</span><span class="p">[</span><span class="s2">&quot;pitchNames&quot;</span><span class="p">]))</span>
@@ -180,24 +153,81 @@
     <span class="k">return</span> <span class="n">df</span>
 
 
+<span class="k">def</span> <span class="nf">_hackRomanNumerals</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">localKey</span><span class="p">):</span>
+    <span class="n">flatsix</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;bVI[\d]*|bVI[\d]*/[#b]?[IV]+&quot;</span>
+    <span class="k">if</span> <span class="n">figure</span> <span class="o">==</span> <span class="s2">&quot;iio7&quot;</span><span class="p">:</span>
+        <span class="n">figure</span> <span class="o">=</span> <span class="s2">&quot;iiø7&quot;</span>
+    <span class="c1"># bVI in minor should be VI</span>
+    <span class="c1"># bVI in major should be bVI</span>
+    <span class="c1"># bVII in major should be bVII</span>
+    <span class="c1"># bVII in minor should be bVII</span>
+    <span class="k">if</span> <span class="n">localKey</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">flatsix</span><span class="p">,</span> <span class="n">figure</span><span class="p">):</span>
+        <span class="n">figure</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;bVI&quot;</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">figure</span>
+
+
+<span class="k">def</span> <span class="nf">_fixRnSynonyms</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;6/4&quot;</span><span class="p">,</span> <span class="s2">&quot;64&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;6/5&quot;</span><span class="p">,</span> <span class="s2">&quot;65&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;4/3&quot;</span><span class="p">,</span> <span class="s2">&quot;43&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;4/2&quot;</span><span class="p">,</span> <span class="s2">&quot;42&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;bII&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">def</span> <span class="nf">_simplifyRomanNumeral</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
+    <span class="n">missingAdd</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(\[(add\d)*\]|\[(no\d*)*\])&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missingAdd</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">figure</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_removeInversion</span><span class="p">(</span><span class="n">figure</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;65&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;43&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;64&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">def</span> <span class="nf">_preprocessRomanNumeral</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">localKey</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_fixRnSynonyms</span><span class="p">(</span>
+        <span class="n">_simplifyRomanNumeral</span><span class="p">(</span><span class="n">_hackRomanNumerals</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">localKey</span><span class="p">))</span>
+    <span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">_extractRomanNumeralInformation</span><span class="p">(</span><span class="n">rn</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hacks and workarounds to retrieve the RomanNumeral from music21.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="s2">&quot;Ger&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span>
-        <span class="ow">and</span> <span class="s2">&quot;Fr&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span>
-        <span class="ow">and</span> <span class="s2">&quot;It&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span>
-    <span class="p">):</span>
-        <span class="k">if</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;I4&quot;</span><span class="p">,</span> <span class="s2">&quot;iv4&quot;</span><span class="p">,</span> <span class="s2">&quot;v4&quot;</span><span class="p">,</span> <span class="s2">&quot;V4&quot;</span><span class="p">,</span> <span class="s2">&quot;I54&quot;</span><span class="p">,</span> <span class="s2">&quot;i54&quot;</span><span class="p">]:</span>
-            <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;V9&quot;</span><span class="p">,</span> <span class="s2">&quot;V7M9&quot;</span><span class="p">]:</span>
-            <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="o">=</span> <span class="s2">&quot;V7&quot;</span>
-        <span class="k">if</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="o">==</span> <span class="s2">&quot;iio7&quot;</span><span class="p">:</span>
-            <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="o">=</span> <span class="s2">&quot;iiø7&quot;</span>
-        <span class="n">rn</span><span class="o">.</span><span class="n">figure</span> <span class="o">=</span> <span class="n">_preprocessRomanNumeral</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="p">)</span>
+    <span class="n">localKey</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+    <span class="n">originalpcset</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">pitchClasses</span>
+    <span class="n">originalFigure</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">figure</span>
+    <span class="n">hackedFigure</span> <span class="o">=</span> <span class="n">_preprocessRomanNumeral</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="p">,</span> <span class="n">localKey</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">parseData</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;m1 </span><span class="si">{</span><span class="n">localKey</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">hackedFigure</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;romantext&quot;</span>
+    <span class="p">)</span>
+    <span class="n">rn</span> <span class="o">=</span> <span class="p">[</span><span class="n">rn</span> <span class="k">for</span> <span class="n">rn</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">newpcset</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">pitchClasses</span>
     <span class="n">romanNumeral</span> <span class="o">=</span> <span class="n">_removeInversion</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">figure</span><span class="p">)</span>
     <span class="n">pcset</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">pitchClasses</span><span class="p">)))</span>
+    <span class="c1"># if (</span>
+    <span class="c1">#     newpcset != originalpcset</span>
+    <span class="c1">#     and &quot;[no&quot; not in originalFigure</span>
+    <span class="c1">#     and &quot;[add&quot; not in originalFigure</span>
+    <span class="c1"># ):</span>
+    <span class="c1">#     print(</span>
+    <span class="c1">#         f&quot;{originalFigure} -&gt; {hackedFigure}, {originalpcset} -&gt; {newpcset}&quot;</span>
+    <span class="c1">#     )</span>
     <span class="n">pitchNames</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">pitchNames</span>
-    <span class="n">localKey</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">root</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitchNames</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">originalFigure</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">hackedFigure</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">originalpcset</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">newpcset</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="n">pitchNames</span> <span class="o">+=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">inversion</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">inversion</span><span class="p">()</span>
+    <span class="c1"># This is a workaround before I commit to writing a mapping between</span>
+    <span class="c1"># music21&#39;s quality vocabulary and my vocabulary</span>
+    <span class="n">quality</span> <span class="o">=</span> <span class="s2">&quot;maj&quot;</span>
     <span class="n">secondaryKey</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">secondaryRomanNumeralKey</span>
     <span class="k">if</span> <span class="n">secondaryKey</span><span class="p">:</span>
         <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">secondaryKey</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
@@ -213,6 +243,9 @@
         <span class="s2">&quot;pitchNames&quot;</span><span class="p">:</span> <span class="n">pitchNames</span><span class="p">,</span>
         <span class="s2">&quot;localKey&quot;</span><span class="p">:</span> <span class="n">localKey</span><span class="p">,</span>
         <span class="s2">&quot;tonicizedKey&quot;</span><span class="p">:</span> <span class="n">tonicizedKey</span><span class="p">,</span>
+        <span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="n">root</span><span class="p">,</span>
+        <span class="s2">&quot;inversion&quot;</span><span class="p">:</span> <span class="n">inversion</span><span class="p">,</span>
+        <span class="s2">&quot;quality&quot;</span><span class="p">:</span> <span class="n">quality</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">rn</span><span class="p">,</span> <span class="n">cleaned</span>
 
@@ -234,9 +267,9 @@
         <span class="n">candidateKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">tonicizedKey</span> <span class="o">=</span> <span class="n">forceTonicization</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">candidateKeys</span><span class="p">)</span>
     <span class="n">chord</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;chord&quot;</span><span class="p">]</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">chord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">numerator</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span>
     <span class="n">quality</span> <span class="o">=</span> <span class="n">frompcset</span><span class="p">[</span><span class="n">pcset</span><span class="p">][</span><span class="n">tonicizedKey</span><span class="p">][</span><span class="s2">&quot;quality&quot;</span><span class="p">]</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">chord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">myrn</span> <span class="o">=</span> <span class="n">numerator</span>
     <span class="k">if</span> <span class="n">tonicizedKey</span> <span class="o">!=</span> <span class="n">localKey</span><span class="p">:</span>
         <span class="n">denominator</span> <span class="o">=</span> <span class="n">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">localKey</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
@@ -251,13 +284,20 @@
         <span class="c1"># print(&quot;Found a cadential&quot;)</span>
         <span class="n">myrn</span> <span class="o">=</span> <span class="n">myrn</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="s2">&quot;Cad&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">numerator</span> <span class="o">=</span> <span class="s2">&quot;Cad&quot;</span>
-    <span class="k">if</span> <span class="n">rn</span> <span class="o">!=</span> <span class="n">myrn</span><span class="p">:</span>
-        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;minor&quot;</span> <span class="k">if</span> <span class="n">localKey</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;major&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="si">{</span><span class="n">rn</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">myrn</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">pcset</span><span class="si">}{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># if rn != myrn:</span>
+    <span class="c1">#     if len(rn.split(&quot;/&quot;)) == 2 and len(myrn.split(&quot;/&quot;)) == 2:</span>
+    <span class="c1">#         rnnum, rnden = rn.split(&quot;/&quot;)</span>
+    <span class="c1">#         myrnnum, myrnden = myrn.split(&quot;/&quot;)</span>
+    <span class="c1">#         if f&quot;{rnnum}/{rnden.lower()}&quot; != f&quot;{myrnnum}/{myrnden}&quot;:</span>
+    <span class="c1">#             mode = &quot;minor&quot; if localKey.islower() else &quot;major&quot;</span>
+    <span class="c1">#             print(f&quot;\t\t{mode}:{rn} -&gt; {myrn}\t{localKey}{pcset}&quot;)</span>
+    <span class="c1">#     elif rn != &quot;bII&quot;:</span>
+    <span class="c1">#         mode = &quot;minor&quot; if localKey.islower() else &quot;major&quot;</span>
+    <span class="c1">#         print(f&quot;\t\t{mode}:{rn} -&gt; {myrn}\t{localKey}{pcset}&quot;)</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;rn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numerator</span>  <span class="c1"># without tonicizations</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;pcset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcset</span>
-    <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;tonicizedKey&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tonicizedKey</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;pitchNames&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pitchNames</span>
+    <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;tonicizedKey&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tonicizedKey</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;inversion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inversion</span>
     <span class="n">rndata</span><span class="p">[</span><span class="s2">&quot;quality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quality</span>

@@ -65,6 +65,8 @@
 <span class="c1"># The diagonal of keys in the Weber tonal chart</span>
 <span class="c1"># constrained to the range of keys between [Fb, G#]</span>
 <span class="n">WEBERDIAGONAL</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;B--&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;c-&quot;</span><span class="p">,</span>
     <span class="s2">&quot;F-&quot;</span><span class="p">,</span>
     <span class="s2">&quot;g-&quot;</span><span class="p">,</span>
     <span class="s2">&quot;C-&quot;</span><span class="p">,</span>
@@ -101,6 +103,8 @@
     <span class="s2">&quot;a#&quot;</span><span class="p">,</span>
     <span class="s2">&quot;D#&quot;</span><span class="p">,</span>
     <span class="s2">&quot;e#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A#&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;b#&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># Adding this vector takes you to the next coordinates of a key</span>
@@ -131,7 +135,7 @@
     <span class="c1"># TODO: Use harmalysis to solve this problem, not romanNumeralFromChord</span>
     <span class="n">degree</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">localKey</span><span class="p">)</span><span class="o">.</span><span class="n">figure</span>
     <span class="c1"># TODO: This is a hack to workaround music21</span>
-    <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="s2">&quot;bVI&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">localKey</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="ow">and</span> <span class="n">degree</span> <span class="o">==</span> <span class="s2">&quot;bVI&quot;</span><span class="p">:</span>
         <span class="n">degree</span> <span class="o">=</span> <span class="s2">&quot;VI&quot;</span>
     <span class="k">return</span> <span class="n">degree</span>
 </pre></div>
@@ -189,7 +193,7 @@
     <span class="c1"># TODO: Use harmalysis to solve this problem, not romanNumeralFromChord</span>
     <span class="n">degree</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">roman</span><span class="o">.</span><span class="n">romanNumeralFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">localKey</span><span class="p">)</span><span class="o">.</span><span class="n">figure</span>
     <span class="c1"># TODO: This is a hack to workaround music21</span>
-    <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="s2">&quot;bVI&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">localKey</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="ow">and</span> <span class="n">degree</span> <span class="o">==</span> <span class="s2">&quot;bVI&quot;</span><span class="p">:</span>
         <span class="n">degree</span> <span class="o">=</span> <span class="s2">&quot;VI&quot;</span>
     <span class="k">return</span> <span class="n">degree</span>
 </pre></div>
