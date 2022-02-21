@@ -124,13 +124,15 @@ def generateDataset(
                 Xi = inputLayer.run(transposition=transposition)
                 Xi = padToSequenceLength(Xi, sequenceLength)
                 npzfile = f"{split}_X_{inputRepresentation}"
-                outputArrays[npzfile].append(Xi)
+                for sequence in Xi:
+                    outputArrays[npzfile].append(sequence)
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
                 yi = padToSequenceLength(yi, sequenceLength)
                 npzfile = f"{split}_y_{outputRepresentation}"
-                outputArrays[npzfile].append(yi)
+                for sequence in yi:
+                    outputArrays[npzfile].append(sequence)
     # drop the extension, we'll overwrite it to .npz
     filename, _ = os.path.splitext(npzOutput)
     outputFile = f"{filename}-synth" if synthetic else filename
