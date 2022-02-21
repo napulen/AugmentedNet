@@ -32,8 +32,8 @@ def _measureAlignmentScore(df):
     return df
 
 
-def from_tsv(tsv):
-    df = pd.read_csv(tsv)
+def from_tsv(tsv, sep="\t"):
+    df = pd.read_csv(tsv, sep=sep)
     df.set_index("j_offset", inplace=True)
     for col in J_LISTTYPE_COLUMNS:
         df[col] = df[col].apply(eval)

@@ -3,19 +3,11 @@ import unittest
 
 import pandas as pd
 
-import AugmentedNet.joint_parser
+from AugmentedNet import joint_parser
 
 from test import AuxiliaryFiles
 
 aux = AuxiliaryFiles("joint_parser")
-
-
-def _load_dfgt(csvGT):
-    dfGT = pd.read_csv(csvGT)
-    dfGT.set_index("j_offset", inplace=True)
-    for col in AugmentedNet.joint_parser.J_LISTTYPE_COLUMNS:
-        dfGT[col] = dfGT[col].apply(eval)
-    return dfGT
 
 
 class TestJointParser(unittest.TestCase):
@@ -23,8 +15,8 @@ class TestJointParser(unittest.TestCase):
         self.maxDiff = None
 
     def test_haydn_annotation_and_score(self):
-        dfGT = _load_dfgt(aux.haydnDataframeGT)
-        df = AugmentedNet.joint_parser.parseAnnotationAndScore(
+        dfGT = joint_parser.from_tsv(aux.haydnDataframeGT)
+        df = joint_parser.parseAnnotationAndScore(
             aux.haydnRomanText, aux.haydnHumdrum, fixedOffset=0.25
         )
         for rowGT, row in zip(dfGT.itertuples(), df.itertuples()):

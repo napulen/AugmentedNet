@@ -43,8 +43,8 @@ def _m21Parse(f):
     return music21.converter.parse(f, format="romantext")
 
 
-def from_tsv(tsv):
-    df = pd.read_csv(tsv, sep="\t")
+def from_tsv(tsv, sep="\t"):
+    df = pd.read_csv(tsv, sep=sep)
     df.set_index("a_offset", inplace=True)
     for col in A_LISTTYPE_COLUMNS:
         df[col] = df[col].apply(eval)
