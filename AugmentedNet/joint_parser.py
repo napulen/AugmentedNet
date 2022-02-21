@@ -144,6 +144,7 @@ def parseAnnotationAndAnnotation(
         a, texturize=texturize, fixedOffset=fixedOffset
     )
     jointdf = pd.concat([sdf, adf], axis=1)
+    jointdf.index.name = "j_offset"
     jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
     if qualityAssessment:
