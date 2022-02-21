@@ -38,7 +38,7 @@ def generateDataset(synthesize=False, texturize=False, tsvDir="dataset"):
                 df = parseAnnotationAndScore(annotation, score)
             else:
                 df = parseAnnotationAndAnnotation(
-                    annotation, annotation, texturize=texturize
+                    annotation, texturize=texturize
                 )
             outpath = os.path.join(datasetDir, split, nickname + ".tsv")
             df.to_csv(outpath, sep="\t")
