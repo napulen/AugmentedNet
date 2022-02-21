@@ -8,7 +8,7 @@ NOTENAMES = ("C", "D", "E", "F", "G", "A", "B")
 
 NOTENAMES_LOWERCASE = [n.lower() for n in NOTENAMES]
 
-PITCHCLASSES = [pc for pc in range(12)]
+PITCHCLASSES = list(range(12))
 
 ACCIDENTALS = ("--", "-", "", "#", "##")
 
@@ -53,43 +53,7 @@ DEGREES = (
     "None",
 )
 
-KEYS = (
-    "F-",
-    "C-",
-    "G-",
-    "D-",
-    "A-",
-    "E-",
-    "B-",
-    "F",
-    "C",
-    "G",
-    "D",
-    "A",
-    "E",
-    "B",
-    "F#",
-    "C#",
-    "G#",
-    ####
-    "d-",
-    "a-",
-    "e-",
-    "b-",
-    "f",
-    "c",
-    "g",
-    "d",
-    "a",
-    "e",
-    "b",
-    "f#",
-    "c#",
-    "g#",
-    "d#",
-    "a#",
-    "e#",
-)
+KEYS = tuple(sorted(set([key for keys in frompcset.values() for key in keys])))
 
 CHORD_QUALITIES = tuple(
     sorted(

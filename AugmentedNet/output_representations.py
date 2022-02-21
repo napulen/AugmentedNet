@@ -63,7 +63,7 @@ class OutputRepresentationTI(FeatureRepresentationTI):
     classList = []
     dfFeature = ""
 
-    def run(self):
+    def run(self, transposition="P1"):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, dfFeature in enumerate(self.df[self.dfFeature]):
             rnIndex = self.classList.index(dfFeature)

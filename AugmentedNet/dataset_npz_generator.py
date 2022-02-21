@@ -94,22 +94,19 @@ def generateDataset(
             ]
             filteredIndex = len(df.index)
             print(f"\t({originalIndex}, {filteredIndex})")
+        if dataAugmentation and split == "training":
+            transpositions = _getTranspositions(df)
+            print("\t", transpositions)
+        else:
+            transpositions = ["P1"]
         for inputRepresentation in inputRepresentations:
             inputLayer = availableInputs[inputRepresentation](df)
             Xi = inputLayer.array
             Xi = padToSequenceLength(Xi, sequenceLength)
-            if dataAugmentation and split == "training":
-                transpositions = _getTranspositions(df)
-                print("\t", transpositions)
-                for transposition in inputLayer.dataAugmentation(
-                    transpositions
-                ):
-                    Xi = np.concatenate(
-                        (
-                            Xi,
-                            padToSequenceLength(transposition, sequenceLength),
-                        )
-                    )
+            for transposition in transpositions:
+                tr = inputLayer.run(transposition=transposition)
+                tr = padToSequenceLength(tr, sequenceLength)
+                Xi = np.concatenate((Xi, tr))
             npzfile = f"{split}_X_{inputRepresentation}"
             for sequence in Xi:
                 outputArrays[npzfile].append(sequence)
@@ -117,15 +114,10 @@ def generateDataset(
             outputLayer = availableOutputs[outputRepresentation](df)
             yi = outputLayer.array
             yi = padToSequenceLength(yi, sequenceLength)
-            if dataAugmentation and split == "training":
-                for tr in outputLayer.dataAugmentation(transpositions):
-                    yi = np.concatenate(
-                        (
-                            yi,
-                            padToSequenceLength(tr, sequenceLength),
-                        )
-                    )
-
+            for transposition in transpositions:
+                tr = outputLayer.run(transposition=transposition)
+                tr = padToSequenceLength(tr, sequenceLength)
+                yi = np.concatenate((yi, tr))
             npzfile = f"{split}_y_{outputRepresentation}"
             for sequence in yi:
                 outputArrays[npzfile].append(sequence)
