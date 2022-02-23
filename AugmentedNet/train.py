@@ -78,7 +78,6 @@ def loadData(npzPath, syntheticDataStrategy=None, modelName="AugmentedNet"):
             x.array = np.concatenate((x.array, xs.array))
         for y, ys in zip(y_train, ys_train):
             y.array = np.concatenate((y.array, ys.array))
-
     for yt, yv in zip(y_train, y_test):
         if modelName in ["Micchi2020"]:
             yt.array = yt.array[:, ::4]
@@ -208,6 +207,46 @@ def evaluate(modelHdf5, X_test, y_true):
     return str(outputPath), summary
 
 
+class CurriculumIterator(object):
+    def __init__(self, x, y, increaseperepoch=0.02):
+        self.realratio = 0.0
+        self.increaseperepoch = increaseperepoch
+        self.xreal = []
+        self.xsynth = []
+        for xi in x:
+            _, seqlen, features = xi.shape
+            xi = xi.reshape(2, -1, seqlen, features)
+            self.xreal.append(xi[0])
+            self.xsynth.append(xi[1])
+        self.yreal = []
+        self.ysynth = []
+        for yi in y:
+            _, seqlen, features = yi.shape
+            yi = yi.reshape(2, -1, seqlen, features)
+            self.yreal.append(yi[0])
+            self.ysynth.append(yi[1])
+
+    def iterator(self):
+        itemssynth = len(self.xsynth[0])
+        itemsreal = len(self.xreal[0])
+        realratio = min(self.realratio, 1.0)
+        chosensynth = int(itemssynth * (1.0 - realratio))
+        chosenreal = int(itemsreal * realratio)
+        idxsynth = np.random.choice(itemssynth, chosensynth, replace=False)
+        idxreal = np.random.choice(itemsreal, chosenreal, replace=False)
+        for idx in idxsynth:
+            inputs = [xi[idx] for xi in self.xsynth]
+            targets = [yi[idx] for yi in self.ysynth]
+            yield (inputs, targets)
+        for idx in idxreal:
+            inputs = [xi[idx] for xi in self.xreal]
+            targets = [yi[idx] for yi in self.yreal]
+            yield (inputs, targets)
+        print(self.realratio)
+        self.realratio += self.increaseperepoch
+        return
+
+
 def train(
     X_train,
     y_train,
@@ -254,10 +293,16 @@ def train(
 
     # Maybe this will force gc on the python lists?
     X_train = y_train = X_test = y_test = []
+
+    curriculum = CurriculumIterator(x, y)
+
+    # for inputs, targets in curriculum.iterator():
+    #     print(inputs, targets)
+    # print("something")
+
     gc.collect()
     model.fit(
-        x,
-        y,
+        curriculum.iterator,
         epochs=epochs,
         shuffle=True,
         batch_size=batchsize,

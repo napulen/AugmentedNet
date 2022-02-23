@@ -52,7 +52,7 @@ class DefaultArguments(object):
     }
     train = {
         "nogpu": False,
-        "generateData": True,
+        "generateData": False,
         "syntheticDataStrategy": None,
         "model": "AugmentedNet",
         "lr_boundaries": [40],
