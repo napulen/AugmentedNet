@@ -320,7 +320,7 @@ def train(
     # Maybe this will force gc on the python lists?
     X_train = y_train = X_test = y_test = []
 
-    curriculum = CurriculumIterator(x, y, batchsize)
+    curriculum = CurriculumIterator(x, y, batchsize, increaseperepoch=0.01)
 
     # for inputs, targets in curriculum.iterator():
     #     print(inputs, targets)
@@ -330,8 +330,8 @@ def train(
     model.fit(
         curriculum,
         epochs=epochs,
-        shuffle=True,
-        batch_size=batchsize,
+        # shuffle=True,
+        batch_size=None,
         validation_data=(xv, yv),
         callbacks=[
             ModdedModelCheckpoint(
