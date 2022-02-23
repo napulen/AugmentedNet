@@ -2,6 +2,7 @@
 
 import datetime
 import gc
+import math
 from pathlib import Path
 import os
 
@@ -12,6 +13,7 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import optimizers
+from tensorflow.keras import utils
 
 from . import cli
 from . import models
@@ -207,8 +209,9 @@ def evaluate(modelHdf5, X_test, y_true):
     return str(outputPath), summary
 
 
-class CurriculumIterator(object):
-    def __init__(self, x, y, increaseperepoch=0.02):
+class CurriculumIterator(utils.Sequence):
+    def __init__(self, x, y, batchsize, increaseperepoch=0.02):
+        self.batchsize = batchsize
         self.realratio = 0.0
         self.increaseperepoch = increaseperepoch
         self.xreal = []
@@ -218,6 +221,7 @@ class CurriculumIterator(object):
             xi = xi.reshape(2, -1, seqlen, features)
             self.xreal.append(xi[0])
             self.xsynth.append(xi[1])
+        self.len = len(self.xreal[0])
         self.yreal = []
         self.ysynth = []
         for yi in y:
@@ -225,26 +229,48 @@ class CurriculumIterator(object):
             yi = yi.reshape(2, -1, seqlen, features)
             self.yreal.append(yi[0])
             self.ysynth.append(yi[1])
+        self.set_curriculum()
 
-    def iterator(self):
-        itemssynth = len(self.xsynth[0])
-        itemsreal = len(self.xreal[0])
+    def set_curriculum(self):
         realratio = min(self.realratio, 1.0)
-        chosensynth = int(itemssynth * (1.0 - realratio))
-        chosenreal = int(itemsreal * realratio)
-        idxsynth = np.random.choice(itemssynth, chosensynth, replace=False)
-        idxreal = np.random.choice(itemsreal, chosenreal, replace=False)
-        for idx in idxsynth:
-            inputs = [xi[idx] for xi in self.xsynth]
-            targets = [yi[idx] for yi in self.ysynth]
-            yield (inputs, targets)
-        for idx in idxreal:
-            inputs = [xi[idx] for xi in self.xreal]
-            targets = [yi[idx] for yi in self.yreal]
-            yield (inputs, targets)
-        print(self.realratio)
-        self.realratio += self.increaseperepoch
+        lensynth = int(self.len * (1.0 - realratio))
+        lenreal = int(self.len * realratio)
+        idxsynth = np.random.choice(self.len, lensynth, replace=False)
+        idxreal = np.random.choice(self.len, lenreal, replace=False)
+        x = [np.zeros(xi.shape) for xi in self.xreal]
+        y = [np.zeros(yi.shape) for yi in self.yreal]
+        for idx, inp in enumerate(self.xsynth):
+            x[idx][:lensynth] = np.take(inp, idxsynth, axis=0)
+        for idx, inp in enumerate(self.xreal):
+            x[idx][lensynth : lensynth + lenreal] = np.take(inp, idxreal, axis=0)
+        for idx, out in enumerate(self.ysynth):
+            y[idx][:lensynth] = np.take(out, idxsynth, axis=0)
+        for idx, out in enumerate(self.yreal):
+            y[idx][lensynth : lensynth + lenreal] = np.take(out, idxreal, axis=0)
+        self.x = x
+        self.y = y
         return
+
+    def __len__(self):
+        return math.ceil(self.len / self.batchsize)
+
+    def __getitem__(self, idx):
+        batch_x = []
+        batch_y = []
+        for xi in self.x:
+            batch_x.append(
+                xi[idx * self.batchsize : (idx + 1) * self.batchsize]
+            )
+        for yi in self.y:
+            batch_y.append(
+                yi[idx * self.batchsize : (idx + 1) * self.batchsize]
+            )
+        return batch_x, batch_y
+
+    def on_epoch_end(self):
+        self.realratio += self.increaseperepoch
+        print(f"Curriculum learning: {self.realratio*100.0}% real examples")
+        self.set_curriculum()
 
 
 def train(
@@ -294,7 +320,7 @@ def train(
     # Maybe this will force gc on the python lists?
     X_train = y_train = X_test = y_test = []
 
-    curriculum = CurriculumIterator(x, y)
+    curriculum = CurriculumIterator(x, y, batchsize)
 
     # for inputs, targets in curriculum.iterator():
     #     print(inputs, targets)
@@ -302,7 +328,7 @@ def train(
 
     gc.collect()
     model.fit(
-        curriculum.iterator,
+        curriculum,
         epochs=epochs,
         shuffle=True,
         batch_size=batchsize,
