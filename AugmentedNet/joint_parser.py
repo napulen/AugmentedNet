@@ -123,6 +123,7 @@ def parseAnnotationAndScore(
     # In that case, ffill the annotation portion of the new dataframe
     jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
+    jointdf.fillna(method="bfill", inplace=True)
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
