@@ -1812,3 +1812,10 @@ DATASPLITS = {
         "wir-orchestral-haydn-symphony-104-1",
     ],
 }
+
+
+def availableCollections():
+    availableCollections = list(
+        sorted(set([x.split("-", 1)[0] for x in ANNOTATIONSCOREDUPLES]))
+    )
+    return availableCollections

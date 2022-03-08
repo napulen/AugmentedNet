@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 
 from . import models
+from .common import availableCollections
 from .dataset_npz_generator import __doc__ as npz_description
 from .dataset_tsv_generator import __doc__ as tsv_description
 from .train import __doc__ as train_description
@@ -101,7 +102,7 @@ def npz(is_parent_parser=False):
         parser = ArgumentParser(description=npz_description, parents=parents)
     parser.add_argument(
         "--collections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        choices=availableCollections(),
         nargs="+",
         help="Include training files from a specific corpus/collection.",
     )
@@ -143,7 +144,7 @@ def npz(is_parent_parser=False):
     )
     parser.add_argument(
         "--testCollections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        choices=availableCollections(),
         nargs="+",
         help="Include test files from a specific corpus/collection.",
     )
