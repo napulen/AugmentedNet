@@ -53,7 +53,7 @@ class DefaultArguments(object):
     }
     train = {
         "nogpu": False,
-        "generateData": True,
+        "useExistingNpz": False,
         "syntheticDataStrategy": None,
         "model": "AugmentedNet",
         "lr_boundaries": [40],
@@ -179,9 +179,9 @@ def train():
         help="Number of training epochs.",
     )
     parser.add_argument(
-        "--generateData",
+        "--useExistingNpz",
         action="store_true",
-        help="Generate the numpy dataset, even if it exists.",
+        help="Do not generate the numpy dataset, use an existing one.",
     )
     parser.add_argument(
         "--lr_boundaries",
