@@ -15,7 +15,6 @@ from .input_representations import (
 from .output_representations import (
     available_representations as availableOutputs,
 )
-from .score_parser import _recursiveTexturization
 from .utils import padToSequenceLength
 
 
@@ -113,12 +112,13 @@ def generateDataset(
             print("\t", transpositions)
         else:
             transpositions = ["P1"]
-        # if synthetic:
-        #     dfsynth = df[df.a_harmonicRhythm == 0]
+        if synthetic:
+            dfsynth = df.copy()
         for transposition in transpositions:
             if synthetic:
-                annotation = ANNOTATIONSCOREDUPLES[row.file][0]
-                df = joint_parser.parseAnnotationAndAnnotation(annotation)
+                # annotation = ANNOTATIONSCOREDUPLES[row.file][0]
+                # dftmp = joint_parser.parseAnnotationAndAnnotation(annotation)
+                df = joint_parser.retexturizeSynthetic(dfsynth)
             for inputRepresentation in inputRepresentations:
                 inputLayer = availableInputs[inputRepresentation](df)
                 Xi = inputLayer.run(transposition=transposition)
