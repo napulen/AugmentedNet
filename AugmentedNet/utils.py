@@ -18,7 +18,7 @@ def disableGPU():
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
-def padToSequenceLength(arr, sequenceLength, constant=None):
+def padToSequenceLength(arr, sequenceLength, constant=0):
     frames, features = arr.shape
     featuresPerSequence = sequenceLength * features
     featuresInExample = frames * features

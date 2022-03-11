@@ -129,7 +129,7 @@ def generateDataset(
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
-                constant = None
+                constant = 0
                 if outputRepresentation == "HarmonicRhythm7":
                     constant = 6
                 yi = padToSequenceLength(yi, sequenceLength, constant=constant)
