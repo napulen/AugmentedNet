@@ -130,7 +130,7 @@ def generateDataset(
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
                 if outputRepresentation == "HarmonicRhythm7":
-                    yi = padToSequenceLength(yi, sequenceLength, constant=5)
+                    yi = padToSequenceLength(yi, sequenceLength, constant=6)
                 else:
                     yi = padToSequenceLength(yi, sequenceLength)
                 npzfile = f"{split}_y_{outputRepresentation}"
