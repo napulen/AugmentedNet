@@ -122,7 +122,7 @@ def generateDataset(
             for inputRepresentation in inputRepresentations:
                 inputLayer = availableInputs[inputRepresentation](df)
                 Xi = inputLayer.run(transposition=transposition)
-                Xi = padToSequenceLength(Xi, sequenceLength, constant=-1)
+                Xi = padToSequenceLength(Xi, sequenceLength)
                 npzfile = f"{split}_X_{inputRepresentation}"
                 for sequence in Xi:
                     outputArrays[npzfile].append(sequence)
