@@ -122,17 +122,17 @@ def generateDataset(
             for inputRepresentation in inputRepresentations:
                 inputLayer = availableInputs[inputRepresentation](df)
                 Xi = inputLayer.run(transposition=transposition)
-                Xi = padToSequenceLength(Xi, sequenceLength)
+                Xi = padToSequenceLength(Xi, sequenceLength, constant=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
                 for sequence in Xi:
                     outputArrays[npzfile].append(sequence)
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
-                if outputRepresentation == "HarmonicRhythm7":
-                    yi = padToSequenceLength(yi, sequenceLength, constant=6)
-                else:
-                    yi = padToSequenceLength(yi, sequenceLength)
+                constant = None
+                if outputRepresentation != "HarmonicRhythm7":
+                    constant = 6
+                yi = padToSequenceLength(yi, sequenceLength, constant=constant)
                 npzfile = f"{split}_y_{outputRepresentation}"
                 for sequence in yi:
                     outputArrays[npzfile].append(sequence)
