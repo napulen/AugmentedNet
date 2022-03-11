@@ -116,13 +116,11 @@ def generateDataset(
             dfsynth = df.copy()
         for transposition in transpositions:
             if synthetic:
-                # annotation = ANNOTATIONSCOREDUPLES[row.file][0]
-                # dftmp = joint_parser.parseAnnotationAndAnnotation(annotation)
                 df = joint_parser.retexturizeSynthetic(dfsynth)
             for inputRepresentation in inputRepresentations:
                 inputLayer = availableInputs[inputRepresentation](df)
                 Xi = inputLayer.run(transposition=transposition)
-                Xi = padToSequenceLength(Xi, sequenceLength)
+                Xi = padToSequenceLength(Xi, sequenceLength, constant=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
                 for sequence in Xi:
                     outputArrays[npzfile].append(sequence)
