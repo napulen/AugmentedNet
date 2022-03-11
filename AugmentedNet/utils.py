@@ -24,6 +24,10 @@ def padToSequenceLength(arr, sequenceLength, constant=0):
     featuresInExample = frames * features
     padding = featuresPerSequence - (featuresInExample % featuresPerSequence)
     paddingTimesteps = int(padding / features)
-    arr = np.pad(arr, ((0, paddingTimesteps), (0, 0)))
+    if constant is None:
+        kwargs = {"mode": "edge"}
+    else:
+        kwargs = {"mode": "constant", "constant_values": constant}
+    arr = np.pad(arr, ((0, paddingTimesteps), (0, 0)), **kwargs)
     arr = arr.reshape(-1, sequenceLength, features)
     return arr
