@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 
 from . import models
+from .common import availableCollections
 from .dataset_npz_generator import __doc__ as npz_description
 from .dataset_tsv_generator import __doc__ as tsv_description
 from .train import __doc__ as train_description
@@ -52,7 +53,7 @@ class DefaultArguments(object):
     }
     train = {
         "nogpu": False,
-        "generateData": True,
+        "useExistingNpz": False,
         "syntheticDataStrategy": None,
         "model": "AugmentedNet",
         "lr_boundaries": [40],
@@ -101,7 +102,7 @@ def npz(is_parent_parser=False):
         parser = ArgumentParser(description=npz_description, parents=parents)
     parser.add_argument(
         "--collections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        choices=availableCollections(),
         nargs="+",
         help="Include training files from a specific corpus/collection.",
     )
@@ -143,7 +144,7 @@ def npz(is_parent_parser=False):
     )
     parser.add_argument(
         "--testCollections",
-        choices=["abc", "bps", "haydnop20", "wir", "wirwtc", "tavern"],
+        choices=availableCollections(),
         nargs="+",
         help="Include test files from a specific corpus/collection.",
     )
@@ -178,9 +179,9 @@ def train():
         help="Number of training epochs.",
     )
     parser.add_argument(
-        "--generateData",
+        "--useExistingNpz",
         action="store_true",
-        help="Generate the numpy dataset, even if it exists.",
+        help="Do not generate the numpy dataset, use an existing one.",
     )
     parser.add_argument(
         "--lr_boundaries",

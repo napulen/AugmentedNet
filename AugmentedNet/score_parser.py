@@ -227,10 +227,7 @@ def parseAnnotationAsScore(
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt=fmt)
     # Step 2: Texturize the dataframe
-    for duration in available_durations:
-        for numberOfNotes in available_number_of_notes:
-            df = _texturizeAnnotationScore(df, duration, numberOfNotes)
-    # Step 3: Turn salami-slice into fixed-duration steps
-    if not eventBased:
-        df = _reindexDataFrame(df, fixedOffset=fixedOffset)
+    df = _recursiveTexturization(
+        df, fixedOffset=fixedOffset, eventBased=eventBased
+    )
     return df

@@ -123,6 +123,7 @@ def parseAnnotationAndScore(
     # In that case, ffill the annotation portion of the new dataframe
     jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
+    jointdf.fillna(method="bfill", inplace=True)
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
@@ -151,4 +152,34 @@ def parseAnnotationAndAnnotation(
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
         jointdf = _inversionMetric(jointdf)
+    return jointdf
+
+
+def reverseJointToAnnotation(dfj):
+    columns = list(annotation_parser.A_COLUMNS)
+    columns.remove("a_offset")
+    adf = dfj[columns]
+    adf.index.name = "a_offset"
+    return adf
+
+
+def reverseJointToScore(dfj):
+    columns = list(score_parser.S_COLUMNS)
+    columns.remove("s_offset")
+    sdf = dfj[dfj.a_harmonicRhythm == 0]
+    sdf = sdf[columns]
+    sdf.index.name = "s_offset"
+    sdf["s_measure"] = sdf.s_measure.astype(int)
+    return sdf
+
+
+def retexturizeSynthetic(dfj):
+    """Given a synthetic joint dataframe, retexturize it."""
+    adf = reverseJointToAnnotation(dfj)
+    sdf = reverseJointToScore(dfj)
+    sdf = score_parser._recursiveTexturization(sdf)
+    jointdf = pd.concat([sdf, adf], axis=1)
+    jointdf.index.name = "j_offset"
+    jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
+    jointdf.fillna(method="ffill", inplace=True)
     return jointdf

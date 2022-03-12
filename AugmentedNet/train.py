@@ -278,7 +278,7 @@ def train(
 def run_experiment(
     experiment_name,
     run_name,
-    generateData,
+    useExistingNpz,
     syntheticDataStrategy,
     model,
     lr_boundaries,
@@ -301,12 +301,12 @@ def run_experiment(
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
     checkpoint = f".model_checkpoint/{experiment_name}/{run_name}-{timestamp}/"
     npzNoExt, _ = os.path.splitext(kwargs["npzOutput"])
-    if generateData or not os.path.isfile(f"{npzNoExt}.npz"):
+    if not useExistingNpz or not os.path.isfile(f"{npzNoExt}.npz"):
         kwargs["synthetic"] = False
         generateDataset(**kwargs)
         # log_artifacts(DATASETDIR, artifact_path="dataset")
     if syntheticDataStrategy:
-        if generateData or not os.path.isfile(f"{npzNoExt}-synth.npz"):
+        if not useExistingNpz or not os.path.isfile(f"{npzNoExt}-synth.npz"):
             kwargs["synthetic"] = True
             generateDataset(**kwargs)
             # log_artifacts(SYNTHDATASETDIR, artifact_path="dataset-synth")
