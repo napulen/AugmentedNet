@@ -18,16 +18,12 @@ def disableGPU():
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
-def padToSequenceLength(arr, sequenceLength, constant=None):
+def padToSequenceLength(arr, sequenceLength, value=0):
     frames, features = arr.shape
     featuresPerSequence = sequenceLength * features
     featuresInExample = frames * features
     padding = featuresPerSequence - (featuresInExample % featuresPerSequence)
     paddingTimesteps = int(padding / features)
-    if constant is None:
-        kwargs = {"mode": "edge"}
-    else:
-        kwargs = {"mode": "constant", "constant_values": constant}
-    arr = np.pad(arr, ((0, paddingTimesteps), (0, 0)), **kwargs)
+    arr = np.pad(arr, ((0, paddingTimesteps), (0, 0)), constant_values=value)
     arr = arr.reshape(-1, sequenceLength, features)
     return arr
