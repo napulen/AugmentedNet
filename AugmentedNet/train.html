@@ -367,7 +367,7 @@
 <span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span>
     <span class="n">experiment_name</span><span class="p">,</span>
     <span class="n">run_name</span><span class="p">,</span>
-    <span class="n">generateData</span><span class="p">,</span>
+    <span class="n">useExistingNpz</span><span class="p">,</span>
     <span class="n">syntheticDataStrategy</span><span class="p">,</span>
     <span class="n">model</span><span class="p">,</span>
     <span class="n">lr_boundaries</span><span class="p">,</span>
@@ -390,12 +390,12 @@
     <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%y%m</span><span class="si">%d</span><span class="s2">T%H%M%S&quot;</span><span class="p">)</span>
     <span class="n">checkpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.model_checkpoint/</span><span class="si">{</span><span class="n">experiment_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">/&quot;</span>
     <span class="n">npzNoExt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;npzOutput&quot;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">generateData</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">.npz&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">useExistingNpz</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">.npz&quot;</span><span class="p">):</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;synthetic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">generateDataset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># log_artifacts(DATASETDIR, artifact_path=&quot;dataset&quot;)</span>
     <span class="k">if</span> <span class="n">syntheticDataStrategy</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">generateData</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">-synth.npz&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">useExistingNpz</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">-synth.npz&quot;</span><span class="p">):</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;synthetic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">generateDataset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="c1"># log_artifacts(SYNTHDATASETDIR, artifact_path=&quot;dataset-synth&quot;)</span>
@@ -996,7 +996,7 @@ be called during TRAIN mode.</p>
             <span class="name">run_experiment</span><span class="signature">(
     experiment_name,
     run_name,
-    generateData,
+    useExistingNpz,
     syntheticDataStrategy,
     model,
     lr_boundaries,
@@ -1013,7 +1013,7 @@ be called during TRAIN mode.</p>
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span>
     <span class="n">experiment_name</span><span class="p">,</span>
     <span class="n">run_name</span><span class="p">,</span>
-    <span class="n">generateData</span><span class="p">,</span>
+    <span class="n">useExistingNpz</span><span class="p">,</span>
     <span class="n">syntheticDataStrategy</span><span class="p">,</span>
     <span class="n">model</span><span class="p">,</span>
     <span class="n">lr_boundaries</span><span class="p">,</span>
@@ -1036,12 +1036,12 @@ be called during TRAIN mode.</p>
     <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%y%m</span><span class="si">%d</span><span class="s2">T%H%M%S&quot;</span><span class="p">)</span>
     <span class="n">checkpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.model_checkpoint/</span><span class="si">{</span><span class="n">experiment_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">/&quot;</span>
     <span class="n">npzNoExt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;npzOutput&quot;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">generateData</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">.npz&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">useExistingNpz</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">.npz&quot;</span><span class="p">):</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;synthetic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">generateDataset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># log_artifacts(DATASETDIR, artifact_path=&quot;dataset&quot;)</span>
     <span class="k">if</span> <span class="n">syntheticDataStrategy</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">generateData</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">-synth.npz&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">useExistingNpz</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npzNoExt</span><span class="si">}</span><span class="s2">-synth.npz&quot;</span><span class="p">):</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;synthetic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">generateDataset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="c1"># log_artifacts(SYNTHDATASETDIR, artifact_path=&quot;dataset-synth&quot;)</span>
