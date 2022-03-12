@@ -31,15 +31,6 @@
         <h2>API Documentation</h2>
             <ul class="memberlist">
             <li>
-                    <a class="function" href="#initializeArrays">initializeArrays</a>
-            </li>
-            <li>
-                    <a class="function" href="#scrutinize">scrutinize</a>
-            </li>
-            <li>
-                    <a class="function" href="#correctSplit">correctSplit</a>
-            </li>
-            <li>
                     <a class="function" href="#generateDataset">generateDataset</a>
             </li>
     </ul>
@@ -70,13 +61,13 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cli</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">joint_parser</span>
 <span class="kn">from</span> <span class="nn">.cache</span> <span class="kn">import</span> <span class="n">TransposeKey</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">DATASETSUMMARYFILE</span><span class="p">,</span> <span class="n">ANNOTATIONSCOREDUPLES</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">DATASETSUMMARYFILE</span>
 <span class="kn">from</span> <span class="nn">.feature_representation</span> <span class="kn">import</span> <span class="n">KEYS</span><span class="p">,</span> <span class="n">INTERVALCLASSES</span>
 <span class="kn">from</span> <span class="nn">.input_representations</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableInputs</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.joint_parser</span> <span class="kn">import</span> <span class="n">J_LISTTYPE_COLUMNS</span>
 <span class="kn">from</span> <span class="nn">.output_representations</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableOutputs</span><span class="p">,</span>
 <span class="p">)</span>
@@ -88,45 +79,14 @@
     <span class="n">tonicizedKeys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tonicizedKeys</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">INTERVALCLASSES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">interval</span> <span class="o">==</span> <span class="s2">&quot;P1&quot;</span><span class="p">:</span>
+            <span class="k">continue</span>
         <span class="n">transposed</span> <span class="o">=</span> <span class="p">[</span><span class="n">TransposeKey</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">tonicizedKeys</span><span class="p">]</span>
         <span class="c1"># Transpose to this interval if every modulation lies within</span>
         <span class="c1"># the set of KEY classes that we can classify</span>
         <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">KEYS</span><span class="p">)):</span>
             <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ret</span>
-
-
-<span class="k">def</span> <span class="nf">initializeArrays</span><span class="p">(</span><span class="n">inputRepresentations</span><span class="p">,</span> <span class="n">outputRepresentations</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Each array becomes a dict entry with the name of the input/output&quot;&quot;&quot;</span>
-    <span class="n">outputArrays</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]:</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
-            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_X_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
-            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_y_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">return</span> <span class="n">outputArrays</span>
-
-
-<span class="k">def</span> <span class="nf">scrutinize</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">qualityThresh</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">bassThresh</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter &#39;bad quality&#39; annotations.&quot;&quot;&quot;</span>
-    <span class="n">originalIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
-        <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">qualitySquaredSum</span> <span class="o">&lt;</span> <span class="n">qualityThresh</span><span class="p">)</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">measureMisalignment</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">incongruentBass</span> <span class="o">&lt;</span> <span class="n">bassThresh</span><span class="p">)</span>
-    <span class="p">]</span>
-    <span class="n">filteredIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">(</span><span class="si">{</span><span class="n">originalIndex</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">filteredIndex</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">correctSplit</span><span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="n">testSetOn</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Correct the split of this file according to &#39;testSetOn&#39; parameter.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">testSetOn</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;validation&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;training&quot;</span>
-        <span class="k">elif</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;validation&quot;</span>
-    <span class="k">return</span> <span class="n">split</span>
 
 
 <span class="k">def</span> <span class="nf">generateDataset</span><span class="p">(</span>
@@ -142,9 +102,12 @@
     <span class="n">tsvDir</span><span class="p">,</span>
     <span class="n">npzOutput</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="n">outputArrays</span> <span class="o">=</span> <span class="n">initializeArrays</span><span class="p">(</span>
-        <span class="n">inputRepresentations</span><span class="p">,</span> <span class="n">outputRepresentations</span>
-    <span class="p">)</span>
+    <span class="n">outputArrays</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
+            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_X_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
+            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_y_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">training</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">testSetOn</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">]</span>
     <span class="n">validation</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">testSetOn</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;validation&quot;</span><span class="p">]</span>
     <span class="n">datasetDir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tsvDir</span><span class="si">}</span><span class="s2">-synth&quot;</span> <span class="k">if</span> <span class="n">synthetic</span> <span class="k">else</span> <span class="n">tsvDir</span>
@@ -163,42 +126,57 @@
     <span class="p">]</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">trainingdf</span><span class="p">,</span> <span class="n">validationdf</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
-        <span class="n">split</span> <span class="o">=</span> <span class="n">correctSplit</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">testSetOn</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
-            <span class="c1"># Preemptive measure just to avoid a potential disaster</span>
-            <span class="k">continue</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span>
+        <span class="k">if</span> <span class="n">testSetOn</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;validation&quot;</span><span class="p">:</span>
+                <span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;training&quot;</span>
+            <span class="k">elif</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
+                <span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;validation&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="si">}</span><span class="s2"> -used-as-&gt; </span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
-        <span class="n">tsvlocation</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datasetDir</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">file</span><span class="si">}</span><span class="s2">.tsv&quot;</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">joint_parser</span><span class="o">.</span><span class="n">from_tsv</span><span class="p">(</span><span class="n">tsvlocation</span><span class="p">)</span>
+        <span class="n">tsvlocation</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datasetDir</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tsvlocation</span> <span class="o">+</span> <span class="s2">&quot;.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">J_LISTTYPE_COLUMNS</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">eval</span><span class="p">)</span>
+        <span class="c1"># Filter the bad quality annotations</span>
         <span class="k">if</span> <span class="n">scrutinizeData</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">scrutinize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">originalIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+                <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">qualitySquaredSum</span> <span class="o">&lt;</span> <span class="mf">0.75</span><span class="p">)</span>
+                <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">measureMisalignment</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">incongruentBass</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">filteredIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">(</span><span class="si">{</span><span class="n">originalIndex</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">filteredIndex</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dataAugmentation</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
             <span class="n">transpositions</span> <span class="o">=</span> <span class="n">_getTranspositions</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transpositions</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">transpositions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">synthetic</span><span class="p">:</span>
-            <span class="n">dfsynth</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transpositions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">synthetic</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">joint_parser</span><span class="o">.</span><span class="n">retexturizeSynthetic</span><span class="p">(</span><span class="n">dfsynth</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">inputRepresentation</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
-                <span class="n">inputLayer</span> <span class="o">=</span> <span class="n">availableInputs</span><span class="p">[</span><span class="n">inputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
-                <span class="n">Xi</span> <span class="o">=</span> <span class="n">inputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
-                <span class="n">Xi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">,</span> <span class="n">value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_X_</span><span class="si">{</span><span class="n">inputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">Xi</span><span class="p">:</span>
-                    <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">outputRepresentation</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
-                <span class="n">outputLayer</span> <span class="o">=</span> <span class="n">availableOutputs</span><span class="p">[</span><span class="n">outputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
-                <span class="n">yi</span> <span class="o">=</span> <span class="n">outputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">outputRepresentation</span> <span class="o">==</span> <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">:</span>
-                    <span class="n">yi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">yi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
-                <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_y_</span><span class="si">{</span><span class="n">outputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">yi</span><span class="p">:</span>
-                    <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">inputRepresentation</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
+            <span class="n">inputLayer</span> <span class="o">=</span> <span class="n">availableInputs</span><span class="p">[</span><span class="n">inputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">Xi</span> <span class="o">=</span> <span class="n">inputLayer</span><span class="o">.</span><span class="n">array</span>
+            <span class="n">Xi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transpositions</span><span class="p">:</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">inputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+                <span class="n">Xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xi</span><span class="p">,</span> <span class="n">tr</span><span class="p">))</span>
+            <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_X_</span><span class="si">{</span><span class="n">inputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">Xi</span><span class="p">:</span>
+                <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">outputRepresentation</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
+            <span class="n">outputLayer</span> <span class="o">=</span> <span class="n">availableOutputs</span><span class="p">[</span><span class="n">outputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">yi</span> <span class="o">=</span> <span class="n">outputLayer</span><span class="o">.</span><span class="n">array</span>
+            <span class="n">yi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transpositions</span><span class="p">:</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">outputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+                <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">yi</span><span class="p">,</span> <span class="n">tr</span><span class="p">))</span>
+            <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_y_</span><span class="si">{</span><span class="n">outputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">yi</span><span class="p">:</span>
+                <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
     <span class="c1"># drop the extension, we&#39;ll overwrite it to .npz</span>
     <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">npzOutput</span><span class="p">)</span>
     <span class="n">outputFile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">-synth&quot;</span> <span class="k">if</span> <span class="n">synthetic</span> <span class="k">else</span> <span class="n">filename</span>
@@ -214,90 +192,6 @@
         </details>
 
             </section>
-                <section id="initializeArrays">
-                            <div class="attr function"><a class="headerlink" href="#initializeArrays">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">initializeArrays</span><span class="signature">(inputRepresentations, outputRepresentations)</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">initializeArrays</span><span class="p">(</span><span class="n">inputRepresentations</span><span class="p">,</span> <span class="n">outputRepresentations</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Each array becomes a dict entry with the name of the input/output&quot;&quot;&quot;</span>
-    <span class="n">outputArrays</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]:</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
-            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_X_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
-            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_y_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">return</span> <span class="n">outputArrays</span>
-</pre></div>
-
-        </details>
-
-            <div class="docstring"><p>Each array becomes a dict entry with the name of the input/output</p>
-</div>
-
-
-                </section>
-                <section id="scrutinize">
-                            <div class="attr function"><a class="headerlink" href="#scrutinize">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">scrutinize</span><span class="signature">(df, qualityThresh=0.75, bassThresh=0.8)</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">scrutinize</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">qualityThresh</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">bassThresh</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter &#39;bad quality&#39; annotations.&quot;&quot;&quot;</span>
-    <span class="n">originalIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
-        <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">qualitySquaredSum</span> <span class="o">&lt;</span> <span class="n">qualityThresh</span><span class="p">)</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">measureMisalignment</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">incongruentBass</span> <span class="o">&lt;</span> <span class="n">bassThresh</span><span class="p">)</span>
-    <span class="p">]</span>
-    <span class="n">filteredIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">(</span><span class="si">{</span><span class="n">originalIndex</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">filteredIndex</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</pre></div>
-
-        </details>
-
-            <div class="docstring"><p>Filter 'bad quality' annotations.</p>
-</div>
-
-
-                </section>
-                <section id="correctSplit">
-                            <div class="attr function"><a class="headerlink" href="#correctSplit">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">correctSplit</span><span class="signature">(split, testSetOn)</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">correctSplit</span><span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="n">testSetOn</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Correct the split of this file according to &#39;testSetOn&#39; parameter.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">testSetOn</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;validation&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;training&quot;</span>
-        <span class="k">elif</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;validation&quot;</span>
-    <span class="k">return</span> <span class="n">split</span>
-</pre></div>
-
-        </details>
-
-            <div class="docstring"><p>Correct the split of this file according to 'testSetOn' parameter.</p>
-</div>
-
-
-                </section>
                 <section id="generateDataset">
                             <div class="attr function"><a class="headerlink" href="#generateDataset">#&nbsp;&nbsp</a>
 
@@ -333,9 +227,12 @@
     <span class="n">tsvDir</span><span class="p">,</span>
     <span class="n">npzOutput</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="n">outputArrays</span> <span class="o">=</span> <span class="n">initializeArrays</span><span class="p">(</span>
-        <span class="n">inputRepresentations</span><span class="p">,</span> <span class="n">outputRepresentations</span>
-    <span class="p">)</span>
+    <span class="n">outputArrays</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
+            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_X_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
+            <span class="n">outputArrays</span><span class="p">[</span><span class="n">split</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_y_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">training</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">testSetOn</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">]</span>
     <span class="n">validation</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">testSetOn</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;validation&quot;</span><span class="p">]</span>
     <span class="n">datasetDir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tsvDir</span><span class="si">}</span><span class="s2">-synth&quot;</span> <span class="k">if</span> <span class="n">synthetic</span> <span class="k">else</span> <span class="n">tsvDir</span>
@@ -354,42 +251,57 @@
     <span class="p">]</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">trainingdf</span><span class="p">,</span> <span class="n">validationdf</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
-        <span class="n">split</span> <span class="o">=</span> <span class="n">correctSplit</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">testSetOn</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
-            <span class="c1"># Preemptive measure just to avoid a potential disaster</span>
-            <span class="k">continue</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span>
+        <span class="k">if</span> <span class="n">testSetOn</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;validation&quot;</span><span class="p">:</span>
+                <span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;training&quot;</span>
+            <span class="k">elif</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
+                <span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;validation&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="si">}</span><span class="s2"> -used-as-&gt; </span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
-        <span class="n">tsvlocation</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datasetDir</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">file</span><span class="si">}</span><span class="s2">.tsv&quot;</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">joint_parser</span><span class="o">.</span><span class="n">from_tsv</span><span class="p">(</span><span class="n">tsvlocation</span><span class="p">)</span>
+        <span class="n">tsvlocation</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datasetDir</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tsvlocation</span> <span class="o">+</span> <span class="s2">&quot;.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">J_LISTTYPE_COLUMNS</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">eval</span><span class="p">)</span>
+        <span class="c1"># Filter the bad quality annotations</span>
         <span class="k">if</span> <span class="n">scrutinizeData</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">scrutinize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">originalIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+                <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">qualitySquaredSum</span> <span class="o">&lt;</span> <span class="mf">0.75</span><span class="p">)</span>
+                <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">measureMisalignment</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">incongruentBass</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">filteredIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">(</span><span class="si">{</span><span class="n">originalIndex</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">filteredIndex</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dataAugmentation</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
             <span class="n">transpositions</span> <span class="o">=</span> <span class="n">_getTranspositions</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transpositions</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">transpositions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">synthetic</span><span class="p">:</span>
-            <span class="n">dfsynth</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transpositions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">synthetic</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">joint_parser</span><span class="o">.</span><span class="n">retexturizeSynthetic</span><span class="p">(</span><span class="n">dfsynth</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">inputRepresentation</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
-                <span class="n">inputLayer</span> <span class="o">=</span> <span class="n">availableInputs</span><span class="p">[</span><span class="n">inputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
-                <span class="n">Xi</span> <span class="o">=</span> <span class="n">inputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
-                <span class="n">Xi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">,</span> <span class="n">value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_X_</span><span class="si">{</span><span class="n">inputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">Xi</span><span class="p">:</span>
-                    <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">outputRepresentation</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
-                <span class="n">outputLayer</span> <span class="o">=</span> <span class="n">availableOutputs</span><span class="p">[</span><span class="n">outputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
-                <span class="n">yi</span> <span class="o">=</span> <span class="n">outputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">outputRepresentation</span> <span class="o">==</span> <span class="s2">&quot;HarmonicRhythm7&quot;</span><span class="p">:</span>
-                    <span class="n">yi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">yi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
-                <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_y_</span><span class="si">{</span><span class="n">outputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">yi</span><span class="p">:</span>
-                    <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">inputRepresentation</span> <span class="ow">in</span> <span class="n">inputRepresentations</span><span class="p">:</span>
+            <span class="n">inputLayer</span> <span class="o">=</span> <span class="n">availableInputs</span><span class="p">[</span><span class="n">inputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">Xi</span> <span class="o">=</span> <span class="n">inputLayer</span><span class="o">.</span><span class="n">array</span>
+            <span class="n">Xi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transpositions</span><span class="p">:</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">inputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+                <span class="n">Xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xi</span><span class="p">,</span> <span class="n">tr</span><span class="p">))</span>
+            <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_X_</span><span class="si">{</span><span class="n">inputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">Xi</span><span class="p">:</span>
+                <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">outputRepresentation</span> <span class="ow">in</span> <span class="n">outputRepresentations</span><span class="p">:</span>
+            <span class="n">outputLayer</span> <span class="o">=</span> <span class="n">availableOutputs</span><span class="p">[</span><span class="n">outputRepresentation</span><span class="p">](</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">yi</span> <span class="o">=</span> <span class="n">outputLayer</span><span class="o">.</span><span class="n">array</span>
+            <span class="n">yi</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transpositions</span><span class="p">:</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">outputLayer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="o">=</span><span class="n">transposition</span><span class="p">)</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">padToSequenceLength</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">sequenceLength</span><span class="p">)</span>
+                <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">yi</span><span class="p">,</span> <span class="n">tr</span><span class="p">))</span>
+            <span class="n">npzfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">_y_</span><span class="si">{</span><span class="n">outputRepresentation</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">yi</span><span class="p">:</span>
+                <span class="n">outputArrays</span><span class="p">[</span><span class="n">npzfile</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
     <span class="c1"># drop the extension, we&#39;ll overwrite it to .npz</span>
     <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">npzOutput</span><span class="p">)</span>
     <span class="n">outputFile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">-synth&quot;</span> <span class="k">if</span> <span class="n">synthetic</span> <span class="k">else</span> <span class="n">filename</span>

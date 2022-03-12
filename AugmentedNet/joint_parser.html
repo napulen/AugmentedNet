@@ -39,15 +39,6 @@
             <li>
                     <a class="function" href="#parseAnnotationAndAnnotation">parseAnnotationAndAnnotation</a>
             </li>
-            <li>
-                    <a class="function" href="#reverseJointToAnnotation">reverseJointToAnnotation</a>
-            </li>
-            <li>
-                    <a class="function" href="#reverseJointToScore">reverseJointToScore</a>
-            </li>
-            <li>
-                    <a class="function" href="#retexturizeSynthetic">retexturizeSynthetic</a>
-            </li>
     </ul>
 
 
@@ -194,7 +185,6 @@
     <span class="c1"># In that case, ffill the annotation portion of the new dataframe</span>
     <span class="n">jointdf</span><span class="p">[</span><span class="s2">&quot;a_harmonicRhythm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">jointdf</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">jointdf</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">qualityAssessment</span><span class="p">:</span>
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_measureAlignmentScore</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_qualityMetric</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
@@ -223,36 +213,6 @@
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_measureAlignmentScore</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_qualityMetric</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_inversionMetric</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">jointdf</span>
-
-
-<span class="k">def</span> <span class="nf">reverseJointToAnnotation</span><span class="p">(</span><span class="n">dfj</span><span class="p">):</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">annotation_parser</span><span class="o">.</span><span class="n">A_COLUMNS</span><span class="p">)</span>
-    <span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;a_offset&quot;</span><span class="p">)</span>
-    <span class="n">adf</span> <span class="o">=</span> <span class="n">dfj</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
-    <span class="n">adf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;a_offset&quot;</span>
-    <span class="k">return</span> <span class="n">adf</span>
-
-
-<span class="k">def</span> <span class="nf">reverseJointToScore</span><span class="p">(</span><span class="n">dfj</span><span class="p">):</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">score_parser</span><span class="o">.</span><span class="n">S_COLUMNS</span><span class="p">)</span>
-    <span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;s_offset&quot;</span><span class="p">)</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">dfj</span><span class="p">[</span><span class="n">dfj</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">sdf</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
-    <span class="n">sdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;s_offset&quot;</span>
-    <span class="n">sdf</span><span class="p">[</span><span class="s2">&quot;s_measure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="n">s_measure</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">sdf</span>
-
-
-<span class="k">def</span> <span class="nf">retexturizeSynthetic</span><span class="p">(</span><span class="n">dfj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given a synthetic joint dataframe, retexturize it.&quot;&quot;&quot;</span>
-    <span class="n">adf</span> <span class="o">=</span> <span class="n">reverseJointToAnnotation</span><span class="p">(</span><span class="n">dfj</span><span class="p">)</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">reverseJointToScore</span><span class="p">(</span><span class="n">dfj</span><span class="p">)</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">score_parser</span><span class="o">.</span><span class="n">_recursiveTexturization</span><span class="p">(</span><span class="n">sdf</span><span class="p">)</span>
-    <span class="n">jointdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sdf</span><span class="p">,</span> <span class="n">adf</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">jointdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;j_offset&quot;</span>
-    <span class="n">jointdf</span><span class="p">[</span><span class="s2">&quot;a_harmonicRhythm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">jointdf</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jointdf</span>
 </pre></div>
 
@@ -312,7 +272,6 @@
     <span class="c1"># In that case, ffill the annotation portion of the new dataframe</span>
     <span class="n">jointdf</span><span class="p">[</span><span class="s2">&quot;a_harmonicRhythm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">jointdf</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">jointdf</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">qualityAssessment</span><span class="p">:</span>
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_measureAlignmentScore</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
         <span class="n">jointdf</span> <span class="o">=</span> <span class="n">_qualityMetric</span><span class="p">(</span><span class="n">jointdf</span><span class="p">)</span>
@@ -373,83 +332,6 @@ s is a .mxl|.krn|.musicxml file</p>
 <p>a is a RomanText file</p>
 
 <p>When synthesizing the file, texturize it if <code>texturize=True</code></p>
-</div>
-
-
-                </section>
-                <section id="reverseJointToAnnotation">
-                            <div class="attr function"><a class="headerlink" href="#reverseJointToAnnotation">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">reverseJointToAnnotation</span><span class="signature">(dfj)</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">reverseJointToAnnotation</span><span class="p">(</span><span class="n">dfj</span><span class="p">):</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">annotation_parser</span><span class="o">.</span><span class="n">A_COLUMNS</span><span class="p">)</span>
-    <span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;a_offset&quot;</span><span class="p">)</span>
-    <span class="n">adf</span> <span class="o">=</span> <span class="n">dfj</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
-    <span class="n">adf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;a_offset&quot;</span>
-    <span class="k">return</span> <span class="n">adf</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="reverseJointToScore">
-                            <div class="attr function"><a class="headerlink" href="#reverseJointToScore">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">reverseJointToScore</span><span class="signature">(dfj)</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">reverseJointToScore</span><span class="p">(</span><span class="n">dfj</span><span class="p">):</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">score_parser</span><span class="o">.</span><span class="n">S_COLUMNS</span><span class="p">)</span>
-    <span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;s_offset&quot;</span><span class="p">)</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">dfj</span><span class="p">[</span><span class="n">dfj</span><span class="o">.</span><span class="n">a_harmonicRhythm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">sdf</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
-    <span class="n">sdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;s_offset&quot;</span>
-    <span class="n">sdf</span><span class="p">[</span><span class="s2">&quot;s_measure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="n">s_measure</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">sdf</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="retexturizeSynthetic">
-                            <div class="attr function"><a class="headerlink" href="#retexturizeSynthetic">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">retexturizeSynthetic</span><span class="signature">(dfj)</span>:
-    </div>
-
-            <details>
-            <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">retexturizeSynthetic</span><span class="p">(</span><span class="n">dfj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given a synthetic joint dataframe, retexturize it.&quot;&quot;&quot;</span>
-    <span class="n">adf</span> <span class="o">=</span> <span class="n">reverseJointToAnnotation</span><span class="p">(</span><span class="n">dfj</span><span class="p">)</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">reverseJointToScore</span><span class="p">(</span><span class="n">dfj</span><span class="p">)</span>
-    <span class="n">sdf</span> <span class="o">=</span> <span class="n">score_parser</span><span class="o">.</span><span class="n">_recursiveTexturization</span><span class="p">(</span><span class="n">sdf</span><span class="p">)</span>
-    <span class="n">jointdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sdf</span><span class="p">,</span> <span class="n">adf</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">jointdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;j_offset&quot;</span>
-    <span class="n">jointdf</span><span class="p">[</span><span class="s2">&quot;a_harmonicRhythm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">jointdf</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">jointdf</span>
-</pre></div>
-
-        </details>
-
-            <div class="docstring"><p>Given a synthetic joint dataframe, retexturize it.</p>
 </div>
 
 
