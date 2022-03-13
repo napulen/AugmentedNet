@@ -26,6 +26,7 @@ class DefaultArguments(object):
     }
     npz = {
         "synthetic": False,
+        "texturizeEachTransposition": False,
         "dataAugmentation": True,
         "collections": ["bps"],
         "testCollections": ["bps"],
@@ -141,6 +142,11 @@ def npz(is_parent_parser=False):
         "--synthetic",
         action="store_true",
         help="Search for a synthetic dataset, not one from real scores.",
+    )
+    parser.add_argument(
+        "--texturizeEachTransposition",
+        action="store_true",
+        help="Texturize each time you transpose a synthesized file.",
     )
     parser.add_argument(
         "--testCollections",

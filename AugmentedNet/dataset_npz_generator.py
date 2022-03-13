@@ -66,6 +66,7 @@ def correctSplit(split, testSetOn):
 
 def generateDataset(
     synthetic,
+    texturizeEachTransposition,
     dataAugmentation,
     collections,
     testCollections,
@@ -113,9 +114,14 @@ def generateDataset(
         else:
             transpositions = ["P1"]
         if synthetic:
-            dfsynth = df.copy()
+            if not texturizeEachTransposition:
+                # once per file
+                df = joint_parser.retexturizeSynthetic(df)
+            else:
+                # once per transposition
+                dfsynth = df.copy()
         for transposition in transpositions:
-            if synthetic:
+            if synthetic and texturizeEachTransposition:
                 df = joint_parser.retexturizeSynthetic(dfsynth)
             for inputRepresentation in inputRepresentations:
                 inputLayer = availableInputs[inputRepresentation](df)
