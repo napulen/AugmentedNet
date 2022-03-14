@@ -123,9 +123,13 @@ def generateDataset(
         for transposition in transpositions:
             if synthetic and texturizeEachTransposition:
                 df = joint_parser.retexturizeSynthetic(dfsynth)
+            print("Original length:", len(df.index))
             for inputRepresentation in inputRepresentations:
                 inputLayer = availableInputs[inputRepresentation](df)
                 Xi = inputLayer.run(transposition=transposition)
+                while len(Xi) <= (sequenceLength / 2):
+                    Xi = np.concatenate((Xi, Xi), axis=0)
+                    print("\tDoubled length to: ", len(Xi))
                 Xi = padToSequenceLength(Xi, sequenceLength, value=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
                 for sequence in Xi:
@@ -133,6 +137,9 @@ def generateDataset(
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
+                while len(yi) <= (sequenceLength / 2):
+                    yi = np.concatenate((yi, yi), axis=0)
+                    print("\tDoubled length to: ", len(yi))
                 if outputRepresentation == "HarmonicRhythm7":
                     yi = padToSequenceLength(yi, sequenceLength, value=6)
                 else:
