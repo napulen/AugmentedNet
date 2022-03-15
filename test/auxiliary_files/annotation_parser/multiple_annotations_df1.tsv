@@ -1,0 +1,27 @@
+a_offset	a_measure	a_duration	a_annotationNumber	a_romanNumeral	a_harmonicRhythm	a_pitchNames	a_bass	a_tenor	a_alto	a_soprano	a_root	a_inversion	a_quality	a_pcset	a_localKey	a_tonicizedKey	a_degree1	a_degree2
+0.0	1	1.0	0	I	0	('C', 'E', 'G')	C	E	G	C	C	0	maj	(0, 4, 7)	C	C	1	None
+1.0	1	1.0	1	ii	0	('D', 'F', 'A')	D	F	A	D	D	0	min	(2, 5, 9)	C	C	2	None
+2.0	1	1.0	2	iii	0	('E', 'G', 'B')	E	G	B	E	E	0	min	(4, 7, 11)	C	C	3	None
+3.0	2	1.0	3	IV	0	('F', 'A', 'C')	F	A	C	F	F	0	maj	(0, 5, 9)	C	C	4	None
+4.0	2	1.0	4	Cad	0	('G', 'C', 'E')	G	C	E	C	C	2	maj	(0, 4, 7)	C	C	1	None
+5.0	2	1.0	5	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	C	C	5	None
+6.0	3	1.0	6	vi	0	('A', 'C', 'E')	A	C	E	A	A	0	min	(0, 4, 9)	C	C	6	None
+7.0	3	1.0	7	V	0	('B', 'D', 'G')	B	D	G	G	G	1	maj	(2, 7, 11)	C	C	5	None
+8.0	3	1.0	8	viio7	0	('D', 'F', 'A-', 'B')	D	F	A-	B	B	1	dim7	(2, 5, 8, 11)	C	c	#7	1
+9.0	4	2.0	9	I	0	('E', 'G', 'C')	E	G	C	C	C	1	maj	(0, 4, 7)	C	C	1	None
+11.0	4	1.0	10	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	C	C	5	None
+12.0	5	1.0	11	i	0	('C', 'E-', 'G')	C	E-	G	C	C	0	min	(0, 3, 7)	c	c	1	None
+13.0	5	1.0	12	iio	0	('D', 'F', 'A-')	D	F	A-	D	D	0	dim	(2, 5, 8)	c	c	2	None
+14.0	5	1.0	13	I	0	('E-', 'G', 'B-')	E-	G	B-	E-	E-	0	maj	(3, 7, 10)	c	E-	3	None
+15.0	6	1.0	14	N	0	('F', 'A-', 'D-')	F	A-	D-	D-	D-	1	maj	(1, 5, 8)	c	c	-2	None
+16.0	6	1.0	15	Cad	0	('G', 'C', 'E-')	G	C	E-	C	C	2	min	(0, 3, 7)	c	c	1	None
+17.0	6	1.0	16	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	c	c	5	None
+18.0	7	2.0	17	It	0	('A-', 'C', 'F#')	A-	C	F#	F#	F#	1	aug6	(0, 6, 8)	c	c	#4	None
+20.0	7	1.0	18	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	c	c	5	None
+21.0	8	2.0	19	Fr7	0	('A-', 'C', 'D', 'F#')	A-	C	D	F#	D	2	aug6	(0, 2, 6, 8)	c	c	2	None
+23.0	8	1.0	20	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	c	c	5	None
+24.0	9	3.0	21	Ger7	0	('A-', 'C', 'E-', 'F#')	A-	C	E-	F#	F#	1	aug6	(0, 3, 6, 8)	c	c	#4	None
+27.0	10	3.0	22	iv	0	('F', 'A-', 'C')	F	A-	C	F	F	0	min	(0, 5, 8)	c	c	4	None
+30.0	11	2.0	23	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	c	c	5	None
+32.0	11	1.0	24	V	0	('G', 'B', 'D')	G	B	D	G	G	0	maj	(2, 7, 11)	c	c	5	None
+33.0	12	3.0	25	I	0	('C', 'E', 'G')	C	E	G	C	C	0	maj	(0, 4, 7)	c	C	1	None
