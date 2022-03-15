@@ -137,7 +137,7 @@ mlruns/
 .vscode/
 
 *.npz
-*.tsv
+./*.tsv
 *.gv
 defaults.json
 .vscode/
