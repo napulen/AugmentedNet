@@ -1,7 +1,7 @@
 # AugmentedNet
 A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
 
-> The `main` branch is now a slightly improved neural network. The source code of the published version (`v1.0.0`) can be found in the [v1](https://github.com/napulen/AugmentedNet/tree/v1) branch. The differences are indicated in any releases > `v1.0.0`. If you report against the published results, you are comparing against `v1.0.0`. If you want to compare against the latest network, train a model using this code.
+> The `main` branch is now an improved neural network. The source code of the published version (`v1.0.0`) can be found in the [v1](https://github.com/napulen/AugmentedNet/tree/v1) branch. The differences are indicated in any releases > `v1.0.0`. If you report against the published results, you are comparing against `v1.0.0`. If you want to compare against the latest network, train a model using this code.
 
 ### ISMIR Paper 
 
@@ -73,10 +73,10 @@ source .env/bin/activate
 
 ### Using accompanying data
 
-If you don't care about generating your own synthetic training examples, use the accompanying `tsv` files, which include the real and synthetic training examples.
+To save you some time, we include the preprocessed `tsv` files of the *real* data, as well as the *synthetic* block-chord templates for texturization. These are available in the release of the latest version.
 
 ```bash
-wget https://github.com/napulen/AugmentedNet/releases/download/v1.3.5/dataset.zip
+wget https://github.com/napulen/AugmentedNet/releases/download/v1.5.0/dataset.zip
 unzip dataset.zip
 ```
 
@@ -84,18 +84,49 @@ Now you are ready to train the network.
 
 ### Generating synthetic examples
 
-If you **do** care about generating your own synthetic training examples, you might want to look into `AugmentedNet.dataset_tsv_generator` and `AugmentedNet.dataset_npz_generator`. For example:
+There are two ways to generate texturizations: at the tsv-level (legacy) and at the numpy-level (newer).
 
-```bash
+#### Texturizations at the tsv-level (legacy)
+
+You can generate one texturization per file in the dataset with this script
+
+```python
 (.env) python -m AugmentedNet.dataset_tsv_generator --synthesize --texturize
-(.env) python -m AugmentedNet.dataset_npz_generator
-(.env) python -m AugmentedNet.train
 ```
 
-At the moment, the code for generating the texturizations is not extremely simple, if you only wanted to do that. However, raise an issue, reach out, and I'll make my best effort to help you on your use case.
+Originally, this is how I trained `v1.0.0`. The network was trained with exactly twice the amount of *real* training data.
+
+#### Texturizations at the npz-level (newer)
+
+After `v1.5.0`, the tsv-dataset only includes the templates (i.e., **block chords**). The texturization is done when encoding the numpy arrays for the neural network. Right before training.
+
+There are two options for texturization in this way
+1. Generate one texturization per file
+2. Generate one texturization per **transposition**
+
+In the second approach, every time you transpose a synthetic example to a different key, you re-texturize it. The amount of "new" training examples seen by the network is much larger this way.
+
+You can control those settings when training the network.
+
+```bash
+# No synthetic examples
+(.env) python -m AugmentedNet.train <compulsory_args>
+
+# Synthetic examples, one texturization per file
+(.env) python -m AugmentedNet.train <compulsory_args> --syntheticDataStrategy concatenate
+
+# Synthetic examples, one texturization per transposition
+(.env) python -m AugmentedNet.train <compulsory_args> --syntheticDataStrategy concatenate --texturizeEachTransposition
+```
+
+See next section for the `<compulsory_args>`.
+
+> At the moment, the code for generating the texturizations is not extremely simple, if you only wanted to do that. However, raise an issue, reach out, and I'll make my best effort to help you on your use case.
 
 
 ### Training the network
+
+If you want to train the network, the minimum call looks like this.
 
 ```bash
 (.env) python -m AugmentedNet.train debug testexperiment
