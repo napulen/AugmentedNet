@@ -289,12 +289,9 @@
     <span class="c1"># Step 1: Parse and produce a salami-sliced dataset</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">_initialDataFrame</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
     <span class="c1"># Step 2: Texturize the dataframe</span>
-    <span class="k">for</span> <span class="n">duration</span> <span class="ow">in</span> <span class="n">available_durations</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">numberOfNotes</span> <span class="ow">in</span> <span class="n">available_number_of_notes</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">_texturizeAnnotationScore</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">numberOfNotes</span><span class="p">)</span>
-    <span class="c1"># Step 3: Turn salami-slice into fixed-duration steps</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">eventBased</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">_reindexDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fixedOffset</span><span class="o">=</span><span class="n">fixedOffset</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">_recursiveTexturization</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">fixedOffset</span><span class="o">=</span><span class="n">fixedOffset</span><span class="p">,</span> <span class="n">eventBased</span><span class="o">=</span><span class="n">eventBased</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
@@ -382,12 +379,9 @@
     <span class="c1"># Step 1: Parse and produce a salami-sliced dataset</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">_initialDataFrame</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
     <span class="c1"># Step 2: Texturize the dataframe</span>
-    <span class="k">for</span> <span class="n">duration</span> <span class="ow">in</span> <span class="n">available_durations</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">numberOfNotes</span> <span class="ow">in</span> <span class="n">available_number_of_notes</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">_texturizeAnnotationScore</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">numberOfNotes</span><span class="p">)</span>
-    <span class="c1"># Step 3: Turn salami-slice into fixed-duration steps</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">eventBased</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">_reindexDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fixedOffset</span><span class="o">=</span><span class="n">fixedOffset</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">_recursiveTexturization</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">fixedOffset</span><span class="o">=</span><span class="n">fixedOffset</span><span class="p">,</span> <span class="n">eventBased</span><span class="o">=</span><span class="n">eventBased</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
