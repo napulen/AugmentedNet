@@ -22,11 +22,39 @@ def _getTranspositions(df):
     tonicizedKeys = df.a_localKey.to_list() + df.a_tonicizedKey.to_list()
     tonicizedKeys = set(tonicizedKeys)
     ret = []
+    CONSTRAINEDKEYS = (
+        "G-",
+        "e-",
+        "D-",
+        "b-",
+        "A-",
+        "f",
+        "E-",
+        "c",
+        "B-",
+        "g",
+        "F",
+        "d",
+        "C",
+        "a",
+        "G",
+        "e",
+        "D",
+        "b",
+        "A",
+        "f#",
+        "E",
+        "c#",
+        "B",
+        "g#",
+        "F#",
+        "d#",
+    )
     for interval in INTERVALCLASSES:
         transposed = [TransposeKey(k, interval) for k in tonicizedKeys]
         # Transpose to this interval if every modulation lies within
         # the set of KEY classes that we can classify
-        if set(transposed).issubset(set(KEYS)):
+        if set(transposed).issubset(set(CONSTRAINEDKEYS)):
             ret.append(interval)
     return ret
 
