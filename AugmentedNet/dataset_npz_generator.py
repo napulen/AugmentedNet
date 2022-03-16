@@ -160,7 +160,6 @@ def generateDataset(
                 Xi = inputLayer.run(transposition=transposition)
                 if len(Xi) <= (sequenceLength / 2):
                     Xi = np.concatenate((Xi, Xi), axis=0)
-                    print("\tDoubled length to: ", len(Xi))
                 Xi = padToSequenceLength(Xi, sequenceLength, value=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
                 for sequence in Xi:
@@ -170,7 +169,6 @@ def generateDataset(
                 yi = outputLayer.run(transposition=transposition)
                 if len(yi) <= (sequenceLength / 2):
                     yi = np.concatenate((yi, yi), axis=0)
-                    print("\tDoubled length to: ", len(yi))
                 if outputRepresentation == "HarmonicRhythm7":
                     yi = padToSequenceLength(yi, sequenceLength, value=6)
                 else:
