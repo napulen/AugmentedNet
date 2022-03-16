@@ -144,7 +144,10 @@ def generateDataset(
         if synthetic:
             if not texturizeEachTransposition:
                 # once per file
-                df = joint_parser.retexturizeSynthetic(df)
+                try:
+                    df = joint_parser.retexturizeSynthetic(df)
+                except:
+                    continue
             else:
                 # once per transposition
                 dfsynth = df.copy()
