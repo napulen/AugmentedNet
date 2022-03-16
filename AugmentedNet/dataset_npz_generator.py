@@ -147,6 +147,7 @@ def generateDataset(
                 try:
                     df = joint_parser.retexturizeSynthetic(df)
                 except:
+                    print("\tFAILED")
                     continue
             else:
                 # once per transposition
