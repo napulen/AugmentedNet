@@ -100,7 +100,9 @@ def predict(modelPath, inputFile, useGpu=False):
     encodedInputs = [availableInputs[i](df) for i in inputs]
     outputLayers = [l.name.split("/")[0] for l in model.outputs]
     # TODO: How to decide the sequence length?
-    modelInputs = [padToSequenceLength(i.array, 640) for i in encodedInputs]
+    modelInputs = [
+        padToSequenceLength(i.array, 640, value=-1) for i in encodedInputs
+    ]
     predictions = model.predict(modelInputs)
     predictions = [p.reshape(1, -1, p.shape[2]) for p in predictions]
     dfdict = {}
