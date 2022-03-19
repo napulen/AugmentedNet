@@ -268,15 +268,30 @@ def _harmonicRhythmPostprocessing(a_harmonicRhythm):
     3 - an eighth note has passed since the last chord
     4 - a quarter note has passed since the last chord
     5 - a half note has passed since the last chord
-    6 - a whole note has passed since the last chord"""
-    template = [1, 2, 2, 3, 3, 3, 3] + ([4] * 8) + ([5] * 16) + ([6] * 32)
+    6 - a whole note has passed since the last chord
+    7 -
+    """
+    template = [1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6] + [
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        9,
+        9,
+        9,
+        9,
+    ]
     hr = a_harmonicRhythm.to_list()
-    t = 62
+    t = len(template) - 1
     for i in range(len(a_harmonicRhythm)):
         if hr[i] == 0:
             t = 0
         else:
-            hr[i] = template[min(t, 62)]
+            hr[i] = template[min(t, len(template) - 1)]
             t += 1
     return hr
 

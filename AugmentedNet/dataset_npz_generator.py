@@ -171,7 +171,7 @@ def generateDataset(
                 if len(yi) <= (sequenceLength / 2):
                     yi = np.concatenate((yi, yi), axis=0)
                 if outputRepresentation == "HarmonicRhythm7":
-                    yi = padToSequenceLength(yi, sequenceLength, value=6)
+                    yi = padToSequenceLength(yi, sequenceLength, value=10)
                 else:
                     yi = padToSequenceLength(yi, sequenceLength)
                 npzfile = f"{split}_y_{outputRepresentation}"
