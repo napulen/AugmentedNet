@@ -227,6 +227,7 @@ def parseAnnotationAsScore(
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s, fmt=fmt)
     # Step 2: Texturize the dataframe
+    df.fillna(method="bfill", inplace=True)
     df = _recursiveTexturization(
         df, fixedOffset=fixedOffset, eventBased=eventBased
     )

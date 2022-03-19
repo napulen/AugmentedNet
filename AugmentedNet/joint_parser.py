@@ -100,6 +100,12 @@ def _inversionMetric(df):
         counts = scoreBasses.count(annotationBass)
         inversionScore = 1.0 - counts / len(scoreBasses)
         df.loc[slices.index, "incongruentBass"] = round(inversionScore, 2)
+    df["incongruentBass"] = df.incongruentBass.fillna(
+        method="ffill", inplace=True
+    )
+    df["incongruentBass"] = df.incongruentBass.fillna(
+        method="bfill", inplace=True
+    )
     return df
 
 
@@ -148,6 +154,7 @@ def parseAnnotationAndAnnotation(
     jointdf.index.name = "j_offset"
     jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
+    jointdf.fillna(method="bfill", inplace=True)
     if qualityAssessment:
         jointdf = _measureAlignmentScore(jointdf)
         jointdf = _qualityMetric(jointdf)
@@ -182,4 +189,5 @@ def retexturizeSynthetic(dfj):
     jointdf.index.name = "j_offset"
     jointdf["a_harmonicRhythm"].fillna(6.0, inplace=True)
     jointdf.fillna(method="ffill", inplace=True)
+    jointdf.fillna(method="bfill", inplace=True)
     return jointdf
