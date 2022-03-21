@@ -8,6 +8,7 @@ from .dataset_npz_generator import __doc__ as npz_description
 from .dataset_tsv_generator import __doc__ as tsv_description
 from .train import __doc__ as train_description
 from .inference import __doc__ as inference_description
+from .feature_representation import TRANSPOSITIONKEYS
 from .input_representations import (
     available_representations as availableInputs,
 )
@@ -51,6 +52,7 @@ class DefaultArguments(object):
         "scrutinizeData": False,
         "testSetOn": False,
         "npzOutput": "dataset",
+        "transpositionKeys": TRANSPOSITIONKEYS,
     }
     train = {
         "nogpu": False,
@@ -158,6 +160,12 @@ def npz(is_parent_parser=False):
         "--testSetOn",
         action="store_true",
         help="Use the real test set, and add the validation set to training.",
+    )
+    parser.add_argument(
+        "--transpositionKeys",
+        choices=TRANSPOSITIONKEYS,
+        nargs="+",
+        help="Constraint the keys for transposition (data augmentation).",
     )
     parser.set_defaults(**DefaultArguments.npz)
     return parser

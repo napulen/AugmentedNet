@@ -18,7 +18,7 @@ from .output_representations import (
 from .utils import padToSequenceLength
 
 
-def _getTranspositions(df):
+def _getTranspositions(df, transpositionKeys=TRANSPOSITIONKEYS):
     tonicizedKeys = df.a_localKey.to_list() + df.a_tonicizedKey.to_list()
     tonicizedKeys = set(tonicizedKeys)
     ret = []
@@ -26,7 +26,7 @@ def _getTranspositions(df):
         transposed = [TransposeKey(k, interval) for k in tonicizedKeys]
         # Transpose to this interval if every modulation lies within
         # the set of KEY classes that we can classify
-        if set(transposed).issubset(set(TRANSPOSITIONKEYS)):
+        if set(transposed).issubset(set(transpositionKeys)):
             ret.append(interval)
     return ret
 
@@ -77,6 +77,7 @@ def generateDataset(
     testSetOn,
     tsvDir,
     npzOutput,
+    transpositionKeys,
 ):
     outputArrays = initializeArrays(
         inputRepresentations, outputRepresentations
@@ -109,7 +110,7 @@ def generateDataset(
         if scrutinizeData and split == "training":
             df = scrutinize(df)
         if dataAugmentation and split == "training":
-            transpositions = _getTranspositions(df)
+            transpositions = _getTranspositions(df, transpositionKeys)
             print("\t", transpositions)
         else:
             transpositions = ["P1"]
