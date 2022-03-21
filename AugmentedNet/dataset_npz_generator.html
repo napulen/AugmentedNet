@@ -72,8 +72,8 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cli</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">joint_parser</span>
 <span class="kn">from</span> <span class="nn">.cache</span> <span class="kn">import</span> <span class="n">TransposeKey</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">DATASETSUMMARYFILE</span><span class="p">,</span> <span class="n">ANNOTATIONSCOREDUPLES</span>
-<span class="kn">from</span> <span class="nn">.feature_representation</span> <span class="kn">import</span> <span class="n">KEYS</span><span class="p">,</span> <span class="n">INTERVALCLASSES</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">DATASETSUMMARYFILE</span>
+<span class="kn">from</span> <span class="nn">.feature_representation</span> <span class="kn">import</span> <span class="n">TRANSPOSITIONKEYS</span><span class="p">,</span> <span class="n">INTERVALCLASSES</span>
 <span class="kn">from</span> <span class="nn">.input_representations</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">available_representations</span> <span class="k">as</span> <span class="n">availableInputs</span><span class="p">,</span>
 <span class="p">)</span>
@@ -91,7 +91,7 @@
         <span class="n">transposed</span> <span class="o">=</span> <span class="p">[</span><span class="n">TransposeKey</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">tonicizedKeys</span><span class="p">]</span>
         <span class="c1"># Transpose to this interval if every modulation lies within</span>
         <span class="c1"># the set of KEY classes that we can classify</span>
-        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">KEYS</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">TRANSPOSITIONKEYS</span><span class="p">)):</span>
             <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ret</span>
 

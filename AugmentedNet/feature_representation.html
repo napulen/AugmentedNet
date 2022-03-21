@@ -144,6 +144,9 @@
 
 <span class="n">KEYS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">key</span> <span class="k">for</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">frompcset</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">])))</span>
 
+<span class="c1"># The keys used for transposition (data augmentation)</span>
+<span class="n">TRANSPOSITIONKEYS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">KEYS</span><span class="p">)</span>
+
 <span class="n">CHORD_QUALITIES</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
     <span class="nb">sorted</span><span class="p">(</span>
         <span class="nb">set</span><span class="p">(</span>
