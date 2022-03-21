@@ -55,6 +55,9 @@ DEGREES = (
 
 KEYS = tuple(sorted(set([key for keys in frompcset.values() for key in keys])))
 
+# The keys used for transposition (data augmentation)
+TRANSPOSITIONKEYS = tuple(KEYS)
+
 CHORD_QUALITIES = tuple(
     sorted(
         set(

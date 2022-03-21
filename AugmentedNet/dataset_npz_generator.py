@@ -7,8 +7,8 @@ import numpy as np
 from . import cli
 from . import joint_parser
 from .cache import TransposeKey
-from .common import DATASETSUMMARYFILE, ANNOTATIONSCOREDUPLES
-from .feature_representation import KEYS, INTERVALCLASSES
+from .common import DATASETSUMMARYFILE
+from .feature_representation import TRANSPOSITIONKEYS, INTERVALCLASSES
 from .input_representations import (
     available_representations as availableInputs,
 )
@@ -26,7 +26,7 @@ def _getTranspositions(df):
         transposed = [TransposeKey(k, interval) for k in tonicizedKeys]
         # Transpose to this interval if every modulation lies within
         # the set of KEY classes that we can classify
-        if set(transposed).issubset(set(KEYS)):
+        if set(transposed).issubset(set(TRANSPOSITIONKEYS)):
             ret.append(interval)
     return ret
 
