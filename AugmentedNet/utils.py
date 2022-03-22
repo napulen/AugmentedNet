@@ -72,4 +72,6 @@ class DynamicArray:
         self.size += 1
 
     def finalize(self):
+        if self.memmap:
+            self.data[: self.size].flush()
         return self.data[: self.size]
