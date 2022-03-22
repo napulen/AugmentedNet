@@ -31,17 +31,6 @@ def _getTranspositions(df, transpositionKeys=TRANSPOSITIONKEYS):
     return ret
 
 
-def initializeArrays(inputRepresentations, outputRepresentations):
-    """Each array becomes a dict entry with the name of the input/output"""
-    outputArrays = {}
-    for split in ["training", "validation"]:
-        for x in inputRepresentations:
-            outputArrays[split + f"_X_{x}"] = []
-        for y in outputRepresentations:
-            outputArrays[split + f"_y_{y}"] = []
-    return outputArrays
-
-
 def scrutinize(df, qualityThresh=0.75, bassThresh=0.8):
     """Filter 'bad quality' annotations."""
     originalIndex = len(df.index)
@@ -79,9 +68,7 @@ def generateDataset(
     npzOutput,
     transpositionKeys,
 ):
-    outputArrays = initializeArrays(
-        inputRepresentations, outputRepresentations
-    )
+    outputArrays = {}
     training = ["training", "validation"] if testSetOn else ["training"]
     validation = ["test"] if testSetOn else ["validation"]
     datasetDir = f"{tsvDir}-synth" if synthetic else tsvDir
@@ -129,8 +116,12 @@ def generateDataset(
                 Xi = inputLayer.run(transposition=transposition)
                 Xi = padToSequenceLength(Xi, sequenceLength, value=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
-                for sequence in Xi:
-                    outputArrays[npzfile].append(sequence)
+                if npzfile not in outputArrays:
+                    outputArrays[npzfile] = Xi
+                else:
+                    outputArrays[npzfile] = np.concatenate(
+                        (outputArrays[npzfile], Xi)
+                    )
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
@@ -139,8 +130,12 @@ def generateDataset(
                 else:
                     yi = padToSequenceLength(yi, sequenceLength)
                 npzfile = f"{split}_y_{outputRepresentation}"
-                for sequence in yi:
-                    outputArrays[npzfile].append(sequence)
+                if npzfile not in outputArrays:
+                    outputArrays[npzfile] = yi
+                else:
+                    outputArrays[npzfile] = np.concatenate(
+                        (outputArrays[npzfile], yi)
+                    )
     # drop the extension, we'll overwrite it to .npz
     filename, _ = os.path.splitext(npzOutput)
     outputFile = f"{filename}-synth" if synthetic else filename
