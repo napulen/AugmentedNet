@@ -119,8 +119,8 @@ def generateDataset(
                 if npzfile not in outputArrays:
                     outputArrays[npzfile] = Xi
                 else:
-                    outputArrays[npzfile] = np.concatenate(
-                        (outputArrays[npzfile], Xi)
+                    outputArrays[npzfile] = np.append(
+                        outputArrays[npzfile], Xi, axis=0
                     )
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
@@ -133,8 +133,8 @@ def generateDataset(
                 if npzfile not in outputArrays:
                     outputArrays[npzfile] = yi
                 else:
-                    outputArrays[npzfile] = np.concatenate(
-                        (outputArrays[npzfile], yi)
+                    outputArrays[npzfile] = np.append(
+                        outputArrays[npzfile], yi, axis=0
                     )
     # drop the extension, we'll overwrite it to .npz
     filename, _ = os.path.splitext(npzOutput)
