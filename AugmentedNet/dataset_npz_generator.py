@@ -3,6 +3,7 @@
 import os
 import pandas as pd
 import numpy as np
+import tensorflow as tf
 
 from . import cli
 from . import joint_parser
@@ -15,7 +16,7 @@ from .input_representations import (
 from .output_representations import (
     available_representations as availableOutputs,
 )
-from .utils import padToSequenceLength
+from .utils import padToSequenceLength, DynamicArray
 
 
 def _getTranspositions(df, transpositionKeys=TRANSPOSITIONKEYS):
@@ -29,6 +30,17 @@ def _getTranspositions(df, transpositionKeys=TRANSPOSITIONKEYS):
         if set(transposed).issubset(set(transpositionKeys)):
             ret.append(interval)
     return ret
+
+
+def initializeArrays(inputRepresentations, outputRepresentations):
+    """Each array becomes a dict entry with the name of the input/output"""
+    outputArrays = {}
+    for split in ["training", "validation"]:
+        for x in inputRepresentations:
+            outputArrays[split + f"_X_{x}"] = []
+        for y in outputRepresentations:
+            outputArrays[split + f"_y_{y}"] = []
+    return outputArrays
 
 
 def scrutinize(df, qualityThresh=0.75, bassThresh=0.8):
@@ -117,11 +129,11 @@ def generateDataset(
                 Xi = padToSequenceLength(Xi, sequenceLength, value=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
                 if npzfile not in outputArrays:
-                    outputArrays[npzfile] = Xi
-                else:
-                    outputArrays[npzfile] = np.append(
-                        outputArrays[npzfile], Xi, axis=0
+                    outputArrays[npzfile] = DynamicArray(
+                        shape=Xi.shape, dtype="int8", memmap=f".{npzfile}.npz"
                     )
+                for sequence in Xi:
+                    outputArrays[npzfile].update(sequence)
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
@@ -131,11 +143,11 @@ def generateDataset(
                     yi = padToSequenceLength(yi, sequenceLength)
                 npzfile = f"{split}_y_{outputRepresentation}"
                 if npzfile not in outputArrays:
-                    outputArrays[npzfile] = yi
-                else:
-                    outputArrays[npzfile] = np.append(
-                        outputArrays[npzfile], yi, axis=0
+                    outputArrays[npzfile] = DynamicArray(
+                        shape=yi.shape, dtype="int8", memmap=f".{npzfile}.npz"
                     )
+                for sequence in yi:
+                    outputArrays[npzfile].update(sequence)
     # drop the extension, we'll overwrite it to .npz
     filename, _ = os.path.splitext(npzOutput)
     outputFile = f"{filename}-synth" if synthetic else filename
