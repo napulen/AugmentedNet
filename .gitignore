@@ -143,4 +143,4 @@ defaults.json
 .vscode/
 
 # Ignore memmap files
-.mmap
+*.mmap
