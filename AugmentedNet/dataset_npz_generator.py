@@ -151,6 +151,7 @@ def generateDataset(
     # drop the extension, we'll overwrite it to .npz
     filename, _ = os.path.splitext(npzOutput)
     outputFile = f"{filename}-synth" if synthetic else filename
+    outputArrays = {k: v.finalize() for k, v in outputArrays.items()}
     np.savez_compressed(outputFile, **outputArrays)
 
 

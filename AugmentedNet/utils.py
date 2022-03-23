@@ -73,5 +73,8 @@ class DynamicArray:
 
     def finalize(self):
         if self.memmap:
-            self.data[: self.size].flush()
-        return self.data[: self.size]
+            self.data.resize((self.size, *self.data.shape[1:]))
+            self.data.flush()
+        else:
+            self.data = np.resize(self.data, (self.size, *self.data.shape[1:]))
+        return self.data
