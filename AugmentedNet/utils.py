@@ -34,21 +34,18 @@ class DynamicArray:
         self,
         shape=(0,),
         dtype=float,
-        initial_capacity=1000,
-        growth_factor=2,
+        initial_capacity=10000,
+        growth_factor=1.5,
         memmap="",
     ):
-        """First item of shape is ingnored, the rest defines the shape"""
+        """First item of shape is ignored, the rest defines the shape."""
         self.shape = shape
         if memmap:
-            self.data = np.require(
-                np.memmap(
-                    memmap,
-                    mode="w+",
-                    shape=(initial_capacity, *shape[1:]),
-                    dtype=dtype,
-                ),
-                requirements=["O"],
+            self.data = np.memmap(
+                memmap,
+                mode="w+",
+                shape=(initial_capacity, *shape[1:]),
+                dtype=dtype,
             )
         else:
             self.data = np.zeros((initial_capacity, *shape[1:]), dtype=dtype)
@@ -56,14 +53,20 @@ class DynamicArray:
         self.growth_factor = growth_factor
         self.memmap = memmap
         self.size = 0
+        self.dtype = dtype
 
     def update(self, x):
         if self.size == self.capacity:
             if self.memmap:
                 self.data.flush()
-            self.capacity *= self.growth_factor
+            self.capacity = int(self.capacity * self.growth_factor)
             if self.memmap:
-                self.data.resize((self.capacity, *self.data.shape[1:]))
+                self.data = np.memmap(
+                    self.memmap,
+                    mode="r+",
+                    shape=(self.capacity, *self.data.shape[1:]),
+                    dtype=self.dtype,
+                )
             else:
                 self.data = np.resize(
                     self.data, (self.capacity, *self.data.shape[1:])
@@ -72,9 +75,4 @@ class DynamicArray:
         self.size += 1
 
     def finalize(self):
-        if self.memmap:
-            self.data.resize((self.size, *self.data.shape[1:]))
-            self.data.flush()
-        else:
-            self.data = np.resize(self.data, (self.size, *self.data.shape[1:]))
-        return self.data
+        return self.data[: self.size]
