@@ -3,6 +3,7 @@
 import os
 import pandas as pd
 import numpy as np
+import tensorflow as tf
 
 from . import cli
 from . import joint_parser
@@ -15,7 +16,7 @@ from .input_representations import (
 from .output_representations import (
     available_representations as availableOutputs,
 )
-from .utils import padToSequenceLength
+from .utils import padToSequenceLength, DynamicArray
 
 
 def _getTranspositions(df, transpositionKeys=TRANSPOSITIONKEYS):
@@ -79,9 +80,7 @@ def generateDataset(
     npzOutput,
     transpositionKeys,
 ):
-    outputArrays = initializeArrays(
-        inputRepresentations, outputRepresentations
-    )
+    outputArrays = {}
     training = ["training", "validation"] if testSetOn else ["training"]
     validation = ["test"] if testSetOn else ["validation"]
     datasetDir = f"{tsvDir}-synth" if synthetic else tsvDir
@@ -129,8 +128,12 @@ def generateDataset(
                 Xi = inputLayer.run(transposition=transposition)
                 Xi = padToSequenceLength(Xi, sequenceLength, value=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"
+                if npzfile not in outputArrays:
+                    outputArrays[npzfile] = DynamicArray(
+                        shape=Xi.shape, dtype="int8", memmap=f".{npzfile}.npz"
+                    )
                 for sequence in Xi:
-                    outputArrays[npzfile].append(sequence)
+                    outputArrays[npzfile].update(sequence)
             for outputRepresentation in outputRepresentations:
                 outputLayer = availableOutputs[outputRepresentation](df)
                 yi = outputLayer.run(transposition=transposition)
@@ -139,11 +142,16 @@ def generateDataset(
                 else:
                     yi = padToSequenceLength(yi, sequenceLength)
                 npzfile = f"{split}_y_{outputRepresentation}"
+                if npzfile not in outputArrays:
+                    outputArrays[npzfile] = DynamicArray(
+                        shape=yi.shape, dtype="int8", memmap=f".{npzfile}.npz"
+                    )
                 for sequence in yi:
-                    outputArrays[npzfile].append(sequence)
+                    outputArrays[npzfile].update(sequence)
     # drop the extension, we'll overwrite it to .npz
     filename, _ = os.path.splitext(npzOutput)
     outputFile = f"{filename}-synth" if synthetic else filename
+    outputArrays = {k: v.finalize() for k, v in outputArrays.items()}
     np.savez_compressed(outputFile, **outputArrays)
 
 
