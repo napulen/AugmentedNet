@@ -34,8 +34,8 @@ class DynamicArray:
         self,
         shape=(0,),
         dtype=float,
-        initial_capacity=10000,
-        growth_factor=1.5,
+        initial_capacity=1000,
+        growth_factor=2,
         memmap="",
     ):
         """First item of shape is ignored, the rest defines the shape."""
@@ -57,10 +57,9 @@ class DynamicArray:
 
     def update(self, x):
         if self.size == self.capacity:
-            if self.memmap:
-                self.data.flush()
             self.capacity = int(self.capacity * self.growth_factor)
             if self.memmap:
+                self.data.flush()
                 self.data = np.memmap(
                     self.memmap,
                     mode="r+",
