@@ -40,8 +40,7 @@ def AugmentedNet(inputs, outputs, blocks=6):
     y = []
     for output in outputs:
         outputFeatures = output.outputFeatures
-        drop = layers.Dropout(0.3)(h)
-        out = layers.Dense(outputFeatures, name=output.shortname)(drop)
+        out = layers.Dense(outputFeatures, name=output.shortname)(h)
         y.append(out)
     model = keras.Model(inputs=x, outputs=y)
     return model
