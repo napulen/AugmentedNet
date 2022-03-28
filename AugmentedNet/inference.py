@@ -86,6 +86,8 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
         denominator = getTonicizationScaleDegree(key, tonicizedKey)
         rn = f"{rn}/{denominator}"
     chordLabel = f"{chord[0]}{quality}"
+    if inv != 0:
+        chordLabel += f"/{chord[inv]}"
     return rn, chordLabel
 
 
