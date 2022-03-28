@@ -154,6 +154,8 @@
         <span class="n">denominator</span> <span class="o">=</span> <span class="n">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
         <span class="n">rn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rn</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">denominator</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">chordLabel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="n">quality</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">inv</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">chordLabel</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">chord</span><span class="p">[</span><span class="n">inv</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">return</span> <span class="n">rn</span><span class="p">,</span> <span class="n">chordLabel</span>
 
 
@@ -351,6 +353,8 @@
         <span class="n">denominator</span> <span class="o">=</span> <span class="n">getTonicizationScaleDegree</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tonicizedKey</span><span class="p">)</span>
         <span class="n">rn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rn</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">denominator</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">chordLabel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="n">quality</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">inv</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">chordLabel</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">chord</span><span class="p">[</span><span class="n">inv</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">return</span> <span class="n">rn</span><span class="p">,</span> <span class="n">chordLabel</span>
 </pre></div>
 
