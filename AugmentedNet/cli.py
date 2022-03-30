@@ -63,6 +63,8 @@ class DefaultArguments(object):
         "lr_values": [0.001, 0.001],
         "epochs": 100,
         "batchsize": 16,
+        "transferLearningFrom": "",
+        "transferLearningFreeze": False,
     }
 
 
@@ -223,6 +225,16 @@ def train():
         "--syntheticDataStrategy",
         choices=["syntheticOnly", "concatenate"],
         help="The strategy to use for synthetic training examples (if any).",
+    )
+    parser.add_argument(
+        "--transferLearningFrom",
+        type=str,
+        help="Start from a pretrained model to do transfer learning.",
+    )
+    parser.add_argument(
+        "--transferLearningFreeze",
+        action="store_true",
+        help="If transfer learning, freeze all but the classification layers.",
     )
     parser.set_defaults(**DefaultArguments.train)
     return parser

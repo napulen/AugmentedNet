@@ -219,9 +219,21 @@ def train(
     lrValues=[0.01, 0.0001],
     epochs=100,
     batchsize=16,
+    transferLearningFrom="",
+    transferLearningFreeze=True,
 ):
     # printTrainingExample(X_train, y_train)
-    model = models.available_models[modelName](X_train, y_train)
+    if transferLearningFrom:
+        print("TRANSFER LEARNING")
+        model = keras.models.load_model(transferLearningFrom)
+        if transferLearningFreeze:
+            outputLayers = [l.name.split("/")[0] for l in model.outputs]
+            for layer in model.layers:
+                if layer.name not in outputLayers:
+                    layer.trainable = False
+                print(layer.name, layer.trainable)
+    else:
+        model = models.available_models[modelName](X_train, y_train)
 
     stepsPerEpoch = X_train[0].array.shape[0] // batchsize
     lrBoundaries = [x * stepsPerEpoch for x in lrBoundaries]
@@ -286,6 +298,8 @@ def run_experiment(
     nogpu,
     epochs,
     batchsize,
+    transferLearningFrom,
+    transferLearningFreeze,
     **kwargs,
 ):
     if nogpu:
@@ -326,6 +340,8 @@ def run_experiment(
         lrValues=lr_values,
         epochs=epochs,
         batchsize=batchsize,
+        transferLearningFrom=transferLearningFrom,
+        transferLearningFreeze=transferLearningFreeze,
     )
     modelpath = os.path.join(checkpoint, bestmodel)
     results, summary = evaluate(modelpath, X_test, y_test)
