@@ -308,9 +308,21 @@
     <span class="n">lrValues</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">],</span>
     <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">batchsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">transferLearningFrom</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">transferLearningFreeze</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="c1"># printTrainingExample(X_train, y_train)</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">available_models</span><span class="p">[</span><span class="n">modelName</span><span class="p">](</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transferLearningFrom</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TRANSFER LEARNING&quot;</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">transferLearningFrom</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">transferLearningFreeze</span><span class="p">:</span>
+            <span class="n">outputLayers</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outputLayers</span><span class="p">:</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">trainable</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">available_models</span><span class="p">[</span><span class="n">modelName</span><span class="p">](</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
     <span class="n">stepsPerEpoch</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">batchsize</span>
     <span class="n">lrBoundaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">stepsPerEpoch</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lrBoundaries</span><span class="p">]</span>
@@ -375,6 +387,8 @@
     <span class="n">nogpu</span><span class="p">,</span>
     <span class="n">epochs</span><span class="p">,</span>
     <span class="n">batchsize</span><span class="p">,</span>
+    <span class="n">transferLearningFrom</span><span class="p">,</span>
+    <span class="n">transferLearningFreeze</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="k">if</span> <span class="n">nogpu</span><span class="p">:</span>
@@ -415,6 +429,8 @@
         <span class="n">lrValues</span><span class="o">=</span><span class="n">lr_values</span><span class="p">,</span>
         <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
         <span class="n">batchsize</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
+        <span class="n">transferLearningFrom</span><span class="o">=</span><span class="n">transferLearningFrom</span><span class="p">,</span>
+        <span class="n">transferLearningFreeze</span><span class="o">=</span><span class="n">transferLearningFreeze</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">modelpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">bestmodel</span><span class="p">)</span>
     <span class="n">results</span><span class="p">,</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">modelpath</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
@@ -910,7 +926,9 @@ be called during TRAIN mode.</p>
     lrBoundaries=[40],
     lrValues=[0.01, 0.0001],
     epochs=100,
-    batchsize=16
+    batchsize=16,
+    transferLearningFrom=&#39;&#39;,
+    transferLearningFreeze=True
 )</span>:
     </div>
 
@@ -927,9 +945,21 @@ be called during TRAIN mode.</p>
     <span class="n">lrValues</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">],</span>
     <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">batchsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">transferLearningFrom</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">transferLearningFreeze</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="c1"># printTrainingExample(X_train, y_train)</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">available_models</span><span class="p">[</span><span class="n">modelName</span><span class="p">](</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transferLearningFrom</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TRANSFER LEARNING&quot;</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">transferLearningFrom</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">transferLearningFreeze</span><span class="p">:</span>
+            <span class="n">outputLayers</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outputLayers</span><span class="p">:</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">trainable</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">available_models</span><span class="p">[</span><span class="n">modelName</span><span class="p">](</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
     <span class="n">stepsPerEpoch</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">batchsize</span>
     <span class="n">lrBoundaries</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">stepsPerEpoch</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lrBoundaries</span><span class="p">]</span>
@@ -1004,6 +1034,8 @@ be called during TRAIN mode.</p>
     nogpu,
     epochs,
     batchsize,
+    transferLearningFrom,
+    transferLearningFreeze,
     **kwargs
 )</span>:
     </div>
@@ -1021,6 +1053,8 @@ be called during TRAIN mode.</p>
     <span class="n">nogpu</span><span class="p">,</span>
     <span class="n">epochs</span><span class="p">,</span>
     <span class="n">batchsize</span><span class="p">,</span>
+    <span class="n">transferLearningFrom</span><span class="p">,</span>
+    <span class="n">transferLearningFreeze</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="k">if</span> <span class="n">nogpu</span><span class="p">:</span>
@@ -1061,6 +1095,8 @@ be called during TRAIN mode.</p>
         <span class="n">lrValues</span><span class="o">=</span><span class="n">lr_values</span><span class="p">,</span>
         <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
         <span class="n">batchsize</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
+        <span class="n">transferLearningFrom</span><span class="o">=</span><span class="n">transferLearningFrom</span><span class="p">,</span>
+        <span class="n">transferLearningFreeze</span><span class="o">=</span><span class="n">transferLearningFreeze</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">modelpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">bestmodel</span><span class="p">)</span>
     <span class="n">results</span><span class="p">,</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">modelpath</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>

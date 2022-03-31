@@ -149,6 +149,8 @@
         <span class="s2">&quot;lr_values&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
         <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
         <span class="s2">&quot;batchsize&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&quot;transferLearningFrom&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;transferLearningFreeze&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">}</span>
 
 
@@ -310,6 +312,16 @@
         <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;syntheticOnly&quot;</span><span class="p">,</span> <span class="s2">&quot;concatenate&quot;</span><span class="p">],</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The strategy to use for synthetic training examples (if any).&quot;</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--transferLearningFrom&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Start from a pretrained model to do transfer learning.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--transferLearningFreeze&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;If transfer learning, freeze all but the classification layers.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">train</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 
@@ -386,6 +398,8 @@
         <span class="s2">&quot;lr_values&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
         <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
         <span class="s2">&quot;batchsize&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&quot;transferLearningFrom&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;transferLearningFreeze&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">}</span>
 </pre></div>
 
@@ -437,7 +451,7 @@
                             <div id="DefaultArguments.train" class="classattr">
                                             <div class="attr variable"><a class="headerlink" href="#DefaultArguments.train">#&nbsp;&nbsp</a>
 
-        <span class="name">train</span><span class="default_value"> = {&#39;nogpu&#39;: False, &#39;useExistingNpz&#39;: False, &#39;syntheticDataStrategy&#39;: None, &#39;model&#39;: &#39;AugmentedNet&#39;, &#39;lr_boundaries&#39;: [40], &#39;lr_values&#39;: [0.001, 0.001], &#39;epochs&#39;: 100, &#39;batchsize&#39;: 16}</span>
+        <span class="name">train</span><span class="default_value"> = {&#39;nogpu&#39;: False, &#39;useExistingNpz&#39;: False, &#39;syntheticDataStrategy&#39;: None, &#39;model&#39;: &#39;AugmentedNet&#39;, &#39;lr_boundaries&#39;: [40], &#39;lr_values&#39;: [0.001, 0.001], &#39;epochs&#39;: 100, &#39;batchsize&#39;: 16, &#39;transferLearningFrom&#39;: &#39;&#39;, &#39;transferLearningFreeze&#39;: False}</span>
     </div>
 
     
@@ -628,6 +642,16 @@
         <span class="s2">&quot;--syntheticDataStrategy&quot;</span><span class="p">,</span>
         <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;syntheticOnly&quot;</span><span class="p">,</span> <span class="s2">&quot;concatenate&quot;</span><span class="p">],</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The strategy to use for synthetic training examples (if any).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--transferLearningFrom&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Start from a pretrained model to do transfer learning.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--transferLearningFreeze&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;If transfer learning, freeze all but the classification layers.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">train</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
