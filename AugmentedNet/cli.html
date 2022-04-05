@@ -48,6 +48,9 @@
                         <li>
                                 <a class="variable" href="#DefaultArguments.train">train</a>
                         </li>
+                        <li>
+                                <a class="variable" href="#DefaultArguments.inference">inference</a>
+                        </li>
                 </ul>
 
             </li>
@@ -151,6 +154,11 @@
         <span class="s2">&quot;batchsize&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
         <span class="s2">&quot;transferLearningFrom&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="s2">&quot;transferLearningFreeze&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">inference</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">:</span> <span class="s2">&quot;AugmentedNet.hdf5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;useGpu&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">}</span>
 
 
@@ -329,12 +337,23 @@
 <span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
-    <span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inputPath&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--dir&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specify a directory input. Run inference on all files within.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--useGpu&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use GPU if available.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">inference</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 </pre></div>
 
@@ -401,6 +420,11 @@
         <span class="s2">&quot;transferLearningFrom&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="s2">&quot;transferLearningFreeze&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">}</span>
+    <span class="n">inference</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;modelPath&quot;</span><span class="p">:</span> <span class="s2">&quot;AugmentedNet.hdf5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;useGpu&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">}</span>
 </pre></div>
 
         </details>
@@ -452,6 +476,16 @@
                                             <div class="attr variable"><a class="headerlink" href="#DefaultArguments.train">#&nbsp;&nbsp</a>
 
         <span class="name">train</span><span class="default_value"> = {&#39;nogpu&#39;: False, &#39;useExistingNpz&#39;: False, &#39;syntheticDataStrategy&#39;: None, &#39;model&#39;: &#39;AugmentedNet&#39;, &#39;lr_boundaries&#39;: [40], &#39;lr_values&#39;: [0.001, 0.001], &#39;epochs&#39;: 100, &#39;batchsize&#39;: 16, &#39;transferLearningFrom&#39;: &#39;&#39;, &#39;transferLearningFreeze&#39;: False}</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="DefaultArguments.inference" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#DefaultArguments.inference">#&nbsp;&nbsp</a>
+
+        <span class="name">inference</span><span class="default_value"> = {&#39;modelPath&#39;: &#39;<a href="../AugmentedNet.html#hdf5">AugmentedNet.hdf5</a>&#39;, &#39;dir&#39;: False, &#39;useGpu&#39;: False}</span>
     </div>
 
     
@@ -675,12 +709,23 @@
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">inference</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">inference_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[])</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
-    <span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;inputFile&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inputPath&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a MusicXML (or similar) input score to process.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--modelPath&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The path to a trained HDF5 AugmentedNet model.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--dir&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specify a directory input. Run inference on all files within.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--useGpu&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use GPU if available.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">DefaultArguments</span><span class="o">.</span><span class="n">inference</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span>
 </pre></div>
 
