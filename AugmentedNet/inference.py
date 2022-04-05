@@ -91,6 +91,57 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     return rn, chordLabel
 
 
+def _correctRomanText(rntxt):
+    modified = rntxt.split("\n")
+    m = modified[5].split()
+    # If there is no Measure 1, inject one
+    if m[0] != "m1":
+        print("\tInjected measure 1")
+        inject = f"m1 {' '.join(m[1:4])}"
+        modified.insert(5, inject)
+    # If there is no Beat 1, inject one
+    m = modified[5].split()
+    if m[2] != "b1":
+        print("\tInjected beat 1")
+        inject = f"b1 {m[3]}"
+        m.insert(2, inject)
+        modified[5] = " ".join(m)
+    return "\n".join(modified)
+
+
+def generateRomanText(h):
+    metadata = h.metadata
+    composer = metadata.composer.split("\n")[0]
+    title = metadata.title.split("\n")[0]
+    ts = "4/4"
+    key = "C"
+    rntxt = f"""\
+Composer: {composer}
+Title: {title}
+Analyst: AugmentedNet, developed by Néstor Nápoles López
+Time Signature: {ts}\n"""
+    setKey = False
+    currentMeasure = -1
+    for n in h.recurse().notes:
+        if not n.lyric:
+            continue
+        rn = n.lyric.split()[0]
+        key = ""
+        measure = n.measureNumber
+        beat = float(n.beat)
+        if abs(beat - int(beat)) < 0.001:
+            beat = int(beat)
+        if ":" in rn:
+            key, rn = rn.split(":")
+        if measure != currentMeasure:
+            rntxt += f"\nm{measure}"
+            currentMeasure = measure
+        if key:
+            rntxt += f" {key}:"
+        rntxt += f" b{round(beat, 3)} {rn}"
+    return rntxt
+
+
 def predict(modelPath, inputFile, useGpu=False):
     if useGpu:
         tensorflowGPUHack()
@@ -101,9 +152,9 @@ def predict(modelPath, inputFile, useGpu=False):
     inputs = [l.name.rsplit("_")[1] for l in model.inputs]
     encodedInputs = [availableInputs[i](df) for i in inputs]
     outputLayers = [l.name.split("/")[0] for l in model.outputs]
-    # TODO: How to decide the sequence length?
+    seqlen = model.inputs[0].shape[1]
     modelInputs = [
-        padToSequenceLength(i.array, 640, value=-1) for i in encodedInputs
+        padToSequenceLength(i.array, seqlen, value=-1) for i in encodedInputs
     ]
     predictions = model.predict(modelInputs)
     predictions = [p.reshape(1, -1, p.shape[2]) for p in predictions]
@@ -158,11 +209,17 @@ def predict(modelPath, inputFile, useGpu=False):
             rn2fig = rn2
         bass.addLyric(formatRomanNumeral(rn2fig, thiskey))
         bass.addLyric(formatChordLabel(chordLabel))
+    rntxt = generateRomanText(s)
+    rntxt = _correctRomanText(rntxt)
+    print(rntxt)
     filename, _ = inputFile.rsplit(".", 1)
     annotatedScore = f"{filename}_annotated.musicxml"
     annotationCSV = f"{filename}_annotated.csv"
+    annotatedRomanText = f"{filename}_annotated.rntxt"
     s.write(fp=annotatedScore)
     dfout.to_csv(annotationCSV)
+    with open(annotatedRomanText, "w") as fd:
+        fd.write(rntxt)
 
 
 if __name__ == "__main__":
