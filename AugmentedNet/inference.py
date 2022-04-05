@@ -93,42 +93,52 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
 
 def _correctRomanText(rntxt):
     modified = rntxt.split("\n")
-    m = modified[5].split()
+    for firstMeasureLine, line in enumerate(modified):
+        if line.startswith("m"):
+            break
+    m = modified[firstMeasureLine].split()
     # If there is no Measure 1, inject one
-    if m[0] != "m1":
+    if m[0] not in ["m0", "m1"]:
         print("\tInjected measure 1")
         inject = f"m1 {' '.join(m[1:4])}"
-        modified.insert(5, inject)
+        modified.insert(firstMeasureLine, inject)
     # If there is no Beat 1, inject one
-    m = modified[5].split()
-    if m[2] != "b1":
+    m = modified[firstMeasureLine].split()
+    if m[0] == "m1" and m[2] != "b1":
         print("\tInjected beat 1")
         inject = f"b1 {m[3]}"
         m.insert(2, inject)
-        modified[5] = " ".join(m)
+        modified[firstMeasureLine] = " ".join(m)
     return "\n".join(modified)
 
 
 def generateRomanText(h):
     metadata = h.metadata
+    metadata.composer = metadata.composer or "Unknown"
+    metadata.title = metadata.title or "Unknown"
     composer = metadata.composer.split("\n")[0]
     title = metadata.title.split("\n")[0]
-    ts = "4/4"
-    key = "C"
+    ts = {
+        (ts.measureNumber, float(ts.beat)): ts.ratioString
+        for ts in h.flat.getElementsByClass("TimeSignature")
+    }
     rntxt = f"""\
 Composer: {composer}
 Title: {title}
 Analyst: AugmentedNet, developed by Néstor Nápoles López
-Time Signature: {ts}\n"""
+"""
     setKey = False
     currentMeasure = -1
-    for n in h.recurse().notes:
+    for n in h.flat.notes:
         if not n.lyric:
             continue
         rn = n.lyric.split()[0]
         key = ""
         measure = n.measureNumber
         beat = float(n.beat)
+        newts = ts.get((measure, beat), None)
+        if newts:
+            rntxt += f"\nTime Signature: {newts}\n"
         if abs(beat - int(beat)) < 0.001:
             beat = int(beat)
         if ":" in rn:
@@ -142,13 +152,13 @@ Time Signature: {ts}\n"""
     return rntxt
 
 
-def predict(modelPath, inputFile, useGpu=False):
+def predict(modelPath, inputPath, useGpu=False):
     if useGpu:
         tensorflowGPUHack()
     else:
         disableGPU()
     model = keras.models.load_model(modelPath)
-    df = parseScore(inputFile)
+    df = parseScore(inputPath)
     inputs = [l.name.rsplit("_")[1] for l in model.inputs]
     encodedInputs = [availableInputs[i](df) for i in inputs]
     outputLayers = [l.name.split("/")[0] for l in model.outputs]
@@ -173,7 +183,7 @@ def predict(modelPath, inputFile, useGpu=False):
     dfout["offset"] = paddedIndex
     dfout["measure"] = paddedMeasure
     chords = solveChordSegmentation(dfout)
-    s = music21.converter.parse(inputFile)
+    s = music21.converter.parse(inputPath)
     # remove all lyrics from score
     for note in s.recurse().notes:
         note.lyrics = []
@@ -212,7 +222,7 @@ def predict(modelPath, inputFile, useGpu=False):
     rntxt = generateRomanText(s)
     rntxt = _correctRomanText(rntxt)
     print(rntxt)
-    filename, _ = inputFile.rsplit(".", 1)
+    filename, _ = inputPath.rsplit(".", 1)
     annotatedScore = f"{filename}_annotated.musicxml"
     annotationCSV = f"{filename}_annotated.csv"
     annotatedRomanText = f"{filename}_annotated.rntxt"
@@ -222,8 +232,20 @@ def predict(modelPath, inputFile, useGpu=False):
         fd.write(rntxt)
 
 
+def batch(inputPath, dir, **kwargs):
+    if not dir and not os.path.isdir(inputPath):
+        predict(inputPath=inputPath, **kwargs)
+    for root, _, files in os.walk(inputPath):
+        for f in files:
+            _, ext = os.path.splitext(f)
+            if ext not in [".mxl", ".xml", ".krn"]:
+                continue
+            filepath = os.path.join(root, f)
+            predict(inputPath=filepath, **kwargs)
+
+
 if __name__ == "__main__":
     parser = cli.inference()
     args = parser.parse_args()
     kwargs = vars(args)
-    predict(**kwargs)
+    batch(**kwargs)

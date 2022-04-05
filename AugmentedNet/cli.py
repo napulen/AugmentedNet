@@ -66,6 +66,11 @@ class DefaultArguments(object):
         "transferLearningFrom": "",
         "transferLearningFreeze": False,
     }
+    inference = {
+        "modelPath": "AugmentedNet.hdf5",
+        "dir": False,
+        "useGpu": False,
+    }
 
 
 def _base(is_parent_parser=True):
@@ -243,10 +248,21 @@ def train():
 def inference():
     parser = ArgumentParser(description=inference_description, parents=[])
     parser.add_argument(
-        "modelPath", help="The path to a trained HDF5 AugmentedNet model."
-    )
-    parser.add_argument(
-        "inputFile",
+        "inputPath",
         help="The path to a MusicXML (or similar) input score to process.",
     )
+    parser.add_argument(
+        "--modelPath", help="The path to a trained HDF5 AugmentedNet model."
+    )
+    parser.add_argument(
+        "--dir",
+        action="store_true",
+        help="Specify a directory input. Run inference on all files within.",
+    )
+    parser.add_argument(
+        "--useGpu",
+        action="store_true",
+        help="Use GPU if available.",
+    )
+    parser.set_defaults(**DefaultArguments.inference)
     return parser
