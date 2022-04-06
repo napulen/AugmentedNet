@@ -147,7 +147,7 @@ Analyst: AugmentedNet, developed by Néstor Nápoles López
             rntxt += f"\nm{measure}"
             currentMeasure = measure
         if key:
-            rntxt += f" {key}:"
+            rntxt += f" {key.replace('-', 'b')}:"
         rntxt += f" b{round(beat, 3)} {rn}"
     return rntxt
 
