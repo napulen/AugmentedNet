@@ -9,8 +9,10 @@ rep_backward4 = '<repeat direction="backward" times="4"/>'
 
 for nick, (a, s) in ANNOTATIONSCOREDUPLES.items():
     print(nick, s)
-    if s.endswith(".mxl"):
-        smusicxml = s.replace(".mxl", ".musicxml")
+    if not nick.startswith("haydnop20"):
+        continue
+    if s.endswith(".krn"):
+        smusicxml = s.replace(".krn", ".musicxml")
         with open(smusicxml) as fd:
             data = fd.read()
         data = (

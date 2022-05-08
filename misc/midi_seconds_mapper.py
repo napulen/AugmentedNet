@@ -1,4 +1,6 @@
 import mido
+import pandas as pd
+
 from AugmentedNet.common import ANNOTATIONSCOREDUPLES
 
 score = "bps_01_01.mid"
@@ -38,12 +40,25 @@ def get_events_quarterLength(mid):
 if __name__ == "__main__":
     for nick, (a, s) in ANNOTATIONSCOREDUPLES.items():
         print(nick)
-        m = s.replace(".mxl", ".mid")
+        m = s.replace(".mxl", ".mid").replace(".krn", ".mid")
+        out = s.replace(".mxl", ".tsv").replace(".krn", ".tsv")
         mid = mido.MidiFile(m)
 
         secs = get_events_seconds(mid)
         qs = get_events_quarterLength(mid)
 
-        for s, notes in sorted(qs.items()):
-            print(f"{s}, {notes}")
-        break
+        dfdict = {"m_offset": [], "m_offsetInSeconds": [], "m_notes": []}
+        if len(secs) != len(qs):
+            print("\t\tERROR: Different sequence length!!!")
+        for (s, notes), (q, notes2) in zip(
+            sorted(secs.items()), sorted(qs.items())
+        ):
+            if notes != notes2:
+                print("\t\tERROR: Note list doest not match!!!")
+            dfdict["m_offset"].append(q)
+            dfdict["m_offsetInSeconds"].append(s)
+            dfdict["m_notes"].append(notes)
+        
+        df = pd.DataFrame(dfdict)
+        df.set_index("m_offset", inplace=True)
+        df.to_csv(out, sep="\t")

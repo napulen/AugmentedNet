@@ -13,12 +13,12 @@ def mscore(inout):
 files = []
 for nick, (a, s) in ANNOTATIONSCOREDUPLES.items():
     print(nick, s)
-    if s.endswith(".mxl"):
-        inn = s.replace(".mxl", ".musicxml")
-        out = s.replace(".mxl", ".wav")
+    if not nick.startswith("haydnop20"):
+        continue
+    if s.endswith(".krn"):
+        inn = s.replace(".mxl", ".musicxml").replace(".krn", ".musicxml")
+        out = s.replace(".mxl", ".wav").replace(".krn", ".wav")
         files.append((inn, out))
 
 with Pool(6) as p:
     p.map(mscore, files)
-
-
