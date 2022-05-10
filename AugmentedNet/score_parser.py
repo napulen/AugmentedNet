@@ -195,7 +195,6 @@ def parseScore(f, fmt=None, fixedOffset=FIXEDOFFSET, eventBased=False):
         df = _reindexDataFrame(df, fixedOffset=fixedOffset)
     return df
 
-
 def _recursiveTexturization(df, fixedOffset=FIXEDOFFSET, eventBased=False):
     for duration in available_durations:
         for numberOfNotes in available_number_of_notes:

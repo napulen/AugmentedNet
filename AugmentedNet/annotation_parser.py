@@ -292,11 +292,10 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     for example, a sixteenth note. This reindex function does
     exactly that.
     """
-    firstRow = df.head(1)
     lastRow = df.tail(1)
-    minOffset = firstRow.index.to_numpy()[0]
-    maxOffset = (lastRow.index + lastRow.a_duration).to_numpy()[0]
-    newIndex = np.arange(minOffset, maxOffset, fixedOffset)
+    minOffset = 0.0 # firstRow.index.to_numpy()[0]
+    maxOffset = lastRow.index[0]
+    newIndex = np.arange(minOffset, maxOffset, fixedOffset).round(FLOATSCALE)
     # All operations done over the full index, i.e., fixed-timesteps
     # plus original onsets. Later, original onsets (e.g., triplets)
     # are removed and just the fixed-timesteps are kept
@@ -309,7 +308,20 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     return df
 
 
-def parseAnnotation(f, fixedOffset=FIXEDOFFSET, eventBased=False):
+def _addOffsetInSeconds(df, tsvSeconds):
+    dfsecs = pd.read_csv(tsvSeconds)
+    dfsecs.set_index("m_offset", inplace=True)
+    df["a_offsetInSeconds"] = dfsecs.m_offsetInSeconds.round(FLOATSCALE)
+    print(f"\t{sum(df.a_offsetInSeconds.isna()) / len(df.index)}")
+    df["a_offsetInSeconds"].interpolate(inplace=True)
+    df["a_offset"] = df.index
+    df.set_index("a_offsetInSeconds", inplace=True)
+    return df
+
+
+def parseAnnotation(
+    f, fixedOffset=FIXEDOFFSET, eventBased=False, tsvSeconds=None
+):
     """Generates the DataFrame from a RomanText file.
 
     Parses the file using music21. Creates an initial DataFrame
@@ -320,6 +332,8 @@ def parseAnnotation(f, fixedOffset=FIXEDOFFSET, eventBased=False):
     s = _m21Parse(f)
     # Step 1: Parse and produce a salami-sliced dataset
     df = _initialDataFrame(s)
+    if tsvSeconds:
+        df = _addOffsetInSeconds(df, tsvSeconds)
     # Step 2: Turn salami-slice into fixed-duration steps
     if not eventBased:
         df = _reindexDataFrame(df, fixedOffset=fixedOffset)
