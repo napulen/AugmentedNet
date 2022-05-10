@@ -144,3 +144,11 @@ defaults.json
 
 # Ignore memmap files
 *.mmap
+
+rawdata/**/*.wav
+rawdata/**/*.mid
+rawdata/**/*.csv
+rawdata/**/*.musicxml
+rawdata/**/*.tsv
+
+
