@@ -82,7 +82,7 @@ def generateDataset(
 ):
     synthetic = False
     texturizeEachTransposition = False
-    dataAugmentation = False
+    # dataAugmentation = False
     scrutinizeData = False
     inputRepresentations = ["Bass19", "Chromagram19"]
     outputArrays = {}
