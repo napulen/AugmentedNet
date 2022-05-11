@@ -292,9 +292,10 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     for example, a sixteenth note. This reindex function does
     exactly that.
     """
+    firstRow = df.head(1)
     lastRow = df.tail(1)
-    minOffset = 0.0 # firstRow.index.to_numpy()[0]
-    maxOffset = lastRow.index[0]
+    minOffset = firstRow.index.to_numpy()[0]
+    maxOffset = lastRow.index.to_numpy()[0]
     newIndex = np.arange(minOffset, maxOffset, fixedOffset).round(FLOATSCALE)
     # All operations done over the full index, i.e., fixed-timesteps
     # plus original onsets. Later, original onsets (e.g., triplets)
@@ -312,7 +313,11 @@ def _addOffsetInSeconds(df, tsvSeconds):
     dfsecs = pd.read_csv(tsvSeconds)
     dfsecs.set_index("m_offset", inplace=True)
     df["a_offsetInSeconds"] = dfsecs.m_offsetInSeconds.round(FLOATSCALE)
-    print(f"\t{sum(df.a_offsetInSeconds.isna()) / len(df.index)}")
+    offset = abs(dfsecs.index.min() - df.index.min())
+    offset += abs(dfsecs.index.max() - df.index.max())
+    print(f"\t{offset}")
+    if offset > 2.0:
+        raise Exception("Too risky/buggy")
     df["a_offsetInSeconds"].interpolate(inplace=True)
     df["a_offset"] = df.index
     df.set_index("a_offsetInSeconds", inplace=True)

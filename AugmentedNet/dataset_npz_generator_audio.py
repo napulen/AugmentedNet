@@ -7,7 +7,7 @@ import tensorflow as tf
 
 from . import cli
 from . import joint_parser
-from .cache import TransposeKey
+from .cache import TransposeKey, m21IntervalStr
 from .common import DATASETSUMMARYFILE
 from .feature_representation import TRANSPOSITIONKEYS, INTERVALCLASSES
 from .input_representations import (
@@ -139,6 +139,8 @@ def generateDataset(
                     column = "c_chroma"
                 # inputLayer = availableInputs[inputRepresentation](df)
                 Xi = np.array(df[column].to_list())
+                semitones = m21IntervalStr(transposition).semitones
+                Xi = np.roll(Xi, semitones, axis=1)
                 Xi = np.pad(Xi, ((0, 0), (7, 0)))
                 Xi = padToSequenceLength(Xi, sequenceLength, value=-1)
                 npzfile = f"{split}_X_{inputRepresentation}"

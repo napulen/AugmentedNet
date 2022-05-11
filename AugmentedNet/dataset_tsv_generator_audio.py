@@ -35,6 +35,8 @@ def generateDataset(synthesize=False, texturize=False, tsvDir="dataset"):
         Path(os.path.join(datasetDir, split)).mkdir(exist_ok=True)
         for nickname in files:
             print(nickname)
+            # if nickname != "abc-op18-no4-2":
+            #     continue
             annotation, score = ANNOTATIONSCOREDUPLES[nickname]
             miditsv = score.replace(".mxl", ".csv").replace(".krn", ".csv")
             chromacsv = score.replace(".mxl", nnls_postfix).replace(
