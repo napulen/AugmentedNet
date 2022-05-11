@@ -9,7 +9,11 @@ from . import cli
 from . import joint_parser
 from .cache import TransposeKey, m21IntervalStr
 from .common import DATASETSUMMARYFILE
-from .feature_representation import TRANSPOSITIONKEYS, INTERVALCLASSES
+from .feature_representation import (
+    TRANSPOSITIONKEYS,
+    INTERVALCLASSES,
+    INTERVAL_ENHARMONICS,
+)
 from .input_representations import (
     available_representations as availableInputs,
 )
@@ -84,6 +88,32 @@ def generateDataset(
     texturizeEachTransposition = False
     # dataAugmentation = False
     scrutinizeData = False
+    transpositionKeys = [
+        "D-",
+        "b-",
+        "A-",
+        "f",
+        "E-",
+        "c",
+        "B-",
+        "g",
+        "F",
+        "d",
+        "C",
+        "a",
+        "G",
+        "e",
+        "D",
+        "b",
+        "A",
+        "f#",
+        "E",
+        "c#",
+        "B",
+        "g#",
+        "F#",
+        "d#",
+    ]
     inputRepresentations = ["Bass19", "Chromagram19"]
     outputArrays = {}
     training = ["training", "validation"] if testSetOn else ["training"]
