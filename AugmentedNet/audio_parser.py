@@ -24,8 +24,8 @@ def from_tsv(tsv, sep="\t"):
     return df
 
 
-def _initialDataFrame(s):
-    """Parses a chroma and produces a pandas dataframe."""
+def _initialDataFrameCSV(s):
+    """Parses a chroma CSV and produces a pandas dataframe."""
     dfdict = {col: [] for col in C_COLUMNS}
     with open(s) as fd:
         rows = fd.readlines()
@@ -52,7 +52,40 @@ def _initialDataFrame(s):
     return df
 
 
+def _initialDataFrameARFF(s, column):
+    """Parses a chroma ARFF and produces a pandas dataframe."""
+    dfdict = {"c_offset": [], column: []}
+    chroma = []
+    with open(s) as fd:
+        rows = fd.readlines()
+    skip = True
+    for r in rows:
+        if "@DATA" in r:
+            skip = False
+            continue
+        elif skip:
+            continue
+        row = r.strip().split(",")
+        t = row[-1]
+        chroma = [float(pc) for pc in row[0:12]]
+        chroma = chroma[3:] + chroma[:3]
+        chromaSum = sum(chroma)
+        if chromaSum != 0:
+            chroma = [round(pc / chromaSum, FLOATSCALE) for pc in chroma]
+        dfdict["c_offset"].append(round(float(t), FLOATSCALE))
+        dfdict[column].append(chroma)
+    df = pd.DataFrame(dfdict)
+    df.set_index("c_offset", inplace=True)
+    return df
+
+
 def parseAudio(f, fixedOffset=FIXEDOFFSET):
     # Step 1: Parse and produce a dataframe of chromagrams
-    df = _initialDataFrame(f)
+    if f.endswith(".csv"):
+        df = _initialDataFrameCSV(f)
+    elif f.endswith(".arff"):
+        df = _initialDataFrameARFF(f, "c_chroma")
+        fbass = f.replace("250.arff", "251.arff")
+        dfbasschroma = _initialDataFrameARFF(fbass, "c_basschroma")
+        df["c_basschroma"] = dfbasschroma.c_basschroma
     return df
