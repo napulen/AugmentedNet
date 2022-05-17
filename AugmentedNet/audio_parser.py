@@ -34,16 +34,10 @@ def _initialDataFrameCSV(s):
         t = row[0]
         basschroma = [float(pc) for pc in row[1:13]]
         basschroma = basschroma[3:] + basschroma[:3]
-        basschromaSum = sum(basschroma)
-        if basschromaSum != 0:
-            basschroma = [
-                round(pc / basschromaSum, FLOATSCALE) for pc in basschroma
-            ]
+        basschroma = _normalizeChroma(basschroma)
         chroma = [float(pc) for pc in row[13:]]
         chroma = chroma[3:] + chroma[:3]
-        chromaSum = sum(chroma)
-        if chromaSum != 0:
-            chroma = [round(pc / chromaSum, FLOATSCALE) for pc in chroma]
+        chroma = _normalizeChroma(chroma)
         dfdict["c_offset"].append(round(float(t), FLOATSCALE))
         dfdict["c_basschroma"].append(basschroma)
         dfdict["c_chroma"].append(chroma)
@@ -51,6 +45,12 @@ def _initialDataFrameCSV(s):
     df.set_index("c_offset", inplace=True)
     return df
 
+def _normalizeChroma(chroma):
+    # chroma = [1.0 if pc > 1.0 else 0.0 for pc in chroma]
+    chromaSum = sum(chroma)
+    if chromaSum != 0:
+        chroma = [round(pc / chromaSum, FLOATSCALE) for pc in chroma]
+    return chroma
 
 def _initialDataFrameARFF(s, column):
     """Parses a chroma ARFF and produces a pandas dataframe."""
@@ -69,9 +69,7 @@ def _initialDataFrameARFF(s, column):
         t = row[-1]
         chroma = [float(pc) for pc in row[0:12]]
         chroma = chroma[3:] + chroma[:3]
-        chromaSum = sum(chroma)
-        if chromaSum != 0:
-            chroma = [round(pc / chromaSum, FLOATSCALE) for pc in chroma]
+        chroma = _normalizeChroma(chroma)
         dfdict["c_offset"].append(round(float(t), FLOATSCALE))
         dfdict[column].append(chroma)
     df = pd.DataFrame(dfdict)

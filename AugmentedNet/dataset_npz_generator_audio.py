@@ -176,7 +176,7 @@ def generateDataset(
                 npzfile = f"{split}_X_{inputRepresentation}"
                 if npzfile not in outputArrays:
                     outputArrays[npzfile] = DynamicArray(
-                        shape=Xi.shape, dtype="int8", memmap=f".{npzfile}.mmap"
+                        shape=Xi.shape, dtype="float32", memmap=f".{npzfile}.mmap"
                     )
                 for sequence in Xi:
                     outputArrays[npzfile].update(sequence)

@@ -154,7 +154,7 @@ Analyst: AugmentedNet, developed by Néstor Nápoles López
 
 
 def predict(model, inputPath):
-    if inputPath.endswith("251.arfff"):
+    if inputPath.endswith("251.arff"):
         # Ignore these
         return
     df = parseAudio(inputPath)
