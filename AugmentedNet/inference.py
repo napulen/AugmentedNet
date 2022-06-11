@@ -9,6 +9,7 @@ import re
 import tensorflow as tf
 from tensorflow import keras
 
+from . import __version__
 from . import cli
 from .chord_vocabulary import frompcset
 from .cache import forceTonicization, getTonicizationScaleDegree
@@ -125,7 +126,7 @@ def generateRomanText(h):
     rntxt = f"""\
 Composer: {composer}
 Title: {title}
-Analyst: AugmentedNet, developed by Néstor Nápoles López
+Analyst: AugmentedNet v{__version__} - https://github.com/napulen/AugmentedNet
 """
     setKey = False
     currentMeasure = -1
@@ -152,12 +153,7 @@ Analyst: AugmentedNet, developed by Néstor Nápoles López
     return rntxt
 
 
-def predict(modelPath, inputPath, useGpu=False):
-    if useGpu:
-        tensorflowGPUHack()
-    else:
-        disableGPU()
-    model = keras.models.load_model(modelPath)
+def predict(model, inputPath):
     df = parseScore(inputPath)
     inputs = [l.name.rsplit("_")[1] for l in model.inputs]
     encodedInputs = [availableInputs[i](df) for i in inputs]
@@ -232,16 +228,24 @@ def predict(modelPath, inputPath, useGpu=False):
         fd.write(rntxt)
 
 
-def batch(inputPath, dir, **kwargs):
+def batch(inputPath, dir, modelPath, useGpu):
+    if useGpu:
+        tensorflowGPUHack()
+    else:
+        disableGPU()
+    model = keras.models.load_model(modelPath)
     if not dir and not os.path.isdir(inputPath):
-        predict(inputPath=inputPath, **kwargs)
+        predict(model, inputPath)
     for root, _, files in os.walk(inputPath):
         for f in files:
-            _, ext = os.path.splitext(f)
-            if ext not in [".mxl", ".xml", ".krn"]:
+            name, ext = os.path.splitext(f)
+            if ext not in [".mxl", ".xml", ".musicxml", ".krn"]:
+                continue
+            if "_annotated" in name:
+                # do not recursively annotate an annotated_file
                 continue
             filepath = os.path.join(root, f)
-            predict(inputPath=filepath, **kwargs)
+            predict(model, inputPath=filepath)
 
 
 if __name__ == "__main__":
