@@ -5,7 +5,9 @@ from AugmentedNet.score_parser import parseScore
 if __name__ == "__main__":
     f = "/mnt/c/Users/nesto/OneDrive/Desktop/langscoreonly-encoding.mxl"
     parser = argparse.ArgumentParser()
-    parser.add_argument("input_musicxml", help="An input file to encode/sonify.")
+    parser.add_argument(
+        "input_musicxml", help="An input file to encode/sonify."
+    )
     args = parser.parse_args([f])
     df = parseScore(args.input_musicxml)
     bassPart = music21.stream.Part()
