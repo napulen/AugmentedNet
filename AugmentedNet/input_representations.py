@@ -109,7 +109,7 @@ class Duration14(FeatureRepresentationTI):
         [0, 1, 1, 1, 1, 1, 1],
     ]
 
-    def run(self):
+    def run(self, transposition=None):
         array = np.zeros(self.shape, dtype=self.dtype)
         prev_measure = -1
         idx = 0
