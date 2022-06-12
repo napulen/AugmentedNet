@@ -110,7 +110,15 @@ INTERVAL_ENHARMONICS = {
     "D8": "M7",
 }
 
-HARMONICRHYTHM = [0, 1, 2, 3, 4, 5, 6]
+NOTEDURATIONS = [
+    0,  # onset
+    1,  # thirtysecond
+    2,  # sixteenth
+    3,  # eighth
+    4,  # quarter
+    5,  # half
+    6,  # whole
+]
 
 
 class FeatureRepresentation(object):

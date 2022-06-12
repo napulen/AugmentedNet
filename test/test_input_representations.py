@@ -10,6 +10,7 @@ from AugmentedNet.input_representations import (
     BassChromagram38,
     BassChromagram70,
     BassIntervals58,
+    Duration14,
     Intervals19,
 )
 from AugmentedNet.joint_parser import J_LISTTYPE_COLUMNS
@@ -36,6 +37,32 @@ def _plot_array(arr):
 
 def _save(arr):
     np.savetxt("tmp.txt", arr, fmt="%i", delimiter=" ")
+
+
+class TestDuration14(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+        self.df = _load_dfgt(aux.haydn)
+        self.timesteps = len(self.df.index)
+        self.transpositions = ["m2", "M6", "P5", "d7"]
+
+    def test_encoding(self):
+        encoding = Duration14(self.df).array
+        encodingGT = np.loadtxt(aux.haydnDuration14GT, dtype="i1")
+        for timestep in range(self.timesteps):
+            with self.subTest(timestep=timestep):
+                ar = np.nonzero(encoding[timestep])
+                arGT = np.nonzero(encodingGT[timestep])
+                self.assertEqual(tuple(ar[0]), tuple(arGT[0]))
+
+    def test_decoding(self):
+        encoding = Duration14(self.df).array
+        decoded = Duration14.decode(encoding)
+        decodedGT = aux.haydnDuration14DecodedGT
+        decodedGT = [(tuple(t[0]), tuple(t[1])) for t in decodedGT]
+        for timestep in range(self.timesteps):
+            with self.subTest(timestep=timestep):
+                self.assertEqual(decoded[timestep], decodedGT[timestep])
 
 
 class TestBassChromagram38(unittest.TestCase):
