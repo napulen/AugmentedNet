@@ -8,13 +8,12 @@ from .cache import (
     TransposePitch,
 )
 from .feature_representation import (
-    HARMONICRHYTHM,
     FeatureRepresentation,
     FeatureRepresentationTI,
     CHORD_QUALITIES,
     COMMON_ROMAN_NUMERALS,
     DEGREES,
-    HARMONICRHYTHM,
+    NOTEDURATIONS,
     KEYS,
     PCSETS,
     SPELLINGS,
@@ -124,7 +123,7 @@ class Inversion4(OutputRepresentationTI):
 
 
 class HarmonicRhythm7(OutputRepresentationTI):
-    classList = HARMONICRHYTHM
+    classList = NOTEDURATIONS
     dfFeature = "a_harmonicRhythm"
 
 

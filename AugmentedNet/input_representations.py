@@ -9,10 +9,11 @@ from .cache import (
     m21IntervalStr,
 )
 from .feature_representation import (
-    PITCHCLASSES,
-    NOTENAMES,
-    SPELLINGS,
     INTERVALCLASSES,
+    NOTEDURATIONS,
+    NOTENAMES,
+    PITCHCLASSES,
+    SPELLINGS,
     FeatureRepresentation,
     FeatureRepresentationTI,
 )
@@ -37,6 +38,109 @@ from .feature_representation import (
 #     bestMatch = 999999
 #     for pc in pitchClasses:
 #         diff = pc -
+
+
+class Duration14(FeatureRepresentationTI):
+    features = 2 * len(NOTEDURATIONS)
+    pattern = [
+        [1, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0],  # eight
+        [0, 1, 0, 1, 0, 0, 0],
+        [0, 0, 1, 1, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0],  # quarter
+        [0, 1, 0, 0, 1, 0, 0],
+        [0, 0, 1, 0, 1, 0, 0],
+        [0, 1, 1, 0, 1, 0, 0],
+        [0, 0, 0, 1, 1, 0, 0],
+        [0, 1, 0, 1, 1, 0, 0],
+        [0, 0, 1, 1, 1, 0, 0],
+        [0, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0],  # half
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 0, 1, 0, 0, 1, 0],
+        [0, 1, 1, 0, 0, 1, 0],
+        [0, 0, 0, 1, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0],
+        [0, 0, 1, 1, 0, 1, 0],
+        [0, 1, 1, 1, 0, 1, 0],
+        [0, 0, 0, 0, 1, 1, 0],
+        [0, 1, 0, 0, 1, 1, 0],
+        [0, 0, 1, 0, 1, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 0, 0, 1, 1, 1, 0],
+        [0, 1, 0, 1, 1, 1, 0],
+        [0, 0, 1, 1, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 1],  # whole
+        [0, 1, 0, 0, 0, 0, 1],
+        [0, 0, 1, 0, 0, 0, 1],
+        [0, 1, 1, 0, 0, 0, 1],
+        [0, 0, 0, 1, 0, 0, 1],
+        [0, 1, 0, 1, 0, 0, 1],
+        [0, 0, 1, 1, 0, 0, 1],
+        [0, 1, 1, 1, 0, 0, 1],
+        [0, 0, 0, 0, 1, 0, 1],
+        [0, 1, 0, 0, 1, 0, 1],
+        [0, 0, 1, 0, 1, 0, 1],
+        [0, 1, 1, 0, 1, 0, 1],
+        [0, 0, 0, 1, 1, 0, 1],
+        [0, 1, 0, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1, 0, 1],
+        [0, 1, 1, 1, 1, 0, 1],
+        [0, 0, 0, 0, 0, 1, 1],
+        [0, 1, 0, 0, 0, 1, 1],
+        [0, 0, 1, 0, 0, 1, 1],
+        [0, 1, 1, 0, 0, 1, 1],
+        [0, 0, 0, 1, 0, 1, 1],
+        [0, 1, 0, 1, 0, 1, 1],
+        [0, 0, 1, 1, 0, 1, 1],
+        [0, 1, 1, 1, 0, 1, 1],
+        [0, 0, 0, 0, 1, 1, 1],
+        [0, 1, 0, 0, 1, 1, 1],
+        [0, 0, 1, 0, 1, 1, 1],
+        [0, 1, 1, 0, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1],
+        [0, 1, 0, 1, 1, 1, 1],
+        [0, 0, 1, 1, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1],
+    ]
+
+    def run(self):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        prev_measure = -1
+        idx = 0
+        for frame, measure in enumerate(self.df.s_measure):
+            if measure != prev_measure:
+                idx = 0
+                prev_measure = measure
+            pattern = self.pattern[idx]
+            array[frame, 0:7] = pattern
+            idx += 1
+        idx = 0
+        for frame, onset in enumerate(self.df.s_isOnset):
+            if sum(onset) > 0:
+                idx = 0
+            pattern = self.pattern[idx]
+            array[frame, 7:] = pattern
+            idx += 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            measureOnset = [
+                NOTEDURATIONS[x] for x in np.nonzero(manyhot[:7])[0]
+            ]
+            noteOnset = [NOTEDURATIONS[x] for x in np.nonzero(manyhot[7:])[0]]
+            ret.append((tuple(measureOnset), tuple(noteOnset)))
+        return ret
 
 
 class Bass19(FeatureRepresentation):
@@ -267,6 +371,7 @@ available_representations = {
     "Bass35": Bass35,
     "Chromagram19": Chromagram19,
     "Chromagram35": Chromagram35,
+    "Duration14": Duration14,
     "Intervals39": Intervals39,
     "Intervals19": Intervals19,
     "BassChromagram38": BassChromagram38,
