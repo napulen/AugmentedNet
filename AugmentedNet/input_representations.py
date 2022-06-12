@@ -119,14 +119,14 @@ class Duration14(FeatureRepresentationTI):
                 prev_measure = measure
             pattern = self.pattern[idx]
             array[frame, 0:7] = pattern
-            idx += 1
+            idx = min(idx + 1, len(self.pattern) - 1)
         idx = 0
         for frame, onset in enumerate(self.df.s_isOnset):
             if sum(onset) > 0:
                 idx = 0
             pattern = self.pattern[idx]
             array[frame, 7:] = pattern
-            idx += 1
+            idx = min(idx + 1, len(self.pattern) - 1)
         return array
 
     @classmethod
