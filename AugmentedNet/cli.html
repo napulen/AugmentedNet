@@ -92,7 +92,7 @@
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">models</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">availableCollections</span>
+<span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">available_collections</span> <span class="k">as</span> <span class="n">availableCollections</span>
 <span class="kn">from</span> <span class="nn">.dataset_npz_generator</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">npz_description</span>
 <span class="kn">from</span> <span class="nn">.dataset_tsv_generator</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">tsv_description</span>
 <span class="kn">from</span> <span class="nn">.train</span> <span class="kn">import</span> <span class="vm">__doc__</span> <span class="k">as</span> <span class="n">train_description</span>
@@ -201,7 +201,7 @@
         <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">npz_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parents</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--collections&quot;</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="n">availableCollections</span><span class="p">(),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">availableCollections</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Include training files from a specific corpus/collection.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -248,7 +248,7 @@
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--testCollections&quot;</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="n">availableCollections</span><span class="p">(),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">availableCollections</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Include test files from a specific corpus/collection.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -543,7 +543,7 @@
         <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">npz_description</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parents</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--collections&quot;</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="n">availableCollections</span><span class="p">(),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">availableCollections</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Include training files from a specific corpus/collection.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -590,7 +590,7 @@
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--testCollections&quot;</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="n">availableCollections</span><span class="p">(),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">availableCollections</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Include test files from a specific corpus/collection.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
