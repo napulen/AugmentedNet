@@ -16,3 +16,6 @@
 [submodule "functional-harmony-micchi"]
 	path = rawdata/functional-harmony-micchi
 	url = https://github.com/napulen/functional-harmony-micchi.git
+[submodule "rawdata/mozart_piano_sonatas"]
+	path = rawdata/mozart_piano_sonatas
+	url = https://github.com/napulen/mozart_piano_sonatas.git
