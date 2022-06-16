@@ -1,9 +1,9 @@
 import music21
+from harmalysis.parsers.roman import parse as parse_rn
 import re
 from AugmentedNet.data.mps import (
     annotation_score_duples as ANNOTATIONSCOREDUPLES,
 )
-import sys
 
 
 def _isInitialKey(token):
@@ -65,7 +65,10 @@ def _processABCToken(token, globalKey):
         key = music21.key.Key(keyStr).tonicPitchNameWithCase
     if _isKeyChange(figure):
         keyStr, figure = figure.split(".")
-        key = music21.roman.RomanNumeral(keyStr, globalKey).root().name
+        # key = music21.roman.RomanNumeral(keyStr, globalKey).root().name
+        natmin = "_nat" if globalKey.islower() else ""
+        rnobj = parse_rn(f"{globalKey}{natmin}:{keyStr}")
+        key = str(rnobj.chord.root)
         if keyStr.islower():
             key = key.lower()
     if _hasAlternateReading(figure):
@@ -127,14 +130,20 @@ def _measureDict(m21Score):
     return tss, ms
 
 
-def makeRntxtHeader(metadata):
+def makeRntxtHeader(metadata, abc_or_mps="mps"):
+    if abc_or_mps == "abc":
+        analyst = (
+            "Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC"
+        )
+    else:
+        analyst = "Hentschel et al. MPS dataset. See https://github.com/DCMLab/mozart_piano_sonatas"
     composer = metadata.composer
     title = metadata.title
     movementNumber = metadata.movementNumber
     movementName = metadata.movementName
     header = f"Composer: {composer}\n"
     header += f"Title: {title} - {movementNumber}: {movementName}\n"
-    header += f"Analyst: Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC\n"
+    header += f"Analyst: {analyst}\n"
     header += f"Proofreader: Automated translation by Néstor Nápoles López\n"
     return header
 
@@ -166,7 +175,8 @@ if __name__ == "__main__":
         print(score)
         harm = music21.converter.parse(score)
         tss, ms = _measureDict(harm)
-        rntxtHeader = makeRntxtHeader(harm.metadata)
+        abc_or_mps = "abc" if filename.startswith("abc") else "mps"
+        rntxtHeader = makeRntxtHeader(harm.metadata, abc_or_mps)
         rntxtBody = makeRntxtBody(tss, ms)
         with open(annotation, "w") as fd:
             fd.write(rntxtHeader)
