@@ -20,7 +20,7 @@ def _annotationScoreHashes():
             scoreStr = sfd.read()
         annotationSha256 = sha256(annotationStr).hexdigest()
         scoreSha256 = sha256(scoreStr).hexdigest()
-        annotationSha256GT, scoreSha256GT = aux.hashes[nickname]
+        annotationSha256GT, scoreSha256GT = aux.hashes.get(nickname, ("", ""))
         yield (
             nickname,
             annotationSha256GT,

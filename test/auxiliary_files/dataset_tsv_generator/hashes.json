@@ -1,1036 +1,4 @@
 {
-    "bps-01-op002-no1-1": [
-        "1fcd912abbf85b4fd9feceee3d792a2d1a1742f439c361ee186e5c4eeaaae825",
-        "d488cf3a6f4517d500d813017a2a8262d5bbf3436c2d08558273a972fc0bbd97"
-    ],
-    "bps-02-op002-no2-1": [
-        "1534a76e44996bdee5880e958a300e636c2d6f5b9b6bb14dc6a6f9e9b2c1e6e1",
-        "6718a9b7010783d1f28726fa3eab5e8f1c956e312a01daf50dad6984da1f1cb3"
-    ],
-    "bps-03-op002-no3-1": [
-        "0ff0617882ac6ad4f5cda49caacc14c2014e8cbdfc3cc6d4ac3f82498f28c704",
-        "7c55a85623408ee8c56dcdab998d8ad43b6badf0f9651766342bc9199a0c606d"
-    ],
-    "bps-04-op007-1": [
-        "78c43470dfaf54e5ac710d2291ae63d712a34d621952f6aac6e8ed6306cf1d86",
-        "d4aed0a1bf127adee66d3c2689a9a18e6a9a05678bc3299e3b97d380f70e01c5"
-    ],
-    "bps-05-op010-no1-1": [
-        "68dd44f840e8582f2d1874e27150568dd71f89070512d11b8fd965c530d9004a",
-        "d91d0d01f742df7396d8795118d30de4e69d132a1298809c40266f55dac4caca"
-    ],
-    "bps-06-op010-no2-1": [
-        "3d242eea06e17a6750cdd6d894ab71207590c5829602db0a5858c8c1bd2f70cc",
-        "d4d6b7345a9a80ddc0ca20fa41cfd816442f0a0e1cb05929bbf0b0a4a847e8a4"
-    ],
-    "bps-07-op010-no3-1": [
-        "0ac9d70858b728ca11645db9d79ef01184875de2ef4c6595a1313791d2b5e3a6",
-        "d770b743d1fa88ce999af8c0370e5ed191d0c04ffe24635d3978a88dbb042415"
-    ],
-    "bps-08-op013-pathetique-1": [
-        "ad095fd08bd2dc25551858a6ff116ac254529421c51570f0e7a7ac417b5562db",
-        "a11b914b48d7e3e02f4329726075d2fc8ae7bc3f3f136c7cda49684526fac2c5"
-    ],
-    "bps-09-op014-no1-1": [
-        "92d14cfabf1c72f9275b1f9f8392ffa8b6eb750fb0068c25161eb390dcebe205",
-        "54e206315dcac94ebb59423446461c7564471c655674acd9e1d8a08b3c81295b"
-    ],
-    "bps-10-op014-no2-1": [
-        "da0c11b5763ecca3339b8eeb744abf7281a0bbf0c74e63c852a8df2191f7b425",
-        "bb3e8a03b6138d5aa0343bfa16a67222b2e07178083d6bbf6046f247e3d3b7e2"
-    ],
-    "bps-11-op022-1": [
-        "684a8426fedfc96c470f279256dc0d9e9e4a5f018c5b19b4fa5b98f5952ce9cf",
-        "b3cc2e8af7b90001b0b9a146422dcd558cfa20410a59fcab3cda85b56dd1790d"
-    ],
-    "bps-12-op026-1": [
-        "a5a8d2fb38b8e7df1920da9df54995a3d3395eb4428d702e011cd981bd0cb44d",
-        "9c914814662d4bff3589d910279447826c1355beaf646365b96d82b5aba2f2e7"
-    ],
-    "bps-13-op027-no1-1": [
-        "d4b106e75816be18054831621383d8c8733b66d090cfacaa54f544d5189fc68a",
-        "874a5b60333ad0bac79f3b5bfa412914b695b62881bd1dcb6d316500f6ff9b8d"
-    ],
-    "bps-14-op027-no2-moonlight-1": [
-        "36c17ce1f9091c93b2c6786fdc5136a217380483d4ff45803087857ea11dfc34",
-        "978204b989919ff0aa523d0eee194f3974972c818ce0469efdebfb80349c3182"
-    ],
-    "bps-15-op028-pastorale-1": [
-        "fdec56a8cf71a45ebce5fdad34a893b387bfdf86bca640661c5549ef955b0044",
-        "e36e117c59741acc0a3ebba4a2e7a041130e274fdc6a7b6cca232b5ad562e6aa"
-    ],
-    "bps-16-op031-no1-1": [
-        "42a9731fe94abdfa4e136fc0bf3938ddf5385f7db8fddde6c1fe1cb120ff46d6",
-        "d7ec5c3ce28abad28df5859d31d00f8a4cc43556ef255450d1e8de6b931f2d4c"
-    ],
-    "bps-17-op031-no2-1": [
-        "4e3d150609d750bb909c4012a043fe3f73c6d69c9cde18a04672c27bc59d30e1",
-        "c553f4748661b1e2015a99ee81ad8b1f85c006a94ec8201e0845932fa12689fe"
-    ],
-    "bps-18-op031-no3-1": [
-        "99b314c2086286b90102908c3881d26b6d402205750448bcf58c01e5da190334",
-        "910daa516f03fc3df8d220523f99d7ce276903d1126358e55d32e45eea171990"
-    ],
-    "bps-19-op049-no1-1": [
-        "d12c2eb8d7470b1c703c019c69e055ddf684e2aed9a461a870b3bb7b4b7c429c",
-        "97d71b4a1af4fe447de675cb98318fff2beaa43cbc99c09455e441ccb8cbb8c7"
-    ],
-    "bps-20-op049-no2-1": [
-        "724e63dbf82525e3527f3a1391154718b6ad28ecbb40bc63816b4fa0a7d2ed36",
-        "36ea903be2b92ddb74cc29b58519c800daae1f678680572331ee4c6debbf8e1e"
-    ],
-    "bps-21-op053-1": [
-        "71f2b30ff0f485f567f0e1eb1d0480f45a572cd10e480ce86b4a535f1eb100a5",
-        "64e0fe04060473f39389524e44a9705e2a986ab99178e9e40922546ba39fe431"
-    ],
-    "bps-22-op054-1": [
-        "27033e655e4099e98764d33b5a03e05489939d92945a102d14dfb47466650dc5",
-        "44268a8c2a5ed441b9b0ccf3f3f533bfcd69b79b9ec27df6173dc3fb596d2b93"
-    ],
-    "bps-23-op057-appassionata-1": [
-        "a4d15191cf93106bf97c2a32409e95d12d155dd0cb8e584caebf853615738bd2",
-        "bc909133daaf9b2b292898f4a2aee7ff328470423fa4064186c3022dd1ce2c39"
-    ],
-    "bps-24-op078-1": [
-        "94051e0ba68508be6197b1062a8e970753d8246e5b871e8299ef7dee839eaa43",
-        "467c6f48bbb0ae22d62d1fc7cc6e7241865429068bd5949e019f9c1f9932252e"
-    ],
-    "bps-25-op079-sonatina-1": [
-        "8be58b0b994131f05b9e33e2cb76250036d0ba31c88c434588b5e2d82f7bb4a5",
-        "2e20af1f2aa9d284baa28025bc707e2127db027f7b7107f3e11fab738e0c0ea5"
-    ],
-    "bps-26-op081a-les-adieux-1": [
-        "fc80107ab9a15daf90e26037ce62447ad004fbfb10ced4db0ae47c3bc1523352",
-        "eaeb519578faabf7575a06733e14c095632f2cc07a6c93a11ffab46db527dbb1"
-    ],
-    "bps-27-op090-1": [
-        "b516cd3dce80bf83073bfd6a3ad07328c5a9be85189fa5adc4a90ec758164bf2",
-        "fe267d1a6e97ef55745ed54e208babae1ccf3900c7c892d0dc720c8394f0af14"
-    ],
-    "bps-28-op101-1": [
-        "c3402d8a701cbcd877fec45faadfaef396d01292af08da7f9916c30bfbb6cafc",
-        "d8d8952ded6f26f6c44250472e21babb1c8f97c09c5cd9424c3ad6a7d566698b"
-    ],
-    "bps-29-op106-hammerklavier-1": [
-        "13798f76b2f92968696f494ed6a2483bb44f4895cc1ba906fc14828980dc373c",
-        "f973e4bbc4ed0d2071282ba88c6f9dd13be3001702bcce044401d268b2d57eb0"
-    ],
-    "bps-30-op109-1": [
-        "0c3a1a6b5b80ca2e2c758a77d57713165d2ea2aec8a99ae96a5dda84f9f5e6c2",
-        "404411df509018aa3a7c90da9af686308f63ebe1f65078738b5de28e0c895d1f"
-    ],
-    "bps-31-op110-1": [
-        "a3fcfd17e59aa7e3136dcfe3723875bb73cc2a46b709175872f64b67d77e8782",
-        "85a8e0bb76a3387913094d7a97fcea451db2bfe5873374e87751c1bb268f10e2"
-    ],
-    "bps-32-op111-1": [
-        "7adf65c5045650537d253fc11bb2266d1a87b0b0f3cfeeecaaa3405ca2e9cea8",
-        "7ea164addd7002df8efb18e01d5a76f0fd3c760a2daa419d566c728dbdee21a8"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-4-mayenlied": [
-        "7d65c5aa82e33bb466778c6643f92fed5ddcead53d49414f86943743aedf3f4b",
-        "e54fdc61bcefeb0749555962829e9557351d2a3c245e6bcfa3a0cf42c808563d"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-1-schwanenlied": [
-        "c76821fe5bce51404550a8ca7f49005a076effc32944c454ddeda64544d20f11",
-        "b67c114383317c25c567711995fea132f647ee6bef01ec363845bef292fb73df"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-6-gondellied": [
-        "6c78a053414e20098e59d2d68804f1f400bd295798eb7000420f8fcdd1ba7b78",
-        "400caf2545025f30f163da4ae6732d25396d84f596dac1d06c1dfd39127f8f96"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-5-morgenstandchen": [
-        "3f5a1aaa56625e296c9526467506f8d144761a973b5b3c0db2135232506cefcd",
-        "cf2670796b4b138831bc7424826c15325ef92fc2559903a5ccf9284c7aed2cd5"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-3-warum-sind-denn-die-rosen-so-blass": [
-        "72334d24fea81fe483094ac9795f951ae6284fa9250c1d68d23bb092bec14e3d",
-        "18d857b9b12d02f7c173e295cad674f86005459024fa2e0208720bc10e796b4e"
-    ],
-    "wir-openscore-liedercorpus-hensel-3-lieder-1-sehnsucht": [
-        "0179e77a38bf5fa1c8045e9b63906dc464e1af40dc179c75784e7cd5f0ff5e3e",
-        "6bc405fbdc98666b83d3c4a09a82022a80b6ee5d1cbb5687a4ce8bc48fb64e65"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-2-ferne": [
-        "d61e8e943a241ba1cd7df350eeb49594ce266714146c8b63f3a0125b19ceb0bc",
-        "02a1932d0a7020eba7e2bb5703ef8ffaeae4da2f2fe3bf8a29254115621f5a24"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-4-die-fruhen-graber": [
-        "906581dc1bc133285c626e7608da4889fbc39d866a7df9d683854e3413622030",
-        "5001f824231aa965708fd29d27600dfeeeb6cf1c9e69cef027c6db3f0b5b1943"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-1-die-ersehnte": [
-        "378cdeb0ce40b24f0ded391991e4774175d31b476c0eaf8563bf628c6872e932",
-        "2d2f3c47a78c511c5a084e8164fb3c69759838e92eee31d64b2cca990674005e"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-3-der-rosenkranz": [
-        "6dd3b4cd0dc06a54cdd246f3a24e2d0b986f09b2ca75c10a1540a5e4c1eb4e1a",
-        "8bdaa4cce25541117cdef4727198899ce3e552034110dadff10508bbf26b1b40"
-    ],
-    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-5-der-maiabend": [
-        "431b2b52b78475dbad571722df6f13853d0ecb5c332667dcf4f6460b0f058010",
-        "ceb893bfecd0a49906e298a014947d9c885011e29e87093b5f7f703702858d19"
-    ],
-    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-4-im-herbste": [
-        "b9a797e6756b82d4e9ebb7c2ef265f5a482fa75b206c5491ad4142beab192e62",
-        "75b60cec40810f703baeb625a40fba6c33dea8a3651ef55e35bae09c16b59ff5"
-    ],
-    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-3-abendbild": [
-        "7fc59e4ea3509db7a6359485f1aaff3658cd4b1b2a4c9dfcfbfd23acb64c12b5",
-        "b51d99e460c4be7ff4991abae6225896120cd8e652c362e96bc7df4db5153198"
-    ],
-    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-2-vorwurf": [
-        "cfafbb03a0ac9800f702d4da047a83b190ce6f8a8f94a28b0a0acb9c68fa1824",
-        "1c076cf3941345d54ea23ac0f9a0b56118a97641b289752b4e452ff1253073c7"
-    ],
-    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-5-bergeslust": [
-        "ffb269f1d96260a188955f07fb02f4749b939baeec09104b5e265a590bb5f7f2",
-        "333a4099023ea961bde3a066c8f168611ed36e1e46ce18a53249a297169794a7"
-    ],
-    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-1-nach-suden": [
-        "cca46e3d0409b01260742c052fe1fb37dede490fc69b640dc41ae602cdb7f199",
-        "1015b4e31261ce90d820046beef5bccd3383fb3c879e7ad8841dba57bb2fa5ec"
-    ],
-    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-6-die-stille-lotosblume": [
-        "5a34822341670d471a493469311986aa5271ca5d009e6b8b957b0ef27b31720c",
-        "a6b19184401ed272c1318ce583545b5b58069f00f5ad6b654a4fcdee88ee2430"
-    ],
-    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-1-ich-stand-in-dunklen-traumen": [
-        "bbabbe1073a98c3aae60f601e6d472fb002db160dea3a92b5f3a6f56b4c65547",
-        "483c81657c5acbecab9ef089d982e1b2f767d4154b9b6b2029d14f7eb42f4b48"
-    ],
-    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-3-liebeszauber": [
-        "683bc9145f3be046f3d37b06517ce96dfd8186e8ccb04147d11c259fb0a96090",
-        "8d4a3bad2fbce73ed217ba7d662a92179f5ab6e9fd979d70cb1c5600b5ddfa08"
-    ],
-    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-2-sie-liebten-sich-beide": [
-        "e3ecc2c589b368373b4c85b40309ac86190e8ac86f0e7695bd9b71163910a3d2",
-        "1200f147efe5b7bba7168ff313b0291fc03a090dc237f29e41e0628b2b44a0d4"
-    ],
-    "wir-openscore-liedercorpus-schumann-lieder-op-12-04-liebst-du-um-schonheit": [
-        "8805cf640f91b385f20f2fe2033dcfe5df0a34ca4d121793613227a006a25637",
-        "7e4b4727081c2fde6a9226ff483124fbeb50dcc0ab9d90ba3825cf1fda46b0cb"
-    ],
-    "wir-openscore-liedercorpus-schumann-die-gute-nacht": [
-        "3375f8b174af8ba7bc8488c58011c11c5d1321c95b7a40fcdccb08945d1a6168",
-        "bf1c254248b72c7af630f16197d481933ddd1bc83f8aa8d0ae2db48a26e596ee"
-    ],
-    "wir-openscore-liedercorpus-coleridge-taylor-oh-the-summer": [
-        "9f7c3357a464e532b6b74e00def9e7d8a9a6efac8893cd34a2dfd5fd4c45141c",
-        "7415ebcfba7c414de1e63afee20b92578028eedf9fa8b6faaaf23b8bf1ff522a"
-    ],
-    "wir-openscore-liedercorpus-franz-6-gesange-op-14-5-liebesfruhling": [
-        "484ba31d36f80fd6f511d85bd2e2b14aa026d2bfc5cbc0470bc2b015347c6f3a",
-        "d7dd1bb83140008315530f43ba4db9e7cc772d024d0cffb07110e035d5337077"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-08-nachtzauber": [
-        "aeeb00bbdd1991f2b6a04e371a772ed4826586e7306869bd36ca7a2b774f316a",
-        "19a2fe3f5532635ebb8fe01b7af3b8c48d7a0a45e915519b45fa2748e7a0efa0"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-19-die-nacht": [
-        "16706127ef8d3822905b950819d1732bad5ea71f94dbfc32c3eb0090de9184a9",
-        "634d6b06d4d42d5181851b16dfecaa99deefaf9353de57de8903c4f7ef6a87f6"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-13-der-scholar": [
-        "7262303093101d92c1cce5cc712ffa262c1b11aad94f932d0ee4943e993f1ef9",
-        "d088b13f785561d3b454907a6c67fa9a427730dd1b0451db9ef16df42ef227fd"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-14-der-verzweifelte-liebhaber": [
-        "72349d81eff9cdae78e2eea848b8224ec78c0e9d84443b3e281a949a30c03c34",
-        "0f3ffdde9451d1f0992083269dc731d1879a4f400bb7ac99535422b00a56bece"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-20-waldmadchen": [
-        "c2bb86aae3d4e8868cce6b00602c3a366044a639476dd85c9bb1406719a9db75",
-        "a10ba07fedc17b3fca930543eecb8dc58fc2d085d4eef64d98ebe89a7886f150"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-04-das-standchen": [
-        "7bf4349c42f364ff3658748bf69476d9c999c40c8e097c09449b9c7d716ab80e",
-        "18829a6dab402532cbe0cd8229c744a4eac2b73c5d8397e00ad53a4b8b71f5d0"
-    ],
-    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-15-unfall": [
-        "8b22123c393bf9d6edd5460c22e1547144b51161e30665314962d0050276f754",
-        "bda6f0e4da5413ac5a87b33afcc242eb78e50175aaf6c54ad5b63557d704d332"
-    ],
-    "wir-openscore-liedercorpus-chausson-7-melodies-op-2-7-le-colibri": [
-        "96daf9ce872d98529623be27833c0c2cf9b51b92ce4a848a8fa675326f09aa61",
-        "1fad9d06edf3c78ff30e37403e615a7d2d1a10911040bdc1757bcf26e35304a8"
-    ],
-    "wir-openscore-liedercorpus-lang-6-lieder-op-25-4-lied-immer-sich-rein-kindlich-erfreun": [
-        "ad74214f89ea960999fdfeeb7997097e0f63f3818bdca7cd2b0925e755b7e765",
-        "568bebcd70146748b13c97699e9f5a5fa4355b4022f27837f501fd262d6cac42"
-    ],
-    "wir-openscore-liedercorpus-mahler-kindertotenlieder-4-oft-denk-ich-sie-sind-nur-ausgegangen": [
-        "58a8bbcdf0c7787ce98c7506fee21a04763703c2e9561a3abedab5a5b293640e",
-        "c3ce03ef6340bba750ddf45f27c1d9b91bd941a50e9bd6847a2132001387c7c7"
-    ],
-    "wir-openscore-liedercorpus-mahler-kindertotenlieder-2-nun-seh-ich-wohl-warum-so-dunkle-flammen": [
-        "b0aef257d7bd64c5731b7b2f570ee51d7c4476ad7692763fc7335beaf350b8f0",
-        "231e6c1d822cdf2df61aa4d6cb846a69867d522c29dcd04cce21323476af53cc"
-    ],
-    "wir-openscore-liedercorpus-schumann-frauenliebe-und-leben-op-42-3-ich-kanns-nicht-fassen": [
-        "b7159fb23e3679dc6f9bc75678bbb94961e054fdc7d8669290a3aa944b2794c6",
-        "a33cea8c1faa665d3c57caaf8c5ed43cc3d5bfb2dbd54e50d205a664ea986746"
-    ],
-    "wir-openscore-liedercorpus-schumann-frauenliebe-und-leben-op-42-1-seit-ich-ihn-gesehen": [
-        "e0834e669f5f8e843f425542f3a0f46909e12390b1c33f427fe4e1e939025fb7",
-        "fe2e208c88236f6468c7b67ceba82ff6747594789057900af27b74ac652ada00"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-04-wenn-ich-in-deine-augen-seh": [
-        "0c1837296a045d26fcf6326b42ae9c8cf445d2b9a1b4fd7c55f4bb5da7349e1e",
-        "0b177aac01ca8c968634bb75b3f93c8a21c1133b0fd8af3e63858e8eedfa7173"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-05-ich-will-meine-seele-tauchen": [
-        "98aad3330706ddb04a06f50050d1b9d86a9e4df6112a38e721245cbe848b6407",
-        "40992f52a2aea71442d729b63c426c22001b43d5066d7362985d95e6dda99511"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-16-die-alten-bosen-lieder": [
-        "ed9043658f8a9bc59a558268ae231284a18b06e0a67c475eb2987bb27f011074",
-        "b4e0c5f02adf75f9d17356a6ebda6bdffe1d181d2f979de834b4875c8fb8b402"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-13-ich-hab-im-traum-geweinet": [
-        "ee267ef47b067108540bf1a787375fb02ed678249531f0880e1680e39270182b",
-        "ab806496a6d886980022c52bb15c498644f1f6e513cb30b25e1f8bf9494c458d"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-11-ein-jungling-liebt-ein-madchen": [
-        "6b3b710b9649a9b97104052b004ff46ab90f2811bf44128e5dc70e7f3ef1199c",
-        "c5f02631f6026ec4f326922d24b0b95260fa64004743631704f27c2081c2c635"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-07-ich-grolle-nicht": [
-        "258518c0dc01b6ee3f09a449364b97568a92f15c968774817066ba02ec04a6ab",
-        "e0848c932aac59bee08ff71b1f42ef2561775f5eb0d263e672a8a916d37b0cdb"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-02-aus-meinen-tranen-spriessen": [
-        "b29319728e487a67e24f7936a7b184af8e306654f61c032b9a45838adf0a8551",
-        "81feb25f17d47775cbbcd34d4eaa72b63a3fbba3464dcf0d94be715942c01097"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-09-das-ist-ein-floten-und-geigen": [
-        "1c89d6f705b728d3d57fe2427ba92d0fdac9f538400b076967cbf0bbacbeea9f",
-        "f0f70431dd0a56e9bdd5944fa8622a75b9c1c48ee457a2ad3f15ad153a70478c"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-01-im-wunderschonen-monat-mai": [
-        "3f3b36f042963fb5f24083834e98d0ffc1fd41f06e47167a32fe0bb0105fb57b",
-        "5d42551fcea90e82492bef9fb9643d2cf7830e68adab6dcce93f3f94046635b1"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-10-hor-ich-das-liedchen-klingen": [
-        "97f96552a74de92216a1e1072074d8935ce02538e2bab172cff1ee6a39565b32",
-        "93d38dbe0c99339703bf04790ef79fc3f0cd9708d8d1470f60c1b3028ca30602"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-03-die-rose-die-lilie": [
-        "cb3f847f07deecc77bb9e8e40b9df1b24acca50222af43143bb2d66b8eece551",
-        "2a547a51ce204985d9b198d33e78126c30b18fc5a8f03fce9e2b9e41449e545a"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-12-am-leuchtenden-sommermorgen": [
-        "6f16dc1ca5fe0640249d696f6d5787b3622f884516610d230eea16264ff341bb",
-        "f496322caaa260b0cb62c30fdf7c6d1eff99ed17c604e9ad743a20204d2461c4"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-06-im-rhein-im-heiligen-strome": [
-        "7166ac9475fea206df9da86572a7c51ae21705634b612b19c295e5742785b618",
-        "14ac63e49f5c8b5718cb32776eecdf997e87d4adaff9494ed30f60e189651d56"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-08-und-wusstens-die-blumen": [
-        "c586306e4cb62ec379ba6fd6028f19534867f5e81b2da6074705754fe7ccc9fc",
-        "86ee60c7b379a291a0e16630eb4b371fafef5d4d5f72929d8ca294d0cbd19f24"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-15-aus-alten-marchen-winkt-es": [
-        "3cf1441d5a83fb9209a033091e12097dfde14d7b1e1b912d1a8a24c759e707ab",
-        "65a53dfd934282a10cb5b53b952d421f771251b69f931694f71f4564d256c4f8"
-    ],
-    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-14-allnachtlich-im-traume": [
-        "23ea1a308c283a40d479379db6b3e38f7ca9f6ab123118080d1b8ce3db93e575",
-        "535ac32d43b2c842b8603ec02e68bac9460d28dab9f21c990332e2e53647d178"
-    ],
-    "wir-openscore-liedercorpus-jaell-4-melodies-1-a-toi": [
-        "82cf2f4f8e111fc3e96a033ba8e3b566fe0978d5aa5918ead2951dd0a0b2c9c4",
-        "63548aaa57c8f73e7637590dcce5a5cf9c76ff12e87d466ab108951d8557e719"
-    ],
-    "wir-openscore-liedercorpus-chaminade-amoroso": [
-        "79410593374ea96611bded5e5928f43d4a92574594f98ea8106d157438e87408",
-        "008214ec7581228c84636a09ed646e25e72bafa1e4e08cad3c5ebeaaa2cbca0f"
-    ],
-    "wir-openscore-liedercorpus-holmes-les-heures-4-lheure-dazur": [
-        "806e3d0a68990676e94ec5e242ae2bdc4b0d885b21870df8360a0c36d5cc9e44",
-        "f9199ee4d33d2ae1bd7c4bb4625e17c2d9040017a0e3d8fdc4fcabf41cbe02fc"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-04-wachtelwacht": [
-        "70c56c6a1a9370ed458e0e1ac350a31a232a82a9a6bec7edd1ffbade9f5cb4e5",
-        "2695e6c9a91b9df3dffcec0348b29bc002f33995aee9534acd4ea32ff861b795"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-03-die-blume-der-blumen": [
-        "118a1374c928e17d5bf27002ce3c1a22f8298570446170ee4ed9ef3fecc61655",
-        "4b031c08118fffba0a9c338f93228571747177f9e7dab2598a1c88f43317327c"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-02-der-traurige-wanderer": [
-        "8c375a7e43a7f2a08152a4d1447a5ee09660150f03485d58277e95907779b416",
-        "ecce10b61abd023e8b9aff1b95bca190a27a28784edf17dec4ddd43651535a2d"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-05-betteley-der-vogel": [
-        "06f28fffeb59b93f7ab96b482929ec5da26a29f1bef0ebb2ed427f8a8b1812a9",
-        "26095f933733a4e31498d8b24c45c4b3f3b8f360fc18ef1ba1938c55b61b777c"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-09-hier-liegt-ein-spielmann-begraben": [
-        "82017e8df2622a546766945423f65216f4127065cd2e72c1b409d02a3432b408",
-        "b419ec2b06c022c89ea55a24d44871e612c00621a26e2a3b8c5bcbc9ee780535"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-08-kaeuzlein": [
-        "8d00f1306686d14f4dec7e18cdbd661b91445645db0429d571697dab7749fb7a",
-        "66c4505e1f75a68127268ef983e7161493c0f2741e9eca6cd77be97d52148a14"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-07-die-wiese": [
-        "ebe39bc6fd4d82f22a6281928fd1dacceffea40346ece11a873c421a1e432bf8",
-        "60eefd70939eaab92be5d82ee733ec62e064da3f71cafd7f2d18841c821fe80b"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-01-fruhlingsblumen": [
-        "8d4c3c1ba8ddccc328812f6b817d64b18186bfa0d7ec22be7fc7c3a9724e0595",
-        "c59ae03a89cac3565e5389cf975a5816c07152f5a6e667ed2a8f19735831d7d6"
-    ],
-    "wir-openscore-liedercorpus-reichardt-zwolf-deutsche-und-italianische-romantische-gesange-10-ida-aus-ariels-offenbarungen": [
-        "0ccc6dd49e64704b7cb425fd4a4f579ab1c5de7d7d684c13bf3f91577019f75b",
-        "1f57b34e2dab14ffe4c2cd7da1ea9f45a9d2deb1d13f85845d587f1500e15f50"
-    ],
-    "wir-openscore-liedercorpus-reichardt-sechs-lieder-von-novalis-op-4-5-noch-ein-bergmannslied": [
-        "1f340b4562e1d9c99402664d81c544c665b20fde5e9a96ebd685aa0a7999b45b",
-        "763366ce6654473acc8d34fb037474f4faffc264da464d6220a228258079fa48"
-    ],
-    "wir-openscore-liedercorpus-brahms-6-songs-op-3-3-liebe-und-fruhling-ii": [
-        "6bcb6339d98a0bb5c4349f33e45fe8f4f053f2da13357a16f3ffe1f1ca3d8ca6",
-        "4c0eb08dce746ad7f892d394fe54e5cd09390bdbacf0fdc985e6f0529abbfceb"
-    ],
-    "wir-openscore-liedercorpus-brahms-7-lieder-op-48-3-liebesklage-des-madchens": [
-        "b1c861b8fd9685017b650dad2521f3ffa68cc078fddf06a8fd519b4455f739ee",
-        "472af9e9a013e6d146140f8753db82c5766789a58e03294304fe5113581ab93d"
-    ],
-    "wir-openscore-liedercorpus-schubert-4-lieder-op-96-1-die-sterne-d-939": [
-        "fd4b256605033d60029c43bf0d7cdcb245d9cd2d7b7c926b61f1b1e91636ff10",
-        "2804609ec5fcb3d2701076202905c0aff76c2c3feaa6c966a56f33b9eac9bbc1"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-16-letzte-hoffnung": [
-        "cbeb5b44122ed7b0bb73dc6b544a9926adc5a4ca91d076eff6fe2ddb89c550be",
-        "398b4bb2ba05fc9e9ccdf9bce28785df6661eb29a65c209bff40d9fd2e554ce8"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-23-die-nebensonnen": [
-        "ee2338eb5d94ca3d8f220fe0d543ea5dc45f81dc98120e356604d40fdf65b5a9",
-        "8e590d418ada5100428ebc3399f04438366f2501f270069e6c38a22ad132af69"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-18-der-stuermische-morgen": [
-        "32d1ce937536305328d711fcbc33d259877afa6f6a45de43f255b91807689d13",
-        "4ede8ef8d6b86e4eca22f6278d191141bf817b160a12f3e7dc17c0a0de5a4b73"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-06-wasserfluth": [
-        "57fedbd79e353fa56939d3ed345f2b3185a258b1eeeb08a5c82095dcfe0c7e8e",
-        "1136a19f209946938b160fef604452ee83a580d2dcba9f8bc5892a63e5b2ac2d"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-09-irrlicht": [
-        "cd976a44bb929d7dd208e6abbc34ac07326e15d90c28b0525d427f9ac3dc0e04",
-        "d17c357f333444a5ec5d92bde89df0c137af8e4bea7c29f862f610b8ded766b3"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-04-erstarrung": [
-        "1d2e0b1a2e65a229e2c93f34d8e8c72a57a499b68525d6cb7e2757a400914a98",
-        "e07b4d9a2f396382aad07a86127f0aaadb27ddf363b0f79e99a72f9a4b3d0630"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-14-der-greise-kopf": [
-        "bd627f246fe36abf3a8f4e01b719bb1e8e8607257d77c240669a9dda50961b86",
-        "575917f3931bc4cde8c4beba52d782a1b9772b4d80074cc515e10765240207b1"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-20-der-wegweiser": [
-        "dd1a928412447e60e9bb1f704778e6d5ccebbdafa8356bfd32d35dc3b14c4308",
-        "a098b7c828b1d2432a72ed7839459c1caa03e05cc82bc14ff0bbfc2eb0e56bbc"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-01-gute-nacht": [
-        "34136e586be969f09b48fcdc079a3ca1aa463485a00eba28df71d9b8ece38773",
-        "eb7963edd08238d806a76ea647f819bf506116b63537a88da8fbf725624c86d9"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-12-einsamkeit-urspruengliche-fassung": [
-        "4844d3d2da3c99545dcc14f0d91f04aec855698b953b1b8088c828aa94aa3026",
-        "6d2aef45f850dadc568ef9f8d6e43e07e498caa376343e9959967b43556c7d18"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-13-die-post": [
-        "db4e393416a6116e200a0f5285257af412457d991fdc567ac7ab1044e32e36b8",
-        "c2110d7f13f8df1137ff167317162bd680bfb067d5aded1b149451cf4fa41c5d"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-03-gefrorne-thranen": [
-        "19f5d172663065915ebb582059760cb6d7ffc6020f6a3b106e550c9ff1b02f21",
-        "78f128d4ee1f3a61ed02feaa212f005c3223f590ef04ff3e1b2b91d6d5e3a7db"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-21-das-wirthshaus": [
-        "95475054c383d7f35c9fb18a65e743fb52ced411caf9e89972eac3300d6b1f82",
-        "ea5312b9ad9d949280f3d7b239cecc64cde4572cf04ed5e5ebda762b1a981f26"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-17-im-dorfe": [
-        "d79b74ea8c215d7b5e3161ad8a99f9217ed82011d3f9bb2e543d75fd99432783",
-        "ea0b37858c4cd0c6f33e9d9816e85e0476c0b515ec67302d0e92872fb607e76a"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-10-rast-spatere-fassung": [
-        "69844fac4584b15a95dcba9298f95cc36457a292d878b39e184683d2413f8505",
-        "28ce8259244a7101469dce72d10d5fc9f73ad4146edda47f3ae1b8e412056a15"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-05-der-lindenbaum": [
-        "bcbb35224a90bed13ca44a79030b6ae8e18d7eae549eeff8e55e4a8b5d0443e4",
-        "e7645cd78f7479992fffb8ea8b9b82769e36e39a09d86e3a918bb183b36ef963"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-11-fruhlingstraum": [
-        "2f1212a9e54ee9204847ee4d1a80dc1943639d3a2f8dd9e4444be8d749f216a4",
-        "bcb905422edb94cd8b2bb650e25985e6319e83d2962170c98ed6e9df6a2a401e"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-02-die-wetterfahne": [
-        "23876161273b0f628fe666f88420a779290507349a2df59e39a4b6f48da75134",
-        "e7f2d8b846142c4caafb6cf59b354f6e9e8214ea76f2daccee023010650330de"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-15-die-kraehe": [
-        "9c912bb8e47409b9d13d1e53b53893119235061266256bb2aef7c0f1d537b738",
-        "14a10a6647222941e9954bcaaa34e332d5e4bc2db8898f037394766fa617571e"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-24-der-leiermann-spatere-fassung": [
-        "b1db672435619b367e4a541fb06c1953e971a74684cff7c20d25201ed61dabe5",
-        "768314647d95b1fd5f2225cbbf9d8f1a61537c627943db9f5bc119c0f13ffec1"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-07-auf-dem-flusse": [
-        "2464db3234a319c5f8e2c32fc9380fab9fe1bf255f9283fa41c3ff059691edf2",
-        "3def580429717aa34c9e520604423dfb119d28f89e8ad1748d84b01b4065394b"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-22-muth": [
-        "de812b109c5720bfcf44a345ffba5705afaa92767265ee25c9652722da50ab22",
-        "558bca4edbce6e81e693936a100e7686cafdfa9b5c44178952234101a3089e71"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-08-ruckblick": [
-        "d3c167b06b88a00178033e49952d65b7e998e6fd8137b61002193486d5a56735",
-        "aa92e5c56fa2bcaf021723651f634aff00e67c0cebcd6dabda653c4ee64e091b"
-    ],
-    "wir-openscore-liedercorpus-schubert-winterreise-d-911-19-tauschung": [
-        "ff01dfb74de3ed1546558d7587180b510dbe963a54d5f047bf44e2876cf4b9db",
-        "9be6167c3e5ee3d7151e4c172b87d6adbff26a798e13c17658a42f84acf22497"
-    ],
-    "wir-openscore-liedercorpus-schubert-op-59-3-du-bist-die-ruh": [
-        "369329f01e805a861cbdf938caf697b0a9e9a4d5a785ff6dc7205faeffef8737",
-        "1d8ae554e7c632729a8851ddd6d778bab457326fdd4c54045060f2cf3f52f6b2"
-    ],
-    "wir-openscore-liedercorpus-schubert-die-schone-mullerin-d-795-12-pause": [
-        "87d0baa381c4f7187d73fc7c2fbc977410ab798923c0f956029b2e2e6e98de08",
-        "11ffde24da48cb9d515e2c9faec626d448adee70180c579d7e9eaa162a71cb0d"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-02-kriegers-ahnung": [
-        "8ed7fad78b4d1bc4f23e35941ba79790b63c68005577d50df36a7071dc9c4da5",
-        "7af082408a1f2bf1f51e0d13865254b8198c2e4bcbd6e0600776464d6fc8164a"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-06-in-der-ferne": [
-        "74bbaadba546542e297c420a8d51a7711eae157ee88c38c8c8da38d96e63be2a",
-        "72dc90ce45d9f751fc2cba82488f56b5de7030b9dbe8604ec4540d55760728f0"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-07-abschied": [
-        "11c8ea39cdef8fd0d030a6ec4e26e84d28b2929365241db5d96704430f9706b4",
-        "cc81d1321eeb58c29ad6943990d5943df5fb70873d700b03f93855d652a72fab"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-10-das-fischermadchen": [
-        "ea8a37b5ef8eafdbbe4f54942d593980d43896058977d435a7eeb5282068ef6a",
-        "f9bb8b6489ce7487755e901c97410c583c2a11abaa0337158131678aa8cbd073"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-11-die-stadt": [
-        "84af14fe89a15668b0592afa18c25a3f704e854dddff912a405dcadfe5208456",
-        "59ee1735170c78c77a1fe27f63de87f511635cf12ce8e552e47d8409b11a2cd2"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-05-aufenthalt": [
-        "0691a9a7995318929926ac2383090b9e1bf1fef99e7e0e1847fc37215028c8e1",
-        "66056177a77f93f701363dd1bfbad624876c337046df61d9882b247217ea51a3"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-13-der-doppelganger": [
-        "79dd54704f6ebed585f2118d71ae7f8dbb63a22b8b737e06792e0d0a00aa3592",
-        "0e2d2c3193c72681e169a00e127846f55caa20fd0e4dbde6ad322f891a6a102d"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-12-am-meer": [
-        "402b72db359ea84cea3c68df0dd5548da1cab50144464cbf609ce5d424386ff7",
-        "e0e7abea0f9d075b1f2ba803a0759580d0e7427dcb924e111a1cdc723498143c"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-14-die-taubenpost": [
-        "03ff254020db70b175d7e1da98bcbe6a4c37dbeda2cff9cf0b5fec8d0ae34fdd",
-        "54cdd2161b330c8b8da6e71d965a8c28df45b8607b6bf7a885c42344ca5ee3b2"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-09-ihr-bild": [
-        "8909a8d72238c89a9c2017c0ec965f58388b5397cc9cdddba2fe03b709ea1dc9",
-        "2afe4b80f4f480790c1dc35787947de94c47f4d881248e5be64e1a33969536e4"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-03-fruhlingssehnsucht": [
-        "ee8a87bb2de581c3395d3948c048b5cd4706f9959d2ddc3b31eb9bd30e9e8d35",
-        "e27c8b9d095970cc76c559bb2b00f2e4add3d7a4c8f7a369bdb884ae9993ec43"
-    ],
-    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-08-der-atlas": [
-        "a4d845d01703e58f547c5eedf628975e5a65de5af8fdb15ab380e28b97a36d01",
-        "f79c9ec11585a92a4f41d3f62a4cbab8571222dfeb71759d93b0c7331ba13c19"
-    ],
-    "wirwtc-bach-wtc-i-24": [
-        "089bfcc629fa8ec1be79595f4af0b89f0a0dabaf77c94d85917b6e8dd523a036",
-        "8fb64fe411963a27de13caaef4b62af3c27dbba756394ed96edd1e9d6154219d"
-    ],
-    "wirwtc-bach-wtc-i-15": [
-        "7573780602ae5cdb088a2683e3318af42ac5afdea587717cab5060e7ec8ae8b8",
-        "528ec9142b332ab231630ed0a293ba80b3b02f35b1517bb78daabbd880a0ae69"
-    ],
-    "wirwtc-bach-wtc-i-8": [
-        "974d84b36d9b0766689f30306cef84bc65b893e8e455249e6f816b216a9b1b48",
-        "d927e102dcaedd7b26b48a8ee1a9f342d39fdaa0950baa409282a07dd2f2acf5"
-    ],
-    "wirwtc-bach-wtc-i-3": [
-        "9801a6db0589a52647915c328cb342615659e5a73850d99125a192229e0488f1",
-        "b736479ee227f5e475c779a4009fb91d1c340e688855c9a42adf3f4f374fa7a1"
-    ],
-    "wirwtc-bach-wtc-i-7": [
-        "4b8023ff6f796d5c77c22f038072aa28a12ee0da0f18db45ced8eb107c96d0db",
-        "a8e386216eb89a14ed73c94c6c1d0bee0903345e4478d6f3e71340df3c1598ac"
-    ],
-    "wirwtc-bach-wtc-i-17": [
-        "5f85d505bcc08bab97f9286380b3d0cc78e885dd2887010a9a1a52d4418c6f3c",
-        "b6f2da42a3c58519b20ad1a60c553a16e2e87b56f4852edd65d6794f944004e4"
-    ],
-    "wirwtc-bach-wtc-i-16": [
-        "89224aeb6c7603f01491b6e092a7ef4595eaca372fc9f47afa998339f9c9ebb0",
-        "e40a89fd3e861255d533e68092c9b1fc36109e7c4107fa0628b7700667c5e576"
-    ],
-    "wirwtc-bach-wtc-i-11": [
-        "10e8c572ea356fb37dcfb167e2fa1430f00a7bb253869bd2405f5ec43b7648e5",
-        "31d8c498130cec13966cfb800d57916b58dbc547ff5c5972a013f2fe0d3df981"
-    ],
-    "wirwtc-bach-wtc-i-20": [
-        "b1c4d9fbbfb30cb3b357396b6c3570f8007b74c841e5595082007498d54829f0",
-        "1a871d8cf5ef2ed50953fb4ea0e7acbf80ff29962f1ffeb445cf12288475de03"
-    ],
-    "wirwtc-bach-wtc-i-19": [
-        "09e674a673507f9a4668732c0ed31f2c42561b2ecde109e7ac5ac0f1312a93bf",
-        "a9b989b0cceea6f2ccde4c26d4a84ee9401a74e10599ae03046418ebda14ccc3"
-    ],
-    "wirwtc-bach-wtc-i-22": [
-        "1e65290e5502017ca0042bf62a2429341bb9ee23a76dbb65a3ed6ab76638f29a",
-        "0a1484babd7a9fbb0ab3630c4f6c7b2d7febb1adf192fd866236f30466b313f8"
-    ],
-    "wirwtc-bach-wtc-i-9": [
-        "859f0445d5a337912b9670661267a4ed95bde2cb0bec74f1ca89a7c1d08cf320",
-        "d581caa7ff81c4b0b78dbf57de49b869ad414594963ef50e7e37c0699abd166b"
-    ],
-    "wirwtc-bach-wtc-i-18": [
-        "5fdd4c6ee8cd376f60d01d3457a831ff2eb4ae19bb12cc44297445efb462a25c",
-        "fc5b861696722069884752d6b3f2e528ff463b9848a4e10f5173705e03fcd8ef"
-    ],
-    "wirwtc-bach-wtc-i-1": [
-        "e2c9b0e4ca444aefbfc6daf9507eaea31931ba630d25fcc97a3cd1bfd7194b37",
-        "7179b0aa86707cc2e6db004c30c5b94713b1cb0d201a58d4d70197be6311f974"
-    ],
-    "wirwtc-bach-wtc-i-5": [
-        "daefb1862be3b76bc321a6a781c6c64582ca1754bbf816dcbb983b6b4509acf7",
-        "a522bed78e8d045b803d65167271668defc5a106e6aaace9d7c354e46d316f53"
-    ],
-    "wirwtc-bach-wtc-i-4": [
-        "703dfd6f51f99799b759bd3fbefd941bf443e29583ae95a5ceab7ef4ecacca1a",
-        "3a8471d25c3f71a71af2de19f351c95f945d3de4fb919b4c7ef92bc4149855a0"
-    ],
-    "wirwtc-bach-wtc-i-6": [
-        "65fe8f6970448e4f34b7278200872019295bb2f323d690ab879ab6c89d17b43b",
-        "4de7ea61b6c90bc231923c926cf8a36ecd2b2aa2829c4d5bdb5e05f336e037f1"
-    ],
-    "wirwtc-bach-wtc-i-10": [
-        "ea97397e7bab4e54ee6b197e25e639b56d6841165c17212540a319dec40ee480",
-        "a36f889320af6ac986cb4e3b091d4d7edc1662d4fa0bb2e15f7ec68fa7ce483a"
-    ],
-    "wirwtc-bach-wtc-i-14": [
-        "fd6afde377962fc12dcce570d80405b957d8c2ca049d39ebc6602e9b4279858f",
-        "9db2438ae5f5c0ec5e5fa16baad917a3ed910285de1e3c804bdfbb20aed74150"
-    ],
-    "wirwtc-bach-wtc-i-23": [
-        "b04042a864e1f312fabf75a3efa51f64c53e118ea5b0788148a9e220a88fdcf2",
-        "26162fa3884931608a838061bed1bb74be76fd7ec5822dee5292aa08692e043a"
-    ],
-    "wirwtc-bach-wtc-i-2": [
-        "3d6047c714bc6e98b6c2cf5c5e846d57992f6ca6e0065b2d1d33297117cc90df",
-        "e13adf687ff1b80ff801c34aa72fc4ac66312c58663364c4ac5d3bfc9aa4dc11"
-    ],
-    "wirwtc-bach-wtc-i-21": [
-        "8a7aaafcd711ac82afa9892cdb4777c7dfc9934091a67fef4136bb670945eca3",
-        "d19aeaca89172737c297dfacd8e64d1e76f34f73a6547631d5e48953f81528df"
-    ],
-    "wirwtc-bach-wtc-i-12": [
-        "a77a439f6df7b61cb2d5fb76838cec1d744ff711aadd57e8b79a853abc4ca2d4",
-        "6cf694fcedb9cf1672568da5da04dc23258e72176b9991d1c1777ce0306c49be"
-    ],
-    "wirwtc-bach-wtc-i-13": [
-        "59831feaa2ae14174c35140f8a88c2ecaab5df2a35609b958457776eb0651b93",
-        "9c2fae600646832ccf1fa93898630bd14848c2c4dcfe9fc08d5a097a3f8d955e"
-    ],
-    "wir-bach-chorales-1": [
-        "085503d447c415afd0ea9e460519e739fcf688121df98346657d108c1ae1079e",
-        "9676f11a2b26488bcf30db90c15576caa1ea2a616b909e376d44b8b804e9d138"
-    ],
-    "wir-bach-chorales-2": [
-        "88c42971649608ccdb409ee9f3e7d867e627031bde02f195b629b32761c6ce76",
-        "a017649b259ceda9c0ee8a74909893a69d01163c5f60ae5e631dc3d2ac58bcb5"
-    ],
-    "wir-bach-chorales-3": [
-        "3ab4cdb20b37d35b7f4fbc5c70affbc979fa734c9961eccd6a59a2c9a891991b",
-        "49553bbbfa8e79ddac3b35232608c9db07c3bf2582a161b805e6eec891e1fe8e"
-    ],
-    "wir-bach-chorales-4": [
-        "6c82412c74e36147415562247ada1c1ef6befc57e05e5b739a8c7804fd990d1a",
-        "5b9a0acc0010297e9f49f8c43d098361deb28f67dfc13f9f6b682cff9ec1003e"
-    ],
-    "wir-bach-chorales-5": [
-        "ebf2d7e298f5fd1a46b0ad6f6f0ab0a85e4f1de752b05c49c202c051ed0ee5f4",
-        "8fd35db74f930089746d03248b8267882c9508d8f005aec67e9f4e23d74c27e4"
-    ],
-    "wir-bach-chorales-6": [
-        "6947a928c259e3899ebcd450a984b52323d3f513d42f779b3045d097317f192f",
-        "3946fb6c7dc6a0fe772f88aaefa5d32f9b42f9fcc476e9a3070f9e5b33ea760a"
-    ],
-    "wir-bach-chorales-7": [
-        "6b3fd56c8a8dd93951f44800bb14d2087084b8cc1e80cf0c8c9020c6c2fdba64",
-        "a2f0dde7a8a4005571326e78f0e1fa10b418477e0d7f765e68048901202d1994"
-    ],
-    "wir-bach-chorales-8": [
-        "6f049790441f8f301ba83653bda79d0b13d2d6e18de1d1416758ada692d40758",
-        "89b527da3439fcfaf49e22ebba367bdcedbd1c624bf49759f2b30f7db789be4c"
-    ],
-    "wir-bach-chorales-9": [
-        "3af267a7b70108604e1f4f50f5dc8343c492f59bb5bd81a32d5a03dbc3cd0688",
-        "03f27251df1e731d9f0ba2ce61c5768dccda2894517e6a9b658b1fbea2f004af"
-    ],
-    "wir-bach-chorales-10": [
-        "e948916392de72b3edb8c68acfbeb4584784a46feff738613ba5f843615f14ad",
-        "3d7f458d1f7588de2c664a9aaefe287937be807355eeb708db38caab98d3bef7"
-    ],
-    "wir-bach-chorales-12": [
-        "8d7abed480ec86dab6d6319adcd84cad95648a8b99b159a0415f2ac98fc74ac4",
-        "b3c3257ceec1d28f6d7408dc34f5ffc8876fa985aa864f7e7af1287aba626925"
-    ],
-    "wir-bach-chorales-13": [
-        "0006958014fce3bdc0941df7e8ca84090247e774916fef80bf77729de98de655",
-        "b1a1a662561edcdd36ab6da4be1512878f06b5bd1173e9d6c6c8df549b418a89"
-    ],
-    "wir-bach-chorales-14": [
-        "946d12117ef07dcae2fe9f081375a6fe75234517d804f16063c5a52e534a69e5",
-        "73cba71862be12e5c432052da978a47ef2d3d7c24de2c1860a5400b573c33008"
-    ],
-    "wir-bach-chorales-16": [
-        "c8669efd7e6a3f6803b422855562d7ce215187d06161e631f75c866b687ad531",
-        "c59e795c3a5ad1a8adde9e6a096029bcd9b39dffb2497c3fa64d62746244e8af"
-    ],
-    "wir-bach-chorales-17": [
-        "b00169557f728629aff44630c92b614873838d2af1018e5c5899b0b4ac5952b6",
-        "67ad121175d7c1784fe5ce42ef4bc150b122f24781c5562ba30ddac7444b6d49"
-    ],
-    "wir-bach-chorales-18": [
-        "0a0f8d895d5f32301bf901b1baf42d7057401cc821444bbd4d6efeeec4915499",
-        "e2d2baa4f9215f6db06eee3e589d1fba68bc98536e55a82fb287752d64f436e2"
-    ],
-    "wir-bach-chorales-19": [
-        "91e00c1cf1aaf5528887a1192784530ab6305cb25c4ffc0e4a8629feb137bc27",
-        "94c548efe4ae90dbbf557b1ead77f0a99f9474be2869c93ccfb007b097503a4f"
-    ],
-    "wir-bach-chorales-20": [
-        "8231549e33b86c3a1ec87792aae5044ef778b36a6a53494135410abf84e3ac63",
-        "0b16559b20595697aa796aed77f71c7291e008f30a82ebe228a5b1b7c0d9ea4b"
-    ],
-    "wir-monteverdi-madrigals-book-5-8": [
-        "76c8083d5bd1ae974f3eb0aaf9fcd6156024e6dcbce41b4c2e163b4ef9178598",
-        "7a88a005cd06a981127fe6ea033eca62fa8a21924273dc9c96c3fd237580303f"
-    ],
-    "wir-monteverdi-madrigals-book-5-7": [
-        "a6fd38ef16217e2829f2570188528858ed457b2cd1fc75d4cef4ddc2269f8e0f",
-        "9eca939b49836c3354a3366a1596e9243cc2d0e61ed1d78ab6b22b3c38a94a1f"
-    ],
-    "wir-monteverdi-madrigals-book-5-5": [
-        "c3045d2c0f8e2bf30357428f08ae15d004e48b7d8cb6913a1f997409724b2fae",
-        "f31452dfa4c3e2e21e88f37838f35291ba15f7087088322fc9c5e1e8518427de"
-    ],
-    "wir-monteverdi-madrigals-book-5-4": [
-        "62a22ab7a191ab87fa167cb5d2537be18511d9a93038b0267311470189b03491",
-        "ac05c17311a4a3f9093e3d6573e530412bc7ededc7fe726ff7d42b40a2b79ff9"
-    ],
-    "wir-monteverdi-madrigals-book-4-11": [
-        "4a8d58bc568fc8eb83f38107de8d40ff2b576be4552235a7dd74e5682ff07a64",
-        "bfde30deab672367a7a07c4f3930861aa4ad7d76167814415e795ab8c519d156"
-    ],
-    "wir-monteverdi-madrigals-book-4-19": [
-        "6f30ac26cd686a54a958b01439320e6e935926717a5b04739adb70d77cb9cf5a",
-        "7d93782f4218edd8cea2e359fceab04e9b805070171a1d0cd3ac5405768dfcf1"
-    ],
-    "wir-monteverdi-madrigals-book-4-10": [
-        "da61b8104fad791b814b52a63ca4a0caaa03e4391cbff9e90958bffa7979d025",
-        "a64635737d720639076c1b28b6cd7b5ff8388aefe0b78ebe57411f22a2b3da9d"
-    ],
-    "wir-monteverdi-madrigals-book-4-12": [
-        "0860884bc72f5e5203bf1becde0ab864cd5adb127ea20b3b65c1a1e74e8b329f",
-        "82fa6170c9a0df44ceb1ffb01494cd3cd1f3d31fb73f7b5d460e8795c6db3b80"
-    ],
-    "wir-monteverdi-madrigals-book-4-13": [
-        "9de539af3b2c16f921a9fd9e092b2fc2330e5a56d7d8355a1603fd4eeb12a6a4",
-        "e08d7d8fbf0508197602fdcd27499596c7ba139ac7686932de9bb1e7ea262d8a"
-    ],
-    "wir-monteverdi-madrigals-book-3-15": [
-        "b715473bdcbfc2fd08b4312b4148174defac6fbe626c1e8df53d7d118a863ac6",
-        "146fc249de867a0c1ba96c862b64ecf900338a02818ae88daabbf34b55c9dc32"
-    ],
-    "wir-monteverdi-madrigals-book-3-8": [
-        "c189f7a795ec1dd9aa14d82802b89834cabacddd1a5c5827faee49c8ec15f96c",
-        "c96e59539d15d9dd670dde47ef9180e187130546f2c64895813659252fa52ec2"
-    ],
-    "wir-monteverdi-madrigals-book-3-3": [
-        "4bdf10fab45e985e5f3bee5791682c7ee003ee8a9b98ba635c407a70f9e82245",
-        "061574e53aecf40a58990479f6c7286ddc87c1eedf7cbe12ab1af24b0144f75f"
-    ],
-    "wir-monteverdi-madrigals-book-3-11": [
-        "551cb2ef8ab97b76403506f2eac3bf77674d9fd65fa4702d369c54f1decf8eda",
-        "2334eb8c96b44d6c1dcecc3dae45388e07ec18946af18685023f8cc04d906256"
-    ],
-    "wir-monteverdi-madrigals-book-3-19": [
-        "cf2ce56441550ca4037df2f09e5841796aa74ffdee9c93e9fc5a010701ea1dfa",
-        "ae39f9451b2c36d64c240cc12001b35038d65289c9f624b698cc564a9ace6959"
-    ],
-    "wir-monteverdi-madrigals-book-3-9": [
-        "23b79c003c5c76621aa3ec2be0f5e104ab63cdf99f3872b41e86bfcb5fb744d3",
-        "a7fccbb7331874d2c98674b32121e99862725bb454f7d60da8737b241ab86a37"
-    ],
-    "wir-monteverdi-madrigals-book-3-1": [
-        "767e0531d31825d89fa91487ba1f3c629a6726c070bbdeceea48b5454fcfb8bd",
-        "d4f7bb23242f3a0992d56ab56c4baf803cbd431cadc6af40ef04ace2337af94a"
-    ],
-    "wir-monteverdi-madrigals-book-3-6": [
-        "ee8fe2032f57c974580b9a35b437fc44c6c02a522ba6def8813d6483870ccb2d",
-        "3c4f27731d5ef8dd7b9a4351fd1dbf157382983e1ef7e953487303e1471c3019"
-    ],
-    "wir-monteverdi-madrigals-book-3-10": [
-        "a9d884caafff74583526f6db538a547237d6a79654676b157ac15facc82bb84c",
-        "6c2467f4e1dfca9e8d493018bfa206fba02133037eda214ce63185b39e67a0fa"
-    ],
-    "wir-monteverdi-madrigals-book-3-14": [
-        "a8d8bd6c564b3fe317e61332e17c5afa2b9bb12fb8900f1cfaf486792e5fad93",
-        "46175523f5f5b9a0656b5a038be62bda7b517dc9d084517eab711f099cef4d7a"
-    ],
-    "wir-monteverdi-madrigals-book-3-13": [
-        "c1731fd3d9ae75885c1dfb0f92a72273bd46f420ebda3ec73a187d01b428a2ef",
-        "daac039b636a60e41905d0947c642aad49996c4e1cb9a5a08703841b63f6f608"
-    ],
-    "wir-variations-and-grounds-bach-b-minor-mass-bwv232-crucifixus": [
-        "ae7135de01dd3abc949e631ae8629c6c856855d2449880ba62f982d3e84082be",
-        "3b3171c86e95c5382f59b3468e57faaf5cb55245f1fc0884fe34f07381052fe9"
-    ],
-    "tavern-beethoven-op34-a": [
-        "83be3d2d6fd1151f033f862d5138e8626a88b07fed8e1c982c656bef22803bae",
-        "5861d5ab00e2e780b1ad7683d06d9224895bdc47b7115634d7ea504b3ca1837e"
-    ],
-    "tavern-beethoven-op34-b": [
-        "01ca40551717c82172f65f2b208bdd4966a2a0f761b12025887243f2b5a39c0d",
-        "5861d5ab00e2e780b1ad7683d06d9224895bdc47b7115634d7ea504b3ca1837e"
-    ],
-    "tavern-beethoven-op76-a": [
-        "0cca62603731f0a93d02a0bac690d2037e3d7b017c50d790766c0fa4ec2b31a6",
-        "e4c409445cb1202b4a1ef003d1a5338e68f673460a7ee24bde5768f96d0ff439"
-    ],
-    "tavern-beethoven-op76-b": [
-        "bc004e0ea7c9041b9e6f7cc35b28cf960b56cd1de41c59d07a6e22c1ae5ca5f8",
-        "e4c409445cb1202b4a1ef003d1a5338e68f673460a7ee24bde5768f96d0ff439"
-    ],
-    "tavern-beethoven-woo-63-a": [
-        "45307dd39336e6d32c7d99211553518d4503f82a75c6581f79b21ea06cb873c9",
-        "33e1be3acc7428480fd744a9800b7228af06e88db40c062f6673411f53115492"
-    ],
-    "tavern-beethoven-woo-63-b": [
-        "7f469fb57039e1ae07620a338ccdb899806a0688d5da5469f39eb59722d62b03",
-        "33e1be3acc7428480fd744a9800b7228af06e88db40c062f6673411f53115492"
-    ],
-    "tavern-beethoven-woo-64-a": [
-        "680405a0e8f5cadeefe09872f3898bed2cf02353614610e04806124e3492f287",
-        "af5599e6fc866ee03d009604f9b2215e30918d8132910b85d87b03875dabd108"
-    ],
-    "tavern-beethoven-woo-64-b": [
-        "ee344dc6552195a1e509d398b08ef8590fdac3adf1af090b36dbfdbed1a278bb",
-        "af5599e6fc866ee03d009604f9b2215e30918d8132910b85d87b03875dabd108"
-    ],
-    "tavern-beethoven-woo-65-a": [
-        "d313909df98e9064579663bee5f45410b3e0291c149db53ee132606892926463",
-        "93a26e84787710f2796f259afe6e7419ae71f278da1776134ac34f16b528b6b0"
-    ],
-    "tavern-beethoven-woo-65-b": [
-        "d9f1624906d6460acf3df5c392fbe77a70c7dec5dfae8a2b3b578e7fe8f9da11",
-        "93a26e84787710f2796f259afe6e7419ae71f278da1776134ac34f16b528b6b0"
-    ],
-    "tavern-beethoven-woo-66-a": [
-        "700a48228bd9103d326da773f34804c90b94aa373b830cae08042c1d9d1239ec",
-        "5131be2044d990e8700e2e841596148f7315ffb588ef5150eb3132d44edfede6"
-    ],
-    "tavern-beethoven-woo-66-b": [
-        "4f79ab228a3340180c32dd385980ea40e0c97cd879a5582bd4a082fd6f4d7ac8",
-        "5131be2044d990e8700e2e841596148f7315ffb588ef5150eb3132d44edfede6"
-    ],
-    "tavern-beethoven-woo-68-a": [
-        "53d980c2923c31b8859682a2a5f9b2b8bd2cb6be128cdd3192c541f33d844082",
-        "23232501106d3dbdf443f35859ae3c4f876c30712eab68f0c3a730d3e4e893f1"
-    ],
-    "tavern-beethoven-woo-68-b": [
-        "6ed66d44b38eeb1c00abc963d537a045e90e0dfa70cde24b7891fd29d00c8eff",
-        "23232501106d3dbdf443f35859ae3c4f876c30712eab68f0c3a730d3e4e893f1"
-    ],
-    "tavern-beethoven-woo-69-a": [
-        "d194fe71228a0de08cea04c1061a6dd08e2577e6f2e20d641d40a89586a23877",
-        "98122e35995cd879279d2cbf72ff2f396538a47b01c220d539ead79f6bd3e0ab"
-    ],
-    "tavern-beethoven-woo-69-b": [
-        "1507f6b34f88d39e91cb56ca83236e02e23eb1f4fcd8f66f6a78d9f943779962",
-        "98122e35995cd879279d2cbf72ff2f396538a47b01c220d539ead79f6bd3e0ab"
-    ],
-    "tavern-beethoven-woo-70-a": [
-        "645bd6068c6f54f79facfdd8713fed25dc8e1dcfd1e1305b970396785179f4d0",
-        "e79485e8ab80189c526e814fc962f0d151770ec526cb73a24e67b772494624a1"
-    ],
-    "tavern-beethoven-woo-70-b": [
-        "ef7222c7a11472087031699fec035adceba89745d4100cfb23d1346d4388b1b6",
-        "e79485e8ab80189c526e814fc962f0d151770ec526cb73a24e67b772494624a1"
-    ],
-    "tavern-beethoven-woo-71-a": [
-        "500af6258f12ed776ba6d23d3a0de75b140012988bf06768cd908589abb2c7ea",
-        "b9df14cf78d1c7768dee1a61a6d98f782b682d112198d6bae6d4a3e2165c097f"
-    ],
-    "tavern-beethoven-woo-71-b": [
-        "8a99335021be48bb28e4067e2e0207edfe1847f79a3c048828c98b8cb3bb87f2",
-        "b9df14cf78d1c7768dee1a61a6d98f782b682d112198d6bae6d4a3e2165c097f"
-    ],
-    "tavern-beethoven-woo-72-a": [
-        "d9accfef333dacbe9a1642120cbf579430c7ced4603e79c88aee4eb319eb99f0",
-        "6d4fdccf73c71bd4643d734d325e4c305c318005cad8f447f118ef329e8f1c4f"
-    ],
-    "tavern-beethoven-woo-72-b": [
-        "55517da561063f340b167229354b83e3d6f6057491ffdd1c0c559c5a17e36ad2",
-        "6d4fdccf73c71bd4643d734d325e4c305c318005cad8f447f118ef329e8f1c4f"
-    ],
-    "tavern-beethoven-woo-73-a": [
-        "9eef326b406b4489b2e7771312497ccf8008d039101b837aa6789c834c79955a",
-        "bb347a050c5eed17af524c5a423ca0afadc6a540335fbb5b4c9cec62466499b7"
-    ],
-    "tavern-beethoven-woo-73-b": [
-        "19a378472c96dcfdf1ef2ce29dae3dd9a29236884d044ead2843e1cf1bbf6198",
-        "bb347a050c5eed17af524c5a423ca0afadc6a540335fbb5b4c9cec62466499b7"
-    ],
-    "tavern-beethoven-woo-75-a": [
-        "f05ec6696d58cc5c5a9a1d05760fd4ed7677920580e0dc1647445bb41047a85d",
-        "ac1378b7fcfb5f7d26ba9d691a17ba9d81919d303591b01495d8c52f25d523c1"
-    ],
-    "tavern-beethoven-woo-75-b": [
-        "32a2e4ef0ea4bb03b2b88e88d1e449ff43e9ee6cd8fe9ce441cff49b27114678",
-        "ac1378b7fcfb5f7d26ba9d691a17ba9d81919d303591b01495d8c52f25d523c1"
-    ],
-    "tavern-beethoven-woo-76-a": [
-        "00c0aee8a5478c7964b573f61bc42f199b82fe9e2d3d2cdd4815b2acf754a4fe",
-        "39085eb6b13b1db359f1ff21adb7011d088c9538cda3c02e27cd0093f2f377ca"
-    ],
-    "tavern-beethoven-woo-76-b": [
-        "2d57df24850b0c593ff731a37c507ebbb9f6b199e6a8b9f8d7a628dbb31dab3d",
-        "39085eb6b13b1db359f1ff21adb7011d088c9538cda3c02e27cd0093f2f377ca"
-    ],
-    "tavern-beethoven-woo-77-a": [
-        "973d1d8e72175e71bf23ad3a352b5f8136d829a3171324eac34ad77e15f02b09",
-        "7369bda4c83d5300b71f9fab053f70063ea935041530bd6a31b75a4b194fe200"
-    ],
-    "tavern-beethoven-woo-77-b": [
-        "4c84ed74ee4ca912ef7e7f4a1d9e2639202f4a38f75963c48b152e790a2384c9",
-        "7369bda4c83d5300b71f9fab053f70063ea935041530bd6a31b75a4b194fe200"
-    ],
-    "tavern-beethoven-woo-78-a": [
-        "5c992cc77ba94594d395b4ffc55acbce2dc277b8fbfc41686f88f78ddf3dcb88",
-        "28827978fca3c932d022bdb8c7b4af01a2284b355a7986b17694f1b33e8392f4"
-    ],
-    "tavern-beethoven-woo-78-b": [
-        "39487d3c2047a2d052d84454c73639cde7b6372ce61a3b6768d6559b244de84c",
-        "28827978fca3c932d022bdb8c7b4af01a2284b355a7986b17694f1b33e8392f4"
-    ],
-    "tavern-beethoven-woo-80-a": [
-        "e047e313589220e0eb1c3617f0bf1df56d758bde33872df1897910095b6b74f5",
-        "9b4721348e35cfa13a56492acaaced50f7c54adb6eb9e3ede5633a1948fa9a94"
-    ],
-    "tavern-beethoven-woo-80-b": [
-        "eab18b188d19b62206a91d591e705fef3b6a43dc8ce49f48a8a19cd799155541",
-        "9b4721348e35cfa13a56492acaaced50f7c54adb6eb9e3ede5633a1948fa9a94"
-    ],
-    "tavern-mozart-k025-a": [
-        "e2baf195ace6666d0edd0a860b8873b767d9af48496d0b1587f9fef7d8ed1dfd",
-        "61c8d784a4e495b8cff62a5d23e7b814014ca23b034eeb662eeea8c35f3a4d4b"
-    ],
-    "tavern-mozart-k025-b": [
-        "62c014b80c27e194af51cc7e1ec049f9a1459e7e5f3194516366401fca07bb30",
-        "61c8d784a4e495b8cff62a5d23e7b814014ca23b034eeb662eeea8c35f3a4d4b"
-    ],
-    "tavern-mozart-k179-a": [
-        "fab75e9cd0740f8255b4d29161ff6c7d0ef223cb67c63d10afda96dac2cb92ba",
-        "3ea9b1aa70d3929f468606712c9c49603795dea551744515309b45be25fa5ba4"
-    ],
-    "tavern-mozart-k179-b": [
-        "4897f2cc180a2260b86012c443a51266a3e1815d64a6e5679d830b15bd8ed2d8",
-        "3ea9b1aa70d3929f468606712c9c49603795dea551744515309b45be25fa5ba4"
-    ],
-    "tavern-mozart-k265-a": [
-        "ed544effc9d6dc74123380be776586139143150df61381aef5bdcad3ccc17430",
-        "baa693517709b8fdeac51c0538bf7b67b78f9f3866827d8eed7a2a38a1bb0268"
-    ],
-    "tavern-mozart-k265-b": [
-        "a510269d11207126617643fc4ef46d7e56710cf0154e9ccc61a3802c908a5139",
-        "baa693517709b8fdeac51c0538bf7b67b78f9f3866827d8eed7a2a38a1bb0268"
-    ],
-    "tavern-mozart-k353-a": [
-        "c896ca3d88fd0eaf7c96fb945018dde7d168d0595cd8ed59b3a6e73f93dc671c",
-        "fe11a55c25879f5a48e08c30fda79e1225cc8fec8e8eb837d853bf0328d7d7d0"
-    ],
-    "tavern-mozart-k353-b": [
-        "6a521d7a1ad97ada9d12132870182504ddcd90ccdf8360efae95a9a66280e13a",
-        "fe11a55c25879f5a48e08c30fda79e1225cc8fec8e8eb837d853bf0328d7d7d0"
-    ],
-    "tavern-mozart-k354-a": [
-        "513670cae9a9ddef12228b101cb3e173f3e5be41f182d8a6c9ed7845b479b572",
-        "5bf9e7d398d2b8356efba6c3889b941908b87471d03a92ddb2a92b7f09fb4f8f"
-    ],
-    "tavern-mozart-k354-b": [
-        "b959c24ab8f587477a56d7ef6a62dba4533250e8ea158c8616f99ecbf07a7ce6",
-        "5bf9e7d398d2b8356efba6c3889b941908b87471d03a92ddb2a92b7f09fb4f8f"
-    ],
-    "tavern-mozart-k398-a": [
-        "96de8afd21b52b8100574b05e6214aa7ebc07f00dc487d903a488131ef11f667",
-        "033d597089eb78f2e9f626f3a663291f6a59ccb9c662b6d0fc1e3fece122aec2"
-    ],
-    "tavern-mozart-k398-b": [
-        "7fd10b60cdeb5d6e3ca74ad0dbe0ac160c59cba5633f54e4f4e4731a3dc143db",
-        "033d597089eb78f2e9f626f3a663291f6a59ccb9c662b6d0fc1e3fece122aec2"
-    ],
-    "tavern-mozart-k455-a": [
-        "c85d445bcacfe62ec5ec91d1d18ded89bdc540f9cbf2787c30bd1208eff9fe80",
-        "c386b61c085700d10a784083b5a5ccd9690b76d0b3098655c17e104035143265"
-    ],
-    "tavern-mozart-k455-b": [
-        "b0bc93c8471d31bcf7d5fd5939065b2a7b2545191c04dcc3268abc1ac09e4230",
-        "c386b61c085700d10a784083b5a5ccd9690b76d0b3098655c17e104035143265"
-    ],
-    "tavern-mozart-k501-a": [
-        "0ab5f7fec1719907c084035aaee1785231e86159cde3a6414bc7d2655e0df50d",
-        "578ea6a542e61617184a3961175b48f4943e29770453524ed77eb3026fa18f79"
-    ],
-    "tavern-mozart-k501-b": [
-        "00c6691778c20c994234b82de3fcaeea31ca95e46224aad697dd20b7b88ad204",
-        "578ea6a542e61617184a3961175b48f4943e29770453524ed77eb3026fa18f79"
-    ],
-    "tavern-mozart-k573-a": [
-        "a2862e1d8eb20f39185d74dff9c88992ab2a19038069bbd9e80726609a5da50b",
-        "19510fcac10413295bf4dbc0c845b75c544c6e56428fcb3060e030153a44ae77"
-    ],
-    "tavern-mozart-k573-b": [
-        "b3c4a27e8ba78b15fc6ef2441fe2c846ef41010537a34e9c3623178b73eeb5f1",
-        "19510fcac10413295bf4dbc0c845b75c544c6e56428fcb3060e030153a44ae77"
-    ],
-    "tavern-mozart-k613-a": [
-        "fcb4c8455c1b2596543270e37ddae647fceba651d259d578b771035dfb0dc872",
-        "1c423cb470a351e5515f54430a7e18db6f1d0b74ce922a56f3ff39838a5cfef6"
-    ],
-    "tavern-mozart-k613-b": [
-        "436bbee85c8f62daffd572a54193b21759d5591177717f1d5bc860b9b255ce09",
-        "1c423cb470a351e5515f54430a7e18db6f1d0b74ce922a56f3ff39838a5cfef6"
-    ],
-    "wir-variations-and-grounds-purcell-sonata-z807": [
-        "7038285b6d0a15ccae85d505953cfa3ce4fd227615ea62d033574be89b0198fe",
-        "793148b71ded02995e277cc0442be7fbc836b07142450f323294bc2dd7073f46"
-    ],
-    "wir-variations-and-grounds-purcell-chacony-z730": [
-        "6695a88b4e668ffb013ef421237bd4dde74fdeee05064d030786f5da278faf12",
-        "c6b27133de0ddebcac0827fda1bf0dde76ecdfaadda3edad200857eb58fbc7f1"
-    ],
     "abc-op18-no1-1": [
         "39361e76e97d7e2018666b625973239262987c01d9f1cc8bbe8319602ee61848",
         "2d7c8026b5ab651dcce96ac368a8e92bea5674f74aef3e163511dcdf8a311a43"
@@ -1311,6 +279,134 @@
         "f5156b7221bfbcadf992d0c66d9524dace2b74e4d65c1af8cfbf6dea40b78531",
         "ddce344eee57b49593d38a96a099f1c8b8fec6b4e87e8982c3b51b522b4141b9"
     ],
+    "bps-01-op002-no1-1": [
+        "1fcd912abbf85b4fd9feceee3d792a2d1a1742f439c361ee186e5c4eeaaae825",
+        "d488cf3a6f4517d500d813017a2a8262d5bbf3436c2d08558273a972fc0bbd97"
+    ],
+    "bps-02-op002-no2-1": [
+        "1534a76e44996bdee5880e958a300e636c2d6f5b9b6bb14dc6a6f9e9b2c1e6e1",
+        "6718a9b7010783d1f28726fa3eab5e8f1c956e312a01daf50dad6984da1f1cb3"
+    ],
+    "bps-03-op002-no3-1": [
+        "0ff0617882ac6ad4f5cda49caacc14c2014e8cbdfc3cc6d4ac3f82498f28c704",
+        "7c55a85623408ee8c56dcdab998d8ad43b6badf0f9651766342bc9199a0c606d"
+    ],
+    "bps-04-op007-1": [
+        "78c43470dfaf54e5ac710d2291ae63d712a34d621952f6aac6e8ed6306cf1d86",
+        "d4aed0a1bf127adee66d3c2689a9a18e6a9a05678bc3299e3b97d380f70e01c5"
+    ],
+    "bps-05-op010-no1-1": [
+        "68dd44f840e8582f2d1874e27150568dd71f89070512d11b8fd965c530d9004a",
+        "d91d0d01f742df7396d8795118d30de4e69d132a1298809c40266f55dac4caca"
+    ],
+    "bps-06-op010-no2-1": [
+        "3d242eea06e17a6750cdd6d894ab71207590c5829602db0a5858c8c1bd2f70cc",
+        "d4d6b7345a9a80ddc0ca20fa41cfd816442f0a0e1cb05929bbf0b0a4a847e8a4"
+    ],
+    "bps-07-op010-no3-1": [
+        "0ac9d70858b728ca11645db9d79ef01184875de2ef4c6595a1313791d2b5e3a6",
+        "d770b743d1fa88ce999af8c0370e5ed191d0c04ffe24635d3978a88dbb042415"
+    ],
+    "bps-08-op013-pathetique-1": [
+        "ad095fd08bd2dc25551858a6ff116ac254529421c51570f0e7a7ac417b5562db",
+        "a11b914b48d7e3e02f4329726075d2fc8ae7bc3f3f136c7cda49684526fac2c5"
+    ],
+    "bps-09-op014-no1-1": [
+        "92d14cfabf1c72f9275b1f9f8392ffa8b6eb750fb0068c25161eb390dcebe205",
+        "54e206315dcac94ebb59423446461c7564471c655674acd9e1d8a08b3c81295b"
+    ],
+    "bps-10-op014-no2-1": [
+        "da0c11b5763ecca3339b8eeb744abf7281a0bbf0c74e63c852a8df2191f7b425",
+        "bb3e8a03b6138d5aa0343bfa16a67222b2e07178083d6bbf6046f247e3d3b7e2"
+    ],
+    "bps-11-op022-1": [
+        "684a8426fedfc96c470f279256dc0d9e9e4a5f018c5b19b4fa5b98f5952ce9cf",
+        "b3cc2e8af7b90001b0b9a146422dcd558cfa20410a59fcab3cda85b56dd1790d"
+    ],
+    "bps-12-op026-1": [
+        "a5a8d2fb38b8e7df1920da9df54995a3d3395eb4428d702e011cd981bd0cb44d",
+        "9c914814662d4bff3589d910279447826c1355beaf646365b96d82b5aba2f2e7"
+    ],
+    "bps-13-op027-no1-1": [
+        "d4b106e75816be18054831621383d8c8733b66d090cfacaa54f544d5189fc68a",
+        "874a5b60333ad0bac79f3b5bfa412914b695b62881bd1dcb6d316500f6ff9b8d"
+    ],
+    "bps-14-op027-no2-moonlight-1": [
+        "36c17ce1f9091c93b2c6786fdc5136a217380483d4ff45803087857ea11dfc34",
+        "978204b989919ff0aa523d0eee194f3974972c818ce0469efdebfb80349c3182"
+    ],
+    "bps-15-op028-pastorale-1": [
+        "fdec56a8cf71a45ebce5fdad34a893b387bfdf86bca640661c5549ef955b0044",
+        "e36e117c59741acc0a3ebba4a2e7a041130e274fdc6a7b6cca232b5ad562e6aa"
+    ],
+    "bps-16-op031-no1-1": [
+        "42a9731fe94abdfa4e136fc0bf3938ddf5385f7db8fddde6c1fe1cb120ff46d6",
+        "d7ec5c3ce28abad28df5859d31d00f8a4cc43556ef255450d1e8de6b931f2d4c"
+    ],
+    "bps-17-op031-no2-1": [
+        "4e3d150609d750bb909c4012a043fe3f73c6d69c9cde18a04672c27bc59d30e1",
+        "c553f4748661b1e2015a99ee81ad8b1f85c006a94ec8201e0845932fa12689fe"
+    ],
+    "bps-18-op031-no3-1": [
+        "99b314c2086286b90102908c3881d26b6d402205750448bcf58c01e5da190334",
+        "910daa516f03fc3df8d220523f99d7ce276903d1126358e55d32e45eea171990"
+    ],
+    "bps-19-op049-no1-1": [
+        "d12c2eb8d7470b1c703c019c69e055ddf684e2aed9a461a870b3bb7b4b7c429c",
+        "97d71b4a1af4fe447de675cb98318fff2beaa43cbc99c09455e441ccb8cbb8c7"
+    ],
+    "bps-20-op049-no2-1": [
+        "724e63dbf82525e3527f3a1391154718b6ad28ecbb40bc63816b4fa0a7d2ed36",
+        "36ea903be2b92ddb74cc29b58519c800daae1f678680572331ee4c6debbf8e1e"
+    ],
+    "bps-21-op053-1": [
+        "71f2b30ff0f485f567f0e1eb1d0480f45a572cd10e480ce86b4a535f1eb100a5",
+        "64e0fe04060473f39389524e44a9705e2a986ab99178e9e40922546ba39fe431"
+    ],
+    "bps-22-op054-1": [
+        "27033e655e4099e98764d33b5a03e05489939d92945a102d14dfb47466650dc5",
+        "44268a8c2a5ed441b9b0ccf3f3f533bfcd69b79b9ec27df6173dc3fb596d2b93"
+    ],
+    "bps-23-op057-appassionata-1": [
+        "a4d15191cf93106bf97c2a32409e95d12d155dd0cb8e584caebf853615738bd2",
+        "bc909133daaf9b2b292898f4a2aee7ff328470423fa4064186c3022dd1ce2c39"
+    ],
+    "bps-24-op078-1": [
+        "94051e0ba68508be6197b1062a8e970753d8246e5b871e8299ef7dee839eaa43",
+        "467c6f48bbb0ae22d62d1fc7cc6e7241865429068bd5949e019f9c1f9932252e"
+    ],
+    "bps-25-op079-sonatina-1": [
+        "8be58b0b994131f05b9e33e2cb76250036d0ba31c88c434588b5e2d82f7bb4a5",
+        "2e20af1f2aa9d284baa28025bc707e2127db027f7b7107f3e11fab738e0c0ea5"
+    ],
+    "bps-26-op081a-les-adieux-1": [
+        "fc80107ab9a15daf90e26037ce62447ad004fbfb10ced4db0ae47c3bc1523352",
+        "eaeb519578faabf7575a06733e14c095632f2cc07a6c93a11ffab46db527dbb1"
+    ],
+    "bps-27-op090-1": [
+        "b516cd3dce80bf83073bfd6a3ad07328c5a9be85189fa5adc4a90ec758164bf2",
+        "fe267d1a6e97ef55745ed54e208babae1ccf3900c7c892d0dc720c8394f0af14"
+    ],
+    "bps-28-op101-1": [
+        "c3402d8a701cbcd877fec45faadfaef396d01292af08da7f9916c30bfbb6cafc",
+        "d8d8952ded6f26f6c44250472e21babb1c8f97c09c5cd9424c3ad6a7d566698b"
+    ],
+    "bps-29-op106-hammerklavier-1": [
+        "13798f76b2f92968696f494ed6a2483bb44f4895cc1ba906fc14828980dc373c",
+        "f973e4bbc4ed0d2071282ba88c6f9dd13be3001702bcce044401d268b2d57eb0"
+    ],
+    "bps-30-op109-1": [
+        "0c3a1a6b5b80ca2e2c758a77d57713165d2ea2aec8a99ae96a5dda84f9f5e6c2",
+        "404411df509018aa3a7c90da9af686308f63ebe1f65078738b5de28e0c895d1f"
+    ],
+    "bps-31-op110-1": [
+        "a3fcfd17e59aa7e3136dcfe3723875bb73cc2a46b709175872f64b67d77e8782",
+        "85a8e0bb76a3387913094d7a97fcea451db2bfe5873374e87751c1bb268f10e2"
+    ],
+    "bps-32-op111-1": [
+        "7adf65c5045650537d253fc11bb2266d1a87b0b0f3cfeeecaaa3405ca2e9cea8",
+        "7ea164addd7002df8efb18e01d5a76f0fd3c760a2daa419d566c728dbdee21a8"
+    ],
     "haydnop20-no1-1": [
         "7aa1d448f9cbbecae0c93264de8372e50c6ca598d08a306fef97e496d62b7388",
         "93a60038d92b9b647af7301689726ed6d1178ba98471eb6a88f6c3a0ca674cff"
@@ -1407,8 +503,1128 @@
         "a06e13c1b6f738080c54d25b159a12528f726225be0ce69d2a034b80702ee547",
         "735842cb3da67892a9b03b86700c6f0e6dd376c2f95a75d4bc7fd4c2d98f4da6"
     ],
+    "mps-k279-1": [
+        "681755bdea2452f9cd5a183ea7fa8a6b25e7f82b526377dbe7a15e8464eefa0c",
+        "6d890ddf8a1c0ed5b56c1a9af2064ed116a296cb4ee3742d170855accdbf6c09"
+    ],
+    "mps-k279-2": [
+        "dcbcbec120ffb747f8cc3f041296ba98f6f196c4961e926872ee0b226d3dad33",
+        "6add4602f0a61f190e49f6796286b64d7974a0b2767e9ebc72e42b56fd2b380e"
+    ],
+    "mps-k279-3": [
+        "60e1ad8bf58f0425d11ede04607a941fba6528a4e1c747afcd71487e8c583a55",
+        "764be3538ea1cd697065dd6b045e98d1d9b4294ba78a195ad5f8d758b1dde42a"
+    ],
+    "mps-k280-1": [
+        "473bcfa36cda6ed4b2ee4e883f56fa1e52afd7d856f7d4260a75b272b6c179ef",
+        "bf962dc8cad4744bbf8f3e31b3eddcd24f4770fa4cc680161fa8211cbccdd3b0"
+    ],
+    "mps-k280-2": [
+        "dd0dbd3a36b38d70992beb6bc93d21cefaf65d41093fae8f4c74f421bc89292a",
+        "882e6a7c2c59b7fbecb67d93668bf6eb425e5328e18483d29f69fe25b0b83f51"
+    ],
+    "mps-k280-3": [
+        "d724e3771cfc767392b14371ce37b140613b227bc401822b4d4d93e124e55909",
+        "2220954c2e643b2d8cf33a98a6ea4132847125825702b8f7d5ba7937b5262e23"
+    ],
+    "mps-k281-1": [
+        "9c9684c3e9be8574e726457ec2e737e321774f1191a5983d33a1f272edbebbc5",
+        "bda3feb05db367892d2935ebbcaa95444844e9f065bac0e1c11a658ad7498694"
+    ],
+    "mps-k281-2": [
+        "4d39dbf75b2ae8598b44ab557b7a2ea82d8f4abb15bcc9de5174b1f6fe17fff7",
+        "781e29b5c05c3fb1f26ec938ac58a46fa1c6d4c5c1e37aa8e0e3722db7918a8f"
+    ],
+    "mps-k281-3": [
+        "66d21b423468a17432d35b6ee021cbd9588637b256e1b235326a3b817ec04040",
+        "1868227ec1ed54f7206ca2103f962ba09acda6e3a08cdc976d322498aa4d0fa8"
+    ],
+    "mps-k282-1": [
+        "00b61448ec6b10ebcaca173cf1eec4a77678d4df5b596fb0892c538077e86ba8",
+        "52884cdd9168adff7fd9bb4b742a6e73e21ff3234f36428a3bea4b9102b98c4b"
+    ],
+    "mps-k282-2": [
+        "3f1f0e317d01207fb3abe4f39b203dfe15e4fb1072ab6935edeedebe5074fb6f",
+        "95753f91c0a87d9ba446170b7f63ee6be95bb7914a81472473e4c93ef9638a28"
+    ],
+    "mps-k282-3": [
+        "f769887515c24e926d186b55eba1267b0b2527a5bda5ada1c641c26ecf013934",
+        "1e567b1ed10114b88ad7bc594db3e1aa52fe8fdfbefe921722ac009d1b0e22b4"
+    ],
+    "mps-k283-1": [
+        "2660fdf08ffb6ac93ce6d9599365f45ed05822426c69d91d663133b4cbb578a2",
+        "f4fd40c804a9cfecb9a018308d1b5c8e1975413a9385b6e2184dfd96708a1a70"
+    ],
+    "mps-k283-2": [
+        "bc0c14794480d5c071ad34687104db3fcd79c7d5b5a17a03d28459c5e89fb9b0",
+        "3b631d529f3743bb38c15dcc26995ede35d46dcad3ce4465920abfd42ff1fa8b"
+    ],
+    "mps-k283-3": [
+        "dea50ca31579e52cfed65cbabd2f5e554f0c730243a451747c9a9e65eb7f69ea",
+        "6d2bba62a2c427b3d3b76e42275d19d509804afa0512c5001c123499aa963438"
+    ],
+    "mps-k284-1": [
+        "77a5c57fe776eb075c50604ad8a60c3834c0fc74bbcaee97cc0d97759312894c",
+        "5a5efa82cda62acd0303570b9c2039b4d19a36889fc25a96d3b2a8f9c63ec735"
+    ],
+    "mps-k284-2": [
+        "f69c6afbddc5efae37337646b885dba52db78eb71b4a38dc39d92f95ce6c2b39",
+        "aa906d42529f2b25f7f2874e3c415d29f3e6b1adb55490aba5606193b08ca2f7"
+    ],
+    "mps-k284-3": [
+        "eeea10bd4a65de2b851e33b243a1094c8357029152b3ed66e5c73267e54f72ff",
+        "e5d8fa3abf6d46ece1ca1cb97f3562bf96c1ae8cc0240224e41c678c988e83d4"
+    ],
+    "mps-k309-1": [
+        "9dbef762eab300e829a605f7acaf8b6d8f620aff3302f54fdf0a8dd7338fb12a",
+        "ffa89a7978138f335b8412ac079d2ab8aa5ef4d9803a8fd1229544869138fbf0"
+    ],
+    "mps-k309-2": [
+        "2e5673dacf8bcaaf4c256631be66cb841e04cb3c8108fb431babaf11b8756655",
+        "9bb93a75e4f6311fd43f5d3c15d1a670faa02608ddcd93ac15e42e36ef5e662c"
+    ],
+    "mps-k309-3": [
+        "525ecc2550eb4b55cf613e7be17e4f880776f9028e9383ae5c1fa7184a0b8b93",
+        "60d7b0464df5af92ffb3be89794a2d416f5e925117117350be34663102add0c2"
+    ],
+    "mps-k310-1": [
+        "6ba78ada56ae0e1da87eceae1eac6c42380a763bf2400fcc06a45da3fb64b593",
+        "8e9c2d1b79bb02473ca2186b96a16db3c56d342bf6845e233252449e67a30c0c"
+    ],
+    "mps-k310-2": [
+        "1261f782f05fe96a15cafaab3de3acd7dd55510a1e88346addee73da31bb9562",
+        "ca683584ffaa290dd37c7d10196ccb4555219957e0b1e0be3715610e04fbf599"
+    ],
+    "mps-k310-3": [
+        "1eb7c150e5025a74a5f71f452b237f6c092a7bcfc75b35b3160fa4cfc2df1c11",
+        "2ce6eb82d5c0f47bb7463afa6000e61e2dd79f1198f88719894db14fd8bf154d"
+    ],
+    "mps-k311-1": [
+        "08ab54da551c0293f5533ba6e0733e7291dc7476dd0e130327816677c96112f4",
+        "169ae267c8efa618e923ef75b7eda6cba1d15c108e7894f24139659798beb2ea"
+    ],
+    "mps-k311-2": [
+        "284df1b4e84d2a20feeb6325481bff5d8739c10201c4df09dca569f6aa26b303",
+        "d7fb7ff608f58494a0fd077da49749556506b5e55d5dabd3c2c77568c4c326da"
+    ],
+    "mps-k311-3": [
+        "902a28136d66f2d9dc5d6c69f74e8033bb6cb492d7e86328c20033f06b476d72",
+        "290a57e71e53a3ed4f0eaa13a3805a1724a847e25c75839b183c1e4820e3f346"
+    ],
+    "mps-k330-1": [
+        "1ab3cf1c45fbf11df7b51819ffed80401ece2258115f507089f52a78c6b72555",
+        "382045c4a78390303f2e63bf192778dd04f5d307579de8cb31e731d47467940a"
+    ],
+    "mps-k330-2": [
+        "5ca8146cdd1a6e02db75d83ff4f2c535ab32a7954230be14eeed347ffa549784",
+        "2fbc088623938b76ee4e0ded0016b543bf5e1f2cad7684e06d3707030abbdffb"
+    ],
+    "mps-k330-3": [
+        "07dbbb384dd36c582e63c401bc35599c41dbc45109a4d32c919ad67f8bcdab02",
+        "e83a092c0ad459f4aa724e385719e34b0155fa7a63b2bdf94d873df8eb5c4951"
+    ],
+    "mps-k331-1": [
+        "b27c05fe6b368b0fa68793df71f880eb7d14bfacb09249c6ab2da3d7cd3022b6",
+        "08683353a89df653d26513ce9c10253c6eebdcdaf1719ca26fcc99e72341ca26"
+    ],
+    "mps-k331-2": [
+        "c05d96c1d9888e9f35ae52f5df4fe55b59af5dff991a8fb67358fde49d33dd76",
+        "2e7b03f6fd3f828348343b2aab65151390358bb542b785385d5983343604e6fb"
+    ],
+    "mps-k331-3": [
+        "2a8b4b25693ea269f2ad2f77b5f18bea235f161c4bbca5e762b1352f755d21ce",
+        "1d8ebc5c60031d870e601a34044757a7f554a271f0efda6fed70dbdcf26ea14b"
+    ],
+    "mps-k332-1": [
+        "b0238c03bfbc23fd14f40e5c9fab191deaddd8d1fbe1709455a2ef3892c24d4f",
+        "70d858bf18b4e683bb8bbcaf6a8618ac830cd70d0f5f587f73fa7862d9be1812"
+    ],
+    "mps-k332-2": [
+        "656eb3228a8db4606ccc4f267437a49ca3632ddbea6e10127b71978dba585666",
+        "29be70afc8eead48c13df6814f791a0428b0491d13dbd5c18ed74cfae09c2802"
+    ],
+    "mps-k332-3": [
+        "9584a27ea779ffc4c60568338ffba78c6f2b6e779ccd020c264d29d4be482636",
+        "e3b1c9ccfaf8a64858e181f7051ac5fa22210475112222f33737d0e51b7d95e0"
+    ],
+    "mps-k333-1": [
+        "be7766e7c7db69241839b99dcb1162a605c944ce28318601c4c67156928ff5e6",
+        "2adcd0c1611649189d8a32583748a0ecc70fdb12a947d4427979ec1aade4b731"
+    ],
+    "mps-k333-2": [
+        "c74651c414827eef2184463fe4ca3ae938a745bfc8e4872393bb86fd5f1c3a73",
+        "6caa3e2f3dac23debb1cbee47b2a65e8ec7320681ee691fc38f036c20d99470b"
+    ],
+    "mps-k333-3": [
+        "178fd432daffa85607535cc7b06d78490b1c5357f46d5c1a8f1399a2a41c6668",
+        "8c23586a56bcf3d1e40cce02b3f1b58bad8f1234237ee28d2494cd37a8d1e2f9"
+    ],
+    "mps-k457-1": [
+        "7161c4720d52058c884b8ac4a44d130a29ff096a8ae120840e5d9bfb2417b7b2",
+        "34214b9a2c49196a7b0cfa79f5d4390a00ce869436026213f22a295624eafa49"
+    ],
+    "mps-k457-2": [
+        "5118f7a54de8a044a67a71b477c0da02194b597ac25d48007601fb9d77e9a474",
+        "57da7f128a1b59f2ef20f4da6eeffde8ffeaa84fc907506cfaa675a8f88d85c0"
+    ],
+    "mps-k457-3": [
+        "226a936d07bf9e6458953a919914bb7e104ef0c58c4013df480392bef74ebb5d",
+        "146ddc87f9f250f67554b6f089100fb59d8fce14538a2744af284755bb6d5b77"
+    ],
+    "mps-k533-1": [
+        "62254779a8699ade6e21109a6838f60e3b009b1f9317279ec0ea34c7575f7bf1",
+        "8308b2a74eece088b30f05559cb7420158c93bb3c05a283c05cf2667658eb838"
+    ],
+    "mps-k533-2": [
+        "3c3c003db46b12eec8b430e311967d1b5edf06cc15ceceb72d890da734a6dbb2",
+        "52941ccb5138bded84734196eefbab976b639550f98aabf949759c651fcf1bda"
+    ],
+    "mps-k533-3": [
+        "abaa7da7e5854796f02caab0e52fbf2f5c26a40139f56031028b7e9247e0b8e8",
+        "438c3fe9d587a39df9b1365995e1ef8f8280034ce10112f63a0c1bb04d625517"
+    ],
+    "mps-k545-1": [
+        "84ddde9d40e9b7385793b083e2579151e73e53059ec5c88bb42971b0854c88bb",
+        "7977296c1f7c77af358676dcebf8e8ba7707744b8e33dd90b8e2287cac8b8b12"
+    ],
+    "mps-k545-2": [
+        "94bfa5a8416e79fc7770a682e417fd5442aef0023a08198bdeaf87f9497127df",
+        "6ad67503603adc88b6124410c3b3d660f45201f80b27414854b775bc6b557fc7"
+    ],
+    "mps-k545-3": [
+        "30d9eb99d06c96d9e5a7c8dd045f77a10fce12fef1791b35adef2567658ffc07",
+        "e5185dae98668b26f896624369e8c23bdcab8a2b9bb4b4fa895269045ae2117e"
+    ],
+    "mps-k570-1": [
+        "2e4e9dcc2cdfa9e35b44fe26387d15882cd8f86303a4f40a1af854d6bae7fb3d",
+        "53408989e955018c2fa8fe1b0e7e8b5df436b4152c9881604c328f3bd35c0258"
+    ],
+    "mps-k570-2": [
+        "8185db8909dec7e77ca9f484584d28141c51a749b0f70e819750e59db78e3e69",
+        "fd2f2c9b08fe122584e9e14428417743639452fa349b74aab2de232a7c8e8b08"
+    ],
+    "mps-k570-3": [
+        "b7c74ea22e81580c0733f45b65ee28262ba02c103bfc546f790fd98c5eda463a",
+        "4eeb8ee9186d23de01973b20f7ff37336644038f639ce79392e7803554812115"
+    ],
+    "mps-k576-1": [
+        "a3d7e3ed815d6323bacb8745ce001d52bf19d94f7fc8a37cb0d0de69ee9e39d1",
+        "5036de68fc4a39af49a5e217859f4843b405e7b692991a695b90ff5d2a26c583"
+    ],
+    "mps-k576-2": [
+        "237c7b2806b1b042ed392f200f91f97fe959eb2757f700c00f879e53004d047d",
+        "abaf7b20d3e491706cc7b5a4749adacee367f12c4c4ecbc6b7f825f54d99d6fb"
+    ],
+    "mps-k576-3": [
+        "e800ca4723a72c56faaecfd2b9e9ca459d9fb59727991263d6b8b0bcddb9a5e2",
+        "8eb34c69c3c09feef5ac4846c15b5321e8169db825a2e493113fe76f5dfee80d"
+    ],
+    "tavern-beethoven-op34-a": [
+        "83be3d2d6fd1151f033f862d5138e8626a88b07fed8e1c982c656bef22803bae",
+        "5861d5ab00e2e780b1ad7683d06d9224895bdc47b7115634d7ea504b3ca1837e"
+    ],
+    "tavern-beethoven-op34-b": [
+        "01ca40551717c82172f65f2b208bdd4966a2a0f761b12025887243f2b5a39c0d",
+        "5861d5ab00e2e780b1ad7683d06d9224895bdc47b7115634d7ea504b3ca1837e"
+    ],
+    "tavern-beethoven-op76-a": [
+        "0cca62603731f0a93d02a0bac690d2037e3d7b017c50d790766c0fa4ec2b31a6",
+        "e4c409445cb1202b4a1ef003d1a5338e68f673460a7ee24bde5768f96d0ff439"
+    ],
+    "tavern-beethoven-op76-b": [
+        "bc004e0ea7c9041b9e6f7cc35b28cf960b56cd1de41c59d07a6e22c1ae5ca5f8",
+        "e4c409445cb1202b4a1ef003d1a5338e68f673460a7ee24bde5768f96d0ff439"
+    ],
+    "tavern-beethoven-woo-63-a": [
+        "45307dd39336e6d32c7d99211553518d4503f82a75c6581f79b21ea06cb873c9",
+        "33e1be3acc7428480fd744a9800b7228af06e88db40c062f6673411f53115492"
+    ],
+    "tavern-beethoven-woo-63-b": [
+        "7f469fb57039e1ae07620a338ccdb899806a0688d5da5469f39eb59722d62b03",
+        "33e1be3acc7428480fd744a9800b7228af06e88db40c062f6673411f53115492"
+    ],
+    "tavern-beethoven-woo-64-a": [
+        "680405a0e8f5cadeefe09872f3898bed2cf02353614610e04806124e3492f287",
+        "af5599e6fc866ee03d009604f9b2215e30918d8132910b85d87b03875dabd108"
+    ],
+    "tavern-beethoven-woo-64-b": [
+        "ee344dc6552195a1e509d398b08ef8590fdac3adf1af090b36dbfdbed1a278bb",
+        "af5599e6fc866ee03d009604f9b2215e30918d8132910b85d87b03875dabd108"
+    ],
+    "tavern-beethoven-woo-65-a": [
+        "d313909df98e9064579663bee5f45410b3e0291c149db53ee132606892926463",
+        "93a26e84787710f2796f259afe6e7419ae71f278da1776134ac34f16b528b6b0"
+    ],
+    "tavern-beethoven-woo-65-b": [
+        "d9f1624906d6460acf3df5c392fbe77a70c7dec5dfae8a2b3b578e7fe8f9da11",
+        "93a26e84787710f2796f259afe6e7419ae71f278da1776134ac34f16b528b6b0"
+    ],
+    "tavern-beethoven-woo-66-a": [
+        "700a48228bd9103d326da773f34804c90b94aa373b830cae08042c1d9d1239ec",
+        "5131be2044d990e8700e2e841596148f7315ffb588ef5150eb3132d44edfede6"
+    ],
+    "tavern-beethoven-woo-66-b": [
+        "4f79ab228a3340180c32dd385980ea40e0c97cd879a5582bd4a082fd6f4d7ac8",
+        "5131be2044d990e8700e2e841596148f7315ffb588ef5150eb3132d44edfede6"
+    ],
+    "tavern-beethoven-woo-68-a": [
+        "53d980c2923c31b8859682a2a5f9b2b8bd2cb6be128cdd3192c541f33d844082",
+        "23232501106d3dbdf443f35859ae3c4f876c30712eab68f0c3a730d3e4e893f1"
+    ],
+    "tavern-beethoven-woo-68-b": [
+        "6ed66d44b38eeb1c00abc963d537a045e90e0dfa70cde24b7891fd29d00c8eff",
+        "23232501106d3dbdf443f35859ae3c4f876c30712eab68f0c3a730d3e4e893f1"
+    ],
+    "tavern-beethoven-woo-69-a": [
+        "d194fe71228a0de08cea04c1061a6dd08e2577e6f2e20d641d40a89586a23877",
+        "98122e35995cd879279d2cbf72ff2f396538a47b01c220d539ead79f6bd3e0ab"
+    ],
+    "tavern-beethoven-woo-69-b": [
+        "1507f6b34f88d39e91cb56ca83236e02e23eb1f4fcd8f66f6a78d9f943779962",
+        "98122e35995cd879279d2cbf72ff2f396538a47b01c220d539ead79f6bd3e0ab"
+    ],
+    "tavern-beethoven-woo-70-a": [
+        "645bd6068c6f54f79facfdd8713fed25dc8e1dcfd1e1305b970396785179f4d0",
+        "e79485e8ab80189c526e814fc962f0d151770ec526cb73a24e67b772494624a1"
+    ],
+    "tavern-beethoven-woo-70-b": [
+        "ef7222c7a11472087031699fec035adceba89745d4100cfb23d1346d4388b1b6",
+        "e79485e8ab80189c526e814fc962f0d151770ec526cb73a24e67b772494624a1"
+    ],
+    "tavern-beethoven-woo-71-a": [
+        "500af6258f12ed776ba6d23d3a0de75b140012988bf06768cd908589abb2c7ea",
+        "b9df14cf78d1c7768dee1a61a6d98f782b682d112198d6bae6d4a3e2165c097f"
+    ],
+    "tavern-beethoven-woo-71-b": [
+        "8a99335021be48bb28e4067e2e0207edfe1847f79a3c048828c98b8cb3bb87f2",
+        "b9df14cf78d1c7768dee1a61a6d98f782b682d112198d6bae6d4a3e2165c097f"
+    ],
+    "tavern-beethoven-woo-72-a": [
+        "d9accfef333dacbe9a1642120cbf579430c7ced4603e79c88aee4eb319eb99f0",
+        "6d4fdccf73c71bd4643d734d325e4c305c318005cad8f447f118ef329e8f1c4f"
+    ],
+    "tavern-beethoven-woo-72-b": [
+        "55517da561063f340b167229354b83e3d6f6057491ffdd1c0c559c5a17e36ad2",
+        "6d4fdccf73c71bd4643d734d325e4c305c318005cad8f447f118ef329e8f1c4f"
+    ],
+    "tavern-beethoven-woo-73-a": [
+        "9eef326b406b4489b2e7771312497ccf8008d039101b837aa6789c834c79955a",
+        "bb347a050c5eed17af524c5a423ca0afadc6a540335fbb5b4c9cec62466499b7"
+    ],
+    "tavern-beethoven-woo-73-b": [
+        "19a378472c96dcfdf1ef2ce29dae3dd9a29236884d044ead2843e1cf1bbf6198",
+        "bb347a050c5eed17af524c5a423ca0afadc6a540335fbb5b4c9cec62466499b7"
+    ],
+    "tavern-beethoven-woo-75-a": [
+        "f05ec6696d58cc5c5a9a1d05760fd4ed7677920580e0dc1647445bb41047a85d",
+        "ac1378b7fcfb5f7d26ba9d691a17ba9d81919d303591b01495d8c52f25d523c1"
+    ],
+    "tavern-beethoven-woo-75-b": [
+        "32a2e4ef0ea4bb03b2b88e88d1e449ff43e9ee6cd8fe9ce441cff49b27114678",
+        "ac1378b7fcfb5f7d26ba9d691a17ba9d81919d303591b01495d8c52f25d523c1"
+    ],
+    "tavern-beethoven-woo-76-a": [
+        "00c0aee8a5478c7964b573f61bc42f199b82fe9e2d3d2cdd4815b2acf754a4fe",
+        "39085eb6b13b1db359f1ff21adb7011d088c9538cda3c02e27cd0093f2f377ca"
+    ],
+    "tavern-beethoven-woo-76-b": [
+        "2d57df24850b0c593ff731a37c507ebbb9f6b199e6a8b9f8d7a628dbb31dab3d",
+        "39085eb6b13b1db359f1ff21adb7011d088c9538cda3c02e27cd0093f2f377ca"
+    ],
+    "tavern-beethoven-woo-77-a": [
+        "973d1d8e72175e71bf23ad3a352b5f8136d829a3171324eac34ad77e15f02b09",
+        "7369bda4c83d5300b71f9fab053f70063ea935041530bd6a31b75a4b194fe200"
+    ],
+    "tavern-beethoven-woo-77-b": [
+        "4c84ed74ee4ca912ef7e7f4a1d9e2639202f4a38f75963c48b152e790a2384c9",
+        "7369bda4c83d5300b71f9fab053f70063ea935041530bd6a31b75a4b194fe200"
+    ],
+    "tavern-beethoven-woo-78-a": [
+        "5c992cc77ba94594d395b4ffc55acbce2dc277b8fbfc41686f88f78ddf3dcb88",
+        "28827978fca3c932d022bdb8c7b4af01a2284b355a7986b17694f1b33e8392f4"
+    ],
+    "tavern-beethoven-woo-78-b": [
+        "39487d3c2047a2d052d84454c73639cde7b6372ce61a3b6768d6559b244de84c",
+        "28827978fca3c932d022bdb8c7b4af01a2284b355a7986b17694f1b33e8392f4"
+    ],
+    "tavern-beethoven-woo-80-a": [
+        "e047e313589220e0eb1c3617f0bf1df56d758bde33872df1897910095b6b74f5",
+        "9b4721348e35cfa13a56492acaaced50f7c54adb6eb9e3ede5633a1948fa9a94"
+    ],
+    "tavern-beethoven-woo-80-b": [
+        "eab18b188d19b62206a91d591e705fef3b6a43dc8ce49f48a8a19cd799155541",
+        "9b4721348e35cfa13a56492acaaced50f7c54adb6eb9e3ede5633a1948fa9a94"
+    ],
+    "tavern-mozart-k025-a": [
+        "e2baf195ace6666d0edd0a860b8873b767d9af48496d0b1587f9fef7d8ed1dfd",
+        "61c8d784a4e495b8cff62a5d23e7b814014ca23b034eeb662eeea8c35f3a4d4b"
+    ],
+    "tavern-mozart-k025-b": [
+        "62c014b80c27e194af51cc7e1ec049f9a1459e7e5f3194516366401fca07bb30",
+        "61c8d784a4e495b8cff62a5d23e7b814014ca23b034eeb662eeea8c35f3a4d4b"
+    ],
+    "tavern-mozart-k179-a": [
+        "fab75e9cd0740f8255b4d29161ff6c7d0ef223cb67c63d10afda96dac2cb92ba",
+        "3ea9b1aa70d3929f468606712c9c49603795dea551744515309b45be25fa5ba4"
+    ],
+    "tavern-mozart-k179-b": [
+        "4897f2cc180a2260b86012c443a51266a3e1815d64a6e5679d830b15bd8ed2d8",
+        "3ea9b1aa70d3929f468606712c9c49603795dea551744515309b45be25fa5ba4"
+    ],
+    "tavern-mozart-k265-a": [
+        "ed544effc9d6dc74123380be776586139143150df61381aef5bdcad3ccc17430",
+        "baa693517709b8fdeac51c0538bf7b67b78f9f3866827d8eed7a2a38a1bb0268"
+    ],
+    "tavern-mozart-k265-b": [
+        "a510269d11207126617643fc4ef46d7e56710cf0154e9ccc61a3802c908a5139",
+        "baa693517709b8fdeac51c0538bf7b67b78f9f3866827d8eed7a2a38a1bb0268"
+    ],
+    "tavern-mozart-k353-a": [
+        "c896ca3d88fd0eaf7c96fb945018dde7d168d0595cd8ed59b3a6e73f93dc671c",
+        "fe11a55c25879f5a48e08c30fda79e1225cc8fec8e8eb837d853bf0328d7d7d0"
+    ],
+    "tavern-mozart-k353-b": [
+        "6a521d7a1ad97ada9d12132870182504ddcd90ccdf8360efae95a9a66280e13a",
+        "fe11a55c25879f5a48e08c30fda79e1225cc8fec8e8eb837d853bf0328d7d7d0"
+    ],
+    "tavern-mozart-k354-a": [
+        "513670cae9a9ddef12228b101cb3e173f3e5be41f182d8a6c9ed7845b479b572",
+        "5bf9e7d398d2b8356efba6c3889b941908b87471d03a92ddb2a92b7f09fb4f8f"
+    ],
+    "tavern-mozart-k354-b": [
+        "b959c24ab8f587477a56d7ef6a62dba4533250e8ea158c8616f99ecbf07a7ce6",
+        "5bf9e7d398d2b8356efba6c3889b941908b87471d03a92ddb2a92b7f09fb4f8f"
+    ],
+    "tavern-mozart-k398-a": [
+        "96de8afd21b52b8100574b05e6214aa7ebc07f00dc487d903a488131ef11f667",
+        "033d597089eb78f2e9f626f3a663291f6a59ccb9c662b6d0fc1e3fece122aec2"
+    ],
+    "tavern-mozart-k398-b": [
+        "7fd10b60cdeb5d6e3ca74ad0dbe0ac160c59cba5633f54e4f4e4731a3dc143db",
+        "033d597089eb78f2e9f626f3a663291f6a59ccb9c662b6d0fc1e3fece122aec2"
+    ],
+    "tavern-mozart-k455-a": [
+        "c85d445bcacfe62ec5ec91d1d18ded89bdc540f9cbf2787c30bd1208eff9fe80",
+        "c386b61c085700d10a784083b5a5ccd9690b76d0b3098655c17e104035143265"
+    ],
+    "tavern-mozart-k455-b": [
+        "b0bc93c8471d31bcf7d5fd5939065b2a7b2545191c04dcc3268abc1ac09e4230",
+        "c386b61c085700d10a784083b5a5ccd9690b76d0b3098655c17e104035143265"
+    ],
+    "tavern-mozart-k501-a": [
+        "0ab5f7fec1719907c084035aaee1785231e86159cde3a6414bc7d2655e0df50d",
+        "578ea6a542e61617184a3961175b48f4943e29770453524ed77eb3026fa18f79"
+    ],
+    "tavern-mozart-k501-b": [
+        "00c6691778c20c994234b82de3fcaeea31ca95e46224aad697dd20b7b88ad204",
+        "578ea6a542e61617184a3961175b48f4943e29770453524ed77eb3026fa18f79"
+    ],
+    "tavern-mozart-k573-a": [
+        "a2862e1d8eb20f39185d74dff9c88992ab2a19038069bbd9e80726609a5da50b",
+        "19510fcac10413295bf4dbc0c845b75c544c6e56428fcb3060e030153a44ae77"
+    ],
+    "tavern-mozart-k573-b": [
+        "b3c4a27e8ba78b15fc6ef2441fe2c846ef41010537a34e9c3623178b73eeb5f1",
+        "19510fcac10413295bf4dbc0c845b75c544c6e56428fcb3060e030153a44ae77"
+    ],
+    "tavern-mozart-k613-a": [
+        "fcb4c8455c1b2596543270e37ddae647fceba651d259d578b771035dfb0dc872",
+        "1c423cb470a351e5515f54430a7e18db6f1d0b74ce922a56f3ff39838a5cfef6"
+    ],
+    "tavern-mozart-k613-b": [
+        "436bbee85c8f62daffd572a54193b21759d5591177717f1d5bc860b9b255ce09",
+        "1c423cb470a351e5515f54430a7e18db6f1d0b74ce922a56f3ff39838a5cfef6"
+    ],
+    "wir-bach-chorales-1": [
+        "085503d447c415afd0ea9e460519e739fcf688121df98346657d108c1ae1079e",
+        "9676f11a2b26488bcf30db90c15576caa1ea2a616b909e376d44b8b804e9d138"
+    ],
+    "wir-bach-chorales-2": [
+        "88c42971649608ccdb409ee9f3e7d867e627031bde02f195b629b32761c6ce76",
+        "a017649b259ceda9c0ee8a74909893a69d01163c5f60ae5e631dc3d2ac58bcb5"
+    ],
+    "wir-bach-chorales-3": [
+        "3ab4cdb20b37d35b7f4fbc5c70affbc979fa734c9961eccd6a59a2c9a891991b",
+        "49553bbbfa8e79ddac3b35232608c9db07c3bf2582a161b805e6eec891e1fe8e"
+    ],
+    "wir-bach-chorales-4": [
+        "6c82412c74e36147415562247ada1c1ef6befc57e05e5b739a8c7804fd990d1a",
+        "5b9a0acc0010297e9f49f8c43d098361deb28f67dfc13f9f6b682cff9ec1003e"
+    ],
+    "wir-bach-chorales-5": [
+        "ebf2d7e298f5fd1a46b0ad6f6f0ab0a85e4f1de752b05c49c202c051ed0ee5f4",
+        "8fd35db74f930089746d03248b8267882c9508d8f005aec67e9f4e23d74c27e4"
+    ],
+    "wir-bach-chorales-6": [
+        "6947a928c259e3899ebcd450a984b52323d3f513d42f779b3045d097317f192f",
+        "3946fb6c7dc6a0fe772f88aaefa5d32f9b42f9fcc476e9a3070f9e5b33ea760a"
+    ],
+    "wir-bach-chorales-7": [
+        "6b3fd56c8a8dd93951f44800bb14d2087084b8cc1e80cf0c8c9020c6c2fdba64",
+        "a2f0dde7a8a4005571326e78f0e1fa10b418477e0d7f765e68048901202d1994"
+    ],
+    "wir-bach-chorales-8": [
+        "6f049790441f8f301ba83653bda79d0b13d2d6e18de1d1416758ada692d40758",
+        "89b527da3439fcfaf49e22ebba367bdcedbd1c624bf49759f2b30f7db789be4c"
+    ],
+    "wir-bach-chorales-9": [
+        "3af267a7b70108604e1f4f50f5dc8343c492f59bb5bd81a32d5a03dbc3cd0688",
+        "03f27251df1e731d9f0ba2ce61c5768dccda2894517e6a9b658b1fbea2f004af"
+    ],
+    "wir-bach-chorales-10": [
+        "e948916392de72b3edb8c68acfbeb4584784a46feff738613ba5f843615f14ad",
+        "3d7f458d1f7588de2c664a9aaefe287937be807355eeb708db38caab98d3bef7"
+    ],
+    "wir-bach-chorales-12": [
+        "8d7abed480ec86dab6d6319adcd84cad95648a8b99b159a0415f2ac98fc74ac4",
+        "b3c3257ceec1d28f6d7408dc34f5ffc8876fa985aa864f7e7af1287aba626925"
+    ],
+    "wir-bach-chorales-13": [
+        "0006958014fce3bdc0941df7e8ca84090247e774916fef80bf77729de98de655",
+        "b1a1a662561edcdd36ab6da4be1512878f06b5bd1173e9d6c6c8df549b418a89"
+    ],
+    "wir-bach-chorales-14": [
+        "946d12117ef07dcae2fe9f081375a6fe75234517d804f16063c5a52e534a69e5",
+        "73cba71862be12e5c432052da978a47ef2d3d7c24de2c1860a5400b573c33008"
+    ],
+    "wir-bach-chorales-16": [
+        "c8669efd7e6a3f6803b422855562d7ce215187d06161e631f75c866b687ad531",
+        "c59e795c3a5ad1a8adde9e6a096029bcd9b39dffb2497c3fa64d62746244e8af"
+    ],
+    "wir-bach-chorales-17": [
+        "b00169557f728629aff44630c92b614873838d2af1018e5c5899b0b4ac5952b6",
+        "67ad121175d7c1784fe5ce42ef4bc150b122f24781c5562ba30ddac7444b6d49"
+    ],
+    "wir-bach-chorales-18": [
+        "0a0f8d895d5f32301bf901b1baf42d7057401cc821444bbd4d6efeeec4915499",
+        "e2d2baa4f9215f6db06eee3e589d1fba68bc98536e55a82fb287752d64f436e2"
+    ],
+    "wir-bach-chorales-19": [
+        "91e00c1cf1aaf5528887a1192784530ab6305cb25c4ffc0e4a8629feb137bc27",
+        "94c548efe4ae90dbbf557b1ead77f0a99f9474be2869c93ccfb007b097503a4f"
+    ],
+    "wir-bach-chorales-20": [
+        "8231549e33b86c3a1ec87792aae5044ef778b36a6a53494135410abf84e3ac63",
+        "0b16559b20595697aa796aed77f71c7291e008f30a82ebe228a5b1b7c0d9ea4b"
+    ],
+    "wir-monteverdi-madrigals-book-3-1": [
+        "767e0531d31825d89fa91487ba1f3c629a6726c070bbdeceea48b5454fcfb8bd",
+        "d4f7bb23242f3a0992d56ab56c4baf803cbd431cadc6af40ef04ace2337af94a"
+    ],
+    "wir-monteverdi-madrigals-book-3-3": [
+        "4bdf10fab45e985e5f3bee5791682c7ee003ee8a9b98ba635c407a70f9e82245",
+        "061574e53aecf40a58990479f6c7286ddc87c1eedf7cbe12ab1af24b0144f75f"
+    ],
+    "wir-monteverdi-madrigals-book-3-6": [
+        "ee8fe2032f57c974580b9a35b437fc44c6c02a522ba6def8813d6483870ccb2d",
+        "3c4f27731d5ef8dd7b9a4351fd1dbf157382983e1ef7e953487303e1471c3019"
+    ],
+    "wir-monteverdi-madrigals-book-3-8": [
+        "c189f7a795ec1dd9aa14d82802b89834cabacddd1a5c5827faee49c8ec15f96c",
+        "c96e59539d15d9dd670dde47ef9180e187130546f2c64895813659252fa52ec2"
+    ],
+    "wir-monteverdi-madrigals-book-3-9": [
+        "23b79c003c5c76621aa3ec2be0f5e104ab63cdf99f3872b41e86bfcb5fb744d3",
+        "a7fccbb7331874d2c98674b32121e99862725bb454f7d60da8737b241ab86a37"
+    ],
+    "wir-monteverdi-madrigals-book-3-10": [
+        "a9d884caafff74583526f6db538a547237d6a79654676b157ac15facc82bb84c",
+        "6c2467f4e1dfca9e8d493018bfa206fba02133037eda214ce63185b39e67a0fa"
+    ],
+    "wir-monteverdi-madrigals-book-3-11": [
+        "551cb2ef8ab97b76403506f2eac3bf77674d9fd65fa4702d369c54f1decf8eda",
+        "2334eb8c96b44d6c1dcecc3dae45388e07ec18946af18685023f8cc04d906256"
+    ],
+    "wir-monteverdi-madrigals-book-3-13": [
+        "c1731fd3d9ae75885c1dfb0f92a72273bd46f420ebda3ec73a187d01b428a2ef",
+        "daac039b636a60e41905d0947c642aad49996c4e1cb9a5a08703841b63f6f608"
+    ],
+    "wir-monteverdi-madrigals-book-3-14": [
+        "a8d8bd6c564b3fe317e61332e17c5afa2b9bb12fb8900f1cfaf486792e5fad93",
+        "46175523f5f5b9a0656b5a038be62bda7b517dc9d084517eab711f099cef4d7a"
+    ],
+    "wir-monteverdi-madrigals-book-3-15": [
+        "b715473bdcbfc2fd08b4312b4148174defac6fbe626c1e8df53d7d118a863ac6",
+        "146fc249de867a0c1ba96c862b64ecf900338a02818ae88daabbf34b55c9dc32"
+    ],
+    "wir-monteverdi-madrigals-book-3-19": [
+        "cf2ce56441550ca4037df2f09e5841796aa74ffdee9c93e9fc5a010701ea1dfa",
+        "ae39f9451b2c36d64c240cc12001b35038d65289c9f624b698cc564a9ace6959"
+    ],
+    "wir-monteverdi-madrigals-book-4-10": [
+        "da61b8104fad791b814b52a63ca4a0caaa03e4391cbff9e90958bffa7979d025",
+        "a64635737d720639076c1b28b6cd7b5ff8388aefe0b78ebe57411f22a2b3da9d"
+    ],
+    "wir-monteverdi-madrigals-book-4-11": [
+        "4a8d58bc568fc8eb83f38107de8d40ff2b576be4552235a7dd74e5682ff07a64",
+        "bfde30deab672367a7a07c4f3930861aa4ad7d76167814415e795ab8c519d156"
+    ],
+    "wir-monteverdi-madrigals-book-4-12": [
+        "0860884bc72f5e5203bf1becde0ab864cd5adb127ea20b3b65c1a1e74e8b329f",
+        "82fa6170c9a0df44ceb1ffb01494cd3cd1f3d31fb73f7b5d460e8795c6db3b80"
+    ],
+    "wir-monteverdi-madrigals-book-4-13": [
+        "9de539af3b2c16f921a9fd9e092b2fc2330e5a56d7d8355a1603fd4eeb12a6a4",
+        "e08d7d8fbf0508197602fdcd27499596c7ba139ac7686932de9bb1e7ea262d8a"
+    ],
+    "wir-monteverdi-madrigals-book-4-19": [
+        "6f30ac26cd686a54a958b01439320e6e935926717a5b04739adb70d77cb9cf5a",
+        "7d93782f4218edd8cea2e359fceab04e9b805070171a1d0cd3ac5405768dfcf1"
+    ],
+    "wir-monteverdi-madrigals-book-5-4": [
+        "62a22ab7a191ab87fa167cb5d2537be18511d9a93038b0267311470189b03491",
+        "ac05c17311a4a3f9093e3d6573e530412bc7ededc7fe726ff7d42b40a2b79ff9"
+    ],
+    "wir-monteverdi-madrigals-book-5-5": [
+        "c3045d2c0f8e2bf30357428f08ae15d004e48b7d8cb6913a1f997409724b2fae",
+        "f31452dfa4c3e2e21e88f37838f35291ba15f7087088322fc9c5e1e8518427de"
+    ],
+    "wir-monteverdi-madrigals-book-5-7": [
+        "a6fd38ef16217e2829f2570188528858ed457b2cd1fc75d4cef4ddc2269f8e0f",
+        "9eca939b49836c3354a3366a1596e9243cc2d0e61ed1d78ab6b22b3c38a94a1f"
+    ],
+    "wir-monteverdi-madrigals-book-5-8": [
+        "76c8083d5bd1ae974f3eb0aaf9fcd6156024e6dcbce41b4c2e163b4ef9178598",
+        "7a88a005cd06a981127fe6ea033eca62fa8a21924273dc9c96c3fd237580303f"
+    ],
+    "wir-openscore-liedercorpus-brahms-6-songs-op-3-3-liebe-und-fruhling-ii": [
+        "6bcb6339d98a0bb5c4349f33e45fe8f4f053f2da13357a16f3ffe1f1ca3d8ca6",
+        "4c0eb08dce746ad7f892d394fe54e5cd09390bdbacf0fdc985e6f0529abbfceb"
+    ],
+    "wir-openscore-liedercorpus-brahms-7-lieder-op-48-3-liebesklage-des-madchens": [
+        "b1c861b8fd9685017b650dad2521f3ffa68cc078fddf06a8fd519b4455f739ee",
+        "472af9e9a013e6d146140f8753db82c5766789a58e03294304fe5113581ab93d"
+    ],
+    "wir-openscore-liedercorpus-chaminade-amoroso": [
+        "79410593374ea96611bded5e5928f43d4a92574594f98ea8106d157438e87408",
+        "008214ec7581228c84636a09ed646e25e72bafa1e4e08cad3c5ebeaaa2cbca0f"
+    ],
+    "wir-openscore-liedercorpus-chausson-7-melodies-op-2-7-le-colibri": [
+        "96daf9ce872d98529623be27833c0c2cf9b51b92ce4a848a8fa675326f09aa61",
+        "1fad9d06edf3c78ff30e37403e615a7d2d1a10911040bdc1757bcf26e35304a8"
+    ],
+    "wir-openscore-liedercorpus-coleridge-taylor-oh-the-summer": [
+        "9f7c3357a464e532b6b74e00def9e7d8a9a6efac8893cd34a2dfd5fd4c45141c",
+        "7415ebcfba7c414de1e63afee20b92578028eedf9fa8b6faaaf23b8bf1ff522a"
+    ],
+    "wir-openscore-liedercorpus-franz-6-gesange-op-14-5-liebesfruhling": [
+        "484ba31d36f80fd6f511d85bd2e2b14aa026d2bfc5cbc0470bc2b015347c6f3a",
+        "d7dd1bb83140008315530f43ba4db9e7cc772d024d0cffb07110e035d5337077"
+    ],
+    "wir-openscore-liedercorpus-hensel-3-lieder-1-sehnsucht": [
+        "0179e77a38bf5fa1c8045e9b63906dc464e1af40dc179c75784e7cd5f0ff5e3e",
+        "6bc405fbdc98666b83d3c4a09a82022a80b6ee5d1cbb5687a4ce8bc48fb64e65"
+    ],
+    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-1-nach-suden": [
+        "cca46e3d0409b01260742c052fe1fb37dede490fc69b640dc41ae602cdb7f199",
+        "1015b4e31261ce90d820046beef5bccd3383fb3c879e7ad8841dba57bb2fa5ec"
+    ],
+    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-2-vorwurf": [
+        "cfafbb03a0ac9800f702d4da047a83b190ce6f8a8f94a28b0a0acb9c68fa1824",
+        "1c076cf3941345d54ea23ac0f9a0b56118a97641b289752b4e452ff1253073c7"
+    ],
+    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-3-abendbild": [
+        "7fc59e4ea3509db7a6359485f1aaff3658cd4b1b2a4c9dfcfbfd23acb64c12b5",
+        "b51d99e460c4be7ff4991abae6225896120cd8e652c362e96bc7df4db5153198"
+    ],
+    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-4-im-herbste": [
+        "b9a797e6756b82d4e9ebb7c2ef265f5a482fa75b206c5491ad4142beab192e62",
+        "75b60cec40810f703baeb625a40fba6c33dea8a3651ef55e35bae09c16b59ff5"
+    ],
+    "wir-openscore-liedercorpus-hensel-5-lieder-op-10-5-bergeslust": [
+        "ffb269f1d96260a188955f07fb02f4749b939baeec09104b5e265a590bb5f7f2",
+        "333a4099023ea961bde3a066c8f168611ed36e1e46ce18a53249a297169794a7"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-1-schwanenlied": [
+        "c76821fe5bce51404550a8ca7f49005a076effc32944c454ddeda64544d20f11",
+        "b67c114383317c25c567711995fea132f647ee6bef01ec363845bef292fb73df"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-3-warum-sind-denn-die-rosen-so-blass": [
+        "72334d24fea81fe483094ac9795f951ae6284fa9250c1d68d23bb092bec14e3d",
+        "18d857b9b12d02f7c173e295cad674f86005459024fa2e0208720bc10e796b4e"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-4-mayenlied": [
+        "7d65c5aa82e33bb466778c6643f92fed5ddcead53d49414f86943743aedf3f4b",
+        "e54fdc61bcefeb0749555962829e9557351d2a3c245e6bcfa3a0cf42c808563d"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-5-morgenstandchen": [
+        "3f5a1aaa56625e296c9526467506f8d144761a973b5b3c0db2135232506cefcd",
+        "cf2670796b4b138831bc7424826c15325ef92fc2559903a5ccf9284c7aed2cd5"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-1-6-gondellied": [
+        "6c78a053414e20098e59d2d68804f1f400bd295798eb7000420f8fcdd1ba7b78",
+        "400caf2545025f30f163da4ae6732d25396d84f596dac1d06c1dfd39127f8f96"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-1-die-ersehnte": [
+        "378cdeb0ce40b24f0ded391991e4774175d31b476c0eaf8563bf628c6872e932",
+        "2d2f3c47a78c511c5a084e8164fb3c69759838e92eee31d64b2cca990674005e"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-2-ferne": [
+        "d61e8e943a241ba1cd7df350eeb49594ce266714146c8b63f3a0125b19ceb0bc",
+        "02a1932d0a7020eba7e2bb5703ef8ffaeae4da2f2fe3bf8a29254115621f5a24"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-3-der-rosenkranz": [
+        "6dd3b4cd0dc06a54cdd246f3a24e2d0b986f09b2ca75c10a1540a5e4c1eb4e1a",
+        "8bdaa4cce25541117cdef4727198899ce3e552034110dadff10508bbf26b1b40"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-4-die-fruhen-graber": [
+        "906581dc1bc133285c626e7608da4889fbc39d866a7df9d683854e3413622030",
+        "5001f824231aa965708fd29d27600dfeeeb6cf1c9e69cef027c6db3f0b5b1943"
+    ],
+    "wir-openscore-liedercorpus-hensel-6-lieder-op-9-5-der-maiabend": [
+        "431b2b52b78475dbad571722df6f13853d0ecb5c332667dcf4f6460b0f058010",
+        "ceb893bfecd0a49906e298a014947d9c885011e29e87093b5f7f703702858d19"
+    ],
+    "wir-openscore-liedercorpus-holmes-les-heures-4-lheure-dazur": [
+        "806e3d0a68990676e94ec5e242ae2bdc4b0d885b21870df8360a0c36d5cc9e44",
+        "f9199ee4d33d2ae1bd7c4bb4625e17c2d9040017a0e3d8fdc4fcabf41cbe02fc"
+    ],
+    "wir-openscore-liedercorpus-jaell-4-melodies-1-a-toi": [
+        "82cf2f4f8e111fc3e96a033ba8e3b566fe0978d5aa5918ead2951dd0a0b2c9c4",
+        "63548aaa57c8f73e7637590dcce5a5cf9c76ff12e87d466ab108951d8557e719"
+    ],
+    "wir-openscore-liedercorpus-lang-6-lieder-op-25-4-lied-immer-sich-rein-kindlich-erfreun": [
+        "ad74214f89ea960999fdfeeb7997097e0f63f3818bdca7cd2b0925e755b7e765",
+        "568bebcd70146748b13c97699e9f5a5fa4355b4022f27837f501fd262d6cac42"
+    ],
+    "wir-openscore-liedercorpus-mahler-kindertotenlieder-2-nun-seh-ich-wohl-warum-so-dunkle-flammen": [
+        "b0aef257d7bd64c5731b7b2f570ee51d7c4476ad7692763fc7335beaf350b8f0",
+        "231e6c1d822cdf2df61aa4d6cb846a69867d522c29dcd04cce21323476af53cc"
+    ],
+    "wir-openscore-liedercorpus-mahler-kindertotenlieder-4-oft-denk-ich-sie-sind-nur-ausgegangen": [
+        "58a8bbcdf0c7787ce98c7506fee21a04763703c2e9561a3abedab5a5b293640e",
+        "c3ce03ef6340bba750ddf45f27c1d9b91bd941a50e9bd6847a2132001387c7c7"
+    ],
+    "wir-openscore-liedercorpus-reichardt-sechs-lieder-von-novalis-op-4-5-noch-ein-bergmannslied": [
+        "1f340b4562e1d9c99402664d81c544c665b20fde5e9a96ebd685aa0a7999b45b",
+        "763366ce6654473acc8d34fb037474f4faffc264da464d6220a228258079fa48"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-deutsche-und-italianische-romantische-gesange-10-ida-aus-ariels-offenbarungen": [
+        "0ccc6dd49e64704b7cb425fd4a4f579ab1c5de7d7d684c13bf3f91577019f75b",
+        "1f57b34e2dab14ffe4c2cd7da1ea9f45a9d2deb1d13f85845d587f1500e15f50"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-01-fruhlingsblumen": [
+        "8d4c3c1ba8ddccc328812f6b817d64b18186bfa0d7ec22be7fc7c3a9724e0595",
+        "c59ae03a89cac3565e5389cf975a5816c07152f5a6e667ed2a8f19735831d7d6"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-02-der-traurige-wanderer": [
+        "8c375a7e43a7f2a08152a4d1447a5ee09660150f03485d58277e95907779b416",
+        "ecce10b61abd023e8b9aff1b95bca190a27a28784edf17dec4ddd43651535a2d"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-03-die-blume-der-blumen": [
+        "118a1374c928e17d5bf27002ce3c1a22f8298570446170ee4ed9ef3fecc61655",
+        "4b031c08118fffba0a9c338f93228571747177f9e7dab2598a1c88f43317327c"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-04-wachtelwacht": [
+        "70c56c6a1a9370ed458e0e1ac350a31a232a82a9a6bec7edd1ffbade9f5cb4e5",
+        "2695e6c9a91b9df3dffcec0348b29bc002f33995aee9534acd4ea32ff861b795"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-05-betteley-der-vogel": [
+        "06f28fffeb59b93f7ab96b482929ec5da26a29f1bef0ebb2ed427f8a8b1812a9",
+        "26095f933733a4e31498d8b24c45c4b3f3b8f360fc18ef1ba1938c55b61b777c"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-07-die-wiese": [
+        "ebe39bc6fd4d82f22a6281928fd1dacceffea40346ece11a873c421a1e432bf8",
+        "60eefd70939eaab92be5d82ee733ec62e064da3f71cafd7f2d18841c821fe80b"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-08-kaeuzlein": [
+        "8d00f1306686d14f4dec7e18cdbd661b91445645db0429d571697dab7749fb7a",
+        "66c4505e1f75a68127268ef983e7161493c0f2741e9eca6cd77be97d52148a14"
+    ],
+    "wir-openscore-liedercorpus-reichardt-zwolf-gesange-op-3-09-hier-liegt-ein-spielmann-begraben": [
+        "82017e8df2622a546766945423f65216f4127065cd2e72c1b409d02a3432b408",
+        "b419ec2b06c022c89ea55a24d44871e612c00621a26e2a3b8c5bcbc9ee780535"
+    ],
+    "wir-openscore-liedercorpus-schubert-4-lieder-op-96-1-die-sterne-d-939": [
+        "fd4b256605033d60029c43bf0d7cdcb245d9cd2d7b7c926b61f1b1e91636ff10",
+        "2804609ec5fcb3d2701076202905c0aff76c2c3feaa6c966a56f33b9eac9bbc1"
+    ],
+    "wir-openscore-liedercorpus-schubert-die-schone-mullerin-d-795-12-pause": [
+        "87d0baa381c4f7187d73fc7c2fbc977410ab798923c0f956029b2e2e6e98de08",
+        "11ffde24da48cb9d515e2c9faec626d448adee70180c579d7e9eaa162a71cb0d"
+    ],
+    "wir-openscore-liedercorpus-schubert-op-59-3-du-bist-die-ruh": [
+        "369329f01e805a861cbdf938caf697b0a9e9a4d5a785ff6dc7205faeffef8737",
+        "1d8ae554e7c632729a8851ddd6d778bab457326fdd4c54045060f2cf3f52f6b2"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-02-kriegers-ahnung": [
+        "8ed7fad78b4d1bc4f23e35941ba79790b63c68005577d50df36a7071dc9c4da5",
+        "7af082408a1f2bf1f51e0d13865254b8198c2e4bcbd6e0600776464d6fc8164a"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-03-fruhlingssehnsucht": [
+        "ee8a87bb2de581c3395d3948c048b5cd4706f9959d2ddc3b31eb9bd30e9e8d35",
+        "e27c8b9d095970cc76c559bb2b00f2e4add3d7a4c8f7a369bdb884ae9993ec43"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-05-aufenthalt": [
+        "0691a9a7995318929926ac2383090b9e1bf1fef99e7e0e1847fc37215028c8e1",
+        "66056177a77f93f701363dd1bfbad624876c337046df61d9882b247217ea51a3"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-06-in-der-ferne": [
+        "74bbaadba546542e297c420a8d51a7711eae157ee88c38c8c8da38d96e63be2a",
+        "72dc90ce45d9f751fc2cba82488f56b5de7030b9dbe8604ec4540d55760728f0"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-07-abschied": [
+        "11c8ea39cdef8fd0d030a6ec4e26e84d28b2929365241db5d96704430f9706b4",
+        "cc81d1321eeb58c29ad6943990d5943df5fb70873d700b03f93855d652a72fab"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-08-der-atlas": [
+        "a4d845d01703e58f547c5eedf628975e5a65de5af8fdb15ab380e28b97a36d01",
+        "f79c9ec11585a92a4f41d3f62a4cbab8571222dfeb71759d93b0c7331ba13c19"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-09-ihr-bild": [
+        "8909a8d72238c89a9c2017c0ec965f58388b5397cc9cdddba2fe03b709ea1dc9",
+        "2afe4b80f4f480790c1dc35787947de94c47f4d881248e5be64e1a33969536e4"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-10-das-fischermadchen": [
+        "ea8a37b5ef8eafdbbe4f54942d593980d43896058977d435a7eeb5282068ef6a",
+        "f9bb8b6489ce7487755e901c97410c583c2a11abaa0337158131678aa8cbd073"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-11-die-stadt": [
+        "84af14fe89a15668b0592afa18c25a3f704e854dddff912a405dcadfe5208456",
+        "59ee1735170c78c77a1fe27f63de87f511635cf12ce8e552e47d8409b11a2cd2"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-12-am-meer": [
+        "402b72db359ea84cea3c68df0dd5548da1cab50144464cbf609ce5d424386ff7",
+        "e0e7abea0f9d075b1f2ba803a0759580d0e7427dcb924e111a1cdc723498143c"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-13-der-doppelganger": [
+        "79dd54704f6ebed585f2118d71ae7f8dbb63a22b8b737e06792e0d0a00aa3592",
+        "0e2d2c3193c72681e169a00e127846f55caa20fd0e4dbde6ad322f891a6a102d"
+    ],
+    "wir-openscore-liedercorpus-schubert-schwanengesang-d-957-14-die-taubenpost": [
+        "03ff254020db70b175d7e1da98bcbe6a4c37dbeda2cff9cf0b5fec8d0ae34fdd",
+        "54cdd2161b330c8b8da6e71d965a8c28df45b8607b6bf7a885c42344ca5ee3b2"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-01-gute-nacht": [
+        "34136e586be969f09b48fcdc079a3ca1aa463485a00eba28df71d9b8ece38773",
+        "eb7963edd08238d806a76ea647f819bf506116b63537a88da8fbf725624c86d9"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-02-die-wetterfahne": [
+        "23876161273b0f628fe666f88420a779290507349a2df59e39a4b6f48da75134",
+        "e7f2d8b846142c4caafb6cf59b354f6e9e8214ea76f2daccee023010650330de"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-03-gefrorne-thranen": [
+        "19f5d172663065915ebb582059760cb6d7ffc6020f6a3b106e550c9ff1b02f21",
+        "78f128d4ee1f3a61ed02feaa212f005c3223f590ef04ff3e1b2b91d6d5e3a7db"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-04-erstarrung": [
+        "1d2e0b1a2e65a229e2c93f34d8e8c72a57a499b68525d6cb7e2757a400914a98",
+        "e07b4d9a2f396382aad07a86127f0aaadb27ddf363b0f79e99a72f9a4b3d0630"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-05-der-lindenbaum": [
+        "bcbb35224a90bed13ca44a79030b6ae8e18d7eae549eeff8e55e4a8b5d0443e4",
+        "e7645cd78f7479992fffb8ea8b9b82769e36e39a09d86e3a918bb183b36ef963"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-06-wasserfluth": [
+        "57fedbd79e353fa56939d3ed345f2b3185a258b1eeeb08a5c82095dcfe0c7e8e",
+        "1136a19f209946938b160fef604452ee83a580d2dcba9f8bc5892a63e5b2ac2d"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-07-auf-dem-flusse": [
+        "2464db3234a319c5f8e2c32fc9380fab9fe1bf255f9283fa41c3ff059691edf2",
+        "3def580429717aa34c9e520604423dfb119d28f89e8ad1748d84b01b4065394b"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-08-ruckblick": [
+        "d3c167b06b88a00178033e49952d65b7e998e6fd8137b61002193486d5a56735",
+        "aa92e5c56fa2bcaf021723651f634aff00e67c0cebcd6dabda653c4ee64e091b"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-09-irrlicht": [
+        "cd976a44bb929d7dd208e6abbc34ac07326e15d90c28b0525d427f9ac3dc0e04",
+        "d17c357f333444a5ec5d92bde89df0c137af8e4bea7c29f862f610b8ded766b3"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-10-rast-spatere-fassung": [
+        "69844fac4584b15a95dcba9298f95cc36457a292d878b39e184683d2413f8505",
+        "28ce8259244a7101469dce72d10d5fc9f73ad4146edda47f3ae1b8e412056a15"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-11-fruhlingstraum": [
+        "2f1212a9e54ee9204847ee4d1a80dc1943639d3a2f8dd9e4444be8d749f216a4",
+        "bcb905422edb94cd8b2bb650e25985e6319e83d2962170c98ed6e9df6a2a401e"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-12-einsamkeit-urspruengliche-fassung": [
+        "4844d3d2da3c99545dcc14f0d91f04aec855698b953b1b8088c828aa94aa3026",
+        "6d2aef45f850dadc568ef9f8d6e43e07e498caa376343e9959967b43556c7d18"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-13-die-post": [
+        "db4e393416a6116e200a0f5285257af412457d991fdc567ac7ab1044e32e36b8",
+        "c2110d7f13f8df1137ff167317162bd680bfb067d5aded1b149451cf4fa41c5d"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-14-der-greise-kopf": [
+        "bd627f246fe36abf3a8f4e01b719bb1e8e8607257d77c240669a9dda50961b86",
+        "575917f3931bc4cde8c4beba52d782a1b9772b4d80074cc515e10765240207b1"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-15-die-kraehe": [
+        "9c912bb8e47409b9d13d1e53b53893119235061266256bb2aef7c0f1d537b738",
+        "14a10a6647222941e9954bcaaa34e332d5e4bc2db8898f037394766fa617571e"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-16-letzte-hoffnung": [
+        "cbeb5b44122ed7b0bb73dc6b544a9926adc5a4ca91d076eff6fe2ddb89c550be",
+        "398b4bb2ba05fc9e9ccdf9bce28785df6661eb29a65c209bff40d9fd2e554ce8"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-17-im-dorfe": [
+        "d79b74ea8c215d7b5e3161ad8a99f9217ed82011d3f9bb2e543d75fd99432783",
+        "ea0b37858c4cd0c6f33e9d9816e85e0476c0b515ec67302d0e92872fb607e76a"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-18-der-stuermische-morgen": [
+        "32d1ce937536305328d711fcbc33d259877afa6f6a45de43f255b91807689d13",
+        "4ede8ef8d6b86e4eca22f6278d191141bf817b160a12f3e7dc17c0a0de5a4b73"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-19-tauschung": [
+        "ff01dfb74de3ed1546558d7587180b510dbe963a54d5f047bf44e2876cf4b9db",
+        "9be6167c3e5ee3d7151e4c172b87d6adbff26a798e13c17658a42f84acf22497"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-20-der-wegweiser": [
+        "dd1a928412447e60e9bb1f704778e6d5ccebbdafa8356bfd32d35dc3b14c4308",
+        "a098b7c828b1d2432a72ed7839459c1caa03e05cc82bc14ff0bbfc2eb0e56bbc"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-21-das-wirthshaus": [
+        "95475054c383d7f35c9fb18a65e743fb52ced411caf9e89972eac3300d6b1f82",
+        "ea5312b9ad9d949280f3d7b239cecc64cde4572cf04ed5e5ebda762b1a981f26"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-22-muth": [
+        "de812b109c5720bfcf44a345ffba5705afaa92767265ee25c9652722da50ab22",
+        "558bca4edbce6e81e693936a100e7686cafdfa9b5c44178952234101a3089e71"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-23-die-nebensonnen": [
+        "ee2338eb5d94ca3d8f220fe0d543ea5dc45f81dc98120e356604d40fdf65b5a9",
+        "8e590d418ada5100428ebc3399f04438366f2501f270069e6c38a22ad132af69"
+    ],
+    "wir-openscore-liedercorpus-schubert-winterreise-d-911-24-der-leiermann-spatere-fassung": [
+        "b1db672435619b367e4a541fb06c1953e971a74684cff7c20d25201ed61dabe5",
+        "768314647d95b1fd5f2225cbbf9d8f1a61537c627943db9f5bc119c0f13ffec1"
+    ],
+    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-1-ich-stand-in-dunklen-traumen": [
+        "bbabbe1073a98c3aae60f601e6d472fb002db160dea3a92b5f3a6f56b4c65547",
+        "483c81657c5acbecab9ef089d982e1b2f767d4154b9b6b2029d14f7eb42f4b48"
+    ],
+    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-2-sie-liebten-sich-beide": [
+        "e3ecc2c589b368373b4c85b40309ac86190e8ac86f0e7695bd9b71163910a3d2",
+        "1200f147efe5b7bba7168ff313b0291fc03a090dc237f29e41e0628b2b44a0d4"
+    ],
+    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-3-liebeszauber": [
+        "683bc9145f3be046f3d37b06517ce96dfd8186e8ccb04147d11c259fb0a96090",
+        "8d4a3bad2fbce73ed217ba7d662a92179f5ab6e9fd979d70cb1c5600b5ddfa08"
+    ],
+    "wir-openscore-liedercorpus-schumann-6-lieder-op-13-6-die-stille-lotosblume": [
+        "5a34822341670d471a493469311986aa5271ca5d009e6b8b957b0ef27b31720c",
+        "a6b19184401ed272c1318ce583545b5b58069f00f5ad6b654a4fcdee88ee2430"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-01-im-wunderschonen-monat-mai": [
+        "3f3b36f042963fb5f24083834e98d0ffc1fd41f06e47167a32fe0bb0105fb57b",
+        "5d42551fcea90e82492bef9fb9643d2cf7830e68adab6dcce93f3f94046635b1"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-02-aus-meinen-tranen-spriessen": [
+        "b29319728e487a67e24f7936a7b184af8e306654f61c032b9a45838adf0a8551",
+        "81feb25f17d47775cbbcd34d4eaa72b63a3fbba3464dcf0d94be715942c01097"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-03-die-rose-die-lilie": [
+        "cb3f847f07deecc77bb9e8e40b9df1b24acca50222af43143bb2d66b8eece551",
+        "2a547a51ce204985d9b198d33e78126c30b18fc5a8f03fce9e2b9e41449e545a"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-04-wenn-ich-in-deine-augen-seh": [
+        "0c1837296a045d26fcf6326b42ae9c8cf445d2b9a1b4fd7c55f4bb5da7349e1e",
+        "0b177aac01ca8c968634bb75b3f93c8a21c1133b0fd8af3e63858e8eedfa7173"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-05-ich-will-meine-seele-tauchen": [
+        "98aad3330706ddb04a06f50050d1b9d86a9e4df6112a38e721245cbe848b6407",
+        "40992f52a2aea71442d729b63c426c22001b43d5066d7362985d95e6dda99511"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-06-im-rhein-im-heiligen-strome": [
+        "7166ac9475fea206df9da86572a7c51ae21705634b612b19c295e5742785b618",
+        "14ac63e49f5c8b5718cb32776eecdf997e87d4adaff9494ed30f60e189651d56"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-07-ich-grolle-nicht": [
+        "258518c0dc01b6ee3f09a449364b97568a92f15c968774817066ba02ec04a6ab",
+        "e0848c932aac59bee08ff71b1f42ef2561775f5eb0d263e672a8a916d37b0cdb"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-08-und-wusstens-die-blumen": [
+        "c586306e4cb62ec379ba6fd6028f19534867f5e81b2da6074705754fe7ccc9fc",
+        "86ee60c7b379a291a0e16630eb4b371fafef5d4d5f72929d8ca294d0cbd19f24"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-09-das-ist-ein-floten-und-geigen": [
+        "1c89d6f705b728d3d57fe2427ba92d0fdac9f538400b076967cbf0bbacbeea9f",
+        "f0f70431dd0a56e9bdd5944fa8622a75b9c1c48ee457a2ad3f15ad153a70478c"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-10-hor-ich-das-liedchen-klingen": [
+        "97f96552a74de92216a1e1072074d8935ce02538e2bab172cff1ee6a39565b32",
+        "93d38dbe0c99339703bf04790ef79fc3f0cd9708d8d1470f60c1b3028ca30602"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-11-ein-jungling-liebt-ein-madchen": [
+        "6b3b710b9649a9b97104052b004ff46ab90f2811bf44128e5dc70e7f3ef1199c",
+        "c5f02631f6026ec4f326922d24b0b95260fa64004743631704f27c2081c2c635"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-12-am-leuchtenden-sommermorgen": [
+        "6f16dc1ca5fe0640249d696f6d5787b3622f884516610d230eea16264ff341bb",
+        "f496322caaa260b0cb62c30fdf7c6d1eff99ed17c604e9ad743a20204d2461c4"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-13-ich-hab-im-traum-geweinet": [
+        "ee267ef47b067108540bf1a787375fb02ed678249531f0880e1680e39270182b",
+        "ab806496a6d886980022c52bb15c498644f1f6e513cb30b25e1f8bf9494c458d"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-14-allnachtlich-im-traume": [
+        "23ea1a308c283a40d479379db6b3e38f7ca9f6ab123118080d1b8ce3db93e575",
+        "535ac32d43b2c842b8603ec02e68bac9460d28dab9f21c990332e2e53647d178"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-15-aus-alten-marchen-winkt-es": [
+        "3cf1441d5a83fb9209a033091e12097dfde14d7b1e1b912d1a8a24c759e707ab",
+        "65a53dfd934282a10cb5b53b952d421f771251b69f931694f71f4564d256c4f8"
+    ],
+    "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-16-die-alten-bosen-lieder": [
+        "ed9043658f8a9bc59a558268ae231284a18b06e0a67c475eb2987bb27f011074",
+        "b4e0c5f02adf75f9d17356a6ebda6bdffe1d181d2f979de834b4875c8fb8b402"
+    ],
+    "wir-openscore-liedercorpus-schumann-die-gute-nacht": [
+        "3375f8b174af8ba7bc8488c58011c11c5d1321c95b7a40fcdccb08945d1a6168",
+        "bf1c254248b72c7af630f16197d481933ddd1bc83f8aa8d0ae2db48a26e596ee"
+    ],
+    "wir-openscore-liedercorpus-schumann-frauenliebe-und-leben-op-42-1-seit-ich-ihn-gesehen": [
+        "e0834e669f5f8e843f425542f3a0f46909e12390b1c33f427fe4e1e939025fb7",
+        "fe2e208c88236f6468c7b67ceba82ff6747594789057900af27b74ac652ada00"
+    ],
+    "wir-openscore-liedercorpus-schumann-frauenliebe-und-leben-op-42-3-ich-kanns-nicht-fassen": [
+        "b7159fb23e3679dc6f9bc75678bbb94961e054fdc7d8669290a3aa944b2794c6",
+        "a33cea8c1faa665d3c57caaf8c5ed43cc3d5bfb2dbd54e50d205a664ea986746"
+    ],
+    "wir-openscore-liedercorpus-schumann-lieder-op-12-04-liebst-du-um-schonheit": [
+        "8805cf640f91b385f20f2fe2033dcfe5df0a34ca4d121793613227a006a25637",
+        "7e4b4727081c2fde6a9226ff483124fbeb50dcc0ab9d90ba3825cf1fda46b0cb"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-04-das-standchen": [
+        "7bf4349c42f364ff3658748bf69476d9c999c40c8e097c09449b9c7d716ab80e",
+        "18829a6dab402532cbe0cd8229c744a4eac2b73c5d8397e00ad53a4b8b71f5d0"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-08-nachtzauber": [
+        "aeeb00bbdd1991f2b6a04e371a772ed4826586e7306869bd36ca7a2b774f316a",
+        "19a2fe3f5532635ebb8fe01b7af3b8c48d7a0a45e915519b45fa2748e7a0efa0"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-13-der-scholar": [
+        "7262303093101d92c1cce5cc712ffa262c1b11aad94f932d0ee4943e993f1ef9",
+        "d088b13f785561d3b454907a6c67fa9a427730dd1b0451db9ef16df42ef227fd"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-14-der-verzweifelte-liebhaber": [
+        "72349d81eff9cdae78e2eea848b8224ec78c0e9d84443b3e281a949a30c03c34",
+        "0f3ffdde9451d1f0992083269dc731d1879a4f400bb7ac99535422b00a56bece"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-15-unfall": [
+        "8b22123c393bf9d6edd5460c22e1547144b51161e30665314962d0050276f754",
+        "bda6f0e4da5413ac5a87b33afcc242eb78e50175aaf6c54ad5b63557d704d332"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-19-die-nacht": [
+        "16706127ef8d3822905b950819d1732bad5ea71f94dbfc32c3eb0090de9184a9",
+        "634d6b06d4d42d5181851b16dfecaa99deefaf9353de57de8903c4f7ef6a87f6"
+    ],
+    "wir-openscore-liedercorpus-wolf-eichendorff-lieder-20-waldmadchen": [
+        "c2bb86aae3d4e8868cce6b00602c3a366044a639476dd85c9bb1406719a9db75",
+        "a10ba07fedc17b3fca930543eecb8dc58fc2d085d4eef64d98ebe89a7886f150"
+    ],
     "wir-orchestral-haydn-symphony-104-1": [
         "a062ec411150c608d9daf50130865dce70d3bead8bde7f08474037f5afd73c7e",
         "a9f82e3e7d25b03983142fd8b85447dee8190b3c9aa07245baf0f4da94eccb9e"
+    ],
+    "wir-variations-and-grounds-bach-b-minor-mass-bwv232-crucifixus": [
+        "ae7135de01dd3abc949e631ae8629c6c856855d2449880ba62f982d3e84082be",
+        "3b3171c86e95c5382f59b3468e57faaf5cb55245f1fc0884fe34f07381052fe9"
+    ],
+    "wir-variations-and-grounds-purcell-chacony-z730": [
+        "6695a88b4e668ffb013ef421237bd4dde74fdeee05064d030786f5da278faf12",
+        "c6b27133de0ddebcac0827fda1bf0dde76ecdfaadda3edad200857eb58fbc7f1"
+    ],
+    "wir-variations-and-grounds-purcell-sonata-z807": [
+        "7038285b6d0a15ccae85d505953cfa3ce4fd227615ea62d033574be89b0198fe",
+        "793148b71ded02995e277cc0442be7fbc836b07142450f323294bc2dd7073f46"
+    ],
+    "wirwtc-bach-wtc-i-1": [
+        "e2c9b0e4ca444aefbfc6daf9507eaea31931ba630d25fcc97a3cd1bfd7194b37",
+        "7179b0aa86707cc2e6db004c30c5b94713b1cb0d201a58d4d70197be6311f974"
+    ],
+    "wirwtc-bach-wtc-i-2": [
+        "3d6047c714bc6e98b6c2cf5c5e846d57992f6ca6e0065b2d1d33297117cc90df",
+        "e13adf687ff1b80ff801c34aa72fc4ac66312c58663364c4ac5d3bfc9aa4dc11"
+    ],
+    "wirwtc-bach-wtc-i-3": [
+        "9801a6db0589a52647915c328cb342615659e5a73850d99125a192229e0488f1",
+        "b736479ee227f5e475c779a4009fb91d1c340e688855c9a42adf3f4f374fa7a1"
+    ],
+    "wirwtc-bach-wtc-i-4": [
+        "703dfd6f51f99799b759bd3fbefd941bf443e29583ae95a5ceab7ef4ecacca1a",
+        "3a8471d25c3f71a71af2de19f351c95f945d3de4fb919b4c7ef92bc4149855a0"
+    ],
+    "wirwtc-bach-wtc-i-5": [
+        "daefb1862be3b76bc321a6a781c6c64582ca1754bbf816dcbb983b6b4509acf7",
+        "a522bed78e8d045b803d65167271668defc5a106e6aaace9d7c354e46d316f53"
+    ],
+    "wirwtc-bach-wtc-i-6": [
+        "65fe8f6970448e4f34b7278200872019295bb2f323d690ab879ab6c89d17b43b",
+        "4de7ea61b6c90bc231923c926cf8a36ecd2b2aa2829c4d5bdb5e05f336e037f1"
+    ],
+    "wirwtc-bach-wtc-i-7": [
+        "4b8023ff6f796d5c77c22f038072aa28a12ee0da0f18db45ced8eb107c96d0db",
+        "a8e386216eb89a14ed73c94c6c1d0bee0903345e4478d6f3e71340df3c1598ac"
+    ],
+    "wirwtc-bach-wtc-i-8": [
+        "974d84b36d9b0766689f30306cef84bc65b893e8e455249e6f816b216a9b1b48",
+        "d927e102dcaedd7b26b48a8ee1a9f342d39fdaa0950baa409282a07dd2f2acf5"
+    ],
+    "wirwtc-bach-wtc-i-9": [
+        "859f0445d5a337912b9670661267a4ed95bde2cb0bec74f1ca89a7c1d08cf320",
+        "d581caa7ff81c4b0b78dbf57de49b869ad414594963ef50e7e37c0699abd166b"
+    ],
+    "wirwtc-bach-wtc-i-10": [
+        "ea97397e7bab4e54ee6b197e25e639b56d6841165c17212540a319dec40ee480",
+        "a36f889320af6ac986cb4e3b091d4d7edc1662d4fa0bb2e15f7ec68fa7ce483a"
+    ],
+    "wirwtc-bach-wtc-i-11": [
+        "10e8c572ea356fb37dcfb167e2fa1430f00a7bb253869bd2405f5ec43b7648e5",
+        "31d8c498130cec13966cfb800d57916b58dbc547ff5c5972a013f2fe0d3df981"
+    ],
+    "wirwtc-bach-wtc-i-12": [
+        "a77a439f6df7b61cb2d5fb76838cec1d744ff711aadd57e8b79a853abc4ca2d4",
+        "6cf694fcedb9cf1672568da5da04dc23258e72176b9991d1c1777ce0306c49be"
+    ],
+    "wirwtc-bach-wtc-i-13": [
+        "59831feaa2ae14174c35140f8a88c2ecaab5df2a35609b958457776eb0651b93",
+        "9c2fae600646832ccf1fa93898630bd14848c2c4dcfe9fc08d5a097a3f8d955e"
+    ],
+    "wirwtc-bach-wtc-i-14": [
+        "fd6afde377962fc12dcce570d80405b957d8c2ca049d39ebc6602e9b4279858f",
+        "9db2438ae5f5c0ec5e5fa16baad917a3ed910285de1e3c804bdfbb20aed74150"
+    ],
+    "wirwtc-bach-wtc-i-15": [
+        "7573780602ae5cdb088a2683e3318af42ac5afdea587717cab5060e7ec8ae8b8",
+        "528ec9142b332ab231630ed0a293ba80b3b02f35b1517bb78daabbd880a0ae69"
+    ],
+    "wirwtc-bach-wtc-i-16": [
+        "89224aeb6c7603f01491b6e092a7ef4595eaca372fc9f47afa998339f9c9ebb0",
+        "e40a89fd3e861255d533e68092c9b1fc36109e7c4107fa0628b7700667c5e576"
+    ],
+    "wirwtc-bach-wtc-i-17": [
+        "5f85d505bcc08bab97f9286380b3d0cc78e885dd2887010a9a1a52d4418c6f3c",
+        "b6f2da42a3c58519b20ad1a60c553a16e2e87b56f4852edd65d6794f944004e4"
+    ],
+    "wirwtc-bach-wtc-i-18": [
+        "5fdd4c6ee8cd376f60d01d3457a831ff2eb4ae19bb12cc44297445efb462a25c",
+        "fc5b861696722069884752d6b3f2e528ff463b9848a4e10f5173705e03fcd8ef"
+    ],
+    "wirwtc-bach-wtc-i-19": [
+        "09e674a673507f9a4668732c0ed31f2c42561b2ecde109e7ac5ac0f1312a93bf",
+        "a9b989b0cceea6f2ccde4c26d4a84ee9401a74e10599ae03046418ebda14ccc3"
+    ],
+    "wirwtc-bach-wtc-i-20": [
+        "b1c4d9fbbfb30cb3b357396b6c3570f8007b74c841e5595082007498d54829f0",
+        "1a871d8cf5ef2ed50953fb4ea0e7acbf80ff29962f1ffeb445cf12288475de03"
+    ],
+    "wirwtc-bach-wtc-i-21": [
+        "8a7aaafcd711ac82afa9892cdb4777c7dfc9934091a67fef4136bb670945eca3",
+        "d19aeaca89172737c297dfacd8e64d1e76f34f73a6547631d5e48953f81528df"
+    ],
+    "wirwtc-bach-wtc-i-22": [
+        "1e65290e5502017ca0042bf62a2429341bb9ee23a76dbb65a3ed6ab76638f29a",
+        "0a1484babd7a9fbb0ab3630c4f6c7b2d7febb1adf192fd866236f30466b313f8"
+    ],
+    "wirwtc-bach-wtc-i-23": [
+        "b04042a864e1f312fabf75a3efa51f64c53e118ea5b0788148a9e220a88fdcf2",
+        "26162fa3884931608a838061bed1bb74be76fd7ec5822dee5292aa08692e043a"
+    ],
+    "wirwtc-bach-wtc-i-24": [
+        "089bfcc629fa8ec1be79595f4af0b89f0a0dabaf77c94d85917b6e8dd523a036",
+        "8fb64fe411963a27de13caaef4b62af3c27dbba756394ed96edd1e9d6154219d"
     ]
 }

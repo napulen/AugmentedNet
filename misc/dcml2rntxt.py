@@ -1,7 +1,9 @@
 import music21
+from harmalysis.parsers.roman import parse as parse_rn
 import re
-from common import ANNOTATIONSCOREDUPLES
-import sys
+from AugmentedNet.data.mps import (
+    annotation_score_duples as ANNOTATIONSCOREDUPLES,
+)
 
 
 def _isInitialKey(token):
@@ -19,6 +21,10 @@ def _isHalfDiminishedSeventh(token):
     return "%" in token
 
 
+def _isPhraseBoundaryV2(token):
+    return "{" in token or "}" in token
+
+
 def _isPhraseEnding(token):
     return "\\" in token
 
@@ -29,6 +35,10 @@ def _isCadenceEnding(token):
 
 def _isCad64(token):
     return token == "V(64)"
+
+
+def _hasAlternateReading(token):
+    return "-" in token
 
 
 def _hasSquareBracket(token):
@@ -55,15 +65,23 @@ def _processABCToken(token, globalKey):
         key = music21.key.Key(keyStr).tonicPitchNameWithCase
     if _isKeyChange(figure):
         keyStr, figure = figure.split(".")
-        key = music21.roman.RomanNumeral(keyStr, globalKey).root().name
+        # key = music21.roman.RomanNumeral(keyStr, globalKey).root().name
+        natmin = "_nat" if globalKey.islower() else ""
+        rnobj = parse_rn(f"{globalKey}{natmin}:{keyStr}")
+        key = str(rnobj.chord.root)
         if keyStr.islower():
             key = key.lower()
+    if _hasAlternateReading(figure):
+        # The preferred reading should be the first one
+        figure = figure.split("-")[0]
     if _isHalfDiminishedSeventh(figure):
         figure = figure.replace("%", "ø")
     if _isCadenceEnding(figure):
         figure = figure.replace("\\\\", "")
     if _isPhraseEnding(figure):
         figure = figure.replace("\\", "")
+    if _isPhraseBoundaryV2(figure):
+        figure = figure.replace("{", "").replace("}", "")
     if _isCad64(figure):
         figure = "Cad64"
     if _hasSquareBracket(figure):
@@ -90,7 +108,7 @@ def _measureDict(m21Score):
         b = round(float(harm.beat), 2)
         b = int(b) if b.is_integer() else b
         annotation = harm.chordKindStr
-        if annotation == "@none":
+        if annotation in ["@none", "{", "}"]:
             continue
         if m not in ms:
             ms[m] = {}
@@ -112,14 +130,20 @@ def _measureDict(m21Score):
     return tss, ms
 
 
-def makeRntxtHeader(metadata):
+def makeRntxtHeader(metadata, abc_or_mps="mps"):
+    if abc_or_mps == "abc":
+        analyst = (
+            "Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC"
+        )
+    else:
+        analyst = "Hentschel et al. MPS dataset. See https://github.com/DCMLab/mozart_piano_sonatas"
     composer = metadata.composer
     title = metadata.title
     movementNumber = metadata.movementNumber
     movementName = metadata.movementName
     header = f"Composer: {composer}\n"
     header += f"Title: {title} - {movementNumber}: {movementName}\n"
-    header += f"Analyst: Neuwirth et al. ABC dataset. See https://github.com/DCMLab/ABC\n"
+    header += f"Analyst: {analyst}\n"
     header += f"Proofreader: Automated translation by Néstor Nápoles López\n"
     return header
 
@@ -141,21 +165,19 @@ def makeRntxtBody(tss, ms):
                     line += f"{beat}{rn} "
             if re.match(r"m(\d)+ $", line):
                 continue
-            body += line[:-1] + "\n"
+            body += f"{line[:-1]}\n"
     return body
 
 
 if __name__ == "__main__":
     for filename, (annotation, score) in ANNOTATIONSCOREDUPLES.items():
-        if filename != "abc-op131-1":
-            continue
         score = score.replace(".mscx", ".mxl")
         print(score)
         harm = music21.converter.parse(score)
         tss, ms = _measureDict(harm)
-        rntxtHeader = makeRntxtHeader(harm.metadata)
+        abc_or_mps = "abc" if filename.startswith("abc") else "mps"
+        rntxtHeader = makeRntxtHeader(harm.metadata, abc_or_mps)
         rntxtBody = makeRntxtBody(tss, ms)
-        out = score.replace(".mxl", ".rntxt")
         with open(annotation, "w") as fd:
             fd.write(rntxtHeader)
             fd.write(rntxtBody)
