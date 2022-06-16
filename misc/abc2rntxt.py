@@ -1,6 +1,8 @@
 import music21
 import re
-from common import ANNOTATIONSCOREDUPLES
+from AugmentedNet.data.mps import (
+    annotation_score_duples as ANNOTATIONSCOREDUPLES,
+)
 import sys
 
 
@@ -19,6 +21,10 @@ def _isHalfDiminishedSeventh(token):
     return "%" in token
 
 
+def _isPhraseBoundaryV2(token):
+    return "{" in token or "}" in token
+
+
 def _isPhraseEnding(token):
     return "\\" in token
 
@@ -29,6 +35,10 @@ def _isCadenceEnding(token):
 
 def _isCad64(token):
     return token == "V(64)"
+
+
+def _hasAlternateReading(token):
+    return "-" in token
 
 
 def _hasSquareBracket(token):
@@ -58,12 +68,17 @@ def _processABCToken(token, globalKey):
         key = music21.roman.RomanNumeral(keyStr, globalKey).root().name
         if keyStr.islower():
             key = key.lower()
+    if _hasAlternateReading(figure):
+        # The preferred reading should be the first one
+        figure = figure.split("-")[0]
     if _isHalfDiminishedSeventh(figure):
         figure = figure.replace("%", "ø")
     if _isCadenceEnding(figure):
         figure = figure.replace("\\\\", "")
     if _isPhraseEnding(figure):
         figure = figure.replace("\\", "")
+    if _isPhraseBoundaryV2(figure):
+        figure = figure.replace("{", "").replace("}", "")
     if _isCad64(figure):
         figure = "Cad64"
     if _hasSquareBracket(figure):
@@ -90,7 +105,7 @@ def _measureDict(m21Score):
         b = round(float(harm.beat), 2)
         b = int(b) if b.is_integer() else b
         annotation = harm.chordKindStr
-        if annotation == "@none":
+        if annotation in ["@none", "{", "}"]:
             continue
         if m not in ms:
             ms[m] = {}
@@ -141,21 +156,18 @@ def makeRntxtBody(tss, ms):
                     line += f"{beat}{rn} "
             if re.match(r"m(\d)+ $", line):
                 continue
-            body += line[:-1] + "\n"
+            body += f"{line[:-1]}\n"
     return body
 
 
 if __name__ == "__main__":
     for filename, (annotation, score) in ANNOTATIONSCOREDUPLES.items():
-        if filename != "abc-op131-1":
-            continue
         score = score.replace(".mscx", ".mxl")
         print(score)
         harm = music21.converter.parse(score)
         tss, ms = _measureDict(harm)
         rntxtHeader = makeRntxtHeader(harm.metadata)
         rntxtBody = makeRntxtBody(tss, ms)
-        out = score.replace(".mxl", ".rntxt")
         with open(annotation, "w") as fd:
             fd.write(rntxtHeader)
             fd.write(rntxtBody)
