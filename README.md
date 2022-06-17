@@ -76,7 +76,7 @@ source .env/bin/activate
 To save you some time, we include the preprocessed `tsv` files of the *real* data, as well as the *synthetic* block-chord templates for texturization. These are available in the release of the latest version.
 
 ```bash
-wget https://github.com/napulen/AugmentedNet/releases/download/v1.5.0/dataset.zip
+wget https://github.com/napulen/AugmentedNet/releases/latest/download/dataset.zip
 unzip dataset.zip
 ```
 
