@@ -37,7 +37,14 @@ S_LISTTYPE_COLUMNS = [
 
 
 def _m21Parse(f, fmt=None):
-    return music21.converter.parse(f, format=fmt)
+    s = music21.converter.parse(f, format=fmt)
+    perc = [
+        p
+        for p in s.parts
+        if list(p.recurse().getElementsByClass("PercussionClef"))
+    ]
+    s.remove(perc, recurse=True)
+    return s
 
 
 def from_tsv(tsv, sep="\t"):
