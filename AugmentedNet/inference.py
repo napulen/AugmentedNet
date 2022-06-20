@@ -92,27 +92,6 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     return rn, chordLabel
 
 
-def _correctRomanText(rntxt):
-    modified = rntxt.split("\n")
-    for firstMeasureLine, line in enumerate(modified):
-        if line.startswith("m"):
-            break
-    m = modified[firstMeasureLine].split()
-    # If there is no Measure 1, inject one
-    if m[0] not in ["m0", "m1"]:
-        print("\tInjected measure 1")
-        inject = f"m1 {' '.join(m[1:4])}"
-        modified.insert(firstMeasureLine, inject)
-    # If there is no Beat 1, inject one
-    m = modified[firstMeasureLine].split()
-    if m[0] == "m1" and m[2] != "b1":
-        print("\tInjected beat 1")
-        inject = f"b1 {m[3]}"
-        m.insert(2, inject)
-        modified[firstMeasureLine] = " ".join(m)
-    return "\n".join(modified)
-
-
 def generateRomanText(h):
     metadata = h.metadata
     metadata.composer = metadata.composer or "Unknown"
@@ -137,19 +116,21 @@ Analyst: AugmentedNet v{__version__} - https://github.com/napulen/AugmentedNet
         key = ""
         measure = n.measureNumber
         beat = float(n.beat)
+        if beat.is_integer():
+            beat = int(beat)
         newts = ts.get((measure, beat), None)
         if newts:
             rntxt += f"\nTime Signature: {newts}\n"
-        if abs(beat - int(beat)) < 0.001:
-            beat = int(beat)
         if ":" in rn:
             key, rn = rn.split(":")
         if measure != currentMeasure:
             rntxt += f"\nm{measure}"
             currentMeasure = measure
+        if beat != 1:
+            rntxt += f" b{round(beat, 3)}"
         if key:
             rntxt += f" {key.replace('-', 'b')}:"
-        rntxt += f" b{round(beat, 3)} {rn}"
+        rntxt += f" {rn}"
     return rntxt
 
 
@@ -216,8 +197,6 @@ def predict(model, inputPath):
         bass.addLyric(formatRomanNumeral(rn2fig, thiskey))
         bass.addLyric(formatChordLabel(chordLabel))
     rntxt = generateRomanText(s)
-    rntxt = _correctRomanText(rntxt)
-    print(rntxt)
     filename, _ = inputPath.rsplit(".", 1)
     annotatedScore = f"{filename}_annotated.musicxml"
     annotationCSV = f"{filename}_annotated.csv"
