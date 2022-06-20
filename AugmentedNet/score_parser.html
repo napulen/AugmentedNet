@@ -99,7 +99,14 @@
 
 
 <span class="k">def</span> <span class="nf">_m21Parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="n">perc</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">p</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">parts</span>
+        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s2">&quot;PercussionClef&quot;</span><span class="p">))</span>
+    <span class="p">]</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">perc</span><span class="p">,</span> <span class="n">recurse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span>
 
 
 <span class="k">def</span> <span class="nf">from_tsv</span><span class="p">(</span><span class="n">tsv</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">):</span>
