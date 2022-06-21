@@ -144,3 +144,5 @@ defaults.json
 
 # Ignore memmap files
 *.mmap
+
+notebooks/**/*.png
