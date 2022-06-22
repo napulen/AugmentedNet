@@ -9,3 +9,19 @@ available_collections = {
     "wir": wir,
     "wirwtc": wirwtc,
 }
+
+
+def getAnnotationScoreDataset(collections=[]):
+    """Return the available (annotation, score) pairs in the dataset."""
+    allCollections = list(available_collections.keys())
+    collections = collections or allCollections
+    duples = {}
+    splits = {"training": [], "validation": [], "test": []}
+    for collection in collections:
+        if collection not in allCollections:
+            raise KeyError()
+        module = available_collections[collection]
+        duples.update(module.annotation_score_duples)
+        for split in splits:
+            splits[split].extend(module.splits[split])
+    return duples, splits
