@@ -58,7 +58,8 @@ class TestScoreParser(unittest.TestCase):
         )
         # This test is somewhat cheating, but I prefer the higher coverage
         # render the df into a m21 score, then compare scores (gt, generated)
-        s = score_parser._engraveScore(df)
+        timeSignatures = {0.0: "3/4"}
+        s = score_parser._engraveScore(df, timeSignatures)
         s = s.makeNotation()
         gt = music21.converter.parse(
             aux.texturizedHaydnOp20No4i, format="humdrum"

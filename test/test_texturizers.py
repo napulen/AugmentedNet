@@ -68,7 +68,7 @@ class TestTexturizers(unittest.TestCase):
         self.assertEqual(available_number_of_notes, GT)
 
     def test_available_durations(self):
-        GT = [4.0, 2.0, 1.0]
+        GT = [4.0, 3.0, 2.0, 1.5, 1.0]
         self.assertEqual(available_durations, GT)
 
     def test_available_templates(self):

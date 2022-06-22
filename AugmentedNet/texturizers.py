@@ -6,7 +6,7 @@ import random
 class TextureTemplate(object):
     """The base class for texturization templates."""
 
-    supported_durations = [4.0, 2.0, 1.0]
+    supported_durations = [4.0, 3.0, 2.0, 1.5, 1.0]
     supported_number_of_notes = [3, 4]
 
     def __init__(self, duration, notes, intervals):
@@ -29,9 +29,37 @@ class TextureTemplate(object):
             self.template = self.templateSeventh
 
     def templateTriad(self):
+        if self.duration == 3.0:
+            return self.templateTriadDottedHalf()
+        elif self.duration == 1.5:
+            return self.templateTriadDottedQuarter()
+        else:
+            return self.templateTriadBinary()
+
+    def templateTriadDottedHalf(self):
+        raise NotImplementedError()
+
+    def templateTriadDottedQuarter(self):
+        raise NotImplementedError()
+
+    def templateTriadBinary(self):
         raise NotImplementedError()
 
     def templateSeventh(self):
+        if self.duration == 3.0:
+            return self.templateSeventhDottedHalf()
+        elif self.duration == 1.5:
+            return self.templateSeventhDottedQuarter()
+        else:
+            return self.templateSeventhBinary()
+
+    def templateSeventhDottedHalf(self):
+        raise NotImplementedError()
+
+    def templateSeventhDottedQuarter(self):
+        raise NotImplementedError()
+
+    def templateSeventhBinary(self):
         raise NotImplementedError()
 
     def __str__(self):
@@ -48,18 +76,56 @@ class BassSplit(TextureTemplate):
     the bass note in isolation during the first half,
     followed by the remaining upper notes."""
 
-    def templateTriad(self):
+    def templateTriadBinary(self):
         dur = self.duration / 2
         return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
 """
 
-    def templateSeventh(self):
+    def templateTriadDottedHalf(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+{dur*2},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+{dur*3},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+{dur*4},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+{dur*5},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+"""
+
+    def templateTriadDottedQuarter(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+{dur*2},{dur},,"['{self.notes[1]}', '{self.notes[2]}']",['{self.intervals[2]}'],"[True, True]"
+"""
+
+    def templateSeventhBinary(self):
         dur = self.duration / 2
         return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+"""
+
+    def templateSeventhDottedHalf(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+{dur*2},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+{dur*3},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+{dur*4},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+{dur*5},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+"""
+
+    def templateSeventhDottedQuarter(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
+{dur*2},{dur},,"['{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[3]}', '{self.intervals[4]}']","[True, True, True]"
 """
 
 
@@ -69,7 +135,7 @@ class Alberti(TextureTemplate):
     A  4-note  melodic  pattern with the contour
     lowest, highest, middle, highest."""
 
-    def templateTriad(self):
+    def templateTriadBinary(self):
         dur = self.duration / 4
         return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
@@ -78,13 +144,51 @@ class Alberti(TextureTemplate):
 {dur*3},{dur},,['{self.notes[2]}'],[],[True]
 """
 
-    def templateSeventh(self):
+    def templateTriadDottedHalf(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[2]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]}'],[],[True]
+{dur*3},{dur},,['{self.notes[2]}'],[],[True]
+{dur*4},{dur},,['{self.notes[1]}'],[],[True]
+{dur*5},{dur},,['{self.notes[2]}'],[],[True]
+"""
+
+    def templateTriadDottedQuarter(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[2]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]}'],[],[True]
+"""
+
+    def templateSeventhBinary(self):
         dur = self.duration / 4
         return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,['{self.notes[3]}'],[],[True]
 {dur*2},{dur},,['{self.notes[1]}'],[],[True]
 {dur*3},{dur},,['{self.notes[2]}'],[],[True]
+"""
+
+    def templateSeventhDottedHalf(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[3]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]}'],[],[True]
+{dur*3},{dur},,['{self.notes[2]}'],[],[True]
+{dur*4},{dur},,['{self.notes[1]}'],[],[True]
+{dur*5},{dur},,['{self.notes[2]}'],[],[True]
+"""
+
+    def templateSeventhDottedQuarter(self):
+        dur = 0.5
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[3]}']",['{self.intervals[2]}'],[True]
+{dur},{dur},,['{self.notes[1]}'],[],[True]
+{dur*2},{dur},,['{self.notes[2]}'],[],[True]
 """
 
 
