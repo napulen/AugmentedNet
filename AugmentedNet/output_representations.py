@@ -142,13 +142,13 @@ class SecondaryDegree22(OutputRepresentationTI):
     dfFeature = "a_degree2"
 
 
-class LocalKey35(OutputRepresentation):
+class LocalKey38(OutputRepresentation):
     classList = KEYS
     dfFeature = "a_localKey"
     transpositionFn = staticmethod(TransposeKey)
 
 
-class TonicizedKey35(OutputRepresentation):
+class TonicizedKey38(OutputRepresentation):
     classList = KEYS
     dfFeature = "a_tonicizedKey"
     transpositionFn = staticmethod(TransposeKey)
@@ -180,10 +180,10 @@ available_representations = {
     "ChordRoot35": ChordRoot35,
     "HarmonicRhythm7": HarmonicRhythm7,
     "Inversion4": Inversion4,
-    "LocalKey35": LocalKey35,
+    "LocalKey38": LocalKey38,
     "PitchClassSet121": PitchClassSet121,
     "PrimaryDegree22": PrimaryDegree22,
     "RomanNumeral31": RomanNumeral31,
     "SecondaryDegree22": SecondaryDegree22,
-    "TonicizedKey35": TonicizedKey35,
+    "TonicizedKey38": TonicizedKey38,
 }

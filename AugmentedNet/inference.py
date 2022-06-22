@@ -177,8 +177,8 @@ def predict(model, inputPath):
         if not notes:
             continue
         bass = sorted(notes, key=lambda n: n[1])[0][0]
-        thiskey = analysis.LocalKey35
-        tonicizedKey = analysis.TonicizedKey35
+        thiskey = analysis.LocalKey38
+        tonicizedKey = analysis.TonicizedKey38
         pcset = analysis.PitchClassSet121
         rn2, chordLabel = resolveRomanNumeral(
             analysis.Bass35,

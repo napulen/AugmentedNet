@@ -13,7 +13,7 @@ from AugmentedNet.utils import tensorflowGPUHack
 
 
 OUTPUTS = [
-    "LocalKey35",
+    "LocalKey38",
     "ChordQuality15",
     "Inversion4",
     "ChordRoot35",
@@ -50,7 +50,7 @@ def evaluate(modelHdf5, X_test, y_true):
     # Some custom features
     df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
     df["RomanNumeral"] = (
-        df.LocalKey35
+        df.LocalKey38
         & df.ChordQuality15
         & df.ChordRoot35
         & df.Inversion4

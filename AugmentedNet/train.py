@@ -163,14 +163,14 @@ def evaluate(modelHdf5, X_test, y_true):
         summary["Degree"] = df.Degree.mean().round(3)
         print(f"Degree: {summary['Degree']}")
     if (
-        "LocalKey35" in df
+        "LocalKey38" in df
         and "ChordQuality11" in df
         and "ChordRoot35" in df
         and "Inversion4" in df
         and "Degree" in df
     ):
         df["RomanNumeral"] = (
-            df.LocalKey35
+            df.LocalKey38
             & df.ChordQuality11
             & df.ChordRoot35
             & df.Inversion4
@@ -179,9 +179,9 @@ def evaluate(modelHdf5, X_test, y_true):
         summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
         print(f"RomanNumeral: {summary['RomanNumeral']}")
     # The alternative approach proposed in Napoles Lopez et al. (2021)
-    if "RomanNumeral31" in df and "LocalKey35" in df and "Inversion4" in df:
+    if "RomanNumeral31" in df and "LocalKey38" in df and "Inversion4" in df:
         df["AltRomanNumeral"] = (
-            df.RomanNumeral31 & df.LocalKey35 & df.Inversion4
+            df.RomanNumeral31 & df.LocalKey38 & df.Inversion4
         )
         summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
         print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
@@ -191,10 +191,10 @@ def evaluate(modelHdf5, X_test, y_true):
         and "Tenor35" in df
         and "Alto35" in df
         and "Soprano35" in df
-        and "LocalKey35" in df
+        and "LocalKey38" in df
     ):
         df["satbRomanNumeral"] = (
-            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey35
+            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey38
         )
         summary["satbRomanNumeral"] = df.satbRomanNumeral.mean().round(3)
         print(f"satbRomanNumeral: {summary['satbRomanNumeral']}")
