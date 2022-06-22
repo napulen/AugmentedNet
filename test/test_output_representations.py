@@ -10,12 +10,12 @@ from AugmentedNet.output_representations import (
     Bass35,
     Inversion4,
     RomanNumeral31,
-    LocalKey35,
+    LocalKey38,
     PrimaryDegree22,
     SecondaryDegree22,
     ChordQuality11,
     ChordRoot35,
-    TonicizedKey35,
+    TonicizedKey38,
     HarmonicRhythm7,
     PitchClassSet121,
 )
@@ -102,9 +102,9 @@ class TestHarmonicRhythm7(TestBass35):
     dfFeature = "a_harmonicRhythm"
 
 
-class TestTonicizedKey35(TestBass35):
-    clas = TonicizedKey35
-    encodingGT = aux.haydnTonicizedKey35
+class TestTonicizedKey38(TestBass35):
+    clas = TonicizedKey38
+    encodingGT = aux.haydnTonicizedKey38
     dfFeature = "a_tonicizedKey"
 
 
@@ -135,9 +135,9 @@ class TestRomanNumeral31(TestBass35):
     dfFeature = "a_romanNumeral"
 
 
-class TestLocalKey35(TestBass35):
-    clas = LocalKey35
-    encodingGT = aux.haydnLocalKey35
+class TestLocalKey38(TestBass35):
+    clas = LocalKey38
+    encodingGT = aux.haydnLocalKey38
     dfFeature = "a_localKey"
 
 
