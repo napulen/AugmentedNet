@@ -317,6 +317,8 @@ available_representations = {
     "Bass35": Bass35,
     "Chromagram19": Chromagram19,
     "Chromagram35": Chromagram35,
+    "MeasureOnset7": MeasureOnset7,
+    "NoteOnset7": NoteOnset7,
     "MeasureNoteOnset14": MeasureNoteOnset14,
     "Intervals39": Intervals39,
     "Intervals19": Intervals19,
