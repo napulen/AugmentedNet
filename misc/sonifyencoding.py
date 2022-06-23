@@ -24,7 +24,9 @@ if __name__ == "__main__":
     chromaPart = music21.stream.Part()
     for n in df.s_notes:
         bass = f"{n[0][:-1]}3"
-        chroma = list(dict.fromkeys([f"{x[:-1]}{noteoctaves[x[0]]}" for x in n]))
+        chroma = list(
+            dict.fromkeys([f"{x[:-1]}{noteoctaves[x[0]]}" for x in n])
+        )
         bassPart.append(music21.note.Note(bass, quarterLength=0.125))
         chromaPart.append(music21.chord.Chord(chroma, quarterLength=0.125))
         print(bass, chroma)
