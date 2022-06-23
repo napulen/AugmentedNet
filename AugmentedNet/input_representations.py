@@ -18,96 +18,12 @@ from .feature_representation import (
     FeatureRepresentationTI,
 )
 
-# NOTENAMEDEFAULTCLASS = {
-#     "C": 0,
-#     "D": 2,
-#     "E": 4,
-#     "F": 5,
-#     "G": 7,
-#     "A": 9,
-#     "B": 11,
-# }
-# def _solvePitchSpelling(noteNames, pitchClasses):
-#     if len(noteNames) != len(pitchClasses):
-#         raise Exception
-#     if not noteNames:
-#         return
-#     elif len(noteNames) == 1:
-#     note = noteNames[0]
-#     default = NOTENAMEDEFAULTCLASS[note]
-#     bestMatch = 999999
-#     for pc in pitchClasses:
-#         diff = pc -
 
-
-class Duration14(FeatureRepresentationTI):
-    features = 2 * len(NOTEDURATIONS)
-    pattern = [
-        [1, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0],
-        [0, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0],  # eight
-        [0, 1, 0, 1, 0, 0, 0],
-        [0, 0, 1, 1, 0, 0, 0],
-        [0, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0],  # quarter
-        [0, 1, 0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 1, 0, 0],
-        [0, 1, 1, 0, 1, 0, 0],
-        [0, 0, 0, 1, 1, 0, 0],
-        [0, 1, 0, 1, 1, 0, 0],
-        [0, 0, 1, 1, 1, 0, 0],
-        [0, 1, 1, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0],  # half
-        [0, 1, 0, 0, 0, 1, 0],
-        [0, 0, 1, 0, 0, 1, 0],
-        [0, 1, 1, 0, 0, 1, 0],
-        [0, 0, 0, 1, 0, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0],
-        [0, 0, 1, 1, 0, 1, 0],
-        [0, 1, 1, 1, 0, 1, 0],
-        [0, 0, 0, 0, 1, 1, 0],
-        [0, 1, 0, 0, 1, 1, 0],
-        [0, 0, 1, 0, 1, 1, 0],
-        [0, 1, 1, 0, 1, 1, 0],
-        [0, 0, 0, 1, 1, 1, 0],
-        [0, 1, 0, 1, 1, 1, 0],
-        [0, 0, 1, 1, 1, 1, 0],
-        [0, 1, 1, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0, 0, 1],  # whole
-        [0, 1, 0, 0, 0, 0, 1],
-        [0, 0, 1, 0, 0, 0, 1],
-        [0, 1, 1, 0, 0, 0, 1],
-        [0, 0, 0, 1, 0, 0, 1],
-        [0, 1, 0, 1, 0, 0, 1],
-        [0, 0, 1, 1, 0, 0, 1],
-        [0, 1, 1, 1, 0, 0, 1],
-        [0, 0, 0, 0, 1, 0, 1],
-        [0, 1, 0, 0, 1, 0, 1],
-        [0, 0, 1, 0, 1, 0, 1],
-        [0, 1, 1, 0, 1, 0, 1],
-        [0, 0, 0, 1, 1, 0, 1],
-        [0, 1, 0, 1, 1, 0, 1],
-        [0, 0, 1, 1, 1, 0, 1],
-        [0, 1, 1, 1, 1, 0, 1],
-        [0, 0, 0, 0, 0, 1, 1],
-        [0, 1, 0, 0, 0, 1, 1],
-        [0, 0, 1, 0, 0, 1, 1],
-        [0, 1, 1, 0, 0, 1, 1],
-        [0, 0, 0, 1, 0, 1, 1],
-        [0, 1, 0, 1, 0, 1, 1],
-        [0, 0, 1, 1, 0, 1, 1],
-        [0, 1, 1, 1, 0, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1],
-        [0, 1, 0, 0, 1, 1, 1],
-        [0, 0, 1, 0, 1, 1, 1],
-        [0, 1, 1, 0, 1, 1, 1],
-        [0, 0, 0, 1, 1, 1, 1],
-        [0, 1, 0, 1, 1, 1, 1],
-        [0, 0, 1, 1, 1, 1, 1],
-        [0, 1, 1, 1, 1, 1, 1],
-    ]
+class MeasureOnset7(FeatureRepresentationTI):
+    features = len(NOTEDURATIONS)
+    pattern = [list(reversed(f"{x:06b}0")) for x in range(64)]
+    pattern = [[int(n) for n in arr] for arr in pattern]
+    pattern[0][0] = 1
 
     def run(self, transposition=None):
         array = np.zeros(self.shape, dtype=self.dtype)
@@ -118,14 +34,7 @@ class Duration14(FeatureRepresentationTI):
                 idx = 0
                 prev_measure = measure
             pattern = self.pattern[idx]
-            array[frame, 0:7] = pattern
-            idx = min(idx + 1, len(self.pattern) - 1)
-        idx = 0
-        for frame, onset in enumerate(self.df.s_isOnset):
-            if sum(onset) > 0:
-                idx = 0
-            pattern = self.pattern[idx]
-            array[frame, 7:] = pattern
+            array[frame] = pattern
             idx = min(idx + 1, len(self.pattern) - 1)
         return array
 
@@ -135,12 +44,49 @@ class Duration14(FeatureRepresentationTI):
             raise IndexError("Strange array shape.")
         ret = []
         for manyhot in array:
-            measureOnset = [
-                NOTEDURATIONS[x] for x in np.nonzero(manyhot[:7])[0]
-            ]
-            noteOnset = [NOTEDURATIONS[x] for x in np.nonzero(manyhot[7:])[0]]
-            ret.append((tuple(measureOnset), tuple(noteOnset)))
+            measureOnset = [NOTEDURATIONS[x] for x in np.nonzero(manyhot)[0]]
+            ret.append(measureOnset)
         return ret
+
+
+class NoteOnset7(MeasureOnset7):
+    def run(self, transposition=None):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        idx = 0
+        for frame, onset in enumerate(self.df.s_isOnset):
+            if sum(onset) > 0:
+                idx = 0
+            pattern = self.pattern[idx]
+            array[frame] = pattern
+            idx = min(idx + 1, len(self.pattern) - 1)
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            noteOnset = [NOTEDURATIONS[x] for x in np.nonzero(manyhot)[0]]
+            ret.append(noteOnset)
+        return ret
+
+
+class MeasureNoteOnset14(FeatureRepresentationTI):
+    features = MeasureOnset7.features + NoteOnset7.features
+    pattern = MeasureOnset7.pattern
+
+    def run(self, transposition=None):
+        self.measure7 = MeasureOnset7(self.df).run(transposition)
+        self.note7 = NoteOnset7(self.df).run(transposition)
+        array = np.concatenate((self.measure7, self.note7), axis=1)
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        measure7 = MeasureOnset7.decode(array[:, : MeasureOnset7.features])
+        note7 = NoteOnset7.decode(array[:, NoteOnset7.features :])
+        return [(tuple(mm), tuple(n)) for mm, n in zip(measure7, note7)]
 
 
 class Bass19(FeatureRepresentation):
@@ -371,7 +317,7 @@ available_representations = {
     "Bass35": Bass35,
     "Chromagram19": Chromagram19,
     "Chromagram35": Chromagram35,
-    "Duration14": Duration14,
+    "MeasureNoteOnset14": MeasureNoteOnset14,
     "Intervals39": Intervals39,
     "Intervals19": Intervals19,
     "BassChromagram38": BassChromagram38,
