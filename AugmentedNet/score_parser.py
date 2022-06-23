@@ -9,6 +9,7 @@ from music21.interval import Interval
 from music21.pitch import Pitch
 from music21.chord import Chord
 from music21.note import Rest
+from music21.meter import TimeSignature
 import numpy as np
 import pandas as pd
 
@@ -144,16 +145,22 @@ def _reindexDataFrame(df, fixedOffset=FIXEDOFFSET):
     return df
 
 
-def _engraveScore(df):
+def _engraveScore(df, timeSignatures=None):
     """Useful for debugging _texturizeAnnotationScore."""
+    tss = timeSignatures or {0.0: "4/4"}
     chords = music21.stream.Stream()
+    offset = 0.0
     for row in df.itertuples():
+        if offset in tss:
+            chords.append(TimeSignature(tss[offset]))
         if row.s_measure == 0:
+            offset += row.s_duration
             continue
         pitches = row.s_notes
         duration = Fraction(row.s_duration).limit_denominator(2048)
         chord = Chord(pitches, quarterLength=duration)
         chords.append(chord)
+        offset += row.s_duration
     return chords
 
 
