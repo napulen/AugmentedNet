@@ -31,7 +31,7 @@ class DefaultArguments(object):
         "dataAugmentation": True,
         "collections": ["bps"],
         "testCollections": ["bps"],
-        "inputRepresentations": ["Bass19", "Chromagram19", "Duration14"],
+        "inputRepresentations": ["Bass19", "Chromagram19", "MeasureNoteOnset14"],
         "outputRepresentations": [
             "Alto35",
             "Bass35",
