@@ -24,7 +24,7 @@ def AugmentedNet(inputs, outputs, blocks=6):
             xi = layers.Concatenate()([xi, h])
         xprime.append(xi)
     if len(x) > 1:
-        inputs = layers.Concatenate()([xi for xi in xprime])
+        inputs = layers.Concatenate()(xprime)
     else:
         inputs = xprime[0]
     h = layers.Dense(64)(inputs)
