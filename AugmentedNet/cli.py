@@ -28,7 +28,7 @@ class DefaultArguments(object):
     npz = {
         "synthetic": False,
         "texturizeEachTransposition": False,
-        "dataAugmentation": True,
+        "noTransposition": False,
         "collections": ["bps"],
         "testCollections": ["bps"],
         "inputRepresentations": [
@@ -121,9 +121,9 @@ def npz(is_parent_parser=False):
         help="Include training files from a specific corpus/collection.",
     )
     parser.add_argument(
-        "--dataAugmentation",
+        "--noTransposition",
         action="store_true",
-        help="Perform data augmentation on the training set.",
+        help="Disable transposition data augmentation on the training set.",
     )
     parser.add_argument(
         "--inputRepresentations",

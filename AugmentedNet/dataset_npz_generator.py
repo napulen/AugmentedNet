@@ -68,7 +68,7 @@ def correctSplit(split, testSetOn):
 def generateDataset(
     synthetic,
     texturizeEachTransposition,
-    dataAugmentation,
+    noTransposition,
     collections,
     testCollections,
     inputRepresentations,
@@ -108,11 +108,11 @@ def generateDataset(
         df = joint_parser.from_tsv(tsvlocation)
         if scrutinizeData and split == "training":
             df = scrutinize(df)
-        if dataAugmentation and split == "training":
+        if noTransposition or split != "training":
+            transpositions = ["P1"]
+        else:
             transpositions = _getTranspositions(df, transpositionKeys)
             print("\t", transpositions)
-        else:
-            transpositions = ["P1"]
         if synthetic:
             if not texturizeEachTransposition:
                 # once per file
