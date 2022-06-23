@@ -31,7 +31,11 @@ class DefaultArguments(object):
         "dataAugmentation": True,
         "collections": ["bps"],
         "testCollections": ["bps"],
-        "inputRepresentations": ["Bass19", "Chromagram19", "MeasureNoteOnset14"],
+        "inputRepresentations": [
+            "Bass19",
+            "Chromagram19",
+            "MeasureNoteOnset14",
+        ],
         "outputRepresentations": [
             "Alto35",
             "Bass35",
@@ -183,7 +187,15 @@ def train():
     parser = ArgumentParser(description=train_description, parents=parents)
     parser.add_argument(
         "experiment_name",
-        choices=["testset", "validationset", "prototyping", "debug"],
+        choices=[
+            "local",
+            "computecanada",
+            "colab",
+            "ablation",
+            "validationset",
+            "testset",
+            "debug",
+        ],
         help="A short name for this experiment.",
     )
     parser.add_argument(
