@@ -117,7 +117,6 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
             "ChordRoot35",
             "Inversion4",
             "PrimaryDegree22",
-            "RomanNumeral31",
             "SecondaryDegree22",
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
@@ -136,6 +135,8 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
 def evaluate(modelHdf5, X_test, y_true):
     model = keras.models.load_model(modelHdf5)
     X = [xi.array for xi in X_test]
+    padding = np.sum(X[0], axis=2) == -X[0].shape[2]
+    padding = padding.reshape(-1, 1)
     X = X if len(X) > 1 else X[0]
     y_preds = model.predict(X)
     dfdict = {}
@@ -144,17 +145,19 @@ def evaluate(modelHdf5, X_test, y_true):
     for y, ypred in zip(y_true, y_preds):
         name = y.name.replace("validation_y_", "")
         features.append(name)
-        dfdict["true_" + name] = []
-        dfdict["pred_" + name] = []
-        for true, preds in zip(y.array, ypred):
-            predsCategorical = np.argmax(preds, axis=1).reshape(-1, 1)
-            decodedTrue = availableOutputs[name].decode(true)
-            dfdict["true_" + name].extend(decodedTrue)
-            decodedPreds = availableOutputs[name].decode(predsCategorical)
-            dfdict["pred_" + name].extend(decodedPreds)
+        dfdict[f"true_{name}"] = []
+        dfdict[f"pred_{name}"] = []
+        true = y.array.reshape(-1, 1)[~padding]
+        ypred = ypred.reshape(-1, ypred.shape[2])
+        predsCategorical = np.argmax(ypred, axis=1).reshape(-1, 1)
+        predsCategorical = predsCategorical[~padding]
+        decodedTrue = availableOutputs[name].decode(true)
+        dfdict[f"true_{name}"].extend(decodedTrue)
+        decodedPreds = availableOutputs[name].decode(predsCategorical)
+        dfdict[f"pred_{name}"].extend(decodedPreds)
     df = pd.DataFrame(dfdict)
     for feature in features:
-        df[feature] = df["true_" + feature] == df["pred_" + feature]
+        df[feature] = df[f"true_{feature}"] == df[f"pred_{feature}"]
         summary[feature] = df[feature].mean().round(3)
         print(f"{feature}: {summary[feature]}")
     # Some custom features, all optional depending on outputs
@@ -163,14 +166,14 @@ def evaluate(modelHdf5, X_test, y_true):
         summary["Degree"] = df.Degree.mean().round(3)
         print(f"Degree: {summary['Degree']}")
     if (
-        "LocalKey35" in df
+        "LocalKey38" in df
         and "ChordQuality11" in df
         and "ChordRoot35" in df
         and "Inversion4" in df
         and "Degree" in df
     ):
         df["RomanNumeral"] = (
-            df.LocalKey35
+            df.LocalKey38
             & df.ChordQuality11
             & df.ChordRoot35
             & df.Inversion4
@@ -179,9 +182,9 @@ def evaluate(modelHdf5, X_test, y_true):
         summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
         print(f"RomanNumeral: {summary['RomanNumeral']}")
     # The alternative approach proposed in Napoles Lopez et al. (2021)
-    if "RomanNumeral31" in df and "LocalKey35" in df and "Inversion4" in df:
+    if "RomanNumeral31" in df and "LocalKey38" in df and "Inversion4" in df:
         df["AltRomanNumeral"] = (
-            df.RomanNumeral31 & df.LocalKey35 & df.Inversion4
+            df.RomanNumeral31 & df.LocalKey38 & df.Inversion4
         )
         summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
         print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
@@ -191,10 +194,10 @@ def evaluate(modelHdf5, X_test, y_true):
         and "Tenor35" in df
         and "Alto35" in df
         and "Soprano35" in df
-        and "LocalKey35" in df
+        and "LocalKey38" in df
     ):
         df["satbRomanNumeral"] = (
-            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey35
+            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey38
         )
         summary["satbRomanNumeral"] = df.satbRomanNumeral.mean().round(3)
         print(f"satbRomanNumeral: {summary['satbRomanNumeral']}")

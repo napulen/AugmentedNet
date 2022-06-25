@@ -28,10 +28,14 @@ class DefaultArguments(object):
     npz = {
         "synthetic": False,
         "texturizeEachTransposition": False,
-        "dataAugmentation": True,
+        "noTransposition": False,
         "collections": ["bps"],
         "testCollections": ["bps"],
-        "inputRepresentations": ["Bass19", "Chromagram19"],
+        "inputRepresentations": [
+            "Bass19",
+            "Chromagram19",
+            "MeasureNoteOnset14",
+        ],
         "outputRepresentations": [
             "Alto35",
             "Bass35",
@@ -39,14 +43,14 @@ class DefaultArguments(object):
             # "ChordRoot35",
             "HarmonicRhythm7",
             # "Inversion4",
-            "LocalKey35",
+            "LocalKey38",
             "PitchClassSet121",
             # "PrimaryDegree22",
             "RomanNumeral31",
             # "SecondaryDegree22",
             "Soprano35",
             "Tenor35",
-            "TonicizedKey35",
+            "TonicizedKey38",
         ],
         "sequenceLength": 640,
         "scrutinizeData": False,
@@ -117,9 +121,9 @@ def npz(is_parent_parser=False):
         help="Include training files from a specific corpus/collection.",
     )
     parser.add_argument(
-        "--dataAugmentation",
+        "--noTransposition",
         action="store_true",
-        help="Perform data augmentation on the training set.",
+        help="Disable transposition data augmentation on the training set.",
     )
     parser.add_argument(
         "--inputRepresentations",
@@ -183,7 +187,15 @@ def train():
     parser = ArgumentParser(description=train_description, parents=parents)
     parser.add_argument(
         "experiment_name",
-        choices=["testset", "validationset", "prototyping", "debug"],
+        choices=[
+            "local",
+            "computecanada",
+            "colab",
+            "ablation",
+            "validationset",
+            "testset",
+            "debug",
+        ],
         help="A short name for this experiment.",
     )
     parser.add_argument(

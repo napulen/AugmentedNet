@@ -1,123 +1,165 @@
+!!!COM: Music21
+!!!OTL: Music21 Fragment
 **kern
 *clefG2
 *k[]
-*M4/4
+*M3/4
 =1
 2.a 2.cc 2.ee
-[4a [4cc [4ee
 =2
-2a] 2cc] 2ee]
-[2dd#X [2ff [2aa [2ccc
+8aL
+8ccJ 8ee
+8ccL 8ee
+8ccJ 8ee
+8ccL 8ee
+8ccJ 8ee
 =3
-4dd#] 4ff] 4aa] 4ccc]
 2.dd#X 2.ff 2.aa 2.ccc
 =4
+2.dd#X 2.ff 2.aa 2.ccc
+=5
 8bb
 4ee
 8gg#X
-4dd#X 4ff#X 4aa
-[4ee [4gg# [4bb
-=5
-4ee] 4gg#] 4bb]
-8ddnL
-8eeJ 8gg#X 8bb
-[2cc#X [2ee [2aa
-=6
-4cc#] 4ee] 4aa]
-2.ee 2.gg#X 2.bb
-=7
-16aLL
-16ee
-16cc#X
-16eeJJ
-8ddL
+8dd#XL
 8ff#XJ 8aa
-4dd#X 4ff# 4aa
-[4ee [4gg#X [4bb
-=8
-2ee] 2gg#] 2bb]
-[2a [2cc#X [2ee
-=9
-4a] 4cc#] 4ee]
-2.b 2.dd 2.ff#X
-=10
-8bb
-4dd 4ee 4gg#X
-8dd 8ee 8gg#
-4cc#X 4ee 4aa
-8eeL
-8dddJ
-=11
-8gg#XL
-8bbJ
-16aLL
+=6
+4ee
+4gg#X 4bb
+16ddnLL
+16bb
 16ee
-16cc#X
-16eeJJ
-8bbL
-16ddL
 16gg#JJ
-16eeLL
-16gg#J
-8ddJ 8ee 8gg#
-=12
-16cc#XLL
-16aa
-16ee
-16aaJJ
-2ee 2gg#X 2bb 2ddd
-4a 4cc# 4ee
-=13
-2.dd 2.ff#X 2.aa 2.bb
-[4dd [4ee [4gg#X [4bb
-=14
-2dd] 2ee] 2gg#] 2bb]
-[2cc#X [2ee [2aa
-=15
-4cc#] 4ee] 4aa]
-2.dd 2.ff#X 2.aa
-=16
-2.dd 2.ff#X 2.bb
-[4cc#X [4ee [4aa
-=17
-2cc#] 2ee] 2aa]
-[2cc#X [2ee [2aa
-=18
-4cc#] 4ee] 4aa]
-2.cc#X 2.ee 2.aa
-=19
-2.b 2.dd 2.ee 2.gg#X
-[4b [4dd [4ee [4gg#
-=20
-2b] 2dd] 2ee] 2gg#]
-[2cc#X [2ee [2aa
-=21
-4cc#] 4ee] 4aa]
+=7
 8cc#XL
 8aaJ
 8eeL
 8aaJ
-16cc#LL
-16aa
+8eeL
+8aaJ
+!!linebreak:original
+=8
+8eeL
+8bbJ
+8gg#XL
+8bbJ
+8gg#L
+8bbJ
+=9
+16aLL
 16ee
-16aaJJ
-=22
-8gg#X
-4b 4dd 4ee
-8b 8dd 8ee
+16cc#X
+16eeJJ
+4dd 4ff#X 4aa
+4dd#X 4ff# 4aa
+=10
+2.ee 2.gg#X 2.bb
+=11
 8aL
-8cc#XJ 8ee
-8bbL
-[8ddJ
-=23
-8ddL]
+8eeJ
+8cc#XL
+8eeJ
+8cc#L
+8eeJ
+=12
+8bL
 8ff#XJ
-16eeLL
+8ddL
+8ff#J
+8ddL
+8ff#J
+=13
+2dd 2ee 2gg#X 2bb
+4cc#X 4ee 4aa
+!!linebreak:original
+=14
+4ee
+16gg#XLL
 16ddd
-16gg#X
-16bbJJ
-[2a [2cc#X [2ee
+16bb
+16dddJJ
+4a 4cc#X 4ee
+=15
+8bbL
+16ddL
+16gg#XJJ
+16eeLL
+16gg#J
+8ddJ 8ee 8gg#
+8cc#XL
+8eeJ 8aa
+=16
+2ee 2gg#X 2bb 2ddd
+4a 4cc#X 4ee
+=17
+2.dd 2.ff#X 2.aa 2.bb
+=18
+8ddL
+8bbJ
+8eeL
+8gg#XJ
+8eeL
+8gg#J
+=19
+8cc#XL
+8aaJ
+8eeL
+8aaJ
+8eeL
+8aaJ
+=20
+2.dd 2.ff#X 2.aa
+!!linebreak:original
+=21
+8ddL
+8ff#XJ 8bb
+8ff#L 8bb
+8ff#J 8bb
+8ff#L 8bb
+8ff#J 8bb
+=22
+2.cc#X 2.ee 2.aa
+=23
+8cc#XL
+8aaJ
+8eeL
+8aaJ
+8eeL
+8aaJ
 =24
-4a] 4cc#] 4ee]
+8cc#XL
+8eeJ 8aa
+8eeL 8aa
+8eeJ 8aa
+8eeL 8aa
+8eeJ 8aa
+=25
+2.b 2.dd 2.ee 2.gg#X
+=26
+2.b 2.dd 2.ee 2.gg#X
+=27
+8cc#XL
+8aaJ
+8eeL
+8aaJ
+8eeL
+8aaJ
+!!linebreak:original
+=28
+8aa
+4cc#X
+8ee
+8cc#L
+8eeJ 8aa
+=29
+2b 2dd 2ee 2gg#X
+4a 4cc#X 4ee
+=30
+4dd
+4ff#X 4bb
+8eeL
+8gg#XJ 8bb 8ddd
+=31
+2.a 2.cc#X 2.ee
 ==
 *-
