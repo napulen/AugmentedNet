@@ -49,7 +49,7 @@
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span><span class="sd">&quot;&quot;&quot;Common hardcoded variables throughout the code.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">available_collections</span>
+<span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">getAnnotationScoreDataset</span>
 
 <span class="c1"># Number of decimals to the right of the decimal point</span>
 <span class="n">FLOATSCALE</span> <span class="o">=</span> <span class="mi">4</span>
@@ -60,13 +60,7 @@
 
 <span class="n">DATASETSUMMARYFILE</span> <span class="o">=</span> <span class="s2">&quot;dataset_summary.tsv&quot;</span>
 
-<span class="n">ANNOTATIONSCOREDUPLES</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">DATASPLITS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;training&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;validation&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="p">[]}</span>
-
-<span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">available_collections</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="n">ANNOTATIONSCOREDUPLES</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">annotation_score_duples</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="n">DATASPLITS</span><span class="p">:</span>
-        <span class="n">DATASPLITS</span><span class="p">[</span><span class="n">split</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="n">split</span><span class="p">])</span>
+<span class="n">ANNOTATIONSCOREDUPLES</span><span class="p">,</span> <span class="n">DATASPLITS</span> <span class="o">=</span> <span class="n">getAnnotationScoreDataset</span><span class="p">()</span>
 </pre></div>
 
         </details>

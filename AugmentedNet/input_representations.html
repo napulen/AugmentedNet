@@ -31,19 +31,49 @@
         <h2>API Documentation</h2>
             <ul class="memberlist">
             <li>
-                    <a class="class" href="#Duration14">Duration14</a>
+                    <a class="class" href="#MeasureOnset7">MeasureOnset7</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="variable" href="#Duration14.features">features</a>
+                                <a class="variable" href="#MeasureOnset7.features">features</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Duration14.pattern">pattern</a>
+                                <a class="variable" href="#MeasureOnset7.pattern">pattern</a>
                         </li>
                         <li>
-                                <a class="function" href="#Duration14.run">run</a>
+                                <a class="function" href="#MeasureOnset7.run">run</a>
                         </li>
                         <li>
-                                <a class="function" href="#Duration14.decode">decode</a>
+                                <a class="function" href="#MeasureOnset7.decode">decode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#NoteOnset7">NoteOnset7</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#NoteOnset7.run">run</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#NoteOnset7.decode">decode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#MeasureNoteOnset14">MeasureNoteOnset14</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#MeasureNoteOnset14.features">features</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#MeasureNoteOnset14.pattern">pattern</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#MeasureNoteOnset14.run">run</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#MeasureNoteOnset14.decode">decode</a>
                         </li>
                 </ul>
 
@@ -239,96 +269,12 @@
     <span class="n">FeatureRepresentationTI</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># NOTENAMEDEFAULTCLASS = {</span>
-<span class="c1">#     &quot;C&quot;: 0,</span>
-<span class="c1">#     &quot;D&quot;: 2,</span>
-<span class="c1">#     &quot;E&quot;: 4,</span>
-<span class="c1">#     &quot;F&quot;: 5,</span>
-<span class="c1">#     &quot;G&quot;: 7,</span>
-<span class="c1">#     &quot;A&quot;: 9,</span>
-<span class="c1">#     &quot;B&quot;: 11,</span>
-<span class="c1"># }</span>
-<span class="c1"># def _solvePitchSpelling(noteNames, pitchClasses):</span>
-<span class="c1">#     if len(noteNames) != len(pitchClasses):</span>
-<span class="c1">#         raise Exception</span>
-<span class="c1">#     if not noteNames:</span>
-<span class="c1">#         return</span>
-<span class="c1">#     elif len(noteNames) == 1:</span>
-<span class="c1">#     note = noteNames[0]</span>
-<span class="c1">#     default = NOTENAMEDEFAULTCLASS[note]</span>
-<span class="c1">#     bestMatch = 999999</span>
-<span class="c1">#     for pc in pitchClasses:</span>
-<span class="c1">#         diff = pc -</span>
 
-
-<span class="k">class</span> <span class="nc">Duration14</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTEDURATIONS</span><span class="p">)</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># eight</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># quarter</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># half</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># whole</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="p">]</span>
+<span class="k">class</span> <span class="nc">MeasureOnset7</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTEDURATIONS</span><span class="p">)</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">06b</span><span class="si">}</span><span class="s2">0&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">]</span>
+    <span class="n">pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
@@ -339,14 +285,7 @@
                 <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">prev_measure</span> <span class="o">=</span> <span class="n">measure</span>
             <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">onset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_isOnset</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="mi">7</span><span class="p">:]</span> <span class="o">=</span> <span class="n">pattern</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 
@@ -356,12 +295,49 @@
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">measureOnset</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="p">]</span>
-            <span class="n">noteOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">measureOnset</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">noteOnset</span><span class="p">)))</span>
+            <span class="n">measureOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measureOnset</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">class</span> <span class="nc">NoteOnset7</span><span class="p">(</span><span class="n">MeasureOnset7</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">onset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_isOnset</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">noteOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">noteOnset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">class</span> <span class="nc">MeasureNoteOnset14</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span> <span class="o">+</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">pattern</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">measure7</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">note7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">mm</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measure7</span><span class="p">,</span> <span class="n">note7</span><span class="p">)]</span>
 
 
 <span class="k">class</span> <span class="nc">Bass19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
@@ -592,7 +568,9 @@
     <span class="s2">&quot;Bass35&quot;</span><span class="p">:</span> <span class="n">Bass35</span><span class="p">,</span>
     <span class="s2">&quot;Chromagram19&quot;</span><span class="p">:</span> <span class="n">Chromagram19</span><span class="p">,</span>
     <span class="s2">&quot;Chromagram35&quot;</span><span class="p">:</span> <span class="n">Chromagram35</span><span class="p">,</span>
-    <span class="s2">&quot;Duration14&quot;</span><span class="p">:</span> <span class="n">Duration14</span><span class="p">,</span>
+    <span class="s2">&quot;MeasureOnset7&quot;</span><span class="p">:</span> <span class="n">MeasureOnset7</span><span class="p">,</span>
+    <span class="s2">&quot;NoteOnset7&quot;</span><span class="p">:</span> <span class="n">NoteOnset7</span><span class="p">,</span>
+    <span class="s2">&quot;MeasureNoteOnset14&quot;</span><span class="p">:</span> <span class="n">MeasureNoteOnset14</span><span class="p">,</span>
     <span class="s2">&quot;Intervals39&quot;</span><span class="p">:</span> <span class="n">Intervals39</span><span class="p">,</span>
     <span class="s2">&quot;Intervals19&quot;</span><span class="p">:</span> <span class="n">Intervals19</span><span class="p">,</span>
     <span class="s2">&quot;BassChromagram38&quot;</span><span class="p">:</span> <span class="n">BassChromagram38</span><span class="p">,</span>
@@ -605,85 +583,22 @@
         </details>
 
             </section>
-                <section id="Duration14">
+                <section id="MeasureOnset7">
                                 <div class="attr class">
-        <a class="headerlink" href="#Duration14">#&nbsp;&nbsp</a>
+        <a class="headerlink" href="#MeasureOnset7">#&nbsp;&nbsp</a>
 
         
         <span class="def">class</span>
-        <span class="name">Duration14</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></span>):
+        <span class="name">MeasureOnset7</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></span>):
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Duration14</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTEDURATIONS</span><span class="p">)</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># eight</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># quarter</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># half</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># whole</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MeasureOnset7</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTEDURATIONS</span><span class="p">)</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">06b</span><span class="si">}</span><span class="s2">0&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">]</span>
+    <span class="n">pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
@@ -694,14 +609,7 @@
                 <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">prev_measure</span> <span class="o">=</span> <span class="n">measure</span>
             <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">onset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_isOnset</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="mi">7</span><span class="p">:]</span> <span class="o">=</span> <span class="n">pattern</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 
@@ -711,11 +619,8 @@
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">measureOnset</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="p">]</span>
-            <span class="n">noteOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">measureOnset</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">noteOnset</span><span class="p">)))</span>
+            <span class="n">measureOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measureOnset</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span>
 </pre></div>
 
@@ -728,18 +633,18 @@ returning a copy of the array that was already computed.</p>
 </div>
 
 
-                            <div id="Duration14.features" class="classattr">
-                                            <div class="attr variable"><a class="headerlink" href="#Duration14.features">#&nbsp;&nbsp</a>
+                            <div id="MeasureOnset7.features" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#MeasureOnset7.features">#&nbsp;&nbsp</a>
 
-        <span class="name">features</span><span class="default_value"> = 14</span>
+        <span class="name">features</span><span class="default_value"> = 7</span>
     </div>
 
     
     
 
                             </div>
-                            <div id="Duration14.pattern" class="classattr">
-                                            <div class="attr variable"><a class="headerlink" href="#Duration14.pattern">#&nbsp;&nbsp</a>
+                            <div id="MeasureOnset7.pattern" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#MeasureOnset7.pattern">#&nbsp;&nbsp</a>
 
         <span class="name">pattern</span><span class="default_value"> = [[1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0], [0, 1, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0], [0, 1, 0, 1, 0, 0, 0], [0, 0, 1, 1, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0], [0, 1, 0, 0, 1, 0, 0], [0, 0, 1, 0, 1, 0, 0], [0, 1, 1, 0, 1, 0, 0], [0, 0, 0, 1, 1, 0, 0], [0, 1, 0, 1, 1, 0, 0], [0, 0, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 1, 0], [0, 0, 1, 0, 0, 1, 0], [0, 1, 1, 0, 0, 1, 0], [0, 0, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0], [0, 0, 1, 1, 0, 1, 0], [0, 1, 1, 1, 0, 1, 0], [0, 0, 0, 0, 1, 1, 0], [0, 1, 0, 0, 1, 1, 0], [0, 0, 1, 0, 1, 1, 0], [0, 1, 1, 0, 1, 1, 0], [0, 0, 0, 1, 1, 1, 0], [0, 1, 0, 1, 1, 1, 0], [0, 0, 1, 1, 1, 1, 0], [0, 1, 1, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 1], [0, 0, 1, 0, 0, 0, 1], [0, 1, 1, 0, 0, 0, 1], [0, 0, 0, 1, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1], [0, 0, 1, 1, 0, 0, 1], [0, 1, 1, 1, 0, 0, 1], [0, 0, 0, 0, 1, 0, 1], [0, 1, 0, 0, 1, 0, 1], [0, 0, 1, 0, 1, 0, 1], [0, 1, 1, 0, 1, 0, 1], [0, 0, 0, 1, 1, 0, 1], [0, 1, 0, 1, 1, 0, 1], [0, 0, 1, 1, 1, 0, 1], [0, 1, 1, 1, 1, 0, 1], [0, 0, 0, 0, 0, 1, 1], [0, 1, 0, 0, 0, 1, 1], [0, 0, 1, 0, 0, 1, 1], [0, 1, 1, 0, 0, 1, 1], [0, 0, 0, 1, 0, 1, 1], [0, 1, 0, 1, 0, 1, 1], [0, 0, 1, 1, 0, 1, 1], [0, 1, 1, 1, 0, 1, 1], [0, 0, 0, 0, 1, 1, 1], [0, 1, 0, 0, 1, 1, 1], [0, 0, 1, 0, 1, 1, 1], [0, 1, 1, 0, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1], [0, 1, 0, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 1]]</span>
     </div>
@@ -748,8 +653,8 @@ returning a copy of the array that was already computed.</p>
     
 
                             </div>
-                            <div id="Duration14.run" class="classattr">
-                                        <div class="attr function"><a class="headerlink" href="#Duration14.run">#&nbsp;&nbsp</a>
+                            <div id="MeasureOnset7.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#MeasureOnset7.run">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
@@ -767,14 +672,7 @@ returning a copy of the array that was already computed.</p>
                 <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">prev_measure</span> <span class="o">=</span> <span class="n">measure</span>
             <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">onset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_isOnset</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="mi">7</span><span class="p">:]</span> <span class="o">=</span> <span class="n">pattern</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 </pre></div>
@@ -784,8 +682,8 @@ returning a copy of the array that was already computed.</p>
     
 
                             </div>
-                            <div id="Duration14.decode" class="classattr">
-                                        <div class="attr function"><a class="headerlink" href="#Duration14.decode">#&nbsp;&nbsp</a>
+                            <div id="MeasureOnset7.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#MeasureOnset7.decode">#&nbsp;&nbsp</a>
 
                 <div class="decorator">@classmethod</div>
 
@@ -801,11 +699,8 @@ returning a copy of the array that was already computed.</p>
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">measureOnset</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="p">]</span>
-            <span class="n">noteOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">measureOnset</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">noteOnset</span><span class="p">)))</span>
+            <span class="n">measureOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measureOnset</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span>
 </pre></div>
 
@@ -818,14 +713,252 @@ returning a copy of the array that was already computed.</p>
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
-                                <dd id="Duration14.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
-                <dd id="Duration14.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
-                <dd id="Duration14.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
-                <dd id="Duration14.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+                                <dd id="MeasureOnset7.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="MeasureOnset7.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="MeasureOnset7.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="MeasureOnset7.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
 
             </div>
             <div><dt><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></dt>
-                                <dd id="Duration14.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentationTI.dataAugmentation">dataAugmentation</a></dd>
+                                <dd id="MeasureOnset7.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentationTI.dataAugmentation">dataAugmentation</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="NoteOnset7">
+                                <div class="attr class">
+        <a class="headerlink" href="#NoteOnset7">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">NoteOnset7</span><wbr>(<span class="base"><a href="#MeasureOnset7">MeasureOnset7</a></span>):
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">NoteOnset7</span><span class="p">(</span><span class="n">MeasureOnset7</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">onset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_isOnset</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">noteOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">noteOnset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>TI stands for Transposition Invariant.</p>
+
+<p>If a representation is TI, dataAugmentation consists of
+returning a copy of the array that was already computed.</p>
+</div>
+
+
+                            <div id="NoteOnset7.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#NoteOnset7.run">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">run</span><span class="signature">(self, transposition=None)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">onset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_isOnset</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="NoteOnset7.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#NoteOnset7.decode">#&nbsp;&nbsp</a>
+
+                <div class="decorator">@classmethod</div>
+
+            <span class="def">def</span>
+            <span class="name">decode</span><span class="signature">(cls, array)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">noteOnset</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTEDURATIONS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">noteOnset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="NoteOnset7.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="NoteOnset7.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="NoteOnset7.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="NoteOnset7.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+            <div><dt><a href="#MeasureOnset7">MeasureOnset7</a></dt>
+                                <dd id="NoteOnset7.features" class="variable"><a href="#MeasureOnset7.features">features</a></dd>
+                <dd id="NoteOnset7.pattern" class="variable"><a href="#MeasureOnset7.pattern">pattern</a></dd>
+
+            </div>
+            <div><dt><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></dt>
+                                <dd id="NoteOnset7.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentationTI.dataAugmentation">dataAugmentation</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="MeasureNoteOnset14">
+                                <div class="attr class">
+        <a class="headerlink" href="#MeasureNoteOnset14">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">MeasureNoteOnset14</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></span>):
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MeasureNoteOnset14</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span> <span class="o">+</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">pattern</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">measure7</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">note7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">mm</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measure7</span><span class="p">,</span> <span class="n">note7</span><span class="p">)]</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>TI stands for Transposition Invariant.</p>
+
+<p>If a representation is TI, dataAugmentation consists of
+returning a copy of the array that was already computed.</p>
+</div>
+
+
+                            <div id="MeasureNoteOnset14.features" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#MeasureNoteOnset14.features">#&nbsp;&nbsp</a>
+
+        <span class="name">features</span><span class="default_value"> = 14</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="MeasureNoteOnset14.pattern" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#MeasureNoteOnset14.pattern">#&nbsp;&nbsp</a>
+
+        <span class="name">pattern</span><span class="default_value"> = [[1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0], [0, 1, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0], [0, 1, 0, 1, 0, 0, 0], [0, 0, 1, 1, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0], [0, 1, 0, 0, 1, 0, 0], [0, 0, 1, 0, 1, 0, 0], [0, 1, 1, 0, 1, 0, 0], [0, 0, 0, 1, 1, 0, 0], [0, 1, 0, 1, 1, 0, 0], [0, 0, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 1, 0], [0, 0, 1, 0, 0, 1, 0], [0, 1, 1, 0, 0, 1, 0], [0, 0, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0], [0, 0, 1, 1, 0, 1, 0], [0, 1, 1, 1, 0, 1, 0], [0, 0, 0, 0, 1, 1, 0], [0, 1, 0, 0, 1, 1, 0], [0, 0, 1, 0, 1, 1, 0], [0, 1, 1, 0, 1, 1, 0], [0, 0, 0, 1, 1, 1, 0], [0, 1, 0, 1, 1, 1, 0], [0, 0, 1, 1, 1, 1, 0], [0, 1, 1, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 1], [0, 0, 1, 0, 0, 0, 1], [0, 1, 1, 0, 0, 0, 1], [0, 0, 0, 1, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1], [0, 0, 1, 1, 0, 0, 1], [0, 1, 1, 1, 0, 0, 1], [0, 0, 0, 0, 1, 0, 1], [0, 1, 0, 0, 1, 0, 1], [0, 0, 1, 0, 1, 0, 1], [0, 1, 1, 0, 1, 0, 1], [0, 0, 0, 1, 1, 0, 1], [0, 1, 0, 1, 1, 0, 1], [0, 0, 1, 1, 1, 0, 1], [0, 1, 1, 1, 1, 0, 1], [0, 0, 0, 0, 0, 1, 1], [0, 1, 0, 0, 0, 1, 1], [0, 0, 1, 0, 0, 1, 1], [0, 1, 1, 0, 0, 1, 1], [0, 0, 0, 1, 0, 1, 1], [0, 1, 0, 1, 0, 1, 1], [0, 0, 1, 1, 0, 1, 1], [0, 1, 1, 1, 0, 1, 1], [0, 0, 0, 0, 1, 1, 1], [0, 1, 0, 0, 1, 1, 1], [0, 0, 1, 0, 1, 1, 1], [0, 1, 1, 0, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1], [0, 1, 0, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 1]]</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="MeasureNoteOnset14.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#MeasureNoteOnset14.run">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">run</span><span class="signature">(self, transposition=None)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">measure7</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">note7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="MeasureNoteOnset14.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#MeasureNoteOnset14.decode">#&nbsp;&nbsp</a>
+
+                <div class="decorator">@classmethod</div>
+
+            <span class="def">def</span>
+            <span class="name">decode</span><span class="signature">(cls, array)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">mm</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measure7</span><span class="p">,</span> <span class="n">note7</span><span class="p">)]</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="MeasureNoteOnset14.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="MeasureNoteOnset14.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="MeasureNoteOnset14.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="MeasureNoteOnset14.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+            <div><dt><a href="feature_representation.html#FeatureRepresentationTI">AugmentedNet.feature_representation.FeatureRepresentationTI</a></dt>
+                                <dd id="MeasureNoteOnset14.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentationTI.dataAugmentation">dataAugmentation</a></dd>
 
             </div>
                                 </dl>

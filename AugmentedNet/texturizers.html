@@ -46,7 +46,25 @@
                                 <a class="function" href="#TextureTemplate.templateTriad">templateTriad</a>
                         </li>
                         <li>
+                                <a class="function" href="#TextureTemplate.templateTriadDottedHalf">templateTriadDottedHalf</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TextureTemplate.templateTriadDottedQuarter">templateTriadDottedQuarter</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TextureTemplate.templateTriadBinary">templateTriadBinary</a>
+                        </li>
+                        <li>
                                 <a class="function" href="#TextureTemplate.templateSeventh">templateSeventh</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TextureTemplate.templateSeventhDottedHalf">templateSeventhDottedHalf</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TextureTemplate.templateSeventhDottedQuarter">templateSeventhDottedQuarter</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TextureTemplate.templateSeventhBinary">templateSeventhBinary</a>
                         </li>
                 </ul>
 
@@ -55,10 +73,22 @@
                     <a class="class" href="#BassSplit">BassSplit</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#BassSplit.templateTriad">templateTriad</a>
+                                <a class="function" href="#BassSplit.templateTriadBinary">templateTriadBinary</a>
                         </li>
                         <li>
-                                <a class="function" href="#BassSplit.templateSeventh">templateSeventh</a>
+                                <a class="function" href="#BassSplit.templateTriadDottedHalf">templateTriadDottedHalf</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#BassSplit.templateTriadDottedQuarter">templateTriadDottedQuarter</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#BassSplit.templateSeventhBinary">templateSeventhBinary</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#BassSplit.templateSeventhDottedHalf">templateSeventhDottedHalf</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#BassSplit.templateSeventhDottedQuarter">templateSeventhDottedQuarter</a>
                         </li>
                 </ul>
 
@@ -67,10 +97,22 @@
                     <a class="class" href="#Alberti">Alberti</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#Alberti.templateTriad">templateTriad</a>
+                                <a class="function" href="#Alberti.templateTriadBinary">templateTriadBinary</a>
                         </li>
                         <li>
-                                <a class="function" href="#Alberti.templateSeventh">templateSeventh</a>
+                                <a class="function" href="#Alberti.templateTriadDottedHalf">templateTriadDottedHalf</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Alberti.templateTriadDottedQuarter">templateTriadDottedQuarter</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Alberti.templateSeventhBinary">templateSeventhBinary</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Alberti.templateSeventhDottedHalf">templateSeventhDottedHalf</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Alberti.templateSeventhDottedQuarter">templateSeventhDottedQuarter</a>
                         </li>
                 </ul>
 
@@ -134,7 +176,7 @@
 <span class="k">class</span> <span class="nc">TextureTemplate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The base class for texturization templates.&quot;&quot;&quot;</span>
 
-    <span class="n">supported_durations</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+    <span class="n">supported_durations</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
     <span class="n">supported_number_of_notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">notes</span><span class="p">,</span> <span class="n">intervals</span><span class="p">):</span>
@@ -157,9 +199,37 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventh</span>
 
     <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadDottedHalf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">1.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadDottedQuarter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadBinary</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhDottedHalf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">1.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhDottedQuarter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhBinary</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -176,18 +246,56 @@
 <span class="sd">    the bass note in isolation during the first half,</span>
 <span class="sd">    followed by the remaining upper notes.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 
@@ -197,7 +305,7 @@
 <span class="sd">    A  4-note  melodic  pattern with the contour</span>
 <span class="sd">    lowest, highest, middle, highest.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">4</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
@@ -206,13 +314,51 @@
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">4</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 
@@ -341,7 +487,7 @@
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">TextureTemplate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The base class for texturization templates.&quot;&quot;&quot;</span>
 
-    <span class="n">supported_durations</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+    <span class="n">supported_durations</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
     <span class="n">supported_number_of_notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">notes</span><span class="p">,</span> <span class="n">intervals</span><span class="p">):</span>
@@ -364,9 +510,37 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventh</span>
 
     <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadDottedHalf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">1.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadDottedQuarter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadBinary</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhDottedHalf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">1.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhDottedQuarter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhBinary</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -419,7 +593,7 @@
                             <div id="TextureTemplate.supported_durations" class="classattr">
                                             <div class="attr variable"><a class="headerlink" href="#TextureTemplate.supported_durations">#&nbsp;&nbsp</a>
 
-        <span class="name">supported_durations</span><span class="default_value"> = [4.0, 2.0, 1.0]</span>
+        <span class="name">supported_durations</span><span class="default_value"> = [4.0, 3.0, 2.0, 1.5, 1.0]</span>
     </div>
 
     
@@ -447,6 +621,68 @@
             <details>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadDottedHalf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">1.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadDottedQuarter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateTriadBinary</span><span class="p">()</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="TextureTemplate.templateTriadDottedHalf" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#TextureTemplate.templateTriadDottedHalf">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateTriadDottedHalf</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="TextureTemplate.templateTriadDottedQuarter" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#TextureTemplate.templateTriadDottedQuarter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateTriadDottedQuarter</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="TextureTemplate.templateTriadBinary" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#TextureTemplate.templateTriadBinary">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateTriadBinary</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 </pre></div>
 
@@ -466,6 +702,68 @@
             <details>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhDottedHalf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mf">1.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhDottedQuarter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templateSeventhBinary</span><span class="p">()</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="TextureTemplate.templateSeventhDottedHalf" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#TextureTemplate.templateSeventhDottedHalf">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhDottedHalf</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="TextureTemplate.templateSeventhDottedQuarter" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#TextureTemplate.templateSeventhDottedQuarter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhDottedQuarter</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="TextureTemplate.templateSeventhBinary" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#TextureTemplate.templateSeventhBinary">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhBinary</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 </pre></div>
 
@@ -493,18 +791,56 @@
 <span class="sd">    the bass note in isolation during the first half,</span>
 <span class="sd">    followed by the remaining upper notes.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -518,17 +854,17 @@ followed by the remaining upper notes.</p>
 </div>
 
 
-                            <div id="BassSplit.templateTriad" class="classattr">
-                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateTriad">#&nbsp;&nbsp</a>
+                            <div id="BassSplit.templateTriadBinary" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateTriadBinary">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">templateTriad</span><span class="signature">(self)</span>:
+            <span class="name">templateTriadBinary</span><span class="signature">(self)</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
@@ -541,21 +877,123 @@ followed by the remaining upper notes.</p>
     
 
                             </div>
-                            <div id="BassSplit.templateSeventh" class="classattr">
-                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateSeventh">#&nbsp;&nbsp</a>
+                            <div id="BassSplit.templateTriadDottedHalf" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateTriadDottedHalf">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">templateSeventh</span><span class="signature">(self)</span>:
+            <span class="name">templateTriadDottedHalf</span><span class="signature">(self)</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="BassSplit.templateTriadDottedQuarter" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateTriadDottedQuarter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateTriadDottedQuarter</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],&quot;[True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="BassSplit.templateSeventhBinary" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateSeventhBinary">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhBinary</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="BassSplit.templateSeventhDottedHalf" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateSeventhDottedHalf">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhDottedHalf</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="BassSplit.templateSeventhDottedQuarter" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#BassSplit.templateSeventhDottedQuarter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhDottedQuarter</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,&quot;[True, True, True]&quot;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -571,6 +1009,8 @@ followed by the remaining upper notes.</p>
                                 <dd id="BassSplit.__init__" class="function"><a href="#TextureTemplate.__init__">TextureTemplate</a></dd>
                 <dd id="BassSplit.supported_durations" class="variable"><a href="#TextureTemplate.supported_durations">supported_durations</a></dd>
                 <dd id="BassSplit.supported_number_of_notes" class="variable"><a href="#TextureTemplate.supported_number_of_notes">supported_number_of_notes</a></dd>
+                <dd id="BassSplit.templateTriad" class="function"><a href="#TextureTemplate.templateTriad">templateTriad</a></dd>
+                <dd id="BassSplit.templateSeventh" class="function"><a href="#TextureTemplate.templateSeventh">templateSeventh</a></dd>
 
             </div>
                                 </dl>
@@ -593,7 +1033,7 @@ followed by the remaining upper notes.</p>
 <span class="sd">    A  4-note  melodic  pattern with the contour</span>
 <span class="sd">    lowest, highest, middle, highest.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">4</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
@@ -602,13 +1042,51 @@ followed by the remaining upper notes.</p>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">4</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -621,17 +1099,17 @@ lowest, highest, middle, highest.</p>
 </div>
 
 
-                            <div id="Alberti.templateTriad" class="classattr">
-                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateTriad">#&nbsp;&nbsp</a>
+                            <div id="Alberti.templateTriadBinary" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateTriadBinary">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">templateTriad</span><span class="signature">(self)</span>:
+            <span class="name">templateTriadBinary</span><span class="signature">(self)</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">4</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
@@ -646,23 +1124,125 @@ lowest, highest, middle, highest.</p>
     
 
                             </div>
-                            <div id="Alberti.templateSeventh" class="classattr">
-                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateSeventh">#&nbsp;&nbsp</a>
+                            <div id="Alberti.templateTriadDottedHalf" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateTriadDottedHalf">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">templateSeventh</span><span class="signature">(self)</span>:
+            <span class="name">templateTriadDottedHalf</span><span class="signature">(self)</span>:
     </div>
 
             <details>
             <summary>View Source</summary>
-            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Alberti.templateTriadDottedQuarter" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateTriadDottedQuarter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateTriadDottedQuarter</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateTriadDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Alberti.templateSeventhBinary" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateSeventhBinary">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhBinary</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">4</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Alberti.templateSeventhDottedHalf" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateSeventhDottedHalf">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhDottedHalf</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhDottedHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">3</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">4</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">5</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Alberti.templateSeventhDottedQuarter" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Alberti.templateSeventhDottedQuarter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">templateSeventhDottedQuarter</span><span class="signature">(self)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">templateSeventhDottedQuarter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">0.0,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,&quot;[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;]&quot;,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
+<span class="si">{</span><span class="n">dur</span><span class="o">*</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">dur</span><span class="si">}</span><span class="s2">,,[&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;],[],[True]</span>
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -678,6 +1258,8 @@ lowest, highest, middle, highest.</p>
                                 <dd id="Alberti.__init__" class="function"><a href="#TextureTemplate.__init__">TextureTemplate</a></dd>
                 <dd id="Alberti.supported_durations" class="variable"><a href="#TextureTemplate.supported_durations">supported_durations</a></dd>
                 <dd id="Alberti.supported_number_of_notes" class="variable"><a href="#TextureTemplate.supported_number_of_notes">supported_number_of_notes</a></dd>
+                <dd id="Alberti.templateTriad" class="function"><a href="#TextureTemplate.templateTriad">templateTriad</a></dd>
+                <dd id="Alberti.templateSeventh" class="function"><a href="#TextureTemplate.templateSeventh">templateSeventh</a></dd>
 
             </div>
                                 </dl>
@@ -794,6 +1376,12 @@ played in syncopation.</p>
                                     <div><dt><a href="#TextureTemplate">TextureTemplate</a></dt>
                                 <dd id="Syncopation.__init__" class="function"><a href="#TextureTemplate.__init__">TextureTemplate</a></dd>
                 <dd id="Syncopation.supported_number_of_notes" class="variable"><a href="#TextureTemplate.supported_number_of_notes">supported_number_of_notes</a></dd>
+                <dd id="Syncopation.templateTriadDottedHalf" class="function"><a href="#TextureTemplate.templateTriadDottedHalf">templateTriadDottedHalf</a></dd>
+                <dd id="Syncopation.templateTriadDottedQuarter" class="function"><a href="#TextureTemplate.templateTriadDottedQuarter">templateTriadDottedQuarter</a></dd>
+                <dd id="Syncopation.templateTriadBinary" class="function"><a href="#TextureTemplate.templateTriadBinary">templateTriadBinary</a></dd>
+                <dd id="Syncopation.templateSeventhDottedHalf" class="function"><a href="#TextureTemplate.templateSeventhDottedHalf">templateSeventhDottedHalf</a></dd>
+                <dd id="Syncopation.templateSeventhDottedQuarter" class="function"><a href="#TextureTemplate.templateSeventhDottedQuarter">templateSeventhDottedQuarter</a></dd>
+                <dd id="Syncopation.templateSeventhBinary" class="function"><a href="#TextureTemplate.templateSeventhBinary">templateSeventhBinary</a></dd>
 
             </div>
                                 </dl>
@@ -883,6 +1471,12 @@ played in syncopation.</p>
                                 <dd id="BlockChord.__init__" class="function"><a href="#TextureTemplate.__init__">TextureTemplate</a></dd>
                 <dd id="BlockChord.supported_durations" class="variable"><a href="#TextureTemplate.supported_durations">supported_durations</a></dd>
                 <dd id="BlockChord.supported_number_of_notes" class="variable"><a href="#TextureTemplate.supported_number_of_notes">supported_number_of_notes</a></dd>
+                <dd id="BlockChord.templateTriadDottedHalf" class="function"><a href="#TextureTemplate.templateTriadDottedHalf">templateTriadDottedHalf</a></dd>
+                <dd id="BlockChord.templateTriadDottedQuarter" class="function"><a href="#TextureTemplate.templateTriadDottedQuarter">templateTriadDottedQuarter</a></dd>
+                <dd id="BlockChord.templateTriadBinary" class="function"><a href="#TextureTemplate.templateTriadBinary">templateTriadBinary</a></dd>
+                <dd id="BlockChord.templateSeventhDottedHalf" class="function"><a href="#TextureTemplate.templateSeventhDottedHalf">templateSeventhDottedHalf</a></dd>
+                <dd id="BlockChord.templateSeventhDottedQuarter" class="function"><a href="#TextureTemplate.templateSeventhDottedQuarter">templateSeventhDottedQuarter</a></dd>
+                <dd id="BlockChord.templateSeventhBinary" class="function"><a href="#TextureTemplate.templateSeventhBinary">templateSeventhBinary</a></dd>
 
             </div>
                                 </dl>

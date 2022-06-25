@@ -133,7 +133,7 @@
 <span class="k">def</span> <span class="nf">generateDataset</span><span class="p">(</span>
     <span class="n">synthetic</span><span class="p">,</span>
     <span class="n">texturizeEachTransposition</span><span class="p">,</span>
-    <span class="n">dataAugmentation</span><span class="p">,</span>
+    <span class="n">noTransposition</span><span class="p">,</span>
     <span class="n">collections</span><span class="p">,</span>
     <span class="n">testCollections</span><span class="p">,</span>
     <span class="n">inputRepresentations</span><span class="p">,</span>
@@ -173,11 +173,11 @@
         <span class="n">df</span> <span class="o">=</span> <span class="n">joint_parser</span><span class="o">.</span><span class="n">from_tsv</span><span class="p">(</span><span class="n">tsvlocation</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">scrutinizeData</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">scrutinize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dataAugmentation</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">noTransposition</span> <span class="ow">or</span> <span class="n">split</span> <span class="o">!=</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
+            <span class="n">transpositions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">transpositions</span> <span class="o">=</span> <span class="n">_getTranspositions</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">transpositionKeys</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transpositions</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">transpositions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">synthetic</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">texturizeEachTransposition</span><span class="p">:</span>
                 <span class="c1"># once per file</span>
@@ -321,7 +321,7 @@
             <span class="name">generateDataset</span><span class="signature">(
     synthetic,
     texturizeEachTransposition,
-    dataAugmentation,
+    noTransposition,
     collections,
     testCollections,
     inputRepresentations,
@@ -340,7 +340,7 @@
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">def</span> <span class="nf">generateDataset</span><span class="p">(</span>
     <span class="n">synthetic</span><span class="p">,</span>
     <span class="n">texturizeEachTransposition</span><span class="p">,</span>
-    <span class="n">dataAugmentation</span><span class="p">,</span>
+    <span class="n">noTransposition</span><span class="p">,</span>
     <span class="n">collections</span><span class="p">,</span>
     <span class="n">testCollections</span><span class="p">,</span>
     <span class="n">inputRepresentations</span><span class="p">,</span>
@@ -380,11 +380,11 @@
         <span class="n">df</span> <span class="o">=</span> <span class="n">joint_parser</span><span class="o">.</span><span class="n">from_tsv</span><span class="p">(</span><span class="n">tsvlocation</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">scrutinizeData</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">scrutinize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dataAugmentation</span> <span class="ow">and</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">noTransposition</span> <span class="ow">or</span> <span class="n">split</span> <span class="o">!=</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
+            <span class="n">transpositions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">transpositions</span> <span class="o">=</span> <span class="n">_getTranspositions</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">transpositionKeys</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transpositions</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">transpositions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">synthetic</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">texturizeEachTransposition</span><span class="p">:</span>
                 <span class="c1"># once per file</span>

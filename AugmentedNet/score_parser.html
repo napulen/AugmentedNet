@@ -71,6 +71,7 @@
 <span class="kn">from</span> <span class="nn">music21.pitch</span> <span class="kn">import</span> <span class="n">Pitch</span>
 <span class="kn">from</span> <span class="nn">music21.chord</span> <span class="kn">import</span> <span class="n">Chord</span>
 <span class="kn">from</span> <span class="nn">music21.note</span> <span class="kn">import</span> <span class="n">Rest</span>
+<span class="kn">from</span> <span class="nn">music21.meter</span> <span class="kn">import</span> <span class="n">TimeSignature</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
@@ -206,16 +207,22 @@
     <span class="k">return</span> <span class="n">df</span>
 
 
-<span class="k">def</span> <span class="nf">_engraveScore</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_engraveScore</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">timeSignatures</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Useful for debugging _texturizeAnnotationScore.&quot;&quot;&quot;</span>
+    <span class="n">tss</span> <span class="o">=</span> <span class="n">timeSignatures</span> <span class="ow">or</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="s2">&quot;4/4&quot;</span><span class="p">}</span>
     <span class="n">chords</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">tss</span><span class="p">:</span>
+            <span class="n">chords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">tss</span><span class="p">[</span><span class="n">offset</span><span class="p">]))</span>
         <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">s_measure</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">+=</span> <span class="n">row</span><span class="o">.</span><span class="n">s_duration</span>
             <span class="k">continue</span>
         <span class="n">pitches</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">s_notes</span>
         <span class="n">duration</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">s_duration</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">2048</span><span class="p">)</span>
         <span class="n">chord</span> <span class="o">=</span> <span class="n">Chord</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span>
         <span class="n">chords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">+=</span> <span class="n">row</span><span class="o">.</span><span class="n">s_duration</span>
     <span class="k">return</span> <span class="n">chords</span>
 
 
