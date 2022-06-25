@@ -117,7 +117,6 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
             "ChordRoot35",
             "Inversion4",
             "PrimaryDegree22",
-            "RomanNumeral31",
             "SecondaryDegree22",
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
@@ -136,6 +135,8 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
 def evaluate(modelHdf5, X_test, y_true):
     model = keras.models.load_model(modelHdf5)
     X = [xi.array for xi in X_test]
+    padding = np.sum(X[0], axis=2) == -X[0].shape[2]
+    padding = padding.reshape(-1, 1)
     X = X if len(X) > 1 else X[0]
     y_preds = model.predict(X)
     dfdict = {}
@@ -144,17 +145,19 @@ def evaluate(modelHdf5, X_test, y_true):
     for y, ypred in zip(y_true, y_preds):
         name = y.name.replace("validation_y_", "")
         features.append(name)
-        dfdict["true_" + name] = []
-        dfdict["pred_" + name] = []
-        for true, preds in zip(y.array, ypred):
-            predsCategorical = np.argmax(preds, axis=1).reshape(-1, 1)
-            decodedTrue = availableOutputs[name].decode(true)
-            dfdict["true_" + name].extend(decodedTrue)
-            decodedPreds = availableOutputs[name].decode(predsCategorical)
-            dfdict["pred_" + name].extend(decodedPreds)
+        dfdict[f"true_{name}"] = []
+        dfdict[f"pred_{name}"] = []
+        true = y.array.reshape(-1, 1)[~padding]
+        ypred = ypred.reshape(-1, ypred.shape[2])
+        predsCategorical = np.argmax(ypred, axis=1).reshape(-1, 1)
+        predsCategorical = predsCategorical[~padding]
+        decodedTrue = availableOutputs[name].decode(true)
+        dfdict[f"true_{name}"].extend(decodedTrue)
+        decodedPreds = availableOutputs[name].decode(predsCategorical)
+        dfdict[f"pred_{name}"].extend(decodedPreds)
     df = pd.DataFrame(dfdict)
     for feature in features:
-        df[feature] = df["true_" + feature] == df["pred_" + feature]
+        df[feature] = df[f"true_{feature}"] == df[f"pred_{feature}"]
         summary[feature] = df[feature].mean().round(3)
         print(f"{feature}: {summary[feature]}")
     # Some custom features, all optional depending on outputs
