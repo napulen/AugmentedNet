@@ -385,8 +385,12 @@ class BassChromagramIntervals77(FeatureRepresentation):
 
 
 available_representations = {
+    "Bass7": Bass7,
+    "Bass12": Bass12,
     "Bass19": Bass19,
     "Bass35": Bass35,
+    "Chromagram7": Chromagram7,
+    "Chromagram12": Chromagram12,
     "Chromagram19": Chromagram19,
     "Chromagram35": Chromagram35,
     "MeasureOnset7": MeasureOnset7,
