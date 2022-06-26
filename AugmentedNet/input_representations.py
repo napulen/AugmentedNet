@@ -85,12 +85,36 @@ class MeasureNoteOnset14(FeatureRepresentationTI):
     @classmethod
     def decode(cls, array):
         measure7 = MeasureOnset7.decode(array[:, : MeasureOnset7.features])
-        note7 = NoteOnset7.decode(array[:, NoteOnset7.features :])
+        note7 = NoteOnset7.decode(array[:, MeasureOnset7.features :])
         return [(tuple(mm), tuple(n)) for mm, n in zip(measure7, note7)]
 
 
-class Bass19(FeatureRepresentation):
-    features = len(NOTENAMES) + len(PITCHCLASSES)
+class Bass12(FeatureRepresentation):
+    features = len(PITCHCLASSES)
+
+    def run(self, transposition="P1"):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        for frame, notes in enumerate(self.df.s_notes):
+            bass = notes[0]
+            transposed = TransposePitch(bass, transposition)
+            pitchObj = m21Pitch(transposed)
+            pitchClass = pitchObj.pitchClass
+            array[frame, pitchClass] = 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            bassPitchClass = np.argmax(manyhot)
+            ret.append(bassPitchClass)
+        return ret
+
+
+class Bass7(FeatureRepresentation):
+    features = len(NOTENAMES)
 
     def run(self, transposition="P1"):
         array = np.zeros(self.shape, dtype=self.dtype)
@@ -100,9 +124,7 @@ class Bass19(FeatureRepresentation):
             pitchObj = m21Pitch(transposed)
             pitchLetter = pitchObj.step
             pitchLetterIndex = NOTENAMES.index(pitchLetter)
-            pitchClass = pitchObj.pitchClass
             array[frame, pitchLetterIndex] = 1
-            array[frame, pitchClass + len(NOTENAMES)] = 1
         return array
 
     @classmethod
@@ -111,14 +133,54 @@ class Bass19(FeatureRepresentation):
             raise IndexError("Strange array shape.")
         ret = []
         for manyhot in array:
-            bassPitchName = NOTENAMES[np.argmax(manyhot[:7])]
-            bassPitchClass = np.argmax(manyhot[7:19])
-            ret.append((bassPitchName, bassPitchClass))
+            bassPitchName = NOTENAMES[np.argmax(manyhot)]
+            ret.append(bassPitchName)
         return ret
 
 
-class Chromagram19(FeatureRepresentation):
-    features = len(NOTENAMES) + len(PITCHCLASSES)
+class Bass19(FeatureRepresentation):
+    features = Bass12.features + Bass7.features
+
+    def run(self, transposition="P1"):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        self.letter = Bass7(self.df).run(transposition)
+        self.pc = Bass12(self.df).run(transposition)
+        array = np.concatenate((self.letter, self.pc), axis=1)
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        letters = Bass7.decode(array[:, : Bass7.features])
+        pcs = Bass12.decode(array[:, Bass7.features :])
+        return [(l, pc) for l, pc in zip(letters, pcs)]
+
+
+class Chromagram12(FeatureRepresentation):
+    features = len(PITCHCLASSES)
+
+    def run(self, transposition="P1"):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        for frame, notes in enumerate(self.df.s_notes):
+            for note in notes:
+                transposedNote = TransposePitch(note, transposition)
+                pitchObj = m21Pitch(transposedNote)
+                pitchClass = pitchObj.pitchClass
+                array[frame, pitchClass] = 1
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        if len(array.shape) != 2 or array.shape[1] != cls.features:
+            raise IndexError("Strange array shape.")
+        ret = []
+        for manyhot in array:
+            chromagramPitchClasses = np.nonzero(manyhot)[0].tolist()
+            ret.append(tuple(chromagramPitchClasses))
+        return ret
+
+
+class Chromagram7(FeatureRepresentation):
+    features = len(NOTENAMES)
 
     def run(self, transposition="P1"):
         array = np.zeros(self.shape, dtype=self.dtype)
@@ -128,9 +190,7 @@ class Chromagram19(FeatureRepresentation):
                 pitchObj = m21Pitch(transposedNote)
                 pitchLetter = pitchObj.step
                 pitchLetterIndex = NOTENAMES.index(pitchLetter)
-                pitchClass = pitchObj.pitchClass
                 array[frame, pitchLetterIndex] = 1
-                array[frame, pitchClass + len(NOTENAMES)] = 1
         return array
 
     @classmethod
@@ -139,14 +199,26 @@ class Chromagram19(FeatureRepresentation):
             raise IndexError("Strange array shape.")
         ret = []
         for manyhot in array:
-            chromagramPitchNames = [
-                NOTENAMES[x] for x in np.nonzero(manyhot[:7])[0]
-            ]
-            chromagramPitchClasses = np.nonzero(manyhot[7:])[0].tolist()
-            ret.append(
-                (tuple(chromagramPitchNames), tuple(chromagramPitchClasses))
-            )
+            pitchNames = [NOTENAMES[x] for x in np.nonzero(manyhot)[0]]
+            ret.append(tuple(pitchNames))
         return ret
+
+
+class Chromagram19(FeatureRepresentation):
+    features = Chromagram12.features + Chromagram7.features
+
+    def run(self, transposition="P1"):
+        array = np.zeros(self.shape, dtype=self.dtype)
+        self.letter = Chromagram7(self.df).run(transposition)
+        self.pc = Chromagram12(self.df).run(transposition)
+        array = np.concatenate((self.letter, self.pc), axis=1)
+        return array
+
+    @classmethod
+    def decode(cls, array):
+        letters = Chromagram7.decode(array[:, : Chromagram7.features])
+        pcs = Chromagram12.decode(array[:, Chromagram7.features :])
+        return [(l, pc) for l, pc in zip(letters, pcs)]
 
 
 class Intervals19(FeatureRepresentationTI):
