@@ -79,6 +79,36 @@
 
             </li>
             <li>
+                    <a class="class" href="#Bass12">Bass12</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Bass12.features">features</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Bass12.run">run</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Bass12.decode">decode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Bass7">Bass7</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Bass7.features">features</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Bass7.run">run</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Bass7.decode">decode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
                     <a class="class" href="#Bass19">Bass19</a>
                             <ul class="memberlist">
                         <li>
@@ -89,6 +119,36 @@
                         </li>
                         <li>
                                 <a class="function" href="#Bass19.decode">decode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Chromagram12">Chromagram12</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Chromagram12.features">features</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Chromagram12.run">run</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Chromagram12.decode">decode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Chromagram7">Chromagram7</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Chromagram7.features">features</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Chromagram7.run">run</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Chromagram7.decode">decode</a>
                         </li>
                 </ul>
 
@@ -336,12 +396,36 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
         <span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
-        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
         <span class="k">return</span> <span class="p">[(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">mm</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measure7</span><span class="p">,</span> <span class="n">note7</span><span class="p">)]</span>
 
 
-<span class="k">class</span> <span class="nc">Bass19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Bass12</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
+            <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">bassPitchClass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bassPitchClass</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">class</span> <span class="nc">Bass7</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
@@ -351,9 +435,7 @@
             <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
             <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
             <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
-            <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
             <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="nd">@classmethod</span>
@@ -362,14 +444,54 @@
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">bassPitchName</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])]</span>
-            <span class="n">bassPitchClass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bassPitchName</span><span class="p">,</span> <span class="n">bassPitchClass</span><span class="p">))</span>
+            <span class="n">bassPitchName</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bassPitchName</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span>
 
 
-<span class="k">class</span> <span class="nc">Chromagram19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Bass19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">Bass12</span><span class="o">.</span><span class="n">features</span> <span class="o">+</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter</span> <span class="o">=</span> <span class="n">Bass7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">Bass12</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="n">letters</span> <span class="o">=</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Bass12</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">pc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">pcs</span><span class="p">)]</span>
+
+
+<span class="k">class</span> <span class="nc">Chromagram12</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
+                <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
+                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">chromagramPitchClasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchClasses</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">class</span> <span class="nc">Chromagram7</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
@@ -379,9 +501,7 @@
                 <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
                 <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
                 <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
-                <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
                 <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="nd">@classmethod</span>
@@ -390,14 +510,26 @@
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">chromagramPitchNames</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="p">]</span>
-            <span class="n">chromagramPitchClasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchNames</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchClasses</span><span class="p">))</span>
-            <span class="p">)</span>
+            <span class="n">pitchNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTENAMES</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">pitchNames</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">class</span> <span class="nc">Chromagram19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="o">.</span><span class="n">features</span> <span class="o">+</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter</span> <span class="o">=</span> <span class="n">Chromagram7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="n">letters</span> <span class="o">=</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">pc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">pcs</span><span class="p">)]</span>
 
 
 <span class="k">class</span> <span class="nc">Intervals19</span><span class="p">(</span><span class="n">FeatureRepresentationTI</span><span class="p">):</span>
@@ -564,8 +696,12 @@
 
 
 <span class="n">available_representations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Bass7&quot;</span><span class="p">:</span> <span class="n">Bass7</span><span class="p">,</span>
+    <span class="s2">&quot;Bass12&quot;</span><span class="p">:</span> <span class="n">Bass12</span><span class="p">,</span>
     <span class="s2">&quot;Bass19&quot;</span><span class="p">:</span> <span class="n">Bass19</span><span class="p">,</span>
     <span class="s2">&quot;Bass35&quot;</span><span class="p">:</span> <span class="n">Bass35</span><span class="p">,</span>
+    <span class="s2">&quot;Chromagram7&quot;</span><span class="p">:</span> <span class="n">Chromagram7</span><span class="p">,</span>
+    <span class="s2">&quot;Chromagram12&quot;</span><span class="p">:</span> <span class="n">Chromagram12</span><span class="p">,</span>
     <span class="s2">&quot;Chromagram19&quot;</span><span class="p">:</span> <span class="n">Chromagram19</span><span class="p">,</span>
     <span class="s2">&quot;Chromagram35&quot;</span><span class="p">:</span> <span class="n">Chromagram35</span><span class="p">,</span>
     <span class="s2">&quot;MeasureOnset7&quot;</span><span class="p">:</span> <span class="n">MeasureOnset7</span><span class="p">,</span>
@@ -869,7 +1005,7 @@ returning a copy of the array that was already computed.</p>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
         <span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
-        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
         <span class="k">return</span> <span class="p">[(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">mm</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measure7</span><span class="p">,</span> <span class="n">note7</span><span class="p">)]</span>
 </pre></div>
 
@@ -938,7 +1074,7 @@ returning a copy of the array that was already computed.</p>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
         <span class="n">measure7</span> <span class="o">=</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
-        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="n">note7</span> <span class="o">=</span> <span class="n">NoteOnset7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">MeasureOnset7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
         <span class="k">return</span> <span class="p">[(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">mm</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measure7</span><span class="p">,</span> <span class="n">note7</span><span class="p">)]</span>
 </pre></div>
 
@@ -964,6 +1100,240 @@ returning a copy of the array that was already computed.</p>
                                 </dl>
                             </div>
                 </section>
+                <section id="Bass12">
+                                <div class="attr class">
+        <a class="headerlink" href="#Bass12">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Bass12</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></span>):
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Bass12</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
+            <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">bassPitchClass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bassPitchClass</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            <div id="Bass12.features" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Bass12.features">#&nbsp;&nbsp</a>
+
+        <span class="name">features</span><span class="default_value"> = 12</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="Bass12.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Bass12.run">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">run</span><span class="signature">(self, transposition=&#39;P1&#39;)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
+            <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Bass12.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Bass12.decode">#&nbsp;&nbsp</a>
+
+                <div class="decorator">@classmethod</div>
+
+            <span class="def">def</span>
+            <span class="name">decode</span><span class="signature">(cls, array)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">bassPitchClass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bassPitchClass</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Bass12.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Bass12.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Bass12.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Bass12.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Bass12.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="Bass7">
+                                <div class="attr class">
+        <a class="headerlink" href="#Bass7">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Bass7</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></span>):
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Bass7</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
+            <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
+            <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">bassPitchName</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bassPitchName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            <div id="Bass7.features" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Bass7.features">#&nbsp;&nbsp</a>
+
+        <span class="name">features</span><span class="default_value"> = 7</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="Bass7.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Bass7.run">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">run</span><span class="signature">(self, transposition=&#39;P1&#39;)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
+            <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
+            <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Bass7.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Bass7.decode">#&nbsp;&nbsp</a>
+
+                <div class="decorator">@classmethod</div>
+
+            <span class="def">def</span>
+            <span class="name">decode</span><span class="signature">(cls, array)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">bassPitchName</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bassPitchName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Bass7.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Bass7.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Bass7.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Bass7.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Bass7.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
                 <section id="Bass19">
                                 <div class="attr class">
         <a class="headerlink" href="#Bass19">#&nbsp;&nbsp</a>
@@ -976,31 +1346,20 @@ returning a copy of the array that was already computed.</p>
             <details>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Bass19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">Bass12</span><span class="o">.</span><span class="n">features</span> <span class="o">+</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
-            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
-            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
-            <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
-            <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
-            <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter</span> <span class="o">=</span> <span class="n">Bass7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">Bass12</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">bassPitchName</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])]</span>
-            <span class="n">bassPitchClass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bassPitchName</span><span class="p">,</span> <span class="n">bassPitchClass</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">ret</span>
+        <span class="n">letters</span> <span class="o">=</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Bass12</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">pc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">pcs</span><span class="p">)]</span>
 </pre></div>
 
         </details>
@@ -1029,15 +1388,9 @@ returning a copy of the array that was already computed.</p>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
-            <span class="n">bass</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">transposed</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
-            <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
-            <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
-            <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
-            <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter</span> <span class="o">=</span> <span class="n">Bass7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">Bass12</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 </pre></div>
 
@@ -1059,14 +1412,9 @@ returning a copy of the array that was already computed.</p>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">bassPitchName</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])]</span>
-            <span class="n">bassPitchClass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bassPitchName</span><span class="p">,</span> <span class="n">bassPitchClass</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">ret</span>
+        <span class="n">letters</span> <span class="o">=</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Bass12</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">Bass7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">pc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">pcs</span><span class="p">)]</span>
 </pre></div>
 
         </details>
@@ -1088,6 +1436,240 @@ returning a copy of the array that was already computed.</p>
                                 </dl>
                             </div>
                 </section>
+                <section id="Chromagram12">
+                                <div class="attr class">
+        <a class="headerlink" href="#Chromagram12">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Chromagram12</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></span>):
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Chromagram12</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
+                <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
+                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">chromagramPitchClasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchClasses</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            <div id="Chromagram12.features" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Chromagram12.features">#&nbsp;&nbsp</a>
+
+        <span class="name">features</span><span class="default_value"> = 12</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="Chromagram12.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Chromagram12.run">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">run</span><span class="signature">(self, transposition=&#39;P1&#39;)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
+                <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
+                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Chromagram12.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Chromagram12.decode">#&nbsp;&nbsp</a>
+
+                <div class="decorator">@classmethod</div>
+
+            <span class="def">def</span>
+            <span class="name">decode</span><span class="signature">(cls, array)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">chromagramPitchClasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchClasses</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Chromagram12.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Chromagram12.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Chromagram12.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Chromagram12.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Chromagram12.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="Chromagram7">
+                                <div class="attr class">
+        <a class="headerlink" href="#Chromagram7">#&nbsp;&nbsp</a>
+
+        
+        <span class="def">class</span>
+        <span class="name">Chromagram7</span><wbr>(<span class="base"><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></span>):
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Chromagram7</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
+                <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
+                <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
+                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">pitchNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTENAMES</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">pitchNames</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            <div id="Chromagram7.features" class="classattr">
+                                            <div class="attr variable"><a class="headerlink" href="#Chromagram7.features">#&nbsp;&nbsp</a>
+
+        <span class="name">features</span><span class="default_value"> = 7</span>
+    </div>
+
+    
+    
+
+                            </div>
+                            <div id="Chromagram7.run" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Chromagram7.run">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">run</span><span class="signature">(self, transposition=&#39;P1&#39;)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
+                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
+                <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
+                <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
+                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div id="Chromagram7.decode" class="classattr">
+                                        <div class="attr function"><a class="headerlink" href="#Chromagram7.decode">#&nbsp;&nbsp</a>
+
+                <div class="decorator">@classmethod</div>
+
+            <span class="def">def</span>
+            <span class="name">decode</span><span class="signature">(cls, array)</span>:
+    </div>
+
+            <details>
+            <summary>View Source</summary>
+            <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+            <span class="n">pitchNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">NOTENAMES</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">pitchNames</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+
+        </details>
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="feature_representation.html#FeatureRepresentation">AugmentedNet.feature_representation.FeatureRepresentation</a></dt>
+                                <dd id="Chromagram7.__init__" class="function"><a href="feature_representation.html#FeatureRepresentation.__init__">FeatureRepresentation</a></dd>
+                <dd id="Chromagram7.shape" class="variable"><a href="feature_representation.html#FeatureRepresentation.shape">shape</a></dd>
+                <dd id="Chromagram7.dataAugmentation" class="function"><a href="feature_representation.html#FeatureRepresentation.dataAugmentation">dataAugmentation</a></dd>
+                <dd id="Chromagram7.encodeManyHot" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeManyHot">encodeManyHot</a></dd>
+                <dd id="Chromagram7.encodeCategorical" class="function"><a href="feature_representation.html#FeatureRepresentation.encodeCategorical">encodeCategorical</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
                 <section id="Chromagram19">
                                 <div class="attr class">
         <a class="headerlink" href="#Chromagram19">#&nbsp;&nbsp</a>
@@ -1100,35 +1682,20 @@ returning a copy of the array that was already computed.</p>
             <details>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Chromagram19</span><span class="p">(</span><span class="n">FeatureRepresentation</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">PITCHCLASSES</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="o">.</span><span class="n">features</span> <span class="o">+</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
-                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
-                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
-                <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
-                <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
-                <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
-                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter</span> <span class="o">=</span> <span class="n">Chromagram7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">chromagramPitchNames</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="p">]</span>
-            <span class="n">chromagramPitchClasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchNames</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchClasses</span><span class="p">))</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="n">ret</span>
+        <span class="n">letters</span> <span class="o">=</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">pc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">pcs</span><span class="p">)]</span>
 </pre></div>
 
         </details>
@@ -1157,15 +1724,9 @@ returning a copy of the array that was already computed.</p>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transposition</span><span class="o">=</span><span class="s2">&quot;P1&quot;</span><span class="p">):</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">s_notes</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
-                <span class="n">transposedNote</span> <span class="o">=</span> <span class="n">TransposePitch</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">transposition</span><span class="p">)</span>
-                <span class="n">pitchObj</span> <span class="o">=</span> <span class="n">m21Pitch</span><span class="p">(</span><span class="n">transposedNote</span><span class="p">)</span>
-                <span class="n">pitchLetter</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">step</span>
-                <span class="n">pitchLetterIndex</span> <span class="o">=</span> <span class="n">NOTENAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitchLetter</span><span class="p">)</span>
-                <span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchObj</span><span class="o">.</span><span class="n">pitchClass</span>
-                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchLetterIndex</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">array</span><span class="p">[</span><span class="n">frame</span><span class="p">,</span> <span class="n">pitchClass</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">NOTENAMES</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter</span> <span class="o">=</span> <span class="n">Chromagram7</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transposition</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 </pre></div>
 
@@ -1187,18 +1748,9 @@ returning a copy of the array that was already computed.</p>
             <summary>View Source</summary>
             <div class="pdoc-code codehilite"><pre><span></span>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Strange array shape.&quot;</span><span class="p">)</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">manyhot</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-            <span class="n">chromagramPitchNames</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">NOTENAMES</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="p">]</span>
-            <span class="n">chromagramPitchClasses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">manyhot</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchNames</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chromagramPitchClasses</span><span class="p">))</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="n">ret</span>
+        <span class="n">letters</span> <span class="o">=</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="n">Chromagram12</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="n">Chromagram7</span><span class="o">.</span><span class="n">features</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">pc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">pcs</span><span class="p">)]</span>
 </pre></div>
 
         </details>
