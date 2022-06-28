@@ -33,9 +33,9 @@ def AugmentedNet(inputs, outputs, blocks=6):
     h = layers.Dense(32)(h)
     h = layers.BatchNormalization()(h)
     h = layers.Activation("relu")(h)
-    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.GRU(30, return_sequences=True)(h)
     h = layers.BatchNormalization()(h)
-    h = layers.Bidirectional(layers.GRU(30, return_sequences=True))(h)
+    h = layers.GRU(30, return_sequences=True)(h)
     h = layers.BatchNormalization()(h)
     y = []
     for output in outputs:
