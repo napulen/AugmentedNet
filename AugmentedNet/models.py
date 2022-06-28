@@ -16,7 +16,7 @@ def AugmentedNet(inputs, outputs, blocks=6):
         xi = layers.Input(shape=(sequenceLength, inputFeatures), name=name)
         x.append(xi)
         for i in range(blocks):
-            filters = 2 ** (blocks - 1 - i)
+            filters = 5
             kernel = 2 ** i
             h = layers.Conv1D(filters, kernel, padding="same")(xi)
             h = layers.BatchNormalization()(h)
