@@ -352,6 +352,7 @@ def run_experiment(
     # Helps organizing them in the mlflow interface
     summary = {f"results_{k}": v for k, v in summary.items()}
     mlflow.log_metrics(summary)
+    mlflow.end_run()
     print(f"The trained model is available in: {modelpath}")
 
 
