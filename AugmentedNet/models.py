@@ -5,7 +5,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-def AugmentedNet(inputs, outputs, blocks=6):
+def AugmentedNet(inputs, outputs, blocks=0):
     """Definition of the AugmentedNet architecture."""
     x = []  # (raw) inputs of the network
     xprime = []  # inputs after initial convolutional blocks
