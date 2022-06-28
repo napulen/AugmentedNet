@@ -441,6 +441,7 @@
     <span class="c1"># Helps organizing them in the mlflow interface</span>
     <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;results_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">end_run</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The trained model is available in: </span><span class="si">{</span><span class="n">modelpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
@@ -1109,6 +1110,7 @@ be called during TRAIN mode.</p>
     <span class="c1"># Helps organizing them in the mlflow interface</span>
     <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;results_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">end_run</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The trained model is available in: </span><span class="si">{</span><span class="n">modelpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
