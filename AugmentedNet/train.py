@@ -160,47 +160,51 @@ def evaluate(modelHdf5, X_test, y_true):
         df[feature] = df[f"true_{feature}"] == df[f"pred_{feature}"]
         summary[feature] = df[feature].mean().round(3)
         print(f"{feature}: {summary[feature]}")
-    # Some custom features, all optional depending on outputs
-    if "PrimaryDegree22" in df and "SecondaryDegree22" in df:
-        df["Degree"] = df.PrimaryDegree22 & df.SecondaryDegree22
-        summary["Degree"] = df.Degree.mean().round(3)
-        print(f"Degree: {summary['Degree']}")
-    if (
-        "LocalKey38" in df
-        and "ChordQuality11" in df
-        and "ChordRoot35" in df
-        and "Inversion4" in df
-        and "Degree" in df
-    ):
-        df["RomanNumeral"] = (
-            df.LocalKey38
-            & df.ChordQuality11
-            & df.ChordRoot35
-            & df.Inversion4
-            & df.Degree
-        )
-        summary["RomanNumeral"] = df.RomanNumeral.mean().round(3)
-        print(f"RomanNumeral: {summary['RomanNumeral']}")
-    # The alternative approach proposed in Napoles Lopez et al. (2021)
-    if "RomanNumeral31" in df and "LocalKey38" in df and "Inversion4" in df:
-        df["AltRomanNumeral"] = (
-            df.RomanNumeral31 & df.LocalKey38 & df.Inversion4
-        )
-        summary["AltRomanNumeral"] = df.AltRomanNumeral.mean().round(3)
-        print(f"AltRomanNumeral: {summary['AltRomanNumeral']}")
     # An alternative version in closed-form chord outputs
     if (
         "Bass35" in df
         and "Tenor35" in df
         and "Alto35" in df
         and "Soprano35" in df
-        and "LocalKey38" in df
     ):
-        df["satbRomanNumeral"] = (
-            df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35 & df.LocalKey38
+        df["SATB"] = df.Bass35 & df.Tenor35 & df.Alto35 & df.Soprano35
+        summary["SATB"] = df.SATB.mean().round(3)
+        print(f"SATB: {summary['SATB']}")
+    # Local and tonicized keys
+    if "LocalKey38" in df and "TonicizedKey38" in df:
+        df["Keys"] = df.LocalKey38 & df.TonicizedKey38
+        summary["Keys"] = df.Keys.mean().round(3)
+        print(f"Keys: {summary['Keys']}")
+    # Roman numeral + tonicization
+    if "RomanNumeral31" in df and "TonicizedKey38" in df:
+        df["RN31withKey"] = df.RomanNumeral31 & df.TonicizedKey38
+        summary["RN31withKey"] = df.RN31withKey.mean().round(3)
+        print(f"RN31withKey: {summary['RN31withKey']}")
+    # All tasks
+    if (
+        "Alto35" in df
+        and "Bass35" in df
+        and "HarmonicRhythm7" in df
+        and "LocalKey38" in df
+        and "PitchClassSet31" in df
+        and "RomanNumeral31" in df
+        and "Soprano35" in df
+        and "Tenor35" in df
+        and "TonicizedKey38" in df
+    ):
+        df["AllTasks"] = (
+            df.Alto35
+            & df.Bass35
+            & df.HarmonicRhythm7
+            & df.LocalKey38
+            & df.PitchClassSet31
+            & df.RomanNumeral31
+            & df.Soprano35
+            & df.Tenor35
+            & df.TonicizedKey38
         )
-        summary["satbRomanNumeral"] = df.satbRomanNumeral.mean().round(3)
-        print(f"satbRomanNumeral: {summary['satbRomanNumeral']}")
+        summary["AllTasks"] = df.AllTasks.mean().round(3)
+        print(f"AllTasks: {summary['AllTasks']}")
     outputPath = modelHdf5.replace(".model_checkpoint", ".results")
     outputPath = outputPath.replace(".hdf5", "")
     Path(outputPath).mkdir(parents=True, exist_ok=True)
@@ -261,7 +265,7 @@ def train(
     yv = yv if len(yv) > 1 else yv[0]
 
     modelNameSuffix = (
-        "{epoch:02d}"
+        "{epoch:03d}"
         + "-{val_monitored_loss:.3f}"
         + "-{val_monitored_accuracy:.4f}"
         + ".hdf5"
@@ -312,7 +316,6 @@ def run_experiment(
         tensorflowGPUHack()
     mlflow.tensorflow.autolog()
     mlflow.set_experiment(experiment_name)
-    mlflow.start_run(run_name=run_name)
     for k, v in kwargs.items():
         mlflow.log_param(f"custom_{k}", v)
     timestamp = datetime.datetime.now().strftime("%y%m%dT%H%M%S")
@@ -332,6 +335,7 @@ def run_experiment(
         syntheticDataStrategy=syntheticDataStrategy,
         modelName=model,
     )
+    mlflow.start_run(run_name=run_name)
     bestmodel = train(
         X_train,
         y_train,
