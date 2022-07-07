@@ -186,7 +186,7 @@ def evaluate(modelHdf5, X_test, y_true):
         and "Bass35" in df
         and "HarmonicRhythm7" in df
         and "LocalKey38" in df
-        and "PitchClassSet31" in df
+        and "PitchClassSet121" in df
         and "RomanNumeral31" in df
         and "Soprano35" in df
         and "Tenor35" in df
@@ -197,7 +197,7 @@ def evaluate(modelHdf5, X_test, y_true):
             & df.Bass35
             & df.HarmonicRhythm7
             & df.LocalKey38
-            & df.PitchClassSet31
+            & df.PitchClassSet121
             & df.RomanNumeral31
             & df.Soprano35
             & df.Tenor35
