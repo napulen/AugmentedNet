@@ -123,10 +123,10 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-09.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-09.musicxml",
     ),
-    "keymodt-reger-10": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-10.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-10.musicxml",
-    ),
+    # "keymodt-reger-10": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-10.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-10.musicxml",
+    # ),
     "keymodt-reger-100A": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-100A.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-100A.musicxml",
@@ -135,14 +135,14 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-100B.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-100B.musicxml",
     ),
-    "keymodt-reger-11": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-11.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-11.musicxml",
-    ),
-    "keymodt-reger-12": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-12.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-12.musicxml",
-    ),
+    # "keymodt-reger-11": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-11.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-11.musicxml",
+    # ),
+    # "keymodt-reger-12": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-12.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-12.musicxml",
+    # ),
     "keymodt-reger-13": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-13.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-13.musicxml",
@@ -171,10 +171,10 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-19.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-19.musicxml",
     ),
-    "keymodt-reger-20": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-20.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-20.musicxml",
-    ),
+    # "keymodt-reger-20": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-20.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-20.musicxml",
+    # ),
     "keymodt-reger-21": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-21.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-21.musicxml",
@@ -255,10 +255,10 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-40.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-40.musicxml",
     ),
-    "keymodt-reger-41": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-41.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-41.musicxml",
-    ),
+    # "keymodt-reger-41": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-41.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-41.musicxml",
+    # ),
     "keymodt-reger-42a": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-42a.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-42a.musicxml",
@@ -371,10 +371,10 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-64.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-64.musicxml",
     ),
-    "keymodt-reger-65": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-65.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-65.musicxml",
-    ),
+    # "keymodt-reger-65": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-65.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-65.musicxml",
+    # ),
     "keymodt-reger-66": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-66.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-66.musicxml",
@@ -415,14 +415,14 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-75.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-75.musicxml",
     ),
-    "keymodt-reger-76": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-76.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-76.musicxml",
-    ),
-    "keymodt-reger-77": (
-        "rawdata/key_modulation_dataset/rntxt/keymodt-reger-77.rntxt",
-        "rawdata/key_modulation_dataset/musicxml/keymodt-reger-77.musicxml",
-    ),
+    # "keymodt-reger-76": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-76.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-76.musicxml",
+    # ),
+    # "keymodt-reger-77": (
+    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-77.rntxt",
+    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-77.musicxml",
+    # ),
     "keymodt-reger-78": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-78.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-78.musicxml",
