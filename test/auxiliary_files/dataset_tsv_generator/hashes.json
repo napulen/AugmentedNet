@@ -503,6 +503,778 @@
         "a06e13c1b6f738080c54d25b159a12528f726225be0ce69d2a034b80702ee547",
         "735842cb3da67892a9b03b86700c6f0e6dd376c2f95a75d4bc7fd4c2d98f4da6"
     ],
+    "keymodt-aldwell-ex27-2a": [
+        "969844e04be85c58f23a8fe77f58abc72454209ad3f0d43aa458a9e247313a5b",
+        "44919e563cffe997205b2d1b1f5af036788e12c722cd006d509e3ff7298288c3"
+    ],
+    "keymodt-aldwell-ex27-2b": [
+        "419048a7f9a81683304df43f5088ed4cef9a0c1b21db467765f6a7b54f4fec43",
+        "addee0f5f245305c5865233d2766fab82e27c2ed9974bbc23d1931049a4cef60"
+    ],
+    "keymodt-aldwell-ex27-2c": [
+        "806ad6eb592f0098de49f60270b38571167e024503c45df9f51c42ff646719c3",
+        "11106f32e71a502e085edcc86c9fc3f184c7fb8023a4ee83fd33a9c78c7cbe7f"
+    ],
+    "keymodt-aldwell-ex27-3": [
+        "0dfcd1f252d4df903dbd2a3b46e48d737c2dd3d123a241372954b8a44bf088b2",
+        "92c86d3d9c09eb7514b05fadc400231bdb820d062f25487c5182cd94f8de3e8b"
+    ],
+    "keymodt-aldwell-ex27-4a": [
+        "f71e9285b1ea01862dd59e49373a755761b4be7a95480349d975ad80c9d38c6f",
+        "39890195aad8b1888699e6734a83fb2d4b2aa0c315914a84ac333f9d793bda3a"
+    ],
+    "keymodt-aldwell-ex27-4b": [
+        "8af73c705bfd7475acc0c59484744d3a4262d7e255440609500b1dacb66bbfe4",
+        "b4fd8c87b2269d6c1d5963dda951ac8b75a8abe141dea4247cee6d9153982877"
+    ],
+    "keymodt-aldwell-ex27-7": [
+        "82d914ef7f1b94bf8f383298703393386dadba2dcbb09b27463afc512544e9ba",
+        "b6e5d11453e1a69fea422fd384237bcc92b527f7770f792f3913e31b9f835cf2"
+    ],
+    "keymodt-kostka-payne-ex18-2": [
+        "0ee45caff1ed8b9a6514a29f21f82d6dd5e6a404af590ee9df101ffa5767540d",
+        "81911bae36193735c6432b04876d1fcba84069b16fc831397e6aca67bae334f1"
+    ],
+    "keymodt-kostka-payne-ex18-3a": [
+        "d30073d5ba39db5e2a871ffadb0e2925132376aa91f500726a9f4994c2ed03f2",
+        "194f9fcec836fe965e34fa8f82921b89ed042f95f5fb69d855d6b320431b4ced"
+    ],
+    "keymodt-kostka-payne-ex18-3b": [
+        "9d6d4e39f3389137ebd5fe4f8630139386b3e48c2c23582265e8df4400ca2e09",
+        "0ffc349bb3a7fa209709aab5138470273a6db2169c9628598ce5ae26201f1676"
+    ],
+    "keymodt-kostka-payne-ex18-4": [
+        "1e06f9c93a115e4938d684da144a38c25b38455209ad2df6a22f99834178f617",
+        "23a1a0452ab5f6f9803762e517d5f3038ac1900d117d5d55fc519a88554ea0ca"
+    ],
+    "keymodt-kostka-payne-ex18-6": [
+        "b90991c9166c51a13182c783140ca7a77cf9b616b7a918465cd042e1dbd69a96",
+        "5ad69f138bd9679fef69f30fa9a6ada9f22427fedb2befec4369a8671be3402f"
+    ],
+    "keymodt-kostka-payne-ex18-7": [
+        "5fcf893acd947381bdf4cdccd878236dc1a105bb4cc46a73443ff287c501ee2d",
+        "c4a1e709ca0596c1ea8d85aa6bf4390c2f115c1b52fe0b1dee8293d3566a020e"
+    ],
+    "keymodt-kostka-payne-ex19-1": [
+        "b6024d38a1b8a03f5c86e0947d99726b1208ee5d71c61acf2ca5d07d2693d691",
+        "39d7618555c0902795ab6e156fba89bb3df772af62e217d9dc30cb1d1f89bb95"
+    ],
+    "keymodt-kostka-payne-ex19-10": [
+        "7d1599b3c7c579574348c21bd228ff2592fbd043299bdf362ea8e046ac6165e8",
+        "80184df2a29fc380779a343b5418c7c41dd2e9528f97012a382deee816f74aa1"
+    ],
+    "keymodt-kostka-payne-ex19-11": [
+        "72fe537e4c768876b990129ffde47cd41b75bb1d2eb3d2d33a3ffdc720efe448",
+        "1d402c2063360ad9543d3d4c7ace0537d78284a2d51c94c052d26ddb8f00366c"
+    ],
+    "keymodt-kostka-payne-ex19-12": [
+        "db46086e480e20c17dfda4dfd9ecff85cd75f538a9770df958699847ac043a62",
+        "5a3b7344784583328008b95b5c73526732a212c395e8fd667cd0ecba2664c957"
+    ],
+    "keymodt-kostka-payne-ex19-2": [
+        "862270ee7f6fe4d3498ffa2036fe7cee8e9ab1981af3250c0ffaec3cad5ca583",
+        "2838d6c5100b3d2d64cb53d49b8f07a956d2cdb34d282445ef8439aa6107b1cb"
+    ],
+    "keymodt-kostka-payne-ex19-3": [
+        "01c9732a47e8faa8824d8b46336e4ef36c31a968743d0d3d5a7dca66cfd7aba7",
+        "0e79c15ceb64cdeccbbc762e67780a82cc3f95781ab609c8859d38995afac057"
+    ],
+    "keymodt-kostka-payne-ex19-4": [
+        "4f3c31f785ff7aaf6e85b5e07a6dbc3dbdaee412675af20a0ff7727eadd372d3",
+        "e1372c6b7a51e4d764f8348ea065251f52c5ebe87970eb8eccc8539cc9dd774f"
+    ],
+    "keymodt-kostka-payne-ex19-5": [
+        "8d94e0f286ed5d95d3a12ddba095317fa34e2b52a81111b02ff295ff3e401b62",
+        "415f028abac602fe5455f577a8c8e7b06e430b1a79f2ff1571d8281450efadae"
+    ],
+    "keymodt-kostka-payne-ex19-6": [
+        "a49fb24b463d0cad7f4b649b88eabbf63fd4d3a75082e750e01bbef467473774",
+        "62437ec213057c1c7faea372e066b72bd86d78735e005ed07ced5ad5b82e21a8"
+    ],
+    "keymodt-reger-01": [
+        "e2fb27601ef168d5ed3c7b29316f4e18f659a5b3f8d7500c20dfc6c54e718c79",
+        "12a478f9c241394e9a818205489e33817326319fa636193393b6121b81c137a2"
+    ],
+    "keymodt-reger-02": [
+        "d6c3274d311269236c2d8f96f860ed113a442a5bf57fa68557fbabd005e8d9e7",
+        "7bdfe3a133ce586aea7519f958c41f9d11530065368072b21df862da16848982"
+    ],
+    "keymodt-reger-03": [
+        "7ffbb254161c500ac37937036533a5b3634157ea66e46a20b438edd33c7d02a9",
+        "86042c0932a9ccb231a82e4a60191873556a88af827d6b47a573bb0596694e31"
+    ],
+    "keymodt-reger-04": [
+        "e3826f9d2f9aa8c21d03e57cbbfd423f2d3d6331fe68a50e5b7d18488e6f2a97",
+        "8813f0dfb76925b88eb87d0c7986f4e4bcd9443bb01aa3196f7446563ba171b6"
+    ],
+    "keymodt-reger-05": [
+        "11c5c6b965cc2b31e3416b23d461dbf6996cc73335409c402ecadd37cf31d0dc",
+        "1a0ea93c16b0b810b2360509ab9f5d3d4a304650c0d1fa97b9b80cd29ec21801"
+    ],
+    "keymodt-reger-06": [
+        "a76159162933430f6e0a97ff243556aba6a303dbdfbb68e13c9ffec9429194a4",
+        "eedbb922a25a744d1a4888e5fc6674cb0df9c525d0644db912326ac72096fd06"
+    ],
+    "keymodt-reger-07": [
+        "49ae4db3540ded1df3512e817fa3c14a1f334dfdeee3378a9ee809dfb8e02be5",
+        "a12b8e7e4ae94db58020f1abc48f899bd9007c9d289ec29d985f8216bb9f4264"
+    ],
+    "keymodt-reger-08": [
+        "64d2ce3f615811c57e03f4885f267bae8a8bb091274cc094deaf32126227ddf2",
+        "a8d95cc67ce86e8c8f23016ca50203f12b3890b1936f802fcb033a1f7e562bc5"
+    ],
+    "keymodt-reger-09": [
+        "fab55387d609aa3ad9569ae92fbc255b43d0cb3bed33b8d6eb47b29455e041f5",
+        "5264e967666ca9d4d3e1391f1d50bf158fc5797e6e9783077a20980c8b466bde"
+    ],
+    "keymodt-reger-100A": [
+        "863fc472b6f1bbabd5fe42d070056864102efc7b7984faf94e56dd26d4d32535",
+        "398f07bf2d3ff85d9441684b14b3167c9fd1cd7951502ab5b85b149dbcbd5502"
+    ],
+    "keymodt-reger-100B": [
+        "49cfefd80cb0a1eecce2d0e6dd5d8f22046453080dbe2310b7ba07bbd85661e0",
+        "bfea914d95886d0f652522a44c61ab3bf6b8e0f5f27fcf2e51930aa0371f4679"
+    ],
+    "keymodt-reger-13": [
+        "12096f40c6a3beaee8ba8736845f13195013fa25d2eb5337cee300ddce76c6f8",
+        "b3bba7e863802bed6292ff22330d8a261f0e8a780987cd109d8a510abf4bd289"
+    ],
+    "keymodt-reger-14": [
+        "b99c4af48a059743f68bd891feb2b0407e5013a52466770212463c1bfe7fbf18",
+        "561f8d416fa7eb37760f79d2aa6df95951d500a8f24d7aaf190cd5b4f08879d0"
+    ],
+    "keymodt-reger-15": [
+        "ec74f34e61c75a1c59c2b80cf1ca65e8755505618411fbef7868feb41d6094f0",
+        "417820879d4a971c0d30e665894b46d8b89eac3df57c08e4011036b48c0bd857"
+    ],
+    "keymodt-reger-16": [
+        "79720aa521140127dabe7113ec9f52ffa0e543414d6f16b9c2438a1332bf6f26",
+        "4238519b7ee274799562aef98c1b33c5d28942767012f270337083dd5e619d15"
+    ],
+    "keymodt-reger-17": [
+        "0f90583adf6c9648a130e06db6addb5bd81e46a48a08fbcda0390364bc56bf9e",
+        "b5e50de2a75164545e26c7e4f04634a1d671e1fbabc1b725d527333e7e1ab5f2"
+    ],
+    "keymodt-reger-18": [
+        "15ce6768cf7d421b9474fc15ba85538c82c708d0ab77c66e1bd0b6c8fd507299",
+        "d28a0b9f7138940bfdc5d24d3187ab6a207207ab0fedec3f26bbd7bfadbc91a8"
+    ],
+    "keymodt-reger-19": [
+        "24c30dd0ce135d8557759a121cc3e77777f57d8ae5e73b9b2ca7928ee26e959a",
+        "f10b071cc05aeed9cb702fd2fc201a69cbba8dc549b900ceeaae119d99debf2a"
+    ],
+    "keymodt-reger-21": [
+        "1b9637d301ad1160ff46a5d39acd24e545dce69ebadacd9d96e201a185d849c3",
+        "993c5c3f174bc7ebbed704f7f40216f8fb021569480d6d2538b075146b4f5cfd"
+    ],
+    "keymodt-reger-22": [
+        "e1d6262f3f9c1ba0b5fc3c45abfbe5f797f1fe0169ed8d7a2a648f4c2f8924f7",
+        "174706c99674f83cca19146ac84fa241720fd621ca68c58e23b3761249bec05a"
+    ],
+    "keymodt-reger-23": [
+        "ba6a46b0e4d8898817f37d75074b3c06a79447596f6e01d1ba1db1daa751c380",
+        "783a758a1cf8eec15e522bb532e571173cf49855e56aaf4997ebc2d4ba08d65a"
+    ],
+    "keymodt-reger-24": [
+        "e42df6d9f0e30eedbaf2fea7bbe18a5840f527504ca9f3cff3cabc7f9b296657",
+        "ba0b11d3d23e6659845fa77673434534823f81666829ddf39220e22d3b02e6b2"
+    ],
+    "keymodt-reger-25": [
+        "0461aa8f0ba16eaae077346fddf1ecb5d247a7a9cf9bde4478a5a94ee4b506b5",
+        "7199fab4500073eb8c1087342953547f864aa22b0c56bc5d365d3a1366483dcf"
+    ],
+    "keymodt-reger-26": [
+        "4998568d73c0c18347857e0dcbb255b313f9733545bd7223aaaa7593e5b66951",
+        "3c8512b3dbed9dfdecd7655d464bd3dcb730f8002c2815046d8476437d516051"
+    ],
+    "keymodt-reger-27": [
+        "1e426c6747c70559ad9b9b878c40aa44721dc56803399e4de275555d8edeed6f",
+        "9f6dd0257d2a32e59b4150c96eba54e4a324321716ba0bc494c4ba27ec7ff6e5"
+    ],
+    "keymodt-reger-28": [
+        "698e1664af703b1d52b66de1b30011ea6f5239c01f2eca67ffd3f00f3e0c0ab1",
+        "48e4ea59643dab4848a985fca0afa1d300747d7997afe9a4bc89a626800ba9e0"
+    ],
+    "keymodt-reger-29": [
+        "3afd6a61582965fb7432ce18f4533c0a8ba4691ae0b1b76a176ece4ade223687",
+        "ab1ff634fb7eba486e6db70a509796b2d773d8321ab33aa617af2200ca307845"
+    ],
+    "keymodt-reger-30": [
+        "2784e3200128442d2c764c5e71695def2040231bdc4e736715aebe930be87857",
+        "3943d02c171cabe5d238a5d5f03c570af68b9c32525cdf86e3f0a83c43a8b830"
+    ],
+    "keymodt-reger-31": [
+        "c879858547ee11bed9fb9a69dff599c31f1d0f90ff915927ed1d657696275e5f",
+        "0208ff3d0d9195951bcf25be5bb9f3503e50baa4e05d6310eee12948da5d408b"
+    ],
+    "keymodt-reger-32": [
+        "0eec6c1ef2107645ea11bf2df655f91f89b37ceb51524bd8557ae0ffb3c12c8b",
+        "cf4dd1477822d2b02148fdfa8516fd461a24b232ad79647a27871f4f1b8e9731"
+    ],
+    "keymodt-reger-33": [
+        "1703f6154a7288f3b69bba443ea32991fa4ac043ef7fa96542e2997b04bbc458",
+        "c95677f2488526b10ebe8d05f3959256235c56fab474a744c6a2ea5a18c2faf6"
+    ],
+    "keymodt-reger-34": [
+        "4022791718dc52876acfe08730fa2e22aef3e53523ed0fdce09720fc1d44d52e",
+        "35dc6bfad66e1d4278e0bb03cb1c7a39bc51d5784411cad664b7aefa4ea748b5"
+    ],
+    "keymodt-reger-35": [
+        "0c7ca162cfa0cb6abaa3b9a86309da47a6b0f890b879abdc58faf0c453678016",
+        "f644c1b150360a7abf78038a4f2a720448523bf85e5f9c9abd9691424c3446bd"
+    ],
+    "keymodt-reger-36": [
+        "8b31bcb9f9f094e0a2809d2be738e5c62d86aa0f4b6e2742ae5778659b8cb836",
+        "2799afdd77c545960791bd7c390893ae7b5404b1038005a3189c0a4fa223ee55"
+    ],
+    "keymodt-reger-37": [
+        "6facbf49db82d38aa2763af0ba8980b028e2e6b3cdf156554d2cfa5d89816933",
+        "c6bf031a082d6f4a14fad27b10e35f269a1be171ce561337223f04b488534c3d"
+    ],
+    "keymodt-reger-38": [
+        "00bf962b1f701f2dd7af1dbbc2e5593439ef129d570b9599465fd7ba3842c36b",
+        "0c446b238e40c91e5cf60317d878ea0e1c3bea92bb3dd6456fc93a19c406e153"
+    ],
+    "keymodt-reger-39": [
+        "afff827bfe6a9bb2103ddbd404aa91ae952dfd5d35509998bc21659a74a2233b",
+        "b61b8cde08cbd14e7eb9dc36d7fa0fdb38cb6def10868467caf782f3ed3986ae"
+    ],
+    "keymodt-reger-40": [
+        "1a14389ddc4e2c4a4b59745891e9f62bc3fdeeba72ae79a746e8f2a4408900fd",
+        "fba7359441f5b2fbaf160bd127377abaa1d0da50484997665ddadc75f0c56e85"
+    ],
+    "keymodt-reger-42a": [
+        "c1ff66d2f443f3ff3dbc5e9941b486b8f00fe69f2f2ad9879d2ee339afe26840",
+        "d8ec1e24999b47f22bb1de68ee79727473a3bb28fed780cde7fc3512b82f4b5d"
+    ],
+    "keymodt-reger-42b": [
+        "09a03011328544aa8c9048f5295514397003e5b9f672c772fdb03ba7dc2b150c",
+        "bf43f054921febcbfbd80f93cb940a3ad851ed1784e53f5604b4a926fbc85e6c"
+    ],
+    "keymodt-reger-43a": [
+        "047f8d9ba2a95057af9064a5c205555d6666d1fc9017a541e650e205d36f6bc3",
+        "3c55403508e4afd3cdb835d7bee00ec8b6b889f2772aec8ab4abe2fb5ea7c0ef"
+    ],
+    "keymodt-reger-43b": [
+        "4d7bbc99167d8466743c28b0f35888bbcb6f57c2be02445d9ad47ffa7bff46bd",
+        "152e505d2dddfd5ce4f39c92cd7ffda1008c677eb3148accdabaddb9ed9e5d5c"
+    ],
+    "keymodt-reger-44a": [
+        "061fd9c44fd92f7b1b34a77fe971523c37621b9e4aa9abce0b915c4e20fc9ae8",
+        "e0100649f2fd10ac3ed07f9989c4f0a195ee07d29c5b006bebb26dfd11cb459c"
+    ],
+    "keymodt-reger-44b": [
+        "9b778c527d2f76ca235c1086ead863efd6752a0210499146850a82fcdfc2310c",
+        "b907f27e3349c36e52870e52a5aae16e6b48e26c5efb5806e2ea5972c8dbbb6e"
+    ],
+    "keymodt-reger-45a": [
+        "48e773303c9d30fade53a1730964f14e22a0c664cde6125f82936c2fc77e7925",
+        "f7d33feade0211421b45d54be4a2f899ab02906c70c25e79c885faaedc0ad681"
+    ],
+    "keymodt-reger-45b": [
+        "62a50efc73586c12a4c9b4e1253a33a7b308f7fc50ab5e84c02dd019f5a07390",
+        "b39bd7b3073ab13deb3a00a0a32ab3b9815dc9ec85a30c9216c5af87d7f89caf"
+    ],
+    "keymodt-reger-46a": [
+        "6e447740f3eb2371527a76329ed69e1baa3485869a86e6aedae0f2d70fd40b3c",
+        "bdfd7476688d784b71896c4ad44728cad823bf5991b3c88ce5511772a539ddb9"
+    ],
+    "keymodt-reger-46b": [
+        "2256af9944024182122314074867eaac7509418c769d2690c6cda0d1b932fa50",
+        "a7a8a03f07f7f919ac977346073a677606cb6d351ccff9c36d3c0360e7e6390b"
+    ],
+    "keymodt-reger-47": [
+        "f919ccb1687cbc14390e5c357deb4157b11838ae805016133942ecc3e8157211",
+        "5d618e115c1e367686cb6d5a56aa6ace03dd8ca3110209d8bd0ac02af6e03e29"
+    ],
+    "keymodt-reger-48": [
+        "d4a12b10bc7d5a29906dd1e190832b3e2c05b587aeba876d52b0cb1e74670b80",
+        "df9df1155f331b6043c40e5921289cbb1deb6affdd8454199dae736655485942"
+    ],
+    "keymodt-reger-49": [
+        "ffe3c1ca47e9aa8b4c09e0ef4c340388f932f2b832b5a22ca0d57c2a4a8d855f",
+        "d861a5972aeeb18a1374d49ac81407090eeebb15434b9d42213f4d69189346c9"
+    ],
+    "keymodt-reger-50": [
+        "c810001921640b6f5d73bf0563c1ef6e48c3d0e18404a2e0f1cde8ef3ecd0c1b",
+        "81b77e127bd7e0f08f067a9c95ff698921a4960afd5e795eb51a2299add17399"
+    ],
+    "keymodt-reger-51": [
+        "49acf5b486d12ad57d4d5f3dd622a92b911a02a3a94939e69eb470060e9b5015",
+        "0048aae6eafd0d910b3aec9ec524181fedfcbce4b52d3c07645ce4a29d9849dd"
+    ],
+    "keymodt-reger-52": [
+        "58bec6904a2019be5d5ce624190e9615e6f39bb1b34e3312982556c5f298de25",
+        "c6809dfc6adb9fddc2f8289fa38692ca98265ef21fc7e4b98527bb0f6ee064fb"
+    ],
+    "keymodt-reger-53": [
+        "bed12e3c939d50ed09c42c320378275bb43b3f7591b253aaff332a67ddde53dc",
+        "98c88b9459093fc0cc58bcf2267c34ecd93da1040f0d196df4f6ed6b8647e78b"
+    ],
+    "keymodt-reger-54": [
+        "511edef371ff31e629fecf9cccc00cee8fdff4c5de94405e8d11c5ac0c1465c4",
+        "283089c108b6fe5e37699a13f2b3a35b5d23e5cb5c834bd55edb7c97b8a2c069"
+    ],
+    "keymodt-reger-55": [
+        "537a506caaa2a96582b93ce106ef5555ba23dbac8b1a41d7fec1d04bdff1a2c3",
+        "81b3d44f37c79f5e36178dc8266db81a33e1d3370ec53d071b5261e8102b5231"
+    ],
+    "keymodt-reger-56": [
+        "b22012e9202f3d53094d8f91916d9b2f3fa0cd99296c754c6f6c34132a0d1d23",
+        "ef43f894f020c724121991461c7e27ec2551ca78935b82645ffba4cc68eccafc"
+    ],
+    "keymodt-reger-57": [
+        "0fa1131348f39a7eddfd58649491140623d5d55489621b29c08e01f490117b1c",
+        "94b5be2abfc26a4b1a0eb5f43b56a39f836a552ba77785aaac46123a8b416084"
+    ],
+    "keymodt-reger-58": [
+        "1ad33ec49838abcab391e1bc7fccd319d95cb0af6873c728df4515166851f1a8",
+        "1a5e6a46fb61e3d24ae75b8e31bc8116d4070928aa34b7e98a0fa2c21f7c1980"
+    ],
+    "keymodt-reger-59": [
+        "79a26ba661181900795d454290c9634b4013488a2f4b31dcaaad0b7f4e00d8e7",
+        "e81473f0ac6ca0cbff7fda9a661257bd7f1b521adb6c8234241195adac84ed49"
+    ],
+    "keymodt-reger-60": [
+        "2477d0f7a9044d6a35a8a6e606609fa49ccc5617495f7c128d1c8fc6c02b0a80",
+        "c5e0bd0fec4d49b79f4483055dd00412883bc8787f5328387c119e3e437803cf"
+    ],
+    "keymodt-reger-61": [
+        "54b31d4bf948e5ac22112a5d1cdf6450985a3a5300a47f52397bcf36a254ab63",
+        "e75d9084afc7fb4bafafc64dab61a378c70729102caebf464a38a8dbf79fb361"
+    ],
+    "keymodt-reger-62": [
+        "491f7260b3656418fb641f6fb9ded25230aa9d03f743a8028306bfbe19480980",
+        "aa1ec8c364e23302fa6a64adc67c993c08ca33c88b159585ce29b27232250dfc"
+    ],
+    "keymodt-reger-63": [
+        "45cfbfee1bfecb41dddef2faa2377c5020c6ebde8258b5e90fb402fc91194e32",
+        "faed4bf1d51fca28d56d6309595fcb4aa596946a481def849d0a265ff5309a22"
+    ],
+    "keymodt-reger-64": [
+        "bc5fd59cc23ddedc5cf5a8d740bc6b802e1bbc5c790bf053383acc412c66c201",
+        "6095876d3edd55db7471df1db6f09e936a9fa89bb0a20f33739f59b87113b050"
+    ],
+    "keymodt-reger-66": [
+        "648bb359e3288d620c4f18ec38c3e928e43fa090062f14e2544097583a79cf2d",
+        "d061950ddc2340f3a965b10c55a44a799c2fab75de921ef97d4b3dbdb43826c5"
+    ],
+    "keymodt-reger-67": [
+        "f2324132e3411a3c2bda7ad99fd363bbc9527c08b36f6a1c8fe510703b2f4c8e",
+        "bb2186528c047e2120511e092163c74385a534b452dd040b32ee93fcc831c75a"
+    ],
+    "keymodt-reger-68": [
+        "b27c1d5da384dbbc40eb415a33cc0c4c65a67b58fec347d6d3f9fdd6bdcab65d",
+        "0290866b526029a52f237e8fefdf008ae2a9b5baca3302c80ba65701e1423112"
+    ],
+    "keymodt-reger-69": [
+        "b93c5885bdfa4840e1bffcf281d50e68f2bdc7a4c5e0babb1c51fd058751a1ba",
+        "fbbfbcfee253d8523a80dc6ab0b13e987c3d638593f7cd7c656d4e11c1119882"
+    ],
+    "keymodt-reger-70": [
+        "5bd10ac264d308acd4512580056251a46017918be04904848587e2c5fc6bd138",
+        "b4efc2bfd45271c394f1ca22e71580aa7bde93002202d8b76fd0ea93e5e3d050"
+    ],
+    "keymodt-reger-71": [
+        "d2dc0b1e5c5fc8f324b186d774d42685d906b288f7c3162fdd4f6bf1c0916603",
+        "256d7cb891c5008bb206ba642667d87a7ebc9b899a364fed9bc9e8a33c552739"
+    ],
+    "keymodt-reger-72": [
+        "7c957cb925d40187cbd56ea739b9e266f8bd21e2e36e8367ecc46c9c63e3ecb9",
+        "e04720b7627d5e81dd800983e889bf0caf38415012cb4d34140b490c5b97d57c"
+    ],
+    "keymodt-reger-73": [
+        "88ae0fe08952cf9e84f2f8669f058b2d6422c4bb17c6302a68ddac7d86d21ab6",
+        "bb66d25fc9f8a39d709d751228b4c36f556aefc99fc1f00aef579436965d1580"
+    ],
+    "keymodt-reger-74": [
+        "ae8da10c1b1e46dd5c555237c183755b09137e466f7c518dda9d6862715ead8f",
+        "8360a57c94060a1e20ea520121673010f0169e784c750f4db772054001dd4fa7"
+    ],
+    "keymodt-reger-75": [
+        "d39b829fba48338622de2589c075ab915c8d2591e89db3fcc5097f42cf8f9412",
+        "f5c4d5f6f88ee998b605755ba8cfb91ffc6ab246f64536ebf85bf9152c07c1c5"
+    ],
+    "keymodt-reger-78": [
+        "afda37914cf69d7b5b23a7374f6ef0f11af7a487efb9ff4d1246b5c2e7a3b7ff",
+        "3f5ac26f0944a96ec2a64819a1b47c58e6b141f8e8342358d5affc070148c784"
+    ],
+    "keymodt-reger-79": [
+        "297da49b59188294b97a58faf45e71e74e7c6fac3680ade3eb07d91d3c3e4d0f",
+        "74ddeb87f6931d18de259409b37eed75e4a3df2229d6d3e66cbbd69382db6a67"
+    ],
+    "keymodt-reger-80": [
+        "c074bfaf1fbb2261da32687accb982ffbd3f2166f1d943beecb7bbd8bebe65ab",
+        "ee14bed4150ccd06b40f2fe69d923b9305da623a13a4813e9620e839eb696c3a"
+    ],
+    "keymodt-reger-81": [
+        "c95555492395cd26d54715921520d113692fb9bd42c985d0a9b3059ae7ac0e24",
+        "1965350f912bcc31c892e833d1c52168e7e5ddda692428d875207d605b45e1f3"
+    ],
+    "keymodt-reger-82": [
+        "9f7a528695e2dc06d73a2f4540623adb56e1a004eae3139636ba576c4f2e6ed5",
+        "54f39a8921b4bc7f288bc6092cc1080092b77261dd4372b4ad0f286601d09206"
+    ],
+    "keymodt-reger-83": [
+        "89b357dadda3405c4119d927d061ffde7e6fdb0c34cbdcc747903d408b4d4423",
+        "c8d9deeeaf3daa07d748b2d8b2b4760200de65034869ef65ba89b979e2f22d7c"
+    ],
+    "keymodt-reger-84": [
+        "3c86b9e7bbbcb169cf4029e0b6fa369de112e9f4d1ee2b1fdb3e07bcc2220d92",
+        "97104470dd66d05099f3d25016635621418cfa9d39089ae7bf31a113611d9f56"
+    ],
+    "keymodt-reger-85": [
+        "7b57a2c09d69f30966381227b40c2202d65d52282598b5cc8feedfe1624791b0",
+        "bfeee12b7c3a5ea68464df6277719d2cd28637474c155ea3a6c9d61da0a19bd2"
+    ],
+    "keymodt-reger-86A": [
+        "d771aae96a63c5fe0b5c1c4b7d8b9f10ca4471ea7bff78aa341d14a0c53b6545",
+        "915c96b652ddf11f9cfabaf4ca0c980eccc5542cbac10eae220dc9a01f7683fa"
+    ],
+    "keymodt-reger-86B": [
+        "97ab9b42262293311cb2014350157d5130209293c3626d09d269567ec8f4a120",
+        "b0cf67e5c4984c077165a45309462db28e90506b65874ec57ab76ae54f4d946b"
+    ],
+    "keymodt-reger-87A": [
+        "a42ac5a7b906e1ea0f6c062e4cb76391b3d1c55c36726a48d660901468798697",
+        "1870183ae5273277c35eaf8a2b34d82b53f8a731371f3e6cf4aeabf334aec488"
+    ],
+    "keymodt-reger-87B": [
+        "27e117b9ac05d51ff48b66122bfde39defac1c778648a257d393a47bfc560088",
+        "2043634fcb7110750422a19db289e958793189062fb1e7ebb0ec109d8060c855"
+    ],
+    "keymodt-reger-88A": [
+        "0ab8a7bb06390e72b4f7eaa3c617447058d98aaf438eb8511db425d68d056b9a",
+        "b038414d9c0ac10e50c3f487659a875e6e2202f75c9df8f81631f324d102f107"
+    ],
+    "keymodt-reger-88B": [
+        "3dd9925d847abea283f8d6997b5214f64ff75081e9ab5cf5d8db0779fb95d21b",
+        "672707361932734ee751190f71d81f418244330f66c926f2f637fa9da5a5a8b5"
+    ],
+    "keymodt-reger-89": [
+        "bd11de3a75592ec35d6e2b6d0c98a6373b8baafb021d057827d8adf6de71753d",
+        "a09a2deeda40399f878d6d0bbe909daa102b78e3e1986721af35657d2e895036"
+    ],
+    "keymodt-reger-90": [
+        "df823cf94b4d6cba772e880058894d5973fd0862fb162456f476a73eaf9a64b4",
+        "3cecc4db15458e3a023de1d757ddb744a5ff87a7b74bf64b3c59665ebb01fdcd"
+    ],
+    "keymodt-reger-91": [
+        "0d739ea1f69a50fb5195f77906752cd5d727f061b9bf3cc8b2f8b6edcefc0f69",
+        "33a11bc1f5e566c0d1a8a1f418fe7a86767faf1b6545b01976f1af2292dfd499"
+    ],
+    "keymodt-reger-92A": [
+        "7a5fbc807f4e543b6089c78530218cec64d1c1f5f265aab917aee0b53d31975d",
+        "2b2cdcfa3b5176e0c47f0a2ae39c11f67f6dbbdbbdb3a0dd6bfa9ef6f083849f"
+    ],
+    "keymodt-reger-92B": [
+        "69e62a9eabc177258192169fc2f4400c27eb4f649bf73605edf21765b54ce429",
+        "13f469efeaa1b6275cacf3427c2be3c5af96a8a87b9e9c4f9f47b4bf86dbf9f0"
+    ],
+    "keymodt-reger-93A": [
+        "377d864eb7d85f2ddb0c269a20b07df8b92aaf7bbf0057a9fa2f0404662e7f8a",
+        "e45343e18fa5eaa5fcabb240193109e1b4fa1eeb51f8cc0ed311fc04d4ddd35b"
+    ],
+    "keymodt-reger-93B": [
+        "21c064bbf7be889080ef686907f2706ee886881d61db968ce817a923c9c42bf8",
+        "2fea015320577195467d0d6956392db4eeecc4dd077139a93c520112151f4e64"
+    ],
+    "keymodt-reger-94A": [
+        "782434137bc25c052ff66f2b8785ea8b1550aca8f455ceb0de1f56b01ad6284f",
+        "6cd1d255d922b65a3f23490d0aa4484c49758beef9e38a79f9690cd93454fe00"
+    ],
+    "keymodt-reger-94B": [
+        "0708dfda9dc61ad89bc1e059c2ec9103aa4a4f38a660005645dbb9dee1989dad",
+        "ccf9b614927796613ec9ed960191673964a8ade37fa5fc93971491bedaa2f54c"
+    ],
+    "keymodt-reger-95A": [
+        "00c8a0935b36cb98ce8621e63028f8173aae8af6a57cde5e50fb2d3358e97e04",
+        "0731f5406fc3d9d910645908a7d8cb8c01273e3da214c1f7ec2c2f803960119a"
+    ],
+    "keymodt-reger-95B": [
+        "0c497662b708148b5ee20087c70095f156dbf62f0e6c0920e0285b4c1187685a",
+        "7c76bf4b8b72034f04ef0522736f287fec50f75696b2011b21fa4bf8445c6cc6"
+    ],
+    "keymodt-reger-96A": [
+        "3bac4358dca80b7b9451d9e50d39a66b3d8295f7938234a7bac3dbce35520413",
+        "91a31748f248fcc6a60b507092e51705456ff93b2c9cb7c7f97657750a1e5b36"
+    ],
+    "keymodt-reger-96B": [
+        "969d78b3fc6a2cbd9f90211e646d41a97883409bc4dbe865f9508a942df87bcb",
+        "477797c0a3ad484459ceac0d9d5c7f702fb27ca6a516678dd63307819b3202ab"
+    ],
+    "keymodt-reger-97A": [
+        "b41b8c7c05285bdd9cc19762c56742e125a9462220e0648ffdbd583b89664b4e",
+        "678281592e3319cd7b6060b66868e7b00317a2143edbf3ae2ed08c7b512edbd4"
+    ],
+    "keymodt-reger-97B": [
+        "faa0e85ddd589fbb1b75678e379a105d937a197a29f3fea5ae23398f85f41ed3",
+        "d84f4da714612af6409e001102afe51d71c6385010ccb21ce75cc3923a277217"
+    ],
+    "keymodt-reger-98A": [
+        "0875fb627c8e57834495f52c6b978b73d68897ffeeab9f02ccbff0bd72ac3a28",
+        "f39914bddf1e217e9068484f475c895d883f3d84a34900aac2c3c0079ca28ee7"
+    ],
+    "keymodt-reger-98B": [
+        "12667b7b20699880023460f9cc175bc03ea92250e7889f372a965e09698358ad",
+        "b8525ca47d5853625a2aaa601b0fc3da5fd70c0a394db31c2d3c4282c594b4a3"
+    ],
+    "keymodt-reger-99A": [
+        "5c1595d32a17e01ac485b7a406ccc2e4aba970d3accdc91891261766d40bd05f",
+        "7579ff7d485728a999e82477a70e40fe258c9cec26a7c1b5d362b355bb6daa41"
+    ],
+    "keymodt-reger-99B": [
+        "4a02eeb25a6e7e1b15253e2327930ddeaf673a16673b3c85896606826f12832f",
+        "489eb6d045cfeff736d6a771607b68069ded0118d5cf99f13ba26e6ec50fa8ef"
+    ],
+    "keymodt-rimsky-korsakov-3-10a": [
+        "6d1a94874cacd46d0dfad3aa69bf869689c439d1cff2376ee66b886d8d761db5",
+        "0011d3955ddfab38d3190d9ddfd5d60cb2af8c39a6b5a30c939262ca55da9ce7"
+    ],
+    "keymodt-rimsky-korsakov-3-10b": [
+        "912afe5e6df7b97ef39a98230e40eb7ab8d0a0478ccbc9245ea74ed13bc39d95",
+        "c11600b4fbde46748a6c402aad8405fcdaf35a47a13fde892de3925cb7c15f53"
+    ],
+    "keymodt-rimsky-korsakov-3-10c": [
+        "5d8f410ac94684325f0e0caaae8d549e20f95ab329f0910f6acfa082e720468b",
+        "cc9bf4c83673fc4efc79ea6c7c0611f953c51aa9a324d6390f9364a33a1e9ed5"
+    ],
+    "keymodt-rimsky-korsakov-3-10d": [
+        "fa60892052e5cf70e79894ff859f3393b3cc45afc83bbac87b8d2b46dff7fbda",
+        "964debdbca8a4d393d160dda760f0ce9755c4e153efb969a4a629ec4e67d0c26"
+    ],
+    "keymodt-rimsky-korsakov-3-14a": [
+        "eba2d0ac68af376171f78f56802f880b31c3f3181ccd0053d1c272764d22cdf0",
+        "105a8ecafe1e7fe0fccda7476b7822941b21b2cf5f54f84d005b17419bd4b745"
+    ],
+    "keymodt-rimsky-korsakov-3-14b": [
+        "efa11d832ccf0b0e43d9428d58c374e481569c853ef03ea69a1c5e7f9a85a894",
+        "166e204ccb53ea1644c16d6426fa8886e3cf5b7f0efd0bfb591205a5378a6bc4"
+    ],
+    "keymodt-rimsky-korsakov-3-14c": [
+        "12168d56da30997921f99c16d353c66001072503ba5717662a8c446408ce1907",
+        "dfebe25523e52928e13331e9d52c680ebaea20228d9e7c85f03be7a914eb14bb"
+    ],
+    "keymodt-rimsky-korsakov-3-14d": [
+        "552e59dffdc7d40b2f1e708f3d6ad3cebe671b7aa362793d3560cb1d4aaab937",
+        "013fa189c0580a38364a60f5162b9c0facc231c0d9dbe43f5820fb872f65db5f"
+    ],
+    "keymodt-rimsky-korsakov-3-14e": [
+        "08d145ed793a74bb63b6e177118239154b739164035f85942d8f5f761a707fa5",
+        "8dc66648f287fa9447593ce2497613d6995d403cedf066159b9279adc642dcc1"
+    ],
+    "keymodt-rimsky-korsakov-3-14f": [
+        "9ddb99da15e82e52d432ec7c16304d3ef34e93dec7c5a736cfe915daa290bb5e",
+        "789927470e8edb4acb6c0ad0211b9dacbd3854bda6c48bda4fbdf694e8142c77"
+    ],
+    "keymodt-rimsky-korsakov-3-14g": [
+        "6aa53291a12a6fef7a35bf53c1e10a850227a97df5395669839f78b9a3fd8ccf",
+        "4a85c4b62fda6f54caf69c20bf6f7e3695fea84861e8959be9c06127fcbd9739"
+    ],
+    "keymodt-rimsky-korsakov-3-17a": [
+        "d0bc0773fd372fe407ef8defab6d63875b1f4f381e64301b440a807f05ed43e2",
+        "affc4992d7c6e0360321ae8843b003173fd9a6266fb6e15cc7faeefaf67ad6d0"
+    ],
+    "keymodt-rimsky-korsakov-3-17b": [
+        "1ab8c40e3c487c5bdb6fa066e5c93de06f65920af65c8ee8d4c0820c27f928eb",
+        "c6c5b1e0ff93bb9fda9f38799128edf79a0650696ecec277a31019237945f084"
+    ],
+    "keymodt-rimsky-korsakov-3-17c": [
+        "1ecbb0f4690ee1406b4755c662cbf163d7cab10ee68175cd46e16718baeac6b0",
+        "7c9e6689fd15588426762418b0c4519a70ed5ebb12cf9a9963402cb9a9d567c8"
+    ],
+    "keymodt-rimsky-korsakov-3-17d": [
+        "55d57c197533550d35a75ce1e15fde875e6fb5c5268b171e22c77a7a6792df80",
+        "d8eaf3c783d7dc04202088f59903af3f92881b665bcc47b78be8780b3b15a71f"
+    ],
+    "keymodt-rimsky-korsakov-3-23a": [
+        "ca7251bdfed586146248d9c98ae0a8995590d2afa5f4d0854101f51e5c86b0f5",
+        "aba26e7bc0730982ca97b1652a4f42fa1dc46659beb3838a0d2d5457b0f45485"
+    ],
+    "keymodt-rimsky-korsakov-3-23b": [
+        "553116482b720f875f5e9dff0ad4c3655ef7aa2821f3d931e8fbf8497a2baf02",
+        "f5e53354eb99371e0ac7ee8884f4d1da6fa7ffa709d6eeabb40e2b470f53e9ba"
+    ],
+    "keymodt-rimsky-korsakov-3-23c": [
+        "2bbf26d23e5dd383808eb06c8e637a3bfc4ab2672c75d4a857949daf839db399",
+        "c87d9ebbf6e20548043443c541e4eb6f44a6023072870505d746eacb038319d7"
+    ],
+    "keymodt-rimsky-korsakov-3-23d": [
+        "84ae5cf6e3853e00bc5151aa77e50c410cb47710cd8ef8546e80c1f2db848c37",
+        "3df731afea336b08586c2bfcce88b56bd112bca6a32acd97a22fb4b0fd57803f"
+    ],
+    "keymodt-rimsky-korsakov-3-23e": [
+        "8b64399c2a903a2b8774e9ceac2f9b3279527957b1368b39fe1dc58aa4890141",
+        "0a7fd7be0134e6fe005be42fa1200ae971c1175453cabad1a3e0e2651a58fc6e"
+    ],
+    "keymodt-rimsky-korsakov-3-23f": [
+        "daa63d2af689291c56ae9d30bf915e150a62135c5243b666dbe892842a47da76",
+        "d511a741d2532ed124ab8d9f4cb5158a8d74d2cd8c3bc6e20e3480ab256509a9"
+    ],
+    "keymodt-rimsky-korsakov-3-23g": [
+        "0575c9f0233ae49918ef5366276717a6fb7fd18d583071591328546e48cbf1c1",
+        "0b9d0df02abda4ee7e1dc9702e969559ec2e1fe5d63cb29f7ff2206d5c70e704"
+    ],
+    "keymodt-rimsky-korsakov-3-24a": [
+        "943be0f16948fc12d35e6f6e3ccced5d7756f9fb32123704d389948ad73cd4b6",
+        "44451d21ba6975b9a14ebe44b5973bd2c6bb85e640be195aa6ed5c7f962a66a1"
+    ],
+    "keymodt-rimsky-korsakov-3-24b": [
+        "ec9c9205864738b3a5c71119b4cffa3c726efb1ab4af6cc1caa17f1d245f0323",
+        "b761e9b67e653cc1297b795667f3c1cc54103b77050b8b658e05579273afba54"
+    ],
+    "keymodt-rimsky-korsakov-3-5a": [
+        "0434c4242a1515626059a6a1ef0c0c612ccc8d13f46bd18ef1d46c7104cbf52c",
+        "10fa54cdd2a2ab18d0d0e09cbf1fc589315b6fa4dbc9f724f62387fdb6ff0ea7"
+    ],
+    "keymodt-rimsky-korsakov-3-5b": [
+        "6fc340af824fae3aa5f5e2a6e08c1b5c71d5f1512afb7d4b15f5a7f2fa0ae645",
+        "a62f92a74b8dbb161a94de68368a5dc5823a1f0ba85f599aa1a83d3c2691d5f6"
+    ],
+    "keymodt-rimsky-korsakov-3-5c": [
+        "83ec209f1a23494cafb62b7e1e13be17814125cd9dac65e09e60bd2f8aea97ca",
+        "ed37de9f64fc366f494d17bb1145c9ee990e29874cabcffe48946c7b47cb5fa2"
+    ],
+    "keymodt-rimsky-korsakov-3-5d": [
+        "1abe5a9002789e96ca7e6d9d5b78963b28a2a3cf0a04992db13f59afbbd318fb",
+        "79f22ddb648374af030ac576f11bb7d75dbaab35a416f513a13900ed0db76c70"
+    ],
+    "keymodt-rimsky-korsakov-3-5e": [
+        "8c2c4a97ff5c12a267b37f2ba4eb2d49c3c7e6872c3148c4c5c59c6fadefca2e",
+        "a29b55cbbe92b7fd1a82e704850998e8f20faf9e229f1da5649e35974fd30313"
+    ],
+    "keymodt-rimsky-korsakov-3-5f": [
+        "5b60118ef48e24112586c39500faee30b6ed5ebaaf4bb1a25f77bccd94ee4494",
+        "f8b26238c216591c448ff56f200a44828b506e206d1e819dd96a52d60baf902b"
+    ],
+    "keymodt-rimsky-korsakov-3-5g": [
+        "8b56136922d8248e17d01977e6b1dd13216315d22de39ea7c6e1647a6f1252d7",
+        "bf8f1c8fd643977d013442dbc2563c7e1656a96d87690a94cd38b4149bf8d534"
+    ],
+    "keymodt-rimsky-korsakov-3-5h": [
+        "445e6a632c53485e878ff99ff3435b0af40d84a651f56efdd3447a245cf720b9",
+        "c177810440d39c68ab5ce7685bf5d269bf5ae3b15b17c3269aaad2c152c51724"
+    ],
+    "keymodt-rimsky-korsakov-3-6": [
+        "0c4eb633f444a5cfd7bff8c37915e6bdd34e9e81e7b725361d5fcc2fa7051e95",
+        "9397530138c651ced0104c300783439d32b90d092d58cf8b9034fae4f98bb568"
+    ],
+    "keymodt-rimsky-korsakov-3-7": [
+        "d9f56b47e91b500588628e1f5c5c0b53bb8186f0a61fb7832cb06e3ef83f925d",
+        "5f5ae39d2e19972eae3c8d1229e82cb953c17b8187013a4790ab3673e7484586"
+    ],
+    "keymodt-rimsky-korsakov-3-8": [
+        "bf85a07747213f01224f01f80c5fa0f883a8d584ed7060fb73e75e5f9a61ec08",
+        "9c4c6ee03221956c04d8aeb0a131b67bb66c161db875da09f1b33eac28a4ee93"
+    ],
+    "keymodt-rimsky-korsakov-3-9a": [
+        "0652a721498a55867a5b7c40e6f9e04ae9832813d56f8afc4c9c850b63e4db65",
+        "e377aa930bfbb6fdc1df591acbbdd75698ef91ca0059dadec1273936b0ef761b"
+    ],
+    "keymodt-rimsky-korsakov-3-9b": [
+        "ff1eab0da64e5bd15a80d1f3c730c2faab1bc0eedd93f651726e312621b10380",
+        "c5e5ab0b5ab8650e06bba4e99709bb7818cb950888907336c72da019c2e4244e"
+    ],
+    "keymodt-tchaikovsky-173a": [
+        "12071f062aa95e7260254063972848ec65919d38496c64bd1cde85ab39bae848",
+        "b00dffaa4218dcb01aff6a831b8174c2fd8f0adb90fe91f08858fcc85e099c15"
+    ],
+    "keymodt-tchaikovsky-173b": [
+        "93841b006be0fb3011bca242542d59b4b829ffc24eb5cdbb035d3d81512dfea3",
+        "c22848cddff97375bde0836944051d19654d0a7c689066b105eeb6df721490e3"
+    ],
+    "keymodt-tchaikovsky-173c": [
+        "d95b7b065ae3d3eacc7bccbbf8e9ec716c6abc2e50de6c8d3490b0f4e2c684ea",
+        "fc2ca2c1ec2db5671063f3fca1d0233fb5aaa9deafc122afba71f8963b64e6f0"
+    ],
+    "keymodt-tchaikovsky-173d": [
+        "5de04393f79248ef14c3b5286fd9836653874a77fbfe6d8a50765e881498356b",
+        "e0aa29ee48da0d217fe1c76aaaea60991658e2d2dacd11f3be070828f18be8a3"
+    ],
+    "keymodt-tchaikovsky-173e": [
+        "4fe140496066576055a2cd12822f2f63d4d04fdd804f3458f2eaffac6dacd312",
+        "8caa67abe7e22b25cc5d9405d835cdea05e430b96b086c515d52dc91ea336cf5"
+    ],
+    "keymodt-tchaikovsky-173f": [
+        "02b5ce85bb5c1f77237fea86cce064330b283e4b9c03325e591bd06ddc3c81d7",
+        "4365c4e01b2c102ea0a4ffb6aa5e90694ba09bfc1fb90aaaf439646a9f9ea802"
+    ],
+    "keymodt-tchaikovsky-173g": [
+        "fba5bef3e42d86c0da2017a15c67c5e58e086c1b3ba1c7c074bf957355fe2e2b",
+        "9cc4c8c4302ad0119db906ec15847cd1e02441a769b8b9f70211981f5f39edea"
+    ],
+    "keymodt-tchaikovsky-173h": [
+        "ecbd232e50ea45217e2602e5118b0f6525b5eab940a119b9f6b980d82ff59e3c",
+        "62b66905722536b8670209f07a31db7aa8d5f3984d8abd7b116a6787c6e60cfc"
+    ],
+    "keymodt-tchaikovsky-173i": [
+        "e6c8746a838d32f73f26843d5e58ba7a7843493c84044a3bfcf87d663743dbb1",
+        "eb4a4ac2ec6600242081b935023759980e6e0ce9b741d21eba255e42e55a058b"
+    ],
+    "keymodt-tchaikovsky-173j": [
+        "d38a1be0f1637d5edee619ee84648830794a1715d30dcbc23738ac32f3480306",
+        "924867faed9ac406b2fa30890292cb96f22a534129623bb7fba51aaa9d0a231b"
+    ],
+    "keymodt-tchaikovsky-173k": [
+        "b29d897d28548747235d119f891195396c6c6f9a279ca89bf5df2f57a978fdf3",
+        "b9ce54e25dd4ebc5703ff81e47513a0f623882252c2652d40078772507b58b85"
+    ],
+    "keymodt-tchaikovsky-183a": [
+        "e92db644defb40d4b68f63563077da88ce5558058b18f4aa08a2a332af791ee6",
+        "32bb1bf944abfee9274faee09fa1191fdcf5e9ced00a2d0ca8e7dcb72a52a5fb"
+    ],
+    "keymodt-tchaikovsky-183b": [
+        "1d58314d5c07e2ec750cbf3b4fa802f4742761483dc88d1fb31fc205d5fc2e99",
+        "39285442b6f3436801dc9b32bb6b207390e46c44a710ec9344c164a21fb1c54a"
+    ],
+    "keymodt-tchaikovsky-183c": [
+        "6a36b9db06dd25c45bedd7d31000bdfa73599d2033f44e541b77e1e16bee3ba5",
+        "924436bd0f350fb0ae9d8ab5282281441ac6220ec0bc366f889b745548afe9c6"
+    ],
+    "keymodt-tchaikovsky-183d": [
+        "1f38ecbac11aa5e63fba809efa3856b194728cc6e5033fc7cf5659bb59f8c279",
+        "c7477c9bba827cdf8b84f080127ff743b479bdf2cef9fe1b11ed4704a522adfa"
+    ],
+    "keymodt-tchaikovsky-183e": [
+        "edeedbf4df976616aebb21cdd478409ef9ef531c4286180fcc5d0d8fddb132c7",
+        "f0880777cb4e365c1b8942391a81ca63894f4139229c250aa7f98d2fecf6b219"
+    ],
+    "keymodt-tchaikovsky-185a": [
+        "0fd8b2ce04a8dc282fd9c3ea624acdde94d0dc8475656c45b72ec5d9c5710fe0",
+        "b4c1306d7a3a16a5de1815ad7b45037a89655610f4b929b233d87800f07a2763"
+    ],
+    "keymodt-tchaikovsky-185b": [
+        "c01fcde5c169c0cef5309876d7c4e130457947a5123913ca4dbca9dc30a442cf",
+        "60e01117674671c2808d03e9b441cc3ac561e1a30813f8c421e1e8bf15bd8847"
+    ],
+    "keymodt-tchaikovsky-189": [
+        "196790087f3999248e96cb9df4ca2eb6392f56e525c144bf558801e872710182",
+        "06d2e4db06fbcaf11bfa4ba75e4da7b90cce5453d1e87a821d42e85bb75a07f2"
+    ],
+    "keymodt-tchaikovsky-191a": [
+        "0cdda5f38a1dba1e9bb9ae715d3da55a2ea9e97a146d25a3162d3e78b88a00d6",
+        "3c20e30c5c68ac1e4e15e42d8430ba5d4a14ee9d06bd8da2ef69e1ef6a64561f"
+    ],
+    "keymodt-tchaikovsky-191b": [
+        "bc7051348ebc86cc327f00a9b812f82b903348ef605a52a5f5deecccbdd52139",
+        "2f4ed35861fb756202a525005d43ff7d9f86d63c8d0cd8ba79c1e7a5ba5aed1c"
+    ],
+    "keymodt-tchaikovsky-191c": [
+        "535404b2709b54bcee76ddba01a3b44dcb9b20f09280aec0b90cb31e5a8182b6",
+        "1f676446d36eef1424496ccf4da72af7403c86ddddcd5c6cf9a11263401d3399"
+    ],
+    "keymodt-tchaikovsky-193a": [
+        "6418e5db3c9b002cd14079b90b7d6124023b39dfe7cc3de5ab3db13916e63ff8",
+        "1858217dc9c34c9b4af8961b4f93665f14b1de688367181c146d1ea1f9a3d6ea"
+    ],
+    "keymodt-tchaikovsky-193b": [
+        "8a71b5fe81110b5e49969373932e77ae2ae3e79c51e52c057457eeb3d4257508",
+        "e2caf22c53bbb862ba465bbbdf4ecfe76efcc2c7d33cfd57fc64ca17e6ac8585"
+    ],
+    "keymodt-tchaikovsky-195": [
+        "ad8e32cbade9cb4a255251cdb9748cad940dab4164d44cddcdb44dd7219b1095",
+        "d1cba50fbece3a23cae76ac2cce7496d1c141c6d09b08dc33d77ec291ae9c66e"
+    ],
     "mps-k279-1": [
         "681755bdea2452f9cd5a183ea7fa8a6b25e7f82b526377dbe7a15e8464eefa0c",
         "6d890ddf8a1c0ed5b56c1a9af2064ed116a296cb4ee3742d170855accdbf6c09"
