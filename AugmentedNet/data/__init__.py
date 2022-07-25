@@ -1,9 +1,10 @@
-from . import abc_dcml, bps, haydnsun, mps, tavern, wir, wirwtc
+from . import abc_dcml, bps, haydnsun, keymodt, mps, tavern, wir, wirwtc
 
 available_collections = {
     "abc": abc_dcml,
     "bps": bps,
     "haydnsun": haydnsun,
+    "keymodt": keymodt,
     "mps": mps,
     "tavern": tavern,
     "wir": wir,
