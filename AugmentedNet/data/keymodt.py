@@ -777,7 +777,7 @@ splits = {
     "training": [
         "keymodt-aldwell-ex27-2a",
         "keymodt-aldwell-ex27-2b",
-        "keymodt-aldwell-ex27-2c",
+        # "keymodt-aldwell-ex27-2c", # Fails on tsv of synthesized
         "keymodt-aldwell-ex27-3",
         "keymodt-aldwell-ex27-7",
         "keymodt-kostka-payne-ex18-2",
@@ -815,8 +815,8 @@ splits = {
         "keymodt-reger-34",
         "keymodt-reger-35",
         "keymodt-reger-36",
-        "keymodt-reger-37",
-        "keymodt-reger-38",
+        # "keymodt-reger-37", # Fails on tsv of synthesized
+        # "keymodt-reger-38", # Fails on tsv of synthesized
         "keymodt-reger-39",
         "keymodt-reger-42b",
         "keymodt-reger-43b",
@@ -918,7 +918,7 @@ splits = {
         "keymodt-reger-05",
         "keymodt-reger-18",
         "keymodt-reger-30",
-        "keymodt-reger-40",
+        # "keymodt-reger-40", # Fails on tsv of synthesized
         "keymodt-reger-43a",
         "keymodt-reger-47",
         "keymodt-reger-48",
