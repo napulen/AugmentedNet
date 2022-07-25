@@ -123,10 +123,6 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-09.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-09.musicxml",
     ),
-    # "keymodt-reger-10": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-10.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-10.musicxml",
-    # ),
     "keymodt-reger-100A": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-100A.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-100A.musicxml",
@@ -135,14 +131,6 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-100B.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-100B.musicxml",
     ),
-    # "keymodt-reger-11": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-11.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-11.musicxml",
-    # ),
-    # "keymodt-reger-12": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-12.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-12.musicxml",
-    # ),
     "keymodt-reger-13": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-13.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-13.musicxml",
@@ -171,10 +159,6 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-19.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-19.musicxml",
     ),
-    # "keymodt-reger-20": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-20.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-20.musicxml",
-    # ),
     "keymodt-reger-21": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-21.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-21.musicxml",
@@ -255,10 +239,6 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-40.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-40.musicxml",
     ),
-    # "keymodt-reger-41": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-41.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-41.musicxml",
-    # ),
     "keymodt-reger-42a": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-42a.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-42a.musicxml",
@@ -371,10 +351,6 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-64.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-64.musicxml",
     ),
-    # "keymodt-reger-65": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-65.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-65.musicxml",
-    # ),
     "keymodt-reger-66": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-66.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-66.musicxml",
@@ -415,14 +391,6 @@ annotation_score_duples = {
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-75.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-75.musicxml",
     ),
-    # "keymodt-reger-76": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-76.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-76.musicxml",
-    # ),
-    # "keymodt-reger-77": (
-    #     "rawdata/key_modulation_dataset/rntxt/keymodt-reger-77.rntxt",
-    #     "rawdata/key_modulation_dataset/musicxml/keymodt-reger-77.musicxml",
-    # ),
     "keymodt-reger-78": (
         "rawdata/key_modulation_dataset/rntxt/keymodt-reger-78.rntxt",
         "rawdata/key_modulation_dataset/musicxml/keymodt-reger-78.musicxml",
@@ -828,14 +796,11 @@ splits = {
         "keymodt-reger-06",
         "keymodt-reger-07",
         "keymodt-reger-09",
-        # "keymodt-reger-10", # Fails on numpy encoding
-        # "keymodt-reger-12", # Discarded: B# major
         "keymodt-reger-13",
         "keymodt-reger-14",
         "keymodt-reger-16",
         "keymodt-reger-17",
         "keymodt-reger-19",
-        # "keymodt-reger-20", # Fails at tsv encoding
         "keymodt-reger-21",
         "keymodt-reger-22",
         "keymodt-reger-23",
@@ -877,8 +842,6 @@ splits = {
         "keymodt-reger-72",
         "keymodt-reger-74",
         "keymodt-reger-75",
-        # "keymodt-reger-76", # Fails on numpy encoding
-        # "keymodt-reger-77", # Discarded: E# major
         "keymodt-reger-78",
         "keymodt-reger-79",
         "keymodt-reger-80",
@@ -983,16 +946,13 @@ splits = {
         "keymodt-kostka-payne-ex18-4",
         "keymodt-kostka-payne-ex19-5",
         "keymodt-reger-08",
-        # "keymodt-reger-11", # Discarded: E# major
         "keymodt-reger-15",
         "keymodt-reger-28",
-        # "keymodt-reger-41", # Fails
         "keymodt-reger-42a",
         "keymodt-reger-45a",
         "keymodt-reger-55",
         "keymodt-reger-59",
         "keymodt-reger-64",
-        # "keymodt-reger-65", # Fails
         "keymodt-reger-68",
         "keymodt-reger-73",
         "keymodt-reger-81",
