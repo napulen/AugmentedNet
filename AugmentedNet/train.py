@@ -244,7 +244,7 @@ def train(
         boundaries=lrBoundaries, values=lrValues
     )
     model.compile(
-        optimizer=optimizers.Adam(learning_rate=lr_schedule),
+        optimizer=optimizers.RMSprop(learning_rate=lr_schedule),
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics="accuracy",
     )
