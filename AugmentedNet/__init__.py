@@ -4,7 +4,7 @@ from os.path import dirname, basename, isfile, join
 import glob
 
 __author__ = "Néstor Nápoles López"
-__version__ = "1.8.0"
+__version__ = "1.9.0"
 modules = glob.glob(join(dirname(__file__), "*.py"))
 __all__ = [
     basename(f)[:-3]
