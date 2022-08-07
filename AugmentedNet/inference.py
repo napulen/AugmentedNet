@@ -92,16 +92,12 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     return rn, chordLabel
 
 
-def generateRomanText(h):
+def generateRomanText(h, ts):
     metadata = h.metadata
     metadata.composer = metadata.composer or "Unknown"
     metadata.title = metadata.title or "Unknown"
     composer = metadata.composer.split("\n")[0]
     title = metadata.title.split("\n")[0]
-    ts = {
-        (ts.measureNumber, float(ts.beat)): ts.ratioString
-        for ts in h.flat.getElementsByClass("TimeSignature")
-    }
     rntxt = f"""\
 Composer: {composer}
 Title: {title}
@@ -161,13 +157,19 @@ def predict(model, inputPath):
     dfout["measure"] = paddedMeasure
     chords = solveChordSegmentation(dfout)
     s = music21.converter.parse(inputPath)
+    ts = {
+        (ts.measureNumber, float(ts.beat)): ts.ratioString
+        for ts in s.flat.getElementsByClass("TimeSignature")
+    }
+    schord = s.chordify().flat.notesAndRests
+    schord.metadata = s.metadata
     # remove all lyrics from score
-    for note in s.recurse().notes:
-        note.lyrics = []
+    # for note in s.recurse().notes:
+    #     note.lyrics = []
     prevkey = ""
     for analysis in chords.itertuples():
         notes = []
-        for n in s.flat.notes.getElementsByOffset(analysis.offset):
+        for n in schord.getElementsByOffset(analysis.offset):
             if isinstance(n, music21.note.Note):
                 notes.append((n, n.pitch.midi))
             elif isinstance(n, music21.chord.Chord) and not isinstance(
@@ -196,12 +198,12 @@ def predict(model, inputPath):
             rn2fig = rn2
         bass.addLyric(formatRomanNumeral(rn2fig, thiskey))
         bass.addLyric(formatChordLabel(chordLabel))
-    rntxt = generateRomanText(s)
+    rntxt = generateRomanText(schord, ts)
     filename, _ = inputPath.rsplit(".", 1)
     annotatedScore = f"{filename}_annotated.musicxml"
     annotationCSV = f"{filename}_annotated.csv"
     annotatedRomanText = f"{filename}_annotated.rntxt"
-    s.write(fp=annotatedScore)
+    schord.write(fp=annotatedScore)
     dfout.to_csv(annotationCSV)
     with open(annotatedRomanText, "w") as fd:
         fd.write(rntxt)
