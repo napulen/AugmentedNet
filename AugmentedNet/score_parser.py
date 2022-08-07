@@ -38,7 +38,7 @@ S_LISTTYPE_COLUMNS = [
 
 
 def _m21Parse(f, fmt=None):
-    s = music21.converter.parse(f, format=fmt)
+    s = music21.converter.parse(f, format=fmt, forceSource=True)
     perc = [
         p
         for p in s.parts

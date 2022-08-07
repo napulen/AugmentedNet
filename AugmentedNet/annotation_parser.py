@@ -40,7 +40,7 @@ A_LISTTYPE_COLUMNS = [
 
 
 def _m21Parse(f):
-    return music21.converter.parse(f, format="romantext")
+    return music21.converter.parse(f, format="romantext", forceSource=True)
 
 
 def from_tsv(tsv, sep="\t"):
