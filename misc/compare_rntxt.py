@@ -2,15 +2,12 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from requests import PreparedRequest
 
 from AugmentedNet.annotation_parser import parseAnnotation
 from AugmentedNet.feature_representation import COMMON_ROMAN_NUMERALS
 
 
 def compare_annotation_df(a, b):
-    b = b.reindex_like(a, method="ffill")
-    b = b.fillna(method="bfill")
     pcset_accuracy = sum(a.a_pcset == b.a_pcset) / len(a.index)
     key_accuracy = sum(a.a_tonicizedKey == b.a_tonicizedKey) / len(a.index)
     inversion_accuracy = sum(a.a_inversion == b.a_inversion) / len(a.index)
@@ -19,8 +16,6 @@ def compare_annotation_df(a, b):
 
 
 def compute_confusion_matrix(a, b):
-    b = b.reindex_like(a, method="ffill")
-    b = b.fillna(method="bfill")
     roman_numeral_classes = len(COMMON_ROMAN_NUMERALS)
     matrix = np.zeros((roman_numeral_classes, roman_numeral_classes))
     for gt, pred in zip(a.a_romanNumeral, b.a_romanNumeral):
@@ -35,18 +30,6 @@ if __name__ == "__main__":
     groundtruth = "predictions_groundtruth"
     models = [m for m in os.listdir(root) if m != groundtruth and "rntxt" in m]
     gtdir = os.path.join(root, groundtruth)
-    crashing_july_7_2022 = [
-        "abc-op127-2.rntxt",
-        "abc-op18-no1-1.rntxt",
-        "bps-07-op010-no3-1.rntxt",
-        "bps-10-op014-no2-1.rntxt",
-        "bps-23-op057-appassionata-1.rntxt",
-        "tavern-beethoven-woo-75-a.rntxt",
-        "tavern-beethoven-woo-75-b.rntxt",
-        "wir-openscore-liedercorpus-hensel-6-lieder-op-9-1-die-ersehnte.rntxt",
-        "wir-openscore-liedercorpus-schumann-dichterliebe-op-48-16-die-alten-bosen-lieder.rntxt",
-        "wirwtc-bach-wtc-i-8.rntxt",
-    ]
     dfdict = {
         "file": [],
         "model": [],
@@ -58,8 +41,8 @@ if __name__ == "__main__":
     }
     i = 0
     for f in sorted(os.listdir(gtdir)):
-        if f in crashing_july_7_2022 or "wir-bach-chorales-19" not in f:
-            continue
+        # if "bps-07" not in f:
+        #     continue
         print(f)
         path = os.path.join(root, groundtruth, f)
         a = parseAnnotation(path)
@@ -68,7 +51,13 @@ if __name__ == "__main__":
             if not os.path.exists(mpath):
                 continue
             print(f"\t{mpath}", end=" ")
-            b = parseAnnotation(mpath)
+            try:
+                b = parseAnnotation(mpath)
+            except:
+                print("\tFAILED")
+                continue
+            b = b.reindex_like(a, method="ffill")
+            b = b.fillna(method="bfill")
             diff = compare_annotation_df(a, b)
             confm = compute_confusion_matrix(a, b)
             plt.imshow(confm, cmap="Blues")
