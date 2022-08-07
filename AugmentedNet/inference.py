@@ -11,7 +11,7 @@ from tensorflow import keras
 
 from . import __version__
 from . import cli
-from .chord_vocabulary import frompcset
+from .chord_vocabulary import frompcset, cosineSimilarity
 from .cache import forceTonicization, getTonicizationScaleDegree
 from .score_parser import parseScore
 from .input_representations import available_representations as availableInputs
@@ -56,15 +56,27 @@ def solveChordSegmentation(df):
     return df.dropna()[df.HarmonicRhythm7 == 0]
 
 
-def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
+def resolveRomanNumeralCosine(b, t, a, s, pcs, key, numerator, tonicizedKey):
+    pcsetVector = np.zeros(12)
     chord = music21.chord.Chord(f"{b}2 {t}3 {a}4 {s}5")
-    pcset = tuple(sorted(set(chord.pitchClasses)))
-    # if the SATB notes don't make sense, use the pcset classifier
-    if pcset not in frompcset:
-        # which is guaranteed to exist in the chord vocabulary
-        pcset = pcs
-    # if the chord is nondiatonic to the tonicizedKey
-    # force a tonicization where the chord does exist
+    for n in chord.pitches:
+        pcsetVector[n.pitchClass] += 1
+    for pc in pcs:
+        pcsetVector[pc] += 1
+    chordNumerator = music21.roman.RomanNumeral(
+        numerator.replace("Cad", "Cad64"), tonicizedKey
+    ).pitchClasses
+    for pc in chordNumerator:
+        pcsetVector[pc] += 1
+    smallestDistance = -2
+    for pcs in frompcset:
+        v2 = np.zeros(12)
+        for p in pcs:
+            v2[p] = 1
+        similarity = cosineSimilarity(pcsetVector, v2)
+        if similarity > smallestDistance:
+            pcset = pcs
+            smallestDistance = similarity
     if tonicizedKey not in frompcset[pcset]:
         # print("Forcing a tonicization")
         candidateKeys = list(frompcset[pcset].keys())
@@ -83,6 +95,8 @@ def resolveRomanNumeral(b, t, a, s, pcs, key, tonicizedKey):
     elif invfigure in ["6", "64"]:
         rnfigure += invfigure
     rn = rnfigure
+    if numerator == "Cad" and inv == 2:
+        rn = "Cad64"
     if tonicizedKey != key:
         denominator = getTonicizationScaleDegree(key, tonicizedKey)
         rn = f"{rn}/{denominator}"
@@ -103,7 +117,6 @@ Composer: {composer}
 Title: {title}
 Analyst: AugmentedNet v{__version__} - https://github.com/napulen/AugmentedNet
 """
-    setKey = False
     currentMeasure = -1
     for n in h.flat.notes:
         if not n.lyric:
@@ -156,7 +169,7 @@ def predict(model, inputPath):
     dfout["offset"] = paddedIndex
     dfout["measure"] = paddedMeasure
     chords = solveChordSegmentation(dfout)
-    s = music21.converter.parse(inputPath)
+    s = music21.converter.parse(inputPath, forceSource=True)
     ts = {
         (ts.measureNumber, float(ts.beat)): ts.ratioString
         for ts in s.flat.getElementsByClass("TimeSignature")
@@ -182,13 +195,15 @@ def predict(model, inputPath):
         thiskey = analysis.LocalKey38
         tonicizedKey = analysis.TonicizedKey38
         pcset = analysis.PitchClassSet121
-        rn2, chordLabel = resolveRomanNumeral(
+        numerator = analysis.RomanNumeral31
+        rn2, chordLabel = resolveRomanNumeralCosine(
             analysis.Bass35,
             analysis.Tenor35,
             analysis.Alto35,
             analysis.Soprano35,
             pcset,
             thiskey,
+            numerator,
             tonicizedKey,
         )
         if thiskey != prevkey:
@@ -226,6 +241,7 @@ def batch(inputPath, dir, modelPath, useGpu):
                 # do not recursively annotate an annotated_file
                 continue
             filepath = os.path.join(root, f)
+            print(filepath)
             predict(model, inputPath=filepath)
 
 
