@@ -1,0 +1,12 @@
+	Model	results_Alto35	results_Bass35	results_HarmonicRhythm7	results_LocalKey38	results_PitchClassSet121	results_RomanNumeral31	results_Soprano35	results_Tenor35	results_TonicizedKey38	results_satbRomanNumeral	results_Alto35_std	results_Bass35_std	results_HarmonicRhythm7_std	results_LocalKey38_std	results_PitchClassSet121_std	results_RomanNumeral31_std	results_Soprano35_std	results_Tenor35_std	results_TonicizedKey38_std	results_satbRomanNumeral_std
+10	baseline	68.1	74.5	78.9	78.8	73.5	61.3	72.3	71.3	80.0	42.6	2.2	2.2	0.9	3.4	1.9	2.8	1.7	2.5	1.8	3.1
+9	input_35_one-hot_spelling	0.0	-0.2	0.2	-0.1	0.1	0.1	0.1	-0.1	0.1	0.1	-0.0	0.1	0.5	-0.2	-0.1	-0.3	0.2	-0.3	0.1	0.0
+8	input_no_onset	-1.4	-2.0	-21.2	0.6	-1.1	-0.1	-0.8	-1.7	0.7	-0.4	-0.5	-0.3	1.1	0.3	-0.3	-0.4	0.1	-0.7	0.2	-0.1
+7	input_no_bottom	-13.1	-16.5	0.0	0.3	0.3	0.4	-5.0	-15.4	0.3	-10.6	0.0	0.2	0.5	-0.4	-0.1	0.0	0.1	0.0	-0.0	-0.5
+6	input_no_chroma	-11.1	-1.7	-4.7	-6.4	-22.2	-18.2	-16.7	-10.3	-10.0	-14.4	-0.3	-0.3	0.2	0.8	0.4	-0.6	0.3	-0.1	1.3	-0.8
+5	conv_single_block	-0.3	-0.4	0.1	-0.4	0.1	-0.2	-0.0	-0.2	0.0	0.1	-0.1	-0.1	0.6	-0.1	-0.0	-0.0	0.4	-0.2	0.2	0.1
+4	conv_constant_filters	-0.3	-0.2	-0.0	-0.5	-0.4	-1.0	-0.6	-0.2	-0.3	-0.5	-0.0	0.3	0.5	-0.1	0.3	0.0	0.5	-0.1	0.2	0.3
+3	conv_noconv	-0.4	-0.3	-0.3	0.1	0.0	-0.4	-0.1	-0.1	0.8	-0.3	-0.3	-0.2	0.9	0.3	-0.5	0.0	-0.0	-0.6	0.1	-0.1
+2	dense_lineardense	0.2	0.5	0.4	-0.5	0.8	0.3	0.7	0.3	0.1	0.6	-0.1	0.1	0.7	-0.0	-0.1	-0.2	0.2	-0.4	0.1	-0.1
+1	gru_nogru	-5.5	-5.0	-7.0	-18.5	-6.0	-10.9	-5.0	-6.2	-12.4	-12.4	-0.7	-0.3	0.3	-0.4	-0.5	-0.2	-0.2	-0.9	0.6	-1.3
+0	gru_unidirectional	-1.9	-1.1	-0.6	-6.7	-2.7	-5.2	-2.4	-2.0	-5.2	-4.7	-0.3	0.0	0.2	-0.1	-0.1	-0.3	0.0	-0.5	0.4	-0.7
