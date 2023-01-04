@@ -2,7 +2,6 @@
 
 from distutils.core import setup
 from pathlib import Path
-
 from setuptools import find_packages
 
 
@@ -13,7 +12,9 @@ def read_version() -> str:
     """
     version = None
 
-    with open(Path(__file__).parent / "AugmentedNet" / "__init__.py", "r") as f:
+    with open(
+        Path(__file__).parent / "AugmentedNet" / "__init__.py", "r"
+    ) as f:
         lines = f.readlines()
 
     for line in lines:
@@ -31,7 +32,7 @@ setup(
     version=read_version(),
     description="A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks",
     author="Néstor Nápoles López",
-    author_email="",
+    author_email="napulen@gmail.com",
     url="https://github.com/napulen/AugmentedNet/",
     python_requires=">=3.7",
     install_requires=[
