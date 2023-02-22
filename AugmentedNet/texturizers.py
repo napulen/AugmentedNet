@@ -218,6 +218,32 @@ class Syncopation(TextureTemplate):
 """
 
 
+class AuxilaryNotes(TextureTemplate):
+    """A syncopated pattern to separate the upper voice from the rest.
+
+    The highest note is played in isolation,
+    followed by the remaining lower notes,
+    played in syncopation."""
+
+    supported_durations = [1.0]
+
+    def templateTriad(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
+{dur},{dur},,['{self.notes[2].transpose(-1, inPlace=True)}'],[],[True]
+{dur*2},{dur*2},,['{self.notes[2]}'],[],[True]
+"""
+
+    def templateSeventh(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[True, True, True, True]"
+{dur},{dur},,['{self.notes[3].transpose(-1, inPlace=True)}'],[],[True]
+{dur*2},{dur*2},,['{self.notes[3]}'],[],[True]
+"""
+
+
 class BlockChord(TextureTemplate):
     """A block-chord texture. The default texture in music21-generated scores."""
 
@@ -235,10 +261,11 @@ class BlockChord(TextureTemplate):
 
 
 available_templates = {
-    "BassSplit": BassSplit,
-    "Alberti": Alberti,
-    "Syncopation": Syncopation,
+    # "BassSplit": BassSplit,
+    # "Alberti": Alberti,
+    # "Syncopation": Syncopation,
     "BlockChord": BlockChord,
+    "AuxilaryNotes": AuxilaryNotes,
 }
 
 available_durations = list(
