@@ -1,6 +1,7 @@
 """Templates for texturizing annotation files and turn them into scores."""
 
 import random
+from music21 import note
 
 
 class TextureTemplate(object):
@@ -228,18 +229,26 @@ class AuxilaryNotes(TextureTemplate):
     supported_durations = [1.0]
 
     def templateTriad(self):
+        transposedNote = note.Note(self.notes[2]).transpose(-1).nameWithOctave
+        print(self.notes)
+        print(self.notes[2])
+        print(transposedNote)
         dur = self.duration / 4
         return f"""\
 0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
-{dur},{dur},,['{self.notes[2].transpose(-1, inPlace=True)}'],[],[True]
+{dur},{dur},,['{transposedNote}'],[],[True]
 {dur*2},{dur*2},,['{self.notes[2]}'],[],[True]
 """
 
     def templateSeventh(self):
+        transposedNote = note.Note(self.notes[3]).transpose(-1).nameWithOctave
+        print(self.notes)
+        print(self.notes[3])
+        print(transposedNote)
         dur = self.duration / 4
         return f"""\
 0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[True, True, True, True]"
-{dur},{dur},,['{self.notes[3].transpose(-1, inPlace=True)}'],[],[True]
+{dur},{dur},,['{transposedNote}'],[],[True]
 {dur*2},{dur*2},,['{self.notes[3]}'],[],[True]
 """
 
