@@ -2,6 +2,7 @@
 
 import random
 from music21 import note
+from music21 import interval
 
 
 class TextureTemplate(object):
@@ -220,36 +221,32 @@ class Syncopation(TextureTemplate):
 
 
 class AuxilaryNotes(TextureTemplate):
-    """A syncopated pattern to separate the upper voice from the rest.
+    """TODO: Add first line
 
-    The highest note is played in isolation,
-    followed by the remaining lower notes,
-    played in syncopation."""
+    TODO: Add details"""
 
-    supported_durations = [1.0]
+    supported_durations = [1.0, 2.0]
 
     def templateTriad(self):
-        transposedNote = note.Note(self.notes[2]).transpose(-1).nameWithOctave
-        print(self.notes)
-        print(self.notes[2])
-        print(transposedNote)
+        transposed_note = note.Note(self.notes[2]).transpose(-1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
         dur = self.duration / 4
         return f"""\
 0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
-{dur},{dur},,['{transposedNote}'],[],[True]
-{dur*2},{dur*2},,['{self.notes[2]}'],[],[True]
+{dur},{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{transposed_name}']","['{self.intervals[0]}', '{transposed_interval}']","[False, False, True]"
+{dur*2},{dur*2},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[False, False, True]"
 """
 
     def templateSeventh(self):
-        transposedNote = note.Note(self.notes[3]).transpose(-1).nameWithOctave
-        print(self.notes)
-        print(self.notes[3])
-        print(transposedNote)
+        transposed_note = note.Note(self.notes[3]).transpose(-1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
         dur = self.duration / 4
         return f"""\
 0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[True, True, True, True]"
-{dur},{dur},,['{transposedNote}'],[],[True]
-{dur*2},{dur*2},,['{self.notes[3]}'],[],[True]
+{dur},{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{transposed_name}']","['{self.intervals[0]}', '{self.intervals[1]}', '{transposed_interval}']","[False, False, False, True]"
+{dur*2},{dur*2},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[False, False, False, True]"
 """
 
 
