@@ -220,8 +220,8 @@ class Syncopation(TextureTemplate):
 """
 
 
-class AuxilaryNotes(TextureTemplate):
-    """TODO: Add first line
+class AuxiliaryNotes(TextureTemplate):
+    """A syncopated pattern to separate the upper voice from the rest.
 
     TODO: Add details"""
 
@@ -271,7 +271,7 @@ available_templates = {
     # "Alberti": Alberti,
     # "Syncopation": Syncopation,
     "BlockChord": BlockChord,
-    "AuxilaryNotes": AuxilaryNotes,
+    "AuxiliaryNotes": AuxiliaryNotes,
 }
 
 available_durations = list(
