@@ -219,7 +219,7 @@ class Syncopation(TextureTemplate):
 """
 
 
-class AuxilaryNotes(TextureTemplate):
+class AuxiliaryNotes(TextureTemplate):
     """A syncopated pattern to separate the upper voice from the rest.
 
     The highest note is played in isolation,
@@ -274,7 +274,7 @@ available_templates = {
     # "Alberti": Alberti,
     # "Syncopation": Syncopation,
     "BlockChord": BlockChord,
-    "AuxilaryNotes": AuxilaryNotes,
+    "AuxiliaryNotes": AuxiliaryNotes,
 }
 
 available_durations = list(
