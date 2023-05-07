@@ -220,7 +220,36 @@ class Syncopation(TextureTemplate):
 """
 
 
-class AuxiliaryNotes(TextureTemplate):
+class AuxiliaryNotesUp(TextureTemplate):
+    """A pitch pattern that creates a minor second interval in the middle of the chord.
+    """
+
+    supported_durations = [1.0, 2.0]
+
+    def templateTriad(self):
+        transposed_note = note.Note(self.notes[2]).transpose(1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
+{dur},{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{transposed_name}']","['{self.intervals[0]}', '{transposed_interval}']","[False, False, True]"
+{dur*2},{dur*2},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[False, False, True]"
+"""
+
+    def templateSeventh(self):
+        transposed_note = note.Note(self.notes[3]).transpose(1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[True, True, True, True]"
+{dur},{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{transposed_name}']","['{self.intervals[0]}', '{self.intervals[1]}', '{transposed_interval}']","[False, False, False, True]"
+{dur*2},{dur*2},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[False, False, False, True]"
+"""
+
+
+class AuxiliaryNotesDown(TextureTemplate):
     """A pitch pattern that creates a minor second interval in the middle of the chord.
     """
 
@@ -249,6 +278,60 @@ class AuxiliaryNotes(TextureTemplate):
 """
 
 
+class AppoggiaturaUp(TextureTemplate):
+    """A pitch pattern that creates a minor second interval at the beggining of the chord.
+    """
+
+    supported_durations = [1.0, 2.0]
+
+    def templateTriad(self):
+        transposed_note = note.Note(self.notes[2]).transpose(1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{transposed_name}']","['{self.intervals[0]}', '{transposed_interval}']","[False, False, True]"
+{dur},{dur*3},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[False, False, True]"
+"""
+
+    def templateSeventh(self):
+        transposed_note = note.Note(self.notes[3]).transpose(1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{transposed_name}']","['{self.intervals[0]}', '{self.intervals[1]}', '{transposed_interval}']","[False, False, False, True]"
+{dur},{dur*3},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[False, False, False, True]"
+"""
+
+
+class AppoggiaturaDown(TextureTemplate):
+    """A pitch pattern that creates a minor second interval at the beggining of the chord.
+    """
+
+    supported_durations = [1.0, 2.0]
+
+    def templateTriad(self):
+        transposed_note = note.Note(self.notes[2]).transpose(-1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{transposed_name}']","['{self.intervals[0]}', '{transposed_interval}']","[False, False, True]"
+{dur},{dur*3},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[False, False, True]"
+"""
+
+    def templateSeventh(self):
+        transposed_note = note.Note(self.notes[3]).transpose(-1)
+        transposed_name = transposed_note.nameWithOctave
+        transposed_interval = interval.Interval(noteStart=note.Note(self.notes[0]), noteEnd=transposed_note).name
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{transposed_name}']","['{self.intervals[0]}', '{self.intervals[1]}', '{transposed_interval}']","[False, False, False, True]"
+{dur},{dur*3},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}', '{self.notes[3]}']","['{self.intervals[0]}', '{self.intervals[1]}', '{self.intervals[2]}']","[False, False, False, True]"
+"""
+
+
 class BlockChord(TextureTemplate):
     """A block-chord texture. The default texture in music21-generated scores."""
 
@@ -270,7 +353,10 @@ available_templates = {
     "Alberti": Alberti,
     "Syncopation": Syncopation,
     "BlockChord": BlockChord,
-    "AuxiliaryNotes": AuxiliaryNotes,
+    "AuxiliaryNotesUp": AuxiliaryNotesUp,
+    "AuxiliaryNotesDown": AuxiliaryNotesDown,
+    "AppoggiaturaUp": AppoggiaturaUp,
+    "AppoggiaturaDown": AppoggiaturaDown,
 }
 
 available_durations = list(
