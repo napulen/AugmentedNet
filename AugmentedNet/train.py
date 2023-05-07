@@ -113,11 +113,11 @@ class ModdedModelCheckpoint(keras.callbacks.ModelCheckpoint):
     def on_epoch_end(self, epoch, logs={}):
         monitored = list(availableOutputs.keys())
         nonMonitored = [
-            "ChordQuality11",
-            "ChordRoot35",
-            "Inversion4",
-            "PrimaryDegree22",
-            "SecondaryDegree22",
+            # "ChordQuality11",
+            # "ChordRoot35",
+            # "Inversion4",
+            # "PrimaryDegree22",
+            # "SecondaryDegree22",
         ]
         monitored = [a for a in monitored if a not in nonMonitored]
         print(f"monitored_outputs: {monitored}")
