@@ -221,9 +221,8 @@ class Syncopation(TextureTemplate):
 
 
 class AuxiliaryNotes(TextureTemplate):
-    """A syncopated pattern to separate the upper voice from the rest.
-
-    TODO: Add details"""
+    """A pitch pattern that creates a minor second interval in the middle of the chord.
+    """
 
     supported_durations = [1.0, 2.0]
 
@@ -267,9 +266,9 @@ class BlockChord(TextureTemplate):
 
 
 available_templates = {
-    # "BassSplit": BassSplit,
-    # "Alberti": Alberti,
-    # "Syncopation": Syncopation,
+    "BassSplit": BassSplit,
+    "Alberti": Alberti,
+    "Syncopation": Syncopation,
     "BlockChord": BlockChord,
     "AuxiliaryNotes": AuxiliaryNotes,
 }
