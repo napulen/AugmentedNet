@@ -272,7 +272,7 @@ class ArpeggioShort(TextureTemplate):
         return f"""\
 0.0,{dur},,['{self.notes[0]}'],[],[True]
 {dur},{dur},,['{self.notes[1]}'],[],[True]
-{dur*2},{dur},,['{self.notes[3]]}'],[],[True]
+{dur*2},{dur},,['{self.notes[3]}'],[],[True]
 {dur*3},{dur},,['{self.notes[1]}'],[],[True]
 """
 
