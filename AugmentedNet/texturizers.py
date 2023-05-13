@@ -219,6 +219,92 @@ class Syncopation(TextureTemplate):
 {dur*3},{dur},,"['{self.notes[0]}', '{self.notes[1]}', '{self.notes[2]}']","['{self.intervals[0]}', '{self.intervals[1]}']","[True, True, True]"
 """
 
+class ArpeggioLong(TextureTemplate):
+    """A simple arpeggio pattern that climbs and descends the chord for half notes.
+
+    The lowest note to the highest note of the chord is played in isolation,
+    then the highest note to the lowest note is played in isolation.
+    The note is formed as a triplet."""
+
+    supported_durations = [2.0]
+
+    def templateTriad(self):
+        dur = self.duration / 6
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[1]}'],[],[True]
+{dur*2},{dur},,['{self.notes[2]}'],[],[True]
+{dur*3},{dur},,['{self.notes[2]}'],[],[True]
+{dur*4},{dur},,['{self.notes[1]}'],[],[True]
+{dur*5},{dur},,['{self.notes[0]}'],[],[True]
+"""
+
+    def templateSeventh(self):
+        dur = self.duration / 6
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[1]}'],[],[True]
+{dur*2},{dur},,['{self.notes[2]}'],[],[True]
+{dur*3},{dur},,['{self.notes[3]}'],[],[True]
+{dur*4},{dur},,['{self.notes[2]}'],[],[True]
+{dur*5},{dur},,['{self.notes[1]}'],[],[True]
+"""
+
+class ArpeggioShort(TextureTemplate):
+    """A simple arpeggio pattern that climbs and descends the chord for quarter notes.
+
+    The lowest note to the highest note of the chord is played in isolation,
+    then the second lowest note is played."""
+
+    supported_durations = [1.0]
+
+    def templateTriad(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[1]}'],[],[True]
+{dur*2},{dur},,['{self.notes[2]}'],[],[True]
+{dur*3},{dur},,['{self.notes[1]}'],[],[True]
+"""
+
+    def templateSeventh(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[1]}'],[],[True]
+{dur*2},{dur},,['{self.notes[3]]}'],[],[True]
+{dur*3},{dur},,['{self.notes[1]}'],[],[True]
+"""
+
+class ArpeggioAltering(TextureTemplate):
+    """Another arpeggio pattern applied for quarter notes..
+
+    Each note is played in the order of:
+    1. The lowest note
+    2. The highest note
+    3. The second lowest note
+    4. The highest note."""
+
+    supported_durations = [1.0]
+
+    def templateTriad(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[2]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]}'],[],[True]
+{dur*3},{dur},,['{self.notes[2]}'],[],[True]
+"""
+
+    def templateSeventh(self):
+        dur = self.duration / 4
+        return f"""\
+0.0,{dur},,['{self.notes[0]}'],[],[True]
+{dur},{dur},,['{self.notes[3]}'],[],[True]
+{dur*2},{dur},,['{self.notes[1]]}'],[],[True]
+{dur*3},{dur},,['{self.notes[3]}'],[],[True]
+"""
+
 
 class AuxiliaryNotesUp(TextureTemplate):
     """A pitch pattern that creates a minor second interval in the middle of the chord.
@@ -357,6 +443,9 @@ available_templates = {
     "AuxiliaryNotesDown": AuxiliaryNotesDown,
     "AppoggiaturaUp": AppoggiaturaUp,
     "AppoggiaturaDown": AppoggiaturaDown,
+    "ArpeggioLong": ArpeggioLong,
+    "ArpeggioShort": ArpeggioShort,
+    "ArpeggioAltering": ArpeggioAltering
 }
 
 available_durations = list(
