@@ -378,6 +378,8 @@ class AuxiliaryNotes(TextureTemplate):
 class BlockChord(TextureTemplate):
     """A block-chord texture. The default texture in music21-generated scores."""
 
+    supported_number_of_notes = [3, 4]
+
     def templateTriad(self):
         dur = self.duration
         return f"""\
