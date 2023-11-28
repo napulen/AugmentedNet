@@ -1,11 +1,40 @@
 # AugmentedNet
-A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks
 
-> The `main` branch is now an improved neural network. The source code of the published version (`v1.0.0`) can be found in the [v1](https://github.com/napulen/AugmentedNet/tree/v1) branch. The differences are indicated in any releases > `v1.0.0`. If you report against the published results, you are comparing against `v1.0.0`. If you want to compare against the latest network, train a model using this code.
+AugmentedNet is an automatic Roman numeral analysis neural network. 
 
-### ISMIR Paper 
+The network was developed by Néstor Nápoles López as part of his PhD research. It was first mentioned in a co-authored ISMIR paper in 2021, and later on in the body of the dissertation.
 
-N. Nápoles López, M. Gotham, and I. Fujinaga, "AugmentedNet: A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks." in *Proceedings of the 22nd International Society for Music Information Retrieval Conference*, 2021, pp. 404–411. https://doi.org/10.5281/zenodo.5624533
+It has been used to power the analysis features in at least the following projects:
+- [Sibelius](https://www.avid.com/resource-center/data-driven-workflows-within-sibelius)
+- [Vimu.app](https://www.vimu.app/)
+- [MusicLang](https://github.com/MusicLang/musiclang)
+
+The version documented in the [PhD dissertation](https://escholarship.mcgill.ca/concern/theses/qr46r6307) matches the `v1.9.1` release of this repository.
+
+The older version of the model described in the [ISMIR paper](https://archives.ismir.net/ismir2021/paper/000050.pdf) matches the `v1.0.0` release of this repository.
+
+In general, the results of `v1.9.1` are better and it is encouraged to use (and compare against) that version.
+
+### PhD Dissertation
+
+Nápoles López, Néstor. 2022. “Automatic Roman Numeral Analysis in Symbolic Music Representations.” PhD Thesis, McGill University. https://escholarship.mcgill.ca/concern/theses/qr46r6307.
+
+
+```bibtex
+@phdthesis{napoleslopez22automatic,
+	type = {{PhD} {Thesis}},
+	title = {Automatic {Roman} {Numeral} {Analysis} in {Symbolic} {Music} {Representations}},
+	url = {https://escholarship.mcgill.ca/concern/theses/qr46r6307},
+	school = {McGill University},
+	author = {Nápoles López, Néstor},
+	month = dec,
+	year = {2022}
+}
+```
+
+### ISMIR Paper
+
+N. Nápoles López, M. Gotham, and I. Fujinaga, “AugmentedNet: A Roman Numeral Analysis Network with Synthetic Training Examples and Additional Tonal Tasks.” in *Proceedings of the 22nd International Society for Music Information Retrieval Conference*, 2021, pp. 404–411. https://doi.org/10.5281/zenodo.5624533
 
 
 ```bibtex
