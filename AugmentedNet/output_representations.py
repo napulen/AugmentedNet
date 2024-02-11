@@ -112,7 +112,7 @@ class Inversion4(OutputRepresentationTI):
     classList = list(range(4))
     dfFeature = "a_inversion"
 
-    def run(self):
+    def run(self, transposition="P1"):
         array = np.zeros(self.shape, dtype=self.dtype)
         for frame, inversion in enumerate(self.df[self.dfFeature]):
             if inversion > 3:
